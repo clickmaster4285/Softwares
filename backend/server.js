@@ -40,7 +40,7 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 const ensureAdminUser = async () => {
   if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
-    console.warn('ADMIN_EMAIL or ADMIN_PASSWORD is missing. Admin initialization skipped.');
+    console.warn('ADMIN_EMAIL or ADMIN_PASSWORD is  missing. Admin initialization skipped.');
     return;
   }
   const existing = await User.findOne({ email: ADMIN_EMAIL });
