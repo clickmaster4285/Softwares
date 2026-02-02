@@ -19,6 +19,7 @@ export interface Admin {
 const PROJECTS_KEY = 'devportal_projects';
 const ADMIN_KEY = 'devportal_admin';
 const SESSION_KEY = 'devportal_session';
+const defaultProjects: Project[] = [];
 
 // Simple hash function for demo purposes (not secure for production)
 const hashPassword = (password: string): string => {
