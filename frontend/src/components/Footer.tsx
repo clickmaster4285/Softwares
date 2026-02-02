@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border/50 px-6 bg-gray-700 text-white">
-      <div className="container mx-auto max-w-6xl py-12">
+    <footer className="border-t border-border/50 px-4 sm:px-6 bg-gray-700 text-white">
+      <div className="container mx-auto max-w-6xl py-10 md:py-12">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -14,9 +14,6 @@ const Footer = () => {
                 alt="Click Master Projects"
                 className="h-12 w-auto object-contain drop-shadow-sm"
               />
-              <span className="font-display text-lg font-semibold text-white">
-                Click Master Projects
-              </span>
             </div>
             <p className="text-sm text-gray-200 max-w-sm">
               A clean, modern portfolio hub for showcasing products, web apps, and digital work with confidence.
@@ -40,9 +37,11 @@ const Footer = () => {
           <div className="space-y-3">
             <p className="text-sm font-semibold text-white">Get in touch</p>
             <div className="grid gap-2 text-sm text-gray-200">
-              <a href="mailto:hello@projecthub.com" className="hover:text-white transition-colors">hello@projecthub.com</a>
-              <a href="tel:+1-202-555-0123" className="hover:text-white transition-colors">+1 (202) 555-0123</a>
-              <span className="text-gray-300">Remote · Worldwide</span>
+              <a href="mailto:marketing@clickmasters.pk" className="hover:text-white transition-colors">marketing@clickmasters.pk</a>
+              <a href="mailto:info@clickmasters.pk" className="hover:text-white transition-colors">info@clickmasters.pk</a>
+              <a href="tel:0332-5394285" className="hover:text-white transition-colors">0332-5394285</a>
+              <a href="tel:0333-1116842" className="hover:text-white transition-colors">0333-1116842</a>
+              <span className="text-gray-300">Islamabad, Pakistan</span>
             </div>
           </div>
         </div>

@@ -6,11 +6,11 @@ const Contact = () => (
   <div className="min-h-screen bg-background">
     <Header />
     <main className="pt-24 container mx-auto max-w-4xl px-4 flex flex-col items-center">
-      <div className="w-full bg-card/90 rounded-2xl shadow-sm p-10 mb-12 border border-border/70 flex flex-col md:flex-row gap-10">
+      <div className="w-full bg-card/90 rounded-2xl shadow-sm p-6 md:p-10 mb-12 border border-border/70 flex flex-col md:flex-row gap-10">
         <div className="flex-1 flex flex-col gap-8 justify-center">
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-2 text-foreground text-center md:text-left">Contact Us</h1>
           <p className="text-lg text-muted-foreground mb-2 text-center md:text-left">
-            Reach out to <span className="font-semibold text-primary"></span> for project inquiries, collaborations, or support. We respond within one business day.
+            Reach out to <span className="font-semibold text-primary">Click Master Projects</span> for project inquiries, collaborations, or support. We respond within one business day.
           </p>
           <div className="space-y-4">
             <div className="flex items-center gap-3">

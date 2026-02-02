@@ -17,15 +17,15 @@ const Header = () => {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-xl shadow-sm border-b border-border/60"
     >
-      <div className="container mx-auto px-6 py-3">
-        <div className="flex items-center justify-between gap-6">
+      <div className="container mx-auto px-4 sm:px-6 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <a href="/" className="flex items-center gap-3 group">
             <img
               src="/Clickmasters-Digital-Marketing-Agency.webp"
               alt="Click Master Projects"
-              className="h-12 md:h-14 w-auto object-contain drop-shadow-sm"
+              className="h-10 sm:h-12 md:h-14 w-auto object-contain drop-shadow-sm"
             />
-            <span className="font-display text-lg md:text-2xl font-semibold text-foreground">
+            <span className="hidden sm:inline font-display text-base md:text-xl font-semibold text-foreground">
               Click Master Projects
             </span>
           </a>
@@ -53,7 +53,7 @@ const Header = () => {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <span className="hidden sm:inline text-xs text-muted-foreground px-3 py-1 rounded-full border border-border/70 bg-secondary/40">
               {projectCount} Projects
             </span>

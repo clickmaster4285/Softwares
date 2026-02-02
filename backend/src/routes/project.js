@@ -4,7 +4,7 @@
 import express from 'express';
 import Project from '../models/Project.js';
 import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
+import { requireAuth, requireAdmin } from '../middleware/auth.js';
 import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -33,17 +33,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-function auth(req, res, next) {
-  const token = req.cookies.token;
-  if (!token) return res.status(401).json({ message: 'Not authenticated' });
-  try {
-    req.user = jwt.verify(token, process.env.JWT_SECRET);
-    next();
-  } catch {
-    res.status(401).json({ message: 'Invalid token' });
-  }
-}
-
 // Get all projects
 router.get('/', async (req, res) => {
   const projects = await Project.find();
@@ -63,7 +52,7 @@ router.get('/:id', async (req, res) => {
 
 
 // Upload project image
-router.post('/upload', auth, upload.single('image'), (req, res) => {
+router.post('/upload', requireAuth, requireAdmin, upload.single('image'), (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
     res.json({ imageUrl: `/uploads/${req.file.filename}` });
@@ -76,9 +65,8 @@ router.post('/upload', auth, upload.single('image'), (req, res) => {
 
 
 // Create project (admin only, with image)
-router.post('/', auth, async (req, res) => {
+router.post('/', requireAuth, requireAdmin, async (req, res) => {
   try {
-    if (req.user.email !== 'admin@demo.com') return res.status(403).json({ message: 'Only admin can add projects' });
     const { title, description, url, tags, status, thumbnail } = req.body;
     if (!title || !description || !url || !thumbnail) {
       return res.status(400).json({ message: 'Missing required fields' });
@@ -95,8 +83,7 @@ router.post('/', auth, async (req, res) => {
 
 
 // Update project (admin only)
-router.put('/:id', auth, async (req, res) => {
-  if (req.user.email !== 'admin@demo.com') return res.status(403).json({ message: 'Only admin can update projects' });
+router.put('/:id', requireAuth, requireAdmin, async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ message: 'Invalid project id' });
   }
@@ -111,8 +98,7 @@ router.put('/:id', auth, async (req, res) => {
 
 
 // Delete project (admin only)
-router.delete('/:id', auth, async (req, res) => {
-  if (req.user.email !== 'admin@demo.com') return res.status(403).json({ message: 'Only admin can delete projects' });
+router.delete('/:id', requireAuth, requireAdmin, async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ message: 'Invalid project id' });
   }

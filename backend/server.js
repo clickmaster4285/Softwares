@@ -9,12 +9,14 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import User from './src/models/User.js';
 
 dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: process.env.Frontend_URL,
+  origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 app.use(express.json());
@@ -33,9 +35,29 @@ app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
 
 const PORT = process.env.PORT || 5000;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
+const ensureAdminUser = async () => {
+  if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+    console.warn('ADMIN_EMAIL or ADMIN_PASSWORD is missing. Admin initialization skipped.');
+    return;
+  }
+  const existing = await User.findOne({ email: ADMIN_EMAIL });
+  if (existing) return;
+  const hashed = await bcrypt.hash(ADMIN_PASSWORD, 10);
+  await User.create({ email: ADMIN_EMAIL, password: hashed });
+  console.log(`Admin initialized: ${ADMIN_EMAIL}`);
+};
+
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    await ensureAdminUser();
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch(err => console.error('MongoDB connection error:', err));
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
+  }
+};
+
+startServer();
