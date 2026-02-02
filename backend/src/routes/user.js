@@ -8,6 +8,7 @@ const router = express.Router();
 
 // Only allow login for admin@demo.com
 router.post('/login', async (req, res) => {
+    console.log("jherera vfa vwe")
   const { email, password } = req.body;
   try {
     if (email !== 'admin@demo.com') return res.status(403).json({ message: 'Only admin can login' });

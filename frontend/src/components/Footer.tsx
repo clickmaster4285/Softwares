@@ -1,7 +1,6 @@
 import { Heart, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import logo from '../../assests/Clickmasters-Digital-Marketing-Agency.webp';
 
 const Footer = () => {
   return (
@@ -11,12 +10,12 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img
-                src={logo}
-                alt=""
+                src="/Clickmasters-Digital-Marketing-Agency.webp"
+                alt="Click Master Projects"
                 className="h-12 w-auto object-contain drop-shadow-sm"
               />
               <span className="font-display text-lg font-semibold text-white">
-                
+                Click Master Projects
               </span>
             </div>
             <p className="text-sm text-gray-200 max-w-sm">
@@ -53,7 +52,7 @@ const Footer = () => {
             Built with <Heart className="w-3.5 h-3.5 text-primary" /> for showcasing projects
           </p>
           <p className="text-xs text-gray-200">
-            © {new Date().getFullYear()} . All rights reserved.
+            © {new Date().getFullYear()} Click Master Projects. All rights reserved.
           </p>
         </div>
       </div>

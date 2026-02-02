@@ -15,7 +15,8 @@ export interface Project {
 }
 
 const fetchProjects = async (): Promise<Project[]> => {
-  const res = await fetch('/api/projects');
+  const { apiFetch } = await import('../lib/api');
+  const res = await apiFetch('/api/projects');
   if (!res.ok) throw new Error('Failed to fetch projects');
   return res.json();
 };

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import logo from '../../assests/Clickmasters-Digital-Marketing-Agency.webp';
 import { getProjects } from '@/lib/storage';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -22,12 +21,12 @@ const Header = () => {
         <div className="flex items-center justify-between gap-6">
           <a href="/" className="flex items-center gap-3 group">
             <img
-              src={logo}
-              alt=""
+              src="/Clickmasters-Digital-Marketing-Agency.webp"
+              alt="Click Master Projects"
               className="h-12 md:h-14 w-auto object-contain drop-shadow-sm"
             />
             <span className="font-display text-lg md:text-2xl font-semibold text-foreground">
-              
+              Click Master Projects
             </span>
           </a>
 

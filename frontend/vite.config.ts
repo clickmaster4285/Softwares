@@ -13,18 +13,8 @@ export default defineConfig(({ mode }) => ({
     fs: {
       allow: [".."],
     },
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/uploads': {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+    // Proxy removed. Backend requests should use VITE_BACKEND_URL in the frontend .env
+    // Example: VITE_BACKEND_URL=http://localhost:5000
   },
   plugins: [react()],
   resolve: {

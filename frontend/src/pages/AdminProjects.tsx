@@ -26,6 +26,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Project } from '@/lib/storage';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
+import { resolveImageUrl } from '@/lib/utils';
 
 const AdminProjects = () => {
   const queryClient = useQueryClient();
@@ -39,7 +40,8 @@ const AdminProjects = () => {
   const { data: projects = [], isLoading } = useQuery<Project[]>({
     queryKey: ['projects'],
     queryFn: async () => {
-      const res = await fetch('/api/projects', { credentials: 'include' });
+      const { apiFetch } = await import('../lib/api');
+      const res = await apiFetch('/api/projects', { credentials: 'include' });
       if (!res.ok) throw new Error('Failed to fetch projects');
       return res.json();
     },
@@ -49,7 +51,8 @@ const AdminProjects = () => {
   // Create project
   const createMutation = useMutation({
     mutationFn: async (data: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>) => {
-      const res = await fetch('/api/projects', {
+      const { apiFetch } = await import('../lib/api');
+      const res = await apiFetch('/api/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -74,7 +77,8 @@ const AdminProjects = () => {
   // Update project
   const updateMutation = useMutation({
     mutationFn: async (data: { id: string; updates: Omit<Project, 'id' | 'createdAt' | 'updatedAt'> }) => {
-      const res = await fetch(`/api/projects/${data.id}`, {
+      const { apiFetch } = await import('../lib/api');
+      const res = await apiFetch(`/api/projects/${data.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -105,7 +109,8 @@ const AdminProjects = () => {
   // Delete project
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetch(`/api/projects/${id}`, {
+      const { apiFetch } = await import('../lib/api');
+      const res = await apiFetch(`/api/projects/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
@@ -171,7 +176,7 @@ const AdminProjects = () => {
                     <div className="flex flex-col md:flex-row md:items-center gap-4">
                       <div className="w-full md:w-24 h-16 rounded-lg overflow-hidden bg-secondary shrink-0">
                         <img
-                          src={project.thumbnail}
+                          src={resolveImageUrl(project.thumbnail)}
                           alt={project.title}
                           className="w-full h-full object-cover"
                           onError={(e) => {

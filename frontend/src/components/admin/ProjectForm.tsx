@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Project } from '@/lib/storage';
+import { resolveImageUrl } from '@/lib/utils';
 
 type EditableProject = Omit<Project, 'id'> & { id?: string; _id?: string };
 
@@ -30,7 +31,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
 
   useEffect(() => {
     if (!imageFile) {
-      setPreviewUrl(thumbnail);
+      setPreviewUrl(resolveImageUrl(thumbnail));
       return;
     }
     const objectUrl = URL.createObjectURL(imageFile);
@@ -59,7 +60,8 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
       const formData = new FormData();
       formData.append('image', imageFile);
       try {
-        const res = await fetch('/api/projects/upload', {
+        const { apiFetch } = await import('../../lib/api');
+        const res = await apiFetch('/api/projects/upload', {
           method: 'POST',
           credentials: 'include',
           body: formData,

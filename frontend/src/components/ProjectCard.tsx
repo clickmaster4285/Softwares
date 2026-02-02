@@ -3,6 +3,7 @@ import { ExternalLink, ArrowUpRight } from 'lucide-react';
 import { Project } from '@/lib/storage';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
+import { resolveImageUrl } from '@/lib/utils';
 
 interface ProjectCardProps {
   project: Project;
@@ -18,6 +19,7 @@ const statusColors = {
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
   const projectId = project._id || project.id;
   const detailLink = projectId ? `/projects/${projectId}` : project.url;
+  const imageUrl = resolveImageUrl(project.thumbnail);
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -34,7 +36,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           {/* Thumbnail */}
           <div className="relative h-48 bg-secondary/60 overflow-hidden">
             <img
-              src={project.thumbnail}
+              src={imageUrl}
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               onError={(e) => {

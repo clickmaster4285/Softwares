@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { resolveImageUrl } from '@/lib/utils';
 
 interface Project {
   _id: string;
@@ -30,7 +31,8 @@ const ProjectDetails = () => {
   const { data: project, isLoading, isError } = useQuery<Project>({
     queryKey: ['project', id],
     queryFn: async () => {
-      const res = await fetch(`/api/projects/${id}`);
+      const { apiFetch } = await import('../lib/api');
+      const res = await apiFetch(`/api/projects/${id}`);
       if (!res.ok) throw new Error('Failed to fetch project');
       return res.json();
     },
@@ -64,7 +66,7 @@ const ProjectDetails = () => {
               <div className="space-y-6">
                 <div className="rounded-3xl overflow-hidden border border-border/70 bg-secondary/30">
                   <img
-                    src={project.thumbnail || '/placeholder.svg'}
+                    src={resolveImageUrl(project.thumbnail)}
                     alt={project.title}
                     className="w-full h-72 md:h-96 object-cover"
                     onError={(e) => {

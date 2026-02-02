@@ -21,8 +21,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   // Check auth on mount
   useEffect(() => {
-    fetch('/api/users/me', { credentials: 'include' })
-      .then(async (res) => {
+    (async () => {
+      try {
+        const { apiFetch } = await import('../lib/api');
+        const res = await apiFetch('/api/users/me', { credentials: 'include' });
         if (res.ok) {
           const user = await res.json();
           setIsAuthenticated(true);
@@ -31,19 +33,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           setIsAuthenticated(false);
           setEmail(null);
         }
-      })
-      .catch(() => {
+      } catch {
         setIsAuthenticated(false);
         setEmail(null);
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
+      }
+    })();
   }, []);
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await fetch('/api/users/login', {
+const { apiFetch } = await import('../lib/api');
+    const res = await apiFetch('/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -69,7 +71,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = async () => {
     try {
-      await fetch('/api/users/logout', {
+      const { apiFetch } = await import('../lib/api');
+      await apiFetch('/api/users/logout', {
         method: 'POST',
         credentials: 'include',
       });
