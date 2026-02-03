@@ -33,6 +33,7 @@ const AdminProjects = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [deletingProjectId, setDeletingProjectId] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const { toast } = useToast();
 
 
@@ -136,6 +137,12 @@ const AdminProjects = () => {
     completed: 'bg-primary/20 text-primary border-primary/30',
   };
 
+  // Get unique categories
+  const categories = Array.from(new Set(projects.map(p => p.category)));
+  const filteredProjects = selectedCategory === 'all' 
+    ? projects 
+    : projects.filter(p => p.category === selectedCategory);
+
   return (
     <AdminLayout>
       <div className="space-y-6">
@@ -150,6 +157,29 @@ const AdminProjects = () => {
           </Button>
         </div>
 
+        {/* Category Filter */}
+        {categories.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant={selectedCategory === 'all' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSelectedCategory('all')}
+            >
+              All ({projects.length})
+            </Button>
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category} ({projects.filter(p => p.category === category).length})
+              </Button>
+            ))}
+          </div>
+        )}
+
         <div className="grid gap-4">
           {isLoading ? (
             <Card className="glass-card border-border/50">
@@ -163,8 +193,14 @@ const AdminProjects = () => {
                 <p className="text-muted-foreground">No projects yet. Create your first project!</p>
               </CardContent>
             </Card>
+          ) : filteredProjects.length === 0 ? (
+            <Card className="glass-card border-border/50">
+              <CardContent className="p-8 text-center">
+                <p className="text-muted-foreground">No projects in this category.</p>
+              </CardContent>
+            </Card>
           ) : (
-            projects.map((project, index) => (
+            filteredProjects.map((project, index) => (
               <motion.div
                 key={project._id || project.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -196,6 +232,9 @@ const AdminProjects = () => {
                           {project.description}
                         </p>
                         <div className="flex flex-wrap gap-1">
+                          <Badge className="text-xs bg-primary/20 text-primary border-primary/30">
+                            {project.category}
+                          </Badge>
                           {project.tags.map((tag) => (
                             <Badge key={tag} variant="secondary" className="text-xs">
                               {tag}

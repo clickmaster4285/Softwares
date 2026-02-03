@@ -24,6 +24,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [url, setUrl] = useState(project?.url || '');
+  const [category, setCategory] = useState(project?.category || '');
   const [status, setStatus] = useState<Project['status']>(project?.status || 'in-progress');
   const [tags, setTags] = useState<string[]>(project?.tags || []);
   const [newTag, setNewTag] = useState('');
@@ -66,12 +67,19 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
           credentials: 'include',
           body: formData,
         });
-        if (!res.ok) throw new Error('Upload failed');
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          const errorMessage = errorData.message || `Upload failed with status ${res.status}`;
+          setUploading(false);
+          alert(`Image upload failed: ${errorMessage}`);
+          return;
+        }
         const data = await res.json();
         imageUrl = data.imageUrl;
-      } catch {
+      } catch (error) {
         setUploading(false);
-        alert('Image upload failed. Please try again.');
+        console.error('Upload error:', error);
+        alert(`Image upload failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
         return;
       }
       setUploading(false);
@@ -83,6 +91,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
       description,
       thumbnail: imageUrl || '/placeholder.svg',
       url,
+      category,
       status,
       tags,
     });
@@ -127,18 +136,29 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="status">Status *</Label>
-          <Select value={status} onValueChange={(v) => setStatus(v as Project['status'])}>
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="live">Live</SelectItem>
-              <SelectItem value="in-progress">In Progress</SelectItem>
-              <SelectItem value="completed">Completed</SelectItem>
-            </SelectContent>
-          </Select>
+          <Label htmlFor="category">Category *</Label>
+          <Input
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            placeholder="e.g., Web Design, Mobile App, etc."
+            required
+          />
         </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="status">Status *</Label>
+        <Select value={status} onValueChange={(v) => setStatus(v as Project['status'])}>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="live">Live</SelectItem>
+            <SelectItem value="in-progress">In Progress</SelectItem>
+            <SelectItem value="completed">Completed</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="space-y-3">

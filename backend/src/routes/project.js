@@ -31,7 +31,21 @@ const storage = multer.diskStorage({
     cb(null, uniqueSuffix + '-' + file.originalname);
   }
 });
-const upload = multer({ storage });
+
+const fileFilter = (req, file, cb) => {
+  const allowedMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+  if (allowedMimes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed.'));
+  }
+};
+
+const upload = multer({ 
+  storage,
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+});
 
 // Get all projects
 router.get('/', async (req, res) => {
@@ -52,14 +66,25 @@ router.get('/:id', async (req, res) => {
 
 
 // Upload project image
-router.post('/upload', requireAuth, requireAdmin, upload.single('image'), (req, res) => {
-  try {
-    if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
-    res.json({ imageUrl: `/uploads/${req.file.filename}` });
-  } catch (err) {
-    console.error('Image upload error:', err);
-    res.status(500).json({ message: 'Internal server error', error: err.message });
-  }
+router.post('/upload', requireAuth, requireAdmin, (req, res) => {
+  console.log('Upload endpoint hit. User:', req.user?.email);
+  upload.single('image')(req, res, (err) => {
+    try {
+      if (err) {
+        console.error('Multer error:', err.message, err);
+        return res.status(400).json({ message: `Upload failed: ${err.message}` });
+      }
+      if (!req.file) {
+        console.error('No file in request');
+        return res.status(400).json({ message: 'No file uploaded' });
+      }
+      console.log('File uploaded successfully:', req.file.filename);
+      res.json({ imageUrl: `/uploads/${req.file.filename}` });
+    } catch (error) {
+      console.error('Image upload error:', error);
+      res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+  });
 });
 
 
@@ -67,12 +92,12 @@ router.post('/upload', requireAuth, requireAdmin, upload.single('image'), (req, 
 // Create project (admin only, with image)
 router.post('/', requireAuth, requireAdmin, async (req, res) => {
   try {
-    const { title, description, url, tags, status, thumbnail } = req.body;
-    if (!title || !description || !url || !thumbnail) {
-      return res.status(400).json({ message: 'Missing required fields' });
+    const { title, description, url, category, tags, status, thumbnail } = req.body;
+    if (!title || !description || !url || !category || !thumbnail) {
+      return res.status(400).json({ message: 'Missing required fields (title, description, url, category, thumbnail)' });
     }
     const project = await Project.create({
-      title, description, url, tags, status, thumbnail, createdBy: req.user.id
+      title, description, url, category, tags, status, thumbnail, createdBy: req.user.id
     });
     res.status(201).json(project);
   } catch (err) {
