@@ -5,6 +5,7 @@ export interface Project {
   description: string;
   thumbnail: string;
   url: string;
+  category: string;
   tags: string[];
   status: 'live' | 'in-progress' | 'completed';
   createdAt: string;

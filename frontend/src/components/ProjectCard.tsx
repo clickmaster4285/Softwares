@@ -63,11 +63,18 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
           {/* Content */}
           <div className="p-6">
-            <div className="flex items-start justify-between gap-4 mb-3">
+            <div className="flex items-start justify-between gap-4 mb-2">
               <h3 className="font-display text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                 {project.title}
               </h3>
               <ExternalLink className="w-4 h-4 text-accent flex-shrink-0 mt-1" />
+            </div>
+
+            {/* Category badge */}
+            <div className="mb-3">
+              <Badge className="text-xs bg-primary/20 text-primary border-primary/30">
+                {project.category}
+              </Badge>
             </div>
 
             <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">

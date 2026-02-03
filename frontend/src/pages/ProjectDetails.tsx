@@ -97,6 +97,12 @@ const ProjectDetails = () => {
                   <h2 className="text-lg font-semibold text-foreground">Project details</h2>
                   <div className="space-y-3">
                     <div>
+                      <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Category</p>
+                      <Badge className="text-xs bg-primary/20 text-primary border-primary/30">
+                        {project.category}
+                      </Badge>
+                    </div>
+                    <div>
                       <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Tags</p>
                       <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag) => (
