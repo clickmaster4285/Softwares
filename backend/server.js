@@ -15,6 +15,7 @@ import User from './src/models/User.js';
 dotenv.config();
 
 const app = express();
+console.log("the frontend is", process.env.FRONTEND_URL)
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
@@ -34,7 +35,7 @@ app.use('/uploads', express.static(uploadsDir));
 app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 

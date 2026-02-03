@@ -5,7 +5,6 @@ import User from '../models/User.js';
 import { requireAuth } from '../middleware/auth.js';
 
 const router = express.Router();
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 const cookieOptions = {
   httpOnly: true,
   sameSite: 'lax',
@@ -16,9 +15,16 @@ const cookieOptions = {
 // Only allow login for admin@demo.com
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+  const ADMIN_EMAIL = process.env.ADMIN_EMAIL; 
   try {
+
     if (!ADMIN_EMAIL) return res.status(500).json({ message: 'ADMIN_EMAIL not configured' });
-    if (email !== ADMIN_EMAIL) return res.status(403).json({ message: 'Only admin can login' });
+    if (!process.env.JWT_SECRET) return res.status(500).json({ message: 'JWT_SECRET not configured' });
+    if (!email || !password) return res.status(400).json({ message: 'Email and password required' });
+    if (email !== ADMIN_EMAIL) {
+      console.log('Email mismatch. Expected:', ADMIN_EMAIL, 'Got:', email);
+      return res.status(403).json({ message: 'Only admin can login' });
+    }
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: 'Invalid credentials' });
     const valid = await bcrypt.compare(password, user.password);
@@ -27,7 +33,8 @@ router.post('/login', async (req, res) => {
     res.cookie('token', token, cookieOptions);
     res.json({ id: user._id, email: user.email });
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Login error:', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
@@ -39,7 +46,12 @@ router.post('/logout', (req, res) => {
 
 // Get current user
 router.get('/me', requireAuth, async (req, res) => {
-  res.json(req.user);
+  try {
+    res.json(req.user);
+  } catch (err) {
+    console.error('Get user error:', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
 });
 
 export default router;
