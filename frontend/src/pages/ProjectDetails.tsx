@@ -1,8 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+// import Header from '@/components/Header';
+// import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { resolveImageUrl, getCategoryName } from '@/lib/utils';
@@ -47,7 +47,7 @@ const ProjectDetails = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      {/* <Header /> */}
       <main className="pt-24 pb-16 px-6">
         <div className="container mx-auto max-w-5xl">
           <div className="mb-6">
@@ -144,7 +144,7 @@ const ProjectDetails = () => {
           )}
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
