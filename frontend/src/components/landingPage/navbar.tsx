@@ -24,7 +24,14 @@ const appsData = [
   {
     category: "SALES",
     color: "text-red-400",
-    items: ["CRM", "Sales", "POS Shop", "POS Restaurant", "Subscriptions", "Rental"],
+    items: [
+      "CRM",
+      "Sales",
+      "POS Shop",
+      "POS Restaurant",
+      "Subscriptions",
+      "Rental",
+    ],
   },
   {
     category: "WEBSITES",
@@ -89,114 +96,7 @@ const appsData = [
   {
     category: "PRODUCTIVITY",
     color: "text-purple-600",
-    items: [
-      "Discuss",
-      "Approvals",
-      "IoT",
-      "VoIP",
-      "Knowledge",
-      "WhatsApp",
-    ],
-  },
-];
-
-// Industries dropdown data
-const industriesData = [
-  {
-    category: "RETAIL",
-    color: "text-teal-600",
-    items: [
-      "Book Store",
-      "Clothing Store",
-      "Furniture Store",
-      "Grocery Store",
-      "Hardware Store",
-      "Toy Store",
-    ],
-  },
-  {
-    category: "FOOD & HOSPITALITY",
-    color: "text-teal-600",
-    items: [
-      "Bar and Pub",
-      "Restaurant",
-      "Fast Food",
-      "Guest House",
-      "Beverage Distributor",
-      "Hotel",
-    ],
-  },
-  {
-    category: "REAL ESTATE",
-    color: "text-red-400",
-    items: [
-      "Real Estate Agency",
-      "Architecture Firm",
-      "Construction",
-      "Estate Management",
-      "Gardening",
-      "Property Owner Association",
-    ],
-  },
-  {
-    category: "CONSULTING",
-    color: "text-purple-600",
-    items: [
-      "Accounting Firm",
-      "Odoo Partner",
-      "Marketing Agency",
-      "Law firm",
-      "Talent Acquisition",
-      "Audit & Certification",
-    ],
-  },
-  {
-    category: "MANUFACTURING",
-    color: "text-purple-600",
-    items: [
-      "Textile",
-      "Metal",
-      "Furnitures",
-      "Food",
-      "Brewery",
-      "Corporate Gifts",
-    ],
-  },
-  {
-    category: "HEALTH & FITNESS",
-    color: "text-orange-500",
-    items: [
-      "Sports Club",
-      "Eyewear Store",
-      "Fitness Center",
-      "Wellness Practitioners",
-      "Pharmacy",
-      "Hair Salon",
-    ],
-  },
-  {
-    category: "TRADES",
-    color: "text-orange-600",
-    items: [
-      "Handyman",
-      "IT Hardware & Support",
-      "Solar Energy Systems",
-      "Shoe Maker",
-      "Cleaning Services",
-      "HVAC Services",
-    ],
-  },
-  {
-    category: "OTHERS",
-    color: "text-purple-600",
-    items: [
-      "Nonprofit Organization",
-      "Environmental Agency",
-      "Billboard Rental",
-      "Photography",
-      "Bike Leasing",
-      "Software Reseller",
-    ],
+    items: ["Discuss", "Approvals", "IoT", "VoIP", "Knowledge", "WhatsApp"],
   },
 ];
 
@@ -257,10 +157,51 @@ const communityData = [
   },
 ];
 
+// Types for API data
+interface IndustryItem {
+  id: string;
+  title: string;
+}
+
+interface IndustryCategory {
+  category: string;
+  items: IndustryItem[];
+}
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [industriesData, setIndustriesData] = useState<IndustryCategory[]>([]);
+  const [isLoadingIndustries, setIsLoadingIndustries] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Fetch industries data from API
+  useEffect(() => {
+    const fetchIndustries = async () => {
+      setIsLoadingIndustries(true);
+      try {
+        const baseUrl = import.meta.env.VITE_API_URL;
+        const response = await fetch(
+          `${baseUrl}/api/categories/project-data/of-category-wise`,
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch industries");
+        }
+
+        const data: IndustryCategory[] = await response.json();
+        setIndustriesData(data);
+      } catch (error) {
+        console.error("Error fetching industries:", error);
+        // Keep empty array on error
+        setIndustriesData([]);
+      } finally {
+        setIsLoadingIndustries(false);
+      }
+    };
+
+    fetchIndustries();
+  }, []);
 
   const handleDropdownToggle = (dropdown: string) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
@@ -269,7 +210,10 @@ export function Navbar() {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setActiveDropdown(null);
       }
     };
@@ -284,7 +228,10 @@ export function Navbar() {
   }, [activeDropdown]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-white" ref={dropdownRef}>
+    <header
+      className="sticky top-0 z-50 w-full border-b border-border bg-white"
+      ref={dropdownRef}
+    >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
@@ -294,7 +241,7 @@ export function Navbar() {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-6">
           <div className="relative">
-            <button 
+            <button
               onClick={() => handleDropdownToggle("apps")}
               className="text-sm font-medium text-gray-700 hover:text-gray-900"
             >
@@ -303,7 +250,7 @@ export function Navbar() {
           </div>
 
           <div className="relative">
-            <button 
+            <button
               onClick={() => handleDropdownToggle("industries")}
               className="text-sm font-medium text-gray-700 hover:text-gray-900"
             >
@@ -312,7 +259,7 @@ export function Navbar() {
           </div>
 
           <div className="relative">
-            <button 
+            <button
               onClick={() => handleDropdownToggle("community")}
               className="text-sm font-medium text-gray-700 hover:text-gray-900"
             >
@@ -420,40 +367,52 @@ export function Navbar() {
 
             {activeDropdown === "industries" && (
               <>
-                <div className="grid grid-cols-4 gap-8 mb-8">
-                  {industriesData.map((section, idx) => (
-                    <div key={idx}>
-                      <h3
-                        className={cn(
-                          "text-xs font-bold mb-3 uppercase tracking-wide",
-                          section.color,
-                        )}
-                      >
-                        {section.category}
-                      </h3>
-                      <ul className="space-y-2">
-                        {section.items.map((item, itemIdx) => (
-                          <li key={itemIdx}>
-                            <Link
-                              to="#"
-                              className="text-sm text-gray-700 hover:text-gray-900"
-                            >
-                              {item}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                {isLoadingIndustries ? (
+                  <div className="text-center py-8">
+                    <p className="text-gray-600">Loading industries...</p>
+                  </div>
+                ) : industriesData.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-gray-600">No industries available</p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="grid grid-cols-4 gap-8 mb-8">
+                      {industriesData.map((section, idx) => (
+                        <div key={idx}>
+                          <h3
+                            className={cn(
+                              "text-xs font-bold mb-3 uppercase tracking-wide",
+                            )}
+                          >
+                            {section.category}
+                          </h3>
+                          <ul className="">
+                            {section.items.map((item, itemIdx) => (
+                              <li key={itemIdx}>
+                                <Link
+                                  to={item.url}
+                                  target="_blank"
+                                  className="text-sm text-gray-700 hover:text-gray-900"
+                                >
+                                  {item.title}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <div className="text-center pt-4 border-t border-gray-200">
-                  <Link
-                    to="#"
-                    className="text-sm text-gray-700 hover:text-gray-900 font-medium"
-                  >
-                    Browse all Industries
-                  </Link>
-                </div>
+                    <div className="text-center pt-4 border-t border-gray-200">
+                      <Link
+                        to="#"
+                        className="text-sm text-gray-700 hover:text-gray-900 font-medium"
+                      >
+                        Browse all Industries
+                      </Link>
+                    </div>
+                  </>
+                )}
               </>
             )}
 
@@ -519,11 +478,7 @@ function MobileNavItem({
         <div className="pl-4 flex flex-col gap-4 mt-2">
           {items.map((section, idx) => (
             <div key={idx}>
-              <h4
-                className={cn(
-                  "text-xs font-bold mb-2 uppercase"
-                )}
-              >
+              <h4 className={cn("text-xs font-bold mb-2 uppercase")}>
                 {section.category}
               </h4>
               <ul className="space-y-1">

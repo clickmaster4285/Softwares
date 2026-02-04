@@ -1,5 +1,6 @@
 import express from 'express';
 import Category from '../models/Category.js';
+import Project from '../models/Project.js';
 import mongoose from 'mongoose';
 import { requireAuth, requireAdmin } from '../middleware/auth.js';
 
@@ -136,5 +137,35 @@ router.delete('/:id', requireAuth, requireAdmin, async (req, res) => {
     res.status(500).json({ message: 'Internal server error', error: err.message });
   }
 });
+
+
+router.get('/project-data/of-category-wise',  async (req, res) => {
+  try {
+    // Fetch all categories that are not deleted
+    const categories = await Category.find({ deleted: false }).lean();
+
+    // For each category, fetch its projects
+    const data = await Promise.all(
+      categories.map(async (cat) => {
+        const projects = await Project.find({ category: cat._id }).lean();
+        return {
+          category: cat.name,
+          items: projects.map((proj) => ({
+            id: proj._id,       // Include project ID
+            title: proj.title,  // Project title
+            title: proj.title,  // Project title
+            url: proj.url,
+          })),
+        };
+      })
+    );
+
+    return res.status(200).json(data);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 export default router;
