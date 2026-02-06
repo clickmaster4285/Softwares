@@ -20,7 +20,7 @@ const communityFeatures = [
   {
     icon: BookOpen,
     title: "Learning Hub",
-    description: "Free courses, tutorials, and certifications to master FlowSuite and grow your skills.",
+    description: "Free courses, tutorials, and certifications to master ClickMasters and grow your skills.",
     stat: "100+",
     statLabel: "Courses",
   },
@@ -57,7 +57,7 @@ export function CommunitySection() {
               Join a thriving <span className="text-primary">global community</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-6 text-pretty">
-              FlowSuite is more than software—it's a movement. Join millions of businesses, 
+              ClickMasters is more than software—it's a movement. Join millions of businesses, 
               developers, and partners building the future of business management together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">

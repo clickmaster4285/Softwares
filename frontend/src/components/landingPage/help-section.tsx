@@ -7,7 +7,7 @@ const helpResources = [
   {
     icon: BookOpen,
     title: "Documentation",
-    description: "Comprehensive guides and API references for all FlowSuite apps.",
+    description: "Comprehensive guides and API references for all ClickMasters apps.",
     link: "Browse Docs",
   },
   {

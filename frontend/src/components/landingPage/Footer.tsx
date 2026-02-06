@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Twitter, Linkedin, Github, Youtube } from "lucide-react"
+import logo from "../../../assests/Clickmasters-Digital-Marketing-Agency.webp"
 
 const footerLinks = {
   product: [
@@ -47,14 +48,11 @@ export function Footer() {
         {/* Top Section */}
         <div className="grid lg:grid-cols-2 gap-12 mb-12 pb-12 border-b border-background/20">
           <div>
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <span className="text-lg font-bold text-primary-foreground">F</span>
-              </div>
-              <span className="text-xl font-bold text-background">FlowSuite</span>
-            </Link>
+              <Link to="/" className="flex items-center gap-2">
+  <img src={logo} className="w-36 h-auto" alt="Logo" />
+</Link>
             <p className="text-background/70 max-w-md mb-6">
-              FlowSuite is the all-in-one business platform trusted by millions. 
+              ClickMasters is the all-in-one business platform trusted by millions. 
               Streamline operations, boost productivity, and scale with confidence.
             </p>
             <div className="flex gap-4">

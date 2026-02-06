@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-
+import logo from "../../../assests/Clickmasters-Digital-Marketing-Agency.webp";
 // Apps dropdown data
 const appsData = [
   {
@@ -235,19 +235,19 @@ export function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="text-2xl font-bold text-gray-600">odoo</div>
+          <img src={logo} className="w-36 h-auto" alt="Logo" />
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-6">
-          <div className="relative">
+          {/* <div className="relative">
             <button
               onClick={() => handleDropdownToggle("apps")}
               className="text-sm font-medium text-gray-700 hover:text-gray-900"
             >
               Apps
             </button>
-          </div>
+          </div> */}
 
           <div className="relative">
             <button
@@ -258,38 +258,31 @@ export function Navbar() {
             </button>
           </div>
 
-          <div className="relative">
-            <button
-              onClick={() => handleDropdownToggle("community")}
-              className="text-sm font-medium text-gray-700 hover:text-gray-900"
-            >
-              Community
-            </button>
-          </div>
-
           <Link
+            to="/about-us"
+            className="text-sm font-medium text-gray-700 hover:text-gray-900"
+          >
+            About Us
+          </Link>
+
+          {/* <Link
             to="#pricing"
             className="text-sm font-medium text-gray-700 hover:text-gray-900"
           >
             Pricing
-          </Link>
+          </Link> */}
 
           <Link
-            to="#help"
+            to="/contact-us"
             className="text-sm font-medium text-gray-700 hover:text-gray-900"
           >
-            Help
+            Contact Us
           </Link>
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-3">
-          <Button variant="ghost" className="text-gray-700">
-            Sign in
-          </Button>
-          <Button className="bg-purple-800 text-white hover:bg-purple-900">
-            Try it free
-          </Button>
+        <div className="hidden lg:flex items-center  gap-3">
+          <Button className="text-gray-700">Sign in</Button>
         </div>
 
         {/* Mobile Menu */}
