@@ -27,7 +27,7 @@ export function HeroSection() {
 
           {/* Subheading */}
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty">
-            FlowSuite brings together CRM, Inventory, HR, Accounting, and 30+ apps into one integrated platform. 
+            ClickMasters brings together CRM, Inventory, HR, Accounting, and 30+ apps into one integrated platform. 
             Scale your operations without the complexity.
           </p>
 
