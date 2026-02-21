@@ -1,4 +1,4 @@
-import { LayoutDashboard, FolderOpen, LogOut, Home, Tags } from 'lucide-react';
+import { LayoutDashboard, FolderOpen, LogOut, Home, Tags, MessageSquare } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +20,7 @@ const menuItems = [
   { title: 'Dashboard', url: '/admin', icon: LayoutDashboard },
   { title: 'Categories', url: '/admin/categories', icon: Tags },
   { title: 'Projects', url: '/admin/projects', icon: FolderOpen },
+  { title: 'Testimonials', url: '/admin/testimonials', icon: MessageSquare },
 ];
 
 const AdminSidebar = () => {

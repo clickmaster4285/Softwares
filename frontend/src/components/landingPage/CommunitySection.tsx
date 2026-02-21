@@ -1,49 +1,50 @@
+import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Users, Code, BookOpen, MessageCircle, Globe, Award } from "lucide-react"
 
 const communityFeatures = [
   {
-    icon: Users,
-    title: "User Community",
-    description: "Connect with 500,000+ users worldwide. Share tips, ask questions, and learn from peers.",
-    stat: "500K+",
-    statLabel: "Members",
+    icon: Code,
+    title: "Custom Software Development",
+    description: "Tailored software built for your business. Web apps, desktop applications, and backend systems that scale.",
+    stat: "1,860+",
+    statLabel: "Projects",
   },
   {
-    icon: Code,
-    title: "Open Source",
-    description: "Contribute to our open-source modules. Build custom apps and share with the community.",
-    stat: "2,500+",
-    statLabel: "Contributors",
+    icon: Users,
+    title: "Web Application Development",
+    description: "Modern web apps with React, Node, and cloud hosting. Responsive, fast, and secure applications.",
+    stat: "3,500+",
+    statLabel: "Clients",
   },
   {
     icon: BookOpen,
-    title: "Learning Hub",
-    description: "Free courses, tutorials, and certifications to master ClickMasters and grow your skills.",
-    stat: "100+",
-    statLabel: "Courses",
+    title: "Mobile App Development",
+    description: "Native and cross-platform mobile apps for iOS and Android. From MVP to enterprise solutions.",
+    stat: "75+",
+    statLabel: "Awards",
   },
   {
     icon: MessageCircle,
-    title: "Forums",
-    description: "Get answers fast. Our active community forums are monitored by experts daily.",
-    stat: "1M+",
-    statLabel: "Discussions",
+    title: "ERP & Business Software",
+    description: "ERP, CRM, inventory, and workflow automation. Integrate with your existing systems and processes.",
+    stat: "5+",
+    statLabel: "Years",
   },
   {
     icon: Globe,
-    title: "Partner Network",
-    description: "Find certified partners for implementation, customization, and support services.",
-    stat: "3,000+",
-    statLabel: "Partners",
+    title: "API & Integrations",
+    description: "REST APIs, third-party integrations, and legacy system modernization. Connect your software ecosystem.",
+    stat: "24/7",
+    statLabel: "Support",
   },
   {
     icon: Award,
-    title: "Events & Meetups",
-    description: "Join conferences, webinars, and local meetups to network and learn.",
-    stat: "200+",
-    statLabel: "Events/Year",
+    title: "Maintenance & Support",
+    description: "Ongoing updates, security patches, and technical support. Keep your software running smoothly.",
+    stat: "100%",
+    statLabel: "Dedicated",
   },
 ]
 
@@ -53,28 +54,27 @@ export function CommunitySection() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
-              Join a thriving <span className="text-primary">global community</span>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
+              Why Choose Our <span className="text-primary">Software Development Services</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-6 text-pretty">
-              ClickMasters is more than software—it's a movement. Join millions of businesses, 
-              developers, and partners building the future of business management together.
+              We are a software development company that delivers custom software, web apps, and mobile apps. Experienced developers, agile process, and on-time delivery.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                Join Community
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+                <Link to="/contact-us">Get in Touch</Link>
               </Button>
-              <Button variant="outline">
-                Become a Partner
+              <Button variant="outline" asChild>
+                <Link to="/testimonials">Client Stories</Link>
               </Button>
             </div>
           </div>
           
           <div className="grid grid-cols-3 gap-4">
             {[
-              { value: "12M+", label: "Users" },
-              { value: "500K+", label: "Community" },
-              { value: "150+", label: "Countries" },
+              { value: "1,860+", label: "Projects" },
+              { value: "3,500+", label: "Clients" },
+              { value: "75+", label: "Awards" },
             ].map((stat) => (
               <div key={stat.label} className="text-center p-6 bg-background rounded-xl border border-border">
                 <p className="text-2xl sm:text-3xl font-bold text-primary">{stat.value}</p>
@@ -88,7 +88,7 @@ export function CommunitySection() {
           {communityFeatures.map((feature) => {
             const Icon = feature.icon
             return (
-              <Card key={feature.title} className="bg-card hover:shadow-lg transition-shadow">
+              <Card key={feature.title} className="bg-card hover:shadow-lg hover:border-primary/20 transition-all rounded-xl border-border/60">
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="h-10 w-10 rounded-lg bg-accent/10 flex items-center justify-center">

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -7,31 +8,31 @@ const helpResources = [
   {
     icon: BookOpen,
     title: "Documentation",
-    description: "Comprehensive guides and API references for all ClickMasters apps.",
+    description: "Technical documentation and developer guides for our software and APIs.",
     link: "Browse Docs",
   },
   {
     icon: Video,
     title: "Video Tutorials",
-    description: "Step-by-step video guides to help you get the most out of FlowSuite.",
+    description: "Step-by-step videos to get started with your software and features.",
     link: "Watch Videos",
   },
   {
     icon: MessageCircle,
     title: "Live Chat",
-    description: "Chat with our support team in real-time. Available 24/7 for Pro users.",
+    description: "Chat with our support team in real-time. Get help with development and technical questions.",
     link: "Start Chat",
   },
   {
     icon: FileQuestion,
     title: "FAQ",
-    description: "Quick answers to the most commonly asked questions.",
+    description: "Common questions about our software development services, pricing, and process.",
     link: "View FAQ",
   },
   {
     icon: Headphones,
     title: "Contact Support",
-    description: "Submit a ticket and get a response within 24 hours.",
+    description: "Request a callback or submit a ticket. Our development team responds within 24 hours.",
     link: "Get Help",
   },
 ]
@@ -41,12 +42,11 @@ export function HelpSection() {
     <section id="help" className="py-20 lg:py-32 bg-muted/30">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
-            How can we <span className="text-primary">help you?</span>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
+            Resources & <span className="text-primary">Support</span>
           </h2>
           <p className="text-lg text-muted-foreground mb-8 text-pretty">
-            Find answers quickly with our knowledge base, or reach out to our support team 
-            for personalized assistance.
+            Documentation, tutorials, and technical support for your software. Need a custom solution? Get in touch with our development team.
           </p>
           
           {/* Search */}
@@ -66,7 +66,7 @@ export function HelpSection() {
           {helpResources.map((resource) => {
             const Icon = resource.icon
             return (
-              <Card key={resource.title} className="group bg-card hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer">
+              <Card key={resource.title} className="group bg-card hover:shadow-lg hover:border-primary/40 transition-all cursor-pointer rounded-xl border-border/60">
                 <CardContent className="p-6 text-center">
                   <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
                     <Icon className="h-6 w-6 text-primary" />
@@ -84,16 +84,16 @@ export function HelpSection() {
 
         {/* Contact CTA */}
         <div className="mt-16 text-center bg-background rounded-2xl border border-border p-8 lg:p-12 max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold text-foreground mb-2">Still need help?</h3>
+          <h3 className="text-2xl font-bold text-foreground mb-2">Have a software project in mind?</h3>
           <p className="text-muted-foreground mb-6">
-            Our customer success team is ready to assist you with any questions.
+            Get a free consultation. Our software development team will discuss your requirements and propose a solution.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Contact Support
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+              <Link to="/contact-us">Contact Us</Link>
             </Button>
-            <Button variant="outline">
-              Schedule a Call
+            <Button variant="outline" asChild>
+              <Link to="/about-us">About ClickMasters</Link>
             </Button>
           </div>
         </div>

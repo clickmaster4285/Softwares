@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import userRoutes from './src/routes/user.js';
 import projectRoutes from './src/routes/project.js';
 import categoryRoutes from './src/routes/category.js';
+import testimonialRoutes from './src/routes/testimonial.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -37,6 +38,7 @@ app.use('/uploads', express.static(uploadsDir));
 app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/testimonials', testimonialRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -46,7 +48,7 @@ app.get('/health', (req, res) => {
 // Global error handler
 app.use((err, req, res, next) => {
   console.error('Global error handler:', err);
-  res.status(err.status || 500).json({ 
+  res.status(err.status || 500).json({
     message: err.message || 'Internal server error',
     error: process.env.NODE_ENV === 'development' ? err : undefined
   });

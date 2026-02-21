@@ -6,38 +6,38 @@ const industries = [
   {
     icon: Factory,
     title: "Manufacturing",
-    description: "Production planning, quality control, MRP, and shop floor management for modern manufacturers.",
-    features: ["Bill of Materials", "Work Orders", "Quality Control", "MRP Planning"],
+    description: "Custom ERP, MES, production planning, and inventory software. We build manufacturing software that integrates with your shop floor and supply chain.",
+    features: ["ERP & MRP", "Production Planning", "Quality Control", "Inventory Systems"],
   },
   {
     icon: Store,
     title: "Retail & eCommerce",
-    description: "Unified commerce with POS, online stores, and omnichannel inventory management.",
-    features: ["Point of Sale", "Multi-channel Sync", "Loyalty Programs", "Returns Management"],
+    description: "E-commerce platforms, POS systems, and omnichannel retail software. Custom web and mobile apps for online stores and in-store operations.",
+    features: ["E-commerce Apps", "POS Software", "Inventory Sync", "Customer Portals"],
   },
   {
     icon: Briefcase,
     title: "Professional Services",
-    description: "Time tracking, project billing, resource planning, and client management for service firms.",
-    features: ["Time Tracking", "Project Billing", "Resource Planning", "Client Portal"],
+    description: "Project management, time tracking, billing, and client portal software. Custom software for consultancies, agencies, and service firms.",
+    features: ["Project Management", "Time & Billing", "Client Portals", "Reporting"],
   },
   {
     icon: Heart,
     title: "Healthcare",
-    description: "Patient management, appointments, compliance tracking, and secure communications.",
-    features: ["Patient Records", "Scheduling", "HIPAA Compliance", "Telehealth"],
+    description: "Patient management, scheduling, EHR integrations, and compliant healthcare software. Secure, HIPAA-aware applications for clinics and hospitals.",
+    features: ["Patient Management", "Scheduling", "EHR Integration", "Telehealth"],
   },
   {
     icon: GraduationCap,
     title: "Education",
-    description: "Student management, course scheduling, online learning, and administration tools.",
-    features: ["Student Portal", "Course Management", "Online Learning", "Attendance"],
+    description: "Learning management systems, student portals, and education software. Custom web and mobile apps for schools, universities, and ed-tech.",
+    features: ["LMS", "Student Portals", "Course Management", "Attendance"],
   },
   {
     icon: Building2,
     title: "Real Estate",
-    description: "Property management, lease tracking, maintenance requests, and tenant communications.",
-    features: ["Property Listings", "Lease Management", "Maintenance", "Tenant Portal"],
+    description: "Property management, listing platforms, and real estate software. Custom solutions for agents, developers, and property managers.",
+    features: ["Property Management", "Listing Platforms", "Lease Management", "Tenant Portals"],
   },
 ]
 
@@ -46,12 +46,11 @@ export function IndustriesSection() {
     <section id="industries" className="py-20 lg:py-32 bg-background">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
-            Tailored solutions for <span className="text-primary">every industry</span>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
+            Software Solutions for <span className="text-primary">Every Industry</span>
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            Pre-configured workflows and best practices for your specific industry. 
-            Get started faster with templates designed by experts.
+            As a software development company we build custom applications for manufacturing, retail, healthcare, education, and more. Industry-specific solutions that scale.
           </p>
         </div>
 
@@ -59,7 +58,7 @@ export function IndustriesSection() {
           {industries.map((industry) => {
             const Icon = industry.icon
             return (
-              <Card key={industry.title} className="group overflow-hidden bg-card hover:shadow-xl transition-all">
+              <Card key={industry.title} className="group overflow-hidden bg-card hover:shadow-xl hover:border-primary/20 transition-all rounded-xl border-border/60">
                 <CardContent className="p-6">
                   <div className="h-12 w-12 rounded-xl bg-primary flex items-center justify-center mb-4">
                     <Icon className="h-6 w-6 text-primary-foreground" />
