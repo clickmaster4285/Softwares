@@ -151,9 +151,8 @@ router.get('/project-data/of-category-wise',  async (req, res) => {
         return {
           category: cat.name,
           items: projects.map((proj) => ({
-            id: proj._id,       // Include project ID
-            title: proj.title,  // Project title
-            title: proj.title,  // Project title
+            id: proj._id,
+            title: proj.title,
             url: proj.url,
           })),
         };

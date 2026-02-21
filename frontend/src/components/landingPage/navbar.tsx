@@ -173,7 +173,14 @@ export function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [industriesData, setIndustriesData] = useState<IndustryCategory[]>([]);
   const [isLoadingIndustries, setIsLoadingIndustries] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Fetch industries data from API
   useEffect(() => {
@@ -229,13 +236,16 @@ export function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b border-border bg-white"
+      className={cn(
+        "sticky top-0 z-50 w-full bg-white transition-all duration-300",
+        isScrolled ? "border-b border-border/60 shadow-sm" : "border-b border-border/40"
+      )}
       ref={dropdownRef}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} className="w-36 h-auto" alt="Logo" />
+        <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-90">
+          <img src={logo} className="w-36 h-auto" alt="ClickMasters" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -252,7 +262,7 @@ export function Navbar() {
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("industries")}
-              className="text-sm font-medium text-gray-700 hover:text-gray-900"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
             >
               Industries
             </button>
@@ -260,7 +270,7 @@ export function Navbar() {
 
           <Link
             to="/about-us"
-            className="text-sm font-medium text-gray-700 hover:text-gray-900"
+            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             About Us
           </Link>
@@ -274,15 +284,23 @@ export function Navbar() {
 
           <Link
             to="/contact-us"
-            className="text-sm font-medium text-gray-700 hover:text-gray-900"
+            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             Contact Us
+          </Link>
+          <Link
+            to="/testimonials"
+            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+          >
+            Testimonials
           </Link>
         </nav>
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center  gap-3">
-          <Button className="text-gray-700">Sign in</Button>
+          <Link to="/admin/login">
+            <Button variant="outline" className="rounded-lg border-primary/30 text-foreground hover:bg-primary/10 hover:border-primary/50">Sign in</Button>
+          </Link>
         </div>
 
         {/* Mobile Menu */}
@@ -293,7 +311,7 @@ export function Navbar() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-full max-w-sm bg-white">
+          <SheetContent side="right" className="w-full max-w-sm bg-white dark:bg-zinc-950 border-l border-border shadow-xl">
             <nav className="flex flex-col gap-4 mt-8">
               <MobileNavItem title="Apps" items={appsData} />
               <MobileNavItem title="Industries" items={industriesData} />
@@ -306,6 +324,13 @@ export function Navbar() {
                 Pricing
               </Link>
               <Link
+                to="/testimonials"
+                className="text-lg font-medium text-gray-700 py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Testimonials
+              </Link>
+              <Link
                 to="#help"
                 className="text-lg font-medium text-gray-700 py-2"
                 onClick={() => setIsOpen(false)}
@@ -313,9 +338,11 @@ export function Navbar() {
                 Help
               </Link>
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-200">
-                <Button variant="outline" className="w-full">
-                  Sign in
-                </Button>
+                <Link to="/admin/login" onClick={() => setIsOpen(false)}>
+                  <Button variant="outline" className="w-full">
+                    Sign in
+                  </Button>
+                </Link>
                 <Button className="w-full bg-purple-800 text-white">
                   Try it free
                 </Button>
@@ -327,7 +354,7 @@ export function Navbar() {
 
       {/* Full-width Dropdown Menus */}
       {activeDropdown && (
-        <div className="absolute left-0 right-0 bg-white border-t border-gray-200 shadow-lg animate-slideDown">
+        <div className="absolute left-0 right-0 bg-background/98 backdrop-blur-md border-t border-border shadow-lg animate-slideDown">
           <div className="container mx-auto px-4 lg:px-8 py-8">
             {activeDropdown === "apps" && (
               <div className="grid grid-cols-4 gap-8">
@@ -335,7 +362,7 @@ export function Navbar() {
                   <div key={idx}>
                     <h3
                       className={cn(
-                        "text-xs font-bold mb-3 uppercase tracking-wide",
+                        "text-sm font-bold mb-3 uppercase tracking-wider text-foreground/90",
                         section.color,
                       )}
                     >
@@ -346,7 +373,7 @@ export function Navbar() {
                         <li key={itemIdx}>
                           <Link
                             to="#"
-                            className="text-sm text-gray-700 hover:text-gray-900"
+                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                           >
                             {item}
                           </Link>
@@ -362,31 +389,27 @@ export function Navbar() {
               <>
                 {isLoadingIndustries ? (
                   <div className="text-center py-8">
-                    <p className="text-gray-600">Loading industries...</p>
+                    <p className="text-muted-foreground">Loading industries...</p>
                   </div>
                 ) : industriesData.length === 0 ? (
                   <div className="text-center py-8">
-                    <p className="text-gray-600">No industries available</p>
+                    <p className="text-muted-foreground">No industries available</p>
                   </div>
                 ) : (
                   <>
                     <div className="grid grid-cols-4 gap-8 mb-8">
                       {industriesData.map((section, idx) => (
                         <div key={idx}>
-                          <h3
-                            className={cn(
-                              "text-xs font-bold mb-3 uppercase tracking-wide",
-                            )}
-                          >
+                          <h3 className="text-base font-bold uppercase tracking-wider text-foreground mb-4 text-primary/90">
                             {section.category}
                           </h3>
-                          <ul className="">
+                          <ul className="space-y-2">
                             {section.items.map((item, itemIdx) => (
                               <li key={itemIdx}>
                                 <Link
                                   to={item.url}
                                   target="_blank"
-                                  className="text-sm text-gray-700 hover:text-gray-900"
+                                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                                 >
                                   {item.title}
                                 </Link>
@@ -396,10 +419,10 @@ export function Navbar() {
                         </div>
                       ))}
                     </div>
-                    <div className="text-center pt-4 border-t border-gray-200">
+                    <div className="text-center pt-4 border-t border-border">
                       <Link
                         to="#"
-                        className="text-sm text-gray-700 hover:text-gray-900 font-medium"
+                        className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
                       >
                         Browse all Industries
                       </Link>

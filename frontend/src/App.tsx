@@ -11,8 +11,10 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminCategories from "./pages/AdminCategories";
 import AdminProjects from "./pages/AdminProjects";
+import AdminTestimonials from "./pages/AdminTestimonials";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Testimonials from "./pages/Testimonials";
 import ProjectDetails from "./pages/ProjectDetails";
 
 const queryClient = new QueryClient();
@@ -30,9 +32,11 @@ const App = () => (
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/categories" element={<AdminCategories />} />
             <Route path="/admin/projects" element={<AdminProjects />} />
+            <Route path="/admin/testimonials" element={<AdminTestimonials />} />
             <Route path="/projects/:id" element={<ProjectDetails />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/about-us" element={<About />} />
+            <Route path="/testimonials" element={<Testimonials />} />
 
 
 

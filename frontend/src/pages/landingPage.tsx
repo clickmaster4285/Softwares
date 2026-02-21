@@ -3,19 +3,19 @@ import { HeroSection } from "@/components/landingPage/hero-section"
 import { AppsSection } from "@/components/landingPage/AppsSection"
 import { IndustriesSection } from "@/components/landingPage/industries-section"
 import { CommunitySection } from "@/components/landingPage/CommunitySection"
-// import { PricingSection } from "@/components/landingPage/pricing-section"
+import { TestimonialsSection } from "@/components/landingPage/TestimonialsSection"
 import { HelpSection } from "@/components/landingPage/help-section"
 import { Footer } from "@/components/landingPage/Footer"
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen" role="main" aria-label="ClickMasters software development company homepage">
       <Navbar />
       <HeroSection />
       <AppsSection />
       <IndustriesSection />
       <CommunitySection />
-      {/* <PricingSection /> */}
+      <TestimonialsSection />
       <HelpSection />
       <Footer />
     </main>

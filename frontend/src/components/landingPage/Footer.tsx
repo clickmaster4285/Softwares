@@ -5,32 +5,31 @@ import { Twitter, Linkedin, Github, Youtube } from "lucide-react"
 import logo from "../../../assests/Clickmasters-Digital-Marketing-Agency.webp"
 
 const footerLinks = {
-  product: [
-    { label: "Features", href: "#" },
-    { label: "Apps", href: "#apps" },
-    { label: "Integrations", href: "#" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Changelog", href: "#" },
+  services: [
+    { label: "Custom Software", href: "/about-us" },
+    { label: "Web Development", href: "/about-us" },
+    { label: "Mobile App Development", href: "/about-us" },
+    { label: "ERP & Business Apps", href: "/about-us" },
+    { label: "Our Projects", href: "/#apps" },
   ],
   company: [
-    { label: "About", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "Press", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "About Us", href: "/about-us" },
+    { label: "Contact", href: "/contact-us" },
+    { label: "Testimonials", href: "/testimonials" },
+    { label: "Industries", href: "/#industries" },
+    { label: "Support", href: "/#help" },
   ],
   resources: [
-    { label: "Documentation", href: "#help" },
-    { label: "Community", href: "#community" },
-    { label: "Partners", href: "#" },
-    { label: "Developers", href: "#" },
-    { label: "Status", href: "#" },
+    { label: "Help & FAQ", href: "/#help" },
+    { label: "Why Choose Us", href: "/#community" },
+    { label: "Case Studies", href: "/#apps" },
+    { label: "Blog", href: "#" },
+    { label: "Careers", href: "#" },
   ],
   legal: [
-    { label: "Privacy", href: "#" },
-    { label: "Terms", href: "#" },
-    { label: "Security", href: "#" },
-    { label: "Cookies", href: "#" },
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms of Service", href: "#" },
+    { label: "Cookie Policy", href: "#" },
   ],
 }
 
@@ -52,8 +51,7 @@ export function Footer() {
   <img src={logo} className="w-36 h-auto" alt="Logo" />
 </Link>
             <p className="text-background/70 max-w-md mb-6">
-              ClickMasters is the all-in-one business platform trusted by millions. 
-              Streamline operations, boost productivity, and scale with confidence.
+              ClickMasters is a software development company. We build custom software, web applications, mobile apps, and ERP solutions for businesses worldwide.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => {
@@ -75,7 +73,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-background mb-4">Subscribe to our newsletter</h3>
             <p className="text-background/70 mb-4">
-              Get the latest news, updates, and tips delivered to your inbox.
+              Get product updates, tech insights, and company news from your software development partner.
             </p>
             <div className="flex gap-2">
               <Input 
@@ -92,9 +90,9 @@ export function Footer() {
         {/* Links Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div>
-            <h4 className="font-semibold text-background mb-4">Product</h4>
+            <h4 className="font-semibold text-background mb-4">Services</h4>
             <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
+              {footerLinks.services.map((link) => (
                 <li key={link.label}>
                   <Link to={link.href} className="text-background/70 hover:text-background transition-colors">
                     {link.label}
@@ -144,7 +142,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-background/20">
           <p className="text-sm text-background/60">
-            © 2026 FlowSuite. All rights reserved.
+            © {new Date().getFullYear()} ClickMasters. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-background/60">
             <span>English (US)</span>
