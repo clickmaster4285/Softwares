@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom"
+'use client';
+
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Play } from "lucide-react"
 
@@ -35,13 +37,13 @@ export function HeroSection() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
             <Button size="lg" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all" asChild>
-              <Link to="/contact-us">
+              <Link href="/contact-us">
                 Start Your Project
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto px-8 py-6 text-lg rounded-xl bg-background/80 border-2 hover:bg-muted/50" asChild>
-              <Link to="/about-us">
+              <Link href="/about-us">
                 <Play className="mr-2 h-5 w-5" />
                 Our Services
               </Link>

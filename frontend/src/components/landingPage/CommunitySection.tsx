@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom"
+'use client';
+
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Users, Code, BookOpen, MessageCircle, Globe, Award } from "lucide-react"
@@ -62,10 +64,10 @@ export function CommunitySection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-                <Link to="/contact-us">Get in Touch</Link>
+                <Link href="/contact-us">Get in Touch</Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link to="/testimonials">Client Stories</Link>
+                <Link href="/testimonials">Client Stories</Link>
               </Button>
             </div>
           </div>

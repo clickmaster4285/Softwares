@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom"
+'use client';
+
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -90,10 +92,10 @@ export function HelpSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-              <Link to="/contact-us">Contact Us</Link>
+              <Link href="/contact-us">Contact Us</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link to="/about-us">About ClickMasters</Link>
+              <Link href="/about-us">About ClickMasters</Link>
             </Button>
           </div>
         </div>

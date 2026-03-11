@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { FolderOpen, TrendingUp, Clock, CheckCircle, Zap, Eye, Tag, Calendar } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

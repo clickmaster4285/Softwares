@@ -1,100 +1,122 @@
+'use client';
+
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { apiFetch } from '@/lib/api';
+
+interface User {
+  id: string;
+  email: string;
+  role?: string;
+}
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  email: string | null;
+  user: User | null;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => Promise<void>;
   loading: boolean;
+  error: string | null;
 }
 
-const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [email, setEmail] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Check auth on mount
+  // Check authentication status on mount
   useEffect(() => {
-    (async () => {
+    const checkAuth = async () => {
       try {
-        const { apiFetch } = await import('../lib/api');
-        const res = await apiFetch('/api/users/me', { credentials: 'include' });
-        if (res.ok) {
-          const user = await res.json();
+        setLoading(true);
+        setError(null);
+        const response = await apiFetch('/api/users/me', { credentials: 'include' });
+        
+        if (response.ok) {
+          const userData = await response.json();
           setIsAuthenticated(true);
-          setEmail(user.email);
+          setUser(userData);
         } else {
           setIsAuthenticated(false);
-          setEmail(null);
+          setUser(null);
         }
-      } catch {
+      } catch (err) {
+        console.error('Auth check failed:', err);
         setIsAuthenticated(false);
-        setEmail(null);
+        setUser(null);
       } finally {
         setLoading(false);
       }
-    })();
+    };
+
+    checkAuth();
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string): Promise<boolean> => {
     try {
-const { apiFetch } = await import('../lib/api');
-    const res = await apiFetch('/api/users/login', {
+      setLoading(true);
+      setError(null);
+
+      const response = await apiFetch('/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
       });
-      
-      if (res.ok) {
+
+      if (response.ok) {
+        const userData = await response.json();
         setIsAuthenticated(true);
-        setEmail(email);
+        setUser(userData);
         return true;
       } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Login failed');
         setIsAuthenticated(false);
-        setEmail(null);
+        setUser(null);
         return false;
       }
-    } catch (error) {
-      console.error('Login error:', error);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Login failed';
+      setError(errorMessage);
       setIsAuthenticated(false);
-      setEmail(null);
+      setUser(null);
       return false;
+    } finally {
+      setLoading(false);
     }
   };
 
-  const logout = async () => {
+  const logout = async (): Promise<void> => {
     try {
-      const { apiFetch } = await import('../lib/api');
+      setLoading(true);
       await apiFetch('/api/users/logout', {
         method: 'POST',
         credentials: 'include',
       });
-    } catch (error) {
-      console.error('Logout error:', error);
+    } catch (err) {
+      console.error('Logout error:', err);
     } finally {
       setIsAuthenticated(false);
-      setEmail(null);
+      setUser(null);
+      setError(null);
+      setLoading(false);
     }
   };
 
-  // Show loading while checking auth
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-      </div>
-    );
-  }
-
   return (
-    <AuthContext.Provider value={{ isAuthenticated, email, login, logout, loading }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        user,
+        login,
+        logout,
+        loading,
+        error,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

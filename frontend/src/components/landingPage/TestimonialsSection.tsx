@@ -1,3 +1,5 @@
+'use client';
+
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -8,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Quote, Star } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 
@@ -130,7 +132,7 @@ export function TestimonialsSection() {
         {testimonials.length > 4 && (
           <div className="text-center mt-12">
             <Link
-              to="/testimonials"
+              href="/testimonials"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors"
             >
               View all testimonials ({testimonials.length})

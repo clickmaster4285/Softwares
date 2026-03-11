@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo.png";
 
 // Types for dropdown data
 interface DropdownSection {
@@ -177,7 +177,7 @@ const communityData: DropdownSection[] = [
 ];
 
 export function Navbar() {
-  const location = useLocation();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [industriesData, setIndustriesData] = useState<IndustryCategory[]>([]);
@@ -196,7 +196,7 @@ export function Navbar() {
     const fetchIndustries = async () => {
       setIsLoadingIndustries(true);
       try {
-        const baseUrl = import.meta.env.VITE_API_URL;
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
         const response = await fetch(
           `${baseUrl}/api/categories/project-data/of-category-wise`
         );
@@ -243,7 +243,7 @@ export function Navbar() {
   }, [activeDropdown]);
 
   const isActivePath = (path: string) => {
-    return location.pathname === path;
+    return pathname === path;
   };
 
   return (
@@ -259,17 +259,17 @@ export function Navbar() {
       <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <Link
-          to="/"
+          href="/"
           className="flex items-center gap-2 transition-opacity hover:opacity-90"
         >
-          <img src={logo} className="w-64 h-auto" alt="ClickMasters" />
+          <img src="/logo.png" className="w-64 h-auto" alt="ClickMasters" />
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-12">
           {/* Home Link */}
           <Link
-            to="/"
+            href="/"
             className={cn(
               "text-md font-medium transition-colors",
               isActivePath("/")
@@ -299,7 +299,7 @@ export function Navbar() {
           </div>
 
           <Link
-            to="/about-us"
+            href="/about-us"
             className={cn(
               "text-md font-medium transition-colors",
               isActivePath("/about-us")
@@ -311,14 +311,14 @@ export function Navbar() {
           </Link>
 
           {/* <Link
-            to="#pricing"
+            href="#pricing"
             className="text-sm font-medium text-gray-700 hover:text-gray-900"
           >
             Pricing
           </Link> */}
 
           <Link
-            to="/contact-us"
+            href="/contact-us"
             className={cn(
               "text-md font-medium transition-colors",
               isActivePath("/contact-us")
@@ -329,7 +329,7 @@ export function Navbar() {
             Contact Us
           </Link>
           <Link
-            to="/testimonials"
+            href="/testimonials"
             className={cn(
               "text-md font-medium transition-colors",
               isActivePath("/testimonials")
@@ -343,7 +343,7 @@ export function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
-          <Link to="/admin/login">
+          <Link href="/admin/login">
             <Button
              
              
@@ -368,7 +368,7 @@ export function Navbar() {
             <nav className="flex flex-col gap-4 mt-8">
               {/* Mobile Home Link */}
               <Link
-                to="/"
+                href="/"
                 className={cn(
                   "text-lg font-medium py-2",
                   isActivePath("/")
@@ -397,28 +397,28 @@ export function Navbar() {
                 onLinkClick={() => setIsOpen(false)}
               />
               <Link
-                to="#pricing"
+                href="#pricing"
                 className="text-lg font-medium text-gray-700 py-2"
                 onClick={() => setIsOpen(false)}
               >
                 Pricing
               </Link>
               <Link
-                to="/testimonials"
+                href="/testimonials"
                 className="text-lg font-medium text-gray-700 py-2"
                 onClick={() => setIsOpen(false)}
               >
                 Testimonials
               </Link>
               <Link
-                to="#help"
+                href="#help"
                 className="text-lg font-medium text-gray-700 py-2"
                 onClick={() => setIsOpen(false)}
               >
                 Help
               </Link>
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-200">
-                <Link to="/admin/login" onClick={() => setIsOpen(false)}>
+                <Link href="/admin/login" onClick={() => setIsOpen(false)}>
                   <Button variant="outline" className="w-full">
                     Sign in
                   </Button>
@@ -451,12 +451,12 @@ export function Navbar() {
                     <ul className="space-y-2">
                       {section.items.map((item, itemIdx) => (
                         <li key={itemIdx}>
-                          <Link
-                            to="#"
+                          <a
+                            href="#"
                             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                           >
                             {item}
-                          </Link>
+                          </a>
                         </li>
                       ))}
                     </ul>
@@ -484,19 +484,19 @@ export function Navbar() {
                     <div className="grid grid-cols-4 gap-8 mb-8">
                       {industriesData.map((section, idx) => (
                         <div key={idx}>
-                          <h3 className="text-base font-bold uppercase tracking-wider text-foreground mb-4 text-primary/90">
+                          <h3 className="text-base font-bold uppercase tracking-wider text-primary/90 mb-4">
                             {section.category}
                           </h3>
                           <ul className="space-y-2">
                             {section.items.map((item, itemIdx) => (
                               <li key={itemIdx}>
-                                <Link
-                                  to={item.url || "#"}
+                                <a
+                                  href={item.url || "#"}
                                   target="_blank"
                                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                                 >
                                   {item.title}
-                                </Link>
+                                </a>
                               </li>
                             ))}
                           </ul>
@@ -504,12 +504,12 @@ export function Navbar() {
                       ))}
                     </div>
                     <div className="text-center pt-4 border-t border-border">
-                      <Link
-                        to="#"
+                      <a
+                        href="#"
                         className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
                       >
                         Browse all Industries
-                      </Link>
+                      </a>
                     </div>
                   </>
                 )}
@@ -531,12 +531,12 @@ export function Navbar() {
                     <ul className="space-y-2">
                       {section.items.map((item, itemIdx) => (
                         <li key={itemIdx}>
-                          <Link
-                            to="#"
+                          <a
+                            href="#"
                             className="text-sm text-gray-700 hover:text-gray-900"
                           >
                             {item}
-                          </Link>
+                          </a>
                         </li>
                       ))}
                     </ul>
@@ -580,13 +580,13 @@ function MobileNavItem({ title, items, isLoading, onLinkClick }: MobileNavItemPr
           {"items" in section &&
             section.items.map((item, itemIdx) => (
               <li key={itemIdx}>
-                <Link
-                  to="#"
+                <a
+                  href="#"
                   className="text-sm text-gray-600 hover:text-gray-900"
                   onClick={onLinkClick}
                 >
                   {typeof item === "string" ? item : item.title}
-                </Link>
+                </a>
               </li>
             ))}
         </ul>

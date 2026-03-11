@@ -1,5 +1,7 @@
+'use client';
+
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { apiFetch } from "@/lib/api";
@@ -131,7 +133,7 @@ export function AppsSection() {
                             {card}
                           </a>
                         ) : (
-                          <Link to={`/projects/${project._id}`}>{card}</Link>
+                          <Link href={`/projects/${project._id}`}>{card}</Link>
                         )}
                       </div>
                     );

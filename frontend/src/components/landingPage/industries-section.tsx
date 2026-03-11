@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Factory, Store, Briefcase, Heart, GraduationCap, Building2 } from "lucide-react"

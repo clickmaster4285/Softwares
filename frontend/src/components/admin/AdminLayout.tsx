@@ -1,5 +1,7 @@
+'use client';
+
 import { ReactNode, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import AdminSidebar from './AdminSidebar';
 import { useAuth } from '@/contexts/AuthContext';
@@ -10,13 +12,13 @@ interface AdminLayoutProps {
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const { isAuthenticated } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/admin/login');
+      router.push('/admin/login');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, router]);
 
   if (!isAuthenticated) {
     return null;

@@ -1,7 +1,9 @@
+'use client';
+
 import { LayoutDashboard, FolderOpen, LogOut, Home, Tags, MessageSquare } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useAuth } from '@/contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import {
   Sidebar,
   SidebarContent,
@@ -26,12 +28,12 @@ const menuItems = [
 const AdminSidebar = () => {
   const { state } = useSidebar();
   const collapsed = state === 'collapsed';
-  const { logout, email } = useAuth();
-  const navigate = useNavigate();
+  const { logout, user } = useAuth();
+  const router = useRouter();
 
   const handleLogout = () => {
     logout();
-    navigate('/admin/login');
+    router.push('/admin/login');
   };
 
   return (
@@ -48,7 +50,7 @@ const AdminSidebar = () => {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink
-                      to={item.url}
+                      href={item.url}
                       end={item.url === '/admin'}
                       className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-muted/50 transition-colors"
                       activeClassName="bg-primary/10 text-primary font-medium"
@@ -88,8 +90,8 @@ const AdminSidebar = () => {
       </SidebarContent>
 
       <SidebarFooter className="border-t border-border/50 p-2">
-        {!collapsed && email && (
-          <p className="text-xs text-muted-foreground truncate mb-2 px-2">{email}</p>
+        {!collapsed && user?.email && (
+          <p className="text-xs text-muted-foreground truncate mb-2 px-2">{user.email}</p>
         )}
         <Button
           variant="ghost"

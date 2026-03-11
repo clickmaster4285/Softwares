@@ -1,4 +1,7 @@
-import { useParams, Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 // import Header from '@/components/Header';
@@ -52,7 +55,7 @@ const ProjectDetails = () => {
         <div className="container mx-auto max-w-5xl">
           <div className="mb-6">
             <Button variant="ghost" size="sm" asChild className="gap-2">
-              <Link to="/">
+              <Link href="/">
                 <ArrowLeft className="h-4 w-4" />
                 Back to projects
               </Link>
@@ -136,7 +139,7 @@ const ProjectDetails = () => {
                     Interested in a similar build? Let’s plan your next launch.
                   </p>
                   <Button asChild className="w-full">
-                    <Link to="/contact">Start a project</Link>
+                    <Link href="/contact-us">Start a project</Link>
                   </Button>
                 </div>
               </aside>

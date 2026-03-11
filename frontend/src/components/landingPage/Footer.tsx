@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+'use client';
+
+import Link from "next/link";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Twitter, Linkedin, Github, Youtube } from "lucide-react"
-import logo from "../../../assests/Clickmasters-Digital-Marketing-Agency.webp"
 
 const footerLinks = {
   services: [
@@ -47,8 +48,8 @@ export function Footer() {
         {/* Top Section */}
         <div className="grid lg:grid-cols-2 gap-12 mb-12 pb-12 border-b border-background/20">
           <div>
-              <Link to="/" className="flex items-center gap-2">
-  <img src={logo} className="w-36 h-auto" alt="Logo" />
+              <Link href="/" className="flex items-center gap-2">
+  <img src="/logo.png" className="w-36 h-auto" alt="Logo" />
 </Link>
             <p className="text-background/70 max-w-md mb-6">
               ClickMasters is a software development company. We build custom software, web applications, mobile apps, and ERP solutions for businesses worldwide.
@@ -59,7 +60,7 @@ export function Footer() {
                 return (
                   <Link
                     key={social.label}
-                    to={social.href}
+                    href={social.href}
                     className="h-10 w-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
                     aria-label={social.label}
                   >
@@ -94,7 +95,7 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-background/70 hover:text-background transition-colors">
+                  <Link href={link.href} className="text-background/70 hover:text-background transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -106,7 +107,7 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-background/70 hover:text-background transition-colors">
+                  <Link href={link.href} className="text-background/70 hover:text-background transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -118,7 +119,7 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-background/70 hover:text-background transition-colors">
+                  <Link href={link.href} className="text-background/70 hover:text-background transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -130,7 +131,7 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-background/70 hover:text-background transition-colors">
+                  <Link href={link.href} className="text-background/70 hover:text-background transition-colors">
                     {link.label}
                   </Link>
                 </li>
