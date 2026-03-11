@@ -1,14 +1,33 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logo from "../../../assests/Clickmasters-Digital-Marketing-Agency.webp";
+import logo from "@/assets/logo.png";
+
+// Types for dropdown data
+interface DropdownSection {
+  category: string;
+  color: string;
+  items: string[];
+}
+
+interface IndustryItem {
+  id: string;
+  title: string;
+  url?: string;
+}
+
+interface IndustryCategory {
+  category: string;
+  items: IndustryItem[];
+}
+
 // Apps dropdown data
-const appsData = [
+const appsData: DropdownSection[] = [
   {
     category: "FINANCE",
     color: "text-teal-600",
@@ -101,7 +120,7 @@ const appsData = [
 ];
 
 // Community dropdown data
-const communityData = [
+const communityData: DropdownSection[] = [
   {
     category: "LEARN",
     color: "text-orange-500",
@@ -157,18 +176,8 @@ const communityData = [
   },
 ];
 
-// Types for API data
-interface IndustryItem {
-  id: string;
-  title: string;
-}
-
-interface IndustryCategory {
-  category: string;
-  items: IndustryItem[];
-}
-
 export function Navbar() {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [industriesData, setIndustriesData] = useState<IndustryCategory[]>([]);
@@ -189,7 +198,7 @@ export function Navbar() {
       try {
         const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(
-          `${baseUrl}/api/categories/project-data/of-category-wise`,
+          `${baseUrl}/api/categories/project-data/of-category-wise`
         );
 
         if (!response.ok) {
@@ -200,7 +209,6 @@ export function Navbar() {
         setIndustriesData(data);
       } catch (error) {
         console.error("Error fetching industries:", error);
-        // Keep empty array on error
         setIndustriesData([]);
       } finally {
         setIsLoadingIndustries(false);
@@ -234,22 +242,44 @@ export function Navbar() {
     };
   }, [activeDropdown]);
 
+  const isActivePath = (path: string) => {
+    return location.pathname === path;
+  };
+
   return (
     <header
       className={cn(
         "sticky top-0 z-50 w-full bg-white transition-all duration-300",
-        isScrolled ? "border-b border-border/60 shadow-sm" : "border-b border-border/40"
+        isScrolled
+          ? "border-b border-border/60 shadow-sm"
+          : "border-b border-border/40"
       )}
       ref={dropdownRef}
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-90">
-          <img src={logo} className="w-36 h-auto" alt="ClickMasters" />
+        <Link
+          to="/"
+          className="flex items-center gap-2 transition-opacity hover:opacity-90"
+        >
+          <img src={logo} className="w-64 h-auto" alt="ClickMasters" />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-12">
+          {/* Home Link */}
+          <Link
+            to="/"
+            className={cn(
+              "text-md font-medium transition-colors",
+              isActivePath("/")
+                ? "text-primary"
+                : "text-foreground/80 hover:text-foreground"
+            )}
+          >
+            Home
+          </Link>
+
           {/* <div className="relative">
             <button
               onClick={() => handleDropdownToggle("apps")}
@@ -262,15 +292,20 @@ export function Navbar() {
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("industries")}
-              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+              className="text-md font-medium text-foreground/80 hover:text-foreground transition-colors"
             >
-              Industries
+              Solutions
             </button>
           </div>
 
           <Link
             to="/about-us"
-            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+            className={cn(
+              "text-md font-medium transition-colors",
+              isActivePath("/about-us")
+                ? "text-primary"
+                : "text-foreground/80 hover:text-foreground"
+            )}
           >
             About Us
           </Link>
@@ -284,22 +319,37 @@ export function Navbar() {
 
           <Link
             to="/contact-us"
-            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+            className={cn(
+              "text-md font-medium transition-colors",
+              isActivePath("/contact-us")
+                ? "text-primary"
+                : "text-foreground/80 hover:text-foreground"
+            )}
           >
             Contact Us
           </Link>
           <Link
             to="/testimonials"
-            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+            className={cn(
+              "text-md font-medium transition-colors",
+              isActivePath("/testimonials")
+                ? "text-primary"
+                : "text-foreground/80 hover:text-foreground"
+            )}
           >
             Testimonials
           </Link>
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center  gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <Link to="/admin/login">
-            <Button variant="outline" className="rounded-lg border-primary/30 text-foreground hover:bg-primary/10 hover:border-primary/50">Sign in</Button>
+            <Button
+             
+             
+            >
+              Sign in
+            </Button>
           </Link>
         </div>
 
@@ -311,11 +361,41 @@ export function Navbar() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-full max-w-sm bg-white dark:bg-zinc-950 border-l border-border shadow-xl">
+          <SheetContent
+            side="right"
+            className="w-full max-w-sm bg-white dark:bg-zinc-950 border-l border-border shadow-xl"
+          >
             <nav className="flex flex-col gap-4 mt-8">
-              <MobileNavItem title="Apps" items={appsData} />
-              <MobileNavItem title="Industries" items={industriesData} />
-              <MobileNavItem title="Community" items={communityData} />
+              {/* Mobile Home Link */}
+              <Link
+                to="/"
+                className={cn(
+                  "text-lg font-medium py-2",
+                  isActivePath("/")
+                    ? "text-primary"
+                    : "text-gray-700 hover:text-gray-900"
+                )}
+                onClick={() => setIsOpen(false)}
+              >
+                Home
+              </Link>
+              
+              <MobileNavItem
+                title="Apps"
+                items={appsData}
+                onLinkClick={() => setIsOpen(false)}
+              />
+              <MobileNavItem
+                title="Industries"
+                items={industriesData}
+                isLoading={isLoadingIndustries}
+                onLinkClick={() => setIsOpen(false)}
+              />
+              <MobileNavItem
+                title="Community"
+                items={communityData}
+                onLinkClick={() => setIsOpen(false)}
+              />
               <Link
                 to="#pricing"
                 className="text-lg font-medium text-gray-700 py-2"
@@ -363,7 +443,7 @@ export function Navbar() {
                     <h3
                       className={cn(
                         "text-sm font-bold mb-3 uppercase tracking-wider text-foreground/90",
-                        section.color,
+                        section.color
                       )}
                     >
                       {section.category}
@@ -389,11 +469,15 @@ export function Navbar() {
               <>
                 {isLoadingIndustries ? (
                   <div className="text-center py-8">
-                    <p className="text-muted-foreground">Loading industries...</p>
+                    <p className="text-muted-foreground">
+                      Loading industries...
+                    </p>
                   </div>
                 ) : industriesData.length === 0 ? (
                   <div className="text-center py-8">
-                    <p className="text-muted-foreground">No industries available</p>
+                    <p className="text-muted-foreground">
+                      No industries available
+                    </p>
                   </div>
                 ) : (
                   <>
@@ -407,7 +491,7 @@ export function Navbar() {
                             {section.items.map((item, itemIdx) => (
                               <li key={itemIdx}>
                                 <Link
-                                  to={item.url}
+                                  to={item.url || "#"}
                                   target="_blank"
                                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                                 >
@@ -439,7 +523,7 @@ export function Navbar() {
                     <h3
                       className={cn(
                         "text-xs font-bold mb-3 uppercase tracking-wide",
-                        section.color,
+                        section.color
                       )}
                     >
                       {section.category}
@@ -467,14 +551,48 @@ export function Navbar() {
   );
 }
 
-function MobileNavItem({
-  title,
-  items,
-}: {
+// MobileNavItem component with proper typing
+interface MobileNavItemProps {
   title: string;
-  items: { category: string; items: string[] }[];
-}) {
+  items: DropdownSection[] | IndustryCategory[];
+  isLoading?: boolean;
+  onLinkClick: () => void;
+}
+
+function MobileNavItem({ title, items, isLoading, onLinkClick }: MobileNavItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const renderItems = () => {
+    if (isLoading) {
+      return <p className="text-sm text-gray-500 pl-4">Loading...</p>;
+    }
+
+    if (items.length === 0) {
+      return <p className="text-sm text-gray-500 pl-4">No items available</p>;
+    }
+
+    return items.map((section, idx) => (
+      <div key={idx}>
+        <h4 className="text-xs font-bold mb-2 uppercase text-gray-500">
+          {"category" in section ? section.category : ""}
+        </h4>
+        <ul className="space-y-1">
+          {"items" in section &&
+            section.items.map((item, itemIdx) => (
+              <li key={itemIdx}>
+                <Link
+                  to="#"
+                  className="text-sm text-gray-600 hover:text-gray-900"
+                  onClick={onLinkClick}
+                >
+                  {typeof item === "string" ? item : item.title}
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </div>
+    ));
+  };
 
   return (
     <div>
@@ -486,29 +604,12 @@ function MobileNavItem({
         <ChevronDown
           className={cn(
             "h-5 w-5 transition-transform",
-            isExpanded && "rotate-180",
+            isExpanded && "rotate-180"
           )}
         />
       </button>
       {isExpanded && (
-        <div className="pl-4 flex flex-col gap-4 mt-2">
-          {items.map((section, idx) => (
-            <div key={idx}>
-              <h4 className={cn("text-xs font-bold mb-2 uppercase")}>
-                {section.category}
-              </h4>
-              <ul className="space-y-1">
-                {section.items.map((item, itemIdx) => (
-                  <li key={itemIdx}>
-                    <Link to="#" className="text-sm text-gray-600">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        <div className="pl-4 flex flex-col gap-4 mt-2">{renderItems()}</div>
       )}
     </div>
   );

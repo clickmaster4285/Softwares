@@ -15,16 +15,31 @@ import bcrypt from 'bcryptjs';
 import User from './src/models/User.js';
 
 dotenv.config();
+const allowedOrigins = (process.env.FRONTEND || '').split(',');
+
 
 const app = express();
-console.log("the frontend is", process.env.FRONTEND_URL)
+
+console.log("the frontend is", process.env.FRONTEND_URL || process.env.FRONTEND)
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: function (origin, callback) {
+    // Allow requests like Postman or curl (no origin)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true); // Origin allowed
+    } else {
+      callback(new Error(`CORS policy: Origin ${origin} not allowed`));
+    }
+  },
   credentials: true
 }));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+
 
 // Ensure uploads directory exists and serve statically
 const __filename = fileURLToPath(import.meta.url);
@@ -53,6 +68,8 @@ app.use((err, req, res, next) => {
     error: process.env.NODE_ENV === 'development' ? err : undefined
   });
 });
+
+
 
 const PORT = process.env.PORT;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
