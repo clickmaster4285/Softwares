@@ -15,12 +15,11 @@ import bcrypt from 'bcryptjs';
 import User from './src/models/User.js';
 
 dotenv.config();
-const allowedOrigins = (process.env.FRONTEND || '').split(',');
+const allowedOrigins = (process.env.FRONTEND_URL || '').split(',');
 
 
 const app = express();
 
-console.log("the frontend is", process.env.FRONTEND_URL || process.env.FRONTEND)
 
 app.use(cors({
   origin: function (origin, callback) {
