@@ -16,11 +16,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(landing)/layout.js"
     ],
-    "/(landing)/about-us/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(landing)/about-us/page.js"
-    ],
     "/(landing)/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

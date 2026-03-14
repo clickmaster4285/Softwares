@@ -13,7 +13,7 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
       </header>
 
       {/* Page content */}
-      <main className="flex-1">{children}</main>
+      <main className="">{children}</main>
 
       {/* Footer */}
       <Footer />
