@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect,useState, useMemo, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,9 +10,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Top Company Section with Floating Animation
 export const TopCompanySection = () => {
+  const sectionRef = useRef(null);
   const cardsRef = useRef(null);
   
   useEffect(() => {
+    // ClipPath animation like StorySection
+    gsap.fromTo(sectionRef.current,
+      {
+        clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)"
+      },
+      {
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        duration: 1.5,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top center",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Text animation
     gsap.fromTo('.company-text',
       {
         opacity: 0,
@@ -33,52 +52,63 @@ export const TopCompanySection = () => {
   }, []);
 
   return (
-    <section ref={cardsRef} className="container mx-auto max-w-6xl px-4 mb-16">
+    <section ref={cardsRef} className="max-w-6xl mb-16 mx-auto">
       <motion.div
-        className="bg-black rounded-2xl p-8 md:p-12 relative overflow-hidden"
-        whileHover={{ scale: 1.02 }}
-        transition={{ duration: 0.3 }}
+        ref={sectionRef}
+        className="bg-gray-50 rounded-2xl border border-gray-200 p-8 md:p-12 w-full"
+        whileHover={{ 
+          scale: 1.05,
+          boxShadow: "0 30px 40px -20px rgba(0,0,0,0.3)",
+          transition: { duration: 0.3 }
+        }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-transparent"
-          animate={{
-            x: ['-100%', '100%'],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10"
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 3, repeat: Infinity }}
+          className="text-3xl md:text-4xl font-bold text-black mb-6"
+          initial={{ x: -50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
           Top Digital Marketing Company in <span className="text-orange-500">Pakistan</span>
         </motion.h2>
         
-        <div className="space-y-4 text-gray-300 relative z-10">
-          <motion.p
-            className="company-text"
-            whileHover={{ x: 10, color: "#fff" }}
-          >
-            Clickmasters is the top digital marketing agency in Pakistan specializing in SEO, PPC, Social Media Marketing, Web Design, Content Creation, and more.
-          </motion.p>
-          <motion.p
-            className="company-text"
-            whileHover={{ x: 10, color: "#fff" }}
-          >
-            As one of Pakistan's best digital marketing agencies, we are committed to supporting businesses in improving their online presence and driving growth.
-          </motion.p>
-          <motion.p
-            className="company-text"
-            whileHover={{ x: 10, color: "#fff" }}
-          >
-            Our expert team delivers effective, results-driven solutions. Choose Clickmasters for innovative strategies and comprehensive digital marketing services.
-          </motion.p>
-        </div>
+        <motion.div
+          className="space-y-4 text-gray-700"
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.3
+              }
+            }
+          }}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+       {[
+  "Clickmasters is a leading software development company in Pakistan, specializing in web and mobile applications, custom software solutions, cloud integrations, and more.",
+  "We are dedicated to helping businesses of all sizes leverage technology to streamline operations, scale efficiently, and achieve their digital transformation goals.",
+"Our expert team delivers high-quality, innovative, and results-driven software solutions. Choose Clickmasters for cutting-edge, scalable development, robust applications, and end-to-end custom tech services."
+].map((text, index) => (
+            <motion.p
+              key={index}
+              className="company-text"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
+              }}
+              whileHover={{ scale: 1.02, x: 10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              {text}
+            </motion.p>
+          ))}
+        </motion.div>
+
+      
       </motion.div>
     </section>
   );

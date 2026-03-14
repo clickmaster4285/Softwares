@@ -1,101 +1,121 @@
 'use client';
 
-import React, { useRef, useEffect,useState, useMemo, useCallback } from 'react';
-import {  motion, useInView } from 'framer-motion';
+import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
+import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
+// ==================== TYPE DEFINITIONS ====================
+
+interface AnimatedCounterProps {
+  value: string;
+  label: string;
+  color: string;
+  delay?: number;
+}
+
+interface StatItem {
+  value: string;
+  label: string;
+}
+
 // ==================== ANIMATED SECTION COMPONENTS ====================
 
 // Animated Counter Component
-const AnimatedCounter = ({ value, label, color, delay = 0 }) => {
-    const [count, setCount] = useState(0);
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.5 });
-    const animationRef = useRef(null);
-    const startTimeRef = useRef(null);
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, label, color, delay = 0 }) => {
+  const [count, setCount] = useState<number>(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const animationRef = useRef<number>();
+  const startTimeRef = useRef<number | null>(null);
 
-    const animate = useCallback((timestamp) => {
-        if (!startTimeRef.current) startTimeRef.current = timestamp;
-        const progress = timestamp - startTimeRef.current;
-        const end = parseInt(value.toString().replace(/[^0-9]/g, ''));
-        const duration = 2000;
+  const animate = useCallback((timestamp: number) => {
+    if (!startTimeRef.current) startTimeRef.current = timestamp;
+    const progress = timestamp - startTimeRef.current;
+    const end = parseInt(value.toString().replace(/[^0-9]/g, ''));
+    const duration = 2000;
 
-        if (progress < duration) {
-            const currentCount = Math.min(Math.floor((progress / duration) * end), end);
-            setCount(currentCount);
-            animationRef.current = requestAnimationFrame(animate);
-        } else {
-            setCount(end);
-        }
-    }, [value]);
+    if (progress < duration) {
+      const currentCount = Math.min(Math.floor((progress / duration) * end), end);
+      setCount(currentCount);
+      animationRef.current = requestAnimationFrame(animate);
+    } else {
+      setCount(end);
+    }
+  }, [value]);
 
-    useEffect(() => {
-        if (isInView) {
-            animationRef.current = requestAnimationFrame(animate);
-        }
-        return () => {
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current);
-            }
-        };
-    }, [isInView, animate]);
+  useEffect(() => {
+    if (isInView) {
+      animationRef.current = requestAnimationFrame(animate);
+    }
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isInView, animate]);
 
-    const suffix = useMemo(() => 
-        value.includes('+') ? '+' : value.includes('%') ? '%' : '',
-    [value]);
+  const suffix = useMemo(() => 
+    value.includes('+') ? '+' : value.includes('%') ? '%' : '',
+  [value]);
 
-    // CSS animation for glow (better performance)
-    const glowStyle = useMemo(() => ({
-        animation: isInView ? 'glowPulse 3s infinite ease-in-out' : 'none',
-        animationDelay: `${delay}s`
-    }), [isInView, delay]);
+  // CSS animation for glow (better performance)
+  const glowStyle = useMemo(() => ({
+    animation: isInView ? 'glowPulse 3s infinite ease-in-out' : 'none',
+    animationDelay: `${delay}s`
+  }), [isInView, delay]);
 
-    const counterStyle = useMemo(() => ({
-        animation: isInView ? 'textGlow 2s infinite ease-in-out' : 'none',
-        animationDelay: `${delay}s`
-    }), [isInView, delay]);
+  const counterStyle = useMemo(() => ({
+    animation: isInView ? 'textGlow 2s infinite ease-in-out' : 'none',
+    animationDelay: `${delay}s`
+  }), [isInView, delay]);
 
-    return (
-        <div ref={ref} className="text-center relative group">
-            <div className="relative">
-                {/* Glow effect with CSS animation */}
-                <div 
-                    className={`absolute inset-0 bg-gradient-to-r ${color} rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`}
-                    style={glowStyle}
-                />
+  return (
+    <div ref={ref} className="text-center relative group">
+      <div className="relative">
+        {/* Glow effect with CSS animation */}
+        <div 
+          className={`absolute inset-0 bg-gradient-to-r ${color} rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`}
+          style={glowStyle}
+        />
 
-                {/* Counter text */}
-                <div 
-                    className={`relative text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${color} mb-1`}
-                    style={counterStyle}
-                >
-                    {count}{suffix}
-                </div>
-            </div>
-            <div className="text-sm text-gray-500 mt-2">{label}</div>
+        {/* Counter text */}
+        <div 
+          className={`relative text-5xl font-bold text-white mb-1`}
+          style={counterStyle}
+        >
+          {count}{suffix}
         </div>
-    );
+      </div>
+      <div className="text-sm text-white mt-2">{label}</div>
+    </div>
+  );
 };
 
-
-export const HeroSection = () => {
-  const heroRef = useRef(null);
+// Hero Section with Background Image
+export const HeroSection: React.FC = () => {
+  const heroRef = useRef<HTMLElement>(null);
   const isInView = useInView(heroRef, { once: true });
   
   // Typer animation state
-  const [displayText, setDisplayText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
+  const [displayText, setDisplayText] = useState<string>('');
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [loopNum, setLoopNum] = useState<number>(0);
+  const [typingSpeed, setTypingSpeed] = useState<number>(150);
 
-  const phrases = [
-    'Where Marketing Meets Innovation',
-    'Your Growth Partners',
-  ];
+const phrases: string[] = [
+  'Building the Future, One Line at a Time',
+  'Innovating Through Code',
+  'Your Technology Partners',
+  'Turning Ideas into Software',
+  'Where Innovation Meets Excellence',
+  'Crafting Scalable Solutions',
+  'Engineering Your Vision',
+  'Code that Powers Your Business',
+];
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -128,49 +148,78 @@ export const HeroSection = () => {
   return (
     <motion.section
       ref={heroRef}
-      className="container mx-auto max-w-6xl px-4 mb-16"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 0.8 }}
     >
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80")',
+          }}
+        />
+        {/* Dark overlay for better text visibility */}
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
+
+      {/* Content */}
       <motion.div
-        className="text-center mb-12"
+        className="container mx-auto max-w-6xl px-4 relative z-10"
         initial={{ y: 50 }}
         animate={isInView ? { y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <motion.h1
-          className="text-4xl md:text-5xl font-bold text-primary mb-6"
-          initial={{ scale: 0.9 }}
-          animate={isInView ? { scale: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <div>Clickmasters</div>
-          <motion.div
-            className="text-foreground mt-2"
-            animate={{
-              scale: [1, 1.02, 1],
-            }}
-            transition={{ duration: 0.3, repeat: Infinity, repeatDelay: 2 }}
+        <motion.div className="text-center">
+          <motion.h1
+            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            initial={{ scale: 0.9 }}
+            animate={isInView ? { scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
-            {displayText}
-            <motion.span
-              animate={{ opacity: [1, 0] }}
-              transition={{ duration: 0.5, repeat: Infinity }}
-              className="inline-block w-[3px] h-[40px] bg-orange-500 ml-1 align-middle"
-            />
+            <div>Clickmasters</div>
+            <motion.div
+              className="text-gray-200 mt-4 text-3xl md:text-4xl"
+              animate={{
+                scale: [1, 1.02, 1],
+              }}
+              transition={{ duration: 0.3, repeat: Infinity, repeatDelay: 2 }}
+            >
+              {displayText}
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+                className="inline-block w-[3px] h-[40px] bg-orange-500 ml-2 align-middle"
+              />
+            </motion.div>
+          </motion.h1>
+
+          {/* Optional: Add a call-to-action button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-8"
+          >
+            <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+              Get Started
+            </button>
           </motion.div>
-        </motion.h1>
+        </motion.div>
       </motion.div>
+
     </motion.section>
   );
 };
 
 // Stats Section with GSAP
-export const StatsSection = () => {
-  const statsRef = useRef(null);
-  const textRef = useRef(null);
+export const StatsSection: React.FC = () => {
+  const statsRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(textRef, { once: true });
+  const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const elements = gsap.utils.toArray('.stat-item');
@@ -194,7 +243,7 @@ export const StatsSection = () => {
     );
   }, []);
 
-  // Add CSS animations to document head (same as TrustedPartners)
+  // Add CSS animations to document head
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -206,76 +255,228 @@ export const StatsSection = () => {
         0%, 100% { text-shadow: 0 0 8px rgba(249,115,22,0); }
         50% { text-shadow: 0 0 8px rgba(249, 115, 22, 0.15); }
       }
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
+      }
+      @keyframes floatReverse {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(20px) rotate(-5deg); }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(1.1); }
+      }
+      @keyframes slide {
+        0% { transform: translateX(-100%) rotate(0deg); }
+        100% { transform: translateX(1000%) rotate(360deg); }
+      }
+      @keyframes shimmer {
+        0% { background-position: -1000px 0; }
+        100% { background-position: 1000px 0; }
+      }
     `;
     document.head.appendChild(style);
     return () => style.remove();
   }, []);
 
-  const stats = [
+  // Mouse move parallax effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const { clientX, clientY } = e;
+      const { width, height, left, top } = containerRef.current.getBoundingClientRect();
+      
+      const x = (clientX - left) / width - 0.5;
+      const y = (clientY - top) / height - 0.5;
+      
+      const elements = containerRef.current.querySelectorAll('.parallax-item');
+      elements.forEach((el: any) => {
+        const speed = parseFloat(el.dataset.speed || '20');
+        el.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  const stats: StatItem[] = [
     { value: '1,860+', label: 'Current Projects' },
     { value: '3,500+', label: 'Happy Clients' },
     { value: '75+', label: 'Awards Winning' },
     { value: '5+', label: 'Years Experience' },
   ];
 
-  const gradients = [
-    'from-orange-100 to-orange-100',
-    'from-orange-100 to-orange-100',
-    'from-orange-100 to-orange-100',
-    'from-orange-100 to-orange-100',
+  const gradients: string[] = [
+    'from-white to-white',
+    'from-white to-white',
+    'from-white to-white',
+    'from-white to-white',
   ];
 
+
+
   return (
-    <section ref={statsRef} className="container mx-auto max-w-6xl px-4 mb-16">
+    <section ref={statsRef} className="container mx-auto max-w-6xl px-4 py-20 relative z-20 -mt-40 mb-10">
+      {/* Background Animation Container */}
+      <div 
+        ref={containerRef}
+        className="absolute inset-0 overflow-hidden rounded-xl pointer-events-none"
+        style={{ 
+      background: '#000000'
+       
+        }}
+      >
+        {/* Animated gradient orbs */}
+        <div className="absolute inset-0 opacity-30">
+          <div 
+            className="absolute w-96 h-96 rounded-full bg-primary blur-3xl"
+            style={{ 
+              top: '20%', 
+              left: '10%',
+              animation: 'float 20s infinite ease-in-out'
+            }}
+          />
+          <div 
+            className="absolute w-96 h-96 rounded-full bg-blue-white blur-3xl"
+            style={{ 
+              bottom: '10%', 
+              right: '15%',
+              animation: 'floatReverse 25s infinite ease-in-out'
+            }}
+          />
+          <div 
+            className="absolute w-64 h-64 rounded-full bg-white blur-3xl"
+            style={{ 
+              top: '50%', 
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              animation: 'pulse 15s infinite ease-in-out'
+            }}
+          />
+        </div>
 
-         <div ref={textRef} className="my-16">
-        <motion.p
-          className="text-xl md:text-2xl text-gray-700 mb-4 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          Leading Digital Marketing Agency in Pakistan
-        </motion.p>
-        
-        <motion.p
-          className="text-lg text-gray-600 max-w-4xl mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          Clickmasters – The Leading and Best Digital Marketing Agency in Pakistan, offering a complete range of services to grow your business.
-        </motion.p>
-      </div>
 
-
-      {/* Stats Cards Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
-        {stats.map((stat, index) => (
-          <div key={index} className="stat-item text-center relative group">
-            {/* Glow effect - EXACTLY like TrustedPartners */}
+        {/* Animated lines/code snippets */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(10)].map((_, i) => (
             <div
-              className={`absolute inset-0 bg-gradient-to-r ${gradients[index % gradients.length]} rounded-full blur-2xl`}
+              key={i}
+              className="absolute h-px bg-white"
               style={{
-                opacity: 0.1,
-                animation: 'glowPulse 3s infinite ease-in-out',
-                animationDelay: `${index * 0.2}s`,
+                top: `${i * 10}%`,
+                left: 0,
+                right: 0,
+                opacity: 0.05,
+                transform: `rotate(${i * 2}deg)`,
+                animation: `slide ${15 + i * 2}s infinite linear`,
+                animationDelay: `${i * 0.5}s`,
               }}
             />
-            {/* Counter with scroll animation - EXACTLY like TrustedPartners */}
-            <div className="relative">
-              <AnimatedCounter 
-                value={stat.value} 
-                label={stat.label} 
-                color={"bg-orange-500"}
-                delay={index * 0.2}
-              />
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        {/* Floating particles */}
+        <div className="absolute inset-0">
+          {[...Array(30)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                opacity: Math.random() * 0.3,
+                animation: `float ${5 + Math.random() * 10}s infinite ease-in-out`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Shimmer effect overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
+            backgroundSize: '1000px 100%',
+            animation: 'shimmer 5s infinite linear',
+          }}
+        />
+
+      
       </div>
 
+      {/* Main Content */}
+      <div className="relative z-30">
+        <div ref={textRef} className="text-white">
+          <motion.p
+            className="text-6xl md:text-2xl mb-6 text-center font-medium"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+           Leading Software Development Company
+          </motion.p>
+          
+          <motion.p
+            className="text-lg max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+          Clickmasters – Crafting custom software solutions to empower businesses worldwide.
+          </motion.p>
 
+  <motion.p
+            className="text-lg max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+          From web and mobile apps to enterprise systems, we deliver scalable, reliable, and innovative software.
+          </motion.p>
+
+        </div>
+
+        {/* Stats Cards Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
+          {stats.map((stat, index) => (
+            <div key={index} className="stat-item text-center relative group">
+              {/* Glow effect */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-r ${gradients[index % gradients.length]} rounded-full blur-2xl`}
+                style={{
+                  opacity: 0.1,
+                  animation: 'glowPulse 3s infinite ease-in-out',
+                  animationDelay: `${index * 0.2}s`,
+                }}
+              />
+              {/* Counter with scroll animation */}
+              <div className="relative">
+                <AnimatedCounter 
+                  value={stat.value} 
+                  label={stat.label} 
+                  color="from-orange-3000 to-orange-300"
+                  delay={index * 0.2}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
+
+// Main component that combines both sections
+const HomePage: React.FC = () => {
+  return (
+    <main className="bg-white">
+      <HeroSection />
+      <StatsSection />
+    </main>
+  );
+};
+
+export default HomePage;

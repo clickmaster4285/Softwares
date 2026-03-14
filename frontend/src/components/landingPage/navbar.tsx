@@ -3,9 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Types for dropdown data
@@ -246,95 +245,130 @@ export function Navbar() {
     return pathname === path;
   };
 
+  const closeDropdowns = () => {
+    setActiveDropdown(null);
+  };
+
   return (
     <header
       className={cn(
         "sticky top-0 z-50 w-full bg-white transition-all duration-300",
         isScrolled
-          ? "border-b border-border/60 shadow-sm"
-          : "border-b border-border/40"
+          ? "border-b border-black/10 shadow-sm"
+          : "border-b border-black/5"
       )}
-      ref={dropdownRef}
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <Link
           href="/"
           className="flex items-center gap-2 transition-opacity hover:opacity-90"
+          onClick={closeDropdowns}
         >
-          <img src="/logo.png" className="w-64 h-auto" alt="ClickMasters" />
+          <img src="/logo.png" className="w-48 md:w-64 h-auto" alt="ClickMasters" />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-12">
+        <nav className="hidden lg:flex items-center gap-8">
           {/* Home Link */}
           <Link
             href="/"
+            onClick={closeDropdowns}
             className={cn(
-              "text-md font-medium transition-colors",
+              "text-sm font-light tracking-wide transition-colors",
               isActivePath("/")
                 ? "text-primary"
-                : "text-foreground/80 hover:text-foreground"
+                : "text-black/70 hover:text-black"
             )}
           >
             Home
           </Link>
 
+          {/* Apps Dropdown */}
           {/* <div className="relative">
             <button
               onClick={() => handleDropdownToggle("apps")}
-              className="text-sm font-medium text-gray-700 hover:text-gray-900"
+              className={cn(
+                "text-sm font-light tracking-wide transition-colors flex items-center gap-1",
+                activeDropdown === "apps" ? "text-black" : "text-black/70 hover:text-black"
+              )}
             >
               Apps
+              <ChevronDown className={cn(
+                "h-4 w-4 transition-transform",
+                activeDropdown === "apps" && "rotate-180"
+              )} />
             </button>
           </div> */}
 
+          {/* Industries Dropdown */}
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("industries")}
-              className="text-md font-medium text-foreground/80 hover:text-foreground transition-colors"
+              className={cn(
+                "text-sm font-light tracking-wide transition-colors flex items-center gap-1",
+                activeDropdown === "industries" ? "text-black" : "text-black/70 hover:text-black"
+              )}
             >
               Solutions
+              <ChevronDown className={cn(
+                "h-4 w-4 transition-transform",
+                activeDropdown === "industries" && "rotate-180"
+              )} />
             </button>
           </div>
 
+          {/* Community Dropdown */}
+          {/* <div className="relative">
+            <button
+              onClick={() => handleDropdownToggle("community")}
+              className={cn(
+                "text-sm font-light tracking-wide transition-colors flex items-center gap-1",
+                activeDropdown === "community" ? "text-black" : "text-black/70 hover:text-black"
+              )}
+            >
+              Community
+              <ChevronDown className={cn(
+                "h-4 w-4 transition-transform",
+                activeDropdown === "community" && "rotate-180"
+              )} />
+            </button>
+          </div> */}
+
           <Link
             href="/about-us"
+            onClick={closeDropdowns}
             className={cn(
-              "text-md font-medium transition-colors",
+              "text-sm font-light tracking-wide transition-colors",
               isActivePath("/about-us")
                 ? "text-primary"
-                : "text-foreground/80 hover:text-foreground"
+                : "text-black/70 hover:text-black"
             )}
           >
             About Us
           </Link>
 
-          {/* <Link
-            href="#pricing"
-            className="text-sm font-medium text-gray-700 hover:text-gray-900"
-          >
-            Pricing
-          </Link> */}
-
           <Link
             href="/contact-us"
+            onClick={closeDropdowns}
             className={cn(
-              "text-md font-medium transition-colors",
+              "text-sm font-light tracking-wide transition-colors",
               isActivePath("/contact-us")
                 ? "text-primary"
-                : "text-foreground/80 hover:text-foreground"
+                : "text-black/70 hover:text-black"
             )}
           >
             Contact Us
           </Link>
+
           <Link
             href="/testimonials"
+            onClick={closeDropdowns}
             className={cn(
-              "text-md font-medium transition-colors",
+              "text-sm font-light tracking-wide transition-colors",
               isActivePath("/testimonials")
                 ? "text-primary"
-                : "text-foreground/80 hover:text-foreground"
+                : "text-black/70 hover:text-black"
             )}
           >
             Testimonials
@@ -343,109 +377,154 @@ export function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
-          <Link href="/admin/login">
-            <Button
-             
-             
-            >
-              Sign in
-            </Button>
+          <Link href="/admin/login" onClick={closeDropdowns}>
+            <button className="px-5 py-2 text-sm font-light tracking-wide text-white bg-black hover:bg-primary transition-colors duration-300">
+              Sign In
+            </button>
+          </Link>
+          <Link href="/get-started" onClick={closeDropdowns}>
+            <button className="px-5 py-2 text-sm font-light tracking-wide text-black bg-transparent border border-black/20 hover:border-primary/50 transition-colors duration-300">
+              Get Started
+            </button>
           </Link>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Trigger */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="lg:hidden">
-            <Button variant="ghost" size="icon">
+            <button className="p-2 text-black/70 hover:text-black transition-colors">
               <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
+            </button>
           </SheetTrigger>
           <SheetContent
             side="right"
-            className="w-full max-w-sm bg-white dark:bg-zinc-950 border-l border-border shadow-xl"
+            className="w-full sm:max-w-md p-0 bg-white border-l border-black/10"
           >
-            <nav className="flex flex-col gap-4 mt-8">
-              {/* Mobile Home Link */}
-              <Link
-                href="/"
-                className={cn(
-                  "text-lg font-medium py-2",
-                  isActivePath("/")
-                    ? "text-primary"
-                    : "text-gray-700 hover:text-gray-900"
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </Link>
-              
-              <MobileNavItem
-                title="Apps"
-                items={appsData}
-                onLinkClick={() => setIsOpen(false)}
-              />
-              <MobileNavItem
-                title="Industries"
-                items={industriesData}
-                isLoading={isLoadingIndustries}
-                onLinkClick={() => setIsOpen(false)}
-              />
-              <MobileNavItem
-                title="Community"
-                items={communityData}
-                onLinkClick={() => setIsOpen(false)}
-              />
-              <Link
-                href="#pricing"
-                className="text-lg font-medium text-gray-700 py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                Pricing
-              </Link>
-              <Link
-                href="/testimonials"
-                className="text-lg font-medium text-gray-700 py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                Testimonials
-              </Link>
-              <Link
-                href="#help"
-                className="text-lg font-medium text-gray-700 py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                Help
-              </Link>
-              <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-200">
-                <Link href="/admin/login" onClick={() => setIsOpen(false)}>
-                  <Button variant="outline" className="w-full">
-                    Sign in
-                  </Button>
-                </Link>
-                <Button className="w-full bg-purple-800 text-white">
-                  Try it free
-                </Button>
+            <div className="flex flex-col h-full">
+              {/* Mobile Header */}
+              <div className="flex items-center justify-between p-6 border-b border-black/5">
+                <img src="/logo.png" className="w-36 h-auto" alt="ClickMasters" />
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 text-black/50 hover:text-black transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
-            </nav>
+
+              {/* Mobile Navigation */}
+              <nav className="flex-1 overflow-y-auto p-6">
+                <div className="flex flex-col space-y-2">
+                  {/* Home */}
+                  <Link
+                    href="/"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "py-3 text-base font-light tracking-wide transition-colors border-b border-black/5",
+                      isActivePath("/")
+                        ? "text-primary"
+                        : "text-black/70 hover:text-black"
+                    )}
+                  >
+                    Home
+                  </Link>
+                  
+                  {/* Apps Mobile Dropdown */}
+                  {/* <MobileDropdown
+                    title="Apps"
+                    items={appsData}
+                    onLinkClick={() => setIsOpen(false)}
+                  /> */}
+
+                  {/* Industries Mobile Dropdown */}
+                  <MobileDropdown
+                    title="Solutions"
+                    items={industriesData}
+                    isLoading={isLoadingIndustries}
+                    onLinkClick={() => setIsOpen(false)}
+                  />
+
+                  {/* Community Mobile Dropdown */}
+                  {/* <MobileDropdown
+                    title="Community"
+                    items={communityData}
+                    onLinkClick={() => setIsOpen(false)}
+                  /> */}
+
+                  <Link
+                    href="/about-us"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "py-3 text-base font-light tracking-wide transition-colors border-b border-black/5",
+                      isActivePath("/about-us")
+                        ? "text-primary"
+                        : "text-black/70 hover:text-black"
+                    )}
+                  >
+                    About Us
+                  </Link>
+
+                  <Link
+                    href="/contact-us"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "py-3 text-base font-light tracking-wide transition-colors border-b border-black/5",
+                      isActivePath("/contact-us")
+                        ? "text-primary"
+                        : "text-black/70 hover:text-black"
+                    )}
+                  >
+                    Contact Us
+                  </Link>
+
+                  <Link
+                    href="/testimonials"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "py-3 text-base font-light tracking-wide transition-colors border-b border-black/5",
+                      isActivePath("/testimonials")
+                        ? "text-primary"
+                        : "text-black/70 hover:text-black"
+                    )}
+                  >
+                    Testimonials
+                  </Link>
+                </div>
+              </nav>
+
+              {/* Mobile Footer */}
+              <div className="p-6 border-t border-black/5 space-y-3">
+                <Link href="/admin/login" onClick={() => setIsOpen(false)}>
+                  <button className="w-full px-5 py-3 text-sm font-light tracking-wide text-white bg-black hover:bg-primary transition-colors duration-300">
+                    Sign In
+                  </button>
+                </Link>
+                <Link href="/get-started" onClick={() => setIsOpen(false)}>
+                  <button className="w-full px-5 py-3 text-sm font-light tracking-wide text-black bg-transparent border border-black/20 hover:border-primary/50 transition-colors duration-300">
+                    Get Started
+                  </button>
+                </Link>
+              </div>
+            </div>
           </SheetContent>
         </Sheet>
       </div>
 
       {/* Full-width Dropdown Menus */}
       {activeDropdown && (
-        <div className="absolute left-0 right-0 bg-background/98 backdrop-blur-md border-t border-border shadow-lg animate-slideDown">
-          <div className="container mx-auto px-4 lg:px-8 py-8">
+        <div 
+          ref={dropdownRef}
+          className="absolute left-0 right-0 bg-white border-t border-black/5 shadow-lg animate-slideDown"
+        >
+          <div className="container mx-auto px-4 lg:px-8 py-12">
             {activeDropdown === "apps" && (
               <div className="grid grid-cols-4 gap-8">
                 {appsData.map((section, idx) => (
                   <div key={idx}>
-                    <h3
-                      className={cn(
-                        "text-sm font-bold mb-3 uppercase tracking-wider text-foreground/90",
-                        section.color
-                      )}
-                    >
+                    <h3 className={cn(
+                      "text-xs font-bold mb-4 uppercase tracking-wider",
+                      section.color
+                    )}>
                       {section.category}
                     </h3>
                     <ul className="space-y-2">
@@ -453,7 +532,7 @@ export function Navbar() {
                         <li key={itemIdx}>
                           <a
                             href="#"
-                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            className="text-sm text-black/60 hover:text-black transition-colors font-light"
                           >
                             {item}
                           </a>
@@ -468,23 +547,19 @@ export function Navbar() {
             {activeDropdown === "industries" && (
               <>
                 {isLoadingIndustries ? (
-                  <div className="text-center py-8">
-                    <p className="text-muted-foreground">
-                      Loading industries...
-                    </p>
+                  <div className="text-center py-12">
+                    <p className="text-black/40 font-light">Loading solutions...</p>
                   </div>
                 ) : industriesData.length === 0 ? (
-                  <div className="text-center py-8">
-                    <p className="text-muted-foreground">
-                      No industries available
-                    </p>
+                  <div className="text-center py-12">
+                    <p className="text-black/40 font-light">No solutions available</p>
                   </div>
                 ) : (
                   <>
                     <div className="grid grid-cols-4 gap-8 mb-8">
                       {industriesData.map((section, idx) => (
                         <div key={idx}>
-                          <h3 className="text-base font-bold uppercase tracking-wider text-primary/90 mb-4">
+                          <h3 className="text-xs font-bold mb-4 uppercase tracking-wider text-primary/90">
                             {section.category}
                           </h3>
                           <ul className="space-y-2">
@@ -492,8 +567,7 @@ export function Navbar() {
                               <li key={itemIdx}>
                                 <a
                                   href={item.url || "#"}
-                                  target="_blank"
-                                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                  className="text-sm text-black/60 hover:text-black transition-colors font-light"
                                 >
                                   {item.title}
                                 </a>
@@ -503,12 +577,12 @@ export function Navbar() {
                         </div>
                       ))}
                     </div>
-                    <div className="text-center pt-4 border-t border-border">
+                    <div className="text-center pt-6 border-t border-black/5">
                       <a
                         href="#"
-                        className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                        className="text-sm font-light text-black/60 hover:text-black transition-colors"
                       >
-                        Browse all Industries
+                        Browse all Solutions →
                       </a>
                     </div>
                   </>
@@ -520,12 +594,10 @@ export function Navbar() {
               <div className="grid grid-cols-4 gap-8">
                 {communityData.map((section, idx) => (
                   <div key={idx}>
-                    <h3
-                      className={cn(
-                        "text-xs font-bold mb-3 uppercase tracking-wide",
-                        section.color
-                      )}
-                    >
+                    <h3 className={cn(
+                      "text-xs font-bold mb-4 uppercase tracking-wider",
+                      section.color
+                    )}>
                       {section.category}
                     </h3>
                     <ul className="space-y-2">
@@ -533,7 +605,7 @@ export function Navbar() {
                         <li key={itemIdx}>
                           <a
                             href="#"
-                            className="text-sm text-gray-700 hover:text-gray-900"
+                            className="text-sm text-black/60 hover:text-black transition-colors font-light"
                           >
                             {item}
                           </a>
@@ -551,66 +623,68 @@ export function Navbar() {
   );
 }
 
-// MobileNavItem component with proper typing
-interface MobileNavItemProps {
+// Mobile Dropdown Component
+interface MobileDropdownProps {
   title: string;
   items: DropdownSection[] | IndustryCategory[];
   isLoading?: boolean;
   onLinkClick: () => void;
 }
 
-function MobileNavItem({ title, items, isLoading, onLinkClick }: MobileNavItemProps) {
+function MobileDropdown({ title, items, isLoading, onLinkClick }: MobileDropdownProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const renderItems = () => {
     if (isLoading) {
-      return <p className="text-sm text-gray-500 pl-4">Loading...</p>;
+      return <p className="text-sm text-black/40 font-light pl-4">Loading...</p>;
     }
 
     if (items.length === 0) {
-      return <p className="text-sm text-gray-500 pl-4">No items available</p>;
+      return <p className="text-sm text-black/40 font-light pl-4">No items available</p>;
     }
 
-    return items.map((section, idx) => (
-      <div key={idx}>
-        <h4 className="text-xs font-bold mb-2 uppercase text-gray-500">
-          {"category" in section ? section.category : ""}
-        </h4>
-        <ul className="space-y-1">
-          {"items" in section &&
-            section.items.map((item, itemIdx) => (
-              <li key={itemIdx}>
-                <a
-                  href="#"
-                  className="text-sm text-gray-600 hover:text-gray-900"
-                  onClick={onLinkClick}
-                >
-                  {typeof item === "string" ? item : item.title}
-                </a>
-              </li>
-            ))}
-        </ul>
+    return (
+      <div className="pl-4 space-y-4 mt-3">
+        {items.map((section, idx) => (
+          <div key={idx}>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-black/40 mb-2">
+              {"category" in section ? section.category : ""}
+            </h4>
+            <ul className="space-y-2">
+              {"items" in section &&
+                section.items.map((item, itemIdx) => (
+                  <li key={itemIdx}>
+                    <a
+                      href="#"
+                      className="text-sm text-black/60 hover:text-black transition-colors font-light"
+                      onClick={onLinkClick}
+                    >
+                      {typeof item === "string" ? item : item.title}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ))}
       </div>
-    ));
+    );
   };
 
   return (
-    <div>
+    <div className="border-b border-black/5">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center justify-between w-full text-lg font-medium text-gray-700 py-2"
+        className="flex items-center justify-between w-full py-3 text-base font-light tracking-wide text-black/70 hover:text-black transition-colors"
       >
         {title}
         <ChevronDown
           className={cn(
-            "h-5 w-5 transition-transform",
+            "h-4 w-4 transition-transform duration-300",
             isExpanded && "rotate-180"
           )}
         />
       </button>
-      {isExpanded && (
-        <div className="pl-4 flex flex-col gap-4 mt-2">{renderItems()}</div>
-      )}
+      {isExpanded && renderItems()}
     </div>
   );
 }

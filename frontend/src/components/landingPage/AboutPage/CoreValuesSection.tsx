@@ -1,17 +1,28 @@
 'use client';
 
-import  {  useState } from 'react';
-import { AnimatePresence, motion} from 'framer-motion';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
+// Types
+interface ValueItem {
+  icon: string;
+  title: string;
+  description: string;
+  features: string[];
+}
 
+interface CoreValueCardProps {
+  value: ValueItem;
+  index: number;
+}
 
 export const CoreValuesSection = () => {
-  const values = [
+  const values: ValueItem[] = [
     { 
       icon: '🏆', 
       title: 'Excellence', 
@@ -59,13 +70,12 @@ export const CoreValuesSection = () => {
   ];
 
   return (
-    <section className="bg-black py-24 relative overflow-hidden">
+    <section className="bg-gray-50 py-24 relative overflow-hidden">
       {/* Background Pattern - matching Features component */}
       <div className="absolute inset-0">
         <div 
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.1]"
           style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, #f97316 1px, transparent 0)`,
             backgroundSize: '32px 32px'
           }}
         />
@@ -80,16 +90,14 @@ export const CoreValuesSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-        
-
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-white">The Principles That </span>
-            <span className="bg-orange-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            <span className="text-gray-900">The Principles That </span>
+            <span className="bg-primary bg-clip-text text-transparent">
               Drive Us Forward
             </span>
           </h2>
 
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             These core values shape our culture, guide our decisions, and define how we work with our clients and each other.
           </p>
         </motion.div>
@@ -106,8 +114,8 @@ export const CoreValuesSection = () => {
 };
 
 // Core Value Card Component - styled exactly like FeatureCard
-const CoreValueCard = ({ value, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
+const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
     <motion.div
@@ -119,7 +127,7 @@ const CoreValueCard = ({ value, index }) => {
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <div className="bg-transparent rounded-2xl p-6 border border-gray-600 hover:border-orange-500 transition-all duration-300 h-full flex flex-col relative overflow-hidden">
+      <div className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-primary transition-all duration-300 h-full flex flex-col relative overflow-hidden shadow-sm hover:shadow-xl">
         {/* Icon */}
         <motion.div 
           className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 text-4xl group-hover:scale-110 transition-transform duration-300"
@@ -137,10 +145,10 @@ const CoreValueCard = ({ value, index }) => {
         </motion.div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-white mb-2">{value.title}</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">{value.title}</h3>
         
         {/* Description */}
-        <p className="text-sm text-gray-400 mb-4">{value.description}</p>
+        <p className="text-sm text-gray-600 mb-4">{value.description}</p>
 
         {/* Features List - appears on hover (exactly like FeatureCard) */}
         <AnimatePresence>
@@ -150,11 +158,11 @@ const CoreValueCard = ({ value, index }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-[#0a0f1a] p-6 rounded-2xl border-2 border-orange-400/50 z-10"
+              className="absolute inset-0 bg-white p-6 rounded-2xl border-2 border-primary/50 z-10 shadow-xl"
             >
-              <h3 className="text-xl font-bold text-white mb-4">{value.title} - Key Traits</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{value.title} - Key Traits</h3>
               <div className="space-y-2">
-                {value.features.map((feature, idx) => (
+                {value.features.map((feature: string, idx: number) => (
                   <motion.div
                     key={feature}
                     initial={{ opacity: 0, x: -10 }}
@@ -162,12 +170,12 @@ const CoreValueCard = ({ value, index }) => {
                     transition={{ duration: 0.2, delay: idx * 0.03 }}
                     className="flex items-start gap-2"
                   >
-                    <span className="text-orange-400 text-sm">•</span>
-                    <span className="text-sm text-gray-300">{feature}</span>
+                    <span className="text-primary text-sm">•</span>
+                    <span className="text-sm text-gray-600">{feature}</span>
                   </motion.div>
                 ))}
               </div>
-              <div className="absolute bottom-3 right-3 text-xs text-orange-400/50">
+              <div className="absolute bottom-3 right-3 text-xs text-primary/50">
                 {value.features.length} traits
               </div>
             </motion.div>
@@ -176,7 +184,7 @@ const CoreValueCard = ({ value, index }) => {
 
         {/* Hint text */}
         <motion.div
-          className="text-xs text-gray-500 mt-2"
+          className="text-xs text-gray-400 mt-2"
           animate={{ opacity: isHovered ? 0 : 1 }}
           transition={{ duration: 0.2 }}
         >

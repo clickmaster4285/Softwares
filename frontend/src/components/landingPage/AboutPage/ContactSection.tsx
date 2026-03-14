@@ -1,8 +1,8 @@
-
 import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRouter } from 'next/navigation'; // Import useRouter from next/navigation
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -10,6 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Contact Section with Floating Elements
 export const ContactSection = () => {
+  const router = useRouter(); // Initialize router
+  
   const contactInfo = [
     { icon: '📍', title: 'Address', value: 'Main PWD Rd, PWD Housing Society Sector A PWD Society, Islamabad, Punjab 45700, Pakistan' },
     { icon: '📧', title: 'Email', value: 'marketing@clickmasters.pk' },
@@ -17,10 +19,14 @@ export const ContactSection = () => {
     { icon: '💬', title: 'Consultation', value: '0333-1116842' }
   ];
 
+  const handleNavigation = () => {
+    router.push('/contact-us'); // Navigate to contact-us page
+  };
+
   return (
-    <section className="bg-black py-16 relative overflow-hidden">
+    <section className="bg-gray-50 py-16 relative overflow-hidden">
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-transparent"
+        className="absolute inset-0 "
         animate={{
           scale: [1, 1.2, 1],
           rotate: [0, 5, -5, 0],
@@ -37,16 +43,17 @@ export const ContactSection = () => {
           className="text-center mb-12"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
           <motion.h2
-            className="text-3xl md:text-4xl font-bold text-white mb-4"
+            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
             Feel Free to <span className="text-orange-500">Contact Us</span> Anytime!
           </motion.h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
             Whether you need expert advice on SEO, PPC, social media, or any other digital marketing services, our team is here to help.
           </p>
         </motion.div>
@@ -55,18 +62,19 @@ export const ContactSection = () => {
           {contactInfo.map((info, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-xl border-2 border-orange-500 p-6 group"
+              className="bg-white rounded-xl border-2 border-primary/10 p-6 group shadow-sm hover:shadow-xl transition-shadow"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 20px 30px -10px rgba(249, 115, 22, 0.5)",
-                backgroundColor: "#fff9f5"
+                boxShadow: "0 20px 30px -10px rgba(249, 115, 22, 0.3)",
+                backgroundColor: "#ffffff"
               }}
             >
               <motion.h3
-                className="font-semibold text-black mb-3 flex items-center"
+                className="font-semibold text-gray-900 mb-3 flex items-center"
                 whileHover={{ x: 10 }}
               >
                 <motion.span
@@ -85,7 +93,7 @@ export const ContactSection = () => {
                 </motion.span>
                 {info.title}
               </motion.h3>
-              <p className="text-sm text-gray-700">{info.value}</p>
+              <p className="text-sm text-gray-600">{info.value}</p>
             </motion.div>
           ))}
         </div>
@@ -94,10 +102,12 @@ export const ContactSection = () => {
           className="text-center mt-12"
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
           transition={{ type: "spring", stiffness: 200, delay: 0.4 }}
         >
           <motion.button
-            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-4 rounded-lg relative overflow-hidden group"
+            onClick={handleNavigation} // Add onClick handler
+            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-4 rounded-lg relative overflow-hidden group shadow-lg hover:shadow-xl transition-all cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
