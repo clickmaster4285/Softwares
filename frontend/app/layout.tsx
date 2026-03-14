@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/providers";
+import { Navbar } from "@/components/landingPage/navbar";
+import { Footer } from "@/components/landingPage/Footer";
 import "@/src/index.css";
 
 export const metadata: Metadata = {
@@ -22,7 +24,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body suppressHydrationWarning>
-        <Providers>{children}</Providers>
+        <Providers>
+          
+          {children}
+         
+        </Providers>
       </body>
     </html>
   );

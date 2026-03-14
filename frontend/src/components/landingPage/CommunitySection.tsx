@@ -1,13 +1,19 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from "next/link";
-import { motion, useInView, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Users, Code, BookOpen, MessageCircle, Globe, Award, ArrowRight, LucideIcon } from "lucide-react";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import CountUp from 'react-countup';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 // Define types
 interface CommunityFeature {
-  icon: LucideIcon;  // More specific than React.ElementType
+  icon: LucideIcon;
   title: string;
   description: string;
   stat: string;
@@ -20,6 +26,7 @@ interface StatItem {
   label: string;
 }
 
+// YOUR ORIGINAL CONTENT - NOT CHANGED
 const communityFeatures: CommunityFeature[] = [
   {
     icon: Code,
@@ -35,7 +42,7 @@ const communityFeatures: CommunityFeature[] = [
     description: "Modern web apps with React, Node, and cloud hosting. Responsive, fast, and secure applications.",
     stat: "3,500+",
     statLabel: "Clients",
-  color: "from-primary/60 to-primary/10",
+    color: "from-primary/60 to-primary/10",
   },
   {
     icon: BookOpen,
@@ -43,7 +50,7 @@ const communityFeatures: CommunityFeature[] = [
     description: "Native and cross-platform mobile apps for iOS and Android. From MVP to enterprise solutions.",
     stat: "75+",
     statLabel: "Awards",
-   color: "from-primary/60 to-primary/10",
+    color: "from-primary/60 to-primary/10",
   },
   {
     icon: MessageCircle,
@@ -67,285 +74,483 @@ const communityFeatures: CommunityFeature[] = [
     description: "Ongoing updates, security patches, and technical support. Keep your software running smoothly.",
     stat: "100%",
     statLabel: "Dedicated",
-   color: "from-primary/60 to-primary/10",
+    color: "from-primary/60 to-primary/10",
   },
 ];
 
+// YOUR ORIGINAL CONTENT - NOT CHANGED
 const stats: StatItem[] = [
   { value: "1,860+", label: "Projects Delivered" },
   { value: "3,500+", label: "Happy Clients" },
   { value: "75+", label: "Industry Awards" },
 ];
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
+// Helper function to extract number for counting
+const extractNumber = (statString: string): number => {
+  const match = statString.match(/[\d,]+/);
+  if (match) {
+    return parseInt(match[0].replace(/,/g, ''), 10);
   }
+  return 0;
 };
 
-const itemVariants: Variants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15
-    }
-  }
+// Helper function to check if stat has plus sign
+const hasPlus = (statString: string): boolean => {
+  return statString.includes('+');
+};
+
+// Helper function to check if stat is percentage
+const isPercentage = (statString: string): boolean => {
+  return statString.includes('%');
+};
+
+// Helper function to check if stat is 24/7 format
+const is247 = (statString: string): boolean => {
+  return statString.includes('24/7');
 };
 
 export function CommunitySection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [countStarted, setCountStarted] = useState(false);
+
+  // Premium GSAP animations (SAME AS INDUSTRIES SECTION)
+  useEffect(() => {
+    if (!hasAnimated && sectionRef.current) {
+      const ctx = gsap.context(() => {
+        // Master timeline for coordinated entrance
+        const masterTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+            once: true,
+            onEnter: () => {
+              setHasAnimated(true);
+              setCountStarted(true);
+            }
+          }
+        });
+
+        // Header animation
+        if (headerRef.current) {
+          masterTl.fromTo(headerRef.current,
+            {
+              opacity: 0,
+              y: 60,
+              scale: 0.9
+            },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 1.2,
+              ease: "power3.out"
+            }
+          );
+        }
+
+        // Animate stats cards
+        statsRef.current.forEach((card, index) => {
+          if (card) {
+            masterTl.fromTo(card,
+              {
+                opacity: 0,
+                y: 50,
+                scale: 0.8
+              },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 1,
+                ease: "back.out(1.2)",
+                delay: index * 0.1
+              },
+              "-=0.4"
+            );
+          }
+        });
+
+        // Animate feature cards with 3D entrance
+        cardsRef.current.forEach((card, index) => {
+          if (card) {
+            masterTl.fromTo(card,
+              {
+                opacity: 0,
+                y: 100,
+                rotationX: 30,
+                rotationY: index % 2 === 0 ? -15 : 15,
+                scale: 0.8,
+                transformPerspective: 1000
+              },
+              {
+                opacity: 1,
+                y: 0,
+                rotationX: 0,
+                rotationY: 0,
+                scale: 1,
+                duration: 1.2,
+                ease: "back.out(1.2)",
+                delay: index * 0.1
+              },
+              "-=0.6"
+            );
+
+            // Add floating particles to each card (only for cards 3+)
+            if (index >= 3) {
+              for (let i = 0; i < 3; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'absolute w-1 h-1 bg-orange-500/20 rounded-full pointer-events-none';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                card.appendChild(particle);
+
+                gsap.to(particle, {
+                  y: gsap.utils.random(-20, 20),
+                  x: gsap.utils.random(-20, 20),
+                  scale: gsap.utils.random(1, 2),
+                  opacity: gsap.utils.random(0.1, 0.3),
+                  duration: gsap.utils.random(2, 4),
+                  repeat: -1,
+                  yoyo: true,
+                  ease: "sine.inOut",
+                  delay: i * 0.2
+                });
+              }
+            }
+          }
+        });
+
+        // CTA section entrance
+        if (ctaRef.current) {
+          masterTl.fromTo(ctaRef.current,
+            {
+              opacity: 0,
+              y: 80,
+              scale: 0.95
+            },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 1.2,
+              ease: "power4.out"
+            },
+            "-=0.4"
+          );
+        }
+
+        // Add floating particles to CTA
+        if (ctaRef.current) {
+          for (let i = 0; i < 6; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'absolute w-1.5 h-1.5 bg-orange-500/20 rounded-full pointer-events-none';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            ctaRef.current.appendChild(particle);
+
+            gsap.to(particle, {
+              y: gsap.utils.random(-30, 30),
+              x: gsap.utils.random(-30, 30),
+              scale: gsap.utils.random(1, 3),
+              opacity: gsap.utils.random(0.1, 0.4),
+              duration: gsap.utils.random(3, 6),
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut"
+            });
+          }
+        }
+      }, sectionRef);
+
+      return () => ctx.revert();
+    }
+  }, [hasAnimated]);
+
+  // Premium hover animation for feature cards
+  const handleCardHover = (index: number, isHovering: boolean) => {
+    setHoveredIndex(isHovering ? index : null);
+    
+    const card = cardsRef.current[index];
+    if (!card) return;
+
+    if (isHovering) {
+      gsap.to(card, {
+        y: -15,
+        scale: 1.02,
+        rotationX: 2,
+        rotationY: index % 2 === 0 ? 2 : -2,
+        boxShadow: "0 30px 40px -20px rgba(249,115,22,0.3), 0 10px 20px -10px rgba(0,0,0,0.1)",
+        borderColor: "#f97316",
+        duration: 0.4,
+        ease: "power2.out"
+      });
+
+      // Create shine effect
+      let shine = card.querySelector('.card-shine') as HTMLDivElement;
+      if (!shine) {
+        shine = document.createElement('div');
+        shine.className = 'card-shine absolute inset-0 pointer-events-none rounded-2xl';
+        shine.style.background = 'radial-gradient(circle at 50% 0%, rgba(249,115,22,0.1), transparent 70%)';
+        card.appendChild(shine);
+      }
+      
+      gsap.to(shine, {
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    } else {
+      gsap.to(card, {
+        y: 0,
+        scale: 1,
+        rotationX: 0,
+        rotationY: 0,
+        boxShadow: "0 4px 20px rgba(0,0,0,0.02)",
+        borderColor: "rgba(249,115,22,0.1)",
+        duration: 0.5,
+        ease: "power3.out"
+      });
+
+      const shine = card.querySelector('.card-shine');
+      if (shine) {
+        gsap.to(shine, {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      }
+    }
+  };
 
   return (
     <section 
       ref={sectionRef}
       id="community"
-      className="relative py-24 overflow-hidden bg-white"
+      className="relative py-24 overflow-hidden bg-white font-sans"
     >
-      {/* Minimalist Background */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-black rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-black rounded-full blur-3xl" />
+      {/* Premium Background Layers */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-orange-500/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-orange-500/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
+        
+        <div 
+          className="absolute inset-0 opacity-[0.02]" 
+          style={{ 
+            backgroundImage: `linear-gradient(to right, #f97316 1px, transparent 1px),
+                             linear-gradient(to bottom, #f97316 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} 
+        />
       </div>
 
-      {/* Subtle Grid - Fixed TypeScript */}
-      <div 
-        className="absolute inset-0" 
-        style={{ 
-          backgroundImage: `linear-gradient(to right, #00000005 1px, transparent 1px),
-                           linear-gradient(to bottom, #00000005 1px, transparent 1px)`,
-          backgroundSize: '60px 60px'
-        } as React.CSSProperties} 
-      />
-
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-20"
-        >
+        {/* Header Section - YOUR ORIGINAL HEADER with premium styling */}
+        <div ref={headerRef} className="text-center mb-20">
           <motion.div
             initial={{ width: 0 }}
-            whileInView={{ width: 80 }}
+            animate={{ width: 80 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="h-px bg-primary/30 mx-auto mb-8"
+            className="h-px bg-orange-500/30 mx-auto mb-8"
           />
           
-          <motion.h2
-            className="text-5xl md:text-6xl font-light tracking-tight text-black mb-4"
-          >
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-4">
             Why Choose Our
-            <span className="font-medium text-primary block mt-2">
-              Software Development <span className="text-primary">Services</span>
+            <span className="font-bold text-orange-500 block mt-2">
+              Software Development Services
             </span>
-          </motion.h2>
+          </h2>
           
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.6 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-black/60 max-w-2xl mx-auto text-lg"
-          >
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">
             We deliver custom software, web apps, and mobile apps with experienced developers, 
             agile process, and on-time delivery.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        {/* Stats Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16"
-        >
-          {stats.map((stat, idx) => (
-            <motion.div
-              key={stat.label}
-              className="relative text-center"
-              whileHover={{ y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.div
-                className="absolute inset-0 bg-primary/5 rounded-2xl"
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.3 + (idx * 0.1) }}
-              />
-              <div className="relative p-6">
-                <motion.p 
-                  className="text-3xl md:text-4xl font-light text-black mb-1"
-                  animate={{
-                    scale: hoveredIndex === idx ? 1.1 : 1,
-                  }}
-                >
-                  {stat.value}
-                </motion.p>
-                <p className="text-xs uppercase tracking-wider text-black/40">
-                  {stat.label}
-                </p>
-                <motion.div
-                  className="absolute bottom-0 left-1/2 h-px bg-primary/30"
-                  initial={{ width: 0, x: "-50%" }}
-                  whileInView={{ width: "40px" }}
-                  transition={{ delay: 0.5 + (idx * 0.1) }}
-                />
+        {/* Stats Row with Counters */}
+        <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16">
+          {stats.map((stat, idx) => {
+            const numericValue = extractNumber(stat.value);
+            const hasPlusSign = hasPlus(stat.value);
+            
+            return (
+              <div
+                key={stat.label}
+                ref={(el) => { statsRef.current[idx] = el; }}
+                className="relative text-center"
+              >
+                <div className="relative bg-white/50 backdrop-blur-sm rounded-2xl p-6 border border-orange-500/10">
+                  <p className="text-3xl md:text-4xl font-bold text-black mb-1">
+                    {numericValue > 0 ? (
+                      <CountUp
+                        start={0}
+                        end={numericValue}
+                        duration={2.5}
+                        separator=","
+                        delay={0.2}
+                        useEasing={true}
+                        useGrouping={true}
+                        onStart={() => setCountStarted(true)}
+                      >
+                        {({ countUpRef, start }) => {
+                          useEffect(() => {
+                            if (countStarted) {
+                              start();
+                            }
+                          }, [countStarted, start]);
+                          return <span ref={countUpRef} />;
+                        }}
+                      </CountUp>
+                    ) : (
+                      stat.value
+                    )}
+                    {hasPlusSign && <span className="text-orange-500 ml-1">+</span>}
+                  </p>
+                  <p className="text-xs uppercase tracking-wider text-gray-500">
+                    {stat.label}
+                  </p>
+                  <div className="absolute bottom-0 left-1/2 h-px bg-orange-500/30 w-10 -translate-x-1/2" />
+                </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            );
+          })}
+        </div>
 
-        {/* Features Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        {/* Features Grid - First 3 cards have NO stats, last 3 cards HAVE stats */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {communityFeatures.map((feature, index) => {
             const Icon = feature.icon;
+            const numericValue = extractNumber(feature.stat);
+            const hasPlusSign = hasPlus(feature.stat);
+            const isPercent = isPercentage(feature.stat);
+            const is247Format = is247(feature.stat);
+            
             return (
-              <motion.div
+              <div
                 key={feature.title}
-                variants={itemVariants}
-                onHoverStart={() => setHoveredIndex(index)}
-                onHoverEnd={() => setHoveredIndex(null)}
-                className="group relative"
+                ref={(el) => { cardsRef.current[index] = el; }}
+                onMouseEnter={() => handleCardHover(index, true)}
+                onMouseLeave={() => handleCardHover(index, false)}
+                className="group relative cursor-pointer"
+                style={{ transformStyle: 'preserve-3d' as const }}
               >
-                {/* Card Border Animation */}
-                <motion.div
-                  className={`absolute -inset-0.5 bg-gradient-to-r ${feature.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                  animate={{
-                    scale: hoveredIndex === index ? 1.02 : 1,
-                  }}
-                  transition={{ duration: 0.4 }}
-                />
-                
-                {/* Main Card */}
-                <div className="relative bg-white rounded-2xl p-6 border border-black/5 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-shadow duration-500 h-full">
+                {/* Premium Card Design */}
+                <div className="relative bg-white rounded-2xl p-6 border border-orange-500/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden">
                   
-                  {/* Header with Icon and Stat */}
+                  {/* Animated Background Pattern */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                    <div className="absolute inset-0" style={{
+                      background: 'radial-gradient(circle at 20% 30%, rgba(249,115,22,0.03) 0%, transparent 50%)',
+                    }} />
+                  </div>
+
+                  {/* Header with Icon - Stats HIDDEN for first 3 cards, SHOWN for last 3 */}
                   <div className="flex items-start justify-between mb-4">
-                    <motion.div
-                      animate={{
-                        x: hoveredIndex === index ? 5 : 0,
-                      }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="relative">
-                        <div className="w-12 h-12 flex items-center justify-center">
-                          <Icon className="w-6 h-6 text-black/80" strokeWidth={1.5} />
-                        </div>
-                        
-                        {/* Animated Underline */}
-                        <motion.div
-                          className="absolute -bottom-1 left-0 h-px bg-primary"
-                          initial={{ width: 0 }}
-                          animate={{
-                            width: hoveredIndex === index ? '32px' : 0,
-                          }}
-                          transition={{ duration: 0.3 }}
-                        />
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-orange-500/20 rounded-full blur-md scale-0 group-hover:scale-150 transition-transform duration-500" />
+                      <div className="relative w-12 h-12 flex items-center justify-center">
+                        <Icon className="w-6 h-6 text-black/80" strokeWidth={1.5} />
                       </div>
-                    </motion.div>
+                    </div>
                     
-                    <motion.div 
-                      className="text-right"
-                      animate={{
-                        scale: hoveredIndex === index ? 1.1 : 1,
-                      }}
-                    >
-                      <p className="text-2xl font-light text-black">{feature.stat}</p>
-                      <p className="text-xs uppercase tracking-wider text-black/40">
-                        {feature.statLabel}
-                      </p>
-                    </motion.div>
+                    {/* Stats section - ONLY show for cards 4, 5, 6 (index >= 3) */}
+                    {index >= 3 && (
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-black">
+                          {is247Format ? (
+                            feature.stat
+                          ) : numericValue > 0 ? (
+                            <>
+                              <CountUp
+                                start={0}
+                                end={numericValue}
+                                duration={2.5}
+                                separator=","
+                                delay={0.2 + (index * 0.1)}
+                                useEasing={true}
+                                useGrouping={true}
+                              >
+                                {({ countUpRef, start }) => {
+                                  useEffect(() => {
+                                    if (countStarted) {
+                                      start();
+                                    }
+                                  }, [countStarted, start]);
+                                  return <span ref={countUpRef} />;
+                                }}
+                              </CountUp>
+                              {hasPlusSign && <span className="text-orange-500 ml-1">+</span>}
+                              {isPercent && <span className="text-orange-500 ml-1">%</span>}
+                            </>
+                          ) : (
+                            feature.stat
+                          )}
+                        </p>
+                        <p className="text-xs uppercase tracking-wider text-gray-500">
+                          {feature.statLabel}
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Content */}
-                  <motion.h3
-                    className="text-lg font-medium text-black mb-2"
-                    animate={{
-                      x: hoveredIndex === index ? 4 : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <h3 className="text-lg font-bold text-black mb-2">
                     {feature.title}
-                  </motion.h3>
+                  </h3>
                   
-                  <motion.p
-                    className="text-black/60 text-sm leading-relaxed"
-                    animate={{
-                      opacity: hoveredIndex === index ? 1 : 0.7,
-                    }}
-                  >
+                  <p className="text-gray-600 text-sm leading-relaxed">
                     {feature.description}
-                  </motion.p>
+                  </p>
 
                   {/* Bottom Corner Accent */}
-                  <motion.div
-                    className="absolute bottom-3 right-3 w-6 h-6"
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: hoveredIndex === index ? 0.2 : 0,
-                      rotate: hoveredIndex === index ? 180 : 0,
-                    }}
-                  >
-                    <div className="w-full h-full border-b border-r border-primary/30" />
-                  </motion.div>
+                  <div className="absolute bottom-3 right-3 w-6 h-6">
+                    <motion.div
+                      className="w-full h-full border-b border-r border-orange-500"
+                      animate={{
+                        rotate: hoveredIndex === index ? 180 : 0,
+                        opacity: hoveredIndex === index ? 0.3 : 0.1
+                      }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             )
           })}
-        </motion.div>
+        </div>
 
-        {/* Bottom CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <div className="relative bg-gradient-to-br from-black/5 to-primary/5 rounded-3xl p-12 overflow-hidden">
-            {/* Animated Pattern - Fixed TypeScript */}
+        {/* Bottom CTA Section - YOUR ORIGINAL CTA with premium styling */}
+        <div ref={ctaRef} className="mt-20">
+          <div className="relative bg-gradient-to-br from-gray-50 to-orange-50/30 rounded-3xl p-12 overflow-hidden border border-orange-500/10">
+            
+            {/* Animated Pattern */}
             <motion.div
               className="absolute inset-0 opacity-5"
               animate={{
                 backgroundPosition: ['0% 0%', '100% 100%'],
               }}
               transition={{
-                duration: 15,
+                duration: 20,
                 repeat: Infinity,
                 ease: "linear"
               }}
               style={{
-                backgroundImage: `radial-gradient(circle at 2px 2px, var(--primary) 1px, transparent 0)`,
+                backgroundImage: `radial-gradient(circle at 2px 2px, #f97316 1px, transparent 0)`,
                 backgroundSize: '30px 30px',
               }}
             />
             
             <div className="relative z-10 max-w-4xl mx-auto text-center">
               <motion.div
-                className="w-12 h-px bg-primary/30 mx-auto mb-8"
+                className="w-12 h-px bg-orange-500 mx-auto mb-8"
                 animate={{
                   width: ['48px', '96px', '48px'],
+                  opacity: [0.5, 1, 0.5]
                 }}
                 transition={{
                   duration: 3,
@@ -354,38 +559,35 @@ export function CommunitySection() {
                 }}
               />
               
-              <h3 className="text-3xl md:text-4xl font-light text-black mb-4">
+              <h3 className="text-3xl md:text-4xl font-bold text-black mb-4">
                 Ready to Start Your Project?
-                <span className="font-medium block mt-2 text-primary">
+                <span className="font-bold block mt-2 text-orange-500">
                   Let's Build Something Amazing Together
                 </span>
               </h3>
               
-              <p className="text-black/60 text-lg leading-relaxed max-w-2xl mx-auto">
+              <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
                 Whether you need a custom web app, mobile solution, or enterprise software, 
                 our team is ready to bring your vision to life.
               </p>
 
-              {/* Custom CTA Buttons */}
+              {/* Custom CTA Buttons - YOUR ORIGINAL BUTTONS with premium styling */}
               <motion.div 
-                className="flex flex-col sm:flex-row gap-4 justify-center mt-8 pt-8 border-t border-black/10"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center mt-8 pt-8 border-t border-orange-500/10"
               >
                 {/* Primary Button */}
                 <Link href="/contact-us" className="inline-block">
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group relative px-8 py-4 bg-black text-white text-sm font-light tracking-wider overflow-hidden"
+                    className="group relative px-8 py-4 bg-black text-white text-sm font-medium tracking-wider overflow-hidden rounded-md"
                   >
                     <span className="relative z-10 flex items-center">
                       Get in Touch
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                     <motion.div
-                      className="absolute inset-0 bg-primary"
+                      className="absolute inset-0 bg-orange-500"
                       initial={{ x: "-100%" }}
                       whileHover={{ x: 0 }}
                       transition={{ duration: 0.3 }}
@@ -396,16 +598,16 @@ export function CommunitySection() {
                 {/* Secondary Button */}
                 <Link href="/testimonials" className="inline-block">
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group relative px-8 py-4 bg-transparent text-black text-sm font-light tracking-wider border border-black/20 hover:border-primary/50 transition-colors duration-300 overflow-hidden"
+                    className="group relative px-8 py-4 bg-transparent text-black text-sm font-medium tracking-wider border border-orange-500/20 hover:border-orange-500/50 transition-colors duration-300 overflow-hidden rounded-md"
                   >
                     <span className="relative z-10 flex items-center">
                       Client Stories
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                     <motion.div
-                      className="absolute inset-0 bg-primary/5"
+                      className="absolute inset-0 bg-orange-500/5"
                       initial={{ scale: 0 }}
                       whileHover={{ scale: 1 }}
                       transition={{ duration: 0.3 }}
@@ -414,29 +616,26 @@ export function CommunitySection() {
                 </Link>
               </motion.div>
 
-              {/* Trust Indicators */}
+              {/* Trust Indicators - YOUR ORIGINAL with premium styling */}
               <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="flex items-center justify-center gap-6 mt-8 text-xs text-black/40"
+                className="flex items-center justify-center gap-6 mt-8 text-xs text-gray-500"
               >
                 <span className="flex items-center">
-                  <span className="w-1 h-1 bg-primary rounded-full mr-2" />
+                  <span className="w-1 h-1 bg-orange-500 rounded-full mr-2" />
                   Agile Development
                 </span>
                 <span className="flex items-center">
-                  <span className="w-1 h-1 bg-primary rounded-full mr-2" />
+                  <span className="w-1 h-1 bg-orange-500 rounded-full mr-2" />
                   On-time Delivery
                 </span>
                 <span className="flex items-center">
-                  <span className="w-1 h-1 bg-primary rounded-full mr-2" />
+                  <span className="w-1 h-1 bg-orange-500 rounded-full mr-2" />
                   24/7 Support
                 </span>
               </motion.div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

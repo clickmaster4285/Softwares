@@ -52,13 +52,7 @@ export default function LandingPage() {
         }
       }}
     >
-      {/* Navbar - Sticky at the top */}
-      <div className="sticky top-0 z-50">
-        <motion.div variants={fadeInUp} viewport={{ once: true }}>
-          <Navbar />
-        </motion.div>
-      </div>
-
+    
       {/* Rest of the sections with their animations */}
       <motion.div variants={scaleIn} viewport={{ once: true, margin: "-100px" }}>
         <HeroSection />
@@ -80,9 +74,6 @@ export default function LandingPage() {
         <HelpSection />
       </motion.div>
 
-      <motion.div variants={fadeIn} viewport={{ once: true }}>
-        <Footer />
-      </motion.div>
     </motion.main>
   );
 }

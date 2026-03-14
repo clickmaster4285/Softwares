@@ -1,14 +1,19 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { motion, useInView, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { apiFetch } from "@/lib/api";
 import { getCategoryName, resolveImageUrl } from "@/lib/utils";
 import { ExternalLink, FolderKanban, ArrowUpRight, Code, Globe, Smartphone, ArrowRight } from "lucide-react";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 // Define TypeScript interfaces
 interface Category {
@@ -56,35 +61,13 @@ const getCategoryIcon = (categoryName: string) => {
   return icons[categoryName] || FolderKanban;
 };
 
-// Variants for animations
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const itemVariants: Variants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15
-    }
-  }
-};
-
 export function AppsSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const categoriesRef = useRef<(HTMLDivElement | null)[]>([]);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   const { data: projects = [], isLoading } = useQuery<Project[]>({
     queryKey: ["projects-public"],
@@ -97,75 +80,175 @@ export function AppsSection() {
 
   const byCategory = groupProjectsByCategory(projects);
 
-  // Loading skeletons with animation
+  // Premium GSAP animations
+  useEffect(() => {
+    if (!hasAnimated && sectionRef.current) {
+      const ctx = gsap.context(() => {
+        // Master timeline for coordinated entrance
+        const masterTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+            once: true,
+            onEnter: () => setHasAnimated(true)
+          }
+        });
+
+        // Header animation
+        if (headerRef.current) {
+          masterTl.fromTo(headerRef.current,
+            {
+              opacity: 0,
+              y: 60,
+              scale: 0.9
+            },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 1.2,
+              ease: "power3.out"
+            }
+          );
+        }
+
+        // Animate category sections
+        categoriesRef.current.forEach((category, index) => {
+          if (category) {
+            masterTl.fromTo(category,
+              {
+                opacity: 0,
+                y: 100,
+                rotationX: 30,
+                scale: 0.8,
+                transformPerspective: 1000
+              },
+              {
+                opacity: 1,
+                y: 0,
+                rotationX: 0,
+                scale: 1,
+                duration: 1.2,
+                ease: "back.out(1.2)",
+                delay: index * 0.2
+              },
+              "-=0.6"
+            );
+          }
+        });
+
+        // CTA section entrance
+        if (ctaRef.current) {
+          masterTl.fromTo(ctaRef.current,
+            {
+              opacity: 0,
+              y: 80,
+              scale: 0.95
+            },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 1.2,
+              ease: "power4.out"
+            },
+            "-=0.2"
+          );
+        }
+
+        // Add floating particles to CTA
+        if (ctaRef.current) {
+          for (let i = 0; i < 6; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'absolute w-1.5 h-1.5 bg-orange-500/20 rounded-full pointer-events-none';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            ctaRef.current.appendChild(particle);
+
+            gsap.to(particle, {
+              y: gsap.utils.random(-30, 30),
+              x: gsap.utils.random(-30, 30),
+              scale: gsap.utils.random(1, 3),
+              opacity: gsap.utils.random(0.1, 0.4),
+              duration: gsap.utils.random(3, 6),
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut"
+            });
+          }
+        }
+      }, sectionRef);
+
+      return () => ctx.revert();
+    }
+  }, [hasAnimated]);
+
+  // Loading skeletons with premium styling
   const renderSkeletons = () => (
-    <motion.div 
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-    >
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {[...Array(8)].map((_, i) => (
-        <motion.div key={i} variants={itemVariants}>
-          <Card className="rounded-xl border-black/5 overflow-hidden bg-white shadow-[0_4px_20px_rgb(0,0,0,0.02)]">
-            <div className="h-40 bg-black/5 animate-pulse" />
-            <CardHeader>
-              <div className="h-5 w-3/4 bg-black/5 rounded animate-pulse" />
-              <div className="h-4 w-full bg-black/5 rounded animate-pulse mt-2" />
-            </CardHeader>
-          </Card>
-        </motion.div>
+        <div key={i} className="relative">
+          <div className="relative bg-white rounded-2xl border border-orange-500/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] overflow-hidden">
+            <div className="h-40 bg-gradient-to-r from-orange-500/5 to-orange-500/10 animate-pulse" />
+            <div className="p-6">
+              <div className="h-5 w-3/4 bg-orange-500/5 rounded animate-pulse mb-2" />
+              <div className="h-4 w-full bg-orange-500/5 rounded animate-pulse" />
+            </div>
+          </div>
+        </div>
       ))}
-    </motion.div>
+    </div>
   );
 
-  // Empty state with animation
+  // Empty state with premium styling
   const renderEmptyState = () => (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="text-center py-16 rounded-2xl border border-black/5 bg-white/50"
+      className="text-center py-16 rounded-3xl border border-orange-500/10 bg-gradient-to-br from-gray-50 to-orange-50/30"
     >
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
+        className="relative inline-block"
       >
-        <FolderKanban className="h-14 w-14 text-black/40 mx-auto mb-4" />
+        <div className="absolute inset-0 bg-orange-500/20 rounded-full blur-xl" />
+        <FolderKanban className="relative h-14 w-14 text-orange-500 mx-auto mb-4" />
       </motion.div>
-      <h3 className="font-display text-xl font-semibold text-black mb-2">No projects yet</h3>
-      <p className="text-black/60 max-w-md mx-auto">
+      <h3 className="text-xl font-bold text-black mb-2">No projects yet</h3>
+      <p className="text-gray-600 max-w-md mx-auto">
         Projects will appear here once they are added and grouped by category.
       </p>
     </motion.div>
   );
 
-  // Project card component with animations
+  // Project card component with premium animations
   const renderProjectCard = (project: Project, index: number) => {
     const isExternal = project.url?.startsWith("http");
     const projectId = project._id;
     const isHovered = hoveredProject === projectId;
     
     const cardContent = (
-      <motion.div
-        variants={itemVariants}
-        onHoverStart={() => setHoveredProject(projectId)}
-        onHoverEnd={() => setHoveredProject(null)}
-        className="group relative h-full"
+      <div
+        onMouseEnter={() => setHoveredProject(projectId)}
+        onMouseLeave={() => setHoveredProject(null)}
+        className="group relative h-full cursor-pointer"
+        style={{ transformStyle: 'preserve-3d' as const }}
       >
-        {/* Card Border Animation */}
-        <motion.div
-          className={`absolute -inset-0.5 bg-gradient-to-r from-primary/60 to-primary/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-          animate={{
-            scale: isHovered ? 1.02 : 1,
-          }}
-          transition={{ duration: 0.4 }}
-        />
-        
-        <Card className="relative h-full overflow-hidden rounded-2xl border-black/5 bg-white shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-all duration-500">
+        {/* Premium Card Design */}
+        <div className="relative bg-white rounded-2xl border border-orange-500/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden">
+          
+          {/* Animated Background Pattern */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+            <div className="absolute inset-0" style={{
+              background: 'radial-gradient(circle at 20% 30%, rgba(249,115,22,0.03) 0%, transparent 50%)',
+            }} />
+          </div>
+
           {/* Image Container */}
-          <div className="aspect-video bg-black/5 relative overflow-hidden">
+          <div className="aspect-video bg-gradient-to-br from-orange-500/5 to-orange-500/10 relative overflow-hidden">
             {project.thumbnail ? (
               <motion.img
                 src={resolveImageUrl(project.thumbnail)}
@@ -177,8 +260,8 @@ export function AppsSection() {
                 loading="lazy"
               />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
-                <FolderKanban className="h-10 w-10 text-primary/30" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <FolderKanban className="h-10 w-10 text-orange-500/30" />
               </div>
             )}
             
@@ -190,12 +273,12 @@ export function AppsSection() {
               transition={{ delay: index * 0.05 }}
             >
               {project.status === "live" && (
-                <Badge className="bg-emerald-500/90 text-white border-0 text-xs font-medium px-2 py-1">
+                <Badge className="bg-emerald-500/90 text-white border-0 text-xs font-medium px-2 py-1 rounded-full">
                   Live
                 </Badge>
               )}
               {project.status === "in-progress" && (
-                <Badge className="bg-amber-500/90 text-white border-0 text-xs font-medium px-2 py-1">
+                <Badge className="bg-amber-500/90 text-white border-0 text-xs font-medium px-2 py-1 rounded-full">
                   In Progress
                 </Badge>
               )}
@@ -210,62 +293,48 @@ export function AppsSection() {
             />
           </div>
           
-          <CardHeader className="pb-2">
-            <motion.div
-              animate={{ x: isHovered ? 4 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <CardTitle className="text-lg text-black line-clamp-1">
-                {project.title}
-              </CardTitle>
-            </motion.div>
-          </CardHeader>
-          
-          <CardContent>
-            <motion.p 
-              className="text-sm text-black/60 line-clamp-2 mb-3"
-              animate={{ opacity: isHovered ? 1 : 0.7 }}
-            >
+          <div className="p-6">
+            <h3 className="text-lg font-bold text-black mb-2 line-clamp-1">
+              {project.title}
+            </h3>
+            
+            <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-3">
               {project.description}
-            </motion.p>
+            </p>
             
             {project.url && (
               <motion.div
-                animate={{ x: isHovered ? 4 : 0 }}
+                whileHover={{ x: 4 }}
+                className="inline-flex items-center gap-1 text-sm font-medium text-orange-500"
               >
-                <motion.div
-                  whileHover={{ x: 4 }}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-primary group/link"
-                >
-                  {isExternal ? (
-                    <>
-                      Visit Project
-                      <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                    </>
-                  ) : (
-                    <>
-                      View Details
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                    </>
-                  )}
-                </motion.div>
+                {isExternal ? (
+                  <>
+                    Visit Project
+                    <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </>
+                ) : (
+                  <>
+                    View Details
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </>
+                )}
               </motion.div>
             )}
 
             {/* Bottom Corner Accent */}
-            <motion.div
-              className="absolute bottom-3 right-3 w-6 h-6"
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: isHovered ? 0.2 : 0,
-                rotate: isHovered ? 180 : 0,
-              }}
-            >
-              <div className="w-full h-full border-b border-r border-primary/30" />
-            </motion.div>
-          </CardContent>
-        </Card>
-      </motion.div>
+            <div className="absolute bottom-3 right-3 w-6 h-6">
+              <motion.div
+                className="w-full h-full border-b border-r border-orange-500"
+                animate={{
+                  rotate: isHovered ? 180 : 0,
+                  opacity: isHovered ? 0.3 : 0.1
+                }}
+                transition={{ duration: 0.5 }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     );
 
     // Wrap with appropriate link
@@ -276,7 +345,7 @@ export function AppsSection() {
           href={project.url} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
+          className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-xl"
         >
           {cardContent}
         </a>
@@ -287,7 +356,7 @@ export function AppsSection() {
       <Link 
         key={project._id} 
         href={`/projects/${project._id}`}
-        className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
+        className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-xl"
       >
         {cardContent}
       </Link>
@@ -298,61 +367,45 @@ export function AppsSection() {
     <section 
       ref={sectionRef}
       id="apps" 
-      className="relative py-24 overflow-hidden bg-white"
+      className="relative py-24 overflow-hidden bg-white font-sans"
     >
-      {/* Minimalist Background */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-black rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-black rounded-full blur-3xl" />
+      {/* Premium Background Layers */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-orange-500/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-orange-500/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
+        
+        <div 
+          className="absolute inset-0 opacity-[0.02]" 
+          style={{ 
+            backgroundImage: `linear-gradient(to right, #f97316 1px, transparent 1px),
+                             linear-gradient(to bottom, #f97316 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} 
+        />
       </div>
 
-      {/* Subtle Grid */}
-      <div 
-        className="absolute inset-0" 
-        style={{ 
-          backgroundImage: `linear-gradient(to right, #00000005 1px, transparent 1px),
-                           linear-gradient(to bottom, #00000005 1px, transparent 1px)`,
-          backgroundSize: '60px 60px'
-        } as React.CSSProperties} 
-      />
-
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center max-w-3xl mx-auto mb-20"
-        >
+        {/* Header Section - YOUR ORIGINAL HEADER with premium styling */}
+        <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-20">
           <motion.div
             initial={{ width: 0 }}
-            whileInView={{ width: 80 }}
+            animate={{ width: 80 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="h-px bg-primary/30 mx-auto mb-8"
+            className="h-px bg-orange-500/30 mx-auto mb-8"
           />
           
-          <motion.h2
-            className="text-5xl md:text-6xl font-light tracking-tight text-black mb-4"
-          >
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-4">
             Software 
-            <span className="font-medium text-primary block mt-2">
-              Projects <span className="text-primary">Portfolio</span>
+            <span className="font-bold text-orange-500 block mt-2">
+              Projects Portfolio
             </span>
-          </motion.h2>
+          </h2>
           
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.6 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-black/60 max-w-2xl mx-auto text-lg"
-          >
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">
             Explore custom software, web applications, and digital solutions we have built 
             for clients across various industries.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Content */}
         {isLoading ? (
@@ -360,91 +413,50 @@ export function AppsSection() {
         ) : byCategory.length === 0 ? (
           renderEmptyState()
         ) : (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="space-y-16"
-          >
+          <div className="space-y-16">
             {byCategory.map(({ categoryName, projects: categoryProjects }, categoryIndex) => {
               const CategoryIcon = getCategoryIcon(categoryName);
               
               return (
-                <motion.div 
+                <div
                   key={categoryName}
-                  variants={itemVariants}
+                  ref={(el) => { categoriesRef.current[categoryIndex] = el; }}
                   className="space-y-8"
                 >
-                  {/* Category Header with Animation */}
-                  <motion.div 
-                    className="flex items-center gap-4"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: categoryIndex * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <motion.div
-                      className="relative"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <div className="w-12 h-12 flex items-center justify-center">
+                  {/* Category Header with Premium Styling */}
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-orange-500/20 rounded-full blur-md" />
+                      <div className="relative w-12 h-12 flex items-center justify-center">
                         <CategoryIcon className="w-6 h-6 text-black/80" strokeWidth={1.5} />
                       </div>
-                      <motion.div
-                        className="absolute -bottom-1 left-0 h-px bg-primary"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '32px' }}
-                        transition={{ delay: categoryIndex * 0.1 + 0.2 }}
-                      />
-                    </motion.div>
+                    </div>
                     
                     <div className="flex-1 flex items-center gap-3">
-                      <h3 className="font-display text-xl sm:text-2xl font-bold text-black">
+                      <h3 className="text-xl sm:text-2xl font-bold text-black">
                         {categoryName}
                       </h3>
-                      <motion.div 
-                        className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent"
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        transition={{ delay: categoryIndex * 0.1 + 0.3 }}
-                      />
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: categoryIndex * 0.1 + 0.4 }}
-                      >
-                        <Badge variant="secondary" className="text-xs bg-black/5 text-black/60 border-0">
-                          {categoryProjects.length} {categoryProjects.length === 1 ? 'Project' : 'Projects'}
-                        </Badge>
-                      </motion.div>
+                      <div className="h-px flex-1 bg-gradient-to-r from-orange-500/30 to-transparent" />
+                      <Badge className="text-xs bg-orange-50 text-orange-600 border-0 rounded-full px-3 py-1">
+                        {categoryProjects.length} {categoryProjects.length === 1 ? 'Project' : 'Projects'}
+                      </Badge>
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* Projects Grid */}
-                  <motion.div 
-                    className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-                    variants={containerVariants}
-                  >
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {categoryProjects.map((project, index) => renderProjectCard(project, index))}
-                  </motion.div>
-                </motion.div>
+                  </div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         )}
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-20 text-center"
-        >
+        {/* Bottom CTA - YOUR ORIGINAL CTA with premium styling */}
+        <div ref={ctaRef} className="mt-20 text-center">
           <motion.div
-            className="w-12 h-px bg-primary/30 mx-auto mb-8"
+            className="w-12 h-px bg-orange-500/30 mx-auto mb-8"
             animate={{
               width: ['48px', '96px', '48px'],
             }}
@@ -457,23 +469,23 @@ export function AppsSection() {
           
           <Link href="/projects" className="inline-block">
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="group relative px-8 py-4 bg-black text-white text-sm font-light tracking-wider overflow-hidden"
+              className="group relative px-8 py-4 bg-black text-white text-sm font-medium tracking-wider overflow-hidden rounded-md"
             >
               <span className="relative z-10 flex items-center">
                 View All Projects
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>
               <motion.div
-                className="absolute inset-0 bg-primary"
+                className="absolute inset-0 bg-orange-500"
                 initial={{ x: "-100%" }}
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
               />
             </motion.button>
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

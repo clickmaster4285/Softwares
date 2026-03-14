@@ -19,11 +19,14 @@ interface StatItem {
   label: string;
 }
 
-// Typing animation component
+// Typing animation component with fixed width
 const TypingAnimation = ({ texts, speed = 100, delay = 2000 }: { texts: string[]; speed?: number; delay?: number }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  
+  // Find the longest text for consistent width
+  const longestText = texts.reduce((a, b) => a.length > b.length ? a : b, '');
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -52,13 +55,21 @@ const TypingAnimation = ({ texts, speed = 100, delay = 2000 }: { texts: string[]
   }, [displayText, currentIndex, isDeleting, texts, speed, delay]);
 
   return (
-    <span className="relative">
-      {displayText}
-      <motion.span 
-        className="absolute -right-3 top-0 w-1 h-full bg-primary"
-        animate={{ opacity: [1, 0, 1] }}
-        transition={{ duration: 1, repeat: Infinity }}
-      />
+    <span className="relative inline-block min-w-[300px] sm:min-w-[400px] lg:min-w-[500px] text-left">
+      {/* Invisible placeholder to maintain width */}
+      <span className="invisible whitespace-pre" aria-hidden="true">
+        {longestText}
+      </span>
+      
+      {/* Actual animated text */}
+      <span className="absolute left-0 top-0 whitespace-nowrap">
+        {displayText}
+        <motion.span 
+          className="inline-block w-1 h-full bg-primary ml-1"
+          animate={{ opacity: [1, 0, 1] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        />
+      </span>
     </span>
   );
 };
@@ -113,18 +124,6 @@ const fadeInUp: Variants = {
   }
 };
 
-const statCardGlow: Variants = {
-  initial: { 
-    scale: 1,
-    boxShadow: "0 0 0px rgba(249,115,22,0)"
-  },
-  hover: { 
-    scale: 1.1,
-    boxShadow: "0 0 30px rgba(249,115,22,0.5)",
-    transition: { duration: 0.3 }
-  }
-};
-
 const stats: StatItem[] = [
   { end: 1860, label: 'Projects Delivered' },
   { end: 3500, label: 'Happy Clients' },
@@ -149,14 +148,14 @@ export function HeroSection(): JSX.Element {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 -z-20">
         <Image
-          src="/hero.jpg" // Fixed path with leading slash
+          src="/hero.jpg"
           alt="Background"
           fill
           className="object-cover"
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/50" /> {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       {/* Glowing Background Effects */}
@@ -238,49 +237,38 @@ export function HeroSection(): JSX.Element {
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge with glow effect */}
-          <motion.div 
-            className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 mb-8 shadow-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0 0 25px rgba(249, 115, 22, 0.5)",
-            }}
-          >
-            <span className="text-sm font-semibold text-primary">Software Development Company</span>
-            <span className="text-sm text-white">Custom Software, Web & Mobile Apps</span>
-            <ArrowRight className="h-4 w-4 text-primary" />
-          </motion.div>
-
-          {/* Heading with Typing Animation */}
-          <motion.h1 
-            id="hero-heading" 
-            className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
+        <div className="max-w-4xl mx-auto text-center min-h-[600px] flex flex-col justify-center">
+     
+          {/* Heading with Typing Animation - Fixed height */}
+          <motion.div
+            className="mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Your Trusted{' '}
-            <span className="text-primary block sm:inline">
-              <TypingAnimation 
-                texts={[
-                  "Software Development Company",
-                  "Web App Development Agency",
-                  "Mobile App Developers",
-                  "ERP Solution Providers"
-                ]} 
-                speed={100}
-                delay={2000}
-              />
-            </span>
-          </motion.h1>
+            <h1 
+              id="hero-heading" 
+              className="font-display text-4xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1]"
+            >
+              Your Trusted{' '}
+              <span className="text-primary block mt-2 min-h-[40px] sm:min-h-[60px] flex items-center justify-center">
+                <TypingAnimation 
+                  texts={[
+                    "Software Development Company",
+                    "Web App Development Agency",
+                    "Mobile App Developers",
+                    "ERP Solution Providers"
+                  ]} 
+                  speed={100}
+                  delay={2000}
+                />
+              </span>
+            </h1>
+          </motion.div>
 
           {/* Subheading */}
           <motion.p 
-            className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto mb-12 text-pretty leading-relaxed"
+            className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto mb-8 text-pretty leading-relaxed min-h-[80px]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
@@ -288,9 +276,9 @@ export function HeroSection(): JSX.Element {
             ClickMasters builds custom software, web applications, mobile apps, and ERP solutions. We are a software development company that turns your ideas into reliable, scalable software.
           </motion.p>
 
-          {/* CTA Buttons with glow on hover */}
+          {/* CTA Buttons */}
           <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20 min-h-[80px]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
@@ -304,7 +292,7 @@ export function HeroSection(): JSX.Element {
                 className="w-full sm:w-auto bg-orange-500 text-white hover:bg-orange-600 px-8 py-6 text-lg rounded-xl shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/50 transition-all relative overflow-hidden group" 
                 asChild
               >
-                <Link href="/contact-us">
+                <Link href="/admin/login">
                   <span className="relative z-10">Start Your Project</span>
                   <ArrowRight className="ml-2 h-5 w-5 relative z-10" />
                   <motion.span 
@@ -327,7 +315,7 @@ export function HeroSection(): JSX.Element {
                 className="w-full sm:w-auto px-8 py-6 text-lg rounded-xl bg-black/30 backdrop-blur-sm border-2 border-white/20 hover:bg-black/40 text-white hover:border-orange-500/50 transition-all" 
                 asChild
               >
-                <Link href="/about-us">
+                <Link href="/services">
                   <Play className="mr-2 h-5 w-5" />
                   Our Services
                 </Link>
@@ -335,48 +323,47 @@ export function HeroSection(): JSX.Element {
             </motion.div>
           </motion.div>
 
-          {/* Stats with enhanced glow effect behind cards */}
-        <motion.div 
-  className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-10 border-t border-white/20"
-  role="list" 
-  aria-label="Company achievements"
-  initial={{ opacity: 0, y: 30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.7, delay: 0.5 }}
->
-  {stats.map((stat, index) => (
-    <motion.div 
-      key={index}
-      className="text-center relative"
-      role="listitem"
-    >
-      {/* Stat content */}
-      <div className="relative z-10 p-4">
-        <motion.p
-          className="text-3xl sm:text-4xl font-bold text-white font-display transition-colors"
-          animate={{
-            textShadow: [
-              "0 0 2px rgba(249,115,22,0.3)",
-              "0 0 10px rgba(249,115,22,0.7)",
-              "0 0 2px rgba(249,115,22,0.3)",
-            ],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            delay: index * 0.3,
-            ease: "easeInOut",
-          }}
-        >
-          <Counter end={stat.end} duration={2} delay={0.2 * index} />
-        </motion.p>
-        <p className="text-sm text-gray-300 mt-1">
-          {stat.label}
-        </p>
-      </div>
-    </motion.div>
-  ))}
-</motion.div>
+          {/* Stats with fixed positioning */}
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-10 border-t border-white/20 mt-auto"
+            role="list" 
+            aria-label="Company achievements"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+          >
+            {stats.map((stat, index) => (
+              <motion.div 
+                key={index}
+                className="text-center relative"
+                role="listitem"
+              >
+                <div className="relative z-10 p-4">
+                  <motion.p
+                    className="text-3xl sm:text-4xl font-bold text-white font-display transition-colors min-h-[48px]"
+                    animate={{
+                      textShadow: [
+                        "0 0 2px rgba(249,115,22,0.3)",
+                        "0 0 10px rgba(249,115,22,0.7)",
+                        "0 0 2px rgba(249,115,22,0.3)",
+                      ],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: index * 0.3,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <Counter end={stat.end} duration={2} delay={0.2 * index} />
+                  </motion.p>
+                  <p className="text-sm text-gray-300 mt-1 min-h-[40px]">
+                    {stat.label}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

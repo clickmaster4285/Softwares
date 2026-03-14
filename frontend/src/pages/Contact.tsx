@@ -11,8 +11,7 @@ import {
     CheckCircle2,
     MessageSquare
 } from 'lucide-react';
-import { Navbar } from '@/components/landingPage/navbar';
-import { Footer } from '@/components/landingPage/Footer';
+
 
 // Define props interface for ContactInfo component
 interface ContactInfoProps {
@@ -122,7 +121,7 @@ const Contact: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-white relative ">
-               <Navbar />
+            
             {/* Background elements - subtle for light theme */}
             <div className="absolute inset-0">
                 <div className="absolute top-40 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
@@ -356,7 +355,7 @@ const Contact: React.FC = () => {
                 </div>
             </main>
 
-            <Footer />
+         
         </div>
     );
 };

@@ -11,36 +11,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/not-found.js"
     ],
-    "/page": [
+    "/(landing)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/(landing)/layout.js"
     ],
-    "/about-us/page": [
+    "/(landing)/about-us/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/about-us/page.js"
+      "static/chunks/app/(landing)/about-us/page.js"
     ],
-    "/contact-us/page": [
+    "/(landing)/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/contact-us/page.js"
+      "static/chunks/app/(landing)/page.js"
     ],
-    "/admin/login/page": [
+    "/(landing)/projects/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/admin/login/page.js"
-    ],
-    "/testimonials/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/testimonials/page.css",
-      "static/chunks/app/testimonials/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/(landing)/projects/page.js"
     ]
   }
 }

@@ -8,12 +8,6 @@ import { Menu, ChevronDown, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Types for dropdown data
-interface DropdownSection {
-  category: string;
-  color: string;
-  items: string[];
-}
-
 interface IndustryItem {
   id: string;
   title: string;
@@ -24,156 +18,6 @@ interface IndustryCategory {
   category: string;
   items: IndustryItem[];
 }
-
-// Apps dropdown data
-const appsData: DropdownSection[] = [
-  {
-    category: "FINANCE",
-    color: "text-teal-600",
-    items: [
-      "Accounting",
-      "Invoicing",
-      "Expenses",
-      "Spreadsheet (BI)",
-      "Documents",
-      "Sign",
-    ],
-  },
-  {
-    category: "SALES",
-    color: "text-red-400",
-    items: [
-      "CRM",
-      "Sales",
-      "POS Shop",
-      "POS Restaurant",
-      "Subscriptions",
-      "Rental",
-    ],
-  },
-  {
-    category: "WEBSITES",
-    color: "text-purple-600",
-    items: [
-      "Website Builder",
-      "eCommerce",
-      "Blog",
-      "Forum",
-      "Live Chat",
-      "eLearning",
-    ],
-  },
-  {
-    category: "SUPPLY CHAIN",
-    color: "text-purple-600",
-    items: [
-      "Inventory",
-      "Manufacturing",
-      "PLM",
-      "Purchase",
-      "Maintenance",
-      "Quality",
-    ],
-  },
-  {
-    category: "HUMAN RESOURCES",
-    color: "text-gray-600",
-    items: [
-      "Employees",
-      "Recruitment",
-      "Time Off",
-      "Appraisals",
-      "Referrals",
-      "Fleet",
-    ],
-  },
-  {
-    category: "MARKETING",
-    color: "text-orange-500",
-    items: [
-      "Social Marketing",
-      "Email Marketing",
-      "SMS Marketing",
-      "Events",
-      "Marketing Automation",
-      "Surveys",
-    ],
-  },
-  {
-    category: "SERVICES",
-    color: "text-orange-600",
-    items: [
-      "Project",
-      "Timesheets",
-      "Field Service",
-      "Helpdesk",
-      "Planning",
-      "Appointments",
-    ],
-  },
-  {
-    category: "PRODUCTIVITY",
-    color: "text-purple-600",
-    items: ["Discuss", "Approvals", "IoT", "VoIP", "Knowledge", "WhatsApp"],
-  },
-];
-
-// Community dropdown data
-const communityData: DropdownSection[] = [
-  {
-    category: "LEARN",
-    color: "text-orange-500",
-    items: [
-      "Tutorials",
-      "Documentation",
-      "Certifications",
-      "Training",
-      "Blog",
-      "Podcast",
-    ],
-  },
-  {
-    category: "GET THE SOFTWARE",
-    color: "text-teal-600",
-    items: ["Download", "Compare Editions", "Releases"],
-  },
-  {
-    category: "COLLABORATE",
-    color: "text-gray-600",
-    items: [
-      "Github",
-      "Forum",
-      "Events",
-      "Translations",
-      "Become a Partner",
-      "Services for Partners",
-      "Register your Accounting Firm",
-    ],
-  },
-  {
-    category: "GET SERVICES",
-    color: "text-purple-600",
-    items: [
-      "Find a Partner",
-      "Find an Accountant",
-      "Meet an advisor",
-      "Implementation Services",
-      "Customer References",
-      "Support",
-      "Upgrades",
-    ],
-  },
-  {
-    category: "EMPOWER EDUCATION",
-    color: "text-orange-500",
-    items: [
-      "Education Program",
-      "Scale Up! Business Game",
-      "LabOdoo",
-      "Visit Odoo",
-    ],
-  },
-];
 
 export function Navbar() {
   const pathname = usePathname();
@@ -252,10 +96,10 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full bg-white transition-all duration-300",
+        "sticky top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "border-b border-black/10 shadow-sm"
-          : "border-b border-black/5"
+          ? "bg-white border-b border-black/10 shadow-sm"
+          : "bg-transparent border-b border-transparent"
       )}
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
@@ -265,7 +109,11 @@ export function Navbar() {
           className="flex items-center gap-2 transition-opacity hover:opacity-90"
           onClick={closeDropdowns}
         >
-          <img src="/logo.png" className="w-48 md:w-64 h-auto" alt="ClickMasters" />
+          <img 
+             src={isScrolled ? "/logo-white.png" : "/logo.png"}
+            className="w-48 md:w-64 h-auto" 
+            alt="ClickMasters" 
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -275,39 +123,60 @@ export function Navbar() {
             href="/"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-light tracking-wide transition-colors",
+              "text-sm transition-colors",
               isActivePath("/")
                 ? "text-primary"
-                : "text-black/70 hover:text-black"
+                : isScrolled 
+                  ? "text-black/70 hover:text-black" 
+                  : "text-white/90 hover:text-white"
             )}
           >
             Home
           </Link>
 
-          {/* Apps Dropdown */}
-          {/* <div className="relative">
-            <button
-              onClick={() => handleDropdownToggle("apps")}
-              className={cn(
-                "text-sm font-light tracking-wide transition-colors flex items-center gap-1",
-                activeDropdown === "apps" ? "text-black" : "text-black/70 hover:text-black"
-              )}
-            >
-              Apps
-              <ChevronDown className={cn(
-                "h-4 w-4 transition-transform",
-                activeDropdown === "apps" && "rotate-180"
-              )} />
-            </button>
-          </div> */}
+          {/* Projects Link */}
+          <Link
+            href="/projects"
+            onClick={closeDropdowns}
+            className={cn(
+              "text-sm transition-colors",
+              isActivePath("/projects")
+                ? "text-primary"
+                : isScrolled 
+                  ? "text-black/70 hover:text-black" 
+                  : "text-white/90 hover:text-white"
+            )}
+          >
+            Projects
+          </Link>
+
+          {/* Services Link */}
+          <Link
+            href="/services"
+            onClick={closeDropdowns}
+            className={cn(
+              "text-sm transition-colors",
+              isActivePath("/services")
+                ? "text-primary"
+                : isScrolled 
+                  ? "text-black/70 hover:text-black" 
+                  : "text-white/90 hover:text-white"
+            )}
+          >
+            Services
+          </Link>
 
           {/* Industries Dropdown */}
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("industries")}
               className={cn(
-                "text-sm font-light tracking-wide transition-colors flex items-center gap-1",
-                activeDropdown === "industries" ? "text-black" : "text-black/70 hover:text-black"
+                "text-sm transition-colors flex items-center gap-1",
+                activeDropdown === "industries" 
+                  ? isScrolled ? "text-black" : "text-white"
+                  : isScrolled 
+                    ? "text-black/70 hover:text-black" 
+                    : "text-white/90 hover:text-white"
               )}
             >
               Solutions
@@ -318,31 +187,16 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* Community Dropdown */}
-          {/* <div className="relative">
-            <button
-              onClick={() => handleDropdownToggle("community")}
-              className={cn(
-                "text-sm font-light tracking-wide transition-colors flex items-center gap-1",
-                activeDropdown === "community" ? "text-black" : "text-black/70 hover:text-black"
-              )}
-            >
-              Community
-              <ChevronDown className={cn(
-                "h-4 w-4 transition-transform",
-                activeDropdown === "community" && "rotate-180"
-              )} />
-            </button>
-          </div> */}
-
           <Link
             href="/about-us"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-light tracking-wide transition-colors",
+              "text-sm transition-colors",
               isActivePath("/about-us")
                 ? "text-primary"
-                : "text-black/70 hover:text-black"
+                : isScrolled 
+                  ? "text-black/70 hover:text-black" 
+                  : "text-white/90 hover:text-white"
             )}
           >
             About Us
@@ -352,10 +206,12 @@ export function Navbar() {
             href="/contact-us"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-light tracking-wide transition-colors",
+              "text-sm transition-colors",
               isActivePath("/contact-us")
                 ? "text-primary"
-                : "text-black/70 hover:text-black"
+                : isScrolled 
+                  ? "text-black/70 hover:text-black" 
+                  : "text-white/90 hover:text-white"
             )}
           >
             Contact Us
@@ -365,10 +221,12 @@ export function Navbar() {
             href="/testimonials"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-light tracking-wide transition-colors",
+              "text-sm transition-colors",
               isActivePath("/testimonials")
                 ? "text-primary"
-                : "text-black/70 hover:text-black"
+                : isScrolled 
+                  ? "text-black/70 hover:text-black" 
+                  : "text-white/90 hover:text-white"
             )}
           >
             Testimonials
@@ -378,13 +236,13 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <Link href="/admin/login" onClick={closeDropdowns}>
-            <button className="px-5 py-2 text-sm font-light tracking-wide text-white bg-black hover:bg-primary transition-colors duration-300">
+            <button className={cn(
+              "px-5 py-2 text-sm transition-colors duration-300",
+              isScrolled
+                ? "text-white rounded-md bg-primary  hover:border-primary/50"
+                : "text-white bg-black rounded-md hover:border-white/60"
+            )}>
               Sign In
-            </button>
-          </Link>
-          <Link href="/get-started" onClick={closeDropdowns}>
-            <button className="px-5 py-2 text-sm font-light tracking-wide text-black bg-transparent border border-black/20 hover:border-primary/50 transition-colors duration-300">
-              Get Started
             </button>
           </Link>
         </div>
@@ -392,7 +250,10 @@ export function Navbar() {
         {/* Mobile Menu Trigger */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="lg:hidden">
-            <button className="p-2 text-black/70 hover:text-black transition-colors">
+            <button className={cn(
+              "p-2 transition-colors",
+              isScrolled ? "text-black/70 hover:text-black" : "text-white/90 hover:text-white"
+            )}>
               <Menu className="h-6 w-6" />
             </button>
           </SheetTrigger>
@@ -420,21 +281,42 @@ export function Navbar() {
                     href="/"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 text-base font-light tracking-wide transition-colors border-b border-black/5",
+                      "py-3 transition-colors border-b border-black/5",
                       isActivePath("/")
                         ? "text-primary"
-                        : "text-black/70 hover:text-black"
+                        : "text-black/70 hover:text-primary"
                     )}
                   >
                     Home
                   </Link>
-                  
-                  {/* Apps Mobile Dropdown */}
-                  {/* <MobileDropdown
-                    title="Apps"
-                    items={appsData}
-                    onLinkClick={() => setIsOpen(false)}
-                  /> */}
+
+                  {/* Projects */}
+                  <Link
+                    href="/projects"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "py-3 transition-colors border-b border-black/5",
+                      isActivePath("/projects")
+                        ? "text-primary"
+                        : "text-black/70 hover:text-primary"
+                    )}
+                  >
+                    Projects
+                  </Link>
+
+                  {/* Services */}
+                  <Link
+                    href="/services"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "py-3 transition-colors border-b border-black/5",
+                      isActivePath("/services")
+                        ? "text-primary"
+                        : "text-black/70 hover:text-primary"
+                    )}
+                  >
+                    Services
+                  </Link>
 
                   {/* Industries Mobile Dropdown */}
                   <MobileDropdown
@@ -444,18 +326,11 @@ export function Navbar() {
                     onLinkClick={() => setIsOpen(false)}
                   />
 
-                  {/* Community Mobile Dropdown */}
-                  {/* <MobileDropdown
-                    title="Community"
-                    items={communityData}
-                    onLinkClick={() => setIsOpen(false)}
-                  /> */}
-
                   <Link
                     href="/about-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 text-base font-light tracking-wide transition-colors border-b border-black/5",
+                      "py-3 transition-colors border-b border-black/5",
                       isActivePath("/about-us")
                         ? "text-primary"
                         : "text-black/70 hover:text-black"
@@ -468,7 +343,7 @@ export function Navbar() {
                     href="/contact-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 text-base font-light tracking-wide transition-colors border-b border-black/5",
+                      "py-3 transition-colors border-b border-black/5",
                       isActivePath("/contact-us")
                         ? "text-primary"
                         : "text-black/70 hover:text-black"
@@ -481,7 +356,7 @@ export function Navbar() {
                     href="/testimonials"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 text-base font-light tracking-wide transition-colors border-b border-black/5",
+                      "py-3 transition-colors border-b border-black/5",
                       isActivePath("/testimonials")
                         ? "text-primary"
                         : "text-black/70 hover:text-black"
@@ -493,15 +368,10 @@ export function Navbar() {
               </nav>
 
               {/* Mobile Footer */}
-              <div className="p-6 border-t border-black/5 space-y-3">
+              <div className="p-6 border-t border-black/5">
                 <Link href="/admin/login" onClick={() => setIsOpen(false)}>
-                  <button className="w-full px-5 py-3 text-sm font-light tracking-wide text-white bg-black hover:bg-primary transition-colors duration-300">
+                  <button className="w-full px-5 py-3 text-sm text-white bg-black hover:bg-primary transition-colors duration-300">
                     Sign In
-                  </button>
-                </Link>
-                <Link href="/get-started" onClick={() => setIsOpen(false)}>
-                  <button className="w-full px-5 py-3 text-sm font-light tracking-wide text-black bg-transparent border border-black/20 hover:border-primary/50 transition-colors duration-300">
-                    Get Started
                   </button>
                 </Link>
               </div>
@@ -517,49 +387,22 @@ export function Navbar() {
           className="absolute left-0 right-0 bg-white border-t border-black/5 shadow-lg animate-slideDown"
         >
           <div className="container mx-auto px-4 lg:px-8 py-12">
-            {activeDropdown === "apps" && (
-              <div className="grid grid-cols-4 gap-8">
-                {appsData.map((section, idx) => (
-                  <div key={idx}>
-                    <h3 className={cn(
-                      "text-xs font-bold mb-4 uppercase tracking-wider",
-                      section.color
-                    )}>
-                      {section.category}
-                    </h3>
-                    <ul className="space-y-2">
-                      {section.items.map((item, itemIdx) => (
-                        <li key={itemIdx}>
-                          <a
-                            href="#"
-                            className="text-sm text-black/60 hover:text-black transition-colors font-light"
-                          >
-                            {item}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            )}
-
             {activeDropdown === "industries" && (
               <>
                 {isLoadingIndustries ? (
                   <div className="text-center py-12">
-                    <p className="text-black/40 font-light">Loading solutions...</p>
+                    <p className="text-black/40">Loading solutions...</p>
                   </div>
                 ) : industriesData.length === 0 ? (
                   <div className="text-center py-12">
-                    <p className="text-black/40 font-light">No solutions available</p>
+                    <p className="text-black/40">No solutions available</p>
                   </div>
                 ) : (
                   <>
                     <div className="grid grid-cols-4 gap-8 mb-8">
                       {industriesData.map((section, idx) => (
                         <div key={idx}>
-                          <h3 className="text-xs font-bold mb-4 uppercase tracking-wider text-primary/90">
+                          <h3 className="text-sm font-semibold mb-4 text-primary/90">
                             {section.category}
                           </h3>
                           <ul className="space-y-2">
@@ -567,7 +410,7 @@ export function Navbar() {
                               <li key={itemIdx}>
                                 <a
                                   href={item.url || "#"}
-                                  className="text-sm text-black/60 hover:text-black transition-colors font-light"
+                                  className="text-black/60 hover:text-black transition-colors"
                                 >
                                   {item.title}
                                 </a>
@@ -580,7 +423,7 @@ export function Navbar() {
                     <div className="text-center pt-6 border-t border-black/5">
                       <a
                         href="#"
-                        className="text-sm font-light text-black/60 hover:text-black transition-colors"
+                        className="text-black/60 hover:text-black transition-colors"
                       >
                         Browse all Solutions →
                       </a>
@@ -588,33 +431,6 @@ export function Navbar() {
                   </>
                 )}
               </>
-            )}
-
-            {activeDropdown === "community" && (
-              <div className="grid grid-cols-4 gap-8">
-                {communityData.map((section, idx) => (
-                  <div key={idx}>
-                    <h3 className={cn(
-                      "text-xs font-bold mb-4 uppercase tracking-wider",
-                      section.color
-                    )}>
-                      {section.category}
-                    </h3>
-                    <ul className="space-y-2">
-                      {section.items.map((item, itemIdx) => (
-                        <li key={itemIdx}>
-                          <a
-                            href="#"
-                            className="text-sm text-black/60 hover:text-black transition-colors font-light"
-                          >
-                            {item}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
             )}
           </div>
         </div>
@@ -626,7 +442,7 @@ export function Navbar() {
 // Mobile Dropdown Component
 interface MobileDropdownProps {
   title: string;
-  items: DropdownSection[] | IndustryCategory[];
+  items: IndustryCategory[];
   isLoading?: boolean;
   onLinkClick: () => void;
 }
@@ -636,33 +452,32 @@ function MobileDropdown({ title, items, isLoading, onLinkClick }: MobileDropdown
 
   const renderItems = () => {
     if (isLoading) {
-      return <p className="text-sm text-black/40 font-light pl-4">Loading...</p>;
+      return <p className="pl-4 text-black/40">Loading...</p>;
     }
 
     if (items.length === 0) {
-      return <p className="text-sm text-black/40 font-light pl-4">No items available</p>;
+      return <p className="pl-4 text-black/40">No items available</p>;
     }
 
     return (
       <div className="pl-4 space-y-4 mt-3">
         {items.map((section, idx) => (
           <div key={idx}>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-black/40 mb-2">
-              {"category" in section ? section.category : ""}
+            <h4 className="text-sm font-semibold text-black/60 mb-2">
+              {section.category}
             </h4>
             <ul className="space-y-2">
-              {"items" in section &&
-                section.items.map((item, itemIdx) => (
-                  <li key={itemIdx}>
-                    <a
-                      href="#"
-                      className="text-sm text-black/60 hover:text-black transition-colors font-light"
-                      onClick={onLinkClick}
-                    >
-                      {typeof item === "string" ? item : item.title}
-                    </a>
-                  </li>
-                ))}
+              {section.items.map((item, itemIdx) => (
+                <li key={itemIdx}>
+                  <a
+                    href="#"
+                    className="text-black/60 hover:text-black transition-colors"
+                    onClick={onLinkClick}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         ))}
@@ -674,7 +489,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick }: MobileDropdown
     <div className="border-b border-black/5">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center justify-between w-full py-3 text-base font-light tracking-wide text-black/70 hover:text-black transition-colors"
+        className="flex items-center justify-between w-full py-3 text-black/70 hover:text-black transition-colors"
       >
         {title}
         <ChevronDown

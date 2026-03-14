@@ -90,7 +90,7 @@ export const CoreValuesSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
             <span className="text-gray-900">The Principles That </span>
             <span className="bg-primary bg-clip-text text-transparent">
               Drive Us Forward

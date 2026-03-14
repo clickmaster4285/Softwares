@@ -4,8 +4,7 @@ import React, { useRef, useEffect,useState, useMemo, useCallback } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Navbar } from '@/components/landingPage/navbar';
-import { Footer } from '@/components/landingPage/Footer';
+
 
 import { HeroSection, StatsSection } from '@/components/landingPage/AboutPage/Hero'
 
@@ -48,7 +47,7 @@ const About = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <Navbar />
+ 
       <main className="">
         <HeroSection />
         <StatsSection />
@@ -74,7 +73,7 @@ const About = () => {
    
         <ContactSection />
       </main>
-      <Footer />
+     
     </motion.div>
   );
 };

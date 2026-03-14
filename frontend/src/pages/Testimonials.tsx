@@ -8,8 +8,7 @@ import 'swiper/css/effect-coverflow';
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from "@tanstack/react-query";
-import { Navbar } from "@/components/landingPage/navbar";
-import { Footer } from "@/components/landingPage/Footer";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -333,7 +332,7 @@ const Testimonials: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+ 
       <main className="pt-4 pb-20">
         <section ref={sectionRef} className="py-20 relative overflow-hidden">
           {/* Animated background */}
@@ -498,7 +497,7 @@ const Testimonials: React.FC = () => {
           </div>
         </section>
       </main>
-      <Footer />
+     
     </div>
   );
 };
