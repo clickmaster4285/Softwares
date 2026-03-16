@@ -26,7 +26,24 @@ export function Navbar() {
   const [industriesData, setIndustriesData] = useState<IndustryCategory[]>([]);
   const [isLoadingIndustries, setIsLoadingIndustries] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const isHome = pathname === "/";
+  const isAbout = pathname === "/about-us";
+
+  // Check if page is loading
+  useEffect(() => {
+    const handleStart = () => setIsPageLoading(true);
+    const handleComplete = () => setIsPageLoading(false);
+
+    // Simulate loading complete after component mounts
+    const timer = setTimeout(() => setIsPageLoading(false), 500);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
+  const isLightHero = (isHome || isAbout) && !isScrolled && !isPageLoading;
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 24);
@@ -93,24 +110,44 @@ export function Navbar() {
     setActiveDropdown(null);
   };
 
+  // During page loading, show black text and logo
+  const navStyle = isPageLoading 
+    ? "bg-white border-b border-black/10 shadow-sm" // Always white during loading
+    : isScrolled
+      ? "bg-white/95 border-b border-black/10 shadow-sm"
+      : "bg-white/10 backdrop-blur-md border-b border-transparent";
+
+  const logoToShow = isPageLoading || !isLightHero ? "/logo.png" : "/logo-white.png";
+  
+  const linkStyle = (isActive: boolean) => {
+    if (isPageLoading) {
+      return isActive ? "text-primary font-bold" : "text-black/70 hover:text-primary";
+    }
+    if (isActive) {
+      return "text-primary font-bold";
+    }
+    if (isLightHero) {
+      return "text-white/90 hover:text-primary";
+    }
+    return "text-black/70 hover:text-primary";
+  };
+
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        isScrolled
-          ? "bg-white border-b border-black/10 shadow-sm"
-          : "bg-transparent border-b border-transparent"
+        "fixed inset-x-0 top-0 z-50 w-full transition-all duration-300",
+        navStyle
       )}
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
-        {/* Logo */}
+        {/* Logo - always show black logo during loading */}
         <Link
           href="/"
           className="flex items-center gap-2 transition-opacity hover:opacity-90"
           onClick={closeDropdowns}
         >
           <img 
-             src={isScrolled ? "/logo-white.png" : "/logo.png"}
+            src={logoToShow}
             className="w-48 md:w-64 h-auto" 
             alt="ClickMasters" 
           />
@@ -123,12 +160,8 @@ export function Navbar() {
             href="/"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm transition-colors",
-              isActivePath("/")
-                ? "text-primary"
-                : isScrolled 
-                  ? "text-black/70 hover:text-black" 
-                  : "text-white/90 hover:text-white"
+              "text-sm font-medium transition-colors",
+              linkStyle(isActivePath("/"))
             )}
           >
             Home
@@ -139,12 +172,8 @@ export function Navbar() {
             href="/projects"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm transition-colors",
-              isActivePath("/projects")
-                ? "text-primary"
-                : isScrolled 
-                  ? "text-black/70 hover:text-black" 
-                  : "text-white/90 hover:text-white"
+              "text-sm font-medium transition-colors",
+              linkStyle(isActivePath("/projects"))
             )}
           >
             Projects
@@ -155,12 +184,8 @@ export function Navbar() {
             href="/services"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm transition-colors",
-              isActivePath("/services")
-                ? "text-primary"
-                : isScrolled 
-                  ? "text-black/70 hover:text-black" 
-                  : "text-white/90 hover:text-white"
+              "text-sm font-medium transition-colors",
+              linkStyle(isActivePath("/services"))
             )}
           >
             Services
@@ -171,12 +196,14 @@ export function Navbar() {
             <button
               onClick={() => handleDropdownToggle("industries")}
               className={cn(
-                "text-sm transition-colors flex items-center gap-1",
+                "text-sm font-medium transition-colors flex items-center gap-1",
                 activeDropdown === "industries" 
-                  ? isScrolled ? "text-black" : "text-white"
-                  : isScrolled 
-                    ? "text-black/70 hover:text-black" 
-                    : "text-white/90 hover:text-white"
+                  ? isScrolled ? "text-primary" : "text-primary"
+                  : isPageLoading
+                    ? "text-black/70 hover:text-primary"
+                    : isLightHero
+                      ? "text-white/90 hover:text-primary"
+                      : "text-black/70 hover:text-primary"
               )}
             >
               Solutions
@@ -191,12 +218,8 @@ export function Navbar() {
             href="/about-us"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm transition-colors",
-              isActivePath("/about-us")
-                ? "text-primary"
-                : isScrolled 
-                  ? "text-black/70 hover:text-black" 
-                  : "text-white/90 hover:text-white"
+              "text-sm font-medium transition-colors",
+              linkStyle(isActivePath("/about-us"))
             )}
           >
             About Us
@@ -206,12 +229,8 @@ export function Navbar() {
             href="/contact-us"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm transition-colors",
-              isActivePath("/contact-us")
-                ? "text-primary"
-                : isScrolled 
-                  ? "text-black/70 hover:text-black" 
-                  : "text-white/90 hover:text-white"
+              "text-sm font-medium transition-colors",
+              linkStyle(isActivePath("/contact-us"))
             )}
           >
             Contact Us
@@ -221,12 +240,8 @@ export function Navbar() {
             href="/testimonials"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm transition-colors",
-              isActivePath("/testimonials")
-                ? "text-primary"
-                : isScrolled 
-                  ? "text-black/70 hover:text-black" 
-                  : "text-white/90 hover:text-white"
+              "text-sm font-medium transition-colors",
+              linkStyle(isActivePath("/testimonials"))
             )}
           >
             Testimonials
@@ -237,10 +252,12 @@ export function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <Link href="/admin/login" onClick={closeDropdowns}>
             <button className={cn(
-              "px-5 py-2 text-sm transition-colors duration-300",
-              isScrolled
-                ? "text-white rounded-md bg-primary  hover:border-primary/50"
-                : "text-white bg-black rounded-md hover:border-white/60"
+              "px-5 py-2 text-sm font-medium transition-colors duration-300",
+              isPageLoading
+                ? "text-white bg-primary hover:bg-primary/90" // Keep primary button during loading
+                : isScrolled
+                  ? "text-white rounded-md bg-primary hover:bg-primary/90"
+                  : "text-white bg-primary rounded-md hover:bg-primary/90"
             )}>
               Sign In
             </button>
@@ -252,7 +269,11 @@ export function Navbar() {
           <SheetTrigger asChild className="lg:hidden">
             <button className={cn(
               "p-2 transition-colors",
-              isScrolled ? "text-black/70 hover:text-black" : "text-white/90 hover:text-white"
+              isPageLoading
+                ? "text-black/70 hover:text-primary"
+                : isScrolled 
+                  ? "text-black/70 hover:text-primary" 
+                  : "text-white/90 hover:text-primary"
             )}>
               <Menu className="h-6 w-6" />
             </button>
@@ -267,7 +288,7 @@ export function Navbar() {
                 <img src="/logo.png" className="w-36 h-auto" alt="ClickMasters" />
                 <button 
                   onClick={() => setIsOpen(false)}
-                  className="p-2 text-black/50 hover:text-black transition-colors"
+                  className="p-2 text-black/50 hover:text-primary transition-colors"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -281,9 +302,9 @@ export function Navbar() {
                     href="/"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 transition-colors border-b border-black/5",
+                      "py-3 font-medium transition-colors border-b border-black/5",
                       isActivePath("/")
-                        ? "text-primary"
+                        ? "text-primary font-bold"
                         : "text-black/70 hover:text-primary"
                     )}
                   >
@@ -295,9 +316,9 @@ export function Navbar() {
                     href="/projects"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 transition-colors border-b border-black/5",
+                      "py-3 font-medium transition-colors border-b border-black/5",
                       isActivePath("/projects")
-                        ? "text-primary"
+                        ? "text-primary font-bold"
                         : "text-black/70 hover:text-primary"
                     )}
                   >
@@ -309,9 +330,9 @@ export function Navbar() {
                     href="/services"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 transition-colors border-b border-black/5",
+                      "py-3 font-medium transition-colors border-b border-black/5",
                       isActivePath("/services")
-                        ? "text-primary"
+                        ? "text-primary font-bold"
                         : "text-black/70 hover:text-primary"
                     )}
                   >
@@ -330,10 +351,10 @@ export function Navbar() {
                     href="/about-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 transition-colors border-b border-black/5",
+                      "py-3 font-medium transition-colors border-b border-black/5",
                       isActivePath("/about-us")
-                        ? "text-primary"
-                        : "text-black/70 hover:text-black"
+                        ? "text-primary font-bold"
+                        : "text-black/70 hover:text-primary"
                     )}
                   >
                     About Us
@@ -343,10 +364,10 @@ export function Navbar() {
                     href="/contact-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 transition-colors border-b border-black/5",
+                      "py-3 font-medium transition-colors border-b border-black/5",
                       isActivePath("/contact-us")
-                        ? "text-primary"
-                        : "text-black/70 hover:text-black"
+                        ? "text-primary font-bold"
+                        : "text-black/70 hover:text-primary"
                     )}
                   >
                     Contact Us
@@ -356,10 +377,10 @@ export function Navbar() {
                     href="/testimonials"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 transition-colors border-b border-black/5",
+                      "py-3 font-medium transition-colors border-b border-black/5",
                       isActivePath("/testimonials")
-                        ? "text-primary"
-                        : "text-black/70 hover:text-black"
+                        ? "text-primary font-bold"
+                        : "text-black/70 hover:text-primary"
                     )}
                   >
                     Testimonials
@@ -370,7 +391,7 @@ export function Navbar() {
               {/* Mobile Footer */}
               <div className="p-6 border-t border-black/5">
                 <Link href="/admin/login" onClick={() => setIsOpen(false)}>
-                  <button className="w-full px-5 py-3 text-sm text-white bg-black hover:bg-primary transition-colors duration-300">
+                  <button className="w-full px-5 py-3 text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors duration-300">
                     Sign In
                   </button>
                 </Link>
@@ -381,7 +402,7 @@ export function Navbar() {
       </div>
 
       {/* Full-width Dropdown Menus */}
-      {activeDropdown && (
+      {activeDropdown && !isPageLoading && (
         <div 
           ref={dropdownRef}
           className="absolute left-0 right-0 bg-white border-t border-black/5 shadow-lg animate-slideDown"
@@ -402,7 +423,7 @@ export function Navbar() {
                     <div className="grid grid-cols-4 gap-8 mb-8">
                       {industriesData.map((section, idx) => (
                         <div key={idx}>
-                          <h3 className="text-sm font-semibold mb-4 text-primary/90">
+                          <h3 className="text-sm font-semibold mb-4 text-primary">
                             {section.category}
                           </h3>
                           <ul className="space-y-2">
@@ -410,7 +431,7 @@ export function Navbar() {
                               <li key={itemIdx}>
                                 <a
                                   href={item.url || "#"}
-                                  className="text-black/60 hover:text-black transition-colors"
+                                  className="text-black/60 hover:text-primary transition-colors"
                                 >
                                   {item.title}
                                 </a>
@@ -423,7 +444,7 @@ export function Navbar() {
                     <div className="text-center pt-6 border-t border-black/5">
                       <a
                         href="#"
-                        className="text-black/60 hover:text-black transition-colors"
+                        className="text-black/60 hover:text-primary transition-colors"
                       >
                         Browse all Solutions →
                       </a>
@@ -463,7 +484,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick }: MobileDropdown
       <div className="pl-4 space-y-4 mt-3">
         {items.map((section, idx) => (
           <div key={idx}>
-            <h4 className="text-sm font-semibold text-black/60 mb-2">
+            <h4 className="text-sm font-semibold text-primary mb-2">
               {section.category}
             </h4>
             <ul className="space-y-2">
@@ -471,7 +492,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick }: MobileDropdown
                 <li key={itemIdx}>
                   <a
                     href="#"
-                    className="text-black/60 hover:text-black transition-colors"
+                    className="text-black/60 hover:text-primary transition-colors"
                     onClick={onLinkClick}
                   >
                     {item.title}
@@ -489,7 +510,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick }: MobileDropdown
     <div className="border-b border-black/5">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center justify-between w-full py-3 text-black/70 hover:text-black transition-colors"
+        className="flex items-center justify-between w-full py-3 font-medium text-black/70 hover:text-primary transition-colors"
       >
         {title}
         <ChevronDown

@@ -73,150 +73,6 @@ export function HelpSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  // Premium GSAP animations
-  useEffect(() => {
-    if (!hasAnimated && sectionRef.current) {
-      const ctx = gsap.context(() => {
-        // Master timeline for coordinated entrance
-        const masterTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-            once: true,
-            onEnter: () => setHasAnimated(true)
-          }
-        });
-
-        // Header animation
-        if (headerRef.current) {
-          masterTl.fromTo(headerRef.current,
-            {
-              opacity: 0,
-              y: 60,
-              scale: 0.9
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 1.2,
-              ease: "power3.out"
-            }
-          );
-        }
-
-        // Search bar animation
-        if (searchRef.current) {
-          masterTl.fromTo(searchRef.current,
-            {
-              opacity: 0,
-              y: 40,
-              scale: 0.95
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 1,
-              ease: "back.out(1.2)"
-            },
-            "-=0.6"
-          );
-        }
-
-        // Animate cards with 3D entrance
-        cardsRef.current.forEach((card, index) => {
-          if (card) {
-            masterTl.fromTo(card,
-              {
-                opacity: 0,
-                y: 100,
-                rotationX: 30,
-                rotationY: index % 2 === 0 ? -15 : 15,
-                scale: 0.8,
-                transformPerspective: 1000
-              },
-              {
-                opacity: 1,
-                y: 0,
-                rotationX: 0,
-                rotationY: 0,
-                scale: 1,
-                duration: 1.2,
-                ease: "back.out(1.2)",
-                delay: index * 0.1
-              },
-              "-=0.6"
-            );
-
-            // Add floating particles to each card
-            for (let i = 0; i < 3; i++) {
-              const particle = document.createElement('div');
-              particle.className = 'absolute w-1 h-1 bg-orange-500/20 rounded-full pointer-events-none';
-              particle.style.left = `${Math.random() * 100}%`;
-              particle.style.top = `${Math.random() * 100}%`;
-              card.appendChild(particle);
-
-              gsap.to(particle, {
-                y: gsap.utils.random(-20, 20),
-                x: gsap.utils.random(-20, 20),
-                scale: gsap.utils.random(1, 2),
-                opacity: gsap.utils.random(0.1, 0.3),
-                duration: gsap.utils.random(2, 4),
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut",
-                delay: i * 0.2
-              });
-            }
-          }
-        });
-
-        // CTA section entrance
-        if (ctaRef.current) {
-          masterTl.fromTo(ctaRef.current,
-            {
-              opacity: 0,
-              y: 80,
-              scale: 0.95
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 1.2,
-              ease: "power4.out"
-            },
-            "-=0.4"
-          );
-        }
-
-        // Add floating particles to CTA
-        if (ctaRef.current) {
-          for (let i = 0; i < 6; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'absolute w-1.5 h-1.5 bg-orange-500/20 rounded-full pointer-events-none';
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            ctaRef.current.appendChild(particle);
-
-            gsap.to(particle, {
-              y: gsap.utils.random(-30, 30),
-              x: gsap.utils.random(-30, 30),
-              scale: gsap.utils.random(1, 3),
-              opacity: gsap.utils.random(0.1, 0.4),
-              duration: gsap.utils.random(3, 6),
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut"
-            });
-          }
-        }
-      }, sectionRef);
-
-      return () => ctx.revert();
-    }
-  }, [hasAnimated]);
 
   // Premium hover animation for cards
   const handleCardHover = (index: number, isHovering: boolean) => {
@@ -289,7 +145,7 @@ export function HelpSection() {
             initial={{ width: 0 }}
             animate={{ width: 80 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-px bg-orange-500/30 mx-auto mb-8"
+            className="h-px bg-primary mx-auto mb-8"
           />
           
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-4">
@@ -307,7 +163,7 @@ export function HelpSection() {
 
 
         {/* Resources Grid - YOUR ORIGINAL RESOURCES with premium card design */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {helpResources.map((resource, index) => {
             const Icon = resource.icon;
             return (

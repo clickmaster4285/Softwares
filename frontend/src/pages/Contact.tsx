@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
     Mail,
@@ -11,7 +11,6 @@ import {
     CheckCircle2,
     MessageSquare
 } from 'lucide-react';
-
 
 // Define props interface for ContactInfo component
 interface ContactInfoProps {
@@ -35,7 +34,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ icon: Icon, title, details, g
             className="relative group h-full"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ delay, duration: 0.5 }}
         >
             {/* Glow effect */}
@@ -76,6 +75,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ icon: Icon, title, details, g
         </motion.div>
     );
 };
+
 // Define interface for form data
 interface FormData {
     name: string;
@@ -92,6 +92,26 @@ const Contact: React.FC = () => {
     const [sending, setSending] = useState<boolean>(false);
     const [success, setSuccess] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [mounted, setMounted] = useState(false);
+    const [formKey, setFormKey] = useState(0); // Key to force re-render of form
+
+    // Handle client-side mounting
+    useEffect(() => {
+        setMounted(true);
+        
+        // Reset form state when component mounts
+        setFormData({ name: '', email: '', message: '' });
+        setSending(false);
+        setSuccess(false);
+        setError(null);
+        
+        // Force a re-render of the form after a short delay
+        const timer = setTimeout(() => {
+            setFormKey(prev => prev + 1);
+        }, 100);
+        
+        return () => clearTimeout(timer);
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -119,9 +139,20 @@ const Contact: React.FC = () => {
 
     const inputClasses = "w-full px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-300 text-foreground placeholder-muted-foreground";
 
+    // Don't render anything until after client-side hydration
+    if (!mounted) {
+        return (
+            <div className="min-h-screen bg-white relative flex items-center justify-center">
+                <div className="text-center">
+                    <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+                    <p className="text-muted-foreground">Loading contact page...</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="min-h-screen bg-white relative ">
-            
+        <div className="min-h-screen bg-white relative">
             {/* Background elements - subtle for light theme */}
             <div className="absolute inset-0">
                 <div className="absolute top-40 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
@@ -137,33 +168,25 @@ const Contact: React.FC = () => {
                     backgroundSize: '4rem 4rem'
                 }}
             />
-
-         
             
             <main className="relative z-10 pt-24">
-                <div className="container max-w-[1320px] mx-auto px-4">
+                <div className="mt-20 container max-w-[1320px] mx-auto px-4">
                     {/* Header */}
                     <motion.div
                         className="max-w-3xl mx-auto text-center mb-16"
                         initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                         transition={{ duration: 0.6 }}
                     >
-                      
-
                         <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                            
                             <span className="text-foreground">
                                Contact Us
                             </span>
                         </h2>
 
-             
-              
-              <p className="text-xl text-muted-foreground">
-            Reach out to <span className="font-semibold text-primary">Click Master Projects</span> for Project Inquiries, Collaborations, or Support. We respond within one business day.
-          </p>
+                        <p className="text-xl text-muted-foreground">
+                            Reach out to <span className="font-semibold text-primary">Click Master Projects</span> for Project Inquiries, Collaborations, or Support. We respond within one business day.
+                        </p>
                     </motion.div>
 
                     {/* Contact Info Cards */}
@@ -202,10 +225,10 @@ const Contact: React.FC = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pb-20">
                         {/* Left Column - Form */}
                         <motion.div
+                            key={formKey} // Force re-render when key changes
                             className="relative bg-card/90 backdrop-blur-sm rounded-3xl shadow-xl p-8 lg:p-10 border border-border/70"
                             initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
+                            animate={mounted ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
                         >
                             {/* Decorative elements */}
@@ -326,8 +349,7 @@ const Contact: React.FC = () => {
                         <motion.div
                             className="relative bg-card/90 backdrop-blur-sm rounded-3xl shadow-xl p-6 h-[500px] overflow-hidden group border border-border/70"
                             initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
+                            animate={mounted ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                             transition={{ duration: 0.6, delay: 0.5 }}
                             whileHover={{ scale: 1.02 }}
                         >
@@ -339,23 +361,20 @@ const Contact: React.FC = () => {
                             </div>
                             <div className="w-full h-full rounded-xl overflow-hidden border-2 border-primary/30 hover:border-primary/50 transition-all duration-300">
                                 <iframe
-                                title="ProjectHub Location"
-                                  src="https://www.google.com/maps?q=Main+PWD+Rd,+PWD+Housing+Society+Sector+A+PWD+Society,+Islamabad,+Punjab+45700,+Pakistan&output=embed"
+                                    title="Click Master Projects Location"
+                                    src="https://www.google.com/maps?q=Main+PWD+Rd,+PWD+Housing+Society+Sector+A+PWD+Society,+Islamabad,+Punjab+45700,+Pakistan&output=embed"
                                     width="100%"
                                     height="100%"
                                     style={{ border: 0, display: 'block' }}
                                     allowFullScreen
                                     loading="lazy"
                                     referrerPolicy="no-referrer-when-downgrade"
-                                   
                                 />
                             </div>
                         </motion.div>
                     </div>
                 </div>
             </main>
-
-         
         </div>
     );
 };

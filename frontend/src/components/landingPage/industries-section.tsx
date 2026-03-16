@@ -6,6 +6,8 @@ import { Factory, Store, Briefcase, Heart, GraduationCap, Building2, ArrowRight,
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRouter } from 'next/navigation';
+import CountUp from "react-countup";
+
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -94,131 +96,7 @@ export function IndustriesSection() {
   const [hasAnimated, setHasAnimated] = useState(false);
 
 
-  // Premium GSAP animations
-  useEffect(() => {
-    if (!hasAnimated && sectionRef.current) {
-      const ctx = gsap.context(() => {
-        // Master timeline for coordinated entrance
-        const masterTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-            once: true,
-            onEnter: () => setHasAnimated(true)
-          }
-        });
 
-        // Header animation with staggered elements
-        if (headerRef.current) {
-          masterTl.fromTo(headerRef.current,
-            {
-              opacity: 0,
-              y: 60,
-              scale: 0.9
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 1.2,
-              ease: "power3.out"
-            }
-          );
-        }
-
-        // Animate each card with sophisticated 3D entrance
-        cardsRef.current.forEach((card, index) => {
-          if (card) {
-            masterTl.fromTo(card,
-              {
-                opacity: 0,
-                y: 100,
-                rotationX: 30,
-                rotationY: index % 2 === 0 ? -15 : 15,
-                scale: 0.8,
-                transformPerspective: 1000
-              },
-              {
-                opacity: 1,
-                y: 0,
-                rotationX: 0,
-                rotationY: 0,
-                scale: 1,
-                duration: 1.2,
-                ease: "back.out(1.2)",
-                delay: index * 0.1
-              },
-              "-=0.6"
-            );
-
-            // Add floating particles to each card
-            for (let i = 0; i < 3; i++) {
-              const particle = document.createElement('div');
-              particle.className = 'absolute w-1 h-1 bg-orange-500/20 rounded-full pointer-events-none';
-              particle.style.left = `${Math.random() * 100}%`;
-              particle.style.top = `${Math.random() * 100}%`;
-              card.appendChild(particle);
-
-              gsap.to(particle, {
-                y: gsap.utils.random(-20, 20),
-                x: gsap.utils.random(-20, 20),
-                scale: gsap.utils.random(1, 2),
-                opacity: gsap.utils.random(0.1, 0.3),
-                duration: gsap.utils.random(2, 4),
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut",
-                delay: i * 0.2
-              });
-            }
-          }
-        });
-
-        // CTA section entrance
-        if (ctaRef.current) {
-          masterTl.fromTo(ctaRef.current,
-            {
-              opacity: 0,
-              y: 80,
-              scale: 0.95
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 1.2,
-              ease: "power4.out"
-            },
-            "-=0.4"
-          );
-        }
-
-        // Add floating particles to CTA
-        if (ctaRef.current) {
-          for (let i = 0; i < 6; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'absolute w-1.5 h-1.5 bg-orange-500/20 rounded-full pointer-events-none';
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            ctaRef.current.appendChild(particle);
-
-            gsap.to(particle, {
-              y: gsap.utils.random(-30, 30),
-              x: gsap.utils.random(-30, 30),
-              scale: gsap.utils.random(1, 3),
-              opacity: gsap.utils.random(0.1, 0.4),
-              duration: gsap.utils.random(3, 6),
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut"
-            });
-          }
-        }
-      }, sectionRef);
-
-      return () => ctx.revert();
-    }
-  }, [hasAnimated]);
 
   // Premium hover animation for cards
   const handleCardHover = (index: number, isHovering: boolean) => {
@@ -368,7 +246,7 @@ export function IndustriesSection() {
                     {industry.features.map((feature: string, i: number) => (
                       <motion.span 
                         key={feature} 
-                        className="text-xs px-2 py-1 bg-orange-50 text-orange-600 rounded-full"
+                        className="text-xs px-2 py-1 bg-gray-50 text-gray-600 rounded-full"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.1 * i }}
@@ -381,7 +259,7 @@ export function IndustriesSection() {
                   {/* Stats with premium animation */}
                   <div className="card-stats pt-3 border-t border-orange-500/20 flex items-baseline justify-between">
                     <div>
-                      <span className="text-2xl font-bold text-black block leading-none">
+                      <span className="text-2xl font-bold text-primary block leading-none">
                         {industry.stats}
                       </span>
                       <span className="text-xs uppercase tracking-wider text-gray-500">

@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import Link from "next/link";
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
@@ -196,17 +196,22 @@ const phrases: string[] = [
             </motion.div>
           </motion.h1>
 
-          {/* Optional: Add a call-to-action button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-8"
-          >
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
-              Get Started
-            </button>
-          </motion.div>
+
+        <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={isInView ? { opacity: 1, y: 0 } : {}}
+  transition={{ duration: 0.6, delay: 0.8 }}
+  className="mt-8"
+>
+  <Link
+    href="/admin/login"
+    className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-center"
+  >
+    Get Started
+  </Link>
+</motion.div>
+
+
         </motion.div>
       </motion.div>
 

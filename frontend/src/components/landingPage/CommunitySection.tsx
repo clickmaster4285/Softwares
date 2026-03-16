@@ -334,21 +334,7 @@ export function CommunitySection() {
       id="community"
       className="relative py-24 overflow-hidden bg-white font-sans"
     >
-      {/* Premium Background Layers */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-orange-500/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-orange-500/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
-        
-        <div 
-          className="absolute inset-0 opacity-[0.02]" 
-          style={{ 
-            backgroundImage: `linear-gradient(to right, #f97316 1px, transparent 1px),
-                             linear-gradient(to bottom, #f97316 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
-          }} 
-        />
-      </div>
-
+  
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section - YOUR ORIGINAL HEADER with premium styling */}
         <div ref={headerRef} className="text-center mb-20">
@@ -356,7 +342,7 @@ export function CommunitySection() {
             initial={{ width: 0 }}
             animate={{ width: 80 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-px bg-orange-500/30 mx-auto mb-8"
+            className="h-px bg-primary mx-auto mb-8"
           />
           
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-4">
@@ -373,54 +359,46 @@ export function CommunitySection() {
         </div>
 
         {/* Stats Row with Counters */}
-        <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16">
-          {stats.map((stat, idx) => {
-            const numericValue = extractNumber(stat.value);
-            const hasPlusSign = hasPlus(stat.value);
-            
-            return (
-              <div
-                key={stat.label}
-                ref={(el) => { statsRef.current[idx] = el; }}
-                className="relative text-center"
-              >
-                <div className="relative bg-white/50 backdrop-blur-sm rounded-2xl p-6 border border-orange-500/10">
-                  <p className="text-3xl md:text-4xl font-bold text-black mb-1">
-                    {numericValue > 0 ? (
-                      <CountUp
-                        start={0}
-                        end={numericValue}
-                        duration={2.5}
-                        separator=","
-                        delay={0.2}
-                        useEasing={true}
-                        useGrouping={true}
-                        onStart={() => setCountStarted(true)}
-                      >
-                        {({ countUpRef, start }) => {
-                          useEffect(() => {
-                            if (countStarted) {
-                              start();
-                            }
-                          }, [countStarted, start]);
-                          return <span ref={countUpRef} />;
-                        }}
-                      </CountUp>
-                    ) : (
-                      stat.value
-                    )}
-                    {hasPlusSign && <span className="text-orange-500 ml-1">+</span>}
-                  </p>
-                  <p className="text-xs uppercase tracking-wider text-gray-500">
-                    {stat.label}
-                  </p>
-                  <div className="absolute bottom-0 left-1/2 h-px bg-orange-500/30 w-10 -translate-x-1/2" />
-                </div>
-              </div>
-            );
-          })}
-        </div>
+<div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16">
+  {stats.map((stat, idx) => {
+    // extract numeric part from stat.value
+    const numericValue = parseInt(stat.value.replace(/\D/g, ""), 10) || 0;
+    const hasPlusSign = stat.value.includes("+");
 
+    return (
+      <div
+        key={stat.label}
+        ref={(el) => { statsRef.current[idx] = el; }}
+        className="relative text-center"
+      >
+        <div className="relative bg-white/50 backdrop-blur-sm rounded-2xl p-6">
+          
+          {/* Glow + CountUp */}
+          <p className="relative text-3xl md:text-4xl font-bold text-primary">
+            <span className="absolute inset-0 bg-primary/20 rounded-full blur-md -z-10" />
+            <CountUp
+              start={0}
+              end={numericValue}
+              duration={2.5}
+              separator=","
+              delay={0.2}
+              useEasing={true}
+              useGrouping={true}
+            />
+            {hasPlusSign && <span className="ml-1 text-orange-500">+</span>}
+          </p>
+
+          <p className="text-xs uppercase tracking-wider text-gray-500">
+            {stat.label}
+          </p>
+
+          <div className="absolute bottom-0 left-1/2 h-px bg-orange-500/30 w-10 -translate-x-1/2" />
+        </div>
+      </div>
+    );
+  })}
+</div>
+        
         {/* Features Grid - First 3 cards have NO stats, last 3 cards HAVE stats */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {communityFeatures.map((feature, index) => {

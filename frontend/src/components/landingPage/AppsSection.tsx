@@ -79,114 +79,17 @@ export function AppsSection() {
   });
 
   const byCategory = groupProjectsByCategory(projects);
+  
+  // Get only the first 2 categories
+  const displayedCategories = byCategory.slice(0, 2);
+  const remainingCount = byCategory.length - 2;
 
-  // Premium GSAP animations
-  useEffect(() => {
-    if (!hasAnimated && sectionRef.current) {
-      const ctx = gsap.context(() => {
-        // Master timeline for coordinated entrance
-        const masterTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-            once: true,
-            onEnter: () => setHasAnimated(true)
-          }
-        });
 
-        // Header animation
-        if (headerRef.current) {
-          masterTl.fromTo(headerRef.current,
-            {
-              opacity: 0,
-              y: 60,
-              scale: 0.9
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 1.2,
-              ease: "power3.out"
-            }
-          );
-        }
-
-        // Animate category sections
-        categoriesRef.current.forEach((category, index) => {
-          if (category) {
-            masterTl.fromTo(category,
-              {
-                opacity: 0,
-                y: 100,
-                rotationX: 30,
-                scale: 0.8,
-                transformPerspective: 1000
-              },
-              {
-                opacity: 1,
-                y: 0,
-                rotationX: 0,
-                scale: 1,
-                duration: 1.2,
-                ease: "back.out(1.2)",
-                delay: index * 0.2
-              },
-              "-=0.6"
-            );
-          }
-        });
-
-        // CTA section entrance
-        if (ctaRef.current) {
-          masterTl.fromTo(ctaRef.current,
-            {
-              opacity: 0,
-              y: 80,
-              scale: 0.95
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 1.2,
-              ease: "power4.out"
-            },
-            "-=0.2"
-          );
-        }
-
-        // Add floating particles to CTA
-        if (ctaRef.current) {
-          for (let i = 0; i < 6; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'absolute w-1.5 h-1.5 bg-orange-500/20 rounded-full pointer-events-none';
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            ctaRef.current.appendChild(particle);
-
-            gsap.to(particle, {
-              y: gsap.utils.random(-30, 30),
-              x: gsap.utils.random(-30, 30),
-              scale: gsap.utils.random(1, 3),
-              opacity: gsap.utils.random(0.1, 0.4),
-              duration: gsap.utils.random(3, 6),
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut"
-            });
-          }
-        }
-      }, sectionRef);
-
-      return () => ctx.revert();
-    }
-  }, [hasAnimated]);
 
   // Loading skeletons with premium styling
   const renderSkeletons = () => (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {[...Array(8)].map((_, i) => (
+      {[...Array(4)].map((_, i) => (
         <div key={i} className="relative">
           <div className="relative bg-white rounded-2xl border border-orange-500/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] overflow-hidden">
             <div className="h-40 bg-gradient-to-r from-orange-500/5 to-orange-500/10 animate-pulse" />
@@ -369,36 +272,19 @@ export function AppsSection() {
       id="apps" 
       className="relative py-24 overflow-hidden bg-white font-sans"
     >
-      {/* Premium Background Layers */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-orange-500/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-orange-500/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
-        
-        <div 
-          className="absolute inset-0 opacity-[0.02]" 
-          style={{ 
-            backgroundImage: `linear-gradient(to right, #f97316 1px, transparent 1px),
-                             linear-gradient(to bottom, #f97316 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
-          }} 
-        />
-      </div>
-
+ 
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
-        {/* Header Section - YOUR ORIGINAL HEADER with premium styling */}
+        {/* Header Section */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-20">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: 80 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-px bg-orange-500/30 mx-auto mb-8"
+            className="h-px bg-primarymx-auto mb-8"
           />
           
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-4">
-            Software 
-            <span className="font-bold text-orange-500 block mt-2">
-              Projects Portfolio
-            </span>
+            Our Projects
           </h2>
           
           <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">
@@ -407,14 +293,14 @@ export function AppsSection() {
           </p>
         </div>
 
-        {/* Content */}
+        {/* Content - Only first 2 categories */}
         {isLoading ? (
           renderSkeletons()
         ) : byCategory.length === 0 ? (
           renderEmptyState()
         ) : (
           <div className="space-y-16">
-            {byCategory.map(({ categoryName, projects: categoryProjects }, categoryIndex) => {
+            {displayedCategories.map(({ categoryName, projects: categoryProjects }, categoryIndex) => {
               const CategoryIcon = getCategoryIcon(categoryName);
               
               return (
@@ -428,7 +314,7 @@ export function AppsSection() {
                     <div className="relative">
                       <div className="absolute inset-0 bg-orange-500/20 rounded-full blur-md" />
                       <div className="relative w-12 h-12 flex items-center justify-center">
-                        <CategoryIcon className="w-6 h-6 text-black/80" strokeWidth={1.5} />
+                        <CategoryIcon className="w-6 h-6 text-primary" strokeWidth={1.5} />
                       </div>
                     </div>
                     
@@ -443,7 +329,7 @@ export function AppsSection() {
                     </div>
                   </div>
 
-                  {/* Projects Grid */}
+                  {/* Projects Grid - Show all projects for this category */}
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {categoryProjects.map((project, index) => renderProjectCard(project, index))}
                   </div>
@@ -453,19 +339,9 @@ export function AppsSection() {
           </div>
         )}
 
-        {/* Bottom CTA - YOUR ORIGINAL CTA with premium styling */}
+        {/* Bottom CTA - Enhanced to show remaining categories count */}
         <div ref={ctaRef} className="mt-20 text-center">
-          <motion.div
-            className="w-12 h-px bg-orange-500/30 mx-auto mb-8"
-            animate={{
-              width: ['48px', '96px', '48px'],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
+        
           
           <Link href="/projects" className="inline-block">
             <motion.button
@@ -474,7 +350,11 @@ export function AppsSection() {
               className="group relative px-8 py-4 bg-black text-white text-sm font-medium tracking-wider overflow-hidden rounded-md"
             >
               <span className="relative z-10 flex items-center">
-                View All Projects
+                {remainingCount > 0 ? (
+                  <>View All Projects ({remainingCount} more {remainingCount === 1 ? 'category' : 'categories'})</>
+                ) : (
+                  <>View All Projects</>
+                )}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>
               <motion.div

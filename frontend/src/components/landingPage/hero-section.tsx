@@ -144,7 +144,7 @@ export function HeroSection(): JSX.Element {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-24 lg:py-36" aria-labelledby="hero-heading">
+    <section className="relative overflow-hidden min-h-screen flex items-center" aria-labelledby="hero-heading">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 -z-20">
         <Image
@@ -154,6 +154,7 @@ export function HeroSection(): JSX.Element {
           className="object-cover"
           priority
           sizes="100vw"
+          quality={100}
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>
@@ -236,22 +237,21 @@ export function HeroSection(): JSX.Element {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center min-h-[600px] flex flex-col justify-center">
-     
-          {/* Heading with Typing Animation - Fixed height */}
+      <div className="container mx-auto px-4 lg:px-8 relative z-10 py-12 md:py-20">
+        <div className="mx-auto max-w-4xl">
+          {/* Heading with Typing Animation - LEFT ALIGNED */}
           <motion.div
-            className="mb-6"
+            className="mb-6 text-left"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <h1 
               id="hero-heading" 
-              className="font-display text-4xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1]"
+              className="font-display text-4xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1] text-left"
             >
               Your Trusted{' '}
-              <span className="text-primary block mt-2 min-h-[40px] sm:min-h-[60px] flex items-center justify-center">
+              <span className="text-primary block mt-2 text-left">
                 <TypingAnimation 
                   texts={[
                     "Software Development Company",
@@ -266,9 +266,9 @@ export function HeroSection(): JSX.Element {
             </h1>
           </motion.div>
 
-          {/* Subheading */}
+          {/* Subheading - LEFT ALIGNED */}
           <motion.p 
-            className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto mb-8 text-pretty leading-relaxed min-h-[80px]"
+            className="text-lg sm:text-xl text-gray-200 text-left mb-8 text-pretty leading-relaxed max-w-2xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
@@ -276,9 +276,9 @@ export function HeroSection(): JSX.Element {
             ClickMasters builds custom software, web applications, mobile apps, and ERP solutions. We are a software development company that turns your ideas into reliable, scalable software.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - LEFT ALIGNED */}
           <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20 min-h-[80px]"
+            className="flex flex-col sm:flex-row items-start justify-start gap-4 mb-16 md:mb-20"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
@@ -293,7 +293,7 @@ export function HeroSection(): JSX.Element {
                 asChild
               >
                 <Link href="/admin/login">
-                  <span className="relative z-10">Start Your Project</span>
+                  <span className="relative z-10">Get Started</span>
                   <ArrowRight className="ml-2 h-5 w-5 relative z-10" />
                   <motion.span 
                     className="absolute inset-0 bg-white/20"
@@ -323,9 +323,9 @@ export function HeroSection(): JSX.Element {
             </motion.div>
           </motion.div>
 
-          {/* Stats with fixed positioning */}
+          {/* Stats - LEFT ALIGNED */}
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-10 border-t border-white/20 mt-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-10 border-t border-white/20 text-left"
             role="list" 
             aria-label="Company achievements"
             initial={{ opacity: 0, y: 30 }}
@@ -335,12 +335,12 @@ export function HeroSection(): JSX.Element {
             {stats.map((stat, index) => (
               <motion.div 
                 key={index}
-                className="text-center relative"
+                className="text-left relative"
                 role="listitem"
               >
-                <div className="relative z-10 p-4">
+                <div className="relative z-10 p-4 pl-0">
                   <motion.p
-                    className="text-3xl sm:text-4xl font-bold text-white font-display transition-colors min-h-[48px]"
+                    className="text-3xl sm:text-4xl font-bold text-white font-display transition-colors text-left"
                     animate={{
                       textShadow: [
                         "0 0 2px rgba(249,115,22,0.3)",
@@ -357,7 +357,7 @@ export function HeroSection(): JSX.Element {
                   >
                     <Counter end={stat.end} duration={2} delay={0.2 * index} />
                   </motion.p>
-                  <p className="text-sm text-gray-300 mt-1 min-h-[40px]">
+                  <p className="text-sm text-gray-300 mt-1 text-left">
                     {stat.label}
                   </p>
                 </div>

@@ -342,7 +342,7 @@ const Testimonials: React.FC = () => {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 rounded-full blur-3xl animate-pulse delay-700" />
           </div>
 
-          <div className="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
+          <div className="mt-20 container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
             {/* Header with floating elements */}
             <motion.div
               className="text-center max-w-3xl mx-auto mb-14"
@@ -354,7 +354,7 @@ const Testimonials: React.FC = () => {
              
 
               <h1 className="font-display text-3xl sm:text-5xl lg:text-5xl font-bold text-foreground mb-4">
-                What our <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Clients Says</span>
+                What our <span className="text-primary">Clients Says</span>
               </h1>
               <p className="text-lg text-muted-foreground">
                 Feedback from businesses who chose our software development company for custom software, web apps, and mobile apps.
@@ -370,10 +370,10 @@ const Testimonials: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <AnimatedCounter value="5000" label="Happy Clients" suffix="+" delay={0.1} gradient="from-orange-400 to-orange-500" />
-                <AnimatedCounter value="98" label="Satisfaction Rate" suffix="%" delay={0.2} gradient="from-amber-400 to-orange-500" />
-                <AnimatedCounter value="50" label="Industry Awards" suffix="+" delay={0.3} gradient="from-orange-500 to-amber-500" />
-                <AnimatedCounter value="24" label="Support Team" suffix="/7" delay={0.4} gradient="from-amber-500 to-orange-400" />
+                <AnimatedCounter value="5000" label="Happy Clients" suffix="+" delay={0.1} gradient="from-primary to-primary" />
+                <AnimatedCounter value="98" label="Satisfaction Rate" suffix="%" delay={0.2} gradient="from-primary to-primary" />
+                <AnimatedCounter value="50" label="Industry Awards" suffix="+" delay={0.3} gradient="from-primary to-primary" />
+                <AnimatedCounter value="24" label="Support Team" suffix="/7" delay={0.4} gradient="from-primary to-primary" />
               </motion.div>
             )}
 
