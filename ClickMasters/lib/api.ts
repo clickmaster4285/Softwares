@@ -3,7 +3,7 @@
  * Works with both client and server components
  */
 
-const API_BASE_URL = '';
+const API_BASE_URL = '/apissssss';
 
 export interface ApiErrorResponse {
   message: string;

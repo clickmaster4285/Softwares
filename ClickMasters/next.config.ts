@@ -16,16 +16,10 @@ const nextConfig: NextConfig = {
     unoptimized: process.env.NODE_ENV === "development",
   },
 
-  // API proxy for development
+  // API proxy for development - disabled (using local API routes)
   rewrites: async () => {
     return {
-      beforeFiles: [
-        {
-          source: "/api/:path*",
-          destination:
-            (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000") + "/api/:path*",
-        },
-      ],
+      beforeFiles: [],
     };
   },
 

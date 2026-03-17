@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '@/lib/models/User';
-import dbConnect from '@/lib/mongoose';
-import { getTokenFromCookies, verifyToken, requireAdmin } from '@/lib/auth';
+import User from '../../../lib/models/User';
+import dbConnect from '../../../lib/mongoose';
+import {  getTokenFromCookies, verifyToken, requireAdmin } from '../../../lib/auth';
+
+import { ensureAdminUser } from '../../../lib/ensureAdmin';
 
 // POST /api/users/login
 export async function POST(req: NextRequest) {
+  await ensureAdminUser();
   await dbConnect();
   try {
     const { email, password } = await req.json();
@@ -32,8 +35,12 @@ export async function POST(req: NextRequest) {
     });
     
     return response;
-  } catch (error) {
-    return NextResponse.json({ message: 'Server error' }, { status: 500 });
+  } catch (error: any) {
+    console.error('Login error:', error);
+    if (error.message.includes('not connected')) {
+      return NextResponse.json({ message: 'Database connection failed. Check MONGODB_URI.' }, { status: 500 });
+    }
+    return NextResponse.json({ message: 'Server error: ' + error.message }, { status: 500 });
   }
 }
 

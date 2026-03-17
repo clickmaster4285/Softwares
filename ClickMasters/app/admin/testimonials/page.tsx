@@ -1,4 +1,4 @@
-import AdminTestimonials from "@/src/pages/AdminTestimonials";
+import AdminTestimonials from "@/components/admin/AdminTestimonials";
 
 export default function TestimonialsPage() {
   return <AdminTestimonials />;

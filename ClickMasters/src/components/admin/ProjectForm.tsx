@@ -37,7 +37,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
   const { data: categories = [] } = useQuery<Category[]>({
     queryKey: ['categories'],
     queryFn: async () => {
-      const { apiFetch } = await import('../../lib/api');
+      const { apiFetch } = await import('../../../lib/api');
       const res = await apiFetch('/api/categories', { credentials: 'include' });
       if (!res.ok) throw new Error('Failed to fetch categories');
       return res.json();
@@ -86,7 +86,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
       const formData = new FormData();
       formData.append('image', imageFile);
       try {
-        const { apiFetch } = await import('../../lib/api');
+        const { apiFetch } = await import('../../../lib/api');
         const res = await apiFetch('/api/projects/upload', {
           method: 'POST',
           credentials: 'include',

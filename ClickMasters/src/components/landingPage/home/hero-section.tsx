@@ -238,7 +238,7 @@ export function HeroSection(): JSX.Element {
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10 py-12 md:py-20">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-7xl">
           {/* Heading with Typing Animation - LEFT ALIGNED */}
           <motion.div
             className="mb-6 text-left"

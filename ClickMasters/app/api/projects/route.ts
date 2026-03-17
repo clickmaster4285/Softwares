@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Project from '@/lib/models/Project';
-import Category from '@/lib/models/Category';
-import dbConnect from '@/lib/mongoose';
-import { requireAuth, requireAdmin } from '@/lib/auth';
+import Project from '../../../lib/models/Project';
+import Category from '../../../lib/models/Category';
+import dbConnect from '../../../lib/mongoose';
+import { requireAuth, requireAdmin } from '../../../lib/auth';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import { IncomingForm } from 'formidable';

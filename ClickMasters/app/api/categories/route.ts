@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Category from '@/lib/models/Category';
-import dbConnect from '@/lib/mongoose';
-import { requireAuth, requireAdmin } from '@/lib/auth';
+import Category from '../../../lib/models/Category';
+import dbConnect from '../../../lib/mongoose';
+import { requireAuth, requireAdmin } from '../../../lib/auth';
 
 export async function GET(req: NextRequest) {
   await dbConnect();

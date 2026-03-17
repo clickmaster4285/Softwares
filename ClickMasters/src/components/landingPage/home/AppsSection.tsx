@@ -78,6 +78,8 @@ const res = await apiFetch("projects");
     },
   });
 
+  console.log("projects", projects)
+
   const byCategory = groupProjectsByCategory(projects);
   
   // Get only the first 2 categories

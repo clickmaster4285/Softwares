@@ -1,4 +1,4 @@
-import AdminProjects from "@/src/pages/AdminProjects";
+import AdminProjects from "@/components/admin/AdminProjects";
 
 export default function ProjectsPage() {
   return <AdminProjects />;
