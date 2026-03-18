@@ -33,7 +33,7 @@ export const TeamSection = () => {
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          Our talented team of digital marketing experts brings together diverse skills and experiences to deliver exceptional results for our clients.
+          Our talented team of software developers experts brings together diverse skills and experiences to deliver exceptional results for our clients.
         </motion.p>
 
         <div className="grid md:grid-cols-3 gap-8 perspective-1000">

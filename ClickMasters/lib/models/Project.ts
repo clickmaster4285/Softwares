@@ -8,7 +8,7 @@ const projectSchema = new mongoose.Schema({
   tags: [String],
   status: { type: String, enum: ['live', 'coming-soon', 'maintenance'], default: 'live' },
   thumbnail: { type: String, required: true },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
 }, { timestamps: true });
 
 export default mongoose.models.Project || mongoose.model('Project', projectSchema);

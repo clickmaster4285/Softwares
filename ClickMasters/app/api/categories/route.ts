@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Category from '../../../lib/models/Category';
 import dbConnect from '../../../lib/mongoose';
-import { requireAuth, requireAdmin } from '../../../lib/auth';
 
+// GET all categories
 export async function GET(req: NextRequest) {
   await dbConnect();
   try {
@@ -13,38 +13,54 @@ export async function GET(req: NextRequest) {
   }
 }
 
+// CREATE category
 export async function POST(req: NextRequest) {
   await dbConnect();
   try {
-    const token = await requireAuth(req);
-    requireAdmin(token);
     const data = await req.json();
+
     const category = await Category.create(data);
+
     return NextResponse.json(category, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+// UPDATE category
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   await dbConnect();
   try {
-    const token = await requireAuth(req);
-    requireAdmin(token);
     const data = await req.json();
-    const category = await Category.findByIdAndUpdate(params.id, data, { new: true });
-    return NextResponse.json(category || { message: 'Not found' }, { status: category ? 200 : 404 });
+
+    const category = await Category.findByIdAndUpdate(
+      params.id,
+      data,
+      { new: true }
+    );
+
+    if (!category) {
+      return NextResponse.json({ message: 'Not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(category);
   } catch (err) {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+// DELETE category (soft delete)
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   await dbConnect();
   try {
-    const token = await requireAuth(req);
-    requireAdmin(token);
     await Category.findByIdAndUpdate(params.id, { deleted: true });
+
     return NextResponse.json({ message: 'Deleted' });
   } catch (err) {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });

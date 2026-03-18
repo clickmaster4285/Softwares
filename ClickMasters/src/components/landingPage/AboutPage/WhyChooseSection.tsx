@@ -9,23 +9,23 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Why Choose Section with Slide-up Cards
 export const WhyChooseSection = () => {
-  const reasons = [
-    {
-      icon: '🤝',
-      title: 'Your Dedicated Partner',
-      description: 'At ClickMasters, we\'re not just another agency – we\'re your dedicated partner in helping your business grow online.'
-    },
-    {
-      icon: '🎯',
-      title: 'Full Range of Services',
-      description: 'We offer a broad range of digital marketing services in Pakistan, from social media marketing to SEO, PPC, and more.'
-    },
-    {
-      icon: '⭐',
-      title: 'Trusted by Brands',
-      description: 'We\'re proud to be recognized as one of the leading digital marketing agencies in Pakistan.'
-    }
-  ];
+ const reasons = [
+  {
+    icon: '🤝',
+    title: 'Your Dedicated Partner',
+    description: 'At ClickMasters, we’re not just another company – we’re your dedicated partner in building solutions that grow your business.'
+  },
+  {
+    icon: '🎯',
+    title: 'Full Range of Services',
+    description: 'We provide a complete suite of software development services, from web and mobile apps to custom enterprise solutions.'
+  },
+  {
+    icon: '⭐',
+    title: 'Trusted by Brands',
+    description: 'We’re proud to be recognized as a leading software development company delivering innovative solutions worldwide.'
+  }
+];
 
   return (
     <section className="container mx-auto max-w-6xl px-4 mt-16 mb-16">
@@ -121,11 +121,11 @@ export const WhyChooseSection = () => {
         />
         
         <h3 className="text-xl font-semibold mb-4 relative z-10 text-white">
-          Customized Strategies for Every Business
-        </h3>
-        <p className="relative z-10 text-gray-300">
-          At Clickmasters, we understand that each business has unique needs. As a leading digital marketing agency, we create custom strategies that help your brand stand out online.
-        </p>
+  Tailored Software Solutions for Every Business
+</h3>
+<p className="relative z-10 text-gray-300">
+  At Clickmasters, we understand that each business has unique requirements. As a leading software development company, we create custom solutions that help your business thrive.
+</p>
       </motion.div>
     </section>
   );

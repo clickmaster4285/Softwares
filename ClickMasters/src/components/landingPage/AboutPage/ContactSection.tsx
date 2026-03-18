@@ -54,7 +54,7 @@ export const ContactSection = () => {
             Feel Free to <span className="text-orange-500">Contact Us</span> Anytime!
           </motion.h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-            Whether you need expert advice on SEO, PPC, social media, or any other digital marketing services, our team is here to help.
+           Whether you need expert guidance on web, mobile, cloud, or any other custom software solutions, our team is here to help.
           </p>
         </motion.div>
 

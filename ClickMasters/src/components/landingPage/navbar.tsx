@@ -267,16 +267,17 @@ export function Navbar() {
         {/* Mobile Menu Trigger */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="lg:hidden">
-            <button className={cn(
-              "p-2 transition-colors",
-              isPageLoading
-                ? "text-black/70 hover:text-primary"
-                : isScrolled 
-                  ? "text-black/70 hover:text-primary" 
-                  : "text-white/90 hover:text-primary"
-            )}>
-              <Menu className="h-6 w-6" />
-            </button>
+          <button
+  className={cn(
+    "p-2 transition-colors",
+    // Mobile menu icon color
+    isLightHero
+      ? "text-white/90 hover:text-primary"
+      : "text-black/70 hover:text-primary"
+  )}
+>
+  <Menu className="h-6 w-6" />
+</button>
           </SheetTrigger>
           <SheetContent
             side="right"

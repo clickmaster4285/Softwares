@@ -236,9 +236,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
             <div className={`absolute inset-0 bg-foreground/30 rounded-full blur-md opacity-50`} />
             <Avatar className="relative w-16 h-16 border-2 border-white dark:border-gray-800 shadow-lg">
               <AvatarImage src={testimonial.avatarUrl} alt={testimonial.authorName} />
-              <AvatarFallback className={`bg-foreground/30 text-white font-semibold`}>
-                {testimonial.authorName.slice(0, 2).toUpperCase()}
-              </AvatarFallback>
+             <AvatarFallback className={`bg-foreground/30 text-black font-semibold`}>
+  {(testimonial.authorName ?? 'NA').slice(0, 2).toUpperCase()}
+</AvatarFallback>
             </Avatar>
           </div>
 

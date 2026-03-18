@@ -68,9 +68,9 @@ export const StorySection = () => {
           whileInView="show"
         >
        {[
-  "What started as a small group of passionate developers has grown into Clickmasters, a full-service software development company delivering innovative solutions tailored to our client's needs.",
-  "Over the years, we've partnered with businesses across industries from agile startups to established enterprises, turning ideas into scalable web, mobile, and cloud applications that solve real-world problems.",
-  "Today, Clickmasters is recognized as a trusted partner in software innovation. From automating workflows to developing complex enterprise platforms, we engineer solutions that accelerate growth, boost efficiency, and empower digital transformation."
+  "What began as a small team of passionate coders has evolved into Clickmasters, a full-service software development company delivering cutting-edge solutions designed to meet our clients' unique challenges.",
+  "Over time, we've collaborated with organizations across sectors, from nimble startups to large enterprises, transforming concepts into scalable web, mobile, and cloud applications that address real-world needs.",
+  "Today, Clickmasters is known as a reliable partner in software innovation. From streamlining processes to building complex enterprise systems, we create solutions that drive growth and enhance efficiency."
 ].map((text, index) => (
             <motion.p
               key={index}

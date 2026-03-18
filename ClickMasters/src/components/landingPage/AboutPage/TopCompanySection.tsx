@@ -70,7 +70,7 @@ export const TopCompanySection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Top Digital Marketing Company in <span className="text-orange-500">Pakistan</span>
+          Top Software Development Company in <span className="text-orange-500">Pakistan</span>
         </motion.h2>
         
         <motion.div
@@ -89,9 +89,9 @@ export const TopCompanySection = () => {
           viewport={{ once: true }}
         >
        {[
-  "Clickmasters is a leading software development company in Pakistan, specializing in web and mobile applications, custom software solutions, cloud integrations, and more.",
-  "We are dedicated to helping businesses of all sizes leverage technology to streamline operations, scale efficiently, and achieve their digital transformation goals.",
-"Our expert team delivers high-quality, innovative, and results-driven software solutions. Choose Clickmasters for cutting-edge, scalable development, robust applications, and end-to-end custom tech services."
+  "Clickmasters is a top software development company in Pakistan, focused on web and mobile applications, custom software solutions, cloud integrations, and more.",
+  "We are committed to helping businesses of every size harness technology to optimize operations and grow efficiently.",
+  "Our skilled team provides high-quality, innovative, and outcome-driven software solutions. Choose Clickmasters for advanced, scalable development, robust applications, and full-service custom tech solutions."
 ].map((text, index) => (
             <motion.p
               key={index}

@@ -61,7 +61,7 @@ const AdminTestimonials = () => {
     queryKey: ['testimonials-admin'],
     queryFn: async () => {
       const { apiFetch } = await import('../../lib/api');
-      const res = await apiFetch('/api/testimonials/admin', { credentials: 'include' });
+      const res = await apiFetch('/api/testimonials', { credentials: 'include' });
       if (!res.ok) throw new Error('Failed to fetch testimonials');
       return res.json();
     },

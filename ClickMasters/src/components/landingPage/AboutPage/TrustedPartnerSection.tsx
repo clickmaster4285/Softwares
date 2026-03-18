@@ -144,7 +144,7 @@ export const TrustedPartnerSection = () => {
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            Your Trusted Digital Partner
+            Your Trusted Software Development Partner
           </motion.h2>
           <motion.p
             className="text-lg text-white/90 max-w-2xl mx-auto"
@@ -152,8 +152,8 @@ export const TrustedPartnerSection = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }} // This makes it run only once
             transition={{ delay: 0.3 }}
-          >
-            We empower businesses with Advanced Digital Marketing Solutions for sustained growth and success.
+          > We empower businesses with innovative software solutions for scalable growth and transformation.
+            
           </motion.p>
         </motion.div>
       </div>

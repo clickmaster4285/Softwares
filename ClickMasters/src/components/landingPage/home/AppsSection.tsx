@@ -72,7 +72,7 @@ export function AppsSection() {
   const { data: projects = [], isLoading } = useQuery<Project[]>({
     queryKey: ["projects-public"],
     queryFn: async () => {
-const res = await apiFetch("projects");
+const res = await apiFetch("/api/projects");
       if (!res.ok) throw new Error("Failed to fetch projects");
       return res.json();
     },
@@ -290,7 +290,7 @@ const res = await apiFetch("projects");
           </h2>
           
           <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">
-            Explore custom software, web applications, and digital solutions we have built 
+            Explore custom software, web applications, and software solutions we have built 
             for clients across various industries.
           </p>
         </div>
