@@ -114,7 +114,7 @@ const AdminTestimonials = () => {
   const updateMutation = useMutation({
     mutationFn: async (data: { id: string } & Partial<Testimonial>) => {
       const { apiFetch } = await import('../../lib/api');
-      const res = await apiFetch(`/api/testimonials/${data.id}`, {
+     const res = await apiFetch(`/api/testimonials?id=${data.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -147,10 +147,10 @@ const AdminTestimonials = () => {
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       const { apiFetch } = await import('../../lib/api');
-      const res = await apiFetch(`/api/testimonials/${id}`, {
-        method: 'DELETE',
-        credentials: 'include',
-      });
+   const res = await apiFetch(`/api/testimonials?id=${id}`, {
+  method: 'DELETE',
+  credentials: 'include',
+});
       if (!res.ok) throw new Error('Failed to delete');
       return res.json();
     },

@@ -6,7 +6,7 @@ const projectSchema = new mongoose.Schema({
   url: { type: String, required: true },
   category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
   tags: [String],
-  status: { type: String, enum: ['live', 'coming-soon', 'maintenance'], default: 'live' },
+  status: { type: String, enum: ['live', 'coming-soon', 'maintenance' , 'in-progress' , 'completed'], default: 'live' },
   thumbnail: { type: String, required: true },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
 }, { timestamps: true });
