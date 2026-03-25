@@ -81,7 +81,7 @@ const AdminProjects = () => {
   const updateMutation = useMutation({
     mutationFn: async (data: { id: string; updates: Omit<Project, 'id' | 'createdAt' | 'updatedAt'> }) => {
       const { apiFetch } = await import('../../lib/api');
-      const res = await apiFetch(`/api/projects/${data.id}`, {
+      const res = await apiFetch(`/api/projects?id=${data.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -108,31 +108,36 @@ const AdminProjects = () => {
     setEditingProject(null);
   };
 
+// Delete project
+const deleteMutation = useMutation({
+  mutationFn: async (id: string) => {
+    const { apiFetch } = await import('../../lib/api');
+    const res = await apiFetch(`/api/projects?id=${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+    if (!res.ok) {
+      const error = await res.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to delete project');
+    }
+    return res.json();
+  },
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['projects'] });
+    toast({ title: 'Project deleted successfully' });
+  },
+  onError: (error: any) => 
+    toast({ 
+      title: error.message || 'Failed to delete project', 
+      variant: 'destructive' 
+    }),
+});
 
-  // Delete project
-  const deleteMutation = useMutation({
-    mutationFn: async (id: string) => {
-      const { apiFetch } = await import('../../lib/api');
-      const res = await apiFetch(`/api/projects/${id}`, {
-        method: 'DELETE',
-        credentials: 'include',
-      });
-      if (!res.ok) throw new Error('Failed to delete project');
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['projects'] });
-      toast({ title: 'Project deleted successfully' });
-    },
-    onError: () => toast({ title: 'Failed to delete project', variant: 'destructive' }),
-  });
-
-  const handleDelete = () => {
-    if (!deletingProjectId) return;
-    deleteMutation.mutate(deletingProjectId);
-    setDeletingProjectId(null);
-  };
-
+const handleDelete = () => {
+  if (!deletingProjectId) return;
+  deleteMutation.mutate(deletingProjectId);
+  setDeletingProjectId(null);
+};
   const statusColors = {
     live: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
     'in-progress': 'bg-amber-500/20 text-amber-400 border-amber-500/30',

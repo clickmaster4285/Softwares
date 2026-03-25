@@ -70,3 +70,29 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
+
+
+export async function PUT(req: NextRequest) {
+  await dbConnect();
+  try {
+    const token = await requireAuth(req);
+    requireAdmin(token);
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ message: 'ID is required' }, { status: 400 });
+    }
+
+    const body = await req.json();
+
+    const updated = await Testimonial.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+
+    return NextResponse.json(updated);
+  } catch (err) {
+    return NextResponse.json({ message: 'Server error' }, { status: 500 });
+  }
+}

@@ -34,9 +34,7 @@ interface Category {
   name: string;
   description: string;
   createdAt: string;
-  createdBy?: {
-    email: string;
-  };
+  createdBy?: { email: string };
 }
 
 const AdminCategories = () => {
@@ -48,18 +46,23 @@ const AdminCategories = () => {
   const [description, setDescription] = useState('');
   const { toast } = useToast();
 
-  // Fetch categories from backend
+  // Fetch categories + sort newest first
   const { data: categories = [], isLoading } = useQuery<Category[]>({
     queryKey: ['categories'],
     queryFn: async () => {
       const { apiFetch } = await import('../../lib/api');
       const res = await apiFetch('/api/categories', { credentials: 'include' });
       if (!res.ok) throw new Error('Failed to fetch categories');
-      return res.json();
+      const data = await res.json();
+      
+      // Sort: newest on top
+      return data.sort((a: Category, b: Category) => 
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
     },
   });
 
-  // Reset form when dialog opens/closes
+  // Reset form
   useEffect(() => {
     if (isFormOpen && !editingCategory) {
       setName('');
@@ -89,8 +92,6 @@ const AdminCategories = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] });
       setIsFormOpen(false);
-      setName('');
-      setDescription('');
       toast({ title: 'Category created successfully' });
     },
     onError: (error: Error) => {
@@ -102,7 +103,7 @@ const AdminCategories = () => {
   const updateMutation = useMutation({
     mutationFn: async (data: { id: string; name: string; description: string }) => {
       const { apiFetch } = await import('../../lib/api');
-      const res = await apiFetch(`/api/categories/${data.id}`, {
+      const res = await apiFetch(`/api/categories?id=${data.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -116,10 +117,9 @@ const AdminCategories = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] });
-      queryClient.invalidateQueries({ queryKey: ['projects'] }); // Refresh projects too
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       setEditingCategory(null);
-      setName('');
-      setDescription('');
+      setIsFormOpen(false);
       toast({ title: 'Category updated successfully' });
     },
     onError: (error: Error) => {
@@ -131,19 +131,24 @@ const AdminCategories = () => {
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       const { apiFetch } = await import('../../lib/api');
-      const res = await apiFetch(`/api/categories/${id}`, {
+      const res = await apiFetch(`/api/categories?id=${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
-      if (!res.ok) throw new Error('Failed to delete category');
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Failed to delete category');
+      }
       return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] });
-      queryClient.invalidateQueries({ queryKey: ['projects'] }); // Refresh projects too
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       toast({ title: 'Category deleted successfully' });
     },
-    onError: () => toast({ title: 'Failed to delete category', variant: 'destructive' }),
+    onError: (error: Error) => {
+      toast({ title: error.message || 'Failed to delete category', variant: 'destructive' });
+    },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -154,9 +159,16 @@ const AdminCategories = () => {
     }
 
     if (editingCategory) {
-      updateMutation.mutate({ id: editingCategory._id, name: name.trim(), description: description.trim() });
+      updateMutation.mutate({ 
+        id: editingCategory._id, 
+        name: name.trim(), 
+        description: description.trim() 
+      });
     } else {
-      createMutation.mutate({ name: name.trim(), description: description.trim() });
+      createMutation.mutate({ 
+        name: name.trim(), 
+        description: description.trim() 
+      });
     }
   };
 
@@ -245,14 +257,17 @@ const AdminCategories = () => {
       </div>
 
       {/* Create/Edit Dialog */}
-      <Dialog open={isFormOpen} onOpenChange={(open) => {
-        setIsFormOpen(open);
-        if (!open) {
-          setEditingCategory(null);
-          setName('');
-          setDescription('');
-        }
-      }}>
+      <Dialog 
+        open={isFormOpen} 
+        onOpenChange={(open) => {
+          setIsFormOpen(open);
+          if (!open) {
+            setEditingCategory(null);
+            setName('');
+            setDescription('');
+          }
+        }}
+      >
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>{editingCategory ? 'Edit Category' : 'Create New Category'}</DialogTitle>
@@ -323,7 +338,10 @@ const AdminCategories = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-destructive hover:bg-destructive/90">
+            <AlertDialogAction 
+              onClick={handleDelete} 
+              className="bg-destructive hover:bg-destructive/90"
+            >
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>

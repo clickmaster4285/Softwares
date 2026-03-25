@@ -7,29 +7,31 @@ import path from 'path';
 import { IncomingForm } from 'formidable';
 
 export const config = {
-  api: {
-    bodyParser: false,
-  },
+  api: { bodyParser: false },
 };
 
-// GET all projects (public)
-export async function GET(req: NextRequest) {
+// Helper to get ID from query
+function getId(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  return searchParams.get('id');
+}
+
+// GET all projects
+export async function GET() {
   await dbConnect();
   try {
     const projects = await Project.find()
       .populate('category', 'name description')
-     
       .sort({ createdAt: -1 })
-      .lean(); // safer for serialization
-
+      .lean();
     return NextResponse.json(projects);
   } catch (err: any) {
-    console.error("GET /projects error:", err.message); // log exact error
-    return NextResponse.json({ message: 'Server error', error: err.message }, { status: 500 });
+    console.error("GET /projects error:", err.message);
+    return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
 
-// POST a new project (public)
+// POST new project
 export async function POST(req: NextRequest) {
   await dbConnect();
   try {
@@ -43,9 +45,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Invalid category' }, { status: 400 });
     }
 
-    const project = await Project.create({
-      title, description, url, category, tags, status, thumbnail,
-    });
+    const project = await Project.create({ title, description, url, category, tags, status, thumbnail });
 
     const populated = await Project.findById(project._id)
       .populate('category', 'name description')
@@ -58,33 +58,42 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// PUT project (public)
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+// PUT update project
+export async function PUT(req: NextRequest) {
   await dbConnect();
   try {
+    const id = getId(req);
+    if (!id) return NextResponse.json({ message: 'ID required' }, { status: 400 });
+
     const data = await req.json();
-    const project = await Project.findByIdAndUpdate(params.id, data, { new: true })
+    const project = await Project.findByIdAndUpdate(id, data, { new: true })
       .populate('category', 'name description')
       .populate('createdBy', 'email');
 
-    if (!project) return NextResponse.json({ message: 'Not found' }, { status: 404 });
+    if (!project) return NextResponse.json({ message: 'Project not found' }, { status: 404 });
     return NextResponse.json(project);
-  } catch (err) {
+  } catch (err: any) {
+    console.error("PUT /projects error:", err.message);
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
 
-// DELETE project (public)
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+// DELETE project
+export async function DELETE(req: NextRequest) {
   await dbConnect();
   try {
-    await Project.findByIdAndDelete(params.id);
-    return NextResponse.json({ message: 'Deleted' });
-  } catch (err) {
+    const id = getId(req);
+    if (!id) return NextResponse.json({ message: 'ID required' }, { status: 400 });
+
+    const deleted = await Project.findByIdAndDelete(id);
+    if (!deleted) return NextResponse.json({ message: 'Project not found' }, { status: 404 });
+
+    return NextResponse.json({ message: 'Deleted successfully' });
+  } catch (err: any) {
+    console.error("DELETE /projects error:", err.message);
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
-
 // Upload image (public)
 export async function POST_upload(req: NextRequest) {
   await dbConnect();
