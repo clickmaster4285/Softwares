@@ -118,8 +118,6 @@ const phrases: string[] = [
 ];
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    
     const handleTyping = () => {
       const i = loopNum % phrases.length;
       const fullText = phrases[i];
@@ -140,7 +138,7 @@ const phrases: string[] = [
       }
     };
 
-    timer = setTimeout(handleTyping, typingSpeed);
+    const timer = setTimeout(handleTyping, typingSpeed);
 
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, loopNum, typingSpeed, phrases]);

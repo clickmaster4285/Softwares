@@ -27,10 +27,14 @@ export async function apiFetch<T = any>(
     path.startsWith("/") ? path : `/${path}`
   }`;
 
-  const headers = {
-    "Content-Type": "application/json",
-    ...options?.headers,
-  };
+  const isFormData =
+    typeof FormData !== "undefined" && options?.body instanceof FormData;
+  const headers = isFormData
+    ? { ...options?.headers }
+    : {
+        "Content-Type": "application/json",
+        ...options?.headers,
+      };
 
   try {
     const response = await fetch(url, {

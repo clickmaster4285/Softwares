@@ -695,7 +695,6 @@ const handleServiceHover = (index: number, isHovering: boolean) => {
         <div ref={statsSectionRef} className="mb-20">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
             {stats.map((stat, idx) => {
-              const Icon = stat.icon;
               const suffix = getSuffix(idx);
               
               return (
@@ -807,7 +806,14 @@ const handleServiceHover = (index: number, isHovering: boolean) => {
             <div className="relative">
               <div className="absolute inset-0 bg-orange-500/20 rounded-xl blur-xl opacity-30 group-hover:opacity-60 transition-all duration-500 group-hover:scale-150" />
               <div className="relative text-3xl md:text-4xl flex items-center justify-center transform group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
-                {service.icon}
+                {typeof service.icon === "string" ? (
+                  <span aria-hidden>{service.icon}</span>
+                ) : (
+                  React.createElement(service.icon, {
+                    className: "h-8 w-8 md:h-10 md:w-10 text-orange-500",
+                    "aria-hidden": true,
+                  })
+                )}
               </div>
               <div className="absolute -inset-2 border-2 border-orange-500/0 rounded-full group-hover:border-orange-500/20 group-hover:animate-ping opacity-0 group-hover:opacity-100 transition-all duration-500" />
             </div>

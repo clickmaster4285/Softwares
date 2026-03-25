@@ -112,6 +112,61 @@ const is247 = (statString: string): boolean => {
   return statString.includes('24/7');
 };
 
+function CommunityCountUpSpan({
+  countStarted,
+  start,
+  countUpRef,
+}: {
+  countStarted: boolean;
+  start: () => void;
+  countUpRef: React.Ref<HTMLSpanElement>;
+}) {
+  useEffect(() => {
+    if (countStarted) {
+      start();
+    }
+  }, [countStarted, start]);
+  return <span ref={countUpRef} />;
+}
+
+function CommunityFeatureCountUp({
+  countStarted,
+  numericValue,
+  index,
+  hasPlusSign,
+  isPercent,
+}: {
+  countStarted: boolean;
+  numericValue: number;
+  index: number;
+  hasPlusSign: boolean;
+  isPercent: boolean;
+}) {
+  return (
+    <>
+      <CountUp
+        start={0}
+        end={numericValue}
+        duration={2.5}
+        separator=","
+        delay={0.2 + index * 0.1}
+        useEasing={true}
+        useGrouping={true}
+      >
+        {({ countUpRef, start }) => (
+          <CommunityCountUpSpan
+            countStarted={countStarted}
+            start={start}
+            countUpRef={countUpRef}
+          />
+        )}
+      </CountUp>
+      {hasPlusSign && <span className="text-orange-500 ml-1">+</span>}
+      {isPercent && <span className="text-orange-500 ml-1">%</span>}
+    </>
+  );
+}
+
 export function CommunitySection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -446,28 +501,13 @@ export function CommunitySection() {
                           {is247Format ? (
                             feature.stat
                           ) : numericValue > 0 ? (
-                            <>
-                              <CountUp
-                                start={0}
-                                end={numericValue}
-                                duration={2.5}
-                                separator=","
-                                delay={0.2 + (index * 0.1)}
-                                useEasing={true}
-                                useGrouping={true}
-                              >
-                                {({ countUpRef, start }) => {
-                                  useEffect(() => {
-                                    if (countStarted) {
-                                      start();
-                                    }
-                                  }, [countStarted, start]);
-                                  return <span ref={countUpRef} />;
-                                }}
-                              </CountUp>
-                              {hasPlusSign && <span className="text-orange-500 ml-1">+</span>}
-                              {isPercent && <span className="text-orange-500 ml-1">%</span>}
-                            </>
+                            <CommunityFeatureCountUp
+                              countStarted={countStarted}
+                              numericValue={numericValue}
+                              index={index}
+                              hasPlusSign={hasPlusSign}
+                              isPercent={isPercent}
+                            />
                           ) : (
                             feature.stat
                           )}

@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/providers";
-import { Navbar } from "@/components/landingPage/navbar";
-import { Footer } from "@/components/landingPage/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Leading software development company providing custom solutions for businesses",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.svg",
   },
 };
 

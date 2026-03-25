@@ -1,9 +1,6 @@
-import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import dbConnect from './mongoose';
 import User from './models/User';
-
-let initialized = false;
 
 export async function ensureAdminUser() {
   const ADMIN_EMAIL = process.env.ADMIN_EMAIL;

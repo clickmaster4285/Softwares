@@ -2,13 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import Project from '../../../lib/models/Project';
 import Category from '../../../lib/models/Category';
 import dbConnect from '../../../lib/mongoose';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
-import { IncomingForm } from 'formidable';
-
-export const config = {
-  api: { bodyParser: false },
-};
 
 // Helper to get ID from query
 function getId(req: NextRequest) {
@@ -92,31 +85,5 @@ export async function DELETE(req: NextRequest) {
   } catch (err: any) {
     console.error("DELETE /projects error:", err.message);
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
-  }
-}
-// Upload image (public)
-export async function POST_upload(req: NextRequest) {
-  await dbConnect();
-  try {
-    const form = IncomingForm();
-    const data = await new Promise<{ fields: any; files: any }>((resolve, reject) => {
-      form.parse(req as any, (err, fields, files) => {
-        if (err) reject(err);
-        resolve({ fields, files });
-      });
-    });
-
-    const file = Array.isArray(data.files.image) ? data.files.image[0] : data.files.image;
-    if (!file) return NextResponse.json({ message: 'No file' }, { status: 400 });
-
-    const buffer = await fs.readFile(file.filepath);
-    const filename = Date.now() + '-' + Math.random().toString(36).slice(2) + path.extname(file.originalFilename!);
-    const filepath = path.join(process.cwd(), 'public/uploads', filename);
-    await mkdir(path.dirname(filepath), { recursive: true });
-    await writeFile(filepath, buffer);
-
-    return NextResponse.json({ imageUrl: `/uploads/${filename}` });
-  } catch (err) {
-    return NextResponse.json({ message: 'Upload failed' }, { status: 500 });
   }
 }
