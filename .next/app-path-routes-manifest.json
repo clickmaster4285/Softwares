@@ -1,0 +1,23 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/categories/route": "/api/categories",
+  "/api/init/route": "/api/init",
+  "/api/projects/[id]/route": "/api/projects/[id]",
+  "/api/projects/route": "/api/projects",
+  "/api/projects/upload/route": "/api/projects/upload",
+  "/api/testimonials/route": "/api/testimonials",
+  "/api/users/route": "/api/users",
+  "/admin/categories/page": "/admin/categories",
+  "/admin/dashboard/page": "/admin/dashboard",
+  "/admin/login/page": "/admin/login",
+  "/admin/page": "/admin",
+  "/admin/projects/page": "/admin/projects",
+  "/admin/testimonials/page": "/admin/testimonials",
+  "/projects/[id]/page": "/projects/[id]",
+  "/(landing)/contact-us/page": "/contact-us",
+  "/(landing)/about-us/page": "/about-us",
+  "/(landing)/page": "/",
+  "/(landing)/projects/page": "/projects",
+  "/(landing)/services/page": "/services",
+  "/(landing)/testimonials/page": "/testimonials"
+}
