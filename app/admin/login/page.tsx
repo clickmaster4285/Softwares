@@ -1,4 +1,4 @@
-import AdminLogin from "@/src/components/admin/AdminLogin";
+import AdminLogin from '@/src/components/admin/AdminLogin';
 
 export default function LoginPage() {
   return <AdminLogin />;

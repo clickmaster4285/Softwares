@@ -7,16 +7,20 @@ import { useRouter } from 'next/navigation'; // Import useRouter from next/navig
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-
 // Contact Section with Floating Elements
 export const ContactSection = () => {
   const router = useRouter(); // Initialize router
-  
+
   const contactInfo = [
-    { icon: '📍', title: 'Address', value: 'Main PWD Rd, PWD Housing Society Sector A PWD Society, Islamabad, Punjab 45700, Pakistan' },
+    {
+      icon: '📍',
+      title: 'Address',
+      value:
+        'Main PWD Rd, PWD Housing Society Sector A PWD Society, Islamabad, Punjab 45700, Pakistan',
+    },
     { icon: '📧', title: 'Email', value: 'marketing@clickmasters.pk' },
     { icon: '📞', title: 'Customer Support', value: '0332-5394285' },
-    { icon: '💬', title: 'Consultation', value: '0333-1116842' }
+    { icon: '💬', title: 'Consultation', value: '0333-1116842' },
   ];
 
   const handleNavigation = () => {
@@ -34,10 +38,10 @@ export const ContactSection = () => {
         transition={{
           duration: 10,
           repeat: Infinity,
-          ease: "linear"
+          ease: 'linear',
         }}
       />
-      
+
       <div className="container mx-auto max-w-6xl px-4 relative z-10">
         <motion.div
           className="text-center mb-12"
@@ -54,7 +58,8 @@ export const ContactSection = () => {
             Feel Free to <span className="text-primary">Contact Us</span> Anytime!
           </motion.h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-           Whether you need expert guidance on web, mobile, cloud, or any other custom software solutions, our team is here to help.
+            Whether you need expert guidance on web, mobile, cloud, or any other custom software
+            solutions, our team is here to help.
           </p>
         </motion.div>
 
@@ -69,8 +74,8 @@ export const ContactSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{
                 scale: 1.05,
-              boxShadow: "0 30px 40px -20px rgba(59,130,246,0.4)",
-                backgroundColor: "#ffffff"
+                boxShadow: '0 30px 40px -20px rgba(59,130,246,0.4)',
+                backgroundColor: '#ffffff',
               }}
             >
               <motion.h3
@@ -81,12 +86,12 @@ export const ContactSection = () => {
                   className="text-primary mr-2 text-xl"
                   animate={{
                     rotate: [0, 10, -10, 0],
-                    scale: [1, 1.2, 1]
+                    scale: [1, 1.2, 1],
                   }}
                   transition={{
                     duration: 2,
                     repeat: Infinity,
-                    delay: index * 0.3
+                    delay: index * 0.3,
                   }}
                 >
                   {info.icon}
@@ -103,7 +108,7 @@ export const ContactSection = () => {
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 200, delay: 0.4 }}
+          transition={{ type: 'spring', stiffness: 200, delay: 0.4 }}
         >
           <motion.button
             onClick={handleNavigation} // Add onClick handler

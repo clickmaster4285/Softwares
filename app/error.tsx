@@ -3,13 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error;
-  reset: () => void;
-}) {
+export default function Error({ error, reset }: { error: Error; reset: () => void }) {
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -19,18 +13,16 @@ export default function Error({
       <div className="max-w-md w-full space-y-8 text-center">
         <div className="text-6xl">⚠️</div>
         <h2 className="text-2xl font-bold text-destructive">Something went wrong!</h2>
-        <p className="text-muted-foreground">
-          An unexpected error occurred. Please try again.
-        </p>
+        <p className="text-muted-foreground">An unexpected error occurred. Please try again.</p>
         <div className="space-x-4">
-          <button 
-            onClick={reset} 
+          <button
+            onClick={reset}
             className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
           >
             Try again
           </button>
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="px-6 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
           >
             Go Home
@@ -40,4 +32,3 @@ export default function Error({
     </div>
   );
 }
-

@@ -9,6 +9,8 @@ function getId(req: NextRequest) {
   return searchParams.get('id');
 }
 
+export const revalidate = 3600;
+
 // GET all projects
 export async function GET() {
   try {
@@ -16,10 +18,11 @@ export async function GET() {
     const projects = await Project.find()
       .populate('category', 'name description')
       .sort({ createdAt: -1 })
+      .limit(20)
       .lean();
     return NextResponse.json(projects);
   } catch (err: any) {
-    console.error("GET /projects error:", err.message);
+    console.error('GET /projects error:', err.message);
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
@@ -29,7 +32,7 @@ export async function POST(req: NextRequest) {
   try {
     await dbConnect();
     const { title, description, url, category, tags, status, thumbnail } = await req.json();
-    
+
     if (!title || !description || !url || !category || !thumbnail) {
       return NextResponse.json({ message: 'Missing fields' }, { status: 400 });
     }
@@ -39,14 +42,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Invalid category' }, { status: 400 });
     }
 
-    const project = await Project.create({ 
-      title, 
-      description, 
-      url, 
-      category, 
-      tags, 
-      status, 
-      thumbnail 
+    const project = await Project.create({
+      title,
+      description,
+      url,
+      category,
+      tags,
+      status,
+      thumbnail,
     });
 
     const populated = await Project.findById(project._id)
@@ -55,7 +58,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(populated, { status: 201 });
   } catch (err: any) {
-    console.error("POST /projects error:", err.message);
+    console.error('POST /projects error:', err.message);
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
@@ -70,26 +73,22 @@ export async function PUT(req: NextRequest) {
     }
 
     const data = await req.json();
-    
+
     // ✅ FIXED: Use returnDocument: 'after' instead of new: true
-    const project = await Project.findByIdAndUpdate(
-      id, 
-      data, 
-      { 
-        returnDocument: 'after',
-        runValidators: true 
-      }
-    )
+    const project = await Project.findByIdAndUpdate(id, data, {
+      returnDocument: 'after',
+      runValidators: true,
+    })
       .populate('category', 'name description')
       .populate('createdBy', 'email');
 
     if (!project) {
       return NextResponse.json({ message: 'Project not found' }, { status: 404 });
     }
-    
+
     return NextResponse.json(project);
   } catch (err: any) {
-    console.error("PUT /projects error:", err.message);
+    console.error('PUT /projects error:', err.message);
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
@@ -110,7 +109,7 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({ message: 'Deleted successfully' });
   } catch (err: any) {
-    console.error("DELETE /projects error:", err.message);
+    console.error('DELETE /projects error:', err.message);
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }

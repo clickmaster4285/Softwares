@@ -23,60 +23,62 @@ interface CoreValueCardProps {
 
 export const CoreValuesSection = () => {
   const values: ValueItem[] = [
-    { 
-      icon: '🏆', 
-      title: 'Excellence', 
+    {
+      icon: '🏆',
+      title: 'Excellence',
       description: 'We pursue excellence in everything we do, constantly raising the bar.',
       features: [
         'Continuous Improvement',
         'Quality First Approach',
         'Best Practices Implementation',
-        'Performance Optimization'
-      ]
+        'Performance Optimization',
+      ],
     },
-    { 
-      icon: '🤝', 
-      title: 'Integrity', 
-      description: 'We believe in honest, transparent communication and ethical business practices.',
+    {
+      icon: '🤝',
+      title: 'Integrity',
+      description:
+        'We believe in honest, transparent communication and ethical business practices.',
       features: [
         'Transparent Communication',
         'Ethical Decision Making',
         'Client-First Mindset',
-        'Honest Feedback Culture'
-      ]
+        'Honest Feedback Culture',
+      ],
     },
-    { 
-      icon: '💡', 
-      title: 'Innovation', 
+    {
+      icon: '💡',
+      title: 'Innovation',
       description: 'We embrace change and continuously innovate to deliver cutting-edge solutions.',
       features: [
         'Creative Problem Solving',
         'Latest Technology Adoption',
         'R&D Investment',
-        'Forward Thinking'
-      ]
+        'Forward Thinking',
+      ],
     },
-    { 
-      icon: '📈', 
-      title: 'Results', 
-      description: 'We are obsessed with delivering measurable results that drive real business growth.',
+    {
+      icon: '📈',
+      title: 'Results',
+      description:
+        'We are obsessed with delivering measurable results that drive real business growth.',
       features: [
         'Data-Driven Decisions',
         'ROI Focused',
         'Performance Tracking',
-        'Goal Achievement'
-      ]
-    }
+        'Goal Achievement',
+      ],
+    },
   ];
 
   return (
     <section className="bg-gray-50 py-24 relative overflow-hidden">
       {/* Background Pattern - matching Features component */}
       <div className="absolute inset-0">
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.1]"
           style={{
-            backgroundSize: '32px 32px'
+            backgroundSize: '32px 32px',
           }}
         />
       </div>
@@ -92,16 +94,15 @@ export const CoreValuesSection = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             <span className="text-gray-900">The Principles That </span>
-            <span className="bg-primary bg-clip-text text-transparent">
-              Drive Us Forward
-            </span>
+            <span className="bg-primary bg-clip-text text-transparent">Drive Us Forward</span>
           </h2>
 
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            These core values shape our culture, guide our decisions, and define how we work with our clients and each other.
+            These core values shape our culture, guide our decisions, and define how we work with
+            our clients and each other.
           </p>
         </motion.div>
-        
+
         {/* Values Grid - matching FeatureCard design */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {values.map((value, index) => (
@@ -129,7 +130,7 @@ const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
     >
       <div className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-primary transition-all duration-300 h-full flex flex-col relative overflow-hidden shadow-sm hover:shadow-xl">
         {/* Icon */}
-        <motion.div 
+        <motion.div
           className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 text-4xl group-hover:scale-110 transition-transform duration-300"
           animate={{
             rotate: [0, 5, -5, 0],
@@ -138,7 +139,7 @@ const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
             duration: 3,
             repeat: Infinity,
             repeatDelay: 2,
-            delay: index * 0.2
+            delay: index * 0.2,
           }}
         >
           {value.icon}
@@ -146,7 +147,7 @@ const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
 
         {/* Title */}
         <h3 className="text-xl font-bold text-gray-900 mb-2">{value.title}</h3>
-        
+
         {/* Description */}
         <p className="text-sm text-gray-600 mb-4">{value.description}</p>
 

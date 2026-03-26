@@ -6,7 +6,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Project, Category } from '../../../lib/storage';
 import { resolveImageUrl } from '../../../lib/utils';
@@ -77,7 +83,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
   };
 
   const handleRemoveTag = (tagToRemove: string) => {
-    setTags(tags.filter(tag => tag !== tagToRemove));
+    setTags(tags.filter((tag) => tag !== tagToRemove));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -189,7 +195,9 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
             </SelectTrigger>
             <SelectContent>
               {categories.length === 0 ? (
-                <SelectItem value="none" disabled>No categories available. Create one first.</SelectItem>
+                <SelectItem value="none" disabled>
+                  No categories available. Create one first.
+                </SelectItem>
               ) : (
                 categories.map((cat) => (
                   <SelectItem key={cat._id} value={cat._id}>
@@ -229,16 +237,20 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
               id="thumbnail"
               type="file"
               accept="image/*"
-              onChange={e => setImageFile(e.target.files?.[0] || null)}
+              onChange={(e) => setImageFile(e.target.files?.[0] || null)}
             />
-            {imageFile && <p className="text-xs text-muted-foreground">Selected: {imageFile.name}</p>}
+            {imageFile && (
+              <p className="text-xs text-muted-foreground">Selected: {imageFile.name}</p>
+            )}
             <Input
               className="mt-2"
               value={thumbnail}
-              onChange={e => setThumbnail(e.target.value)}
+              onChange={(e) => setThumbnail(e.target.value)}
               placeholder="Or paste image URL"
             />
-            <p className="text-xs text-muted-foreground">Upload an image or paste a URL. Leave empty for default placeholder.</p>
+            <p className="text-xs text-muted-foreground">
+              Upload an image or paste a URL. Leave empty for default placeholder.
+            </p>
           </div>
           <div className="rounded-lg border border-border/60 bg-secondary/40 overflow-hidden">
             <img

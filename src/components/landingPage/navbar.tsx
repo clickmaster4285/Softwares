@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, ChevronDown, X } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
-import { apiFetch } from "@/lib/api";
-import { getCategoryName } from "@/lib/utils";
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Menu, ChevronDown, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useQuery } from '@tanstack/react-query';
+import { apiFetch } from '@/lib/api';
+import { getCategoryName } from '@/lib/utils';
 
 // Types for dropdown data
 interface ProjectItem {
@@ -30,7 +30,7 @@ interface Project {
   thumbnail?: string;
   url?: string;
   category: string | { _id: string; name: string };
-  status: "live" | "in-progress" | "completed";
+  status: 'live' | 'in-progress' | 'completed';
   technologies?: string[];
   client?: string;
   completionDate?: string;
@@ -46,15 +46,15 @@ export function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const isHome = pathname === "/";
-  const isAbout = pathname === "/about-us";
+  const isHome = pathname === '/';
+  const isAbout = pathname === '/about-us';
 
   // Fetch projects from API for Solutions dropdown
   const { data: projects = [], isLoading: isLoadingProjects } = useQuery<Project[]>({
-    queryKey: ["projects-public"],
+    queryKey: ['projects-public'],
     queryFn: async () => {
-      const res = await apiFetch("/api/projects");
-      if (!res.ok) throw new Error("Failed to fetch projects");
+      const res = await apiFetch('/api/projects');
+      if (!res.ok) throw new Error('Failed to fetch projects');
       return res.json();
     },
   });
@@ -62,21 +62,21 @@ export function Navbar() {
   // Group projects by category
   const groupedProjects = projects.reduce((acc: ProjectCategory[], project) => {
     const categoryName = getCategoryName(project.category);
-    const existingCategory = acc.find(cat => cat.category === categoryName);
-    
+    const existingCategory = acc.find((cat) => cat.category === categoryName);
+
     const projectItem: ProjectItem = {
       id: project._id,
       title: project.title,
       url: project.url || `/projects/${project._id}`, // Use external URL if exists, otherwise internal
-      externalUrl: project.url // Store external URL separately if needed
+      externalUrl: project.url, // Store external URL separately if needed
     };
-    
+
     if (existingCategory) {
       existingCategory.items.push(projectItem);
     } else {
       acc.push({
         category: categoryName,
-        items: [projectItem]
+        items: [projectItem],
       });
     }
     return acc;
@@ -110,8 +110,8 @@ export function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const handleMouseEnter = (dropdown: string) => {
@@ -130,20 +130,17 @@ export function Navbar() {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
       }
     };
 
     if (activeDropdown) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [activeDropdown]);
 
@@ -156,33 +153,30 @@ export function Navbar() {
   };
 
   // During page loading, show black text and logo
-  const navStyle = isPageLoading 
-    ? "bg-white border-b border-black/10 shadow-sm"
+  const navStyle = isPageLoading
+    ? 'bg-white border-b border-black/10 shadow-sm'
     : isScrolled
-      ? "bg-white/95 border-b border-black/10 shadow-sm"
-      : "bg-white/10 backdrop-blur-md border-b border-transparent";
+      ? 'bg-white/95 border-b border-black/10 shadow-sm'
+      : 'bg-white/10 backdrop-blur-md border-b border-transparent';
 
-  const logoToShow = isPageLoading || !isLightHero ? "/logo.png" : "/logo-white.png";
-  
+  const logoToShow = isPageLoading || !isLightHero ? '/logo.png' : '/logo-white.png';
+
   const linkStyle = (isActive: boolean) => {
     if (isPageLoading) {
-      return isActive ? "text-primary font-bold" : "text-black/70 hover:text-primary";
+      return isActive ? 'text-primary font-bold' : 'text-black/70 hover:text-primary';
     }
     if (isActive) {
-      return "text-primary font-bold";
+      return 'text-primary font-bold';
     }
     if (isLightHero) {
-      return "text-white/90 hover:text-primary";
+      return 'text-white/90 hover:text-primary';
     }
-    return "text-black/70 hover:text-primary";
+    return 'text-black/70 hover:text-primary';
   };
 
   return (
     <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 w-full transition-all duration-300",
-        navStyle
-      )}
+      className={cn('fixed inset-x-0 top-0 z-50 w-full transition-all duration-300', navStyle)}
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
@@ -191,11 +185,7 @@ export function Navbar() {
           className="flex items-center gap-2 transition-opacity hover:opacity-90"
           onClick={closeDropdowns}
         >
-          <img 
-            src={logoToShow}
-            className="w-48 md:w-64 h-auto" 
-            alt="ClickMasters" 
-          />
+          <img src={logoToShow} className="w-48 md:w-64 h-auto" alt="ClickMasters" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -204,38 +194,39 @@ export function Navbar() {
           <Link
             href="/"
             onClick={closeDropdowns}
-            className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/"))
-            )}
+            className={cn('text-sm font-medium transition-colors', linkStyle(isActivePath('/')))}
           >
             Home
           </Link>
 
           {/* Solutions Dropdown - Hover with click navigation */}
-          <div 
+          <div
             className="relative"
-            onMouseEnter={() => handleMouseEnter("solutions")}
+            onMouseEnter={() => handleMouseEnter('solutions')}
             onMouseLeave={handleMouseLeave}
           >
             <button
               onClick={handleSolutionsClick}
               className={cn(
-                "text-sm font-medium transition-colors flex items-center gap-1",
-                activeDropdown === "solutions" 
-                  ? isScrolled ? "text-primary" : "text-primary"
+                'text-sm font-medium transition-colors flex items-center gap-1',
+                activeDropdown === 'solutions'
+                  ? isScrolled
+                    ? 'text-primary'
+                    : 'text-primary'
                   : isPageLoading
-                    ? "text-black/70 hover:text-primary"
+                    ? 'text-black/70 hover:text-primary'
                     : isLightHero
-                      ? "text-white/90 hover:text-primary"
-                      : "text-black/70 hover:text-primary"
+                      ? 'text-white/90 hover:text-primary'
+                      : 'text-black/70 hover:text-primary'
               )}
             >
               Solutions
-              <ChevronDown className={cn(
-                "h-4 w-4 transition-transform",
-                activeDropdown === "solutions" && "rotate-180"
-              )} />
+              <ChevronDown
+                className={cn(
+                  'h-4 w-4 transition-transform',
+                  activeDropdown === 'solutions' && 'rotate-180'
+                )}
+              />
             </button>
           </div>
 
@@ -244,8 +235,8 @@ export function Navbar() {
             href="/services"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/services"))
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/services'))
             )}
           >
             Services
@@ -255,8 +246,8 @@ export function Navbar() {
             href="/about-us"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/about-us"))
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/about-us'))
             )}
           >
             About Us
@@ -266,8 +257,8 @@ export function Navbar() {
             href="/contact-us"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/contact-us"))
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/contact-us'))
             )}
           >
             Contact Us
@@ -277,8 +268,8 @@ export function Navbar() {
             href="/testimonials"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/testimonials"))
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/testimonials'))
             )}
           >
             Testimonials
@@ -288,14 +279,16 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <Link href="/admin/login" onClick={closeDropdowns}>
-            <button className={cn(
-              "px-5 py-2 text-sm font-medium transition-colors duration-300",
-              isPageLoading
-                ? "text-white bg-primary hover:bg-primary/90"
-                : isScrolled
-                  ? "text-white rounded-md bg-primary hover:bg-primary/90"
-                  : "text-white bg-primary rounded-md hover:bg-primary/90"
-            )}>
+            <button
+              className={cn(
+                'px-5 py-2 text-sm font-medium transition-colors duration-300',
+                isPageLoading
+                  ? 'text-white bg-primary hover:bg-primary/90'
+                  : isScrolled
+                    ? 'text-white rounded-md bg-primary hover:bg-primary/90'
+                    : 'text-white bg-primary rounded-md hover:bg-primary/90'
+              )}
+            >
               Sign In
             </button>
           </Link>
@@ -306,10 +299,10 @@ export function Navbar() {
           <SheetTrigger asChild className="lg:hidden">
             <button
               className={cn(
-                "p-2 transition-colors",
+                'p-2 transition-colors',
                 isLightHero
-                  ? "text-white/90 hover:text-primary"
-                  : "text-black/70 hover:text-primary"
+                  ? 'text-white/90 hover:text-primary'
+                  : 'text-black/70 hover:text-primary'
               )}
             >
               <Menu className="h-6 w-6" />
@@ -333,10 +326,10 @@ export function Navbar() {
                     href="/"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     Home
@@ -356,10 +349,10 @@ export function Navbar() {
                     href="/services"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/services")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/services')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     Services
@@ -369,10 +362,10 @@ export function Navbar() {
                     href="/about-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/about-us")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/about-us')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     About Us
@@ -382,10 +375,10 @@ export function Navbar() {
                     href="/contact-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/contact-us")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/contact-us')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     Contact Us
@@ -395,10 +388,10 @@ export function Navbar() {
                     href="/testimonials"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/testimonials")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/testimonials')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     Testimonials
@@ -420,8 +413,8 @@ export function Navbar() {
       </div>
 
       {/* Full-width Dropdown Menu for Solutions */}
-      {activeDropdown === "solutions" && !isPageLoading && (
-        <div 
+      {activeDropdown === 'solutions' && !isPageLoading && (
+        <div
           ref={dropdownRef}
           onMouseEnter={() => {
             if (hoverTimeoutRef.current) {
@@ -493,7 +486,13 @@ interface MobileDropdownProps {
   onProjectClick: (project: ProjectItem) => void;
 }
 
-function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }: MobileDropdownProps) {
+function MobileDropdown({
+  title,
+  items,
+  isLoading,
+  onLinkClick,
+  onProjectClick,
+}: MobileDropdownProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const renderItems = () => {
@@ -509,9 +508,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }
       <div className="pl-4 space-y-4 mt-3">
         {items.map((section, idx) => (
           <div key={idx}>
-            <h4 className="text-sm font-semibold text-primary mb-2">
-              {section.category}
-            </h4>
+            <h4 className="text-sm font-semibold text-primary mb-2">{section.category}</h4>
             <ul className="space-y-2">
               {section.items.map((item, itemIdx) => (
                 <li key={itemIdx}>
@@ -554,10 +551,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }
       >
         {title}
         <ChevronDown
-          className={cn(
-            "h-4 w-4 transition-transform duration-300",
-            isExpanded && "rotate-180"
-          )}
+          className={cn('h-4 w-4 transition-transform duration-300', isExpanded && 'rotate-180')}
         />
       </button>
       {isExpanded && renderItems()}

@@ -22,28 +22,30 @@ const AdminDashboard = () => {
   });
 
   // Calculate stats
-  const liveCount = projects.filter(p => p.status === 'live').length;
-  const inProgressCount = projects.filter(p => p.status === 'in-progress').length;
-  const completedCount = projects.filter(p => p.status === 'completed').length;
+  const liveCount = projects.filter((p) => p.status === 'live').length;
+  const inProgressCount = projects.filter((p) => p.status === 'in-progress').length;
+  const completedCount = projects.filter((p) => p.status === 'completed').length;
   const totalProjects = projects.length;
 
   // Get categories and their counts
-  const categoryNames = Array.from(new Set(projects.map(p => getCategoryName(p.category))));
-  const categoryStats = categoryNames.map(catName => ({
-    name: catName,
-    count: projects.filter(p => getCategoryName(p.category) === catName).length,
-    live: projects.filter(p => getCategoryName(p.category) === catName && p.status === 'live').length,
-  })).sort((a, b) => b.count - a.count);
+  const categoryNames = Array.from(new Set(projects.map((p) => getCategoryName(p.category))));
+  const categoryStats = categoryNames
+    .map((catName) => ({
+      name: catName,
+      count: projects.filter((p) => getCategoryName(p.category) === catName).length,
+      live: projects.filter((p) => getCategoryName(p.category) === catName && p.status === 'live')
+        .length,
+    }))
+    .sort((a, b) => b.count - a.count);
 
   // Get recent projects
-  const recentProjects = projects.sort((a, b) => 
-    new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-  ).slice(0, 5);
+  const recentProjects = projects
+    .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+    .slice(0, 5);
 
   // Calculate completion percentage
-  const completionPercentage = totalProjects > 0 
-    ? Math.round((completedCount / totalProjects) * 100) 
-    : 0;
+  const completionPercentage =
+    totalProjects > 0 ? Math.round((completedCount / totalProjects) * 100) : 0;
 
   // Get stats array
   const stats = [
@@ -114,7 +116,9 @@ const AdminDashboard = () => {
               <h2 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                 Dashboard
               </h2>
-              <p className="text-muted-foreground mt-2">Welcome back! Here's your portfolio overview.</p>
+              <p className="text-muted-foreground mt-2">
+                Welcome back! Here's your portfolio overview.
+              </p>
             </div>
           </div>
         </motion.div>
@@ -127,18 +131,16 @@ const AdminDashboard = () => {
           animate="visible"
         >
           {stats.map((stat, index) => (
-            <motion.div
-              key={stat.title}
-              variants={itemVariants}
-              className="group"
-            >
+            <motion.div key={stat.title} variants={itemVariants} className="group">
               <Card className="glass-card border-border/50 overflow-hidden relative hover:shadow-lg transition-all duration-300">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
                   <CardTitle className="text-sm font-medium text-muted-foreground">
                     {stat.title}
                   </CardTitle>
-                  <div className={`p-2 rounded-lg ${stat.bgColor} group-hover:scale-110 transition-transform duration-300`}>
+                  <div
+                    className={`p-2 rounded-lg ${stat.bgColor} group-hover:scale-110 transition-transform duration-300`}
+                  >
                     <stat.icon className={`h-4 w-4 ${stat.color}`} />
                   </div>
                 </CardHeader>
@@ -188,7 +190,9 @@ const AdminDashboard = () => {
                   </div>
                 ) : recentProjects.length === 0 ? (
                   <div className="text-center py-8">
-                    <p className="text-muted-foreground">No projects yet. Create your first project!</p>
+                    <p className="text-muted-foreground">
+                      No projects yet. Create your first project!
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-3">
@@ -210,7 +214,11 @@ const AdminDashboard = () => {
                             </Badge>
                           </div>
                           <p className="text-xs text-muted-foreground mt-1">
-                            {new Date(project.updatedAt).toLocaleDateString()} at {new Date(project.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            {new Date(project.updatedAt).toLocaleDateString()} at{' '}
+                            {new Date(project.updatedAt).toLocaleTimeString([], {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
                           </p>
                         </div>
                         <span
@@ -218,11 +226,13 @@ const AdminDashboard = () => {
                             project.status === 'live'
                               ? 'bg-emerald-500/20 text-emerald-400'
                               : project.status === 'in-progress'
-                              ? 'bg-amber-500/20 text-amber-400'
-                              : 'bg-primary/20 text-primary'
+                                ? 'bg-amber-500/20 text-amber-400'
+                                : 'bg-primary/20 text-primary'
                           }`}
                         >
-                          {project.status === 'in-progress' ? 'In Progress' : project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+                          {project.status === 'in-progress'
+                            ? 'In Progress'
+                            : project.status.charAt(0).toUpperCase() + project.status.slice(1)}
                         </span>
                       </motion.div>
                     ))}
@@ -278,7 +288,10 @@ const AdminDashboard = () => {
                               />
                             </div>
                             <span className="text-xs text-muted-foreground w-8 text-right">
-                              {totalProjects > 0 ? Math.round((cat.count / totalProjects) * 100) : 0}%
+                              {totalProjects > 0
+                                ? Math.round((cat.count / totalProjects) * 100)
+                                : 0}
+                              %
                             </span>
                           </div>
                           {cat.live > 0 && (

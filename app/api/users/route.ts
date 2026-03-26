@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../../../lib/models/User';
 import dbConnect from '../../../lib/mongoose';
-import {  getTokenFromCookies, verifyToken, requireAdmin } from '../../../lib/auth';
+import { getTokenFromCookies, verifyToken, requireAdmin } from '../../../lib/auth';
 
 import { ensureAdminUser } from '../../../lib/ensureAdmin';
 
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL!;
-    
+
     if (email !== ADMIN_EMAIL) {
       return NextResponse.json({ message: 'Only admin can login' }, { status: 403 });
     }
@@ -24,21 +24,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Invalid credentials' }, { status: 400 });
     }
 
-    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET!, { expiresIn: '7d' });
-    
-    const response = NextResponse.json({ id: user._id, email: user.email });
-    response.cookies.set('token', token, { 
-      httpOnly: true, 
-      sameSite: 'lax', 
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 7 * 24 * 60 * 60 
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET!, {
+      expiresIn: '7d',
     });
-    
+
+    const response = NextResponse.json({ id: user._id, email: user.email });
+    response.cookies.set('token', token, {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 7 * 24 * 60 * 60,
+    });
+
     return response;
   } catch (error: any) {
     console.error('Login error:', error);
     if (error.message.includes('not connected')) {
-      return NextResponse.json({ message: 'Database connection failed. Check MONGODB_URI.' }, { status: 500 });
+      return NextResponse.json(
+        { message: 'Database connection failed. Check MONGODB_URI.' },
+        { status: 500 }
+      );
     }
     return NextResponse.json({ message: 'Server error: ' + error.message }, { status: 500 });
   }

@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setLoading(true);
         setError(null);
         const response = await apiFetch('/api/users/me', { credentials: 'include' });
-        
+
         if (response.ok) {
           const userData = await response.json();
           setIsAuthenticated(true);

@@ -18,7 +18,7 @@ const generateEmailTemplate = (name: string, email: string, message: string) => 
   const currentDate = new Date().toLocaleString('en-PK', {
     timeZone: 'Asia/Karachi',
     dateStyle: 'full',
-    timeStyle: 'medium'
+    timeStyle: 'medium',
   });
 
   return `
@@ -296,10 +296,7 @@ export async function POST(req: NextRequest) {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { message: 'Invalid email format' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'Invalid email format' }, { status: 400 });
     }
 
     // Create transporter
@@ -337,7 +334,7 @@ export async function POST(req: NextRequest) {
       headers: {
         'X-Submitter-Email': email,
         'X-Submitter-Name': name,
-        'Priority': 'normal',
+        Priority: 'normal',
       },
     };
 
@@ -355,23 +352,22 @@ export async function POST(req: NextRequest) {
     // Send both emails
     const [adminInfo, userInfo] = await Promise.all([
       transporter.sendMail(adminMailOptions),
-      transporter.sendMail(userMailOptions)
+      transporter.sendMail(userMailOptions),
     ]);
 
     console.log('Admin email sent:', adminInfo.messageId);
     console.log('Auto-reply sent:', userInfo.messageId);
 
     return NextResponse.json(
-      { 
+      {
         message: 'Email sent successfully',
-        success: true 
+        success: true,
       },
       { status: 200 }
     );
-
   } catch (error: any) {
     console.error('Error sending email:', error);
-    
+
     // More detailed error response
     let errorMessage = 'Failed to send message';
     if (error.code === 'EAUTH') {
@@ -383,9 +379,9 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { 
+      {
         message: errorMessage,
-        success: false 
+        success: false,
       },
       { status: 500 }
     );

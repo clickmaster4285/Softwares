@@ -30,10 +30,10 @@ const AdminLogin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     const success = await login(email, password);
     setIsLoading(false);
-    
+
     if (success) {
       toast({
         title: 'Welcome back',
@@ -59,7 +59,7 @@ const AdminLogin = () => {
         className="object-cover opacity-60"
         priority
       />
-      
+
       {/* Dark overlay for better contrast */}
       <div className="absolute inset-0 bg-black/50" />
 
@@ -82,14 +82,8 @@ const AdminLogin = () => {
         <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-8 shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
-         
-            
-            <h1 className="mt-10 text-2xl font-semibold text-white mb-1">
-              Admin Login
-            </h1>
-            <p className="text-sm text-white/60">
-              Sign in to access the dashboard
-            </p>
+            <h1 className="mt-10 text-2xl font-semibold text-white mb-1">Admin Login</h1>
+            <p className="text-sm text-white/60">Sign in to access the dashboard</p>
           </div>
 
           {/* Form */}
@@ -154,8 +148,6 @@ const AdminLogin = () => {
               )}
             </Button>
           </form>
-
-        
         </div>
 
         {/* Footer */}

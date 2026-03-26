@@ -23,16 +23,13 @@ export async function apiFetch<T = any>(
   path: string,
   options?: RequestInit & { baseURL?: string }
 ): Promise<Response> {
-  const url = `${options?.baseURL || API_BASE_URL}${
-    path.startsWith("/") ? path : `/${path}`
-  }`;
+  const url = `${options?.baseURL || API_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`;
 
-  const isFormData =
-    typeof FormData !== "undefined" && options?.body instanceof FormData;
+  const isFormData = typeof FormData !== 'undefined' && options?.body instanceof FormData;
   const headers = isFormData
     ? { ...options?.headers }
     : {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...options?.headers,
       };
 
@@ -40,12 +37,12 @@ export async function apiFetch<T = any>(
     const response = await fetch(url, {
       ...options,
       headers,
-      credentials: "include",
+      credentials: 'include',
     });
 
     return response;
   } catch (error) {
-    console.error("[API Error]", error);
+    console.error('[API Error]', error);
     throw error;
   }
 }
@@ -53,11 +50,8 @@ export async function apiFetch<T = any>(
 /**
  * GET request helper
  */
-export async function apiGet<T = any>(
-  path: string,
-  options?: RequestInit
-): Promise<T> {
-  const response = await apiFetch(path, { ...options, method: "GET" });
+export async function apiGet<T = any>(path: string, options?: RequestInit): Promise<T> {
+  const response = await apiFetch(path, { ...options, method: 'GET' });
   if (!response.ok) {
     throw new Error(`API Error: ${response.statusText}`);
   }
@@ -74,7 +68,7 @@ export async function apiPost<T = any>(
 ): Promise<T> {
   const response = await apiFetch(path, {
     ...options,
-    method: "POST",
+    method: 'POST',
     body: data ? JSON.stringify(data) : undefined,
   });
   if (!response.ok) {
@@ -86,14 +80,10 @@ export async function apiPost<T = any>(
 /**
  * PUT request helper
  */
-export async function apiPut<T = any>(
-  path: string,
-  data?: any,
-  options?: RequestInit
-): Promise<T> {
+export async function apiPut<T = any>(path: string, data?: any, options?: RequestInit): Promise<T> {
   const response = await apiFetch(path, {
     ...options,
-    method: "PUT",
+    method: 'PUT',
     body: data ? JSON.stringify(data) : undefined,
   });
   if (!response.ok) {
@@ -105,11 +95,8 @@ export async function apiPut<T = any>(
 /**
  * DELETE request helper
  */
-export async function apiDelete<T = any>(
-  path: string,
-  options?: RequestInit
-): Promise<T> {
-  const response = await apiFetch(path, { ...options, method: "DELETE" });
+export async function apiDelete<T = any>(path: string, options?: RequestInit): Promise<T> {
+  const response = await apiFetch(path, { ...options, method: 'DELETE' });
   if (!response.ok) {
     throw new Error(`API Error: ${response.statusText}`);
   }
@@ -126,7 +113,7 @@ export async function apiPatch<T = any>(
 ): Promise<T> {
   const response = await apiFetch(path, {
     ...options,
-    method: "PATCH",
+    method: 'PATCH',
     body: data ? JSON.stringify(data) : undefined,
   });
   if (!response.ok) {

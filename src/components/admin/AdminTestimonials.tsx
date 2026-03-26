@@ -108,13 +108,14 @@ const AdminTestimonials = () => {
       setIsFormOpen(false);
       toast({ title: 'Testimonial created successfully' });
     },
-    onError: (e: Error) => toast({ title: e.message || 'Failed to create', variant: 'destructive' }),
+    onError: (e: Error) =>
+      toast({ title: e.message || 'Failed to create', variant: 'destructive' }),
   });
 
   const updateMutation = useMutation({
     mutationFn: async (data: { id: string } & Partial<Testimonial>) => {
       const { apiFetch } = await import('../../lib/api');
-     const res = await apiFetch(`/api/testimonials?id=${data.id}`, {
+      const res = await apiFetch(`/api/testimonials?id=${data.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -141,16 +142,17 @@ const AdminTestimonials = () => {
       setIsFormOpen(false);
       toast({ title: 'Testimonial updated successfully' });
     },
-    onError: (e: Error) => toast({ title: e.message || 'Failed to update', variant: 'destructive' }),
+    onError: (e: Error) =>
+      toast({ title: e.message || 'Failed to update', variant: 'destructive' }),
   });
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       const { apiFetch } = await import('../../lib/api');
-   const res = await apiFetch(`/api/testimonials?id=${id}`, {
-  method: 'DELETE',
-  credentials: 'include',
-});
+      const res = await apiFetch(`/api/testimonials?id=${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
       if (!res.ok) throw new Error('Failed to delete');
       return res.json();
     },
@@ -190,10 +192,19 @@ const AdminTestimonials = () => {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">Testimonials</h2>
-            <p className="text-muted-foreground mt-1">Manage testimonials shown on the landing page</p>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+              Testimonials
+            </h2>
+            <p className="text-muted-foreground mt-1">
+              Manage testimonials shown on the landing page
+            </p>
           </div>
-          <Button onClick={() => { setEditingTestimonial(null); setIsFormOpen(true); }}>
+          <Button
+            onClick={() => {
+              setEditingTestimonial(null);
+              setIsFormOpen(true);
+            }}
+          >
             <Plus className="h-4 w-4 mr-2" />
             Add Testimonial
           </Button>
@@ -209,7 +220,9 @@ const AdminTestimonials = () => {
           <Card className="glass-card border-border/50 pt-6">
             <CardContent className="p-8 text-center">
               <MessageSquare className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">No testimonials yet. Add one to show on the landing page.</p>
+              <p className="text-muted-foreground">
+                No testimonials yet. Add one to show on the landing page.
+              </p>
               <Button className="mt-4" onClick={() => setIsFormOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
                 Add Testimonial
@@ -253,14 +266,19 @@ const AdminTestimonials = () => {
                         </div>
                         <p className="text-sm text-muted-foreground line-clamp-2">{t.content}</p>
                         {!t.isActive && (
-                          <span className="inline-block mt-2 text-xs text-amber-600 font-medium">Hidden on landing page</span>
+                          <span className="inline-block mt-2 text-xs text-amber-600 font-medium">
+                            Hidden on landing page
+                          </span>
                         )}
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
                         <Button
                           variant="ghost"
                           size="icon"
-                          onClick={() => { setEditingTestimonial(t); setIsFormOpen(true); }}
+                          onClick={() => {
+                            setEditingTestimonial(t);
+                            setIsFormOpen(true);
+                          }}
                           className="text-muted-foreground hover:text-foreground"
                         >
                           <Pencil className="h-4 w-4" />
@@ -294,7 +312,9 @@ const AdminTestimonials = () => {
           <DialogHeader>
             <DialogTitle>{editingTestimonial ? 'Edit Testimonial' : 'Add Testimonial'}</DialogTitle>
             <DialogDescription>
-              {editingTestimonial ? 'Update testimonial' : 'New testimonial will appear on the landing page (if active).'}
+              {editingTestimonial
+                ? 'Update testimonial'
+                : 'New testimonial will appear on the landing page (if active).'}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -362,17 +382,22 @@ const AdminTestimonials = () => {
             <div className="flex items-center justify-between rounded-lg border border-border p-4">
               <div>
                 <Label htmlFor="isActive">Show on landing page</Label>
-                <p className="text-sm text-muted-foreground">Inactive testimonials are hidden from the public.</p>
+                <p className="text-sm text-muted-foreground">
+                  Inactive testimonials are hidden from the public.
+                </p>
               </div>
               <Switch id="isActive" checked={isActive} onCheckedChange={setIsActive} />
             </div>
             <div className="flex justify-end gap-2 pt-2">
-              <Button type="button" variant="outline" onClick={() => setIsFormOpen(false)}>Cancel</Button>
-              <Button
-                type="submit"
-                disabled={createMutation.isPending || updateMutation.isPending}
-              >
-                {createMutation.isPending || updateMutation.isPending ? 'Saving...' : editingTestimonial ? 'Update' : 'Create'}
+              <Button type="button" variant="outline" onClick={() => setIsFormOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending}>
+                {createMutation.isPending || updateMutation.isPending
+                  ? 'Saving...'
+                  : editingTestimonial
+                    ? 'Update'
+                    : 'Create'}
               </Button>
             </div>
           </form>

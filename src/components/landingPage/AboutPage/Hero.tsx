@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Link from "next/link";
+import Link from 'next/link';
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,20 +32,23 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, label, color, 
   const animationRef = useRef<number>();
   const startTimeRef = useRef<number | null>(null);
 
-  const animate = useCallback((timestamp: number) => {
-    if (!startTimeRef.current) startTimeRef.current = timestamp;
-    const progress = timestamp - startTimeRef.current;
-    const end = parseInt(value.toString().replace(/[^0-9]/g, ''));
-    const duration = 2000;
+  const animate = useCallback(
+    (timestamp: number) => {
+      if (!startTimeRef.current) startTimeRef.current = timestamp;
+      const progress = timestamp - startTimeRef.current;
+      const end = parseInt(value.toString().replace(/[^0-9]/g, ''));
+      const duration = 2000;
 
-    if (progress < duration) {
-      const currentCount = Math.min(Math.floor((progress / duration) * end), end);
-      setCount(currentCount);
-      animationRef.current = requestAnimationFrame(animate);
-    } else {
-      setCount(end);
-    }
-  }, [value]);
+      if (progress < duration) {
+        const currentCount = Math.min(Math.floor((progress / duration) * end), end);
+        setCount(currentCount);
+        animationRef.current = requestAnimationFrame(animate);
+      } else {
+        setCount(end);
+      }
+    },
+    [value]
+  );
 
   useEffect(() => {
     if (isInView) {
@@ -58,36 +61,44 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, label, color, 
     };
   }, [isInView, animate]);
 
-  const suffix = useMemo(() => 
-    value.includes('+') ? '+' : value.includes('%') ? '%' : '',
-  [value]);
+  const suffix = useMemo(
+    () => (value.includes('+') ? '+' : value.includes('%') ? '%' : ''),
+    [value]
+  );
 
   // CSS animation for glow (better performance)
-  const glowStyle = useMemo(() => ({
-    animation: isInView ? 'glowPulse 3s infinite ease-in-out' : 'none',
-    animationDelay: `${delay}s`
-  }), [isInView, delay]);
+  const glowStyle = useMemo(
+    () => ({
+      animation: isInView ? 'glowPulse 3s infinite ease-in-out' : 'none',
+      animationDelay: `${delay}s`,
+    }),
+    [isInView, delay]
+  );
 
-  const counterStyle = useMemo(() => ({
-    animation: isInView ? 'textGlow 2s infinite ease-in-out' : 'none',
-    animationDelay: `${delay}s`
-  }), [isInView, delay]);
+  const counterStyle = useMemo(
+    () => ({
+      animation: isInView ? 'textGlow 2s infinite ease-in-out' : 'none',
+      animationDelay: `${delay}s`,
+    }),
+    [isInView, delay]
+  );
 
   return (
     <div ref={ref} className="text-center relative group">
       <div className="relative">
         {/* Glow effect with CSS animation */}
-        <div 
+        <div
           className={`absolute inset-0 bg-gradient-to-r ${color} rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`}
           style={glowStyle}
         />
 
         {/* Counter text */}
-        <div 
+        <div
           className={`relative sm:text-3xl lg:5xl font-bold text-white mb-1`}
           style={counterStyle}
         >
-          {count}{suffix}
+          {count}
+          {suffix}
         </div>
       </div>
       <div className="text-sm text-white mt-2">{label}</div>
@@ -99,23 +110,23 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, label, color, 
 export const HeroSection: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
   const isInView = useInView(heroRef, { once: true });
-  
+
   // Typer animation state
   const [displayText, setDisplayText] = useState<string>('');
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [loopNum, setLoopNum] = useState<number>(0);
   const [typingSpeed, setTypingSpeed] = useState<number>(150);
 
-const phrases: string[] = [
-  'Building the Future, One Line at a Time',
-  'Innovating Through Code',
-  'Your Technology Partners',
-  'Turning Ideas into Software',
-  'Where Innovation Meets Excellence',
-  'Crafting Scalable Solutions',
-  'Engineering Your Vision',
-  'Code that Powers Your Business',
-];
+  const phrases: string[] = [
+    'Building the Future, One Line at a Time',
+    'Innovating Through Code',
+    'Your Technology Partners',
+    'Turning Ideas into Software',
+    'Where Innovation Meets Excellence',
+    'Crafting Scalable Solutions',
+    'Engineering Your Vision',
+    'Code that Powers Your Business',
+  ];
 
   useEffect(() => {
     const handleTyping = () => {
@@ -153,10 +164,11 @@ const phrases: string[] = [
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80")',
+            backgroundImage:
+              'url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80")',
           }}
         />
         {/* Dark overlay for better text visibility */}
@@ -194,25 +206,21 @@ const phrases: string[] = [
             </motion.div>
           </motion.h1>
 
-
-        <motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={isInView ? { opacity: 1, y: 0 } : {}}
-  transition={{ duration: 0.6, delay: 0.8 }}
-  className="mt-8"
->
-  <Link
-    href="/admin/login"
-    className="bg-primary hover:bg-primary text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-center"
-  >
-    Get Started
-  </Link>
-</motion.div>
-
-
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-8"
+          >
+            <Link
+              href="/admin/login"
+              className="bg-primary hover:bg-primary text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-center"
+            >
+              Get Started
+            </Link>
+          </motion.div>
         </motion.div>
       </motion.div>
-
     </motion.section>
   );
 };
@@ -354,11 +362,20 @@ export const StatsSection: React.FC = () => {
           />
           <div
             className="absolute w-48 h-48 md:w-96 md:h-96 rounded-full bg-blue-white blur-2xl md:blur-3xl"
-            style={{ bottom: '10%', right: '15%', animation: 'floatReverse 25s infinite ease-in-out' }}
+            style={{
+              bottom: '10%',
+              right: '15%',
+              animation: 'floatReverse 25s infinite ease-in-out',
+            }}
           />
           <div
             className="absolute w-32 h-32 md:w-64 md:h-64 rounded-full bg-white blur-2xl md:blur-3xl"
-            style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', animation: 'pulse 15s infinite ease-in-out' }}
+            style={{
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              animation: 'pulse 15s infinite ease-in-out',
+            }}
           />
         </div>
 
@@ -434,7 +451,8 @@ export const StatsSection: React.FC = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            From web and mobile apps to enterprise systems, we deliver scalable, reliable, and innovative software.
+            From web and mobile apps to enterprise systems, we deliver scalable, reliable, and
+            innovative software.
           </motion.p>
         </div>
 

@@ -1,6 +1,5 @@
 'use client';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -25,14 +24,13 @@ import {
 import { apiFetch } from "@/lib/api";
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin();
 
 export interface Testimonial {
   _id: string;
@@ -44,7 +42,7 @@ export interface Testimonial {
   rating: number;
 }
 
-// Animated Counter (same as your original)
+// Animated Counter (unchanged)
 interface AnimatedCounterProps {
   value: string;
   label: string;
@@ -122,6 +120,8 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, isActive }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-60px" });
+
   const gradients = [
     'from-primary/80 to-primary',
     'from-primary to-primary',
@@ -132,26 +132,23 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
   ];
   const gradient = gradients[index % gradients.length];
 
+  // GSAP Animation (no ScrollTrigger to avoid conflicts)
   useEffect(() => {
-    if (cardRef.current) {
-      gsap.fromTo(cardRef.current,
-        { opacity: 0, y: 50, scale: 0.9 },
+    if (isInView && cardRef.current) {
+      gsap.fromTo(
+        cardRef.current,
+        { autoAlpha: 0, y: 50, scale: 0.9 },
         {
-          opacity: 1,
+          autoAlpha: 1,
           y: 0,
           scale: 1,
           duration: 0.8,
           delay: index * 0.1,
           ease: "back.out(1.2)",
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: "top bottom-=100",
-            toggleActions: "play none none reverse"
-          }
         }
       );
     }
-  }, [index]);
+  }, [isInView, index]);
 
   return (
     <motion.div
@@ -161,12 +158,16 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
       transition={{ duration: 0.3 }}
     >
       <motion.div
-        className={`absolute -inset-1 bg-gradient-to-r ${gradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
-        animate={{ scale: isActive ? [1, 1.1, 1] : 1 }}
-        transition={{ duration: 3, repeat: isActive ? Infinity : 0 }}
+        className={`absolute -inset-1 bg-gradient-to-r ${gradient} rounded-3xl blur-xl transition-all duration-700 ${
+          isActive ? 'opacity-40' : 'opacity-0'
+        }`}
+        animate={isActive ? { scale: [1, 1.12, 1] } : {}}
+        transition={{ duration: 3.5, repeat: Infinity }}
       />
 
-      <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 dark:border-gray-800/20 overflow-hidden h-full">
+      <div className={`relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 dark:border-gray-800/20 overflow-hidden h-full transition-all duration-500 ${
+        isActive ? 'scale-[1.03] shadow-2xl' : ''
+      }`}>
         <div className="absolute top-0 right-0 w-32 h-32">
           <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${gradient} opacity-10 rounded-bl-full`} />
         </div>
@@ -227,8 +228,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
         <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
           <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
             <span className="flex items-center gap-1">
-              <TrendingUp className="w-3 h-3" />
-              +{Math.floor(Math.random() * 30 + 20)}% growth
+              <TrendingUp className="w-3 h-3" />+{Math.floor(Math.random() * 30 + 20)}% growth
             </span>
             <span className="flex items-center gap-1">
               <MessageCircle className="w-3 h-3" />
@@ -244,8 +244,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
 export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [swiperRef, setSwiperRef] = useState<any>(null);
-  const [hasEnoughSlides, setHasEnoughSlides] = useState(false);
+  const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   const { data: testimonials = [], isLoading } = useQuery<Testimonial[]>({
@@ -255,64 +254,63 @@ export function TestimonialsSection() {
       if (!res.ok) throw new Error("Failed to fetch testimonials");
       return res.json();
     },
+    staleTime: 300000,
+    refetchOnWindowFocus: false,
   });
 
-  const displayTestimonials = testimonials.slice(0, 6); // Limit for homepage
+  const displayTestimonials = testimonials.slice(0, 6);
+  const loopedTestimonials = [...displayTestimonials, ...displayTestimonials];
 
-  useEffect(() => {
-    if (displayTestimonials.length > 0) {
-      setHasEnoughSlides(displayTestimonials.length >= 6);
-    }
-  }, [displayTestimonials]);
+  const shouldLoop = displayTestimonials.length >= 2;
+  const useCoverflow = displayTestimonials.length >= 4;
 
   // GSAP section entrance
   useEffect(() => {
-    if (sectionRef.current) {
-      gsap.fromTo(sectionRef.current,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top center",
-            toggleActions: "play none none reverse"
+    const ctx = gsap.context(() => {
+      if (sectionRef.current) {
+        gsap.fromTo(sectionRef.current,
+          { autoAlpha: 0 },
+          {
+            autoAlpha: 1,
+            duration: 1,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top center",
+              toggleActions: "play none none reverse"
+            }
           }
-        }
-      );
-    }
+        );
+      }
+    });
+    return () => ctx.revert();
   }, []);
 
-  // Autoplay control
+  // Autoplay
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isAutoPlaying && swiperRef && displayTestimonials.length > 0) {
+    let interval: NodeJS.Timeout | null = null;
+    if (isAutoPlaying && swiperRef && displayTestimonials.length > 1) {
       interval = setInterval(() => swiperRef.slideNext(), 5000);
     }
-    return () => clearInterval(interval);
+    return () => { if (interval) clearInterval(interval); };
   }, [isAutoPlaying, swiperRef, displayTestimonials.length]);
 
   if (testimonials.length === 0) return null;
 
   return (
     <section ref={sectionRef} id="testimonials" className="py-20 lg:py-28 bg-white dark:bg-gray-950 relative overflow-hidden">
-      {/* Background accents */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: 80 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="h-px bg-primary mx-auto mb-8"
+        />
 
-          <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: 80 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="h-px bg-primary mx-auto mb-8"
-                  />
-
-        
-        {/* Header */}
         <motion.div
           className="text-center max-w-3xl mx-auto mb-14"
           initial={{ opacity: 0, y: 30 }}
@@ -320,16 +318,14 @@ export function TestimonialsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-  Hear What Our <span className="text-primary">Clients Have to Say</span>
-</h2>
-<p className="text-gray-700 max-w-2xl mx-auto text-base mt-4">
-  Discover why businesses trust us for their custom software, web, and mobile app solutions. Read real feedback from our clients who have transformed their ideas into seamless digital experiences with our expertise.
-</p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Hear What Our <span className="text-primary">Clients Have to Say</span>
+          </h2>
+          <p className="text-gray-700 max-w-2xl mx-auto text-base mt-4">
+            Discover why businesses trust us for their custom software, web, and mobile app solutions. Read real feedback from our clients who have transformed their ideas into seamless digital experiences with our expertise.
+          </p>
         </motion.div>
 
-
-        {/* Swiper Testimonials */}
         {isLoading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(3)].map((_, i) => (
@@ -348,7 +344,7 @@ export function TestimonialsSection() {
           <div className="relative">
             <Swiper
               modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
-              effect="coverflow"
+              effect={useCoverflow ? "coverflow" : "slide"}
               coverflowEffect={{
                 rotate: 20,
                 stretch: 0,
@@ -359,7 +355,8 @@ export function TestimonialsSection() {
               spaceBetween={30}
               slidesPerView={1}
               centeredSlides={true}
-              loop={hasEnoughSlides}
+              loop={shouldLoop}
+              loopAdditionalSlides={2}   // Fixed: replaced loopedSlides
               navigation={{
                 prevEl: '.testimonial-prev',
                 nextEl: '.testimonial-next',
@@ -367,30 +364,34 @@ export function TestimonialsSection() {
               pagination={{ clickable: true, dynamicBullets: true }}
               autoplay={isAutoPlaying ? { delay: 5000, disableOnInteraction: false } : false}
               onSwiper={setSwiperRef}
-              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+              onSlideChange={(swiper) => {
+                setActiveIndex(swiper.realIndex % displayTestimonials.length);
+              }}
               breakpoints={{
                 640: { slidesPerView: 1, spaceBetween: 20 },
-                768: { slidesPerView: displayTestimonials.length >= 2 ? 2 : 1, spaceBetween: 30 },
-                1024: { slidesPerView: displayTestimonials.length >= 3 ? 3 : displayTestimonials.length, spaceBetween: 40 },
+                768: { slidesPerView: Math.min(2, displayTestimonials.length), spaceBetween: 30 },
+                1024: { slidesPerView: Math.min(3, displayTestimonials.length), spaceBetween: 40 },
               }}
               className="pb-14"
             >
-              {displayTestimonials.map((testimonial, index) => (
-                <SwiperSlide key={testimonial._id}>
-                  <TestimonialCard
-                    testimonial={testimonial}
-                    index={index}
-                    isActive={index === activeIndex}
-                  />
-                </SwiperSlide>
-              ))}
+              {loopedTestimonials.map((testimonial, idx) => {
+                const originalIndex = idx % displayTestimonials.length;
+                return (
+                  <SwiperSlide key={`${testimonial._id}-${idx}`}>
+                    <TestimonialCard
+                      testimonial={testimonial}
+                      index={originalIndex}
+                      isActive={originalIndex === activeIndex}
+                    />
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
 
-            {/* Custom Navigation */}
             {displayTestimonials.length > 1 && (
               <div className="flex items-center justify-center gap-4 mt-8">
                 <button
-                  className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary transition-all hover:scale-110 disabled:opacity-50"
+                  className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary transition-all hover:scale-110"
                   onClick={() => setIsAutoPlaying(false)}
                 >
                   <ChevronLeft className="w-6 h-6" />
@@ -414,7 +415,6 @@ export function TestimonialsSection() {
           </div>
         )}
 
-        {/* View All Button */}
         {testimonials.length > 6 && (
           <div className="text-center mt-12">
             <a

@@ -1,24 +1,24 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import Link from "next/link";
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { apiFetch } from "@/lib/api";
-import { getCategoryName, resolveImageUrl } from "@/lib/utils";
-import { 
-  ExternalLink, 
-  FolderKanban, 
-  ArrowUpRight, 
-  Code, 
-  Globe, 
-  Smartphone, 
+import { useQuery } from '@tanstack/react-query';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { apiFetch } from '@/lib/api';
+import { getCategoryName, resolveImageUrl } from '@/lib/utils';
+import {
+  ExternalLink,
+  FolderKanban,
+  ArrowUpRight,
+  Code,
+  Globe,
+  Smartphone,
   ArrowRight,
   Search,
-  X
-} from "lucide-react";
+  X,
+} from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -38,7 +38,7 @@ interface Project {
   thumbnail?: string;
   url?: string;
   category: string | Category;
-  status: "live" | "in-progress" | "completed";
+  status: 'live' | 'in-progress' | 'completed';
   technologies?: string[];
   client?: string;
   completionDate?: string;
@@ -52,13 +52,13 @@ interface GroupedProjects {
 // Helper function with proper typing
 function groupProjectsByCategory(projects: Project[]): GroupedProjects[] {
   const map = new Map<string, Project[]>();
-  
+
   for (const p of projects) {
     const name = getCategoryName(p.category);
     if (!map.has(name)) map.set(name, []);
     map.get(name)!.push(p);
   }
-  
+
   return Array.from(map.entries())
     .map(([categoryName, projects]) => ({ categoryName, projects }))
     .sort((a, b) => a.categoryName.localeCompare(b.categoryName));
@@ -76,11 +76,15 @@ const getCategoryIcon = (categoryName: string) => {
 
 // Get color for status
 const getStatusColor = (status: string) => {
-  switch(status) {
-    case 'live': return 'bg-emerald-500/90';
-    case 'in-progress': return 'bg-amber-500/90';
-    case 'completed': return 'bg-blue-500/90';
-    default: return 'bg-gray-500/90';
+  switch (status) {
+    case 'live':
+      return 'bg-emerald-500/90';
+    case 'in-progress':
+      return 'bg-amber-500/90';
+    case 'completed':
+      return 'bg-blue-500/90';
+    default:
+      return 'bg-gray-500/90';
   }
 };
 
@@ -92,37 +96,38 @@ export default function ProjectsPage() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
-  
+
   // Filter states
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
 
   const { data: projects = [], isLoading } = useQuery<Project[]>({
-    queryKey: ["projects-public"],
+    queryKey: ['projects-public'],
     queryFn: async () => {
-      const res = await apiFetch("/api/projects");
-      if (!res.ok) throw new Error("Failed to fetch projects");
+      const res = await apiFetch('/api/projects');
+      if (!res.ok) throw new Error('Failed to fetch projects');
       return res.json();
     },
   });
 
   // Filter projects based on search and filters
   const filteredProjects = useMemo(() => {
-    return projects.filter(project => {
-      const matchesSearch = searchQuery === '' || 
+    return projects.filter((project) => {
+      const matchesSearch =
+        searchQuery === '' ||
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (project.technologies && project.technologies.some(tech => 
-          tech.toLowerCase().includes(searchQuery.toLowerCase())
-        ));
-      
-      const matchesCategory = selectedCategory === 'all' || 
-        getCategoryName(project.category) === selectedCategory;
-      
-      const matchesStatus = selectedStatus === 'all' || 
-        project.status === selectedStatus;
-      
+        (project.technologies &&
+          project.technologies.some((tech) =>
+            tech.toLowerCase().includes(searchQuery.toLowerCase())
+          ));
+
+      const matchesCategory =
+        selectedCategory === 'all' || getCategoryName(project.category) === selectedCategory;
+
+      const matchesStatus = selectedStatus === 'all' || project.status === selectedStatus;
+
       return matchesSearch && matchesCategory && matchesStatus;
     });
   }, [projects, searchQuery, selectedCategory, selectedStatus]);
@@ -134,7 +139,7 @@ export default function ProjectsPage() {
 
   // Extract unique categories and statuses for filters
   const categories = useMemo(() => {
-    return ['all', ...new Set(projects.map(p => getCategoryName(p.category)))];
+    return ['all', ...new Set(projects.map((p) => getCategoryName(p.category)))];
   }, [projects]);
 
   const statuses = ['all', 'live', 'in-progress', 'completed'];
@@ -147,33 +152,35 @@ export default function ProjectsPage() {
         const masterTl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 70%",
+            start: 'top 70%',
             once: true,
-            onEnter: () => setHasAnimated(true)
-          }
+            onEnter: () => setHasAnimated(true),
+          },
         });
 
         // Header animation
         if (headerRef.current) {
-          masterTl.fromTo(headerRef.current,
+          masterTl.fromTo(
+            headerRef.current,
             {
               opacity: 0,
               y: 60,
-              scale: 0.9
+              scale: 0.9,
             },
             {
               opacity: 1,
               y: 0,
               scale: 1,
               duration: 1.2,
-              ease: "power3.out"
+              ease: 'power3.out',
             }
           );
         }
 
         // Filters animation
         if (filtersRef.current) {
-          masterTl.fromTo(filtersRef.current,
+          masterTl.fromTo(
+            filtersRef.current,
             {
               opacity: 0,
               y: 40,
@@ -182,22 +189,23 @@ export default function ProjectsPage() {
               opacity: 1,
               y: 0,
               duration: 1,
-              ease: "power2.out"
+              ease: 'power2.out',
             },
-            "-=0.6"
+            '-=0.6'
           );
         }
 
         // Animate category sections
         categoriesRef.current.forEach((category, index) => {
           if (category) {
-            masterTl.fromTo(category,
+            masterTl.fromTo(
+              category,
               {
                 opacity: 0,
                 y: 100,
                 rotationX: 30,
                 scale: 0.8,
-                transformPerspective: 1000
+                transformPerspective: 1000,
               },
               {
                 opacity: 1,
@@ -205,30 +213,31 @@ export default function ProjectsPage() {
                 rotationX: 0,
                 scale: 1,
                 duration: 1.2,
-                ease: "back.out(1.2)",
-                delay: index * 0.2
+                ease: 'back.out(1.2)',
+                delay: index * 0.2,
               },
-              "-=0.6"
+              '-=0.6'
             );
           }
         });
 
         // CTA section entrance
         if (ctaRef.current) {
-          masterTl.fromTo(ctaRef.current,
+          masterTl.fromTo(
+            ctaRef.current,
             {
               opacity: 0,
               y: 80,
-              scale: 0.95
+              scale: 0.95,
             },
             {
               opacity: 1,
               y: 0,
               scale: 1,
               duration: 1.2,
-              ease: "power4.out"
+              ease: 'power4.out',
             },
-            "-=0.2"
+            '-=0.2'
           );
         }
 
@@ -236,7 +245,8 @@ export default function ProjectsPage() {
         if (ctaRef.current) {
           for (let i = 0; i < 6; i++) {
             const particle = document.createElement('div');
-            particle.className = 'absolute w-1.5 h-1.5 bg-primary/20 rounded-full pointer-events-none';
+            particle.className =
+              'absolute w-1.5 h-1.5 bg-primary/20 rounded-full pointer-events-none';
             particle.style.left = `${Math.random() * 100}%`;
             particle.style.top = `${Math.random() * 100}%`;
             ctaRef.current.appendChild(particle);
@@ -249,7 +259,7 @@ export default function ProjectsPage() {
               duration: gsap.utils.random(3, 6),
               repeat: -1,
               yoyo: true,
-              ease: "sine.inOut"
+              ease: 'sine.inOut',
             });
           }
         }
@@ -261,11 +271,11 @@ export default function ProjectsPage() {
 
   // Project card component
   const renderProjectCard = (project: Project, index: number) => {
-    const isExternal = project.url?.startsWith("http");
+    const isExternal = project.url?.startsWith('http');
     const projectId = project._id;
     const isHovered = hoveredProject === projectId;
     const CategoryIcon = getCategoryIcon(getCategoryName(project.category));
-    
+
     const cardContent = (
       <div
         onMouseEnter={() => setHoveredProject(projectId)}
@@ -275,12 +285,15 @@ export default function ProjectsPage() {
       >
         {/* Premium Card Design */}
         <div className="relative bg-white rounded-2xl border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(249,115,22,0.3)] transition-shadow duration-500">
-          
           {/* Animated Background Pattern */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-            <div className="absolute inset-0" style={{
-              background: 'radial-gradient(circle at 20% 30%, rgba(249,115,22,0.03) 0%, transparent 50%)',
-            }} />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  'radial-gradient(circle at 20% 30%, rgba(249,115,22,0.03) 0%, transparent 50%)',
+              }}
+            />
           </div>
 
           {/* Image Container */}
@@ -300,7 +313,7 @@ export default function ProjectsPage() {
                 <CategoryIcon className="h-12 w-12 text-primary/30" />
               </div>
             )}
-            
+
             {/* Status Badge */}
             <motion.div
               className="absolute top-3 right-3"
@@ -308,9 +321,14 @@ export default function ProjectsPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <Badge className={`${getStatusColor(project.status)} text-white border-0 text-xs font-medium px-3 py-1 rounded-full`}>
-                {project.status === 'live' ? 'Live' : 
-                 project.status === 'in-progress' ? 'In Progress' : 'Completed'}
+              <Badge
+                className={`${getStatusColor(project.status)} text-white border-0 text-xs font-medium px-3 py-1 rounded-full`}
+              >
+                {project.status === 'live'
+                  ? 'Live'
+                  : project.status === 'in-progress'
+                    ? 'In Progress'
+                    : 'Completed'}
               </Badge>
             </motion.div>
 
@@ -329,12 +347,10 @@ export default function ProjectsPage() {
               transition={{ duration: 0.3 }}
             />
           </div>
-          
+
           <div className="p-6">
-            <h3 className="text-lg font-bold text-black mb-2 line-clamp-1">
-              {project.title}
-            </h3>
-            
+            <h3 className="text-lg font-bold text-black mb-2 line-clamp-1">{project.title}</h3>
+
             <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
               {project.description}
             </p>
@@ -343,8 +359,8 @@ export default function ProjectsPage() {
             {project.technologies && project.technologies.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.technologies.slice(0, 3).map((tech, i) => (
-                  <span 
-                    key={i} 
+                  <span
+                    key={i}
                     className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full"
                   >
                     {tech}
@@ -357,7 +373,7 @@ export default function ProjectsPage() {
                 )}
               </div>
             )}
-            
+
             {/* Link */}
             <motion.div
               whileHover={{ x: 4 }}
@@ -382,7 +398,7 @@ export default function ProjectsPage() {
                 className="w-full h-full border-b border-r border-primary"
                 animate={{
                   rotate: isHovered ? 180 : 0,
-                  opacity: isHovered ? 0.3 : 0.1
+                  opacity: isHovered ? 0.3 : 0.1,
                 }}
                 transition={{ duration: 0.5 }}
               />
@@ -394,10 +410,10 @@ export default function ProjectsPage() {
 
     if (isExternal && project.url) {
       return (
-        <a 
-          key={project._id} 
-          href={project.url} 
-          target="_blank" 
+        <a
+          key={project._id}
+          href={project.url}
+          target="_blank"
           rel="noopener noreferrer"
           className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
         >
@@ -405,10 +421,10 @@ export default function ProjectsPage() {
         </a>
       );
     }
-    
+
     return (
-      <Link 
-        key={project._id} 
+      <Link
+        key={project._id}
         href={`/projects/${project._id}`}
         className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
       >
@@ -425,14 +441,14 @@ export default function ProjectsPage() {
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
         </div>
-        
+
         <div className="container relative z-10 mx-auto max-w-7xl px-4">
           <div className="text-center mb-12">
             <div className="h-px w-20 bg-primary/30 mx-auto mb-8" />
             <div className="h-12 w-96 bg-primary/5 rounded mx-auto mb-4 animate-pulse" />
             <div className="h-6 w-64 bg-primary/5 rounded mx-auto animate-pulse" />
           </div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="relative">
@@ -453,7 +469,7 @@ export default function ProjectsPage() {
   }
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="relative py-24 overflow-hidden bg-white font-sans min-h-screen"
     >
@@ -462,33 +478,29 @@ export default function ProjectsPage() {
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/3 to-transparent rounded-full blur-3xl" />
-        
-        <div 
-          className="absolute inset-0 opacity-[0.02]" 
-          style={{ 
+
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
             backgroundImage: `linear-gradient(to right, #f97316 1px, transparent 1px),
                              linear-gradient(to bottom, #f97316 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
-          }} 
+            backgroundSize: '40px 40px',
+          }}
         />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section */}
         <div ref={headerRef} className=" mt-20 text-center max-w-3xl mx-auto mb-12">
-        
-          
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-black mb-4">
             Our Solutions
           </h1>
-          
+
           <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">
-            Explore our complete collection of custom software, web applications, 
-            and digital solutions built for clients across various industries.
+            Explore our complete collection of custom software, web applications, and digital
+            solutions built for clients across various industries.
           </p>
         </div>
-
-    
 
         {/* Content */}
         {filteredProjects.length === 0 ? (
@@ -501,7 +513,7 @@ export default function ProjectsPage() {
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring" }}
+              transition={{ delay: 0.2, type: 'spring' }}
               className="relative inline-block"
             >
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl" />
@@ -526,30 +538,30 @@ export default function ProjectsPage() {
           <div className="space-y-16">
             {groupedProjects.map(({ categoryName, projects: categoryProjects }, categoryIndex) => {
               const CategoryIcon = getCategoryIcon(categoryName);
-              
+
               return (
                 <div
                   key={categoryName}
-                  ref={(el) => { categoriesRef.current[categoryIndex] = el; }}
+                  ref={(el) => {
+                    categoriesRef.current[categoryIndex] = el;
+                  }}
                   className="space-y-8"
                 >
-                 <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4">
+                    {/* Category Name + Badge */}
+                    <div className="flex-1 flex items-center gap-3">
+                      <h3 className="text-xl sm:text-2xl font-bold ">{categoryName}</h3>
 
-  {/* Category Name + Badge */}
-  <div className="flex-1 flex items-center gap-3">
-    <h3 className="text-xl sm:text-2xl font-bold ">
-      {categoryName}
-    </h3>
+                      {/* Gradient line */}
+                      <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
 
-    {/* Gradient line */}
-    <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
-
-    {/* Projects Badge */}
-    <Badge className="text-xs bg-primary text-primary border-0 rounded-full px-3 py-1">
-      {categoryProjects.length} {categoryProjects.length === 1 ? 'Project' : 'Projects'}
-    </Badge>
-  </div>
-</div>
+                      {/* Projects Badge */}
+                      <Badge className="text-xs bg-primary text-primary border-0 rounded-full px-3 py-1">
+                        {categoryProjects.length}{' '}
+                        {categoryProjects.length === 1 ? 'Project' : 'Projects'}
+                      </Badge>
+                    </div>
+                  </div>
 
                   {/* Projects Grid */}
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

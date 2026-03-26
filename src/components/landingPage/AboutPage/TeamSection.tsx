@@ -6,13 +6,24 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-
 // Team Section with 3D Cards
 export const TeamSection = () => {
   const team = [
-    { icon: '👨‍💼', title: 'SEO Specialists', description: 'Experts in organic search optimization with proven track records.' },
-    { icon: '🎨', title: 'Creative Designers', description: 'Award-winning designers who create stunning visuals that drive engagement.' },
-    { icon: '📊', title: 'Data Analysts', description: 'Data-driven professionals who turn insights into actionable strategies.' }
+    {
+      icon: '👨‍💼',
+      title: 'SEO Specialists',
+      description: 'Experts in organic search optimization with proven track records.',
+    },
+    {
+      icon: '🎨',
+      title: 'Creative Designers',
+      description: 'Award-winning designers who create stunning visuals that drive engagement.',
+    },
+    {
+      icon: '📊',
+      title: 'Data Analysts',
+      description: 'Data-driven professionals who turn insights into actionable strategies.',
+    },
   ];
 
   return (
@@ -26,14 +37,15 @@ export const TeamSection = () => {
         >
           Meet Our Expert <span className="text-primary">Team</span>
         </motion.h2>
-        
+
         <motion.p
           className="text-center text-gray-700 max-w-3xl mx-auto mb-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          Our talented team of software developers experts brings together diverse skills and experiences to deliver exceptional results for our clients.
+          Our talented team of software developers experts brings together diverse skills and
+          experiences to deliver exceptional results for our clients.
         </motion.p>
 
         <div className="grid md:grid-cols-3 gap-8 perspective-1000">
@@ -47,8 +59,8 @@ export const TeamSection = () => {
               whileHover={{
                 rotateY: 10,
                 scale: 1.05,
-              boxShadow: "0 30px 40px -20px rgba(59,130,246,0.4)",
-                transition: { duration: 0.3 }
+                boxShadow: '0 30px 40px -20px rgba(59,130,246,0.4)',
+                transition: { duration: 0.3 },
               }}
             >
               <motion.div

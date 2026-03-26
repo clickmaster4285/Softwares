@@ -24,31 +24,25 @@ function isValidationError(error: unknown): error is ValidationError {
   return error instanceof Error && error.name === 'ValidationError';
 }
 
+export const revalidate = 3600;
+
 // GET all testimonials (public)
 export async function GET() {
   try {
     await dbConnect();
-    
-    const testimonials = await Testimonial.find()
-      .sort({ createdAt: -1 })
-      .lean();
-    
+
+    const testimonials = await Testimonial.find().sort({ createdAt: -1 }).limit(12).lean();
+
     return NextResponse.json(testimonials);
   } catch (err) {
     console.error('GET /api/testimonials error:', err);
-    
+
     // Check for specific MongoDB errors
     if (isMongoError(err) && err.name === 'MongoNetworkError') {
-      return NextResponse.json(
-        { message: 'Database connection error' },
-        { status: 503 }
-      );
+      return NextResponse.json({ message: 'Database connection error' }, { status: 503 });
     }
-    
-    return NextResponse.json(
-      { message: 'Failed to fetch testimonials' },
-      { status: 500 }
-    );
+
+    return NextResponse.json({ message: 'Failed to fetch testimonials' }, { status: 500 });
   }
 }
 
@@ -75,21 +69,10 @@ export async function POST(req: NextRequest) {
     try {
       body = await req.json();
     } catch (parseError) {
-      return NextResponse.json(
-        { message: 'Invalid request body' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'Invalid request body' }, { status: 400 });
     }
 
-    const { 
-      authorName, 
-      authorRole, 
-      authorCompany, 
-      content, 
-      avatarUrl, 
-      rating, 
-      isActive 
-    } = body;
+    const { authorName, authorRole, authorCompany, content, avatarUrl, rating, isActive } = body;
 
     // Validate required fields
     if (!authorName || typeof authorName !== 'string' || authorName.trim().length === 0) {
@@ -108,7 +91,7 @@ export async function POST(req: NextRequest) {
 
     // Validate rating
     const validatedRating = Math.min(5, Math.max(1, Number(rating) || 5));
-    
+
     // Validate and sanitize inputs
     const testimonialData = {
       authorName: authorName.trim(),
@@ -126,14 +109,14 @@ export async function POST(req: NextRequest) {
       testimonial = await Testimonial.create(testimonialData);
     } catch (dbError) {
       console.error('Database create error:', dbError);
-      
+
       if (isValidationError(dbError)) {
         return NextResponse.json(
           { message: 'Validation error', errors: dbError.errors },
           { status: 400 }
         );
       }
-      
+
       throw dbError;
     }
 
@@ -141,18 +124,15 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     const error = err as Error;
     console.error('POST /api/testimonials error:', error);
-    
+
     // Log full error details for debugging
     console.error('Error details:', {
       name: error.name,
       message: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
     });
-    
-    return NextResponse.json(
-      { message: 'Failed to create testimonial' },
-      { status: 500 }
-    );
+
+    return NextResponse.json({ message: 'Failed to create testimonial' }, { status: 500 });
   }
 }
 
@@ -177,20 +157,14 @@ export async function PUT(req: NextRequest) {
     // Get ID from URL
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
-    
+
     if (!id) {
-      return NextResponse.json(
-        { message: 'Testimonial ID is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'Testimonial ID is required' }, { status: 400 });
     }
 
     // Validate MongoDB ObjectId format
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-      return NextResponse.json(
-        { message: 'Invalid testimonial ID format' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'Invalid testimonial ID format' }, { status: 400 });
     }
 
     // Parse request body
@@ -198,19 +172,13 @@ export async function PUT(req: NextRequest) {
     try {
       body = await req.json();
     } catch (parseError) {
-      return NextResponse.json(
-        { message: 'Invalid request body' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'Invalid request body' }, { status: 400 });
     }
 
     // Check if testimonial exists
     const existingTestimonial = await Testimonial.findById(id);
     if (!existingTestimonial) {
-      return NextResponse.json(
-        { message: 'Testimonial not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ message: 'Testimonial not found' }, { status: 404 });
     }
 
     // Define update data type
@@ -226,7 +194,7 @@ export async function PUT(req: NextRequest) {
 
     // Sanitize and prepare update data
     const updateData: UpdateData = {};
-    
+
     if (body.authorName !== undefined) {
       updateData.authorName = String(body.authorName).trim();
     }
@@ -251,41 +219,31 @@ export async function PUT(req: NextRequest) {
 
     // Validate required fields if they're being updated
     if (updateData.authorName !== undefined && updateData.authorName.length === 0) {
-      return NextResponse.json(
-        { message: 'authorName cannot be empty' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'authorName cannot be empty' }, { status: 400 });
     }
-    
+
     if (updateData.content !== undefined && updateData.content.length === 0) {
-      return NextResponse.json(
-        { message: 'content cannot be empty' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'content cannot be empty' }, { status: 400 });
     }
 
     // Update testimonial
     let updated;
     try {
-      updated = await Testimonial.findByIdAndUpdate(
-        id,
-        updateData,
-        {
-          new: true,
-          runValidators: true,
-          context: 'query'
-        }
-      );
+      updated = await Testimonial.findByIdAndUpdate(id, updateData, {
+        new: true,
+        runValidators: true,
+        context: 'query',
+      });
     } catch (dbError) {
       console.error('Database update error:', dbError);
-      
+
       if (isValidationError(dbError)) {
         return NextResponse.json(
           { message: 'Validation error', errors: dbError.errors },
           { status: 400 }
         );
       }
-      
+
       throw dbError;
     }
 
@@ -293,17 +251,14 @@ export async function PUT(req: NextRequest) {
   } catch (err) {
     const error = err as Error;
     console.error('PUT /api/testimonials error:', error);
-    
+
     console.error('Error details:', {
       name: error.name,
       message: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
     });
-    
-    return NextResponse.json(
-      { message: 'Failed to update testimonial' },
-      { status: 500 }
-    );
+
+    return NextResponse.json({ message: 'Failed to update testimonial' }, { status: 500 });
   }
 }
 
@@ -328,20 +283,14 @@ export async function DELETE(req: NextRequest) {
     // Get ID from URL
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
-    
+
     if (!id) {
-      return NextResponse.json(
-        { message: 'Testimonial ID is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'Testimonial ID is required' }, { status: 400 });
     }
 
     // Validate MongoDB ObjectId format
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-      return NextResponse.json(
-        { message: 'Invalid testimonial ID format' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'Invalid testimonial ID format' }, { status: 400 });
     }
 
     // Delete testimonial
@@ -352,32 +301,26 @@ export async function DELETE(req: NextRequest) {
       console.error('Database delete error:', dbError);
       throw dbError;
     }
-    
+
     if (!deleted) {
-      return NextResponse.json(
-        { message: 'Testimonial not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ message: 'Testimonial not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       message: 'Testimonial deleted successfully',
-      id: id 
+      id: id,
     });
   } catch (err) {
     const error = err as Error;
     console.error('DELETE /api/testimonials error:', error);
-    
+
     console.error('Error details:', {
       name: error.name,
       message: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
     });
-    
-    return NextResponse.json(
-      { message: 'Failed to delete testimonial' },
-      { status: 500 }
-    );
+
+    return NextResponse.json({ message: 'Failed to delete testimonial' }, { status: 500 });
   }
 }
 
@@ -386,7 +329,7 @@ export async function OPTIONS() {
   return new NextResponse(null, {
     status: 204,
     headers: {
-      'Allow': 'GET, POST, PUT, DELETE, OPTIONS',
+      Allow: 'GET, POST, PUT, DELETE, OPTIONS',
     },
   });
 }

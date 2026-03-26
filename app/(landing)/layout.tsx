@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
-import { Navbar } from "@/components/landingPage/navbar";
-import { Footer } from "@/components/landingPage/Footer";
+import { ReactNode } from 'react';
+import { Navbar } from '@/components/landingPage/navbar';
+import { Footer } from '@/components/landingPage/Footer';
 
 export default function LandingLayout({ children }: { children: ReactNode }) {
   return (

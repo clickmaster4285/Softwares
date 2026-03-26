@@ -54,10 +54,11 @@ const AdminCategories = () => {
       const res = await apiFetch('/api/categories', { credentials: 'include' });
       if (!res.ok) throw new Error('Failed to fetch categories');
       const data = await res.json();
-      
+
       // Sort: newest on top
-      return data.sort((a: Category, b: Category) => 
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      return data.sort(
+        (a: Category, b: Category) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
     },
   });
@@ -159,15 +160,15 @@ const AdminCategories = () => {
     }
 
     if (editingCategory) {
-      updateMutation.mutate({ 
-        id: editingCategory._id, 
-        name: name.trim(), 
-        description: description.trim() 
+      updateMutation.mutate({
+        id: editingCategory._id,
+        name: name.trim(),
+        description: description.trim(),
       });
     } else {
-      createMutation.mutate({ 
-        name: name.trim(), 
-        description: description.trim() 
+      createMutation.mutate({
+        name: name.trim(),
+        description: description.trim(),
       });
     }
   };
@@ -183,7 +184,9 @@ const AdminCategories = () => {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">Categories</h2>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+              Categories
+            </h2>
             <p className="text-muted-foreground mt-1">Manage project categories</p>
           </div>
           <Button onClick={() => setIsFormOpen(true)}>
@@ -202,7 +205,9 @@ const AdminCategories = () => {
           ) : categories.length === 0 ? (
             <Card className="glass-card border-border/50 pt-6">
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">No categories yet. Create your first category!</p>
+                <p className="text-muted-foreground">
+                  No categories yet. Create your first category!
+                </p>
               </CardContent>
             </Card>
           ) : (
@@ -257,8 +262,8 @@ const AdminCategories = () => {
       </div>
 
       {/* Create/Edit Dialog */}
-      <Dialog 
-        open={isFormOpen} 
+      <Dialog
+        open={isFormOpen}
         onOpenChange={(open) => {
           setIsFormOpen(open);
           if (!open) {
@@ -311,15 +316,12 @@ const AdminCategories = () => {
               >
                 Cancel
               </Button>
-              <Button
-                type="submit"
-                disabled={createMutation.isPending || updateMutation.isPending}
-              >
+              <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending}>
                 {createMutation.isPending || updateMutation.isPending
                   ? 'Saving...'
                   : editingCategory
-                  ? 'Update Category'
-                  : 'Create Category'}
+                    ? 'Update Category'
+                    : 'Create Category'}
               </Button>
             </div>
           </form>
@@ -332,14 +334,14 @@ const AdminCategories = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Category</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete this category? Projects using this category will need to be updated.
-              This action cannot be undone.
+              Are you sure you want to delete this category? Projects using this category will need
+              to be updated. This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction 
-              onClick={handleDelete} 
+            <AlertDialogAction
+              onClick={handleDelete}
               className="bg-destructive hover:bg-destructive/90"
             >
               Delete

@@ -7,10 +7,10 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Quote,
   Star,
@@ -20,9 +20,9 @@ import {
   Award,
   TrendingUp,
   Play,
-  Pause
-} from "lucide-react";
-import { apiFetch } from "@/lib/api";
+  Pause,
+} from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -30,8 +30,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Import Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
-
-
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -55,12 +53,12 @@ interface AnimatedCounterProps {
 }
 
 // Animated Counter Component with Glow Effect
-const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ 
-  value, 
-  label, 
-  suffix = '', 
-  delay = 0, 
-  gradient = 'from-primary/80 to-primary' 
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
+  value,
+  label,
+  suffix = '',
+  delay = 0,
+  gradient = 'from-primary/80 to-primary',
 }) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -98,26 +96,33 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
       {/* Glow effect on hover and pulse */}
       <motion.div
         className={`absolute -inset-4 bg-gradient-to-r ${gradient} rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
-        animate={isInView ? {
-          scale: [1, 1.2, 1],
-          opacity: [0, 0.2, 0],
-        } : {}}
+        animate={
+          isInView
+            ? {
+                scale: [1, 1.2, 1],
+                opacity: [0, 0.2, 0],
+              }
+            : {}
+        }
         transition={{ duration: 3, repeat: Infinity, delay }}
       />
 
       <div className="relative">
         <motion.div
           className={`text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${gradient}`}
-          animate={isInView ? {
-            scale: [1, 1.05, 1],
-          } : {}}
+          animate={
+            isInView
+              ? {
+                  scale: [1, 1.05, 1],
+                }
+              : {}
+          }
           transition={{ duration: 2, repeat: Infinity, delay }}
         >
-          {count}{suffix}
+          {count}
+          {suffix}
         </motion.div>
-        <div className="text-sm text-muted-foreground mt-2 font-medium tracking-wide">
-          {label}
-        </div>
+        <div className="text-sm text-muted-foreground mt-2 font-medium tracking-wide">{label}</div>
       </div>
     </motion.div>
   );
@@ -145,11 +150,12 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
   useEffect(() => {
     // GSAP animation for card entrance
     if (cardRef.current) {
-      gsap.fromTo(cardRef.current,
+      gsap.fromTo(
+        cardRef.current,
         {
           opacity: 0,
           y: 50,
-          scale: 0.9
+          scale: 0.9,
         },
         {
           opacity: 1,
@@ -157,12 +163,12 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
           scale: 1,
           duration: 0.8,
           delay: index * 0.1,
-          ease: "back.out(1.2)",
+          ease: 'back.out(1.2)',
           scrollTrigger: {
             trigger: cardRef.current,
-            start: "top bottom-=100",
-            toggleActions: "play none none reverse"
-          }
+            start: 'top bottom-=100',
+            toggleActions: 'play none none reverse',
+          },
         }
       );
     }
@@ -188,18 +194,22 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
       <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 dark:border-gray-800/20 overflow-hidden h-full">
         {/* Decorative elements */}
         <div className="absolute top-0 right-0 w-32 h-32">
-          <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${gradient} opacity-10 rounded-bl-full`} />
+          <div
+            className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${gradient} opacity-10 rounded-bl-full`}
+          />
         </div>
 
-        <Quote className={`absolute bottom-6 right-6 w-16 h-16 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-10`} />
+        <Quote
+          className={`absolute bottom-6 right-6 w-16 h-16 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-10`}
+        />
 
         {/* Company badge */}
         <div className="flex items-center justify-between mb-6">
-          <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary bg-opacity-10`}>
+          <div
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary bg-opacity-10`}
+          >
             <Award className="w-3.5 h-3.5 text-white" />
-            <span className="text-xs font-semibold text-white">
-              Verified Client
-            </span>
+            <span className="text-xs font-semibold text-white">Verified Client</span>
           </div>
 
           {/* Rating */}
@@ -212,10 +222,11 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
                 transition={{ delay: i * 0.1 }}
               >
                 <Star
-                  className={`w-4 h-4 ${i < (testimonial.rating ?? 5)
-                    ? 'fill-amber-400 text-amber-400'
-                    : 'text-gray-300 dark:text-gray-600'
-                    }`}
+                  className={`w-4 h-4 ${
+                    i < (testimonial.rating ?? 5)
+                      ? 'fill-amber-400 text-amber-400'
+                      : 'text-gray-300 dark:text-gray-600'
+                  }`}
                 />
               </motion.div>
             ))}
@@ -224,7 +235,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
 
         {/* Testimonial content with quote mark */}
         <div className="relative mb-8">
-          <Quote className={`absolute -top-2 -left-2 w-6 h-6 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-30`} />
+          <Quote
+            className={`absolute -top-2 -left-2 w-6 h-6 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-30`}
+          />
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed pl-6 line-clamp-4">
             "{testimonial.content}"
           </p>
@@ -236,22 +249,22 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
             <div className={`absolute inset-0 bg-foreground/30 rounded-full blur-md opacity-50`} />
             <Avatar className="relative w-16 h-16 border-2 border-white dark:border-gray-800 shadow-lg">
               <AvatarImage src={testimonial.avatarUrl} alt={testimonial.authorName} />
-             <AvatarFallback className={`bg-foreground/30 text-black font-semibold`}>
-  {(testimonial.authorName ?? 'NA').slice(0, 2).toUpperCase()}
-</AvatarFallback>
+              <AvatarFallback className={`bg-foreground/30 text-black font-semibold`}>
+                {(testimonial.authorName ?? 'NA').slice(0, 2).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
           </div>
 
           <div>
-            <h4 className="font-bold text-gray-900 dark:text-white text-lg">{testimonial.authorName}</h4>
+            <h4 className="font-bold text-gray-900 dark:text-white text-lg">
+              {testimonial.authorName}
+            </h4>
             {(testimonial.authorRole || testimonial.authorCompany) && (
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {testimonial.authorRole}
                 {testimonial.authorRole && testimonial.authorCompany && ' at '}
                 {testimonial.authorCompany && (
-                  <span className={`font-medium text-primary`}>
-                    {testimonial.authorCompany}
-                  </span>
+                  <span className={`font-medium text-primary`}>{testimonial.authorCompany}</span>
                 )}
               </p>
             )}
@@ -262,8 +275,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
         <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
           <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
             <span className="flex items-center gap-1">
-              <TrendingUp className="w-3 h-3" />
-              +{Math.floor(Math.random() * 30 + 20)}% growth
+              <TrendingUp className="w-3 h-3" />+{Math.floor(Math.random() * 30 + 20)}% growth
             </span>
             <span className="flex items-center gap-1">
               <MessageCircle className="w-3 h-3" />
@@ -284,10 +296,10 @@ const Testimonials: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   const { data: testimonials = [], isLoading } = useQuery<Testimonial[]>({
-    queryKey: ["testimonials"],
+    queryKey: ['testimonials'],
     queryFn: async () => {
-      const res = await apiFetch("/api/testimonials");
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
+      const res = await apiFetch('/api/testimonials');
+      if (!res.ok) throw new Error('Failed to fetch testimonials');
       return res.json();
     },
   });
@@ -303,7 +315,8 @@ const Testimonials: React.FC = () => {
   // GSAP animation for section entrance
   useEffect(() => {
     if (sectionRef.current) {
-      gsap.fromTo(sectionRef.current,
+      gsap.fromTo(
+        sectionRef.current,
         {
           opacity: 0,
         },
@@ -312,9 +325,9 @@ const Testimonials: React.FC = () => {
           duration: 1,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top center",
-            toggleActions: "play none none reverse"
-          }
+            start: 'top center',
+            toggleActions: 'play none none reverse',
+          },
         }
       );
     }
@@ -332,7 +345,6 @@ const Testimonials: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
- 
       <main className="pt-4 pb-20">
         <section ref={sectionRef} className="py-20 relative overflow-hidden">
           {/* Animated background */}
@@ -351,55 +363,54 @@ const Testimonials: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-             
-
               <h1 className="font-display text-3xl sm:text-5xl lg:text-5xl font-bold text-foreground mb-4">
                 What our <span className="text-primary">Clients Says</span>
               </h1>
               <p className="text-lg text-muted-foreground">
-                Feedback from businesses who chose our software development company for custom software, web apps, and mobile apps.
+                Feedback from businesses who chose our software development company for custom
+                software, web apps, and mobile apps.
               </p>
             </motion.div>
 
             {/* Stats Section with Glow Effects */}
-        {!isLoading && testimonials.length > 0 && (
-  <motion.div
-    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-20 py-8"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  >
-    <AnimatedCounter
-      value="5000"
-      label="Happy Clients"
-      suffix="+"
-      delay={0.1}
-      gradient="from-primary to-primary"
-    />
-    <AnimatedCounter
-      value="98"
-      label="Satisfaction Rate"
-      suffix="%"
-      delay={0.2}
-      gradient="from-primary to-primary"
-    />
-    <AnimatedCounter
-      value="50"
-      label="Industry Awards"
-      suffix="+"
-      delay={0.3}
-      gradient="from-primary to-primary"
-    />
-    <AnimatedCounter
-      value="24"
-      label="Support Team"
-      suffix="/7"
-      delay={0.4}
-      gradient="from-primary to-primary"
-    />
-  </motion.div>
-)}
+            {!isLoading && testimonials.length > 0 && (
+              <motion.div
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-20 py-8"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <AnimatedCounter
+                  value="5000"
+                  label="Happy Clients"
+                  suffix="+"
+                  delay={0.1}
+                  gradient="from-primary to-primary"
+                />
+                <AnimatedCounter
+                  value="98"
+                  label="Satisfaction Rate"
+                  suffix="%"
+                  delay={0.2}
+                  gradient="from-primary to-primary"
+                />
+                <AnimatedCounter
+                  value="50"
+                  label="Industry Awards"
+                  suffix="+"
+                  delay={0.3}
+                  gradient="from-primary to-primary"
+                />
+                <AnimatedCounter
+                  value="24"
+                  label="Support Team"
+                  suffix="/7"
+                  delay={0.4}
+                  gradient="from-primary to-primary"
+                />
+              </motion.div>
+            )}
 
             {/* Testimonials Content */}
             {isLoading ? (
@@ -425,11 +436,13 @@ const Testimonials: React.FC = () => {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: 0.2, type: "spring" }}
+                  transition={{ delay: 0.2, type: 'spring' }}
                 >
                   <Quote className="h-14 w-14 text-muted-foreground mx-auto mb-4" />
                 </motion.div>
-                <h2 className="font-display text-xl font-semibold text-foreground mb-2">No testimonials yet</h2>
+                <h2 className="font-display text-xl font-semibold text-foreground mb-2">
+                  No testimonials yet
+                </h2>
                 <p className="text-muted-foreground">Check back later for client stories.</p>
               </motion.div>
             ) : (
@@ -456,10 +469,14 @@ const Testimonials: React.FC = () => {
                     clickable: true,
                     dynamicBullets: true,
                   }}
-                  autoplay={isAutoPlaying ? {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                  } : false}
+                  autoplay={
+                    isAutoPlaying
+                      ? {
+                          delay: 5000,
+                          disableOnInteraction: false,
+                        }
+                      : false
+                  }
                   onSwiper={setSwiperRef}
                   onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
                   breakpoints={{
@@ -521,7 +538,6 @@ const Testimonials: React.FC = () => {
           </div>
         </section>
       </main>
-     
     </div>
   );
 };
