@@ -1,10 +1,8 @@
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  // Add middleware logic here as needed
-  // Example: Check authentication, redirects, etc.
-  
-  return;
+  return NextResponse.next();
 }
 
 export const config = {

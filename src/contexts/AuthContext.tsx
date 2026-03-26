@@ -1,6 +1,15 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useCallback,
+  useMemo,
+} from 'react';
+import { usePathname } from 'next/navigation';
 import { apiFetch } from '@/lib/api';
 
 interface User {
@@ -25,9 +34,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const pathname = usePathname();
 
   // Check authentication status on mount
   useEffect(() => {
+    // Avoid a guaranteed extra network call on public pages.
+    // Auth is only required for admin screens in this project.
+    if (!pathname?.startsWith('/admin')) {
+      setLoading(false);
+      return;
+    }
+
     const checkAuth = async () => {
       try {
         setLoading(true);
@@ -52,9 +69,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
 
     checkAuth();
-  }, []);
+  }, [pathname]);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = useCallback(async (email: string, password: string): Promise<boolean> => {
     try {
       setLoading(true);
       setError(null);
@@ -87,9 +104,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const logout = async (): Promise<void> => {
+  const logout = useCallback(async (): Promise<void> => {
     try {
       setLoading(true);
       await apiFetch('/api/users/logout', {
@@ -104,18 +121,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setError(null);
       setLoading(false);
     }
-  };
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      isAuthenticated,
+      user,
+      login,
+      logout,
+      loading,
+      error,
+    }),
+    [isAuthenticated, user, login, logout, loading, error]
+  );
 
   return (
     <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        user,
-        login,
-        logout,
-        loading,
-        error,
-      }}
+      value={value}
     >
       {children}
     </AuthContext.Provider>

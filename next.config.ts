@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Image optimization
   images: {
     remotePatterns: [
       {
@@ -13,7 +12,7 @@ const nextConfig: NextConfig = {
         hostname: "localhost",
       },
     ],
-    unoptimized: true,
+    formats: ["image/avif", "image/webp"],
   },
 
   // API proxy for development - disabled (using local API routes)
@@ -34,6 +33,13 @@ const nextConfig: NextConfig = {
   typescript: {
     tsconfigPath: './tsconfig.json',
   },
+
+  poweredByHeader: false,
+  reactStrictMode: true,
+  compiler:
+    process.env.NODE_ENV === "production"
+      ? { removeConsole: { exclude: ["error", "warn"] } }
+      : undefined,
 };
 
 export default nextConfig;
