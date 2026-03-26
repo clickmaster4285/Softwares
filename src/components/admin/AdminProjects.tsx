@@ -245,7 +245,7 @@ const AdminProjects = () => {
                           {project.description}
                         </p>
                         <div className="flex flex-wrap gap-1">
-                          <Badge className="text-xs bg-primary/20 text-primary border-primary/30">
+                          <Badge className="text-xs bg-primary text-white border-primary/30">
                             {getCategoryName(project.category)}
                           </Badge>
                           {project.tags?.map((tag: string) => (

@@ -11,8 +11,8 @@ function getId(req: NextRequest) {
 
 // GET all projects
 export async function GET() {
-  await dbConnect();
   try {
+    await dbConnect();
     const projects = await Project.find()
       .populate('category', 'name description')
       .sort({ createdAt: -1 })
@@ -26,9 +26,10 @@ export async function GET() {
 
 // POST new project
 export async function POST(req: NextRequest) {
-  await dbConnect();
   try {
+    await dbConnect();
     const { title, description, url, category, tags, status, thumbnail } = await req.json();
+    
     if (!title || !description || !url || !category || !thumbnail) {
       return NextResponse.json({ message: 'Missing fields' }, { status: 400 });
     }
@@ -38,32 +39,54 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Invalid category' }, { status: 400 });
     }
 
-    const project = await Project.create({ title, description, url, category, tags, status, thumbnail });
+    const project = await Project.create({ 
+      title, 
+      description, 
+      url, 
+      category, 
+      tags, 
+      status, 
+      thumbnail 
+    });
 
     const populated = await Project.findById(project._id)
       .populate('category', 'name description')
       .populate('createdBy', 'email');
 
     return NextResponse.json(populated, { status: 201 });
-  } catch (err) {
-    console.error(err);
+  } catch (err: any) {
+    console.error("POST /projects error:", err.message);
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
 
-// PUT update project
+// PUT update project - FIXED (removed deprecated 'new' option)
 export async function PUT(req: NextRequest) {
-  await dbConnect();
   try {
+    await dbConnect();
     const id = getId(req);
-    if (!id) return NextResponse.json({ message: 'ID required' }, { status: 400 });
+    if (!id) {
+      return NextResponse.json({ message: 'ID required' }, { status: 400 });
+    }
 
     const data = await req.json();
-    const project = await Project.findByIdAndUpdate(id, data, { new: true })
+    
+    // ✅ FIXED: Use returnDocument: 'after' instead of new: true
+    const project = await Project.findByIdAndUpdate(
+      id, 
+      data, 
+      { 
+        returnDocument: 'after',
+        runValidators: true 
+      }
+    )
       .populate('category', 'name description')
       .populate('createdBy', 'email');
 
-    if (!project) return NextResponse.json({ message: 'Project not found' }, { status: 404 });
+    if (!project) {
+      return NextResponse.json({ message: 'Project not found' }, { status: 404 });
+    }
+    
     return NextResponse.json(project);
   } catch (err: any) {
     console.error("PUT /projects error:", err.message);
@@ -73,13 +96,17 @@ export async function PUT(req: NextRequest) {
 
 // DELETE project
 export async function DELETE(req: NextRequest) {
-  await dbConnect();
   try {
+    await dbConnect();
     const id = getId(req);
-    if (!id) return NextResponse.json({ message: 'ID required' }, { status: 400 });
+    if (!id) {
+      return NextResponse.json({ message: 'ID required' }, { status: 400 });
+    }
 
     const deleted = await Project.findByIdAndDelete(id);
-    if (!deleted) return NextResponse.json({ message: 'Project not found' }, { status: 404 });
+    if (!deleted) {
+      return NextResponse.json({ message: 'Project not found' }, { status: 404 });
+    }
 
     return NextResponse.json({ message: 'Deleted successfully' });
   } catch (err: any) {
@@ -87,5 +114,3 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
-
-

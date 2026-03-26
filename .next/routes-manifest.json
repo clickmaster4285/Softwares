@@ -14,7 +14,13 @@
   ],
   "headers": [],
   "rewrites": {
-    "beforeFiles": [],
+    "beforeFiles": [
+      {
+        "source": "/uploads/:path*",
+        "destination": "/api/uploads/:path*",
+        "regex": "^/uploads(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+      }
+    ],
     "afterFiles": [],
     "fallback": []
   },
@@ -26,6 +32,14 @@
         "nxtPid": "nxtPid"
       },
       "namedRegex": "^/api/projects/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/uploads/[filename]",
+      "regex": "^/api/uploads/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPfilename": "nxtPfilename"
+      },
+      "namedRegex": "^/api/uploads/(?<nxtPfilename>[^/]+?)(?:/)?$"
     },
     {
       "page": "/projects/[id]",

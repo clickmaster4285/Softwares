@@ -155,17 +155,12 @@ const AdminLogin = () => {
             </Button>
           </form>
 
-          {/* Demo Credentials */}
-          <div className="mt-6 pt-6 border-t border-white/20 text-center">
-            <p className="text-xs text-white/40">
-              Demo: admin@example.com / admin123
-            </p>
-          </div>
+        
         </div>
 
         {/* Footer */}
         <p className="text-center text-xs text-white/40 mt-6">
-          © 2026 Click Master Projects. All rights reserved.
+          © 2026 ClickMasters. All rights reserved.
         </p>
       </motion.div>
     </div>

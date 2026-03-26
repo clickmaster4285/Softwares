@@ -7,7 +7,7 @@ export const API_ENDPOINTS = {
   PROJECTS: '/api/projects',
   CATEGORIES: '/api/categories',
   TESTIMONIALS: '/api/testimonials',
-  // CONTACT: '/api/contact',
+   CONTACT: '/api/contact',
 } as const;
 
 export const ROUTES = {

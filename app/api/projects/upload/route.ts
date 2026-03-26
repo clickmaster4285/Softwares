@@ -1,3 +1,4 @@
+// app/api/projects/upload/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
@@ -20,8 +21,9 @@ export async function POST(req: NextRequest) {
     await mkdir(path.dirname(filepath), { recursive: true });
     await writeFile(filepath, buffer);
 
+    // CHANGE THIS: Return API route URL instead of direct public URL
     return NextResponse.json({ 
-      imageUrl: `/uploads/${filename}` 
+      imageUrl: `/api/uploads/${filename}`  // This will serve the image
     });
   } catch (err) {
     console.error("Upload error:", err);

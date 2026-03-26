@@ -15,7 +15,7 @@ interface HelpResource {
   icon: React.ElementType;
   title: string;
   description: string;
-  link: string;
+ 
   color?: string;
   stat?: string;
 }
@@ -26,7 +26,7 @@ const helpResources: HelpResource[] = [
     icon: BookOpen,
     title: "Documentation",
     description: "Technical documentation and developer guides for our software and APIs.",
-    link: "Browse Docs",
+    
     stat: "150+",
     color: "from-primary to primary/80",
   },
@@ -34,7 +34,7 @@ const helpResources: HelpResource[] = [
     icon: Video,
     title: "Video Tutorials",
     description: "Step-by-step videos to get started with your software and features.",
-    link: "Watch Videos",
+   
     stat: "200+",
     color: "from-primary to primary/80",
   },
@@ -42,7 +42,7 @@ const helpResources: HelpResource[] = [
     icon: MessageCircle,
     title: "Live Chat",
     description: "Chat with our support team in real-time. Get help with development and technical questions.",
-    link: "Start Chat",
+   
     stat: "24/7",
     color: "from-primary to primary/80",
   },
@@ -50,7 +50,7 @@ const helpResources: HelpResource[] = [
     icon: FileQuestion,
     title: "FAQ",
     description: "Common questions about our software development services, pricing, and process.",
-    link: "View FAQ",
+  
     stat: "50+",
     color: "from-primary to primary/80",
   },
@@ -58,7 +58,7 @@ const helpResources: HelpResource[] = [
     icon: Headphones,
     title: "Contact Support",
     description: "Request a callback or submit a ticket. Our development team responds within 24 hours.",
-    link: "Get Help",
+  
     stat: "24h",
     color: "from-primary to primary/80",
   },
@@ -213,14 +213,8 @@ export function HelpSection() {
                     {resource.description}
                   </p>
 
-                  {/* Link Button */}
-                  <motion.button
-                    whileHover={{ x: 4 }}
-                    className="flex items-center text-sm text-primary font-medium"
-                  >
-                    {resource.link}
-                    <ArrowRight className="ml-2 h-3 w-3" />
-                  </motion.button>
+                
+                 
 
                   {/* Bottom Corner Accent */}
                   <div className="absolute bottom-3 right-3 w-6 h-6">

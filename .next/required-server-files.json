@@ -63,14 +63,14 @@
       "remotePatterns": [
         {
           "protocol": "https",
-          "hostname": "**.supabase.co"
+          "hostname": "**"
         },
         {
           "protocol": "http",
           "hostname": "localhost"
         }
       ],
-      "unoptimized": false
+      "unoptimized": true
     },
     "devIndicators": {
       "position": "bottom-left"
@@ -301,7 +301,12 @@
       "root": "C:\\Users\\PC\\Desktop\\softwaress\\ClickMasters"
     },
     "_originalRewrites": {
-      "beforeFiles": [],
+      "beforeFiles": [
+        {
+          "source": "/uploads/:path*",
+          "destination": "/api/uploads/:path*"
+        }
+      ],
       "afterFiles": [],
       "fallback": []
     }

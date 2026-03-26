@@ -64,7 +64,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-, "src/utils/sendEmail.js"  ],
+, "src/utils/sendEmail.ts"  ],
   "exclude": [
     "node_modules"
   ]

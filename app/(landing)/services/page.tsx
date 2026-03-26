@@ -528,58 +528,61 @@ export default function ServicesPage() {
   }, [hasAnimated]);
 
   // GSAP animation for active process step change
-  useEffect(() => {
-    if (processDetailsRef.current) {
-      // Animate details panel on step change
-      gsap.fromTo(processDetailsRef.current,
-        {
-          opacity: 0.5,
-          y: 20,
-          scale: 0.98
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          ease: "power3.out"
-        }
-      );
+ 
+useEffect(() => {
+  if (processDetailsRef.current) {
+    // Animate details panel on step change
+    gsap.fromTo(processDetailsRef.current,
+      {
+        opacity: 0.5,
+        y: 20,
+        scale: 0.98
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.6,
+        ease: "power3.out"
+      }
+    );
 
-      // Animate the active card
-      processCardsRef.current.forEach((card, index) => {
-        if (card) {
-          if (index === activeProcessStep) {
-            gsap.to(card, {
-              scale: 1.05,
-              y: -5,
-           boxShadow: `0 25px 40px -15px hsl(var(--primary) / 0.4)`,
-borderColor: `hsl(var(--primary))`,
-              duration: 0.4,
-              ease: "power2.out"
-            });
+    // Animate the active card
+    processCardsRef.current.forEach((card, index) => {
+      if (card) {
+        if (index === activeProcessStep) {
+          // Active card gets primary shadow and border
+          gsap.to(card, {
+            scale: 1.05,
+            y: -5,
+            boxShadow: `0 25px 40px -15px hsl(var(--primary) / 0.4)`,
+            borderColor: `hsl(var(--primary))`,
+            duration: 0.4,
+            ease: "power2.out"
+          });
 
-            // Animate the icon
-            gsap.to(card.querySelector('.process-icon'), {
-              rotate: 360,
-              scale: 1.1,
-              duration: 0.6,
-              ease: "back.out(1.2)"
-            });
-          } else {
-            gsap.to(card, {
-              scale: 1,
-              y: 0,
-             boxShadow: `0 25px 40px -15px hsl(var(--primary) / 0.4)`,
-              borderColor: "#D1D5DB",
-              duration: 0.4,
-              ease: "power2.out"
-            });
-          }
+          // Animate the icon
+          gsap.to(card.querySelector('.process-icon'), {
+            rotate: 360,
+            scale: 1.1,
+            duration: 0.6,
+            ease: "back.out(1.2)"
+          });
+        } else {
+          // Inactive cards get NO shadow or minimal gray shadow
+          gsap.to(card, {
+            scale: 1,
+            y: 0,
+            boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05)", // Light gray shadow
+            borderColor: "rgba(0, 0, 0, 0.05)", // Light gray border
+            duration: 0.4,
+            ease: "power2.out"
+          });
         }
-      });
-    }
-  }, [activeProcessStep]);
+      }
+    });
+  }
+}, [activeProcessStep]);
 
   // Auto-rotate process steps
   useEffect(() => {

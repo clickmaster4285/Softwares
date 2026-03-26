@@ -6,24 +6,31 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.supabase.co",
+        hostname: "**",
       },
       {
         protocol: "http",
         hostname: "localhost",
       },
     ],
-    unoptimized: process.env.NODE_ENV === "development",
+    unoptimized: true,
   },
 
   // API proxy for development - disabled (using local API routes)
-  rewrites: async () => {
+  async rewrites() {
     return {
-      beforeFiles: [],
+      beforeFiles: [
+        {
+          source: '/uploads/:path*',
+          destination: '/api/uploads/:path*',
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
     };
   },
 
-  // TypeScript configuration is in tsconfig.json, not here
+  // TypeScript configuration
   typescript: {
     tsconfigPath: './tsconfig.json',
   },

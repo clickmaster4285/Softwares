@@ -13,14 +13,24 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function resolveImageUrl(url?: string): string {
   if (!url) return "/placeholder.svg";
+  
   const clean = url.replace(/\\/g, "/");
+  
+  // Handle full URLs
   if (clean.startsWith("http://") || clean.startsWith("https://")) return clean;
+  
+  // Handle data URLs and blob URLs
   if (clean.startsWith("data:") || clean.startsWith("blob:")) return clean;
+  
+  // Handle uploads - always reliable
   if (clean.startsWith("/uploads")) {
-    const base = process.env.NEXT_PUBLIC_API_URL ?? "";
-    return base ? `${base}${clean}` : clean;
+    return clean; // Static files served from public/uploads/ work in both dev/prod
   }
-  return clean;
+  
+  // Handle other relative paths - prefix if needed
+  if (clean.startsWith("/")) return clean;
+  
+  return `/uploads/${clean}`;
 }
 
 /**
