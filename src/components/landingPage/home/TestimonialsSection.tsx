@@ -238,10 +238,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
               <TrendingUp className="w-3 h-3" />
               +{Math.floor(Math.random() * 30 + 20)}% growth
             </span>
-            <span className="flex items-center gap-1">
-              <MessageCircle className="w-3 h-3" />
-              {Math.floor(Math.random() * 6 + 3)} months using
-            </span>
+          
           </div>
         </div>
       </div>

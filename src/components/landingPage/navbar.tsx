@@ -449,9 +449,7 @@ router.push('/solutions');
                               className="text-black/60 hover:text-primary transition-colors block py-1 text-left w-full"
                             >
                               {item.title}
-                              {item.externalUrl && (
-                                <span className="ml-2 text-xs text-gray-400">(external)</span>
-                              )}
+                            
                             </button>
                           </li>
                         ))}
@@ -465,7 +463,7 @@ router.push('/solutions');
                     onClick={closeDropdowns}
                     className="text-black/60 hover:text-primary transition-colors"
                   >
-                    Browse all Projects →
+                    Browse all Solutions →
                   </Link>
                 </div>
               </>
@@ -520,9 +518,7 @@ function MobileDropdown({
                     className="text-black/60 hover:text-primary transition-colors block py-1 text-left w-full"
                   >
                     {item.title}
-                    {item.externalUrl && (
-                      <span className="ml-2 text-xs text-gray-400">(external)</span>
-                    )}
+                   
                   </button>
                 </li>
               ))}
