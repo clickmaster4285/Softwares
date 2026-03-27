@@ -23,7 +23,12 @@ export async function apiFetch(
 ): Promise<Response> {
   const url = `${options?.baseURL || ''}${path.startsWith('/') ? path : `/${path}`}`;
 
-  const fetchOptions: RequestInit = { ...options, credentials: 'include' };
+  const method = (options.method || "GET").toUpperCase();
+  const fetchOptions: RequestInit = {
+    ...options,
+    credentials: "include",
+    ...(method === "GET" && !options.cache ? { cache: "force-cache" } : {}),
+  };
 
   // CRITICAL: Do NOT set Content-Type when uploading files (FormData)
   if (options.body instanceof FormData) {
@@ -31,7 +36,10 @@ export async function apiFetch(
     delete (fetchOptions.headers as any)?.['Content-Type'];
   } else {
     fetchOptions.headers = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
+      ...(method === "GET"
+        ? { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120" }
+        : {}),
       ...options.headers,
     };
   }

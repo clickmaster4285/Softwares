@@ -8,6 +8,7 @@ import 'swiper/css/effect-coverflow';
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from "@tanstack/react-query";
+import dynamic from 'next/dynamic';
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -24,15 +25,11 @@ import {
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 import { motion, useInView } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Import Swiper
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+const Swiper = dynamic(() => import('swiper/react').then((m) => m.Swiper), { ssr: false });
+const SwiperSlide = dynamic(() => import('swiper/react').then((m) => m.SwiperSlide), { ssr: false });
 
 export interface Testimonial {
   _id: string;
@@ -267,8 +264,16 @@ export function TestimonialsSection() {
 
   // GSAP section entrance
   useEffect(() => {
-    if (sectionRef.current) {
-      gsap.fromTo(sectionRef.current,
+    let isMounted = true;
+    if (!sectionRef.current) return;
+
+    (async () => {
+      const { gsap } = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      gsap.registerPlugin(ScrollTrigger);
+      if (!isMounted || !sectionRef.current) return;
+      gsap.fromTo(
+        sectionRef.current,
         { opacity: 0 },
         {
           opacity: 1,
@@ -276,11 +281,15 @@ export function TestimonialsSection() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top center",
-            toggleActions: "play none none reverse"
-          }
+            toggleActions: "play none none reverse",
+          },
         }
       );
-    }
+    })();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   // Autoplay control

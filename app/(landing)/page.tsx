@@ -1,104 +1,42 @@
-'use client';
-
-import { motion, Variants } from "framer-motion";
-
+import dynamic from 'next/dynamic';
+import { Suspense } from "react";
 import { HeroSection } from "@/components/landingPage/home/hero-section";
-import { AppsSection } from "@/components/landingPage/home/AppsSection";
-import { IndustriesSection } from "@/components/landingPage/home/industries-section";
-import { CommunitySection } from "@/components/landingPage/home/CommunitySection";
-import { TestimonialsSection } from "@/components/landingPage/home/TestimonialsSection";
-import { HelpSection } from "@/components/landingPage/home/help-section";
 
-
-// Animation variants
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.1, 0, 1] }
-  }
-};
-
-const fadeIn: Variants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: { duration: 0.8 }
-  }
-};
-
-const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
-};
+const AppsSection = dynamic(() => import('@/components/landingPage/home/AppsSection').then((m) => m.AppsSection), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" />,
+});
+const IndustriesSection = dynamic(() => import('@/components/landingPage/home/industries-section').then((m) => m.IndustriesSection), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" />,
+});
+const CommunitySection = dynamic(() => import('@/components/landingPage/home/CommunitySection').then((m) => m.CommunitySection), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" />,
+});
+const TestimonialsSection = dynamic(() => import('@/components/landingPage/home/TestimonialsSection').then((m) => m.TestimonialsSection), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" />,
+});
+const HelpSection = dynamic(() => import('@/components/landingPage/home/help-section').then((m) => m.HelpSection), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />,
+});
 
 export default function LandingPage() {
   return (
-    <main 
-      className="min-h-screen"
-      role="main"
-      aria-label="ClickMasters software development company homepage"
-    >
-      {/* Remove the parent motion.main and let each section animate independently on scroll */}
-      
-      <motion.div
-        variants={scaleIn}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <HeroSection />
-      </motion.div>
-
-      <motion.div
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
+    <main className="min-h-screen" role="main" aria-label="ClickMasters software development company homepage">
+      <HeroSection />
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <AppsSection />
-      </motion.div>
-
-      <motion.div
-        variants={fadeIn}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <IndustriesSection />
-      </motion.div>
-
-      <motion.div
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <CommunitySection />
-      </motion.div>
-
-      <motion.div
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <TestimonialsSection />
-      </motion.div>
-
-      <motion.div
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
+      </Suspense>
+      <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 rounded-lg" />}>
         <HelpSection />
-      </motion.div>
+      </Suspense>
     </main>
   );
 }

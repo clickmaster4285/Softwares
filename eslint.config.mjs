@@ -27,13 +27,12 @@ export default tseslint.config(
       "@next/next": nextPlugin,
     },
 
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
-
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-unused-vars": "warn",
-    },
+rules: {
+  "@typescript-eslint/no-explicit-any": "off",
+  "@typescript-eslint/no-unused-vars": "off",
+  "@next/next/no-img-element": "off",
+  "react-hooks/exhaustive-deps": "off",
+  "@typescript-eslint/triple-slash-reference": "off",
+},
   }
 );

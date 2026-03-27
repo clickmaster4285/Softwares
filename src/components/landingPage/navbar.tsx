@@ -4,11 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetch } from "@/lib/api";
 import { getCategoryName } from "@/lib/utils";
+import { Icon } from "@/components/ui/icon";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 // Types for dropdown data
 interface ProjectItem {
@@ -191,10 +192,12 @@ export function Navbar() {
           className="flex items-center gap-2 transition-opacity hover:opacity-90"
           onClick={closeDropdowns}
         >
-          <img 
+          <OptimizedImage
             src={logoToShow}
-            className="w-48 md:w-64 h-auto" 
-            alt="ClickMasters" 
+            className="w-48 md:w-64 h-auto"
+            alt="ClickMasters"
+            width={256}
+            height={64}
           />
         </Link>
 
@@ -232,10 +235,13 @@ export function Navbar() {
               )}
             >
               Solutions
-              <ChevronDown className={cn(
-                "h-4 w-4 transition-transform",
-                activeDropdown === "solutions" && "rotate-180"
-              )} />
+              <Icon
+                name="ChevronDown"
+                className={cn(
+                  "h-4 w-4 transition-transform",
+                  activeDropdown === "solutions" && "rotate-180"
+                )}
+              />
             </button>
           </div>
 
@@ -312,7 +318,7 @@ export function Navbar() {
                   : "text-black/70 hover:text-primary"
               )}
             >
-              <Menu className="h-6 w-6" />
+              <Icon name="Menu" className="h-6 w-6" />
             </button>
           </SheetTrigger>
           <SheetContent
@@ -322,7 +328,13 @@ export function Navbar() {
             <div className="flex flex-col h-full">
               {/* Mobile Header */}
               <div className="flex items-center justify-between p-6 border-b border-black/5">
-                <img src="/logo.png" className="w-36 h-auto" alt="ClickMasters" />
+                <OptimizedImage
+                  src="/logo.png"
+                  className="w-36 h-auto"
+                  alt="ClickMasters"
+                  width={144}
+                  height={36}
+                />
               </div>
 
               {/* Mobile Navigation */}
@@ -539,7 +551,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }
             className="text-primary hover:text-primary/80 text-sm font-medium inline-flex items-center gap-1"
           >
             View All Projects
-            <ChevronDown className="h-3 w-3 -rotate-90" />
+            <Icon name="ChevronDown" className="h-3 w-3 -rotate-90" />
           </Link>
         </div>
       </div>
@@ -553,7 +565,8 @@ function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }
         className="flex items-center justify-between w-full py-3 font-medium text-black/70 hover:text-primary transition-colors"
       >
         {title}
-        <ChevronDown
+        <Icon
+          name="ChevronDown"
           className={cn(
             "h-4 w-4 transition-transform duration-300",
             isExpanded && "rotate-180"

@@ -27,12 +27,16 @@ export async function apiFetch<T = any>(
     path.startsWith("/") ? path : `/${path}`
   }`;
 
+  const method = (options?.method || "GET").toUpperCase();
   const isFormData =
     typeof FormData !== "undefined" && options?.body instanceof FormData;
   const headers = isFormData
     ? { ...options?.headers }
     : {
         "Content-Type": "application/json",
+        ...(method === "GET"
+          ? { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120" }
+          : {}),
         ...options?.headers,
       };
 
@@ -41,6 +45,7 @@ export async function apiFetch<T = any>(
       ...options,
       headers,
       credentials: "include",
+      ...(method === "GET" && !options?.cache ? { cache: "force-cache" } : {}),
     });
 
     return response;
