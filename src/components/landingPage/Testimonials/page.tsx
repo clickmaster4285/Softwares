@@ -46,6 +46,19 @@ interface Testimonial {
   rating: number;
 }
 
+function normalizeTestimonials(payload: unknown): Testimonial[] {
+  if (Array.isArray(payload)) return payload as Testimonial[];
+  if (
+    payload &&
+    typeof payload === "object" &&
+    "data" in payload &&
+    Array.isArray((payload as { data?: unknown }).data)
+  ) {
+    return (payload as { data: Testimonial[] }).data;
+  }
+  return [];
+}
+
 interface AnimatedCounterProps {
   value: string;
   label: string;
@@ -288,7 +301,8 @@ const Testimonials: React.FC = () => {
     queryFn: async () => {
       const res = await apiFetch("/api/testimonials");
       if (!res.ok) throw new Error("Failed to fetch testimonials");
-      return res.json();
+      const payload: unknown = await res.json();
+      return normalizeTestimonials(payload);
     },
   });
 
