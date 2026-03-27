@@ -118,19 +118,20 @@ interface TestimonialCardProps {
   testimonial: Testimonial;
   index: number;
   isActive: boolean;
+  duplicateIndex?: number;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, isActive }) => {
+const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, isActive, duplicateIndex }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const gradients = [
     'from-primary/80 to-primary',
-    'from-primary to-primary',
+    'from-amber-400 to-primary',
     'from-primary to-primary',
     'from-primary to-primary/80',
     'from-primary/80 to-primary',
-    'from-primary to-primary/80',
+    'from-amber-400 to-primary/80',
   ];
-  const gradient = gradients[index % gradients.length];
+  const gradient = gradients[(duplicateIndex ?? index) % gradients.length];
 
   useEffect(() => {
     if (cardRef.current) {
@@ -141,7 +142,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
           y: 0,
           scale: 1,
           duration: 0.8,
-          delay: index * 0.1,
+          delay: (duplicateIndex ?? index) * 0.1,
           ease: "back.out(1.2)",
           scrollTrigger: {
             trigger: cardRef.current,
@@ -151,7 +152,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
         }
       );
     }
-  }, [index]);
+  }, [index, duplicateIndex]);
 
   return (
     <motion.div
@@ -181,13 +182,20 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
 
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
-              <Star
+              <motion.div
                 key={i}
-                className={`w-4 h-4 ${i < (testimonial.rating ?? 5)
-                  ? 'fill-primary text-primary'
-                  : 'text-gray-300 dark:text-gray-600'
-                }`}
-              />
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Star
+                  className={`w-4 h-4 ${
+                    i < (testimonial.rating ?? 5)
+                      ? 'fill-amber-400 text-amber-400'
+                      : 'text-gray-300 dark:text-gray-600'
+                  }`}
+                />
+              </motion.div>
             ))}
           </div>
         </div>
@@ -257,11 +265,52 @@ export function TestimonialsSection() {
     },
   });
 
-  const displayTestimonials = testimonials.slice(0, 6); // Limit for homepage
+  // Function to duplicate testimonials to reach desired count
+  const getDuplicatedTestimonials = (originalTestimonials: Testimonial[], targetCount: number = 6) => {
+    if (originalTestimonials.length === 0) return [];
+    
+    const duplicated: Testimonial[] = [];
+    const repeatCount = Math.ceil(targetCount / originalTestimonials.length);
+    
+    for (let i = 0; i < repeatCount; i++) {
+      duplicated.push(...originalTestimonials.map(t => ({
+        ...t,
+        _id: `${t._id}-dup-${i}` // Create unique IDs for duplicates
+      })));
+    }
+    
+    return duplicated.slice(0, targetCount);
+  };
+
+  // Get processed testimonials with duplication if needed
+  const getProcessedTestimonials = () => {
+    if (testimonials.length === 0) return [];
+    
+    // If we have 4 or more, use original (but limit to 6 for homepage)
+    if (testimonials.length >= 4) {
+      return testimonials.slice(0, 6);
+    }
+    
+    // For 2-3 testimonials, duplicate to create 6 items
+    if (testimonials.length >= 2 && testimonials.length <= 3) {
+      return getDuplicatedTestimonials(testimonials, 6);
+    }
+    
+    // For 1 testimonial, duplicate to 3 items
+    if (testimonials.length === 1) {
+      return getDuplicatedTestimonials(testimonials, 3);
+    }
+    
+    return testimonials;
+  };
+
+  const displayTestimonials = getProcessedTestimonials();
+  const isDuplicated = testimonials.length >= 2 && testimonials.length <= 3;
 
   useEffect(() => {
     if (displayTestimonials.length > 0) {
-      setHasEnoughSlides(displayTestimonials.length >= 6);
+      // Enable loop if we have at least 2 slides for better carousel experience
+      setHasEnoughSlides(displayTestimonials.length >= 2);
     }
   }, [displayTestimonials]);
 
@@ -300,18 +349,50 @@ export function TestimonialsSection() {
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
-
+        {/* Stats Section with Glow Effects */}
+        {!isLoading && testimonials.length > 0 && (
           <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: 80 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="h-px bg-primary mx-auto mb-8"
-                  />
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-20 py-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <AnimatedCounter
+              value="5000"
+              label="Happy Clients"
+              suffix="+"
+              delay={0.1}
+              gradient="from-primary to-primary"
+            />
+            <AnimatedCounter
+              value="98"
+              label="Satisfaction Rate"
+              suffix="%"
+              delay={0.2}
+              gradient="from-primary to-primary"
+            />
+            <AnimatedCounter
+              value="50"
+              label="Industry Awards"
+              suffix="+"
+              delay={0.3}
+              gradient="from-primary to-primary"
+            />
+            <AnimatedCounter
+              value="24"
+              label="Support Team"
+              suffix="/7"
+              delay={0.4}
+              gradient="from-primary to-primary"
+            />
+          </motion.div>
+        )}
 
-        
         {/* Header */}
         <motion.div
           className="text-center max-w-3xl mx-auto mb-14"
@@ -320,19 +401,26 @@ export function TestimonialsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-  Hear What Our <span className="text-primary">Clients Have to Say</span>
-</h2>
-<p className="text-gray-700 max-w-2xl mx-auto text-base mt-4">
-  Discover why businesses trust us for their custom software, web, and mobile app solutions. Read real feedback from our clients who have transformed their ideas into seamless digital experiences with our expertise.
-</p>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: 80 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="h-px bg-primary mx-auto mb-8"
+          />
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Hear What Our <span className="text-primary">Clients Have to Say</span>
+          </h2>
+          <p className="text-gray-700 max-w-2xl mx-auto text-base mt-4">
+            Discover why businesses trust us for their custom software, web, and mobile app solutions. 
+            Read real feedback from our clients who have transformed their ideas into seamless digital 
+            experiences with our expertise.
+          </p>
         </motion.div>
-
 
         {/* Swiper Testimonials */}
         {isLoading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(3)].map((_, i) => (
+            {[...Array(6)].map((_, i) => (
               <Card key={i} className="rounded-3xl border-border/60 h-96">
                 <CardContent className="p-8">
                   <div className="h-10 w-10 bg-muted rounded animate-pulse mb-4" />
@@ -367,23 +455,36 @@ export function TestimonialsSection() {
               pagination={{ clickable: true, dynamicBullets: true }}
               autoplay={isAutoPlaying ? { delay: 5000, disableOnInteraction: false } : false}
               onSwiper={setSwiperRef}
-              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+              onSlideChange={(swiper) => {
+                // Handle active index properly with duplicated slides
+                const realIndex = swiper.realIndex % testimonials.length;
+                setActiveIndex(realIndex);
+              }}
               breakpoints={{
                 640: { slidesPerView: 1, spaceBetween: 20 },
-                768: { slidesPerView: displayTestimonials.length >= 2 ? 2 : 1, spaceBetween: 30 },
-                1024: { slidesPerView: displayTestimonials.length >= 3 ? 3 : displayTestimonials.length, spaceBetween: 40 },
+                768: { slidesPerView: Math.min(2, displayTestimonials.length), spaceBetween: 30 },
+                1024: { slidesPerView: Math.min(3, displayTestimonials.length), spaceBetween: 40 },
               }}
               className="pb-14"
             >
-              {displayTestimonials.map((testimonial, index) => (
-                <SwiperSlide key={testimonial._id}>
-                  <TestimonialCard
-                    testimonial={testimonial}
-                    index={index}
-                    isActive={index === activeIndex}
-                  />
-                </SwiperSlide>
-              ))}
+              {displayTestimonials.map((testimonial, index) => {
+                // Determine if this is a duplicate and get original index for active state
+                const isDuplicateSlide = testimonial._id.includes('-dup-');
+                const originalIndex = isDuplicateSlide 
+                  ? index % testimonials.length 
+                  : index % testimonials.length;
+                
+                return (
+                  <SwiperSlide key={testimonial._id}>
+                    <TestimonialCard
+                      testimonial={testimonial}
+                      index={index}
+                      isActive={originalIndex === activeIndex}
+                      duplicateIndex={index}
+                    />
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
 
             {/* Custom Navigation */}

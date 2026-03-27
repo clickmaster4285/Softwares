@@ -28,7 +28,7 @@ export const WhyChooseSection = () => {
 ];
 
   return (
-    <section className="container mx-auto max-w-6xl px-4 mt-16 mb-16">
+    <section className="container mx-auto max-w-6xl px-4 mt-16 mb-16"  id="help">
       <motion.h2
         className="text-3xl md:text-4xl font-bold text-black text-center mb-12"
         initial={{ scale: 0.8, opacity: 0 }}
