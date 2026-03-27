@@ -130,8 +130,18 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
   const gradient = gradients[index % gradients.length];
 
   useEffect(() => {
-    if (cardRef.current) {
-      gsap.fromTo(cardRef.current,
+    let isMounted = true;
+    const el = cardRef.current;
+    if (!el) return;
+
+    (async () => {
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+      if (!isMounted) return;
+
+      gsap.fromTo(
+        el,
         { opacity: 0, y: 50, scale: 0.9 },
         {
           opacity: 1,
@@ -141,13 +151,17 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
           delay: index * 0.1,
           ease: "back.out(1.2)",
           scrollTrigger: {
-            trigger: cardRef.current,
+            trigger: el,
             start: "top bottom-=100",
-            toggleActions: "play none none reverse"
-          }
+            toggleActions: "play none none reverse",
+          },
         }
       );
-    }
+    })();
+
+    return () => {
+      isMounted = false;
+    };
   }, [index]);
 
   return (
