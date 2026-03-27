@@ -8,6 +8,7 @@ export const API_ENDPOINTS = {
   CATEGORIES: '/api/categories',
   TESTIMONIALS: '/api/testimonials',
    CONTACT: '/api/contact',
+   
 } as const;
 
 export const ROUTES = {

@@ -3,6 +3,8 @@
  * Works with both client and server components
  */
 
+const API_BASE_URL = '';
+
 export interface ApiErrorResponse {
   message: string;
   error?: string;
@@ -17,18 +19,13 @@ export interface ApiSuccessResponse<T> {
 /**
  * Enhanced fetch wrapper for API calls
  */
-export async function apiFetch(
+export async function apiFetch<T = any>(
   path: string,
   options: RequestInit & { baseURL?: string } = {}
 ): Promise<Response> {
   const url = `${options?.baseURL || ''}${path.startsWith('/') ? path : `/${path}`}`;
 
-  const method = (options.method || "GET").toUpperCase();
-  const fetchOptions: RequestInit = {
-    ...options,
-    credentials: "include",
-    ...(method === "GET" && !options.cache ? { cache: "force-cache" } : {}),
-  };
+  const fetchOptions: RequestInit = { ...options, credentials: 'include' };
 
   // CRITICAL: Do NOT set Content-Type when uploading files (FormData)
   if (options.body instanceof FormData) {
@@ -36,10 +33,7 @@ export async function apiFetch(
     delete (fetchOptions.headers as any)?.['Content-Type'];
   } else {
     fetchOptions.headers = {
-      "Content-Type": "application/json",
-      ...(method === "GET"
-        ? { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120" }
-        : {}),
+      'Content-Type': 'application/json',
       ...options.headers,
     };
   }

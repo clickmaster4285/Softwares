@@ -1,15 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
-import { apiFetch } from "@/lib/api";
-import { getCategoryName } from "@/lib/utils";
-import { Icon } from "@/components/ui/icon";
-import { OptimizedImage } from "@/components/ui/optimized-image";
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Menu, ChevronDown, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useQuery } from '@tanstack/react-query';
+import { apiFetch } from '@/lib/api';
+import { getCategoryName } from '@/lib/utils';
 
 // Types for dropdown data
 interface ProjectItem {
@@ -31,7 +30,7 @@ interface Project {
   thumbnail?: string;
   url?: string;
   category: string | { _id: string; name: string };
-  status: "live" | "in-progress" | "completed";
+  status: 'live' | 'in-progress' | 'completed';
   technologies?: string[];
   client?: string;
   completionDate?: string;
@@ -47,15 +46,15 @@ export function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const isHome = pathname === "/";
-  const isAbout = pathname === "/about-us";
+  const isHome = pathname === '/';
+  const isAbout = pathname === '/about-us';
 
   // Fetch projects from API for Solutions dropdown
   const { data: projects = [], isLoading: isLoadingProjects } = useQuery<Project[]>({
-    queryKey: ["projects-public"],
+    queryKey: ['projects-public'],
     queryFn: async () => {
-      const res = await apiFetch("/api/projects");
-      if (!res.ok) throw new Error("Failed to fetch projects");
+      const res = await apiFetch('/api/projects');
+      if (!res.ok) throw new Error('Failed to fetch projects');
       return res.json();
     },
   });
@@ -63,21 +62,21 @@ export function Navbar() {
   // Group projects by category
   const groupedProjects = projects.reduce((acc: ProjectCategory[], project) => {
     const categoryName = getCategoryName(project.category);
-    const existingCategory = acc.find(cat => cat.category === categoryName);
-    
+    const existingCategory = acc.find((cat) => cat.category === categoryName);
+
     const projectItem: ProjectItem = {
       id: project._id,
       title: project.title,
       url: project.url || `/projects/${project._id}`, // Use external URL if exists, otherwise internal
-      externalUrl: project.url // Store external URL separately if needed
+      externalUrl: project.url, // Store external URL separately if needed
     };
-    
+
     if (existingCategory) {
       existingCategory.items.push(projectItem);
     } else {
       acc.push({
         category: categoryName,
-        items: [projectItem]
+        items: [projectItem],
       });
     }
     return acc;
@@ -98,7 +97,7 @@ export function Navbar() {
   // Handle Solutions link click
   const handleSolutionsClick = () => {
     closeDropdowns();
-    router.push('/projects');
+router.push('/solutions');
   };
 
   // Check if page is loading
@@ -111,8 +110,8 @@ export function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const handleMouseEnter = (dropdown: string) => {
@@ -131,20 +130,17 @@ export function Navbar() {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
       }
     };
 
     if (activeDropdown) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [activeDropdown]);
 
@@ -157,33 +153,30 @@ export function Navbar() {
   };
 
   // During page loading, show black text and logo
-  const navStyle = isPageLoading 
-    ? "bg-white border-b border-black/10 shadow-sm"
+  const navStyle = isPageLoading
+    ? 'bg-white border-b border-black/10 shadow-sm'
     : isScrolled
-      ? "bg-white/95 border-b border-black/10 shadow-sm"
-      : "bg-white/10 backdrop-blur-md border-b border-transparent";
+      ? 'bg-white/95 border-b border-black/10 shadow-sm'
+      : 'bg-white/10 backdrop-blur-md border-b border-transparent';
 
-  const logoToShow = isPageLoading || !isLightHero ? "/logo.png" : "/logo-white.png";
-  
+  const logoToShow = isPageLoading || !isLightHero ? '/logo.png' : '/logo-white.png';
+
   const linkStyle = (isActive: boolean) => {
     if (isPageLoading) {
-      return isActive ? "text-primary font-bold" : "text-black/70 hover:text-primary";
+      return isActive ? 'text-primary font-bold' : 'text-black/70 hover:text-primary';
     }
     if (isActive) {
-      return "text-primary font-bold";
+      return 'text-primary font-bold';
     }
     if (isLightHero) {
-      return "text-white/90 hover:text-primary";
+      return 'text-white/90 hover:text-primary';
     }
-    return "text-black/70 hover:text-primary";
+    return 'text-black/70 hover:text-primary';
   };
 
   return (
     <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 w-full transition-all duration-300",
-        navStyle
-      )}
+      className={cn('fixed inset-x-0 top-0 z-50 w-full transition-all duration-300', navStyle)}
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
@@ -192,13 +185,7 @@ export function Navbar() {
           className="flex items-center gap-2 transition-opacity hover:opacity-90"
           onClick={closeDropdowns}
         >
-          <OptimizedImage
-            src={logoToShow}
-            className="w-48 md:w-64 h-auto"
-            alt="ClickMasters"
-            width={256}
-            height={64}
-          />
+          <img src={logoToShow} className="w-48 md:w-64 h-auto" alt="ClickMasters" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -207,39 +194,37 @@ export function Navbar() {
           <Link
             href="/"
             onClick={closeDropdowns}
-            className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/"))
-            )}
+            className={cn('text-sm font-medium transition-colors', linkStyle(isActivePath('/')))}
           >
             Home
           </Link>
 
           {/* Solutions Dropdown - Hover with click navigation */}
-          <div 
+          <div
             className="relative"
-            onMouseEnter={() => handleMouseEnter("solutions")}
+            onMouseEnter={() => handleMouseEnter('solutions')}
             onMouseLeave={handleMouseLeave}
           >
             <button
               onClick={handleSolutionsClick}
               className={cn(
-                "text-sm font-medium transition-colors flex items-center gap-1",
-                activeDropdown === "solutions" 
-                  ? isScrolled ? "text-primary" : "text-primary"
+                'text-sm font-medium transition-colors flex items-center gap-1',
+                activeDropdown === 'solutions'
+                  ? isScrolled
+                    ? 'text-primary'
+                    : 'text-primary'
                   : isPageLoading
-                    ? "text-black/70 hover:text-primary"
+                    ? 'text-black/70 hover:text-primary'
                     : isLightHero
-                      ? "text-white/90 hover:text-primary"
-                      : "text-black/70 hover:text-primary"
+                      ? 'text-white/90 hover:text-primary'
+                      : 'text-black/70 hover:text-primary'
               )}
             >
               Solutions
-              <Icon
-                name="ChevronDown"
+              <ChevronDown
                 className={cn(
-                  "h-4 w-4 transition-transform",
-                  activeDropdown === "solutions" && "rotate-180"
+                  'h-4 w-4 transition-transform',
+                  activeDropdown === 'solutions' && 'rotate-180'
                 )}
               />
             </button>
@@ -250,8 +235,8 @@ export function Navbar() {
             href="/services"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/services"))
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/services'))
             )}
           >
             Services
@@ -261,8 +246,8 @@ export function Navbar() {
             href="/about-us"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/about-us"))
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/about-us'))
             )}
           >
             About Us
@@ -272,8 +257,8 @@ export function Navbar() {
             href="/contact-us"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/contact-us"))
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/contact-us'))
             )}
           >
             Contact Us
@@ -283,8 +268,8 @@ export function Navbar() {
             href="/testimonials"
             onClick={closeDropdowns}
             className={cn(
-              "text-sm font-medium transition-colors",
-              linkStyle(isActivePath("/testimonials"))
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/testimonials'))
             )}
           >
             Testimonials
@@ -294,14 +279,16 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <Link href="/admin/login" onClick={closeDropdowns}>
-            <button className={cn(
-              "px-5 py-2 text-sm font-medium transition-colors duration-300",
-              isPageLoading
-                ? "text-white bg-primary hover:bg-primary/90"
-                : isScrolled
-                  ? "text-white rounded-md bg-primary hover:bg-primary/90"
-                  : "text-white bg-primary rounded-md hover:bg-primary/90"
-            )}>
+            <button
+              className={cn(
+                'px-5 py-2 text-sm font-medium transition-colors duration-300',
+                isPageLoading
+                  ? 'text-white bg-primary hover:bg-primary/90'
+                  : isScrolled
+                    ? 'text-white rounded-md bg-primary hover:bg-primary/90'
+                    : 'text-white bg-primary rounded-md hover:bg-primary/90'
+              )}
+            >
               Sign In
             </button>
           </Link>
@@ -312,13 +299,13 @@ export function Navbar() {
           <SheetTrigger asChild className="lg:hidden">
             <button
               className={cn(
-                "p-2 transition-colors",
+                'p-2 transition-colors',
                 isLightHero
-                  ? "text-white/90 hover:text-primary"
-                  : "text-black/70 hover:text-primary"
+                  ? 'text-white/90 hover:text-primary'
+                  : 'text-black/70 hover:text-primary'
               )}
             >
-              <Icon name="Menu" className="h-6 w-6" />
+              <Menu className="h-6 w-6" />
             </button>
           </SheetTrigger>
           <SheetContent
@@ -328,13 +315,7 @@ export function Navbar() {
             <div className="flex flex-col h-full">
               {/* Mobile Header */}
               <div className="flex items-center justify-between p-6 border-b border-black/5">
-                <OptimizedImage
-                  src="/logo.png"
-                  className="w-36 h-auto"
-                  alt="ClickMasters"
-                  width={144}
-                  height={36}
-                />
+                <img src="/logo.png" className="w-36 h-auto" alt="ClickMasters" />
               </div>
 
               {/* Mobile Navigation */}
@@ -345,10 +326,10 @@ export function Navbar() {
                     href="/"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     Home
@@ -368,10 +349,10 @@ export function Navbar() {
                     href="/services"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/services")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/services')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     Services
@@ -381,10 +362,10 @@ export function Navbar() {
                     href="/about-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/about-us")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/about-us')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     About Us
@@ -394,10 +375,10 @@ export function Navbar() {
                     href="/contact-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/contact-us")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/contact-us')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     Contact Us
@@ -407,10 +388,10 @@ export function Navbar() {
                     href="/testimonials"
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "py-3 font-medium transition-colors border-b border-black/5",
-                      isActivePath("/testimonials")
-                        ? "text-primary font-bold"
-                        : "text-black/70 hover:text-primary"
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/testimonials')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
                     )}
                   >
                     Testimonials
@@ -432,8 +413,8 @@ export function Navbar() {
       </div>
 
       {/* Full-width Dropdown Menu for Solutions */}
-      {activeDropdown === "solutions" && !isPageLoading && (
-        <div 
+      {activeDropdown === 'solutions' && !isPageLoading && (
+        <div
           ref={dropdownRef}
           onMouseEnter={() => {
             if (hoverTimeoutRef.current) {
@@ -468,9 +449,7 @@ export function Navbar() {
                               className="text-black/60 hover:text-primary transition-colors block py-1 text-left w-full"
                             >
                               {item.title}
-                              {item.externalUrl && (
-                                <span className="ml-2 text-xs text-gray-400">(external)</span>
-                              )}
+                            
                             </button>
                           </li>
                         ))}
@@ -480,11 +459,11 @@ export function Navbar() {
                 </div>
                 <div className="text-center pt-6 border-t border-black/5">
                   <Link
-                    href="/projects"
+                    href="/solutions"
                     onClick={closeDropdowns}
                     className="text-black/60 hover:text-primary transition-colors"
                   >
-                    Browse all Projects →
+                    Browse all Solutions →
                   </Link>
                 </div>
               </>
@@ -505,7 +484,13 @@ interface MobileDropdownProps {
   onProjectClick: (project: ProjectItem) => void;
 }
 
-function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }: MobileDropdownProps) {
+function MobileDropdown({
+  title,
+  items,
+  isLoading,
+  onLinkClick,
+  onProjectClick,
+}: MobileDropdownProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const renderItems = () => {
@@ -521,9 +506,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }
       <div className="pl-4 space-y-4 mt-3">
         {items.map((section, idx) => (
           <div key={idx}>
-            <h4 className="text-sm font-semibold text-primary mb-2">
-              {section.category}
-            </h4>
+            <h4 className="text-sm font-semibold text-primary mb-2">{section.category}</h4>
             <ul className="space-y-2">
               {section.items.map((item, itemIdx) => (
                 <li key={itemIdx}>
@@ -535,9 +518,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }
                     className="text-black/60 hover:text-primary transition-colors block py-1 text-left w-full"
                   >
                     {item.title}
-                    {item.externalUrl && (
-                      <span className="ml-2 text-xs text-gray-400">(external)</span>
-                    )}
+                   
                   </button>
                 </li>
               ))}
@@ -551,7 +532,7 @@ function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }
             className="text-primary hover:text-primary/80 text-sm font-medium inline-flex items-center gap-1"
           >
             View All Projects
-            <Icon name="ChevronDown" className="h-3 w-3 -rotate-90" />
+            <ChevronDown className="h-3 w-3 -rotate-90" />
           </Link>
         </div>
       </div>
@@ -565,12 +546,8 @@ function MobileDropdown({ title, items, isLoading, onLinkClick, onProjectClick }
         className="flex items-center justify-between w-full py-3 font-medium text-black/70 hover:text-primary transition-colors"
       >
         {title}
-        <Icon
-          name="ChevronDown"
-          className={cn(
-            "h-4 w-4 transition-transform duration-300",
-            isExpanded && "rotate-180"
-          )}
+        <ChevronDown
+          className={cn('h-4 w-4 transition-transform duration-300', isExpanded && 'rotate-180')}
         />
       </button>
       {isExpanded && renderItems()}

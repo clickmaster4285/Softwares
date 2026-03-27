@@ -1,13 +1,22 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
+import React, { useState, useRef, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Badge } from "@/components/ui/badge";
-import { apiFetch } from "@/lib/api";
-import { getCategoryName, resolveImageUrl } from "@/lib/utils";
-import { ExternalLink, FolderKanban, ArrowUpRight, ArrowRight } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { apiFetch } from '@/lib/api';
+import { getCategoryName, resolveImageUrl } from '@/lib/utils';
+import {
+  ExternalLink,
+  FolderKanban,
+  ArrowUpRight,
+  Code,
+  Globe,
+  Smartphone,
+  ArrowRight,
+} from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -27,7 +36,7 @@ interface Project {
   thumbnail?: string;
   url?: string;
   category: string | Category;
-  status: "live" | "in-progress" | "completed";
+  status: 'live' | 'in-progress' | 'completed';
 }
 
 interface GroupedProjects {
@@ -38,17 +47,27 @@ interface GroupedProjects {
 // Helper function with proper typing
 function groupProjectsByCategory(projects: Project[]): GroupedProjects[] {
   const map = new Map<string, Project[]>();
-  
+
   for (const p of projects) {
     const name = getCategoryName(p.category);
     if (!map.has(name)) map.set(name, []);
     map.get(name)!.push(p);
   }
-  
+
   return Array.from(map.entries())
     .map(([categoryName, projects]) => ({ categoryName, projects }))
     .sort((a, b) => a.categoryName.localeCompare(b.categoryName));
 }
+
+// Get icon for category
+const getCategoryIcon = (categoryName: string) => {
+  const icons: Record<string, React.ElementType> = {
+    'Web Development': Globe,
+    'Mobile Apps': Smartphone,
+    'Custom Software': Code,
+  };
+  return icons[categoryName] || FolderKanban;
+};
 
 export function AppsSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -56,25 +75,24 @@ export function AppsSection() {
   const categoriesRef = useRef<(HTMLDivElement | null)[]>([]);
   const ctaRef = useRef<HTMLDivElement>(null);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   const { data: projects = [], isLoading } = useQuery<Project[]>({
-    queryKey: ["projects-public"],
+    queryKey: ['projects-public'],
     queryFn: async () => {
-const res = await apiFetch("/api/projects");
-      if (!res.ok) throw new Error("Failed to fetch projects");
+      const res = await apiFetch('/api/projects');
+      if (!res.ok) throw new Error('Failed to fetch projects');
       return res.json();
     },
+    staleTime: 300000, // 5min
+    refetchOnWindowFocus: false,
   });
 
-  console.log("projects", projects)
-
   const byCategory = groupProjectsByCategory(projects);
-  
+
   // Get only the first 2 categories
   const displayedCategories = byCategory.slice(0, 2);
   const remainingCount = byCategory.length - 2;
-
-
 
   // Loading skeletons with premium styling
   const renderSkeletons = () => (
@@ -104,25 +122,25 @@ const res = await apiFetch("/api/projects");
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ delay: 0.2, type: "spring" }}
+        transition={{ delay: 0.2, type: 'spring' }}
         className="relative inline-block"
       >
         <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl" />
         <FolderKanban className="relative h-14 w-14 text-primary mx-auto mb-4" />
       </motion.div>
-      <h3 className="text-xl font-bold text-black mb-2">No projects yet</h3>
+      <h3 className="text-xl font-bold text-black mb-2">No solutions yet</h3>
       <p className="text-gray-600 max-w-md mx-auto">
-        Projects will appear here once they are added and grouped by category.
+        Solutions will appear here once they are added and grouped by category.
       </p>
     </motion.div>
   );
 
   // Project card component with premium animations
   const renderProjectCard = (project: Project, index: number) => {
-    const isExternal = project.url?.startsWith("http");
+    const isExternal = project.url?.startsWith('http');
     const projectId = project._id;
     const isHovered = hoveredProject === projectId;
-    
+
     const cardContent = (
       <div
         onMouseEnter={() => setHoveredProject(projectId)}
@@ -132,12 +150,15 @@ const res = await apiFetch("/api/projects");
       >
         {/* Premium Card Design */}
         <div className="relative bg-white rounded-2xl border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden">
-          
           {/* Animated Background Pattern */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-            <div className="absolute inset-0" style={{
-              background: 'radial-gradient(circle at 20% 30%, rgba(249,115,22,0.03) 0%, transparent 50%)',
-            }} />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  'radial-gradient(circle at 20% 30%, rgba(249,115,22,0.03) 0%, transparent 50%)',
+              }}
+            />
           </div>
 
           {/* Image Container */}
@@ -157,7 +178,7 @@ const res = await apiFetch("/api/projects");
                 <FolderKanban className="h-10 w-10 text-primary/30" />
               </div>
             )}
-            
+
             {/* Status Badge Overlay with Animation */}
             <motion.div
               className="absolute top-3 right-3"
@@ -165,12 +186,12 @@ const res = await apiFetch("/api/projects");
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              {project.status === "live" && (
+              {project.status === 'live' && (
                 <Badge className="bg-emerald-500/90 text-white border-0 text-xs font-medium px-2 py-1 rounded-full">
                   Live
                 </Badge>
               )}
-              {project.status === "in-progress" && (
+              {project.status === 'in-progress' && (
                 <Badge className="bg-amber-500/90 text-white border-0 text-xs font-medium px-2 py-1 rounded-full">
                   In Progress
                 </Badge>
@@ -185,16 +206,14 @@ const res = await apiFetch("/api/projects");
               transition={{ duration: 0.3 }}
             />
           </div>
-          
+
           <div className="p-6">
-            <h3 className="text-lg font-bold text-black mb-2 line-clamp-1">
-              {project.title}
-            </h3>
-            
+            <h3 className="text-lg font-bold text-black mb-2 line-clamp-1">{project.title}</h3>
+
             <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-3">
               {project.description}
             </p>
-            
+
             {project.url && (
               <motion.div
                 whileHover={{ x: 4 }}
@@ -220,7 +239,7 @@ const res = await apiFetch("/api/projects");
                 className="w-full h-full border-b border-r border-primary"
                 animate={{
                   rotate: isHovered ? 180 : 0,
-                  opacity: isHovered ? 0.3 : 0.1
+                  opacity: isHovered ? 0.3 : 0.1,
                 }}
                 transition={{ duration: 0.5 }}
               />
@@ -233,10 +252,10 @@ const res = await apiFetch("/api/projects");
     // Wrap with appropriate link
     if (isExternal && project.url) {
       return (
-        <a 
-          key={project._id} 
-          href={project.url} 
-          target="_blank" 
+        <a
+          key={project._id}
+          href={project.url}
+          target="_blank"
           rel="noopener noreferrer"
           className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
         >
@@ -244,10 +263,10 @@ const res = await apiFetch("/api/projects");
         </a>
       );
     }
-    
+
     return (
-      <Link 
-        key={project._id} 
+      <Link
+        key={project._id}
         href={`/projects/${project._id}`}
         className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
       >
@@ -257,12 +276,11 @@ const res = await apiFetch("/api/projects");
   };
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="apps" 
+      id="apps"
       className="relative py-24 overflow-hidden bg-white font-sans"
     >
- 
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-20">
@@ -272,14 +290,14 @@ const res = await apiFetch("/api/projects");
             transition={{ duration: 0.8, delay: 0.2 }}
             className="h-px bg-primarymx-auto mb-8"
           />
-          
+
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-4">
             Our Solutions
           </h2>
-          
+
           <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">
-            Explore custom software, web applications, and software solutions we have built 
-            for clients across various industries.
+            Explore custom software, web applications, and software solutions we have built for
+            clients across various industries.
           </p>
         </div>
 
@@ -290,43 +308,44 @@ const res = await apiFetch("/api/projects");
           renderEmptyState()
         ) : (
           <div className="space-y-16">
-            {displayedCategories.map(({ categoryName, projects: categoryProjects }, categoryIndex) => {
-              return (
-                <div
-                  key={categoryName}
-                  ref={(el) => { categoriesRef.current[categoryIndex] = el; }}
-                  className="space-y-8"
-                >
-                  {/* Category Header with Premium Styling */}
-                  <div className="flex items-center gap-4">
-                   
-                    
-                    <div className="flex-1 flex items-center gap-3">
-                      <h3 className="text-xl sm:text-2xl font-bold text-black">
-                        {categoryName}
-                      </h3>
-                      <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
-                      <Badge className="text-xs bg-primary text-primary border-0 rounded-full px-3 py-1">
-                        {categoryProjects.length} {categoryProjects.length === 1 ? 'Solution' : 'Solutions'}
-                      </Badge>
+            {displayedCategories.map(
+              ({ categoryName, projects: categoryProjects }, categoryIndex) => {
+                const CategoryIcon = getCategoryIcon(categoryName);
+
+                return (
+                  <div
+                    key={categoryName}
+                    ref={(el) => {
+                      categoriesRef.current[categoryIndex] = el;
+                    }}
+                    className="space-y-8"
+                  >
+                    {/* Category Header with Premium Styling */}
+                    <div className="flex items-center gap-4">
+                      <div className="flex-1 flex items-center gap-3">
+                        <h3 className="text-xl sm:text-2xl font-bold text-black">{categoryName}</h3>
+                        <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
+                        <Badge className="text-xs bg-primary text-primary border-0 rounded-full px-3 py-1">
+                          {categoryProjects.length}{' '}
+                          {categoryProjects.length === 1 ? 'Solution' : 'Solutions'}
+                        </Badge>
+                      </div>
+                    </div>
+
+                    {/* Projects Grid - Show all projects for this category */}
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                      {categoryProjects.map((project, index) => renderProjectCard(project, index))}
                     </div>
                   </div>
-
-                  {/* Projects Grid - Show all projects for this category */}
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {categoryProjects.map((project, index) => renderProjectCard(project, index))}
-                  </div>
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
         )}
 
         {/* Bottom CTA - Enhanced to show remaining categories count */}
         <div ref={ctaRef} className="mt-20 text-center">
-        
-          
-          <Link href="/projects" className="inline-block">
+          <Link href="/solutions" className="inline-block">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
@@ -334,7 +353,10 @@ const res = await apiFetch("/api/projects");
             >
               <span className="relative z-10 flex items-center">
                 {remainingCount > 0 ? (
-                  <>View All Solutions ({remainingCount} more {remainingCount === 1 ? 'category' : 'categories'})</>
+                  <>
+                    View All Solutions ({remainingCount} more{' '}
+                    {remainingCount === 1 ? 'category' : 'categories'})
+                  </>
                 ) : (
                   <>View All Solutions</>
                 )}
@@ -342,7 +364,7 @@ const res = await apiFetch("/api/projects");
               </span>
               <motion.div
                 className="absolute inset-0 bg-primary"
-                initial={{ x: "-100%" }}
+                initial={{ x: '-100%' }}
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
               />

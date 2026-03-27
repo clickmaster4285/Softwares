@@ -23,15 +23,13 @@ import {
   Pause
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
-
-
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -44,19 +42,6 @@ interface Testimonial {
   content: string;
   avatarUrl?: string;
   rating: number;
-}
-
-function normalizeTestimonials(payload: unknown): Testimonial[] {
-  if (Array.isArray(payload)) return payload as Testimonial[];
-  if (
-    payload &&
-    typeof payload === "object" &&
-    "data" in payload &&
-    Array.isArray((payload as { data?: unknown }).data)
-  ) {
-    return (payload as { data: Testimonial[] }).data;
-  }
-  return [];
 }
 
 interface AnimatedCounterProps {
@@ -140,9 +125,10 @@ interface TestimonialCardProps {
   testimonial: Testimonial;
   index: number;
   isActive: boolean;
+  duplicateIndex?: number;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, isActive }) => {
+const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, isActive, duplicateIndex }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const gradients = [
     'from-primary/80 to-primary',
@@ -153,7 +139,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
     'from-amber-400 to-primary/80',
   ];
 
-  const gradient = gradients[index % gradients.length];
+  const gradient = gradients[(duplicateIndex ?? index) % gradients.length];
 
   useEffect(() => {
     // GSAP animation for card entrance
@@ -169,7 +155,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
           y: 0,
           scale: 1,
           duration: 0.8,
-          delay: index * 0.1,
+          delay: (duplicateIndex ?? index) * 0.1,
           ease: "back.out(1.2)",
           scrollTrigger: {
             trigger: cardRef.current,
@@ -179,7 +165,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
         }
       );
     }
-  }, [index]);
+  }, [index, duplicateIndex]);
 
   return (
     <motion.div
@@ -278,10 +264,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
               <TrendingUp className="w-3 h-3" />
               +{Math.floor(Math.random() * 30 + 20)}% growth
             </span>
-            <span className="flex items-center gap-1">
-              <MessageCircle className="w-3 h-3" />
-              {Math.floor(Math.random() * 6 + 3)} months using
-            </span>
+           
           </div>
         </div>
       </div>
@@ -301,18 +284,60 @@ const Testimonials: React.FC = () => {
     queryFn: async () => {
       const res = await apiFetch("/api/testimonials");
       if (!res.ok) throw new Error("Failed to fetch testimonials");
-      const payload: unknown = await res.json();
-      return normalizeTestimonials(payload);
+      return res.json();
     },
   });
 
+  // Function to duplicate testimonials to reach desired count
+  const getDuplicatedTestimonials = (originalTestimonials: Testimonial[], targetCount: number = 6) => {
+    if (originalTestimonials.length === 0) return [];
+    
+    const duplicated: Testimonial[] = [];
+    const repeatCount = Math.ceil(targetCount / originalTestimonials.length);
+    
+    for (let i = 0; i < repeatCount; i++) {
+      duplicated.push(...originalTestimonials.map(t => ({
+        ...t,
+        _id: `${t._id}-dup-${i}` // Create unique IDs for duplicates
+      })));
+    }
+    
+    return duplicated.slice(0, targetCount);
+  };
+
+  // Get processed testimonials with duplication if needed
+  const getProcessedTestimonials = () => {
+    if (testimonials.length === 0) return [];
+    
+    // If we have 4 or more, use original
+    if (testimonials.length >= 4) {
+      return testimonials;
+    }
+    
+    // For 2-3 testimonials, duplicate to create 6 items
+    if (testimonials.length >= 2 && testimonials.length <= 3) {
+      return getDuplicatedTestimonials(testimonials, 6);
+    }
+    
+    // For 1 testimonial, duplicate to 3 items
+    if (testimonials.length === 1) {
+      return getDuplicatedTestimonials(testimonials, 3);
+    }
+    
+    return testimonials;
+  };
+
+  const displayTestimonials = getProcessedTestimonials();
+  const originalTestimonialsCount = testimonials.length;
+  const isDuplicated = originalTestimonialsCount >= 2 && originalTestimonialsCount <= 3;
+
   // Check if we have enough slides for loop mode
   useEffect(() => {
-    if (testimonials.length > 0) {
-      // For coverflow effect with slidesPerView=3, we need at least 6 slides for loop to work properly
-      setHasEnoughSlides(testimonials.length >= 6);
+    if (displayTestimonials.length > 0) {
+      // Enable loop if we have at least 2 slides for better carousel experience
+      setHasEnoughSlides(displayTestimonials.length >= 2);
     }
-  }, [testimonials]);
+  }, [displayTestimonials]);
 
   // GSAP animation for section entrance
   useEffect(() => {
@@ -336,17 +361,16 @@ const Testimonials: React.FC = () => {
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    if (isAutoPlaying && swiperRef && testimonials.length > 0) {
+    if (isAutoPlaying && swiperRef && displayTestimonials.length > 0) {
       interval = setInterval(() => {
         swiperRef.slideNext();
       }, 5000);
     }
     return () => clearInterval(interval);
-  }, [isAutoPlaying, swiperRef, testimonials.length]);
+  }, [isAutoPlaying, swiperRef, displayTestimonials.length]);
 
   return (
     <div className="min-h-screen bg-white">
- 
       <main className="pt-4 pb-20">
         <section ref={sectionRef} className="py-20 relative overflow-hidden">
           {/* Animated background */}
@@ -365,8 +389,12 @@ const Testimonials: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-             
-
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: 80 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="h-px bg-primary mx-auto mb-8"
+              />
               <h1 className="font-display text-3xl sm:text-5xl lg:text-5xl font-bold text-foreground mb-4">
                 What our <span className="text-primary">Clients Says</span>
               </h1>
@@ -376,44 +404,44 @@ const Testimonials: React.FC = () => {
             </motion.div>
 
             {/* Stats Section with Glow Effects */}
-        {!isLoading && testimonials.length > 0 && (
-  <motion.div
-    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-20 py-8"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  >
-    <AnimatedCounter
-      value="5000"
-      label="Happy Clients"
-      suffix="+"
-      delay={0.1}
-      gradient="from-primary to-primary"
-    />
-    <AnimatedCounter
-      value="98"
-      label="Satisfaction Rate"
-      suffix="%"
-      delay={0.2}
-      gradient="from-primary to-primary"
-    />
-    <AnimatedCounter
-      value="50"
-      label="Industry Awards"
-      suffix="+"
-      delay={0.3}
-      gradient="from-primary to-primary"
-    />
-    <AnimatedCounter
-      value="24"
-      label="Support Team"
-      suffix="/7"
-      delay={0.4}
-      gradient="from-primary to-primary"
-    />
-  </motion.div>
-)}
+            {!isLoading && testimonials.length > 0 && (
+              <motion.div
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-20 py-8"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <AnimatedCounter
+                  value="5000"
+                  label="Happy Clients"
+                  suffix="+"
+                  delay={0.1}
+                  gradient="from-primary to-primary"
+                />
+                <AnimatedCounter
+                  value="98"
+                  label="Satisfaction Rate"
+                  suffix="%"
+                  delay={0.2}
+                  gradient="from-primary to-primary"
+                />
+                <AnimatedCounter
+                  value="50"
+                  label="Industry Awards"
+                  suffix="+"
+                  delay={0.3}
+                  gradient="from-primary to-primary"
+                />
+                <AnimatedCounter
+                  value="24"
+                  label="Support Team"
+                  suffix="/7"
+                  delay={0.4}
+                  gradient="from-primary to-primary"
+                />
+              </motion.div>
+            )}
 
             {/* Testimonials Content */}
             {isLoading ? (
@@ -461,7 +489,7 @@ const Testimonials: React.FC = () => {
                   spaceBetween={30}
                   slidesPerView={1}
                   centeredSlides={true}
-                  loop={hasEnoughSlides} // Only enable loop if we have enough slides
+                  loop={hasEnoughSlides}
                   navigation={{
                     prevEl: '.testimonial-prev',
                     nextEl: '.testimonial-next',
@@ -475,41 +503,54 @@ const Testimonials: React.FC = () => {
                     disableOnInteraction: false,
                   } : false}
                   onSwiper={setSwiperRef}
-                  onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                  onSlideChange={(swiper) => {
+                    // Handle active index properly with duplicated slides
+                    const realIndex = swiper.realIndex % originalTestimonialsCount;
+                    setActiveIndex(realIndex);
+                  }}
                   breakpoints={{
                     640: {
                       slidesPerView: 1,
                       spaceBetween: 20,
                     },
                     768: {
-                      slidesPerView: testimonials.length >= 2 ? 2 : 1,
+                      slidesPerView: displayTestimonials.length >= 2 ? 2 : 1,
                       spaceBetween: 30,
                     },
                     1024: {
-                      slidesPerView: testimonials.length >= 3 ? 3 : testimonials.length,
+                      slidesPerView: displayTestimonials.length >= 3 ? 3 : displayTestimonials.length,
                       spaceBetween: 40,
                     },
                   }}
                   className="pb-14"
                 >
-                  {testimonials.map((testimonial, index) => (
-                    <SwiperSlide key={testimonial._id}>
-                      <TestimonialCard
-                        testimonial={testimonial}
-                        index={index}
-                        isActive={index === activeIndex}
-                      />
-                    </SwiperSlide>
-                  ))}
+                  {displayTestimonials.map((testimonial, index) => {
+                    // Determine if this is a duplicate and get original index for active state
+                    const isDuplicateSlide = testimonial._id.includes('-dup-');
+                    const originalIndex = isDuplicateSlide 
+                      ? index % originalTestimonialsCount 
+                      : index % originalTestimonialsCount;
+                    
+                    return (
+                      <SwiperSlide key={testimonial._id}>
+                        <TestimonialCard
+                          testimonial={testimonial}
+                          index={index}
+                          isActive={originalIndex === activeIndex}
+                          duplicateIndex={index}
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
                 </Swiper>
 
                 {/* Custom Navigation with Glow Effects - Only show if we have more than 1 slide */}
-                {testimonials.length > 1 && (
+                {displayTestimonials.length > 1 && (
                   <div className="flex items-center justify-center gap-4 mt-8">
                     <button
                       className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                       onClick={() => setIsAutoPlaying(false)}
-                      disabled={testimonials.length <= 1}
+                      disabled={displayTestimonials.length <= 1}
                     >
                       <ChevronLeft className="w-6 h-6" />
                     </button>
@@ -524,7 +565,7 @@ const Testimonials: React.FC = () => {
                     <button
                       className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                       onClick={() => setIsAutoPlaying(false)}
-                      disabled={testimonials.length <= 1}
+                      disabled={displayTestimonials.length <= 1}
                     >
                       <ChevronRight className="w-6 h-6" />
                     </button>
@@ -535,7 +576,6 @@ const Testimonials: React.FC = () => {
           </div>
         </section>
       </main>
-     
     </div>
   );
 };

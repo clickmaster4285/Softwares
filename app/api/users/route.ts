@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../../../lib/models/User';
 import dbConnect from '../../../lib/mongoose';
-import { getTokenFromCookies, verifyToken } from '../../../lib/auth';
+import {  getTokenFromCookies, verifyToken, requireAdmin } from '../../../lib/auth';
 
 import { ensureAdminUser } from '../../../lib/ensureAdmin';
 
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 }
 
 // POST /api/users/logout
-export async function DELETE() {
+export async function DELETE(req: NextRequest) {
   const response = NextResponse.json({ message: 'Logged out' });
   response.cookies.delete('token');
   return response;
@@ -66,7 +66,7 @@ export async function GET() {
 
     return NextResponse.json(user);
   } catch (error: any) {
-    console.error('GET /users/me error:', error);
+    console.error('GET /users error:', error);
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 }

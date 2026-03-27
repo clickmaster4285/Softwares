@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Pencil, Trash2, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -46,10 +46,10 @@ const AdminProjects = () => {
       const res = await apiFetch('/api/projects', { credentials: 'include' });
       if (!res.ok) throw new Error('Failed to fetch projects');
       const data = await res.json();
-      
+
       // Sort: Newest projects on top
-      return data.sort((a: any, b: any) => 
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      return data.sort(
+        (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
     },
   });
@@ -81,7 +81,10 @@ const AdminProjects = () => {
 
   // Update project
   const updateMutation = useMutation({
-    mutationFn: async (data: { id: string; updates: Omit<Project, 'id' | 'createdAt' | 'updatedAt'> }) => {
+    mutationFn: async (data: {
+      id: string;
+      updates: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>;
+    }) => {
       const { apiFetch } = await import('../../lib/api');
       const res = await apiFetch(`/api/projects?id=${data.id}`, {
         method: 'PUT',
@@ -95,7 +98,7 @@ const AdminProjects = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] });
       setEditingProject(null);
-      setIsFormOpen(false);           // ← Fixed: close dialog after success
+      setIsFormOpen(false); // ← Fixed: close dialog after success
       toast({ title: 'Project updated successfully' });
     },
     onError: () => toast({ title: 'Failed to update project', variant: 'destructive' }),
@@ -130,10 +133,10 @@ const AdminProjects = () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] });
       toast({ title: 'Project deleted successfully' });
     },
-    onError: (error: any) => 
-      toast({ 
-        title: error.message || 'Failed to delete project', 
-        variant: 'destructive' 
+    onError: (error: any) =>
+      toast({
+        title: error.message || 'Failed to delete project',
+        variant: 'destructive',
       }),
   });
 
@@ -150,23 +153,26 @@ const AdminProjects = () => {
   };
 
   // Get unique categories for filter
-  const categoryNames = Array.from(new Set(projects.map(p => getCategoryName(p.category))));
+  const categoryNames = Array.from(new Set(projects.map((p) => getCategoryName(p.category))));
 
-  const filteredProjects = selectedCategory === 'all' 
-    ? projects 
-    : projects.filter(p => getCategoryName(p.category) === selectedCategory);
+  const filteredProjects =
+    selectedCategory === 'all'
+      ? projects
+      : projects.filter((p) => getCategoryName(p.category) === selectedCategory);
 
   return (
     <AdminLayout>
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">Projects</h2>
-            <p className="text-muted-foreground mt-1">Manage your portfolio projects</p>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+              Solutions
+            </h2>
+            <p className="text-muted-foreground mt-1">Manage your portfolio solutions</p>
           </div>
           <Button onClick={() => setIsFormOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Add Project
+            Add Solutions
           </Button>
         </div>
 
@@ -187,7 +193,8 @@ const AdminProjects = () => {
                 size="sm"
                 onClick={() => setSelectedCategory(categoryName)}
               >
-                {categoryName} ({projects.filter(p => getCategoryName(p.category) === categoryName).length})
+                {categoryName} (
+                {projects.filter((p) => getCategoryName(p.category) === categoryName).length})
               </Button>
             ))}
           </div>
@@ -197,19 +204,19 @@ const AdminProjects = () => {
           {isLoading ? (
             <Card className="glass-card border-border/50 pt-6">
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">Loading projects...</p>
+                <p className="text-muted-foreground">Loading solutions...</p>
               </CardContent>
             </Card>
           ) : projects.length === 0 ? (
             <Card className="glass-card border-border/50 pt-6">
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">No projects yet. Create your first project!</p>
+                <p className="text-muted-foreground">No solutions yet. Create your first project!</p>
               </CardContent>
             </Card>
           ) : filteredProjects.length === 0 ? (
             <Card className="glass-card border-border/50 pt-6">
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">No projects in this category.</p>
+                <p className="text-muted-foreground">No solutions in this category.</p>
               </CardContent>
             </Card>
           ) : (
@@ -236,9 +243,15 @@ const AdminProjects = () => {
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-semibold text-foreground truncate">{project.title}</h3>
-                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${statusColors[project.status]}`}>
-                            {project.status === 'in-progress' ? 'In Progress' : project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+                          <h3 className="font-semibold text-foreground truncate">
+                            {project.title}
+                          </h3>
+                          <span
+                            className={`px-2 py-0.5 rounded-full text-xs font-medium border ${statusColors[project.status]}`}
+                          >
+                            {project.status === 'in-progress'
+                              ? 'In Progress'
+                              : project.status.charAt(0).toUpperCase() + project.status.slice(1)}
                           </span>
                         </div>
                         <p className="text-sm text-muted-foreground line-clamp-1 mb-2">
@@ -291,8 +304,8 @@ const AdminProjects = () => {
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Create New Project</DialogTitle>
-            <DialogDescription>Add a new project to your portfolio</DialogDescription>
+            <DialogTitle>Create New Solution</DialogTitle>
+            <DialogDescription>Add a new solution to your portfolio</DialogDescription>
           </DialogHeader>
           <ProjectForm onSubmit={handleCreate} onCancel={() => setIsFormOpen(false)} />
         </DialogContent>
@@ -302,8 +315,8 @@ const AdminProjects = () => {
       <Dialog open={!!editingProject} onOpenChange={() => setEditingProject(null)}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Edit Project</DialogTitle>
-            <DialogDescription>Update your project details</DialogDescription>
+            <DialogTitle>Edit Solution</DialogTitle>
+            <DialogDescription>Update your Solution details</DialogDescription>
           </DialogHeader>
           {editingProject && (
             <ProjectForm
@@ -319,14 +332,17 @@ const AdminProjects = () => {
       <AlertDialog open={!!deletingProjectId} onOpenChange={() => setDeletingProjectId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Project</AlertDialogTitle>
+            <AlertDialogTitle>Delete Solution</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete this project? This action cannot be undone.
+              Are you sure you want to delete this solution? This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-destructive hover:bg-destructive/90">
+            <AlertDialogAction
+              onClick={handleDelete}
+              className="bg-destructive hover:bg-destructive/90"
+            >
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
