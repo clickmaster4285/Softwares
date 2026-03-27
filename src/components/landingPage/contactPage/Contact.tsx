@@ -161,6 +161,7 @@ const Contact: React.FC = () => {
                                                 <input
                                                     type="text"
                                                     name="name"
+                                                    autoComplete="name"
                                                     value={formData.name}
                                                     onChange={handleChange}
                                                     placeholder="Full Name *"
@@ -173,6 +174,7 @@ const Contact: React.FC = () => {
                                                 <input
                                                     type="email"
                                                     name="email"
+                                                    autoComplete="email"
                                                     value={formData.email}
                                                     onChange={handleChange}
                                                     placeholder="Email Address *"
@@ -188,6 +190,7 @@ const Contact: React.FC = () => {
                                                 <input
                                                     type="tel"
                                                     name="phone"
+                                                    autoComplete="tel"
                                                     value={formData.phone}
                                                     onChange={handleChange}
                                                     placeholder="Phone Number"
@@ -199,6 +202,7 @@ const Contact: React.FC = () => {
                                                 <input
                                                     type="text"
                                                     name="company"
+                                                    autoComplete="organization"
                                                     value={formData.company}
                                                     onChange={handleChange}
                                                     placeholder="Company Name"

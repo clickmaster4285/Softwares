@@ -120,6 +120,15 @@ const stats: StatItem[] = [
   { end: 5, label: 'Years Experience' }
 ];
 
+const particlePositions = [
+  { top: '14%', left: '22%' },
+  { top: '31%', left: '68%' },
+  { top: '52%', left: '40%' },
+  { top: '67%', left: '83%' },
+  { top: '79%', left: '19%' },
+  { top: '90%', left: '56%' },
+] as const;
+
 export function HeroSection(): JSX.Element {
   const [glowIntensity, setGlowIntensity] = useState<number>(1);
 
@@ -204,13 +213,13 @@ export function HeroSection(): JSX.Element {
         </div>
 
         {/* Floating particles for extra glow */}
-        {[...Array(6)].map((_, i) => (
+        {particlePositions.map((position, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-primary/30 rounded-full"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
+              top: position.top,
+              left: position.left,
             }}
             animate={{
               scale: [1, 2, 1],

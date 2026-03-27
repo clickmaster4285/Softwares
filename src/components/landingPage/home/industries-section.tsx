@@ -166,7 +166,7 @@ export function IndustriesSection() {
                 whileHover={{
                   scale: 1.05,
                   boxShadow: '0 25px 35px -15px rgba(249,115,22,0.3)',
-                  borderColor: 'hsl(var(--primary))',
+                  borderColor: 'rgb(249, 115, 22)',
                   transition: { duration: 0.3 },
                 }}
                 onMouseEnter={() => handleCardHover(index, true)}

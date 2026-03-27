@@ -35,6 +35,7 @@ const nextConfig: NextConfig = {
       },
     ],
     formats: ["image/avif", "image/webp"],
+    qualities: [75, 85, 100],
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96],
     minimumCacheTTL: 60,
@@ -60,7 +61,6 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "DENY" },
-          { key: "X-XSS-Protection", value: "1; mode=block" },
         ],
       },
       {
@@ -94,8 +94,11 @@ const nextConfig: NextConfig = {
     process.env.NODE_ENV === "production"
       ? { removeConsole: { exclude: ["error", "warn"] } }
       : undefined,
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, dev }) => {
     if (!isServer) {
+      if (dev) {
+        config.devtool = "source-map";
+      }
       const optimization = config.optimization ?? {};
       const splitChunks = optimization.splitChunks;
       if (splitChunks && typeof splitChunks === "object") {

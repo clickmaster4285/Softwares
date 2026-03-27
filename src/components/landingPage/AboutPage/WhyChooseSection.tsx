@@ -45,7 +45,7 @@ export const WhyChooseSection = () => {
             whileHover={{
               scale: 1.08, // Increased from 1.05 to 1.08 for more noticeable size increase
             boxShadow: "0 25px 35px -15px rgba(37, 99, 235, 0.3)",
-             borderColor: "hsl(var(--primary))",
+             borderColor: "rgb(249, 115, 22)",
               transition: { duration: 0.3 }
             }}
           >
