@@ -460,7 +460,7 @@ const Testimonials: React.FC = () => {
                   spaceBetween={30}
                   slidesPerView={1}
                   centeredSlides={true}
-                  loop={hasEnoughSlides} // Only enable loop if we have enough slides
+                  loop={true} // Only enable loop if we have enough slides
                   navigation={{
                     prevEl: '.testimonial-prev',
                     nextEl: '.testimonial-next',

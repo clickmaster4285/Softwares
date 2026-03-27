@@ -33,7 +33,7 @@ import { cn } from '@/lib/utils';
 const menuItems = [
   { title: 'Dashboard', url: '/admin', icon: LayoutDashboard },
   { title: 'Categories', url: '/admin/categories', icon: Tags },
-  { title: 'Projects', url: '/admin/projects', icon: FolderOpen },
+  { title: 'Solutions', url: '/admin/solutions', icon: FolderOpen },
   { title: 'Testimonials', url: '/admin/testimonials', icon: MessageSquare },
 ];
 

@@ -1,7 +1,0 @@
-{
-  "/api/projects/route": "app/api/projects/route.js",
-  "/api/testimonials/route": "app/api/testimonials/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/(landing)/page": "app/(landing)/page.js",
-  "/(landing)/testimonials/page": "app/(landing)/testimonials/page.js"
-}

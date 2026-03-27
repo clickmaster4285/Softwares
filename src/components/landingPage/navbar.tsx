@@ -97,7 +97,7 @@ export function Navbar() {
   // Handle Solutions link click
   const handleSolutionsClick = () => {
     closeDropdowns();
-    router.push('/projects');
+router.push('/solutions');
   };
 
   // Check if page is loading

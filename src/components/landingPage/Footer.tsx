@@ -291,29 +291,7 @@ export function Footer(): JSX.Element {
           <motion.p className="text-sm text-background/60" whileHover={{ color: '#ffffff' }}>
             © {currentYear} ClickMasters. All rights reserved.
           </motion.p>
-          <motion.div
-            className="flex items-center gap-6 text-sm text-background/60"
-            whileHover={{ color: '#ffffff' }}
-          >
-            <motion.span
-              className="cursor-pointer"
-              whileHover={{ scale: 1.1 }}
-              role="button"
-              tabIndex={0}
-              aria-label="Change language"
-            >
-              English (US)
-            </motion.span>
-            <motion.span
-              className="cursor-pointer"
-              whileHover={{ scale: 1.1 }}
-              role="button"
-              tabIndex={0}
-              aria-label="Change currency"
-            >
-              USD ($)
-            </motion.span>
-          </motion.div>
+       
         </motion.div>
       </div>
     </motion.footer>

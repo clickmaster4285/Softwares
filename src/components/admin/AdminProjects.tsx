@@ -166,13 +166,13 @@ const AdminProjects = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
-              Projects
+              Solutions
             </h2>
-            <p className="text-muted-foreground mt-1">Manage your portfolio projects</p>
+            <p className="text-muted-foreground mt-1">Manage your portfolio solutions</p>
           </div>
           <Button onClick={() => setIsFormOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Add Project
+            Add Solutions
           </Button>
         </div>
 
@@ -204,19 +204,19 @@ const AdminProjects = () => {
           {isLoading ? (
             <Card className="glass-card border-border/50 pt-6">
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">Loading projects...</p>
+                <p className="text-muted-foreground">Loading solutions...</p>
               </CardContent>
             </Card>
           ) : projects.length === 0 ? (
             <Card className="glass-card border-border/50 pt-6">
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">No projects yet. Create your first project!</p>
+                <p className="text-muted-foreground">No solutions yet. Create your first project!</p>
               </CardContent>
             </Card>
           ) : filteredProjects.length === 0 ? (
             <Card className="glass-card border-border/50 pt-6">
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">No projects in this category.</p>
+                <p className="text-muted-foreground">No solutions in this category.</p>
               </CardContent>
             </Card>
           ) : (

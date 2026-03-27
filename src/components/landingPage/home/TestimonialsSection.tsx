@@ -6,10 +6,10 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Quote,
   Star,
@@ -19,18 +19,20 @@ import {
   Award,
   TrendingUp,
   Play,
-  Pause
-} from "lucide-react";
-import { apiFetch } from "@/lib/api";
-import { motion, useInView } from 'framer-motion';
+  Pause,
+} from 'lucide-react';
+import { apiFetch } from '@/lib/api';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 
-gsap.registerPlugin();
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 export interface Testimonial {
   _id: string;
@@ -42,7 +44,6 @@ export interface Testimonial {
   rating: number;
 }
 
-// Animated Counter (unchanged)
 interface AnimatedCounterProps {
   value: string;
   label: string;
@@ -51,12 +52,13 @@ interface AnimatedCounterProps {
   gradient?: string;
 }
 
+// Animated Counter Component with Glow Effect
 const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   value,
   label,
   suffix = '',
   delay = 0,
-  gradient = 'from-primary/80 to-primary'
+  gradient = 'from-primary/80 to-primary',
 }) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -91,22 +93,36 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay, duration: 0.5 }}
     >
+      {/* Glow effect on hover and pulse */}
       <motion.div
         className={`absolute -inset-4 bg-gradient-to-r ${gradient} rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
-        animate={isInView ? { scale: [1, 1.2, 1], opacity: [0, 0.2, 0] } : {}}
+        animate={
+          isInView
+            ? {
+                scale: [1, 1.2, 1],
+                opacity: [0, 0.2, 0],
+              }
+            : {}
+        }
         transition={{ duration: 3, repeat: Infinity, delay }}
       />
+
       <div className="relative">
         <motion.div
           className={`text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${gradient}`}
-          animate={isInView ? { scale: [1, 1.05, 1] } : {}}
+          animate={
+            isInView
+              ? {
+                  scale: [1, 1.05, 1],
+                }
+              : {}
+          }
           transition={{ duration: 2, repeat: Infinity, delay }}
         >
-          {count}{suffix}
+          {count}
+          {suffix}
         </motion.div>
-        <div className="text-sm text-muted-foreground mt-2 font-medium tracking-wide">
-          {label}
-        </div>
+        <div className="text-sm text-muted-foreground mt-2 font-medium tracking-wide">{label}</div>
       </div>
     </motion.div>
   );
@@ -120,35 +136,43 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, isActive }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: "-60px" });
-
   const gradients = [
     'from-primary/80 to-primary',
-    'from-primary to-primary',
+    'from-amber-400 to-primary',
     'from-primary to-primary',
     'from-primary to-primary/80',
     'from-primary/80 to-primary',
-    'from-primary to-primary/80',
+    'from-amber-400 to-primary/80',
   ];
+
   const gradient = gradients[index % gradients.length];
 
-  // GSAP Animation (no ScrollTrigger to avoid conflicts)
   useEffect(() => {
-    if (isInView && cardRef.current) {
+    // GSAP animation for card entrance
+    if (cardRef.current) {
       gsap.fromTo(
         cardRef.current,
-        { autoAlpha: 0, y: 50, scale: 0.9 },
         {
-          autoAlpha: 1,
+          opacity: 0,
+          y: 50,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
           y: 0,
           scale: 1,
           duration: 0.8,
           delay: index * 0.1,
-          ease: "back.out(1.2)",
+          ease: 'back.out(1.2)',
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: 'top bottom-=100',
+            toggleActions: 'play none none reverse',
+          },
         }
       );
     }
-  }, [isInView, index]);
+  }, [index]);
 
   return (
     <motion.div
@@ -157,49 +181,67 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
     >
+      {/* Animated background gradient */}
       <motion.div
-        className={`absolute -inset-1 bg-gradient-to-r ${gradient} rounded-3xl blur-xl transition-all duration-700 ${
-          isActive ? 'opacity-40' : 'opacity-0'
-        }`}
-        animate={isActive ? { scale: [1, 1.12, 1] } : {}}
-        transition={{ duration: 3.5, repeat: Infinity }}
+        className={`absolute -inset-1 bg-gradient-to-r ${gradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
+        animate={{
+          scale: isActive ? [1, 1.1, 1] : 1,
+        }}
+        transition={{ duration: 3, repeat: isActive ? Infinity : 0 }}
       />
 
-      <div className={`relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 dark:border-gray-800/20 overflow-hidden h-full transition-all duration-500 ${
-        isActive ? 'scale-[1.03] shadow-2xl' : ''
-      }`}>
+      {/* Main card */}
+      <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 dark:border-gray-800/20 overflow-hidden h-full">
+        {/* Decorative elements */}
         <div className="absolute top-0 right-0 w-32 h-32">
-          <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${gradient} opacity-10 rounded-bl-full`} />
+          <div
+            className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${gradient} opacity-10 rounded-bl-full`}
+          />
         </div>
 
-        <Quote className={`absolute bottom-6 right-6 w-16 h-16 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-10`} />
+        <Quote
+          className={`absolute bottom-6 right-6 w-16 h-16 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-10`}
+        />
 
+        {/* Company badge */}
         <div className="flex items-center justify-between mb-6">
           <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary bg-opacity-10`}>
             <Award className="w-3.5 h-3.5 text-white" />
             <span className="text-xs font-semibold text-white">Verified Client</span>
           </div>
 
+          {/* Rating */}
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
-              <Star
+              <motion.div
                 key={i}
-                className={`w-4 h-4 ${i < (testimonial.rating ?? 5)
-                  ? 'fill-primary text-primary'
-                  : 'text-gray-300 dark:text-gray-600'
-                }`}
-              />
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Star
+                  className={`w-4 h-4 ${
+                    i < (testimonial.rating ?? 5)
+                      ? 'fill-amber-400 text-amber-400'
+                      : 'text-gray-300 dark:text-gray-600'
+                  }`}
+                />
+              </motion.div>
             ))}
           </div>
         </div>
 
+        {/* Testimonial content with quote mark */}
         <div className="relative mb-8">
-          <Quote className={`absolute -top-2 -left-2 w-6 h-6 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-30`} />
+          <Quote
+            className={`absolute -top-2 -left-2 w-6 h-6 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-30`}
+          />
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed pl-6 line-clamp-4">
             "{testimonial.content}"
           </p>
         </div>
 
+        {/* Author info */}
         <div className="flex items-center gap-4">
           <div className="relative">
             <div className={`absolute inset-0 bg-foreground/30 rounded-full blur-md opacity-50`} />
@@ -212,7 +254,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
           </div>
 
           <div>
-            <h4 className="font-bold text-gray-900 dark:text-white text-lg">{testimonial.authorName}</h4>
+            <h4 className="font-bold text-gray-900 dark:text-white text-lg">
+              {testimonial.authorName}
+            </h4>
             {(testimonial.authorRole || testimonial.authorCompany) && (
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {testimonial.authorRole}
@@ -225,6 +269,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
           </div>
         </div>
 
+        {/* Stats indicator */}
         <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
           <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
             <span className="flex items-center gap-1">
@@ -245,72 +290,69 @@ export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
+  const [hasEnoughSlides, setHasEnoughSlides] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   const { data: testimonials = [], isLoading } = useQuery<Testimonial[]>({
-    queryKey: ["testimonials"],
+    queryKey: ['testimonials'],
     queryFn: async () => {
-      const res = await apiFetch("/api/testimonials");
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
+      const res = await apiFetch('/api/testimonials');
+      if (!res.ok) throw new Error('Failed to fetch testimonials');
       return res.json();
     },
-    staleTime: 300000,
-    refetchOnWindowFocus: false,
   });
 
-  const displayTestimonials = testimonials.slice(0, 6);
-  const loopedTestimonials = [...displayTestimonials, ...displayTestimonials];
-
-  const shouldLoop = displayTestimonials.length >= 2;
-  const useCoverflow = displayTestimonials.length >= 4;
-
-  // GSAP section entrance
+  // Check if we have enough slides for loop mode
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (sectionRef.current) {
-        gsap.fromTo(sectionRef.current,
-          { autoAlpha: 0 },
-          {
-            autoAlpha: 1,
-            duration: 1,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top center",
-              toggleActions: "play none none reverse"
-            }
-          }
-        );
-      }
-    });
-    return () => ctx.revert();
+    if (testimonials.length > 0) {
+      setHasEnoughSlides(testimonials.length >= 2);
+    }
+  }, [testimonials]);
+
+  // GSAP animation for section entrance
+  useEffect(() => {
+    if (sectionRef.current) {
+      gsap.fromTo(
+        sectionRef.current,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top center',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
   }, []);
 
-  // Autoplay
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    if (isAutoPlaying && swiperRef && displayTestimonials.length > 1) {
-      interval = setInterval(() => swiperRef.slideNext(), 5000);
+    let interval: NodeJS.Timeout;
+    if (isAutoPlaying && swiperRef && testimonials.length > 0) {
+      interval = setInterval(() => {
+        swiperRef.slideNext();
+      }, 5000);
     }
-    return () => { if (interval) clearInterval(interval); };
-  }, [isAutoPlaying, swiperRef, displayTestimonials.length]);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, swiperRef, testimonials.length]);
 
   if (testimonials.length === 0) return null;
 
   return (
     <section ref={sectionRef} id="testimonials" className="py-20 lg:py-28 bg-white dark:bg-gray-950 relative overflow-hidden">
+      {/* Animated background */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: 80 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="h-px bg-primary mx-auto mb-8"
-        />
-
+        {/* Header with floating elements */}
         <motion.div
           className="text-center max-w-3xl mx-auto mb-14"
           initial={{ opacity: 0, y: 30 }}
@@ -318,24 +360,65 @@ export function TestimonialsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Hear What Our <span className="text-primary">Clients Have to Say</span>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            What our <span className="text-primary">Clients Says</span>
           </h2>
-          <p className="text-gray-700 max-w-2xl mx-auto text-base mt-4">
-            Discover why businesses trust us for their custom software, web, and mobile app solutions. Read real feedback from our clients who have transformed their ideas into seamless digital experiences with our expertise.
+          <p className="text-lg text-muted-foreground">
+            Feedback from businesses who chose our software development company for custom
+            software, web apps, and mobile apps.
           </p>
         </motion.div>
 
+        {/* Stats Section with Glow Effects */}
+        {!isLoading && testimonials.length > 0 && (
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-20 py-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <AnimatedCounter
+              value="5000"
+              label="Happy Clients"
+              suffix="+"
+              delay={0.1}
+              gradient="from-primary to-primary"
+            />
+            <AnimatedCounter
+              value="98"
+              label="Satisfaction Rate"
+              suffix="%"
+              delay={0.2}
+              gradient="from-primary to-primary"
+            />
+            <AnimatedCounter
+              value="50"
+              label="Industry Awards"
+              suffix="+"
+              delay={0.3}
+              gradient="from-primary to-primary"
+            />
+            <AnimatedCounter
+              value="24"
+              label="Support Team"
+              suffix="/7"
+              delay={0.4}
+              gradient="from-primary to-primary"
+            />
+          </motion.div>
+        )}
+
+        {/* Testimonials Content */}
         {isLoading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(3)].map((_, i) => (
-              <Card key={i} className="rounded-3xl border-border/60 h-96">
-                <CardContent className="p-8">
+            {[...Array(6)].map((_, i) => (
+              <Card key={i} className="rounded-xl border-border/60">
+                <CardContent className="p-6">
                   <div className="h-10 w-10 bg-muted rounded animate-pulse mb-4" />
-                  <div className="space-y-3">
-                    <div className="h-4 w-full bg-muted rounded animate-pulse" />
-                    <div className="h-4 w-5/6 bg-muted rounded animate-pulse" />
-                  </div>
+                  <div className="h-4 w-full bg-muted rounded animate-pulse mb-2" />
+                  <div className="h-4 w-3/4 bg-muted rounded animate-pulse mb-4" />
+                  <div className="h-12 w-12 rounded-full bg-muted animate-pulse" />
                 </CardContent>
               </Card>
             ))}
@@ -344,7 +427,7 @@ export function TestimonialsSection() {
           <div className="relative">
             <Swiper
               modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
-              effect={useCoverflow ? "coverflow" : "slide"}
+              effect="coverflow"
               coverflowEffect={{
                 rotate: 20,
                 stretch: 0,
@@ -355,58 +438,74 @@ export function TestimonialsSection() {
               spaceBetween={30}
               slidesPerView={1}
               centeredSlides={true}
-              loop={shouldLoop}
-              loopAdditionalSlides={2}   // Fixed: replaced loopedSlides
+              loop={hasEnoughSlides}
               navigation={{
                 prevEl: '.testimonial-prev',
                 nextEl: '.testimonial-next',
               }}
-              pagination={{ clickable: true, dynamicBullets: true }}
-              autoplay={isAutoPlaying ? { delay: 5000, disableOnInteraction: false } : false}
-              onSwiper={setSwiperRef}
-              onSlideChange={(swiper) => {
-                setActiveIndex(swiper.realIndex % displayTestimonials.length);
+              pagination={{
+                clickable: true,
+                dynamicBullets: true,
               }}
+              autoplay={
+                isAutoPlaying
+                  ? {
+                      delay: 5000,
+                      disableOnInteraction: false,
+                    }
+                  : false
+              }
+              onSwiper={setSwiperRef}
+              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
               breakpoints={{
-                640: { slidesPerView: 1, spaceBetween: 20 },
-                768: { slidesPerView: Math.min(2, displayTestimonials.length), spaceBetween: 30 },
-                1024: { slidesPerView: Math.min(3, displayTestimonials.length), spaceBetween: 40 },
+                640: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: testimonials.length >= 2 ? 2 : 1,
+                  spaceBetween: 30,
+                },
+                1024: {
+                  slidesPerView: testimonials.length >= 3 ? 3 : testimonials.length,
+                  spaceBetween: 40,
+                },
               }}
               className="pb-14"
             >
-              {loopedTestimonials.map((testimonial, idx) => {
-                const originalIndex = idx % displayTestimonials.length;
-                return (
-                  <SwiperSlide key={`${testimonial._id}-${idx}`}>
-                    <TestimonialCard
-                      testimonial={testimonial}
-                      index={originalIndex}
-                      isActive={originalIndex === activeIndex}
-                    />
-                  </SwiperSlide>
-                );
-              })}
+              {testimonials.map((testimonial, index) => (
+                <SwiperSlide key={testimonial._id}>
+                  <TestimonialCard
+                    testimonial={testimonial}
+                    index={index}
+                    isActive={index === activeIndex}
+                  />
+                </SwiperSlide>
+              ))}
             </Swiper>
 
-            {displayTestimonials.length > 1 && (
+            {/* Custom Navigation with Glow Effects - Only show if we have more than 1 slide */}
+            {testimonials.length > 1 && (
               <div className="flex items-center justify-center gap-4 mt-8">
                 <button
-                  className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary transition-all hover:scale-110"
+                  className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={() => setIsAutoPlaying(false)}
+                  disabled={testimonials.length <= 1}
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
 
                 <button
                   onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                  className="w-14 h-14 rounded-full bg-gradient-to-r from-primary/80 to-primary shadow-xl hover:shadow-2xl flex items-center justify-center text-white transition-all hover:scale-110"
+                  className="w-14 h-14 rounded-full bg-gradient-to-r from-primary/80 to-primary shadow-xl hover:shadow-2xl flex items-center justify-center text-white transition-all hover:scale-110 hover:shadow-primary/25"
                 >
                   {isAutoPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
                 </button>
 
                 <button
-                  className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary transition-all hover:scale-110"
+                  className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={() => setIsAutoPlaying(false)}
+                  disabled={testimonials.length <= 1}
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
@@ -415,6 +514,7 @@ export function TestimonialsSection() {
           </div>
         )}
 
+        {/* View All Link */}
         {testimonials.length > 6 && (
           <div className="text-center mt-12">
             <a
