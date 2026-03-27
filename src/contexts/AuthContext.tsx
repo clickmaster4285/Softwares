@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 import { apiFetch } from '@/lib/api';
 
 interface User {
@@ -25,9 +26,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const pathname = usePathname();
 
-  // Check authentication status on mount
+  // Only check auth on admin routes to avoid unnecessary API calls on landing pages.
   useEffect(() => {
+    if (!pathname?.startsWith('/admin') || pathname === '/admin/login') {
+      setLoading(false);
+      return;
+    }
+
     const checkAuth = async () => {
       try {
         setLoading(true);
@@ -52,7 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
 
     checkAuth();
-  }, []);
+  }, [pathname]);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
@@ -92,8 +99,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = async (): Promise<void> => {
     try {
       setLoading(true);
-      await apiFetch('/api/users/logout', {
-        method: 'POST',
+      await apiFetch('/api/users', {
+        method: 'DELETE',
         credentials: 'include',
       });
     } catch (err) {
