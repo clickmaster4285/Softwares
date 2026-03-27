@@ -208,14 +208,7 @@ export function Footer(): JSX.Element {
                   type="email"
                   aria-label="Email for newsletter"
                 />
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                >
-                  <Send className="h-4 w-4 text-background/30" />
-                </motion.div>
+              
               </div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
