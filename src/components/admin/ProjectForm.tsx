@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { X, Plus } from 'lucide-react';
+import { X, Plus, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Project, Category } from '../../../lib/storage';
 import { resolveImageUrl } from '../../../lib/utils';
 import { useQuery } from '@tanstack/react-query';
+import { compressAndConvertImage, getImageDimensions } from '../../../src/utils/imageUtils';
 
 type EditableProject = Omit<Project, 'id'> & { id?: string; _id?: string };
 
@@ -26,6 +27,8 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
   const [thumbnail, setThumbnail] = useState(project?.thumbnail || '');
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [compressing, setCompressing] = useState(false);
+  const [compressionProgress, setCompressionProgress] = useState<string>('');
   const [url, setUrl] = useState(project?.url || '');
   const [categoryId, setCategoryId] = useState<string>('');
   const [status, setStatus] = useState<Project['status']>(project?.status || 'in-progress');
@@ -33,6 +36,11 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
   const [newTag, setNewTag] = useState('');
   const [previewUrl, setPreviewUrl] = useState(project?.thumbnail || '');
   const [isInitialized, setIsInitialized] = useState(false);
+  const [originalFileInfo, setOriginalFileInfo] = useState<{
+    name: string;
+    size: string;
+    dimensions?: { width: number; height: number };
+  } | null>(null);
 
   // Fetch categories
   const { data: categories = [], isLoading: categoriesLoading } = useQuery<Category[]>({
@@ -59,15 +67,90 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
     }
   }, [project, categoriesLoading, categories, isInitialized]);
 
-  useEffect(() => {
-    if (!imageFile) {
-      setPreviewUrl(resolveImageUrl(thumbnail));
-      return;
+  // Handle image file selection with compression
+  const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setCompressing(true);
+      setCompressionProgress('Reading image...');
+      
+      // Get original image info
+      const dimensions = await getImageDimensions(file);
+      const fileSizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+      
+      setOriginalFileInfo({
+        name: file.name,
+        size: `${fileSizeInMB} MB`,
+        dimensions
+      });
+      
+      setCompressionProgress(`Compressing image (${dimensions.width}x${dimensions.height})...`);
+      
+      // Compress and convert to WebP
+      // Adjust quality based on original size
+      let quality = 0.8;
+      if (file.size > 5 * 1024 * 1024) { // > 5MB
+        quality = 0.7;
+      } else if (file.size > 2 * 1024 * 1024) { // > 2MB
+        quality = 0.75;
+      }
+      
+      const compressedFile = await compressAndConvertImage(file, {
+        maxWidth: 1920,
+        maxHeight: 1080,
+        quality,
+        format: 'webp'
+      });
+      
+      const compressedSizeInMB = (compressedFile.size / (1024 * 1024)).toFixed(2);
+      setCompressionProgress(`Compressed: ${fileSizeInMB} MB → ${compressedSizeInMB} MB`);
+      
+      // Create preview URL
+      const previewObjectUrl = URL.createObjectURL(compressedFile);
+      setPreviewUrl(previewObjectUrl);
+      setImageFile(compressedFile);
+      
+      // Clear thumbnail URL if it was set
+      setThumbnail('');
+      
+      // Auto-clear compression message after 3 seconds
+      setTimeout(() => {
+        setCompressionProgress('');
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Image compression error:', error);
+      alert(`Failed to process image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      // Fallback to original file
+      const previewObjectUrl = URL.createObjectURL(file);
+      setPreviewUrl(previewObjectUrl);
+      setImageFile(file);
+    } finally {
+      setCompressing(false);
     }
-    const objectUrl = URL.createObjectURL(imageFile);
-    setPreviewUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [imageFile, thumbnail]);
+  };
+
+  // Cleanup preview URL on unmount
+  useEffect(() => {
+    return () => {
+      if (previewUrl && previewUrl !== project?.thumbnail && !previewUrl.startsWith('http')) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl, project?.thumbnail]);
+
+  // Handle URL input change
+  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = e.target.value;
+    setThumbnail(url);
+    if (url && !imageFile) {
+      setPreviewUrl(resolveImageUrl(url));
+    } else if (!url && !imageFile && project?.thumbnail) {
+      setPreviewUrl(resolveImageUrl(project.thumbnail));
+    }
+  };
 
   const handleAddTag = () => {
     if (newTag.trim() && !tags.includes(newTag.trim())) {
@@ -84,11 +167,12 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
     e.preventDefault();
     let imageUrl = thumbnail;
 
-    // If a file is selected, upload it first
+    // If a file is selected, upload it
     if (imageFile) {
       setUploading(true);
       const formData = new FormData();
       formData.append('image', imageFile);
+      
       try {
         const { apiFetch } = await import('../../../lib/api');
         const res = await apiFetch('/api/projects/upload', {
@@ -96,6 +180,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
           credentials: 'include',
           body: formData,
         });
+        
         if (!res.ok) {
           const errorData = await res.json().catch(() => ({}));
           const errorMessage = errorData.message || `Upload failed with status ${res.status}`;
@@ -103,6 +188,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
           alert(`Image upload failed: ${errorMessage}`);
           return;
         }
+        
         const data = await res.json();
         imageUrl = data.imageUrl;
       } catch (error) {
@@ -125,7 +211,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
       description,
       thumbnail: imageUrl || '/placeholder.svg',
       url,
-      category: categoryId, // Send category ID
+      category: categoryId,
       status,
       tags,
     });
@@ -229,17 +315,70 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
               id="thumbnail"
               type="file"
               accept="image/*"
-              onChange={e => setImageFile(e.target.files?.[0] || null)}
+              onChange={handleImageSelect}
+              disabled={compressing}
             />
-            {imageFile && <p className="text-xs text-muted-foreground">Selected: {imageFile.name}</p>}
-            <Input
-              className="mt-2"
-              value={thumbnail}
-              onChange={e => setThumbnail(e.target.value)}
-              placeholder="Or paste image URL"
-            />
-            <p className="text-xs text-muted-foreground">Upload an image or paste a URL. Leave empty for default placeholder.</p>
+            
+            {/* Compression status indicator */}
+            {compressing && (
+              <div className="flex items-center gap-2 text-sm text-blue-600">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>{compressionProgress}</span>
+              </div>
+            )}
+            
+            {/* Original file info */}
+            {originalFileInfo && !compressing && (
+              <div className="text-xs text-muted-foreground space-y-1">
+                <p>Original: {originalFileInfo.name}</p>
+                <p>Size: {originalFileInfo.size}</p>
+                {originalFileInfo.dimensions && (
+                  <p>Dimensions: {originalFileInfo.dimensions.width} x {originalFileInfo.dimensions.height}</p>
+                )}
+              </div>
+            )}
+            
+            {/* Processed file info */}
+            {imageFile && !compressing && originalFileInfo && (
+              <div className="text-xs text-green-600">
+                <p>Processed: {imageFile.name}</p>
+                <p>Size: {(imageFile.size / (1024 * 1024)).toFixed(2)} MB (WebP format)</p>
+              </div>
+            )}
+            
+            <div className="relative">
+              <Input
+                className="mt-2"
+                value={thumbnail}
+                onChange={handleUrlChange}
+                placeholder="Or paste image URL"
+                disabled={!!imageFile}
+              />
+              {imageFile && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                  onClick={() => {
+                    setImageFile(null);
+                    setOriginalFileInfo(null);
+                    setPreviewUrl(project?.thumbnail || '');
+                    setThumbnail(project?.thumbnail || '');
+                  }}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
+            
+            <p className="text-xs text-muted-foreground">
+              {imageFile 
+                ? '✓ Image will be uploaded as WebP after compression'
+                : 'Upload an image to automatically compress and convert to WebP, or paste a URL'}
+            </p>
           </div>
+          
           <div className="rounded-lg border border-border/60 bg-secondary/40 overflow-hidden">
             <img
               src={previewUrl || '/placeholder.svg'}
@@ -293,8 +432,12 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="submit" disabled={uploading}>
-          {uploading ? 'Uploading...' : project ? 'Update Project' : 'Create Project'}
+        <Button 
+          type="submit" 
+          disabled={uploading || compressing}
+        >
+          {(uploading || compressing) && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+          {uploading ? 'Uploading...' : compressing ? 'Processing...' : project ? 'Update Project' : 'Create Project'}
         </Button>
       </div>
     </form>

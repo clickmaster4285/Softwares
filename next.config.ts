@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+   allowedDevOrigins: [
+    "http://192.168.88.33:3000", // your LAN IP + port
+    "http://localhost:3000",      // keep localhost
+  ],
   images: {
     remotePatterns: [
       {
