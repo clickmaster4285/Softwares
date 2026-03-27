@@ -1,14 +1,13 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { motion } from 'framer-motion';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { apiFetch } from "@/lib/api";
 import { getCategoryName, resolveImageUrl } from "@/lib/utils";
-import { ExternalLink, FolderKanban, ArrowUpRight, Code, Globe, Smartphone, ArrowRight } from "lucide-react";
+import { ExternalLink, FolderKanban, ArrowUpRight, ArrowRight } from "lucide-react";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -51,23 +50,12 @@ function groupProjectsByCategory(projects: Project[]): GroupedProjects[] {
     .sort((a, b) => a.categoryName.localeCompare(b.categoryName));
 }
 
-// Get icon for category
-const getCategoryIcon = (categoryName: string) => {
-  const icons: Record<string, React.ElementType> = {
-    'Web Development': Globe,
-    'Mobile Apps': Smartphone,
-    'Custom Software': Code,
-  };
-  return icons[categoryName] || FolderKanban;
-};
-
 export function AppsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const categoriesRef = useRef<(HTMLDivElement | null)[]>([]);
   const ctaRef = useRef<HTMLDivElement>(null);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
 
   const { data: projects = [], isLoading } = useQuery<Project[]>({
     queryKey: ["projects-public"],
@@ -303,8 +291,6 @@ const res = await apiFetch("/api/projects");
         ) : (
           <div className="space-y-16">
             {displayedCategories.map(({ categoryName, projects: categoryProjects }, categoryIndex) => {
-              const CategoryIcon = getCategoryIcon(categoryName);
-              
               return (
                 <div
                   key={categoryName}

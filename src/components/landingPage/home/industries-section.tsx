@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Factory, Store, Briefcase, Heart, GraduationCap, Building2, ArrowRight, LucideIcon } from "lucide-react"
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRouter } from 'next/navigation';
-import CountUp from "react-countup";
 
 
 // Register GSAP plugins
@@ -93,7 +92,6 @@ export function IndustriesSection() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const ctaRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
 
   // Premium hover animation for cards
   const handleCardHover = (index: number, isHovering: boolean) => {

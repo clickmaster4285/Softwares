@@ -17,7 +17,7 @@ export async function verifyToken(token: string) {
   return jwt.verify(token, process.env.JWT_SECRET) as { id: string; email: string };
 }
 
-export async function requireAuth(request: NextRequest): Promise<{ id: string; email: string }> {
+export async function requireAuth(_request: NextRequest): Promise<{ id: string; email: string }> {
   const token = await getTokenFromCookies(); // ✅ await because it's async
   if (!token) throw new Error('Unauthorized');
 

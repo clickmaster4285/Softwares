@@ -23,7 +23,7 @@ import {
   Pause
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

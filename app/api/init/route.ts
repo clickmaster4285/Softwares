@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ensureAdminUser } from '../../../lib/ensureAdmin';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     await ensureAdminUser();
     return NextResponse.json({ message: 'Initialization completed' });

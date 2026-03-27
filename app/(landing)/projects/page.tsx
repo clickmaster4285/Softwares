@@ -2,9 +2,8 @@
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Link from "next/link";
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion} from 'framer-motion';
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { apiFetch } from "@/lib/api";
 import { getCategoryName, resolveImageUrl } from "@/lib/utils";
@@ -15,9 +14,7 @@ import {
   Code, 
   Globe, 
   Smartphone, 
-  ArrowRight,
-  Search,
-  X
+
 } from "lucide-react";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -133,11 +130,11 @@ export default function ProjectsPage() {
   }, [filteredProjects]);
 
   // Extract unique categories and statuses for filters
-  const categories = useMemo(() => {
-    return ['all', ...new Set(projects.map(p => getCategoryName(p.category)))];
-  }, [projects]);
+  // const categories = useMemo(() => {
+  //   return ['all', ...new Set(projects.map(p => getCategoryName(p.category)))];
+  // }, [projects]);
 
-  const statuses = ['all', 'live', 'in-progress', 'completed'];
+  // const statuses = ['all', 'live', 'in-progress', 'completed'];
 
   // Premium GSAP animations
   useEffect(() => {
@@ -525,8 +522,6 @@ export default function ProjectsPage() {
         ) : (
           <div className="space-y-16">
             {groupedProjects.map(({ categoryName, projects: categoryProjects }, categoryIndex) => {
-              const CategoryIcon = getCategoryIcon(categoryName);
-              
               return (
                 <div
                   key={categoryName}

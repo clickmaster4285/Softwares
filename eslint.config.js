@@ -15,17 +15,25 @@ export default tseslint.config(
       ".git",
     ],
   },
+
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+
+    // ✅ ADD THIS (IMPORTANT)
     plugins: {
+      "@typescript-eslint": tseslint.plugin,
       "react-hooks": reactHooks,
+      "@next/next": nextPlugin,
     },
+
     rules: {
       ...reactHooks.configs.recommended.rules,
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
+
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": "warn",
     },
-  },
-  nextPlugin.flatConfig.coreWebVitals,
+  }
 );

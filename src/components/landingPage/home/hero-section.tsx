@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-import { motion, useInView, Variants } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 // Define types
 interface CounterProps {
@@ -87,7 +87,6 @@ const Counter = ({ end, duration = 2, delay = 0 }: CounterProps): JSX.Element =>
     let animationFrame: number;
     
     const startValue = 0;
-    const increment = end / (duration * 60); // 60fps
 
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
@@ -112,16 +111,6 @@ const Counter = ({ end, duration = 2, delay = 0 }: CounterProps): JSX.Element =>
   }, [isInView, end, duration, delay]);
 
   return <span ref={ref}>{count}+</span>;
-};
-
-// Animation variants
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6 }
-  }
 };
 
 const stats: StatItem[] = [

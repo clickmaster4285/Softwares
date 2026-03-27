@@ -1,9 +1,9 @@
 'use client';
 
 import Link from "next/link";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from 'framer-motion';
-import { BookOpen, MessageCircle, Video, FileQuestion, Headphones, Search, ArrowRight } from "lucide-react";
+import { BookOpen, MessageCircle, Video, FileQuestion, Headphones, ArrowRight } from "lucide-react";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -67,11 +67,10 @@ const helpResources: HelpResource[] = [
 export function HelpSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLDivElement>(null);
+  
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const ctaRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
 
 
   // Premium hover animation for cards

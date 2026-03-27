@@ -1,10 +1,9 @@
 'use client';
 
-import { LayoutDashboard, FolderOpen, LogOut, Home, Tags, MessageSquare, Settings, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, FolderOpen, LogOut, Home, Tags, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import {
   Sidebar,
   SidebarContent,

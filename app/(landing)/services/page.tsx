@@ -2,24 +2,11 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from "next/link";
-import { motion, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import { 
-  Code, 
-  Globe, 
-  Smartphone, 
-  Database, 
-  Cloud, 
-  Shield, 
   ArrowRight,
   CheckCircle,
-  Users,
-  Clock,
-  Award,
-  BarChart,
-  Settings,
-  Paintbrush,
   Rocket,
-  Zap,
   Sparkles,
   Target,
   PenTool,
@@ -29,7 +16,6 @@ import {
 } from "lucide-react";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import CountUp from 'react-countup';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -50,12 +36,6 @@ interface ProcessStep {
   description: string;
   details: string[];
   duration: string;
-}
-
-interface StatItem {
-  value: string;
-  label: string;
-  icon: React.ElementType;
 }
 
 // Services Data
@@ -185,30 +165,6 @@ const processSteps: ProcessStep[] = [
   }
 ];
 
-// Stats with proper numeric values for CountUp
-const stats: StatItem[] = [
-  { 
-    value: "150", 
-    label: "Successful Software Projects Delivered",
-    icon: Award
-  },
-  { 
-    value: "50", 
-    label: "Satisfied Clients Worldwide",
-    icon: Users
-  },
-  { 
-    value: "98", 
-    label: "Client Retention Rate",
-    icon: BarChart
-  },
-  { 
-    value: "24", 
-    label: "Support Hours Available",
-    icon: Clock
-  }
-];
-
 // Technologies
 const technologies = [
   { name: "React", category: "Frontend" },
@@ -232,7 +188,6 @@ const technologies = [
 export default function ServicesPage() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<(HTMLDivElement | null)[]>([]);
   const statsSectionRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<(HTMLDivElement | null)[]>([]);
   const processSectionRef = useRef<HTMLDivElement>(null);
@@ -244,20 +199,13 @@ export default function ServicesPage() {
   const [hoveredService, setHoveredService] = useState<number | null>(null);
   const [activeProcessStep, setActiveProcessStep] = useState<number>(0);
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [statsInView, setStatsInView] = useState(false);
 
   // Check if stats section is in view
-  const statsInViewport = useInView(statsSectionRef, { 
+  useInView(statsSectionRef, { 
     once: true, 
     amount: 0.5,
     margin: "-100px"
   });
-
-  useEffect(() => {
-    if (statsInViewport) {
-      setStatsInView(true);
-    }
-  }, [statsInViewport]);
 
   // Premium GSAP animations
   useEffect(() => {
@@ -290,37 +238,6 @@ export default function ServicesPage() {
             }
           );
         }
-
-        // Stats animation with enhanced glow
-        statsRef.current.forEach((stat, index) => {
-          if (stat) {
-            masterTl.fromTo(stat,
-              {
-                opacity: 0,
-                y: 50,
-                scale: 0.8
-              },
-              {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 1,
-                ease: "back.out(1.2)",
-                delay: index * 0.1
-              },
-              "-=0.6"
-            );
-
-            // Add pulsing glow animation to stat values
-            gsap.to(stat.querySelector('.stat-glow'), {
-            boxShadow: `0 25px 40px -15px hsl(var(--primary) / 0.4)`,
-              repeat: -1,
-              yoyo: true,
-              duration: 1.5,
-              ease: "sine.inOut"
-            });
-          }
-        });
 
         // Services animation with 3D entrance
         servicesRef.current.forEach((service, index) => {
@@ -651,12 +568,6 @@ borderColor: `hsl(var(--primary))`,
     });
   }
 };
-
-  // Helper function to get suffix from original stat value
-  const getSuffix = (index: number) => {
-    const suffixes = ['+', '+', '%', '/7'];
-    return suffixes[index];
-  };
 
   return (
     <section 

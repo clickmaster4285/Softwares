@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
     let body;
     try {
       body = await req.json();
-    } catch (parseError) {
+    } catch {
       return NextResponse.json(
         { message: 'Invalid request body' },
         { status: 400 }
@@ -197,7 +197,7 @@ export async function PUT(req: NextRequest) {
     let body;
     try {
       body = await req.json();
-    } catch (parseError) {
+    } catch {
       return NextResponse.json(
         { message: 'Invalid request body' },
         { status: 400 }

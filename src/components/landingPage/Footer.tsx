@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Twitter, Linkedin, Github, Youtube, Mail, Send } from "lucide-react";
-import { motion, Variants, HTMLMotionProps } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 // Type definitions
 interface FooterLink {

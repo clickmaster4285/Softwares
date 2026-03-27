@@ -3,8 +3,6 @@
  * Works with both client and server components
  */
 
-const API_BASE_URL = '';
-
 export interface ApiErrorResponse {
   message: string;
   error?: string;
@@ -19,7 +17,7 @@ export interface ApiSuccessResponse<T> {
 /**
  * Enhanced fetch wrapper for API calls
  */
-export async function apiFetch<T = any>(
+export async function apiFetch(
   path: string,
   options: RequestInit & { baseURL?: string } = {}
 ): Promise<Response> {

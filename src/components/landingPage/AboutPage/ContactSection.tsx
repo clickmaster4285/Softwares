@@ -1,12 +1,5 @@
-import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
-import { AnimatePresence, motion, useInView } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation'; // Import useRouter from next/navigation
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
-
 
 // Contact Section with Floating Elements
 export const ContactSection = () => {

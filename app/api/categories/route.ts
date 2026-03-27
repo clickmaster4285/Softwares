@@ -14,7 +14,7 @@ export async function GET() {
   try {
     const categories = await Category.find({ deleted: false });
     return NextResponse.json(categories);
-  } catch (err) {
+  } catch {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
     const category = await Category.create(data);
     return NextResponse.json(category, { status: 201 });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
@@ -49,7 +49,7 @@ export async function PUT(req: NextRequest) {
     }
 
     return NextResponse.json(category);
-  } catch (err) {
+  } catch {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
@@ -70,7 +70,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     return NextResponse.json({ message: 'Deleted successfully' });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
   }
 }
