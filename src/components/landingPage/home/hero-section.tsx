@@ -19,63 +19,13 @@ interface StatItem {
   label: string;
 }
 
-// Typing animation component with fixed width
-const TypingAnimation = ({ texts, speed = 100, delay = 2000 }: { texts: string[]; speed?: number; delay?: number }) => {
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  
-  // Find the longest text for consistent width
-  const longestText = texts.reduce((a, b) => a.length > b.length ? a : b, '');
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const currentFullText = texts[currentIndex];
-      
-      if (!isDeleting) {
-        // Typing
-        if (displayText.length < currentFullText.length) {
-          setDisplayText(currentFullText.slice(0, displayText.length + 1));
-        } else {
-          // Wait before starting to delete
-          setTimeout(() => setIsDeleting(true), delay);
-        }
-      } else {
-        // Deleting
-        if (displayText.length > 0) {
-          setDisplayText(displayText.slice(0, -1));
-        } else {
-          setIsDeleting(false);
-          setCurrentIndex((prev) => (prev + 1) % texts.length);
-        }
-      }
-    }, isDeleting ? speed / 2 : speed);
-
-    return () => clearTimeout(timeout);
-  }, [displayText, currentIndex, isDeleting, texts, speed, delay]);
-
-  return (
-    <span className="relative block w-full max-w-full min-w-0 text-left sm:inline-block sm:min-w-[min(100%,24rem)] lg:min-w-[28rem]">
-      {/* Reserve space: wraps on small screens, single line from sm up */}
-      <span
-        className="invisible block max-w-full break-words whitespace-pre-wrap sm:inline sm:whitespace-pre"
-        aria-hidden="true"
-      >
-        {longestText}
-      </span>
-
-      {/* Animated text: wraps on narrow viewports to avoid horizontal scroll */}
-      <span className="absolute left-0 top-0 w-full max-w-full break-words whitespace-normal sm:whitespace-nowrap">
-        {displayText}
-        <motion.span
-          className="inline-block w-0.5 min-h-[1em] align-middle bg-primary ml-0.5 sm:ml-1"
-          animate={{ opacity: [1, 0, 1] }}
-          transition={{ duration: 1, repeat: Infinity }}
-        />
-      </span>
-    </span>
-  );
-};
+const heroBullets = [
+  'MVP to full-scale SaaS development',
+  'Native, cross-platform & enterprise mobile apps',
+  'AI & automation systems',
+  'ERP, CRM, and enterprise solutions',
+  'Built for scalability, performance & ROI',
+] as const;
 
 // Counter component for stats
 const Counter = ({ end, duration = 2, delay = 0 }: CounterProps): JSX.Element => {
@@ -296,42 +246,49 @@ export function HeroSection(): JSX.Element {
         <div className="mx-auto max-w-7xl w-full min-w-0">
           <div className="grid gap-8 sm:gap-10 lg:gap-12 lg:grid-cols-[1fr_minmax(280px,400px)] xl:grid-cols-[1fr_420px] items-start mb-10 sm:mb-12 md:mb-16 lg:mb-20">
             <div className="min-w-0">
-              {/* Heading with Typing Animation - LEFT ALIGNED */}
+              {/* Headline — LEFT ALIGNED */}
               <motion.div
                 className="mb-4 sm:mb-6 text-left min-w-0"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
-                <h1 
-                  id="hero-heading" 
-                  className="font-display text-[1.65rem] leading-tight sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white text-pretty text-left [overflow-wrap:anywhere]"
+                <h1
+                  id="hero-heading"
+                  className="font-display text-[1.55rem] leading-snug sm:text-2xl md:text-3xl lg:text-[2.35rem] xl:text-5xl font-bold tracking-tight text-white text-pretty text-left [overflow-wrap:anywhere]"
                 >
-                  Your Trusted{' '}
-                  <span className="text-primary block mt-1.5 sm:mt-2 text-left min-w-0">
-                    <TypingAnimation 
-                      texts={[
-                        "Software Development Company",
-                        "Web App Development Agency",
-                        "Mobile App Developers",
-                        "ERP Solution Providers"
-                      ]} 
-                      speed={100}
-                      delay={2000}
-                    />
-                  </span>
+                  Custom Software Development That Scales Your Business Revenue{' '}
+                  <span className="text-primary">— Not Just Code</span>
                 </h1>
               </motion.div>
 
-              {/* Subheading - LEFT ALIGNED */}
-              <motion.p 
-                className="text-base sm:text-lg md:text-xl text-gray-200 text-left mb-6 sm:mb-8 text-pretty leading-relaxed max-w-2xl"
+              {/* Subheading — LEFT ALIGNED */}
+              <motion.p
+                className="text-base sm:text-lg md:text-xl text-gray-200 text-left mb-4 sm:mb-5 text-pretty leading-relaxed max-w-2xl"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
               >
-                ClickMasters builds custom software, web applications, mobile apps, and ERP solutions. We are a software development company that turns your ideas into reliable, scalable software.
+                We design, build, and deploy high-performance web, mobile, SaaS, and AI-powered
+                systems for companies in the USA, Europe &amp; Middle East.
               </motion.p>
+
+              {/* Value bullets — below subheading */}
+              <motion.ul
+                className="mb-6 sm:mb-8 text-left space-y-2 sm:space-y-2.5 max-w-2xl"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.35 }}
+              >
+                {heroBullets.map((text) => (
+                  <li
+                    key={text}
+                    className="relative pl-5 text-sm sm:text-base text-gray-100 leading-snug before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary/75"
+                  >
+                    {text}
+                  </li>
+                ))}
+              </motion.ul>
 
               {/* CTA Buttons - LEFT ALIGNED */}
               <motion.div 

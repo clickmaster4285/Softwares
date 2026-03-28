@@ -388,6 +388,12 @@ export const defaultMetadata: Metadata = {
     canonical: siteConfig.url,
   },
 
+  icons: {
+    icon: [{ url: '/logo-white.webp', type: 'image/webp' }],
+    apple: '/logo-white.webp',
+    shortcut: '/logo-white.webp',
+  },
+
   openGraph: {
     type: 'website',
     locale: siteConfig.locale,
