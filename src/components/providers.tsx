@@ -14,7 +14,9 @@ const queryClient = new QueryClient({
       staleTime: 1000 * 60 * 5, // 5 minutes
       gcTime: 1000 * 60 * 10,   // 10 minutes
       refetchOnWindowFocus: false,
-      refetchOnMount: false,
+      // Default true: after mutations invalidate caches, remounted routes must refetch stale data.
+      // refetchOnMount: false caused updated/deleted items to look unchanged until a full page reload.
+      refetchOnMount: true,
       refetchOnReconnect: false,
       retry: 1,
     },

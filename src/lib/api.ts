@@ -38,6 +38,8 @@ export async function apiFetch<T = any>(
       ...options,
       headers,
       credentials: 'include',
+      // Avoid stale API responses from the browser HTTP cache after PUT/DELETE.
+      cache: options?.cache ?? 'no-store',
     });
 
     return response;

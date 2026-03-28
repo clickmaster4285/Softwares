@@ -43,6 +43,24 @@ export interface Testimonial {
   createdAt: string;
 }
 
+function testimonialRowId(t: { _id: string }) {
+  return String(t._id);
+}
+
+function sortTestimonialsNewestFirst(list: Testimonial[]) {
+  return [...list].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+}
+
+function patchTestimonialCaches(
+  queryClient: ReturnType<typeof useQueryClient>,
+  updater: (old: Testimonial[] | undefined) => Testimonial[] | undefined
+) {
+  queryClient.setQueryData(['testimonials-admin'], updater);
+  queryClient.setQueryData(['testimonials'], updater);
+}
+
 const AdminTestimonials = () => {
   const queryClient = useQueryClient();
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -102,9 +120,10 @@ const AdminTestimonials = () => {
       }
       return res.json();
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['testimonials-admin'] });
-      queryClient.invalidateQueries({ queryKey: ['testimonials'] });
+    onSuccess: (created: Testimonial) => {
+      patchTestimonialCaches(queryClient, (old) =>
+        sortTestimonialsNewestFirst([...(old ?? []), created])
+      );
       setIsFormOpen(false);
       toast({ title: 'Testimonial created successfully' });
     },
@@ -134,9 +153,13 @@ const AdminTestimonials = () => {
       }
       return res.json();
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['testimonials-admin'] });
-      queryClient.invalidateQueries({ queryKey: ['testimonials'] });
+    onSuccess: (updated: Testimonial) => {
+      const id = testimonialRowId(updated);
+      patchTestimonialCaches(queryClient, (old) => {
+        if (!old) return old;
+        const next = old.map((t) => (testimonialRowId(t) === id ? { ...t, ...updated } : t));
+        return sortTestimonialsNewestFirst(next);
+      });
       setEditingTestimonial(null);
       setIsFormOpen(false);
       toast({ title: 'Testimonial updated successfully' });
@@ -154,9 +177,11 @@ const AdminTestimonials = () => {
       if (!res.ok) throw new Error('Failed to delete');
       return res.json();
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['testimonials-admin'] });
-      queryClient.invalidateQueries({ queryKey: ['testimonials'] });
+    onSuccess: (_data, deletedId: string) => {
+      const id = String(deletedId);
+      patchTestimonialCaches(queryClient, (old) =>
+        old ? old.filter((t) => testimonialRowId(t) !== id) : old
+      );
       setDeletingId(null);
       toast({ title: 'Testimonial deleted' });
     },

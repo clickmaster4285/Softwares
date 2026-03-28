@@ -30,6 +30,24 @@ import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
 import { resolveImageUrl, getCategoryName } from '../../../lib/utils';
 
+function projectRowId(p: { _id?: string; id?: string }) {
+  return String(p._id ?? p.id ?? '');
+}
+
+function sortProjectsNewestFirst<T extends { createdAt?: string }>(list: T[]) {
+  return [...list].sort(
+    (a, b) => new Date(b.createdAt ?? 0).getTime() - new Date(a.createdAt ?? 0).getTime()
+  );
+}
+
+function patchProjectCaches(
+  queryClient: ReturnType<typeof useQueryClient>,
+  updater: (old: Project[] | undefined) => Project[] | undefined
+) {
+  queryClient.setQueryData(['projects'], updater);
+  queryClient.setQueryData(['projects-public'], updater);
+}
+
 const AdminProjects = () => {
   const queryClient = useQueryClient();
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -67,8 +85,12 @@ const AdminProjects = () => {
       if (!res.ok) throw new Error('Failed to create project');
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (created: Project) => {
+      patchProjectCaches(queryClient, (old) =>
+        old ? sortProjectsNewestFirst([...old, created]) : old
+      );
       queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ['projects-public'] });
       setIsFormOpen(false);
       toast({ title: 'Project created successfully' });
     },
@@ -95,8 +117,15 @@ const AdminProjects = () => {
       if (!res.ok) throw new Error('Failed to update project');
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (updated: Project) => {
+      const uid = projectRowId(updated);
+      patchProjectCaches(queryClient, (old) => {
+        if (!old) return old;
+        const next = old.map((p) => (projectRowId(p) === uid ? { ...p, ...updated } : p));
+        return sortProjectsNewestFirst(next);
+      });
       queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ['projects-public'] });
       setEditingProject(null);
       setIsFormOpen(false); // ← Fixed: close dialog after success
       toast({ title: 'Project updated successfully' });
@@ -129,8 +158,13 @@ const AdminProjects = () => {
       }
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (_data, deletedId: string) => {
+      const id = String(deletedId);
+      patchProjectCaches(queryClient, (old) =>
+        old ? old.filter((p) => projectRowId(p) !== id) : old
+      );
       queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ['projects-public'] });
       toast({ title: 'Project deleted successfully' });
     },
     onError: (error: any) =>
