@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/providers";
 import "./globals.css";
+import { defaultMetadata } from './metadata-config';
 
 export const metadata: Metadata = {
-  title: "ClickMasters - Professional Software Development",
-  description:
-    "Leading software development company providing custom solutions for businesses",
-  icons: {
-    icon: "/clickMasters.png",
-  },
+  ...defaultMetadata,
+  // Override or add specific metadata here
   verification: {
     google: "tH8GZm7N2hbAICQfeQEs4YejO057UvY4eJBWLkHHJxU",
   },
+  // You can also add other verification codes
+  // yandex: "yandex-verification-code",
+  // other: {
+  //   "msvalidate.01": "bing-verification-code",
+  // },
 };
 
 export default function RootLayout({

@@ -2,6 +2,11 @@ import dynamic from 'next/dynamic';
 import { Suspense } from "react";
 import { HeroSection } from "@/components/landingPage/home/hero-section";
 
+import { metadataConfig } from '@/app/metadata-config';
+
+export const metadata = metadataConfig.home();
+
+
 const AppsSection = dynamic(() => import('@/components/landingPage/home/AppsSection').then((m) => m.AppsSection), {
   loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" />,
 });
