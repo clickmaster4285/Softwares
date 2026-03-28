@@ -37,6 +37,12 @@ interface Category {
   createdBy?: { email: string };
 }
 
+function sortCategoriesNewestFirst(list: Category[]) {
+  return [...list].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+}
+
 const AdminCategories = () => {
   const queryClient = useQueryClient();
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -89,8 +95,10 @@ const AdminCategories = () => {
       }
       return res.json();
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
+    onSuccess: (created: Category) => {
+      queryClient.setQueryData<Category[]>(['categories'], (old) =>
+        sortCategoriesNewestFirst([...(old ?? []), created])
+      );
       setIsFormOpen(false);
       toast({ title: 'Category created successfully' });
     },
@@ -115,9 +123,15 @@ const AdminCategories = () => {
       }
       return res.json();
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
+    onSuccess: (updated: Category) => {
+      const id = String(updated._id);
+      queryClient.setQueryData<Category[]>(['categories'], (old) => {
+        if (!old) return old;
+        const next = old.map((c) => (String(c._id) === id ? { ...c, ...updated } : c));
+        return sortCategoriesNewestFirst(next);
+      });
       queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ['projects-public'] });
       setEditingCategory(null);
       setIsFormOpen(false);
       toast({ title: 'Category updated successfully' });
@@ -141,9 +155,13 @@ const AdminCategories = () => {
       }
       return res.json();
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
+    onSuccess: (_data, deletedId: string) => {
+      const id = String(deletedId);
+      queryClient.setQueryData<Category[]>(['categories'], (old) =>
+        old ? old.filter((c) => String(c._id) !== id) : old
+      );
       queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ['projects-public'] });
       toast({ title: 'Category deleted successfully' });
     },
     onError: (error: Error) => {

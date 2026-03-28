@@ -39,7 +39,10 @@ export async function apiFetch<T = any>(
   }
 
   try {
-    const response = await fetch(url, fetchOptions);
+    const response = await fetch(url, {
+      ...fetchOptions,
+      cache: fetchOptions.cache ?? 'no-store',
+    });
     return response;
   } catch (error) {
     console.error('[API Error]', error);
