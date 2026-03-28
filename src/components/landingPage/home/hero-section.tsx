@@ -203,7 +203,7 @@ export function HeroSection(): JSX.Element {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 -z-20">
         <Image
-          src="/hero.jpg"
+          src="/hero.webp"
           alt="Background"
           fill
           className="object-cover"

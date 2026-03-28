@@ -15,7 +15,7 @@ export const siteConfig = {
  
   url: process.env.NEXT_PUBLIC_APP_URL || 'https://clickmasters.pk',
  
-  ogImage: '/og/default.jpg',
+  ogImage: '/og/default.webp',
  
   twitterHandle: '@clickmasters',
  
@@ -196,7 +196,7 @@ export const organizationSchema = {
  
   name: siteConfig.name,
   url: siteConfig.url,
-  logo: `${siteConfig.url}/logo.png`,
+  logo: `${siteConfig.url}/logo.webp`,
  
   description: siteConfig.description,
  
@@ -334,8 +334,8 @@ export const localBusinessSchema = {
   name: siteConfig.name,
   url: siteConfig.url,
 
-  logo: `${siteConfig.url}/logo.png`,
-  image: `${siteConfig.url}/og/default.jpg`,
+  logo: `${siteConfig.url}/logo.webp`,
+  image: `${siteConfig.url}/og/default.webp`,
 
   description: siteConfig.description,
 
@@ -415,7 +415,7 @@ export const defaultMetadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
 
-    images: [`${siteConfig.url}/og/default.jpg`],
+    images: [`${siteConfig.url}/og/default.webp`],
   },
 
   robots: {
@@ -453,7 +453,7 @@ export const metadataConfig = {
       url: siteConfig.url,
       images: [
         {
-          url: `${siteConfig.url}/og/home.jpg`,
+          url: `${siteConfig.url}/og/home.webp`,
           width: 1200,
           height: 630,
           alt: 'ClickMasters – Custom Software Development Company',
@@ -464,7 +464,7 @@ export const metadataConfig = {
       card: 'summary_large_image',
       title: 'ClickMasters – Custom Software Development',
       description: 'Web apps, mobile apps & ERP. 10+ years of expertise, 100+ projects delivered. Get a free quote.',
-      images: [`${siteConfig.url}/og/home.jpg`],
+      images: [`${siteConfig.url}/og/home.webp`],
     },
   }),
 
@@ -481,7 +481,7 @@ export const metadataConfig = {
       url: `${siteConfig.url}/about`,
       images: [
         {
-          url: `${siteConfig.url}/og/about.jpg`,
+          url: `${siteConfig.url}/og/about.webp`,
           width: 1200,
           height: 630,
           alt: 'ClickMasters team – software development company',
@@ -492,7 +492,7 @@ export const metadataConfig = {
       title: 'About ClickMasters – Our Team & Story',
       description:
         '10+ years, 50+ engineers, 100+ projects. Meet the team behind world-class custom software.',
-      images: [`${siteConfig.url}/og/about.jpg`],
+      images: [`${siteConfig.url}/og/about.webp`],
     },
   }),
 
@@ -509,7 +509,7 @@ export const metadataConfig = {
       url: `${siteConfig.url}/services`,
       images: [
         {
-          url: `${siteConfig.url}/og/services.jpg`,
+          url: `${siteConfig.url}/og/services.webp`,
           width: 1200,
           height: 630,
           alt: 'ClickMasters software development services',
@@ -520,7 +520,7 @@ export const metadataConfig = {
       title: 'Software Development Services | ClickMasters',
       description:
         'Web apps, mobile apps, ERP, APIs & cloud. Full-cycle development tailored to your business. Free consultation.',
-      images: [`${siteConfig.url}/og/services.jpg`],
+      images: [`${siteConfig.url}/og/services.webp`],
     },
   }),
 
@@ -537,7 +537,7 @@ export const metadataConfig = {
       url: `${siteConfig.url}/solutions`,
       images: [
         {
-          url: `${siteConfig.url}/og/solutions.jpg`,
+          url: `${siteConfig.url}/og/solutions.webp`,
           width: 1200,
           height: 630,
           alt: 'ClickMasters software solutions portfolio',
@@ -548,7 +548,7 @@ export const metadataConfig = {
       title: 'Software Portfolio – 100+ Projects | ClickMasters',
       description:
         'Real results across fintech, healthcare, retail & logistics. 100+ custom software projects delivered.',
-      images: [`${siteConfig.url}/og/solutions.jpg`],
+      images: [`${siteConfig.url}/og/solutions.webp`],
     },
   }),
 
@@ -565,7 +565,7 @@ export const metadataConfig = {
       url: `${siteConfig.url}/testimonials`,
       images: [
         {
-          url: `${siteConfig.url}/og/testimonials.jpg`,
+          url: `${siteConfig.url}/og/testimonials.webp`,
           width: 1200,
           height: 630,
           alt: 'ClickMasters client testimonials and reviews',
@@ -576,7 +576,7 @@ export const metadataConfig = {
       title: 'Client Reviews – Rated 4.9/5 | ClickMasters',
       description:
         '100+ clients. 4.9/5 average rating. Real reviews from businesses who built their software with ClickMasters.',
-      images: [`${siteConfig.url}/og/testimonials.jpg`],
+      images: [`${siteConfig.url}/og/testimonials.webp`],
     },
   }),
 
@@ -593,7 +593,7 @@ export const metadataConfig = {
       url: `${siteConfig.url}/contact`,
       images: [
         {
-          url: `${siteConfig.url}/og/contact.jpg`,
+          url: `${siteConfig.url}/og/contact.webp`,
           width: 1200,
           height: 630,
           alt: 'Contact ClickMasters – free software development consultation',
@@ -604,7 +604,7 @@ export const metadataConfig = {
       title: 'Get a Free Consultation | ClickMasters',
       description:
         'Tell us about your project. Our team responds within 24 hours with a no-obligation quote.',
-      images: [`${siteConfig.url}/og/contact.jpg`],
+      images: [`${siteConfig.url}/og/contact.webp`],
     },
   }),
 
@@ -630,7 +630,7 @@ export const metadataConfig = {
       url: `${siteConfig.url}/solutions/${slug}`,
       images: [
         {
-          url: ogImageUrl || `${siteConfig.url}/og/solutions.jpg`,
+          url: ogImageUrl || `${siteConfig.url}/og/solutions.webp`,
           width: 1200,
           height: 630,
           alt: `${title} – software solution by ClickMasters`,
@@ -642,7 +642,7 @@ export const metadataConfig = {
       description:
         description ||
         `See how ClickMasters delivered a custom ${title} solution – stack, challenges, and results.`,
-      images: [ogImageUrl || `${siteConfig.url}/og/solutions.jpg`],
+      images: [ogImageUrl || `${siteConfig.url}/og/solutions.webp`],
     },
   }),
 

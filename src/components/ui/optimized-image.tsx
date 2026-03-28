@@ -17,23 +17,20 @@ export function OptimizedImage({
   className,
   priority = false,
 }: OptimizedImageProps) {
-  const isLargeLogo = src.includes("logo-white") || src.includes("logo.png");
+  const isLargeLogo = src.includes("logo-white") || src.includes("logo.webp");
 
   if (isLargeLogo) {
     return (
-      <picture>
-        <source srcSet={src.replace(".png", ".webp")} type="image/webp" />
-        <Image
-          src={src}
-          alt={alt}
-          width={width || 192}
-          height={height || 48}
-          className={className}
-          priority={priority}
-          quality={85}
-          sizes="(max-width: 768px) 140px, 192px"
-        />
-      </picture>
+      <Image
+        src={src}
+        alt={alt}
+        width={width || 192}
+        height={height || 48}
+        className={className}
+        priority={priority}
+        quality={85}
+        sizes="(max-width: 768px) 140px, 192px"
+      />
     );
   }
 

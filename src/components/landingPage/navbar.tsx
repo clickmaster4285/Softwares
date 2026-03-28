@@ -159,7 +159,7 @@ router.push('/solutions');
       ? 'bg-white/95 border-b border-black/10 shadow-sm'
       : 'bg-white/10 backdrop-blur-md border-b border-transparent';
 
-  const logoToShow = isPageLoading || !isLightHero ? '/logo.png' : '/logo-white.png';
+  const logoToShow = isPageLoading || !isLightHero ? '/logo.webp' : '/logo-white.webp';
 
   const linkStyle = (isActive: boolean) => {
     if (isPageLoading) {
@@ -315,7 +315,7 @@ router.push('/solutions');
             <div className="flex flex-col h-full">
               {/* Mobile Header */}
               <div className="flex items-center justify-between p-6 border-b border-black/5">
-                <img src="/logo.png" className="w-36 h-auto" alt="ClickMasters" />
+                <img src="/logo.webp" className="w-36 h-auto" alt="ClickMasters" />
               </div>
 
               {/* Mobile Navigation */}

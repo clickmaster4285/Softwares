@@ -154,7 +154,7 @@ export function Footer(): JSX.Element {
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
               <Link href="/" className="flex items-center gap-2">
-                <img src="/logo-white.png" className="w-36 h-auto" alt="Logo" />
+                <img src="/logo-white.webp" className="w-36 h-auto" alt="Logo" />
               </Link>
             </motion.div>
             <motion.p variants={itemVariants} className="text-background/70 max-w-md mb-6">

@@ -51,9 +51,9 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background Image - hero.jpg */}
+      {/* Background Image - loginImg.webp */}
       <Image
-        src="/loginImg.jpg"
+        src="/loginImg.webp"
         alt="Background"
         fill
         className="object-cover opacity-60"
