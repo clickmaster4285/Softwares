@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/clickMasters.png",
   },
+  verification: {
+    google: "tH8GZm7N2hbAICQfeQEs4YejO057UvY4eJBWLkHHJxU",
+  },
 };
 
 export default function RootLayout({
