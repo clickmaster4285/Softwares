@@ -8,8 +8,6 @@
     "start": "next start",
     "lint": "eslint .",
     "analyze": "ANALYZE=true next build",
-    "optimize-images": "node scripts/optimize-images.js",
-    "prebuild": "npm run optimize-images",
     "format": "prettier --write \"src/**/*.{ts,tsx,md}\" \"app/**/*.{ts,tsx}\"",
     "type-check": "tsc --noEmit"
   },
