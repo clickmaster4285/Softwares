@@ -41,6 +41,21 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60,
   },
 
+  async redirects() {
+    return [
+      {
+        source: "/solutions",
+        destination: "/software-solutions",
+        permanent: true,
+      },
+      {
+        source: "/solutions/:path*",
+        destination: "/software-solutions/:path*",
+        permanent: true,
+      },
+    ];
+  },
+
   async rewrites() {
     return {
       beforeFiles: [

@@ -267,7 +267,7 @@ export function AppsSection() {
     return (
       <Link
         key={project._id}
-        href={`/projects/${project._id}`}
+        href={`/software-solutions/${project._id}`}
         className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
       >
         {cardContent}
@@ -345,7 +345,7 @@ export function AppsSection() {
 
         {/* Bottom CTA - Enhanced to show remaining categories count */}
         <div ref={ctaRef} className="mt-20 text-center">
-          <Link href="/solutions" className="inline-block">
+          <Link href="/case-studies" className="inline-block">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
@@ -354,11 +354,11 @@ export function AppsSection() {
               <span className="relative z-10 flex items-center">
                 {remainingCount > 0 ? (
                   <>
-                    View All Solutions ({remainingCount} more{' '}
+                    View all case studies ({remainingCount} more{' '}
                     {remainingCount === 1 ? 'category' : 'categories'})
                   </>
                 ) : (
-                  <>View All Solutions</>
+                  <>View all case studies</>
                 )}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>

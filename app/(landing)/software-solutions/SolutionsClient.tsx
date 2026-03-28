@@ -83,7 +83,21 @@ const getStatusColor = (status: string) => {
   }
 };
 
-export default function ProjectsPage() {
+type SolutionsClientProps = {
+  /** Page H1 — defaults to solutions catalog title */
+  heading?: string;
+  /** Intro paragraph under the title */
+  subheading?: string;
+};
+
+const DEFAULT_HEADING = 'Our Solutions';
+const DEFAULT_SUBHEADING =
+  'Explore our complete collection of custom software, web applications, and digital solutions built for clients across various industries.';
+
+export default function SolutionsClient({
+  heading = DEFAULT_HEADING,
+  subheading = DEFAULT_SUBHEADING,
+}: SolutionsClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const filtersRef = useRef<HTMLDivElement>(null);
@@ -408,7 +422,7 @@ export default function ProjectsPage() {
     return (
       <Link 
         key={project._id} 
-        href={`/projects/${project._id}`}
+        href={`/software-solutions/${project._id}`}
         className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
       >
         {cardContent}
@@ -478,13 +492,10 @@ export default function ProjectsPage() {
         
           
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-black mb-4">
-            Our Solutions
+            {heading}
           </h1>
-          
-          <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">
-            Explore our complete collection of custom software, web applications, 
-            and digital solutions built for clients across various industries.
-          </p>
+
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
         </div>
 
     

@@ -938,10 +938,10 @@ export default function ServicesPage() {
                   </button>
                 </Link>
 
-                <Link href="/solutions">
+                <Link href="/case-studies">
                   <button className="group relative w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 bg-transparent text-black text-sm font-medium tracking-wider border border-primary/20 hover:border-primary/50 transition-colors duration-300 overflow-hidden rounded-md">
                     <span className="relative z-10 flex items-center justify-center">
-                      View Our Work
+                      View case studies
                       <Sparkles className="ml-2 h-3 w-3 md:h-4 md:w-4" />
                     </span>
                     <div className="absolute inset-0 bg-primary/5 transform scale-0 group-hover:scale-100 transition-transform duration-300" />

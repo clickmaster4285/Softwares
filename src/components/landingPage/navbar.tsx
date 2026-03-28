@@ -67,7 +67,7 @@ export function Navbar() {
     const projectItem: ProjectItem = {
       id: project._id,
       title: project.title,
-      url: project.url || `/projects/${project._id}`, // Use external URL if exists, otherwise internal
+      url: project.url || `/software-solutions/${project._id}`, // Use external URL if exists, otherwise internal
       externalUrl: project.url, // Store external URL separately if needed
     };
 
@@ -90,14 +90,14 @@ export function Navbar() {
       window.open(project.externalUrl, '_blank', 'noopener,noreferrer');
     } else {
       // If it's internal, navigate using router
-      router.push(project.url || `/projects/${project.id}`);
+      router.push(project.url || `/software-solutions/${project.id}`);
     }
   };
 
   // Handle Solutions link click
   const handleSolutionsClick = () => {
     closeDropdowns();
-router.push('/solutions');
+    router.push('/software-solutions');
   };
 
   // Check if page is loading
@@ -243,6 +243,17 @@ router.push('/solutions');
           </Link>
 
           <Link
+            href="/case-studies"
+            onClick={closeDropdowns}
+            className={cn(
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/case-studies'))
+            )}
+          >
+            Case Studies
+          </Link>
+
+          <Link
             href="/about-us"
             onClick={closeDropdowns}
             className={cn(
@@ -359,6 +370,19 @@ router.push('/solutions');
                   </Link>
 
                   <Link
+                    href="/case-studies"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/case-studies')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
+                    )}
+                  >
+                    Case Studies
+                  </Link>
+
+                  <Link
                     href="/about-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
@@ -459,7 +483,7 @@ router.push('/solutions');
                 </div>
                 <div className="text-center pt-6 border-t border-black/5">
                   <Link
-                    href="/solutions"
+                    href="/software-solutions"
                     onClick={closeDropdowns}
                     className="text-black/60 hover:text-primary transition-colors"
                   >

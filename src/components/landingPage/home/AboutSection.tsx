@@ -174,10 +174,10 @@ export function AboutSection() {
                   About ClickMasters
                 </span>
               </div>
-              <h2 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-gray-900">
-                Your Trusted{" "}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.12] tracking-tight text-gray-900">
+                We Don&apos;t Just Build Software —{" "}
                 <span className="text-orange-500 relative inline-block">
-                  Software Development
+                  We Build Revenue Systems
                   <svg className="absolute -bottom-1.5 left-0 w-full" viewBox="0 0 300 6" preserveAspectRatio="none" fill="none">
                     <path
                       d="M0 3 Q75 0 150 3 Q225 6 300 3"
@@ -191,8 +191,7 @@ export function AboutSection() {
                       }}
                     />
                   </svg>
-                </span>{" "}
-                Company
+                </span>
               </h2>
             </div>
 
@@ -262,7 +261,7 @@ export function AboutSection() {
                 </svg>
               </a>
               <a
-                href="/solutions"
+                href="/case-studies"
                 className="group inline-flex items-center border border-gray-300 hover:border-orange-400 hover:text-orange-500 hover:bg-orange-50/40 active:scale-95 transition-all duration-200 text-gray-700 text-sm font-medium px-7 py-3.5"
               >
                 View Our Work

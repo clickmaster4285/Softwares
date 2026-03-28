@@ -277,7 +277,7 @@ export function serviceSchema(name: string, description: string, url: string) {
   };
 }
 
-/** SoftwareApplication / case study – use on /solutions/[slug] */
+/** SoftwareApplication / case study – use on /software-solutions/[slug] */
 export function softwareAppSchema(opts: {
   name: string;
   description: string;
@@ -530,17 +530,17 @@ export const metadataConfig = {
     },
   }),
 
-  // ── /solutions ──────────────────────────────────────────────────────────────
+  // ── /software-solutions ─────────────────────────────────────────────────────
   solutions: (): Metadata => ({
-    title: 'Case Studies & Software Solutions Portfolio',
+    title: 'Software Solutions Portfolio',
     description:
       'Browse 100+ custom software projects: web platforms, mobile apps, and enterprise ERP systems across fintech, healthcare, retail, and logistics. See real results.',
-    alternates: { canonical: `${siteConfig.url}/solutions` },
+    alternates: { canonical: `${siteConfig.url}/software-solutions` },
     openGraph: {
       title: 'Software Solutions Portfolio – 100+ Projects | ClickMasters',
       description:
         '100+ delivered projects across fintech, healthcare, retail, and logistics. Real results, real clients. Explore our portfolio.',
-      url: `${siteConfig.url}/solutions`,
+      url: `${siteConfig.url}/software-solutions`,
       images: [
         {
           url: `${siteConfig.url}/og/solutions.webp`,
@@ -554,6 +554,35 @@ export const metadataConfig = {
       title: 'Software Portfolio – 100+ Projects | ClickMasters',
       description:
         'Real results across fintech, healthcare, retail & logistics. 100+ custom software projects delivered.',
+      images: [`${siteConfig.url}/og/solutions.webp`],
+    },
+  }),
+
+  // ── /case-studies ────────────────────────────────────────────────────────────
+  caseStudies: (): Metadata => ({
+    title: 'Case Studies – Outcomes from Custom Software | ClickMasters',
+    description:
+      'Explore case studies: challenges, solutions, and measurable results from web apps, SaaS, mobile, and enterprise software we have delivered for clients worldwide.',
+    alternates: { canonical: `${siteConfig.url}/case-studies` },
+    openGraph: {
+      title: 'Case Studies – Custom Software That Drives Results | ClickMasters',
+      description:
+        'Real projects, real outcomes. See how we ship high-performance software for businesses in the USA, Europe, and the Middle East.',
+      url: `${siteConfig.url}/case-studies`,
+      images: [
+        {
+          url: `${siteConfig.url}/og/solutions.webp`,
+          width: 1200,
+          height: 630,
+          alt: 'ClickMasters case studies and software project outcomes',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Case Studies | ClickMasters',
+      description:
+        'Deep dives into custom software projects: strategy, build, launch, and ROI.',
       images: [`${siteConfig.url}/og/solutions.webp`],
     },
   }),
@@ -614,7 +643,7 @@ export const metadataConfig = {
     },
   }),
 
-  // ── /solutions/[slug] ───────────────────────────────────────────────────────
+  // ── /software-solutions/[slug] ───────────────────────────────────────────────
   solutionsDetail: (
     title: string,
     description: string,
@@ -626,14 +655,14 @@ export const metadataConfig = {
       description ||
       `See how ClickMasters built a custom ${title} solution. Explore the tech stack, challenges solved, and measurable results delivered.`,
     alternates: {
-      canonical: `${siteConfig.url}/solutions/${slug}`,
+      canonical: `${siteConfig.url}/software-solutions/${slug}`,
     },
     openGraph: {
       title: `${title} | Software Solution by ClickMasters`,
       description:
         description ||
         `How ClickMasters built a custom ${title} solution – tech stack, challenges, and results.`,
-      url: `${siteConfig.url}/solutions/${slug}`,
+      url: `${siteConfig.url}/software-solutions/${slug}`,
       images: [
         {
           url: ogImageUrl || `${siteConfig.url}/og/solutions.webp`,

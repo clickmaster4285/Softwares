@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, Mail, User, Phone, Send, CheckCircle2, DollarSign } from "lucide-react";
+import { ArrowRight, FileText, Mail, User, Phone, Send, CheckCircle2, DollarSign } from "lucide-react";
 import { motion, useInView } from 'framer-motion';
 
 // Define types
@@ -304,12 +304,12 @@ export function HeroSection(): JSX.Element {
                 >
                   <Button 
                     size="lg" 
-                    className="w-full sm:w-auto min-h-[48px] touch-manipulation bg-primary text-white hover:bg-primary px-6 py-5 sm:px-8 sm:py-6 text-base sm:text-lg rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 transition-all relative overflow-hidden group" 
+                    className="w-full sm:w-auto min-h-[48px] touch-manipulation bg-primary text-white hover:bg-primary px-4 py-5 sm:px-6 md:px-8 sm:py-6 text-sm sm:text-base md:text-lg rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 transition-all relative overflow-hidden group text-center leading-snug" 
                     asChild
                   >
                     <Link href="/contact-us">
-                      <span className="relative z-10">Get Started</span>
-                      <ArrowRight className="ml-2 h-5 w-5 relative z-10" />
+                      <span className="relative z-10">Get Free Software Strategy Call</span>
+                      <ArrowRight className="ml-2 h-5 w-5 shrink-0 relative z-10" />
                       <motion.span 
                         className="absolute inset-0 bg-white/20"
                         initial={{ x: '-100%' }}
@@ -328,12 +328,12 @@ export function HeroSection(): JSX.Element {
                   <Button 
                     size="lg" 
                     variant="outline" 
-                    className="w-full sm:w-auto min-h-[48px] touch-manipulation px-6 py-5 sm:px-8 sm:py-6 text-base sm:text-lg rounded-xl bg-black/30 backdrop-blur-sm border-2 border-white/20 hover:bg-black/40 text-white hover:border-primary/50 transition-all" 
+                    className="w-full sm:w-auto min-h-[48px] touch-manipulation px-4 py-5 sm:px-6 md:px-8 sm:py-6 text-sm sm:text-base md:text-lg rounded-xl bg-black/30 backdrop-blur-sm border-2 border-white/20 hover:bg-black/40 text-white hover:border-primary/50 transition-all text-center leading-snug" 
                     asChild
                   >
-                    <Link href="/services">
-                      <Play className="mr-2 h-5 w-5" />
-                      Our Services
+                    <Link href="/contact-us">
+                      <FileText className="mr-2 h-5 w-5 shrink-0" />
+                      Request Proposal
                     </Link>
                   </Button>
                 </motion.div>

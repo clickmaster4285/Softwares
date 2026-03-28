@@ -35,7 +35,7 @@ const footerLinks: FooterLinks = {
     { label: 'Web Development', href: '/services' },
     { label: 'Mobile App Development', href: '/services' },
     { label: 'ERP & Business Apps', href: '/services' },
-    { label: 'Our Solutions', href: '/solutions' },
+    { label: 'Our Solutions', href: '/software-solutions' },
   ],
   company: [
     { label: 'About Us', href: '/about-us' },
@@ -46,7 +46,7 @@ const footerLinks: FooterLinks = {
   resources: [
     { label: 'Help & FAQ', href: '/contact-us' },
     { label: 'Why Choose Us', href: '/#community' },
-    { label: 'Case Studies', href: '/#apps' },
+    { label: 'Case Studies', href: '/case-studies' },
    
   ],
   legal: [
