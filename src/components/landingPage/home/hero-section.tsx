@@ -197,7 +197,7 @@ export function HeroSection(): JSX.Element {
 
   return (
     <section
-      className="relative min-h-screen flex items-center pt-[max(1rem,env(safe-area-inset-top))] pb-10 sm:pb-12 md:py-12 lg:py-20"
+      className="relative -mt-20 min-h-screen flex items-center pt-[max(5rem,calc(1rem+env(safe-area-inset-top)))] pb-10 sm:pb-12 md:py-12 lg:py-20"
       aria-labelledby="hero-heading"
     >
       {/* Background Image with Overlay */}
