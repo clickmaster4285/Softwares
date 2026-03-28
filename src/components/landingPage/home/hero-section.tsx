@@ -292,7 +292,7 @@ export function HeroSection(): JSX.Element {
         ))}
       </div>
 
-      <div className="container mx-auto px-3 sm:px-4 lg:px-8 relative z-10 w-full max-w-full min-w-0">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8 relative z-10 w-full max-w-full min-w-0 mt-14">
         <div className="mx-auto max-w-7xl w-full min-w-0">
           <div className="grid gap-8 sm:gap-10 lg:gap-12 lg:grid-cols-[1fr_minmax(280px,400px)] xl:grid-cols-[1fr_420px] items-start mb-10 sm:mb-12 md:mb-16 lg:mb-20">
             <div className="min-w-0">
