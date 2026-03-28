@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/providers";
 import "./globals.css";
-import { defaultMetadata } from './metadata-config';
+import { defaultMetadata, organizationSchema, webSiteSchema } from './metadata-config';
+import Script from 'next/script';
 
-export const metadata: Metadata = {
-  ...defaultMetadata,
-  // Override or add specific metadata here
-  verification: {
-    google: "tH8GZm7N2hbAICQfeQEs4YejO057UvY4eJBWLkHHJxU",
-  },
-  // You can also add other verification codes
-  // yandex: "yandex-verification-code",
-  // other: {
-  //   "msvalidate.01": "bing-verification-code",
-  // },
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
@@ -30,6 +20,24 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+
+        {/* Organization Schema - Improves brand visibility in search */}
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+
+        {/* WebSite Schema - Enables Google Sitelinks Search Box */}
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(webSiteSchema),
+          }}
+        />
       </body>
     </html>
   );
