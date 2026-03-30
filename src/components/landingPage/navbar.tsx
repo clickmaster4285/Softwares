@@ -634,7 +634,7 @@ export function Navbar() {
                       .map((section) => (
                         <div key={section.category}>
                           <div className="grid gap-6 sm:grid-cols-2">
-                            {section.items.map((item) => (
+                            {section.items.slice(0, 16).map((item) => (
                               <button
                                 key={item.id}
                                 type="button"
