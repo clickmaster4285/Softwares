@@ -293,8 +293,8 @@ const AdminCategories = () => {
               {editingCategory ? 'Update category details' : 'Add a new category for your projects'}
             </DialogDescription>
           </DialogHeader>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
+          <form onSubmit={handleSubmit} className="min-w-0 space-y-4">
+            <div className="min-w-0 space-y-2">
               <Label htmlFor="name">Category Name *</Label>
               <Input
                 id="name"
@@ -316,10 +316,11 @@ const AdminCategories = () => {
               />
             </div>
 
-            <div className="flex justify-end gap-2 pt-4">
+            <div className="flex flex-col-reverse gap-2 pt-4 sm:flex-row sm:justify-end">
               <Button
                 type="button"
                 variant="outline"
+                className="w-full sm:w-auto"
                 onClick={() => {
                   setIsFormOpen(false);
                   setEditingCategory(null);
@@ -332,6 +333,7 @@ const AdminCategories = () => {
               <Button
                 type="submit"
                 disabled={createMutation.isPending || updateMutation.isPending}
+                className="w-full sm:w-auto"
               >
                 {createMutation.isPending || updateMutation.isPending
                   ? 'Saving...'

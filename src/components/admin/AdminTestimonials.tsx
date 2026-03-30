@@ -322,9 +322,9 @@ const AdminTestimonials = () => {
               {editingTestimonial ? 'Update testimonial' : 'New testimonial will appear on the landing page (if active).'}
             </DialogDescription>
           </DialogHeader>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
+          <form onSubmit={handleSubmit} className="min-w-0 space-y-4">
+            <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="min-w-0 space-y-2">
                 <Label htmlFor="authorName">Author Name *</Label>
                 <Input
                   id="authorName"
@@ -384,18 +384,26 @@ const AdminTestimonials = () => {
                 placeholder="https://..."
               />
             </div>
-            <div className="flex items-center justify-between rounded-lg border border-border p-4">
-              <div>
+            <div className="flex flex-col gap-3 rounded-lg border border-border p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0 pr-2">
                 <Label htmlFor="isActive">Show on landing page</Label>
                 <p className="text-sm text-muted-foreground">Inactive testimonials are hidden from the public.</p>
               </div>
-              <Switch id="isActive" checked={isActive} onCheckedChange={setIsActive} />
+              <Switch id="isActive" checked={isActive} onCheckedChange={setIsActive} className="shrink-0" />
             </div>
-            <div className="flex justify-end gap-2 pt-2">
-              <Button type="button" variant="outline" onClick={() => setIsFormOpen(false)}>Cancel</Button>
+            <div className="flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-end">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsFormOpen(false)}
+                className="w-full sm:w-auto"
+              >
+                Cancel
+              </Button>
               <Button
                 type="submit"
                 disabled={createMutation.isPending || updateMutation.isPending}
+                className="w-full sm:w-auto"
               >
                 {createMutation.isPending || updateMutation.isPending ? 'Saving...' : editingTestimonial ? 'Update' : 'Create'}
               </Button>

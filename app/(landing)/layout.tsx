@@ -14,10 +14,12 @@ const Navbar = dynamic(
 export default function LandingLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen ">
-      <Navbar />
-      {/* Matches navbar h-20 so fixed header does not overlap page content */}
-      <div className="h-20 shrink-0" aria-hidden="true" />
+      {/* Sticky Navbar */}
+      <header className="sticky top-0 z-50">
+        <Navbar />
+      </header>
 
+      {/* Page content */}
       <main className="">{children}</main>
 
       {/* Footer */}

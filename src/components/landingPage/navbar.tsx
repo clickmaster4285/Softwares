@@ -36,11 +36,33 @@ interface Project {
   completionDate?: string;
 }
 
+type ServiceMenuItem = {
+  title: string;
+  description: string;
+  href: string;
+};
+
+type ServiceMenuSection = {
+  label: string;
+  items: ServiceMenuItem[];
+};
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeServiceSection, setActiveServiceSection] = useState<string>('Engineering Services');
+  const [activeSolutionsSection, setActiveSolutionsSection] = useState<string>('');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -82,6 +104,14 @@ export function Navbar() {
     return acc;
   }, []);
 
+  useEffect(() => {
+    if (activeDropdown !== 'solutions') return;
+    if (groupedProjects.length === 0) return;
+    if (!activeSolutionsSection || !groupedProjects.some((s) => s.category === activeSolutionsSection)) {
+      setActiveSolutionsSection(groupedProjects[0]?.category ?? '');
+    }
+  }, [activeDropdown, groupedProjects, activeSolutionsSection]);
+
   // Handle project click
   const handleProjectClick = (project: ProjectItem) => {
     closeDropdowns();
@@ -99,6 +129,66 @@ export function Navbar() {
     closeDropdowns();
     router.push('/software-solutions');
   };
+
+  const handleServicesClick = () => {
+    closeDropdowns();
+    router.push('/services');
+  };
+
+  const serviceSections: ServiceMenuSection[] = [
+    {
+      label: 'Engineering Services',
+      items: [
+        {
+          title: 'Custom Software Development',
+          description: 'Enterprise-grade systems, automation, and modernization.',
+          href: `/services#${slugify('custom-software-development')}`,
+        },
+        {
+          title: 'Web Application Development',
+          description: 'Scalable SPAs, dashboards, and high-performance web apps.',
+          href: `/services#${slugify('web-application-development')}`,
+        },
+        {
+          title: 'Mobile App Development',
+          description: 'Native and cross-platform mobile apps for iOS and Android.',
+          href: `/services#${slugify('mobile-app-development')}`,
+        },
+      ],
+    },
+    {
+      label: 'Data & Platforms',
+      items: [
+        {
+          title: 'Database Design & Management',
+          description: 'Secure SQL/NoSQL design, migrations, and performance tuning.',
+          href: `/services#${slugify('database-design-management')}`,
+        },
+        {
+          title: 'Cloud Solutions & DevOps',
+          description: 'CI/CD, cloud migration, containers, reliability, and monitoring.',
+          href: `/services#${slugify('cloud-solutions-devops')}`,
+        },
+      ],
+    },
+    {
+      label: 'Security & Compliance',
+      items: [
+        {
+          title: 'Cybersecurity & Compliance',
+          description: 'Audits, pentesting, IAM, encryption, and regulatory readiness.',
+          href: `/services#${slugify('cybersecurity-compliance')}`,
+        },
+      ],
+    },
+  ];
+
+  useEffect(() => {
+    if (activeDropdown !== 'services') return;
+    if (!serviceSections.some((s) => s.label === activeServiceSection)) {
+      setActiveServiceSection(serviceSections[0]?.label ?? 'Engineering Services');
+    }
+  }, [activeDropdown]);
 
   // Check if page is loading
   useEffect(() => {
@@ -230,17 +320,34 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* Services Link */}
-          <Link
-            href="/services"
-            onClick={closeDropdowns}
-            className={cn(
-              'text-sm font-medium transition-colors',
-              linkStyle(isActivePath('/services'))
-            )}
+          {/* Services Dropdown - Mega menu */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter('services')}
+            onMouseLeave={handleMouseLeave}
           >
-            Services
-          </Link>
+            <button
+              onClick={handleServicesClick}
+              className={cn(
+                'text-sm font-medium transition-colors flex items-center gap-1',
+                activeDropdown === 'services'
+                  ? 'text-primary'
+                  : isPageLoading
+                    ? 'text-black/70 hover:text-primary'
+                    : isLightHero
+                      ? 'text-white/90 hover:text-primary'
+                      : 'text-black/70 hover:text-primary'
+              )}
+            >
+              Services
+              <ChevronDown
+                className={cn(
+                  'h-4 w-4 transition-transform',
+                  activeDropdown === 'services' && 'rotate-180'
+                )}
+              />
+            </button>
+          </div>
 
           <Link
             href="/case-studies"
@@ -252,6 +359,8 @@ export function Navbar() {
           >
             Case Studies
           </Link>
+
+
 
           <Link
             href="/about-us"
@@ -285,6 +394,15 @@ export function Navbar() {
           >
             Testimonials
           </Link>
+
+          <Link
+            href="/blog"
+            onClick={closeDropdowns}
+            className={cn('text-sm font-medium transition-colors', linkStyle(isActivePath('/blog')))}
+          >
+            Blog
+          </Link>
+
         </nav>
 
         {/* Desktop CTA */}
@@ -383,6 +501,19 @@ export function Navbar() {
                   </Link>
 
                   <Link
+                    href="/blog"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/blog')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
+                    )}
+                  >
+                    Blog
+                  </Link>
+
+                  <Link
                     href="/about-us"
                     onClick={() => setIsOpen(false)}
                     className={cn(
@@ -446,52 +577,193 @@ export function Navbar() {
             }
           }}
           onMouseLeave={handleMouseLeave}
-          className="absolute left-0 right-0 bg-white border-t border-black/5 shadow-lg animate-slideDown"
+          className="absolute left-0 right-0 top-full border-t border-black/5 animate-slideDown bg-transparent"
         >
-          <div className="container mx-auto px-4 lg:px-8 py-12">
+          <div className="container mx-auto px-4 lg:px-8 py-0">
             {isLoadingProjects ? (
-              <div className="text-center py-12">
+              <div className="mx-auto max-w-6xl py-10 text-center">
                 <p className="text-black/40">Loading projects...</p>
               </div>
             ) : groupedProjects.length === 0 ? (
-              <div className="text-center py-12">
+              <div className="mx-auto max-w-6xl py-10 text-center">
                 <p className="text-black/40">No projects available</p>
               </div>
             ) : (
-              <>
-                <div className="grid grid-cols-4 gap-8 mb-8">
-                  {groupedProjects.map((section, idx) => (
-                    <div key={idx}>
-                      <h3 className="text-sm font-semibold mb-4 text-primary">
-                        {section.category}
-                      </h3>
-                      <ul className="space-y-2">
-                        {section.items.map((item, itemIdx) => (
-                          <li key={itemIdx}>
+              <div className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]">
+                <div className="grid grid-cols-12">
+                  {/* Left rail */}
+                  <div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
+                    <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+                      Solutions
+                    </p>
+                    <ul className="space-y-1">
+                      {groupedProjects.map((section) => {
+                        const active = section.category === activeSolutionsSection;
+                        return (
+                          <li key={section.category}>
                             <button
-                              onClick={() => handleProjectClick(item)}
-                              className="text-black/60 hover:text-primary transition-colors block py-1 text-left w-full"
+                              type="button"
+                              onMouseEnter={() => setActiveSolutionsSection(section.category)}
+                              onClick={() => setActiveSolutionsSection(section.category)}
+                              className={cn(
+                                'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between',
+                                active
+                                  ? 'bg-white text-slate-900 shadow-sm'
+                                  : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
+                              )}
                             >
-                              {item.title}
-                            
+                              <span>{section.category}</span>
+                              <ChevronDown
+                                className={cn(
+                                  'h-4 w-4 -rotate-90 transition-opacity',
+                                  active ? 'opacity-70' : 'opacity-0'
+                                )}
+                                aria-hidden
+                              />
                             </button>
                           </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                        );
+                      })}
+                    </ul>
+                  </div>
+
+                  {/* Right content */}
+                  <div className="col-span-9 p-8">
+                    {groupedProjects
+                      .filter((s) => s.category === activeSolutionsSection)
+                      .map((section) => (
+                        <div key={section.category}>
+                          <div className="grid gap-6 sm:grid-cols-2">
+                            {section.items.map((item) => (
+                              <button
+                                key={item.id}
+                                type="button"
+                                onClick={() => handleProjectClick(item)}
+                                className="group rounded-md p-2 text-left transition-colors hover:bg-slate-50"
+                              >
+                                <div className="flex items-start justify-between gap-4">
+                                  <p className="text-sm font-semibold text-slate-900 group-hover:text-primary">
+                                    {item.title}
+                                  </p>
+                                  <ChevronDown className="mt-0.5 h-4 w-4 -rotate-90 text-slate-300 transition-colors group-hover:text-primary" />
+                                </div>
+                              </button>
+                            ))}
+                          </div>
+
+                          <div className="mt-6 border-t border-slate-200 pt-4">
+                            <Link
+                              href="/software-solutions"
+                              onClick={closeDropdowns}
+                              className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                            >
+                              Browse all solutions →
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
                 </div>
-                <div className="text-center pt-6 border-t border-black/5">
-                  <Link
-                    href="/software-solutions"
-                    onClick={closeDropdowns}
-                    className="text-black/60 hover:text-primary transition-colors"
-                  >
-                    Browse all Solutions →
-                  </Link>
-                </div>
-              </>
+              </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Full-width Dropdown Menu for Services */}
+      {activeDropdown === 'services' && !isPageLoading && (
+        <div
+          ref={dropdownRef}
+          onMouseEnter={() => {
+            if (hoverTimeoutRef.current) {
+              clearTimeout(hoverTimeoutRef.current);
+            }
+          }}
+          onMouseLeave={handleMouseLeave}
+          className="absolute left-0 right-0 top-full border-t border-black/5 animate-slideDown bg-transparent"
+        >
+          <div className="container mx-auto px-4 lg:px-8 py-0">
+            <div className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]">
+              <div className="grid grid-cols-12">
+                {/* Left rail */}
+                <div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
+                  <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+                    Services
+                  </p>
+                  <ul className="space-y-1">
+                    {serviceSections.map((section) => {
+                      const active = section.label === activeServiceSection;
+                      return (
+                        <li key={section.label}>
+                          <button
+                            type="button"
+                            onMouseEnter={() => setActiveServiceSection(section.label)}
+                            onClick={() => setActiveServiceSection(section.label)}
+                            className={cn(
+                              'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between',
+                              active
+                                ? 'bg-white text-slate-900 shadow-sm'
+                                : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
+                            )}
+                          >
+                            <span>{section.label}</span>
+                            <ChevronDown
+                              className={cn(
+                                'h-4 w-4 -rotate-90 transition-opacity',
+                                active ? 'opacity-70' : 'opacity-0 group-hover:opacity-60'
+                              )}
+                              aria-hidden
+                            />
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+
+                {/* Right content */}
+                <div className="col-span-9 p-8">
+                  {serviceSections
+                    .filter((s) => s.label === activeServiceSection)
+                    .map((section) => (
+                      <div key={section.label}>
+                        <div className="grid gap-6 sm:grid-cols-2">
+                          {section.items.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={closeDropdowns}
+                              className="group rounded-md p-2 transition-colors hover:bg-slate-50"
+                            >
+                              <div className="flex items-start justify-between gap-4">
+                                <div>
+                                  <p className="text-sm font-semibold text-slate-900 group-hover:text-primary">
+                                    {item.title}
+                                  </p>
+                                  <p className="mt-1 text-xs leading-relaxed text-slate-500">
+                                    {item.description}
+                                  </p>
+                                </div>
+                                <ChevronDown className="mt-0.5 h-4 w-4 -rotate-90 text-slate-300 transition-colors group-hover:text-primary" />
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+
+                        <div className="mt-6 border-t border-slate-200 pt-4">
+                          <Link
+                            href="/services"
+                            onClick={closeDropdowns}
+                            className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                          >
+                            All services →
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

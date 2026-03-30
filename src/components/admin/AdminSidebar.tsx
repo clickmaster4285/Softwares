@@ -7,7 +7,7 @@ import {
   Home,
   Tags,
   MessageSquare,
-  Settings,
+  FileSearch,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -34,6 +34,7 @@ const menuItems = [
   { title: 'Dashboard', url: '/admin', icon: LayoutDashboard },
   { title: 'Categories', url: '/admin/categories', icon: Tags },
   { title: 'Solutions', url: '/admin/solutions', icon: FolderOpen },
+  { title: 'Case studies', url: '/admin/case-studies', icon: FileSearch },
   { title: 'Testimonials', url: '/admin/testimonials', icon: MessageSquare },
 ];
 

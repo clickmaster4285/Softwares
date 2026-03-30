@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Project from '../../../lib/models/Project';
 import Category from '../../../lib/models/Category';
+import CaseStudy from '../../../lib/models/CaseStudy';
 import dbConnect from '../../../lib/mongoose';
 
 // Helper to get ID from query
@@ -28,8 +29,9 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     await dbConnect();
-    const { title, description, url, category, tags, status, thumbnail } = await req.json();
-    
+    const body = await req.json();
+    const { title, description, url, category, tags, status, thumbnail } = body;
+
     if (!title || !description || !url || !category || !thumbnail) {
       return NextResponse.json({ message: 'Missing fields' }, { status: 400 });
     }
@@ -39,14 +41,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Invalid category' }, { status: 400 });
     }
 
-    const project = await Project.create({ 
-      title, 
-      description, 
-      url, 
-      category, 
-      tags, 
-      status, 
-      thumbnail 
+    const project = await Project.create({
+      title,
+      description,
+      url,
+      category,
+      tags,
+      status,
+      thumbnail,
     });
 
     const populated = await Project.findById(project._id)
@@ -107,6 +109,8 @@ export async function DELETE(req: NextRequest) {
     if (!deleted) {
       return NextResponse.json({ message: 'Project not found' }, { status: 404 });
     }
+
+    await CaseStudy.deleteMany({ project: id });
 
     return NextResponse.json({ message: 'Deleted successfully' });
   } catch (err: any) {
