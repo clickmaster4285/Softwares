@@ -147,7 +147,7 @@ export function HeroSection(): JSX.Element {
 
   return (
     <section
-      className="relative -mt-20 min-h-screen flex items-center pt-[max(5rem,calc(1rem+env(safe-area-inset-top)))] pb-10 sm:pb-12 md:py-12 lg:py-20"
+      className="relative min-h-screen flex items-center pt-[max(9.5rem,calc(1rem+env(safe-area-inset-top)))] pb-10 sm:pb-12 md:pt-[10rem] md:pb-12 lg:pt-[9rem] lg:pb-20"
       aria-labelledby="hero-heading"
     >
       {/* Background Image with Overlay */}
@@ -242,7 +242,7 @@ export function HeroSection(): JSX.Element {
         ))}
       </div>
 
-      <div className="container mx-auto px-3 sm:px-4 lg:px-8 relative z-10 w-full max-w-full min-w-0 mt-14">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8 relative z-10 w-full max-w-full min-w-0">
         <div className="mx-auto max-w-7xl w-full min-w-0">
           <div className="grid gap-8 sm:gap-10 lg:gap-12 lg:grid-cols-[1fr_minmax(280px,400px)] xl:grid-cols-[1fr_420px] items-start mb-10 sm:mb-12 md:mb-16 lg:mb-20">
             <div className="min-w-0">
