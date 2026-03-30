@@ -208,6 +208,12 @@ export function Navbar() {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
+    if (dropdown === 'services') {
+      setActiveServiceSection(serviceSections[0]?.label ?? 'Engineering Services');
+    }
+    if (dropdown === 'solutions') {
+      setActiveSolutionsSection(groupedProjects[0]?.category ?? '');
+    }
     setActiveDropdown(dropdown);
   };
 
@@ -240,6 +246,8 @@ export function Navbar() {
 
   const closeDropdowns = () => {
     setActiveDropdown(null);
+    setActiveServiceSection(serviceSections[0]?.label ?? 'Engineering Services');
+    setActiveSolutionsSection(groupedProjects[0]?.category ?? '');
   };
 
   // During page loading, show black text and logo
