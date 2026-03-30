@@ -587,6 +587,35 @@ export const metadataConfig = {
     },
   }),
 
+  // ── /blog ────────────────────────────────────────────────────────────────────
+  blog: (): Metadata => ({
+    title: 'Blog – Software Insights, Product Strategy, and Engineering',
+    description:
+      'Read practical articles from ClickMasters on software architecture, product delivery, performance, and scaling digital products.',
+    alternates: { canonical: `${siteConfig.url}/blog` },
+    openGraph: {
+      title: 'ClickMasters Blog – Software Engineering and Product Insights',
+      description:
+        'Guides and insights on building, launching, and scaling modern software products.',
+      url: `${siteConfig.url}/blog`,
+      images: [
+        {
+          url: `${siteConfig.url}/og/solutions.webp`,
+          width: 1200,
+          height: 630,
+          alt: 'ClickMasters blog',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'ClickMasters Blog',
+      description:
+        'Actionable insights on architecture, delivery, and product growth from the ClickMasters team.',
+      images: [`${siteConfig.url}/og/solutions.webp`],
+    },
+  }),
+
   // ── /testimonials ───────────────────────────────────────────────────────────
   testimonials: (): Metadata => ({
     title: 'Client Reviews & Testimonials – Rated 4.9/5',

@@ -41,12 +41,14 @@ const footerLinks: FooterLinks = {
     { label: 'About Us', href: '/about-us' },
     { label: 'Contact', href: '/contact-us' },
     { label: 'Testimonials', href: '/testimonials' },
+    { label: 'Blog', href: '/blog' },
     { label: 'Support', href: '/#help' },
   ],
   resources: [
     { label: 'Help & FAQ', href: '/contact-us' },
     { label: 'Why Choose Us', href: '/#community' },
     { label: 'Case Studies', href: '/case-studies' },
+    { label: 'Blog', href: '/blog' },
    
   ],
   legal: [

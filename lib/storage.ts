@@ -69,6 +69,20 @@ export interface CaseStudy {
   updatedAt: string;
 }
 
+export interface BlogPost {
+  _id: string;
+  slug?: string;
+  published: boolean;
+  title: string;
+  excerpt: string;
+  content: string;
+  author?: string;
+  thumbnail?: string;
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Admin {
   email: string;
   passwordHash: string;
