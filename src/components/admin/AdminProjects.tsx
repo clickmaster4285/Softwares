@@ -336,7 +336,7 @@ const AdminProjects = () => {
 
       {/* Create Dialog */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
             <DialogTitle>Create New Solution</DialogTitle>
             <DialogDescription>Add a new solution to your portfolio</DialogDescription>
@@ -347,7 +347,7 @@ const AdminProjects = () => {
 
       {/* Edit Dialog */}
       <Dialog open={!!editingProject} onOpenChange={() => setEditingProject(null)}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
             <DialogTitle>Edit Solution</DialogTitle>
             <DialogDescription>Update your Solution details</DialogDescription>

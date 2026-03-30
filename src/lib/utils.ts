@@ -1,6 +1,11 @@
 // utils.ts - Frontend utilities
-export const getCategoryName = (category: string | { name: string }): string => {
-  return typeof category === 'string' ? category : category.name || 'Uncategorized';
+export const getCategoryName = (
+  category: string | { _id?: string; name?: string } | undefined
+): string => {
+  if (!category) return 'Uncategorized';
+  if (typeof category === 'string') return category;
+  if (typeof category === 'object' && category.name) return category.name;
+  return 'Uncategorized';
 };
 
 // lib/utils.ts

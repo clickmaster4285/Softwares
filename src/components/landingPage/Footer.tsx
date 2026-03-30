@@ -35,7 +35,7 @@ const footerLinks: FooterLinks = {
     { label: 'Web Development', href: '/services' },
     { label: 'Mobile App Development', href: '/services' },
     { label: 'ERP & Business Apps', href: '/services' },
-    { label: 'Our Solutions', href: '/solutions' },
+    { label: 'Our Solutions', href: '/software-solutions' },
   ],
   company: [
     { label: 'About Us', href: '/about-us' },
@@ -46,7 +46,7 @@ const footerLinks: FooterLinks = {
   resources: [
     { label: 'Help & FAQ', href: '/contact-us' },
     { label: 'Why Choose Us', href: '/#community' },
-    { label: 'Case Studies', href: '/#apps' },
+    { label: 'Case Studies', href: '/case-studies' },
    
   ],
   legal: [
@@ -154,7 +154,7 @@ export function Footer(): JSX.Element {
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
               <Link href="/" className="flex items-center gap-2">
-                <img src="/logo-white.png" className="w-36 h-auto" alt="Logo" />
+                <img src="/logo-white.webp" className="w-36 h-auto" alt="Logo" />
               </Link>
             </motion.div>
             <motion.p variants={itemVariants} className="text-background/70 max-w-md mb-6">

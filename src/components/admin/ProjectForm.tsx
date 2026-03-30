@@ -230,7 +230,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="min-w-0 space-y-4">
       <div className="space-y-2">
         <Label htmlFor="title">Title *</Label>
         <Input
@@ -254,8 +254,8 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="space-y-2">
+      <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="min-w-0 space-y-2">
           <Label htmlFor="url">Project URL *</Label>
           <Input
             id="url"
@@ -267,10 +267,10 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="min-w-0 space-y-2">
           <Label htmlFor="category">Category *</Label>
           <Select value={categoryId} onValueChange={setCategoryId} required>
-            <SelectTrigger id="category">
+            <SelectTrigger id="category" className="w-full min-w-0">
               <SelectValue placeholder="Select a category" />
             </SelectTrigger>
             <SelectContent>
@@ -293,10 +293,10 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="min-w-0 space-y-2">
         <Label htmlFor="status">Status *</Label>
         <Select value={status} onValueChange={(v) => setStatus(v as Project['status'])}>
-          <SelectTrigger>
+          <SelectTrigger className="w-full min-w-0">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -309,8 +309,8 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
 
       <div className="space-y-3">
         <Label htmlFor="thumbnail">Project Image</Label>
-        <div className="grid gap-4 md:grid-cols-[1fr_200px] items-start">
-          <div className="space-y-2">
+        <div className="grid min-w-0 gap-4 md:grid-cols-[1fr_minmax(0,200px)] items-start">
+          <div className="min-w-0 space-y-2">
             <Input
               id="thumbnail"
               type="file"
@@ -346,9 +346,9 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
               </div>
             )}
             
-            <div className="relative">
+            <div className="relative min-w-0">
               <Input
-                className="mt-2"
+                className={imageFile ? 'mt-2 pr-10' : 'mt-2'}
                 value={thumbnail}
                 onChange={handleUrlChange}
                 placeholder="Or paste image URL"
@@ -379,11 +379,11 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
             </p>
           </div>
           
-          <div className="rounded-lg border border-border/60 bg-secondary/40 overflow-hidden">
+          <div className="min-h-[8rem] rounded-lg border border-border/60 bg-secondary/40 overflow-hidden md:min-h-0">
             <img
               src={previewUrl || '/placeholder.svg'}
               alt="Thumbnail preview"
-              className="h-32 w-full object-cover"
+              className="h-32 w-full max-w-full object-cover"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/placeholder.svg';
               }}
@@ -392,10 +392,11 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="min-w-0 space-y-2">
         <Label>Tags</Label>
-        <div className="flex gap-2">
+        <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-stretch">
           <Input
+            className="min-w-0 flex-1"
             value={newTag}
             onChange={(e) => setNewTag(e.target.value)}
             placeholder="Add a tag"
@@ -406,7 +407,13 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
               }
             }}
           />
-          <Button type="button" variant="outline" size="icon" onClick={handleAddTag}>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            className="h-10 w-full shrink-0 sm:h-10 sm:w-10"
+            onClick={handleAddTag}
+          >
             <Plus className="h-4 w-4" />
           </Button>
         </div>
@@ -428,13 +435,14 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
         )}
       </div>
 
-      <div className="flex justify-end gap-2 pt-4">
-        <Button type="button" variant="outline" onClick={onCancel}>
+      <div className="flex flex-col-reverse gap-2 pt-4 sm:flex-row sm:justify-end">
+        <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto">
           Cancel
         </Button>
-        <Button 
-          type="submit" 
+        <Button
+          type="submit"
           disabled={uploading || compressing}
+          className="w-full sm:w-auto"
         >
           {(uploading || compressing) && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
           {uploading ? 'Uploading...' : compressing ? 'Processing...' : project ? 'Update Project' : 'Create Project'}

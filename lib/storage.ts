@@ -51,6 +51,24 @@ export interface Project {
   updatedAt: string;
 }
 
+export interface CaseStudy {
+  _id: string;
+  slug?: string;
+  project: string | Project;
+  published: boolean;
+  title: string;
+  excerpt: string;
+  client?: string;
+  technologies: string[];
+  thumbnail?: string;
+  status: 'live' | 'in-progress' | 'completed';
+  challenge: string;
+  approach: string;
+  results: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Admin {
   email: string;
   passwordHash: string;
