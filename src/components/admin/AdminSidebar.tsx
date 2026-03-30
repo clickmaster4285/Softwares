@@ -8,6 +8,7 @@ import {
   Tags,
   MessageSquare,
   FileSearch,
+  Newspaper,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -35,6 +36,7 @@ const menuItems = [
   { title: 'Categories', url: '/admin/categories', icon: Tags },
   { title: 'Solutions', url: '/admin/solutions', icon: FolderOpen },
   { title: 'Case studies', url: '/admin/case-studies', icon: FileSearch },
+  { title: 'Blog', url: '/admin/blog', icon: Newspaper },
   { title: 'Testimonials', url: '/admin/testimonials', icon: MessageSquare },
 ];
 
