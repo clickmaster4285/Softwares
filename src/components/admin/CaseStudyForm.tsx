@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { X, Plus, Loader2 } from 'lucide-react';
+import { X, Plus, Loader2, Lock, LockOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -65,7 +65,7 @@ const CaseStudyForm = ({ caseStudy, onSubmit, onCancel }: CaseStudyFormProps) =>
 
   const [projectId, setProjectId] = useState(() => projectIdFromRef(caseStudy?.project as Project | string));
   const [slug, setSlug] = useState(caseStudy?.slug || '');
-  const [slugTouched, setSlugTouched] = useState(Boolean(caseStudy?.slug));
+  const [slugLocked, setSlugLocked] = useState(true);
   const [title, setTitle] = useState(caseStudy?.title || '');
   const [excerpt, setExcerpt] = useState(caseStudy?.excerpt || '');
   const [client, setClient] = useState(caseStudy?.client || '');
@@ -124,10 +124,9 @@ const CaseStudyForm = ({ caseStudy, onSubmit, onCancel }: CaseStudyFormProps) =>
   }, [projectId, projects, isEdit]);
 
   useEffect(() => {
-    if (slugTouched) return;
-    const next = slugify(title);
-    setSlug(next);
-  }, [title, slugTouched]);
+    if (!slugLocked) return;
+    setSlug(slugify(title));
+  }, [title, slugLocked]);
 
   const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -277,17 +276,44 @@ const CaseStudyForm = ({ caseStudy, onSubmit, onCancel }: CaseStudyFormProps) =>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="cs-slug">Slug</Label>
+        <div className="flex items-center justify-between gap-3">
+          <Label htmlFor="cs-slug">Slug</Label>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            onClick={() => {
+              setSlugLocked((prev) => {
+                const nextLocked = !prev;
+                if (nextLocked) setSlug(slugify(title));
+                return nextLocked;
+              });
+            }}
+          >
+            {slugLocked ? (
+              <>
+                <LockOpen className="mr-1.5 h-3.5 w-3.5" />
+                Unlock
+              </>
+            ) : (
+              <>
+                <Lock className="mr-1.5 h-3.5 w-3.5" />
+                Lock
+              </>
+            )}
+          </Button>
+        </div>
         <Input
           id="cs-slug"
           value={slug}
-          onChange={(e) => {
-            setSlugTouched(true);
-            setSlug(e.target.value);
-          }}
+          onChange={(e) => setSlug(e.target.value)}
           placeholder="e.g. alpha-project"
+          disabled={slugLocked}
         />
         <p className="text-xs text-muted-foreground">
+          {slugLocked
+            ? 'Slug is auto-generated from title and locked.'
+            : 'Slug is unlocked. You can edit it manually.'}{' '}
           Used in the URL: <span className="font-mono">/case-studies/</span>
           <span className="font-mono">{slugify(slug) || 'your-slug'}</span>
         </p>
