@@ -8,6 +8,8 @@ import dbConnect from '../../../../lib/mongoose';
 import { resolveImageUrl } from '../../../../lib/utils';
 import { Button } from '@/components/ui/button';
 import BlogToc from '@/components/blog/BlogToc';
+import { breadcrumbSchema } from '@/app/metadata-config';
+import Script from 'next/script';
 
 function slugify(value: string) {
   return value
@@ -129,8 +131,22 @@ export default async function BlogDetailPage({
   const { html: htmlWithIds, toc } = buildContentWithToc(htmlContent);
 
   return (
-    <div className="min-h-screen bg-[#f5f6f8] pt-20 text-slate-900">
-      <article>
+    <>
+      <Script
+        id="blog-detail-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: 'Home', url: '/' },
+              { name: 'Blog', url: '/blog' },
+              { name: post.title, url: `/blog/${slug}` },
+            ]),
+          ),
+        }}
+      />
+      <div className="min-h-screen bg-[#f5f6f8] pt-20 text-slate-900">
+        <article>
         <div className="border-b border-slate-200/80 bg-white">
           <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
             <Button variant="ghost" className="-ml-2 mb-6 gap-2 text-slate-600" asChild>
@@ -186,7 +202,8 @@ export default async function BlogDetailPage({
             </aside>
           </div>
         </div>
-      </article>
-    </div>
+        </article>
+      </div>
+    </>
   );
 }

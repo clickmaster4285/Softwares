@@ -5,15 +5,16 @@ import { Metadata } from 'next';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const siteConfig = {
-  name: 'ClickMasters',
+  name: 'Clickmasters Digital Marketing Agency',
  
   title:
     'ClickMasters – Software Development Company',
  
   description:
-    'ClickMasters is a leading software development company providing custom web development, mobile app development, SaaS platforms, and ERP solutions for startups and enterprises worldwide.',
+  "ClickMasters is a professional custom software development company " +
+  "building web apps, mobile apps, SaaS, AI systems, and enterprise software.", 
  
-  url: process.env.NEXT_PUBLIC_APP_URL || 'https://clickmasters.pk',
+  url: process.env.NEXT_PUBLIC_APP_URL || 'https://software.clickmasters.pk',
  
   ogImage: '/og/default.webp',
  
@@ -202,6 +203,10 @@ export const organizationSchema = {
  
   sameAs: [
     'https://www.linkedin.com/company/clickmasters-digital-marketing-agency',
+    'https://www.instagram.com/clickmasters.pk/',
+    'https://www.facebook.com/clickmasterspvtltd',
+    'https://www.youtube.com/@clickmastersofficial',
+    'https://www.pinterest.com/clickmasters00/',
   ],
  
   contactPoint: {
@@ -231,19 +236,38 @@ export const webSiteSchema = {
   },
 };
 
+export type BreadcrumbItem = {
+  name: string;
+  url: string;
+};
+
+function toAbsoluteUrl(url: string) {
+  if (!url) return siteConfig.url;
+  if (/^https?:\/\//i.test(url)) return url;
+  const normalizedPath = url.startsWith('/') ? url : `/${url}`;
+  return `${siteConfig.url}${normalizedPath}`;
+}
+
 /** Breadcrumbs – call on every inner page */
-// export function breadcrumbSchema(crumbs: { name: string; url: string }[]) {
-//   return {
-//     '@context': 'https://schema.org',
-//     '@type': 'BreadcrumbList',
-//     itemListElement: crumbs.map((c, i) => ({
-//       '@type': 'ListItem',
-//       position: i + 1,
-//       name: c.name,
-//       item: c.url,
-//     })),
-//   };
-// }
+export function breadcrumbSchema(crumbs: BreadcrumbItem[]) {
+  const cleanedCrumbs = crumbs
+    .map((crumb) => ({
+      name: crumb.name?.trim(),
+      url: toAbsoluteUrl(crumb.url?.trim()),
+    }))
+    .filter((crumb) => Boolean(crumb.name && crumb.url));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: cleanedCrumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  };
+}
 
 /** FAQ rich results – use on any page that has a FAQ section */
 // export function faqSchema(items: { question: string; answer: string }[]) {

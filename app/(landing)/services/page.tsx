@@ -1,4 +1,4 @@
-import { metadataConfig, serviceSchema, siteConfig } from '@/app/metadata-config';
+import { breadcrumbSchema, metadataConfig, serviceSchema, siteConfig } from '@/app/metadata-config';
 import Script from 'next/script';
 import ServicesClient from './ServicesClient';
 
@@ -46,6 +46,18 @@ const servicesForJsonLd = [
 export default function ServicesPage() {
   return (
     <>
+      <Script
+        id="services-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: 'Home', url: '/' },
+              { name: 'Services', url: '/services' },
+            ]),
+          ),
+        }}
+      />
       {servicesForJsonLd.map((s, i) => (
         <Script
           key={s.hash}
