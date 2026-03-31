@@ -9,6 +9,8 @@ import '../../../../lib/models/Category';
 import dbConnect from '../../../../lib/mongoose';
 import { resolveImageUrl, getCategoryName } from '../../../../lib/utils';
 import { Button } from '@/components/ui/button';
+import { breadcrumbSchema } from '@/app/metadata-config';
+import Script from 'next/script';
 
 type LeanProject = {
   _id?: mongoose.Types.ObjectId;
@@ -142,8 +144,22 @@ export default async function CaseStudyDetailPage({
     : '';
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-slate-900">
-      <article>
+    <>
+      <Script
+        id="case-study-detail-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: 'Home', url: '/' },
+              { name: 'Case Studies', url: '/case-studies' },
+              { name: cs.title, url: `/case-studies/${slug}` },
+            ]),
+          ),
+        }}
+      />
+      <div className="min-h-screen bg-[#fafafa] text-slate-900">
+        <article>
         <div className="border-b border-slate-200/80 bg-white">
           <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
             <Button variant="ghost" className="-ml-2 mb-6 gap-2 text-slate-600" asChild>
@@ -226,7 +242,8 @@ export default async function CaseStudyDetailPage({
           </section>
 
         </div>
-      </article>
-    </div>
+        </article>
+      </div>
+    </>
   );
 }

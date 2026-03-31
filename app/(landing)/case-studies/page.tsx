@@ -1,7 +1,8 @@
-import { metadataConfig } from '@/app/metadata-config';
+import { breadcrumbSchema, metadataConfig } from '@/app/metadata-config';
 import CaseStudy from '../../../lib/models/CaseStudy';
 import dbConnect from '../../../lib/mongoose';
 import CaseStudiesClient, { type CaseStudyCard } from './CaseStudiesClient';
+import Script from 'next/script';
 
 export const metadata = metadataConfig.caseStudies();
 
@@ -24,5 +25,21 @@ export default async function CaseStudiesPage() {
     // DB unavailable during build or at runtime — client will refetch from /api/case-studies
   }
 
-  return <CaseStudiesClient initialCaseStudies={initialCaseStudies} />;
+  return (
+    <>
+      <Script
+        id="case-studies-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: 'Home', url: '/' },
+              { name: 'Case Studies', url: '/case-studies' },
+            ]),
+          ),
+        }}
+      />
+      <CaseStudiesClient initialCaseStudies={initialCaseStudies} />
+    </>
+  );
 }
