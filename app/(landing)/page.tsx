@@ -1,7 +1,14 @@
 import dynamic from 'next/dynamic';
 import { Suspense } from "react";
 import { HeroSection } from "@/components/landingPage/home/hero-section";
-import { metadataConfig } from '@/app/metadata-config';
+import SchemaMarkup from '@/components/SchemaMarkup';
+import {
+  homepageFaqSchema,
+  homepageOrganizationSchema,
+  homepageServiceSchema,
+  homepageWebPageSchema,
+  metadataConfig,
+} from '@/app/metadata-config';
 
 export const metadata = metadataConfig.home();
 
@@ -25,6 +32,10 @@ const TestimonialsSection = dynamic(
   () => import('@/components/landingPage/home/TestimonialsSection').then((m) => m.TestimonialsSection),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
 );
+const FaqSection = dynamic(
+  () => import('@/components/landingPage/home/FaqSection').then((m) => m.FaqSection),
+  { loading: () => <div className="h-80 animate-pulse bg-gray-100 rounded-lg" /> }
+);
 const HelpSection = dynamic(
   () => import('@/components/landingPage/home/help-section').then((m) => m.HelpSection),
   { loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" /> }
@@ -33,6 +44,10 @@ const HelpSection = dynamic(
 export default function LandingPage() {
   return (
     <main className="min-h-screen" role="main" aria-label="ClickMasters software development company homepage">
+      <SchemaMarkup data={homepageOrganizationSchema} />
+      <SchemaMarkup data={homepageServiceSchema} />
+      <SchemaMarkup data={homepageFaqSchema} />
+      <SchemaMarkup data={homepageWebPageSchema} />
       <HeroSection />
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <AboutSection />
@@ -48,6 +63,9 @@ export default function LandingPage() {
       </Suspense>
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <TestimonialsSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-80 animate-pulse bg-gray-100 rounded-lg" />}>
+        <FaqSection />
       </Suspense>
       <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 rounded-lg" />}>
         <HelpSection />
