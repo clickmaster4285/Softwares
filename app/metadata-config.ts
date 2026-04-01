@@ -222,6 +222,7 @@ export const organizationSchema = {
 export const webSiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': `${siteConfig.url}/#website`,
 
   name: siteConfig.name,
   url: siteConfig.url,
@@ -233,6 +234,206 @@ export const webSiteSchema = {
       urlTemplate: `${siteConfig.url}/search?q={search_term_string}`,
     },
     'query-input': 'required name=search_term_string',
+  },
+};
+
+/** Additional WebSite schema for blog sitelinks searchbox */
+export const webSiteBlogSearchSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'ClickMasters',
+  url: siteConfig.url,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${siteConfig.url}/blog?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+/** Additional homepage Organization schema */
+export const homepageOrganizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${siteConfig.url}/#organization`,
+  name: 'ClickMasters',
+  alternateName: 'ClickMasters Software',
+  url: siteConfig.url,
+  logo: `${siteConfig.url}/logo.webp`,
+  image: `${siteConfig.url}/og-image.jpg`,
+  description:
+    'ClickMasters is a professional custom software development company ' +
+    'building web apps, mobile apps, SaaS, AI systems, and enterprise software.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Main PWD Rd, PWD Housing Society Sector A',
+    addressLocality: 'Islamabad',
+    addressRegion: 'Punjab',
+    postalCode: '45700',
+    addressCountry: 'PK',
+  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+92-332-5394285',
+      contactType: 'customer service',
+      availableLanguage: 'English',
+    },
+  ],
+  sameAs: [
+    'https://www.linkedin.com/company/clickmasters',
+    'https://twitter.com/clickmasters',
+  ],
+};
+
+/** Additional homepage service catalog schema */
+export const homepageServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${siteConfig.url}/#primary-service`,
+  name: 'Custom Software Development Services',
+  serviceType: 'Custom Software Development',
+  description:
+    'Professional custom software development services including web apps, mobile apps, SaaS, AI, and enterprise systems.',
+  url: siteConfig.url,
+  provider: {
+    '@type': 'Organization',
+    '@id': `${siteConfig.url}/#organization`,
+    name: 'ClickMasters',
+    url: siteConfig.url,
+  },
+  areaServed: {
+    '@type': 'Place',
+    name: 'Worldwide',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Software Development Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Custom Software Development',
+          description: 'Tailored software built for your business needs',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Web Application Development',
+          description: 'Modern web apps with React, Next.js and cloud hosting',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Mobile App Development',
+          description: 'Native and cross-platform iOS and Android apps',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'SaaS Product Development',
+          description: 'End-to-end SaaS platform development and scaling',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI & Automation Systems',
+          description:
+            'AI-powered software and intelligent automation solutions',
+        },
+      },
+    ],
+  },
+};
+
+/** Additional homepage FAQ schema */
+export const homepageFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${siteConfig.url}/#faq`,
+  mainEntityOfPage: `${siteConfig.url}/`,
+  inLanguage: 'en',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How much does custom software development cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Custom software development costs vary based on complexity, features, and timeline. A basic web application typically starts from $5,000–$15,000, while enterprise systems range from $30,000–$200,000+. We provide free consultations to give accurate project estimates.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does it take to build a custom software application?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Development timelines depend on the project scope. An MVP takes 6–12 weeks, a full web or mobile application takes 3–6 months, and enterprise systems can take 6–18 months. We use agile sprints to deliver working software every 2 weeks.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What technologies does ClickMasters use?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "We use modern, proven technologies including React, Next.js, Node.js, Python, Flutter, React Native, PostgreSQL, MongoDB, AWS, Google Cloud, and Azure. We choose the best stack for each project's specific needs.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you provide post-launch support and maintenance?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. ClickMasters provides 24/7 post-launch support, security updates, performance monitoring, and feature development. We offer monthly maintenance plans to keep your software running smoothly.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can ClickMasters work with international clients?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. We work with clients across the USA, Europe, Middle East, and worldwide. Our team operates across time zones and uses agile project management tools to ensure seamless collaboration regardless of location.',
+      },
+    },
+  ],
+};
+
+/** Additional homepage webpage schema for rich result context */
+export const homepageWebPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${siteConfig.url}/#webpage`,
+  url: `${siteConfig.url}/`,
+  name: 'Custom Software Development Company | ClickMasters',
+  description:
+    'ClickMasters builds web apps, mobile apps, SaaS, AI systems, and enterprise software.',
+  inLanguage: 'en',
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': `${siteConfig.url}/#website`,
+    url: siteConfig.url,
+    name: 'ClickMasters',
+  },
+  about: {
+    '@type': 'Organization',
+    '@id': `${siteConfig.url}/#organization`,
+    name: 'ClickMasters',
+  },
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: `${siteConfig.url}/og-image.jpg`,
+    width: 1200,
+    height: 630,
   },
 };
 
@@ -474,41 +675,60 @@ export const metadataConfig = {
 
   // ── / (Home) ────────────────────────────────────────────────────────────────
  home: (): Metadata => ({
-    title: 'Software Development Company',
-    description: 'ClickMasters delivers custom web apps, mobile apps, and ERP systems for growing businesses. 10+ years experience · 100+ projects shipped · Free consultation.',
+    title: 'Software Development Company | ClickMasters',
+    description:
+      'ClickMasters is a professional custom software development company. ' +
+      'We build web apps, mobile apps, SaaS platforms, AI systems, and ' +
+      'enterprise software. Get a free consultation today.',
+    keywords: [
+      'custom software development company',
+      'software development company',
+      'web application development',
+      'mobile app development',
+      'SaaS development company',
+      'enterprise software development',
+      'software house Pakistan',
+      'AI software development',
+    ],
     alternates: { canonical: siteConfig.url },
     openGraph: {
-      title: 'ClickMasters – Custom Software Development for Growing Businesses',
-      description: 'Web apps, mobile apps, and ERP solutions built by an expert team. 100+ projects delivered worldwide. Book a free consultation.',
+      title: 'Custom Software Development Company | ClickMasters',
+      description:
+        'Professional custom software development — web apps, mobile apps, ' +
+        'SaaS, AI & enterprise solutions. Get a free consultation.',
       url: siteConfig.url,
+      siteName: 'ClickMasters',
+      type: 'website',
       images: [
         {
-          url: `${siteConfig.url}/og/home.webp`,
+          url: `${siteConfig.url}/og-image.jpg`,
           width: 1200,
           height: 630,
-          alt: 'ClickMasters – Custom Software Development Company',
+          alt: 'ClickMasters — Custom Software Development Company',
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'ClickMasters – Custom Software Development',
-      description: 'Web apps, mobile apps & ERP. 10+ years of expertise, 100+ projects delivered. Get a free quote.',
-      images: [`${siteConfig.url}/og/home.webp`],
+      title: 'Custom Software Development Company | ClickMasters',
+      description:
+        'We build web apps, mobile apps, SaaS, AI & enterprise software.',
+      images: [`${siteConfig.url}/og-image.jpg`],
     },
   }),
 
   // ── /about ──────────────────────────────────────────────────────────────────
   about: (): Metadata => ({
-    title: 'About Us – Experienced Software Development Team',
+    title: 'About ClickMasters | Experienced Software Development Team',
     description:
-      'Meet the ClickMasters team: 10+ years of experience, 50+ engineers, and 100+ successful projects across fintech, healthcare, retail, and logistics. Learn our story.',
-    alternates: { canonical: `${siteConfig.url}/about` },
+      'Learn about ClickMasters — a full-service custom software development ' +
+      'company with 10+ years experience building web apps, mobile apps, and ' +
+      'enterprise solutions for businesses worldwide.',
+    alternates: { canonical: `${siteConfig.url}/about-us` },
     openGraph: {
-      title: 'About ClickMasters – 10+ Years Building Reliable Software',
-      description:
-        '50+ engineers. 100+ projects. Industries from fintech to logistics. Discover our mission, values, and what makes us different.',
-      url: `${siteConfig.url}/about`,
+      title: 'About ClickMasters | Software Development Company',
+      description: '10+ years building reliable software. Meet our team.',
+      url: `${siteConfig.url}/about-us`,
       images: [
         {
           url: `${siteConfig.url}/og/about.webp`,
@@ -613,9 +833,10 @@ export const metadataConfig = {
 
   // ── /blog ────────────────────────────────────────────────────────────────────
   blog: (): Metadata => ({
-    title: 'Blog – Software Insights, Product Strategy, and Engineering',
+    title: 'Software Development Blog | ClickMasters Insights',
     description:
-      'Read practical articles from ClickMasters on software architecture, product delivery, performance, and scaling digital products.',
+      'Expert articles on custom software development, SaaS, mobile apps, ' +
+      'AI systems, and engineering best practices from the ClickMasters team.',
     alternates: { canonical: `${siteConfig.url}/blog` },
     openGraph: {
       title: 'ClickMasters Blog – Software Engineering and Product Insights',
@@ -670,10 +891,12 @@ export const metadataConfig = {
 
   // ── /contact ────────────────────────────────────────────────────────────────
   contact: (): Metadata => ({
-    title: 'Contact Us – Get a Free Software Development Quote',
+    title: 'Contact ClickMasters | Get a Free Software Development Quote',
     description:
-      'Start your project with ClickMasters. Share your requirements and get a free, no-obligation quote from our expert team within 24 hours.',
-    alternates: { canonical: `${siteConfig.url}/contact` },
+      'Get in touch with ClickMasters for a free consultation on your ' +
+      'custom software project. Web apps, mobile apps, SaaS, AI & enterprise ' +
+      'solutions. We respond within 1 business day.',
+    alternates: { canonical: `${siteConfig.url}/contact-us` },
     openGraph: {
       title: 'Contact ClickMasters – Free Software Development Consultation',
       description:

@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/providers";
 import "./globals.css";
-import { defaultMetadata, organizationSchema, webSiteSchema } from './metadata-config';
+import {
+  defaultMetadata,
+  organizationSchema,
+  webSiteBlogSearchSchema,
+  webSiteSchema,
+} from './metadata-config';
 import Script from 'next/script';
 
 export const metadata: Metadata = defaultMetadata;
@@ -36,6 +41,15 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(webSiteSchema),
+          }}
+        />
+
+        {/* Additional WebSite schema for blog search action */}
+        <Script
+          id="website-blog-search-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(webSiteBlogSearchSchema),
           }}
         />
       </body>
