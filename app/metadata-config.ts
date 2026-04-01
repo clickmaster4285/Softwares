@@ -614,9 +614,9 @@ export const defaultMetadata: Metadata = {
   },
 
   icons: {
-    icon: [{ url: '/logo-white.webp', type: 'image/webp' }],
-    apple: '/logo-white.webp',
-    shortcut: '/logo-white.webp',
+    icon: [{ url: '/logo.webp', type: 'image/webp' }],
+    apple: '/logo.webp',
+    shortcut: '/logo.webp',
   },
 
   openGraph: {
