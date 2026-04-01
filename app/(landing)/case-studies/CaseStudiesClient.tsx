@@ -209,6 +209,38 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
         </div>
       </section>
 
+      <section className="border-b border-slate-200/80 bg-[#fafafa] py-14 sm:py-16" aria-labelledby="case-studies-methodology">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 id="case-studies-methodology" className="font-display text-2xl font-bold text-slate-900 sm:text-3xl">
+            How each case study is structured
+          </h2>
+          <p className="mt-3 max-w-3xl text-slate-600">
+            Every write-up follows the same narrative so you can compare delivery patterns, stacks, and outcomes
+            across industries — from fintech and healthcare to logistics and retail.
+          </p>
+          <div className="mt-10 grid gap-10 sm:grid-cols-3">
+            <div>
+              <h3 className="text-lg font-semibold text-slate-900">Challenge &amp; context</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                Business goals, constraints, and the problem the product needed to solve before engineering began.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-slate-900">Approach &amp; delivery</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                Architecture choices, team model, milestones, and how we collaborated with stakeholders through launch.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-slate-900">Results &amp; impact</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                Measurable outcomes, live products, and what changed for users and revenue after go-live.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Studies grid — directly under metrics so cards are visible without scrolling past methodology */}
       <section id="studies" className="scroll-mt-24 border-b border-slate-200/80 bg-[#fafafa] py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">

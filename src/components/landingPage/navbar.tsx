@@ -47,14 +47,14 @@ type ServiceMenuSection = {
   items: ServiceMenuItem[];
 };
 
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/['"]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
+const mobileServicePageLinks: { title: string; href: string }[] = [
+  { title: 'Custom Software Development', href: '/services/custom-software-development' },
+  { title: 'Web Application Development', href: '/services/web-application-development' },
+  { title: 'Mobile App Development', href: '/services/mobile-app-development' },
+  { title: 'Database Design & Management', href: '/services/database-design-management' },
+  { title: 'Cloud Solutions & DevOps', href: '/services/cloud-solutions-devops' },
+  { title: 'Cybersecurity & Compliance', href: '/services/cybersecurity-compliance' },
+];
 
 export function Navbar() {
   const pathname = usePathname();
@@ -142,17 +142,17 @@ export function Navbar() {
         {
           title: 'Custom Software Development',
           description: 'Enterprise-grade systems, automation, and modernization.',
-          href: `/services#${slugify('custom-software-development')}`,
+          href: '/services/custom-software-development',
         },
         {
           title: 'Web Application Development',
           description: 'Scalable SPAs, dashboards, and high-performance web apps.',
-          href: `/services#${slugify('web-application-development')}`,
+          href: '/services/web-application-development',
         },
         {
           title: 'Mobile App Development',
           description: 'Native and cross-platform mobile apps for iOS and Android.',
-          href: `/services#${slugify('mobile-app-development')}`,
+          href: '/services/mobile-app-development',
         },
       ],
     },
@@ -162,12 +162,12 @@ export function Navbar() {
         {
           title: 'Database Design & Management',
           description: 'Secure SQL/NoSQL design, migrations, and performance tuning.',
-          href: `/services#${slugify('database-design-management')}`,
+          href: '/services/database-design-management',
         },
         {
           title: 'Cloud Solutions & DevOps',
           description: 'CI/CD, cloud migration, containers, reliability, and monitoring.',
-          href: `/services#${slugify('cloud-solutions-devops')}`,
+          href: '/services/cloud-solutions-devops',
         },
       ],
     },
@@ -177,7 +177,7 @@ export function Navbar() {
         {
           title: 'Cybersecurity & Compliance',
           description: 'Audits, pentesting, IAM, encryption, and regulatory readiness.',
-          href: `/services#${slugify('cybersecurity-compliance')}`,
+          href: '/services/cybersecurity-compliance',
         },
       ],
     },
@@ -494,6 +494,19 @@ export function Navbar() {
                   >
                     Services
                   </Link>
+                  <ul className="mb-2 ml-1 space-y-1 border-b border-black/5 pb-3">
+                    {mobileServicePageLinks.map((s) => (
+                      <li key={s.href}>
+                        <Link
+                          href={s.href}
+                          onClick={() => setIsOpen(false)}
+                          className="block py-1.5 pl-3 text-sm text-black/60 hover:text-primary"
+                        >
+                          {s.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
 
                   <Link
                     href="/case-studies"

@@ -61,6 +61,15 @@ function buildContentWithToc(html: string) {
   return { html: withIds, toc };
 }
 
+function toMetaDescription(text: string | undefined, fallback: string): string {
+  const raw = (text ?? '').replace(/\s+/g, ' ').trim();
+  const use = raw || fallback;
+  if (use.length <= 160) return use;
+  const cut = use.slice(0, 157).trimEnd();
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut) + '…';
+}
+
 async function findPostBySlugOrId(slugOrId: string) {
   const normalized = slugify(slugOrId);
 
@@ -101,9 +110,16 @@ export async function generateMetadata({
   if (!doc) return { title: 'Blog post' };
 
   const d = doc as { title?: string; excerpt?: string };
+  const title = d.title ?? 'Blog post';
+  const description = toMetaDescription(
+    d.excerpt,
+    `Software development insights from ClickMasters: ${title}. Custom software, SaaS, and engineering best practices.`,
+  );
   return {
-    title: `${d.title ?? 'Blog post'} | ClickMasters`,
-    description: d.excerpt,
+    title: `${title} | ClickMasters`,
+    description,
+    openGraph: { title: `${title} | ClickMasters`, description },
+    twitter: { description },
   };
 }
 

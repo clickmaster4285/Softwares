@@ -414,9 +414,9 @@ export const homepageWebPageSchema = {
   '@type': 'WebPage',
   '@id': `${siteConfig.url}/#webpage`,
   url: `${siteConfig.url}/`,
-  name: 'Custom Software Development Company | ClickMasters',
+  name: 'Custom Software Development That Scales Your Business Revenue — Not Just Code',
   description:
-    'ClickMasters builds web apps, mobile apps, SaaS, AI systems, and enterprise software.',
+    'Software development company & software house: custom software solutions, web & mobile apps, SaaS, and ERP. Expert software developers.',
   inLanguage: 'en',
   isPartOf: {
     '@type': 'WebSite',
@@ -710,9 +710,9 @@ export const metadataConfig = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Custom Software Development Company | ClickMasters',
+      title: 'Custom Software Development That Scales Your Business Revenue — Not Just Code',
       description:
-        'We build web apps, mobile apps, SaaS, AI & enterprise software.',
+        'Software development company & software house: custom solutions, web & mobile, SaaS, ERP. Expert developers. Free consultation.',
       images: [`${siteConfig.url}/og-image.jpg`],
     },
   }),
@@ -721,13 +721,12 @@ export const metadataConfig = {
   about: (): Metadata => ({
     title: 'About ClickMasters | Experienced Software Development Team',
     description:
-      'Learn about ClickMasters — a full-service custom software development ' +
-      'company with 10+ years experience building web apps, mobile apps, and ' +
-      'enterprise solutions for businesses worldwide.',
+      'Meet ClickMasters: a software development company & software house with 10+ years building custom software solutions for global clients. Our story & team.',
     alternates: { canonical: `${siteConfig.url}/about-us` },
     openGraph: {
       title: 'About ClickMasters | Software Development Company',
-      description: '10+ years building reliable software. Meet our team.',
+      description:
+        'Software house & development team behind custom web apps, mobile apps, and enterprise software. Decade of delivery across industries.',
       url: `${siteConfig.url}/about-us`,
       images: [
         {
@@ -746,11 +745,37 @@ export const metadataConfig = {
     },
   }),
 
+  // ── /services/[slug] ────────────────────────────────────────────────────────
+  serviceDetail: (title: string, description: string, slug: string): Metadata => ({
+    title: `${title} Services | ClickMasters`,
+    description,
+    alternates: { canonical: `${siteConfig.url}/services/${slug}` },
+    openGraph: {
+      title: `${title} | ClickMasters`,
+      description,
+      url: `${siteConfig.url}/services/${slug}`,
+      images: [
+        {
+          url: `${siteConfig.url}/og/services.webp`,
+          width: 1200,
+          height: 630,
+          alt: `${title} — ClickMasters software services`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | ClickMasters`,
+      description,
+      images: [`${siteConfig.url}/og/services.webp`],
+    },
+  }),
+
   // ── /services ───────────────────────────────────────────────────────────────
   services: (): Metadata => ({
     title: 'Software Development Services – Web, Mobile App & ERP',
     description:
-      'Full-cycle software development: custom web apps, iOS & Android apps, ERP systems, API integrations, and cloud solutions. Get a free consultation today.',
+      'Full-cycle custom software: web apps, mobile, ERP, APIs, and cloud. Trusted software development company and software house. Book a free consult.',
     alternates: { canonical: `${siteConfig.url}/services` },
     openGraph: {
       title: 'Software Development Services – Web, Mobile & ERP | ClickMasters',
@@ -778,7 +803,7 @@ export const metadataConfig = {
   solutions: (): Metadata => ({
     title: 'Software Solutions Portfolio',
     description:
-      'Browse 100+ custom software projects: web platforms, mobile apps, and enterprise ERP systems across fintech, healthcare, retail, and logistics. See real results.',
+      'Portfolio of 100+ custom software projects: web platforms, mobile apps, ERP across fintech, healthcare, retail & logistics. Software house case studies.',
     alternates: { canonical: `${siteConfig.url}/software-solutions` },
     openGraph: {
       title: 'Software Solutions Portfolio – 100+ Projects | ClickMasters',
@@ -806,7 +831,7 @@ export const metadataConfig = {
   caseStudies: (): Metadata => ({
     title: 'Case Studies – Outcomes from Custom Software | ClickMasters',
     description:
-      'Explore case studies: challenges, solutions, and measurable results from web apps, SaaS, mobile, and enterprise software we have delivered for clients worldwide.',
+      'Case studies from our software development company: custom software, web & mobile apps, and SaaS outcomes for clients in the US, EU, and Middle East.',
     alternates: { canonical: `${siteConfig.url}/case-studies` },
     openGraph: {
       title: 'Case Studies – Custom Software That Drives Results | ClickMasters',
@@ -835,8 +860,7 @@ export const metadataConfig = {
   blog: (): Metadata => ({
     title: 'Software Development Blog | ClickMasters Insights',
     description:
-      'Expert articles on custom software development, SaaS, mobile apps, ' +
-      'AI systems, and engineering best practices from the ClickMasters team.',
+      'Blog by a software development company: architecture, SaaS, mobile, AI, and engineering practices. Insights for teams building custom software solutions.',
     alternates: { canonical: `${siteConfig.url}/blog` },
     openGraph: {
       title: 'ClickMasters Blog – Software Engineering and Product Insights',
@@ -865,7 +889,7 @@ export const metadataConfig = {
   testimonials: (): Metadata => ({
     title: 'Client Reviews & Testimonials – Rated 4.9/5',
     description:
-      'See why 100+ clients rate ClickMasters 4.9/5. Verified reviews from businesses in fintech, healthcare, retail, and logistics who trusted us with their software.',
+      'Client reviews for our software house: 4.9/5 from fintech, healthcare, retail & logistics. Real feedback on custom software and software developers.',
     alternates: { canonical: `${siteConfig.url}/testimonials` },
     openGraph: {
       title: 'ClickMasters Reviews – Rated 4.9/5 by 100+ Clients',
@@ -893,15 +917,13 @@ export const metadataConfig = {
   contact: (): Metadata => ({
     title: 'Contact ClickMasters | Get a Free Software Development Quote',
     description:
-      'Get in touch with ClickMasters for a free consultation on your ' +
-      'custom software project. Web apps, mobile apps, SaaS, AI & enterprise ' +
-      'solutions. We respond within 1 business day.',
+      'Contact our software development company for a free quote on custom software, web apps, mobile, or SaaS. We reply within one business day. Islamabad, worldwide.',
     alternates: { canonical: `${siteConfig.url}/contact-us` },
     openGraph: {
       title: 'Contact ClickMasters – Free Software Development Consultation',
       description:
         'Share your project requirements and hear back within 24 hours. No-obligation consultation with expert developers.',
-      url: `${siteConfig.url}/contact`,
+      url: `${siteConfig.url}/contact-us`,
       images: [
         {
           url: `${siteConfig.url}/og/contact.webp`,

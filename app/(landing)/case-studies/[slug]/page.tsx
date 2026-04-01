@@ -29,6 +29,15 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, '');
 }
 
+function toMetaDescription(text: string | undefined, fallback: string): string {
+  const raw = (text ?? '').replace(/\s+/g, ' ').trim();
+  const use = raw || fallback;
+  if (use.length <= 160) return use;
+  const cut = use.slice(0, 157).trimEnd();
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut) + '…';
+}
+
 async function findCaseStudyBySlugOrId(slugOrId: string) {
   const normalized = slugify(slugOrId);
 
@@ -102,9 +111,16 @@ export async function generateMetadata({
 
   if (!doc) return { title: 'Case study' };
   const d = doc as { title?: string; excerpt?: string };
+  const title = d.title ?? 'Case study';
+  const description = toMetaDescription(
+    d.excerpt,
+    `Case study: ${title} — custom software delivery by ClickMasters. Web, mobile, SaaS, and enterprise outcomes.`,
+  );
   return {
-    title: `${d.title ?? 'Case study'} | ClickMasters`,
-    description: d.excerpt,
+    title: `${title} | ClickMasters`,
+    description,
+    openGraph: { title: `${title} | ClickMasters`, description },
+    twitter: { description },
   };
 }
 
@@ -199,7 +215,7 @@ export default async function CaseStudyDetailPage({
         <div className="relative mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
           <img
             src={imageSrc}
-            alt=""
+            alt={`${cs.title} — case study hero image`}
             className="mb-12 w-full max-h-[420px] rounded-2xl border border-slate-200/90 object-cover shadow-sm"
           />
 
