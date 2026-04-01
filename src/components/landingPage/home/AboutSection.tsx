@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 /* ── DATA ───────────────────────────────────────────────── */
 const values = [
@@ -245,6 +246,25 @@ export function AboutSection() {
                 <strong className="text-gray-700 font-medium">software house</strong>, we handle everything from
                 discovery and UI/UX design to backend development, QA testing, cloud deployment, and long-term
                 maintenance — end to end, under one roof.
+              </p>
+              <p className="text-[15px] leading-relaxed text-gray-500">
+                Explore our{" "}
+                <Link href="/services/web-application-development" className="font-medium text-orange-600 hover:underline">
+                  web application development
+                </Link>
+                ,{" "}
+                <Link href="/services/mobile-app-development" className="font-medium text-orange-600 hover:underline">
+                  mobile app development
+                </Link>
+                , and{" "}
+                <Link href="/services/custom-software-development" className="font-medium text-orange-600 hover:underline">
+                  custom software development
+                </Link>{" "}
+                services, or browse the{" "}
+                <Link href="/software-solutions" className="font-medium text-orange-600 hover:underline">
+                  software solutions portfolio
+                </Link>{" "}
+                by industry.
               </p>
             </div>
 

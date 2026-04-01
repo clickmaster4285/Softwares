@@ -154,7 +154,7 @@ export function HeroSection(): JSX.Element {
       <div className="absolute inset-0 -z-20">
         <Image
           src="/hero.webp"
-          alt="Background"
+          alt="ClickMasters software development team building custom web and mobile applications for business clients"
           fill
           className="object-cover"
           priority

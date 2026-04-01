@@ -405,13 +405,21 @@ const Testimonials: React.FC = () => {
 
             {/* Stats Section with Glow Effects */}
             {!isLoading && testimonials.length > 0 && (
-              <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-20 py-8"
+              <motion.section
+                aria-labelledby="testimonials-trust-heading"
+                className="mb-20 py-8"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
+                <h2
+                  id="testimonials-trust-heading"
+                  className="mb-10 text-center font-display text-2xl font-bold text-foreground sm:text-3xl"
+                >
+                  Trust metrics at a glance
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12">
                 <AnimatedCounter
                   value="5000"
                   label="Happy Clients"
@@ -440,7 +448,8 @@ const Testimonials: React.FC = () => {
                   delay={0.4}
                   gradient="from-primary to-primary"
                 />
-              </motion.div>
+                </div>
+              </motion.section>
             )}
 
             {/* Testimonials Content */}
@@ -476,6 +485,10 @@ const Testimonials: React.FC = () => {
               </motion.div>
             ) : (
               <div className="relative">
+                <h2 className="mb-8 text-center font-display text-2xl font-bold text-foreground sm:text-3xl">
+                  Featured client stories
+                </h2>
+                <h3 className="sr-only">Carousel of verified client testimonials</h3>
                 <Swiper
                   modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
                   effect="coverflow"

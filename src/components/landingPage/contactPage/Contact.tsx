@@ -1,7 +1,7 @@
 // Update your Contact component to include all fields
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
     Mail,
@@ -40,12 +40,6 @@ const Contact: React.FC = () => {
     const [sending, setSending] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -89,17 +83,6 @@ const Contact: React.FC = () => {
 
     const inputClasses = "w-full px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-300 text-foreground placeholder-muted-foreground";
 
-    if (!mounted) {
-        return (
-            <div className="min-h-screen bg-white flex items-center justify-center">
-                <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
-                    <p className="text-muted-foreground">Loading contact page...</p>
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div className="min-h-screen bg-white relative">
             <main className="relative z-10 pt-24">
@@ -107,10 +90,10 @@ const Contact: React.FC = () => {
                     <motion.div 
                         className="max-w-3xl mx-auto text-center mb-16" 
                         initial={{ opacity: 0, y: 30 }} 
-                        animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }} 
+                        animate={{ opacity: 1, y: 0 }} 
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6 mt-16">Contact Us</h2>
+                        <h1 className="text-3xl md:text-5xl font-bold mb-6 mt-16">Contact Us</h1>
                         <p className="text-xl text-muted-foreground">
                             Reach out to <span className="font-semibold text-primary">ClickMasters</span> for inquiries or support.
                         </p>
@@ -121,7 +104,7 @@ const Contact: React.FC = () => {
                         <motion.div 
                             className="relative bg-card/90 backdrop-blur-sm rounded-3xl shadow-xl p-8 lg:p-10 border border-border/70"
                             initial={{ opacity: 0, x: -30 }} 
-                            animate={mounted ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }} 
+                            animate={{ opacity: 1, x: 0 }} 
                             transition={{ duration: 0.6 }}
                         >
                             <div className="relative z-10">
@@ -287,7 +270,7 @@ const Contact: React.FC = () => {
                             <motion.div
                                 className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                                 initial={{ opacity: 0, x: 30 }}
-                                animate={mounted ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                                animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.6, delay: 0.2 }}
                             >
                                 <ContactInfoCard
@@ -316,7 +299,7 @@ const Contact: React.FC = () => {
                             <motion.div 
                                 className="relative bg-card/90 backdrop-blur-sm rounded-3xl shadow-xl p-2 h-[300px] overflow-hidden group border border-border/70"
                                 initial={{ opacity: 0, y: 30 }}
-                                animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.4 }}
                                 whileHover={{ scale: 1.02 }}
                             >

@@ -30,13 +30,19 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CountUp from 'react-countup';
-import { metadataConfig } from '@/app/metadata-config';
-
-export const metadata = metadataConfig.services();
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
+}
+
+function slugifyServiceId(title: string) {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 // Define types
@@ -618,16 +624,18 @@ export default function ServicesPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {services.map((service, index) => {
             const isHovered = hoveredService === index;
+            const serviceSlug = slugifyServiceId(service.title);
 
             return (
               <div
                 key={index}
+                id={serviceSlug}
                 ref={(el) => {
                   servicesRef.current[index] = el;
                 }}
                 onMouseEnter={() => handleServiceHover(index, true)}
                 onMouseLeave={() => handleServiceHover(index, false)}
-                className="group relative cursor-pointer"
+                className="group relative scroll-mt-28 cursor-pointer"
               >
                 {/* Card */}
                 <div className="relative bg-white rounded-2xl p-6 md:p-8 border border-primary/10 shadow-sm h-full overflow-hidden transition-all duration-300">
@@ -694,6 +702,14 @@ export default function ServicesPage() {
                       </div>
                     ))}
                   </div>
+
+                  <Link
+                    href={`/services/${serviceSlug}`}
+                    className="relative z-10 inline-flex items-center text-sm font-semibold text-primary hover:underline"
+                  >
+                    Dedicated service page
+                    <ArrowRight className="ml-1 h-4 w-4" aria-hidden />
+                  </Link>
 
                   {/* Corner Accent */}
                   <div className="absolute bottom-4 right-4 w-5 h-5 md:w-6 md:h-6">
