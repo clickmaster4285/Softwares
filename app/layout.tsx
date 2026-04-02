@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/providers";
 import "./globals.css";
+import { Inter, Space_Grotesk } from "next/font/google";
 import {
   defaultMetadata,
   organizationSchema,
@@ -10,6 +11,18 @@ import {
 import Script from 'next/script';
 
 export const metadata: Metadata = defaultMetadata;
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space-grotesk",
+});
 
 export default function RootLayout({
   children,
@@ -21,7 +34,10 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body suppressHydrationWarning>
+      <body
+        suppressHydrationWarning
+        className={`${inter.variable} ${spaceGrotesk.variable}`}
+      >
         <Providers>
           {children}
         </Providers>
