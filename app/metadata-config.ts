@@ -675,7 +675,7 @@ export const metadataConfig = {
 
   // ── / (Home) ────────────────────────────────────────────────────────────────
  home: (): Metadata => ({
-    title: 'Software Development Company | ClickMasters',
+    title: 'Best Software Development Company in Pakistan',
     description:
       'ClickMasters is a professional custom software development company. ' +
       'We build web apps, mobile apps, SaaS platforms, AI systems, and ' +

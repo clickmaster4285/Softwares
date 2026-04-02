@@ -1,30 +1,43 @@
-const faqItems = [
+import Link from 'next/link';
+
+type FaqItem = {
+  question: string;
+  answer: string;
+  more?: { href: string; label: string };
+};
+
+const faqItems: FaqItem[] = [
   {
     question: 'How much does custom software development cost?',
     answer:
       'Custom software development costs vary based on complexity, features, and timeline. A basic web application typically starts from $5,000-$15,000, while enterprise systems range from $30,000-$200,000+. We provide free consultations to give accurate project estimates.',
+    more: { href: '/contact-us', label: 'Get a free consultation' },
   },
   {
     question: 'How long does it take to build a custom software application?',
     answer:
       'Development timelines depend on the project scope. An MVP takes 6-12 weeks, a full web or mobile application takes 3-6 months, and enterprise systems can take 6-18 months. We use agile sprints to deliver working software every 2 weeks.',
+    more: { href: '/case-studies', label: 'See how we deliver' },
   },
   {
     question: 'What technologies does ClickMasters use?',
     answer:
       "We use modern, proven technologies including React, Next.js, Node.js, Python, Flutter, React Native, PostgreSQL, MongoDB, AWS, Google Cloud, and Azure. We choose the best stack for each project's specific needs.",
+    more: { href: '/services', label: 'Explore our services' },
   },
   {
     question: 'Do you provide post-launch support and maintenance?',
     answer:
       'Yes. ClickMasters provides 24/7 post-launch support, security updates, performance monitoring, and feature development. We offer monthly maintenance plans to keep your software running smoothly.',
+    more: { href: '/testimonials', label: 'What clients say' },
   },
   {
     question: 'Can ClickMasters work with international clients?',
     answer:
       'Yes. We work with clients across the USA, Europe, Middle East, and worldwide. Our team operates across time zones and uses agile project management tools to ensure seamless collaboration regardless of location.',
+    more: { href: '/software-solutions', label: 'Browse solutions by industry' },
   },
-] as const;
+];
 
 export function FaqSection() {
   return (
@@ -65,6 +78,17 @@ export function FaqSection() {
               </summary>
               <p className="mt-4 border-t border-slate-100 pt-4 text-base leading-7 text-slate-600">
                 {item.answer}
+                {item.more ? (
+                  <>
+                    {' '}
+                    <Link
+                      href={item.more.href}
+                      className="font-medium text-primary hover:underline"
+                    >
+                      {item.more.label}
+                    </Link>
+                  </>
+                ) : null}
               </p>
             </details>
           ))}
