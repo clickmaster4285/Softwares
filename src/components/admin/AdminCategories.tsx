@@ -28,11 +28,13 @@ import {
 import AdminLayout from '@/components/admin/AdminLayout';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
+import { Checkbox } from '@/components/ui/checkbox';
 
 interface Category {
   _id: string;
   name: string;
   description: string;
+  showOnHome?: boolean;
   createdAt: string;
   createdBy?: { email: string };
 }
@@ -50,6 +52,7 @@ const AdminCategories = () => {
   const [deletingCategoryId, setDeletingCategoryId] = useState<string | null>(null);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [showOnHome, setShowOnHome] = useState(false);
   const { toast } = useToast();
 
   // Fetch categories + sort newest first
@@ -73,15 +76,17 @@ const AdminCategories = () => {
     if (isFormOpen && !editingCategory) {
       setName('');
       setDescription('');
+      setShowOnHome(false);
     } else if (editingCategory) {
       setName(editingCategory.name);
       setDescription(editingCategory.description);
+      setShowOnHome(Boolean(editingCategory.showOnHome));
     }
   }, [isFormOpen, editingCategory]);
 
   // Create category
   const createMutation = useMutation({
-    mutationFn: async (data: { name: string; description: string }) => {
+    mutationFn: async (data: { name: string; description: string; showOnHome: boolean }) => {
       const { apiFetch } = await import('../../lib/api');
       const res = await apiFetch('/api/categories', {
         method: 'POST',
@@ -109,13 +114,17 @@ const AdminCategories = () => {
 
   // Update category
   const updateMutation = useMutation({
-    mutationFn: async (data: { id: string; name: string; description: string }) => {
+    mutationFn: async (data: { id: string; name: string; description: string; showOnHome: boolean }) => {
       const { apiFetch } = await import('../../lib/api');
       const res = await apiFetch(`/api/categories?id=${data.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ name: data.name, description: data.description }),
+        body: JSON.stringify({
+          name: data.name,
+          description: data.description,
+          showOnHome: data.showOnHome,
+        }),
       });
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
@@ -180,12 +189,14 @@ const AdminCategories = () => {
       updateMutation.mutate({ 
         id: editingCategory._id, 
         name: name.trim(), 
-        description: description.trim() 
+        description: description.trim(),
+        showOnHome,
       });
     } else {
       createMutation.mutate({ 
         name: name.trim(), 
-        description: description.trim() 
+        description: description.trim(),
+        showOnHome,
       });
     }
   };
@@ -316,6 +327,17 @@ const AdminCategories = () => {
               />
             </div>
 
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="showOnHome"
+                checked={showOnHome}
+                onCheckedChange={(checked) => setShowOnHome(Boolean(checked))}
+              />
+              <Label htmlFor="showOnHome" className="text-sm font-medium">
+                Show this category in "Our Solutions" on home page
+              </Label>
+            </div>
+
             <div className="flex flex-col-reverse gap-2 pt-4 sm:flex-row sm:justify-end">
               <Button
                 type="button"
@@ -326,6 +348,7 @@ const AdminCategories = () => {
                   setEditingCategory(null);
                   setName('');
                   setDescription('');
+                  setShowOnHome(false);
                 }}
               >
                 Cancel

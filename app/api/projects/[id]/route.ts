@@ -10,7 +10,7 @@ export async function GET(
   await dbConnect();
   try {
     const project = await Project.findById(id)
-      .populate("category", "name description")
+      .populate("category", "name description showOnHome")
       .lean();
     if (!project) {
       return NextResponse.json({ message: "Project not found" }, { status: 404 });

@@ -2,6 +2,7 @@ export type ServicePageContent = {
   slug: string;
   /** Anchor on /services for deep links */
   sectionId: string;
+  category: string;
   title: string;
   /** 150–160 chars for meta description */
   metaDescription: string;
@@ -10,164 +11,243 @@ export type ServicePageContent = {
   sections: { heading: string; body: string }[];
 };
 
-const services: ServicePageContent[] = [
+export type ServiceMenuSection = {
+  label: string;
+  items: { title: string; description: string }[];
+};
+
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+export const serviceMenuSections: ServiceMenuSection[] = [
   {
-    slug: 'custom-software-development',
-    sectionId: 'custom-software-development',
-    title: 'Custom Software Development',
-    metaDescription:
-      'Custom software development for enterprises and startups. We build scalable web, mobile, and internal tools with modern stacks. Free consultation.',
-    lead:
-      'End-to-end custom software tailored to your workflows, integrations, and growth targets — from discovery through launch and long-term support.',
-    highlights: [
-      'Domain-driven design and clear milestones',
-      'APIs, automation, and legacy modernization',
-      'Dedicated team aligned with your product goals',
-    ],
-    sections: [
-      {
-        heading: 'What we build',
-        body:
-          'Business portals, internal tools, workflow automation, and customer-facing platforms. We align architecture with your roadmap so you can scale without costly rewrites.',
-      },
-      {
-        heading: 'How we deliver',
-        body:
-          'Agile sprints, transparent reporting, and continuous demos. You get predictable releases, test coverage, and documentation your team can own.',
-      },
+    label: 'Software Development',
+    items: [
+      { title: 'Custom Software Development', description: 'Tailored software for specific business goals.' },
+      { title: 'Enterprise Software Development', description: 'Scalable enterprise platforms and workflows.' },
+      { title: 'SaaS Product Development', description: 'Cloud-based SaaS products with recurring value.' },
+      { title: 'MVP Development', description: 'Fast MVP releases to validate ideas.' },
+      { title: 'Desktop Application Development', description: 'Reliable desktop apps for business operations.' },
+      { title: 'API Development & Integration', description: 'Robust APIs and third-party integrations.' },
+      { title: 'Microservices Architecture', description: 'Distributed systems built for scale.' },
+      { title: 'Backend Development', description: 'Secure, high-performance backend services.' },
+      { title: 'Frontend Development', description: 'Responsive, accessible frontend experiences.' },
+      { title: 'Full Stack Development', description: 'End-to-end product development support.' },
     ],
   },
   {
-    slug: 'web-application-development',
-    sectionId: 'web-application-development',
-    title: 'Web Application Development',
-    metaDescription:
-      'Web application development with React, Next.js, and cloud-ready backends. SPAs, dashboards, and B2B portals built for speed and SEO. Get a quote.',
-    lead:
-      'High-performance web apps — from marketing sites to complex dashboards — engineered for Core Web Vitals, accessibility, and maintainability.',
-    highlights: [
-      'React, Next.js, and API-first backends',
-      'Auth, roles, and secure data handling',
-      'Performance tuning and production monitoring',
-    ],
-    sections: [
-      {
-        heading: 'Modern frontends',
-        body:
-          'We ship responsive, accessible interfaces with a focus on load time and developer experience so your product stays fast as features grow.',
-      },
-      {
-        heading: 'Reliable backends',
-        body:
-          'REST and GraphQL APIs, background jobs, and integrations with payments, CRMs, and third-party services — designed for uptime and observability.',
-      },
+    label: 'Web Development',
+    items: [
+      { title: 'Web Application Development', description: 'Modern web apps and business portals.' },
+      { title: 'Website Development', description: 'SEO-friendly websites that convert.' },
+      { title: 'Progressive Web App (PWA) Development', description: 'Installable web apps with offline support.' },
+      { title: 'Headless CMS Development', description: 'Flexible content systems with API delivery.' },
+      { title: 'JAMstack Development', description: 'Fast static-first web architectures.' },
+      { title: 'E-commerce Development', description: 'Scalable online stores and checkout flows.' },
+      { title: 'Headless E-commerce', description: 'Composable commerce for modern storefronts.' },
+      { title: 'Shopify Development', description: 'Custom Shopify storefront and app work.' },
+      { title: 'WooCommerce Development', description: 'WordPress commerce customization and support.' },
     ],
   },
   {
-    slug: 'mobile-app-development',
-    sectionId: 'mobile-app-development',
-    title: 'Mobile App Development',
-    metaDescription:
-      'Mobile app development for iOS and Android: native and cross-platform apps with Flutter and React Native. UX, APIs, and store releases handled end-to-end.',
-    lead:
-      'Native-quality mobile experiences for consumer and enterprise use cases, with a release process that covers testing, analytics, and app store compliance.',
-    highlights: [
-      'iOS, Android, and cross-platform options',
-      'Offline-first and push notification patterns',
-      'CI/CD and staged rollouts',
-    ],
-    sections: [
-      {
-        heading: 'Product and UX',
-        body:
-          'We prototype flows, validate with stakeholders, and implement polished UI that matches your brand while staying performant on real devices.',
-      },
-      {
-        heading: 'Integration and scale',
-        body:
-          'Secure APIs, token refresh, deep links, and analytics hooks so your app fits cleanly into your existing systems and growth stack.',
-      },
+    label: 'Mobile Development',
+    items: [
+      { title: 'Mobile App Development', description: 'Mobile products for iOS and Android users.' },
+      { title: 'Android App Development', description: 'Native Android apps with strong performance.' },
+      { title: 'iOS App Development', description: 'Native iOS apps built for Apple ecosystem.' },
+      { title: 'Cross-Platform App Development', description: 'Shared-code apps for faster delivery.' },
+      { title: 'Flutter App Development', description: 'Flutter apps with consistent UI.' },
+      { title: 'React Native Development', description: 'React Native apps with reusable components.' },
     ],
   },
   {
-    slug: 'database-design-management',
-    sectionId: 'database-design-management',
-    title: 'Database Design & Management',
-    metaDescription:
-      'Database design and management: PostgreSQL, MongoDB, migrations, indexing, and performance tuning. Secure schemas and backups for production workloads.',
-    lead:
-      'Data models that stay fast under load — from greenfield schema design to migrations, replication, and day-two operations.',
-    highlights: [
-      'SQL and NoSQL expertise',
-      'Migrations without risky downtime',
-      'Query optimization and monitoring',
-    ],
-    sections: [
-      {
-        heading: 'Schema and modeling',
-        body:
-          'We design normalized or document-oriented schemas around your access patterns, with clear ownership boundaries and audit-friendly structures where needed.',
-      },
-      {
-        heading: 'Operations',
-        body:
-          'Backups, failover planning, and slow-query reviews — so your team sleeps well as traffic and data volume grow.',
-      },
+    label: 'Design',
+    items: [
+      { title: 'UI/UX Design', description: 'User-first interfaces with measurable outcomes.' },
+      { title: 'Product Design', description: 'End-to-end product thinking and execution.' },
+      { title: 'Web Design', description: 'Modern web layouts with clear hierarchy.' },
+      { title: 'Mobile App Design', description: 'Mobile-first design systems and flows.' },
+      { title: 'UX Research', description: 'Research-backed decisions for better usability.' },
+      { title: 'Wireframing & Prototyping', description: 'Rapid wireframes and interactive prototypes.' },
+      { title: 'Design Systems', description: 'Reusable design language and component patterns.' },
     ],
   },
   {
-    slug: 'cloud-solutions-devops',
-    sectionId: 'cloud-solutions-devops',
-    title: 'Cloud Solutions & DevOps',
-    metaDescription:
-      'Cloud and DevOps on AWS, GCP, and Azure: CI/CD, containers, IaC, and observability. We automate deploys and harden infrastructure for scale.',
-    lead:
-      'Infrastructure and pipelines that make releases boring — in a good way — with automated tests, environments, and guardrails.',
-    highlights: [
-      'Docker, Kubernetes, and serverless where it fits',
-      'GitHub Actions and pipeline design',
-      'Cost and reliability reviews',
-    ],
-    sections: [
-      {
-        heading: 'Platforms',
-        body:
-          'We help you pick and implement the right mix of compute, storage, and managed services across major clouds, with security baselines from day one.',
-      },
-      {
-        heading: 'Delivery automation',
-        body:
-          'Branching strategy, preview environments, and progressive delivery so your team ships frequently with confidence.',
-      },
+    label: 'Artificial Intelligence (AI)',
+    items: [
+      { title: 'Generative AI Solutions', description: 'LLM-powered generation and automation workflows.' },
+      { title: 'AI Chatbot Development', description: 'Conversational assistants for support and sales.' },
+      { title: 'AI Agents Development', description: 'Autonomous agents for business operations.' },
+      { title: 'AI Automation Systems', description: 'Intelligent automation across repetitive tasks.' },
+      { title: 'AI Integration Services', description: 'Integrate AI capabilities into existing systems.' },
+      { title: 'AI Model Development', description: 'Custom model development and deployment.' },
+      { title: 'LLM Applications Development', description: 'Production-grade LLM applications and tooling.' },
     ],
   },
   {
-    slug: 'cybersecurity-compliance',
-    sectionId: 'cybersecurity-compliance',
-    title: 'Cybersecurity & Compliance',
-    metaDescription:
-      'Cybersecurity and compliance: secure SDLC, audits, penetration testing prep, and hardening for web and mobile apps. Reduce risk before you scale.',
-    lead:
-      'Security woven into development — not bolted on at the end — with practical controls aligned to your industry and threat model.',
-    highlights: [
-      'OWASP-aligned reviews and fixes',
-      'Encryption, secrets, and IAM patterns',
-      'Documentation for audit readiness',
+    label: 'Machine Learning (ML)',
+    items: [
+      { title: 'Machine Learning Solutions', description: 'ML systems tailored to your domain data.' },
+      { title: 'Predictive Analytics', description: 'Forecasting models to guide decisions.' },
+      { title: 'Recommendation Systems', description: 'Personalized recommendations for engagement.' },
+      { title: 'Model Training & Optimization', description: 'Training pipelines and model performance tuning.' },
+      { title: 'Deep Learning Solutions', description: 'Advanced neural models for complex problems.' },
     ],
-    sections: [
-      {
-        heading: 'Application security',
-        body:
-          'Threat modeling, dependency updates, and code review practices that catch common vulnerabilities before they reach production.',
-      },
-      {
-        heading: 'Compliance support',
-        body:
-          'We work with your policies and legal requirements to implement logging, data retention, and access controls that auditors expect to see.',
-      },
+  },
+  {
+    label: 'NLP & Computer Vision',
+    items: [
+      { title: 'Natural Language Processing (NLP)', description: 'Text understanding and language workflows.' },
+      { title: 'Speech Recognition Systems', description: 'Voice-to-text and speech processing solutions.' },
+      { title: 'Text Analytics', description: 'Insights from unstructured text data.' },
+      { title: 'Computer Vision Solutions', description: 'Image and video understanding pipelines.' },
+      { title: 'Image Processing', description: 'Image enhancement, detection, and classification.' },
+      { title: 'Video Analytics', description: 'Real-time and batch video intelligence.' },
+    ],
+  },
+  {
+    label: 'Data Services',
+    items: [
+      { title: 'Data Science & Analytics', description: 'Data-driven strategy and advanced analytics.' },
+      { title: 'Business Intelligence (BI)', description: 'BI dashboards and business reporting systems.' },
+      { title: 'Data Engineering', description: 'Reliable pipelines and data platform architecture.' },
+      { title: 'Data Warehousing', description: 'Warehouse design for analytics at scale.' },
+      { title: 'Data Visualization', description: 'Clear visual storytelling with data.' },
+      { title: 'Big Data Solutions', description: 'Large-scale data processing infrastructure.' },
+    ],
+  },
+  {
+    label: 'Automation & Integration',
+    items: [
+      { title: 'Business Process Automation', description: 'Automate repetitive business workflows.' },
+      { title: 'Workflow Automation', description: 'Orchestrated process automation across teams.' },
+      { title: 'Robotic Process Automation (RPA)', description: 'RPA bots for operational efficiency.' },
+      { title: 'System Integration', description: 'Connect platforms and eliminate silos.' },
+      { title: 'API Integration', description: 'Reliable integration between tools and services.' },
+      { title: 'Web Scraping & Data Extraction', description: 'Structured data extraction for operations.' },
+    ],
+  },
+  {
+    label: 'Cloud & DevOps',
+    items: [
+      { title: 'Cloud Solutions', description: 'Cloud architecture and migration services.' },
+      { title: 'Cloud-Native Development', description: 'Cloud-native apps built for resilience.' },
+      { title: 'DevOps Services', description: 'Delivery pipelines and release automation.' },
+      { title: 'DevSecOps', description: 'Security integrated into DevOps practices.' },
+      { title: 'CI/CD Pipeline Setup', description: 'Automated build, test, and deployment workflows.' },
+      { title: 'Serverless Architecture', description: 'Event-driven serverless application design.' },
+      { title: 'Containerization (Docker & Kubernetes)', description: 'Containerized deployments at scale.' },
+      { title: 'Infrastructure as Code (IaC)', description: 'Versioned, repeatable infrastructure setup.' },
+    ],
+  },
+  {
+    label: 'Database Services',
+    items: [
+      { title: 'Database Design', description: 'Data models optimized for real workloads.' },
+      { title: 'Database Management', description: 'Database operations, reliability, and health.' },
+      { title: 'Data Migration', description: 'Safe migration with minimal downtime.' },
+      { title: 'Database Optimization', description: 'Performance tuning for faster queries.' },
+      { title: 'SQL & NoSQL Solutions', description: 'Right-fit SQL and NoSQL implementations.' },
+    ],
+  },
+  {
+    label: 'Cybersecurity',
+    items: [
+      { title: 'Cybersecurity Services', description: 'Security posture improvements and hardening.' },
+      { title: 'Security Audits', description: 'Comprehensive infrastructure and app audits.' },
+      { title: 'Penetration Testing', description: 'Controlled security testing by experts.' },
+      { title: 'Vulnerability Assessment', description: 'Find and prioritize security weaknesses.' },
+      { title: 'Compliance & Risk Management', description: 'Controls and governance for compliance.' },
+      { title: 'Application Security', description: 'Secure SDLC and application hardening.' },
+    ],
+  },
+  {
+    label: 'Testing & QA',
+    items: [
+      { title: 'QA & Software Testing', description: 'Comprehensive QA strategies and execution.' },
+      { title: 'Automated Testing', description: 'Reliable test automation for faster releases.' },
+      { title: 'Manual Testing', description: 'Thorough exploratory and scenario-based testing.' },
+      { title: 'Performance Testing', description: 'Measure and optimize system performance.' },
+      { title: 'Load Testing', description: 'Validate reliability under peak traffic.' },
+      { title: 'Bug Fixing', description: 'Rapid issue resolution and stabilization.' },
+    ],
+  },
+  {
+    label: 'Support & Outsourcing',
+    items: [
+      { title: 'Maintenance & Support', description: 'Ongoing maintenance and product support.' },
+      { title: 'Dedicated Development Teams', description: 'Skilled dedicated teams for long-term work.' },
+      { title: 'IT Outsourcing', description: 'Flexible outsourcing for technical delivery.' },
+      { title: 'Staff Augmentation', description: 'On-demand engineers to scale your team.' },
+      { title: 'Technical Support', description: 'Reliable support for systems and users.' },
+    ],
+  },
+  {
+    label: 'Blockchain & Web3',
+    items: [
+      { title: 'Blockchain Development', description: 'Blockchain platforms and custom protocols.' },
+      { title: 'Smart Contract Development', description: 'Secure smart contract implementation.' },
+      { title: 'Decentralized App (DApp) Development', description: 'DApp architecture and frontend integration.' },
+      { title: 'Web3 Development', description: 'Web3 product development and integrations.' },
+      { title: 'Crypto Wallet Development', description: 'Wallet apps with secure asset handling.' },
+      { title: 'NFT Marketplace Development', description: 'NFT marketplace platforms and tooling.' },
+      { title: 'Token Development', description: 'Token standards and launch support.' },
+    ],
+  },
+  {
+    label: 'IoT & Emerging Tech',
+    items: [
+      { title: 'IoT Development', description: 'Connected device ecosystems and dashboards.' },
+      { title: 'Smart Systems Development', description: 'Intelligent systems with real-time control.' },
+      { title: 'Industrial IoT', description: 'Industrial monitoring and automation solutions.' },
+      { title: 'Embedded Systems Development', description: 'Embedded firmware and hardware integration.' },
+    ],
+  },
+  {
+    label: 'Immersive Tech',
+    items: [
+      { title: 'AR Development', description: 'Augmented reality experiences and apps.' },
+      { title: 'VR Development', description: 'Virtual reality applications for training and products.' },
+      { title: 'Mixed Reality (MR) Solutions', description: 'Mixed reality for collaborative experiences.' },
+      { title: '3D Application Development', description: 'Interactive 3D applications and simulations.' },
     ],
   },
 ];
+
+const services: ServicePageContent[] = serviceMenuSections.flatMap((section) =>
+  section.items.map((item) => {
+    const slug = slugify(item.title);
+    return {
+      slug,
+      sectionId: slug,
+      category: section.label,
+      title: item.title,
+      metaDescription: `${item.title} services by ClickMasters. Expert ${item.title.toLowerCase()} for scalable, secure, and business-focused digital products.`,
+      lead: `Our ${item.title.toLowerCase()} services help you plan, build, and scale with clear timelines, quality engineering, and long-term support.`,
+      highlights: [
+        `Business-aligned delivery for ${item.title.toLowerCase()}`,
+        'Scalable architecture and clean implementation',
+        'Transparent execution with measurable outcomes',
+      ],
+      sections: [
+        {
+          heading: `What our ${item.title.toLowerCase()} includes`,
+          body: `We handle strategy, design, implementation, testing, and deployment so your team can launch faster with less risk and better product quality.`,
+        },
+        {
+          heading: 'How we deliver value',
+          body: 'Our team works in iterative sprints with regular demos, clear communication, and production-ready documentation to keep your project on track.',
+        },
+      ],
+    };
+  })
+);
 
 const bySlug = new Map(services.map((s) => [s.slug, s]));
 

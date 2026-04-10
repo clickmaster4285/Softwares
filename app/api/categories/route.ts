@@ -24,7 +24,11 @@ export async function POST(req: NextRequest) {
   await dbConnect();
   try {
     const data = await req.json();
-    const category = await Category.create(data);
+    const category = await Category.create({
+      name: data?.name,
+      description: data?.description,
+      showOnHome: Boolean(data?.showOnHome),
+    });
     return NextResponse.json(category, { status: 201 });
   } catch {
     return NextResponse.json({ message: 'Server error' }, { status: 500 });
@@ -42,7 +46,17 @@ export async function PUT(req: NextRequest) {
 
     const data = await req.json();
 
-    const category = await Category.findByIdAndUpdate(id, data, { new: true });
+    const category = await Category.findByIdAndUpdate(
+      id,
+      {
+        ...(typeof data?.name === 'string' ? { name: data.name } : {}),
+        ...(typeof data?.description === 'string' ? { description: data.description } : {}),
+        ...(typeof data?.showOnHome !== 'undefined'
+          ? { showOnHome: Boolean(data.showOnHome) }
+          : {}),
+      },
+      { new: true, runValidators: true }
+    );
 
     if (!category) {
       return NextResponse.json({ message: 'Category not found' }, { status: 404 });

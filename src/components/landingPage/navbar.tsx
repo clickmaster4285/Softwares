@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '@/lib/api';
 import { getCategoryName } from '@/lib/utils';
+import { serviceMenuSections } from '@/lib/service-pages';
 
 // Types for dropdown data
 interface ProjectItem {
@@ -47,21 +48,26 @@ type ServiceMenuSection = {
   items: ServiceMenuItem[];
 };
 
-const mobileServicePageLinks: { title: string; href: string }[] = [
-  { title: 'Custom Software Development', href: '/services/custom-software-development' },
-  { title: 'Web Application Development', href: '/services/web-application-development' },
-  { title: 'Mobile App Development', href: '/services/mobile-app-development' },
-  { title: 'Database Design & Management', href: '/services/database-design-management' },
-  { title: 'Cloud Solutions & DevOps', href: '/services/cloud-solutions-devops' },
-  { title: 'Cybersecurity & Compliance', href: '/services/cybersecurity-compliance' },
-];
+const mobileServicePageLinks: { title: string; href: string }[] = serviceMenuSections.flatMap((section) =>
+  section.items.map((item) => ({
+    title: item.title,
+    href: `/services/${item.title
+      .toLowerCase()
+      .trim()
+      .replace(/['"]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')}`,
+  }))
+);
 
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [activeServiceSection, setActiveServiceSection] = useState<string>('Engineering Services');
+  const [activeServiceSection, setActiveServiceSection] = useState<string>(
+    serviceMenuSections[0]?.label ?? ''
+  );
   const [activeSolutionsSection, setActiveSolutionsSection] = useState<string>('');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true);
@@ -135,58 +141,24 @@ export function Navbar() {
     router.push('/services');
   };
 
-  const serviceSections: ServiceMenuSection[] = [
-    {
-      label: 'Engineering Services',
-      items: [
-        {
-          title: 'Custom Software Development',
-          description: 'Enterprise-grade systems, automation, and modernization.',
-          href: '/services/custom-software-development',
-        },
-        {
-          title: 'Web Application Development',
-          description: 'Scalable SPAs, dashboards, and high-performance web apps.',
-          href: '/services/web-application-development',
-        },
-        {
-          title: 'Mobile App Development',
-          description: 'Native and cross-platform mobile apps for iOS and Android.',
-          href: '/services/mobile-app-development',
-        },
-      ],
-    },
-    {
-      label: 'Data & Platforms',
-      items: [
-        {
-          title: 'Database Design & Management',
-          description: 'Secure SQL/NoSQL design, migrations, and performance tuning.',
-          href: '/services/database-design-management',
-        },
-        {
-          title: 'Cloud Solutions & DevOps',
-          description: 'CI/CD, cloud migration, containers, reliability, and monitoring.',
-          href: '/services/cloud-solutions-devops',
-        },
-      ],
-    },
-    {
-      label: 'Security & Compliance',
-      items: [
-        {
-          title: 'Cybersecurity & Compliance',
-          description: 'Audits, pentesting, IAM, encryption, and regulatory readiness.',
-          href: '/services/cybersecurity-compliance',
-        },
-      ],
-    },
-  ];
+  const serviceSections: ServiceMenuSection[] = serviceMenuSections.map((section) => ({
+    label: section.label,
+    items: section.items.map((item) => ({
+      title: item.title,
+      description: item.description,
+      href: `/services/${item.title
+        .toLowerCase()
+        .trim()
+        .replace(/['"]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')}`,
+    })),
+  }));
 
   useEffect(() => {
     if (activeDropdown !== 'services') return;
     if (!serviceSections.some((s) => s.label === activeServiceSection)) {
-      setActiveServiceSection(serviceSections[0]?.label ?? 'Engineering Services');
+      setActiveServiceSection(serviceSections[0]?.label ?? '');
     }
   }, [activeDropdown]);
 
@@ -209,7 +181,7 @@ export function Navbar() {
       clearTimeout(hoverTimeoutRef.current);
     }
     if (dropdown === 'services') {
-      setActiveServiceSection(serviceSections[0]?.label ?? 'Engineering Services');
+      setActiveServiceSection(serviceSections[0]?.label ?? '');
     }
     if (dropdown === 'solutions') {
       setActiveSolutionsSection(groupedProjects[0]?.category ?? '');
@@ -246,7 +218,7 @@ export function Navbar() {
 
   const closeDropdowns = () => {
     setActiveDropdown(null);
-    setActiveServiceSection(serviceSections[0]?.label ?? 'Engineering Services');
+    setActiveServiceSection(serviceSections[0]?.label ?? '');
     setActiveSolutionsSection(groupedProjects[0]?.category ?? '');
   };
 
@@ -704,10 +676,10 @@ export function Navbar() {
           className="absolute left-0 right-0 top-full border-t border-black/5 animate-slideDown bg-transparent"
         >
           <div className="container mx-auto px-4 lg:px-8 py-0">
-            <div className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]">
-              <div className="grid grid-cols-12">
+            <div className="mx-auto max-w-6xl h-[520px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]">
+              <div className="grid h-full grid-cols-12">
                 {/* Left rail */}
-                <div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
+                <div className="col-span-3 h-full overflow-y-auto bg-slate-50 p-4 border-r border-slate-200">
                   <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
                     Services
                   </p>
@@ -743,12 +715,12 @@ export function Navbar() {
                 </div>
 
                 {/* Right content */}
-                <div className="col-span-9 p-8">
+                <div className="col-span-9 h-full p-8">
                   {serviceSections
                     .filter((s) => s.label === activeServiceSection)
                     .map((section) => (
-                      <div key={section.label}>
-                        <div className="grid gap-6 sm:grid-cols-2">
+                      <div key={section.label} className="flex h-full flex-col">
+                        <div className="grid flex-1 content-start gap-6 overflow-y-auto pr-2 sm:grid-cols-2">
                           {section.items.map((item) => (
                             <Link
                               key={item.href}

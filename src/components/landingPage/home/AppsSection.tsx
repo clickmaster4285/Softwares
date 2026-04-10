@@ -27,6 +27,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface Category {
   _id: string;
   name: string;
+  showOnHome?: boolean;
 }
 
 interface Project {
@@ -88,11 +89,30 @@ export function AppsSection() {
     refetchOnWindowFocus: false,
   });
 
-  const byCategory = groupProjectsByCategory(projects);
+  const { data: categories = [], isLoading: isLoadingCategories } = useQuery<Category[]>({
+    queryKey: ['categories-public'],
+    queryFn: async () => {
+      const res = await apiFetch('/api/categories');
+      if (!res.ok) throw new Error('Failed to fetch categories');
+      return res.json();
+    },
+    staleTime: 300000,
+    refetchOnWindowFocus: false,
+  });
 
-  // Get only the first 2 categories
-  const displayedCategories = byCategory.slice(0, 2);
-  const remainingCount = byCategory.length - 2;
+  const visibleCategoryNames = new Set(
+    categories.filter((category) => Boolean(category.showOnHome)).map((category) => category.name)
+  );
+
+  const projectsInHomeCategories = projects.filter((project) =>
+    visibleCategoryNames.has(getCategoryName(project.category))
+  );
+
+  const displayedCategories = groupProjectsByCategory(projectsInHomeCategories);
+
+  if (!isLoading && !isLoadingCategories && displayedCategories.length === 0) {
+    return null;
+  }
 
   // Loading skeletons with premium styling
   const renderSkeletons = () => (
@@ -302,9 +322,9 @@ export function AppsSection() {
         </div>
 
         {/* Content - Only first 2 categories */}
-        {isLoading ? (
+        {isLoading || isLoadingCategories ? (
           renderSkeletons()
-        ) : byCategory.length === 0 ? (
+        ) : displayedCategories.length === 0 ? (
           renderEmptyState()
         ) : (
           <div className="space-y-16">
@@ -352,14 +372,7 @@ export function AppsSection() {
               className="group relative px-8 py-4 bg-black text-white text-sm font-medium tracking-wider overflow-hidden rounded-md"
             >
               <span className="relative z-10 flex items-center">
-                {remainingCount > 0 ? (
-                  <>
-                    View all case studies ({remainingCount} more{' '}
-                    {remainingCount === 1 ? 'category' : 'categories'})
-                  </>
-                ) : (
-                  <>View all case studies</>
-                )}
+                View all case studies
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>
               <motion.div

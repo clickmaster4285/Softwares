@@ -15,7 +15,7 @@ export async function GET() {
   try {
     await dbConnect();
     const projects = await Project.find()
-      .populate('category', 'name description')
+      .populate('category', 'name description showOnHome')
       .sort({ createdAt: -1 })
       .lean();
     return NextResponse.json(projects);
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     });
 
     const populated = await Project.findById(project._id)
-      .populate('category', 'name description')
+      .populate('category', 'name description showOnHome')
       .populate('createdBy', 'email');
 
     return NextResponse.json(populated, { status: 201 });
@@ -82,7 +82,7 @@ export async function PUT(req: NextRequest) {
         runValidators: true 
       }
     )
-      .populate('category', 'name description')
+      .populate('category', 'name description showOnHome')
       .populate('createdBy', 'email');
 
     if (!project) {

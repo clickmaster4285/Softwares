@@ -4,22 +4,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import {
-  Code,
-  Globe,
-  Smartphone,
-  Database,
-  Cloud,
-  Shield,
   ArrowRight,
   CheckCircle,
   Users,
   Clock,
   Award,
   BarChart,
-  Settings,
-  Paintbrush,
   Rocket,
-  Zap,
   Sparkles,
   Target,
   PenTool,
@@ -30,6 +21,7 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CountUp from 'react-countup';
+import { getAllServicePages } from '@/lib/service-pages';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -69,93 +61,34 @@ interface StatItem {
   icon: React.ElementType;
 }
 
+const categoryIcons: Record<string, string> = {
+  'Software Development': '💻',
+  'Web Development': '🌐',
+  'Mobile Development': '📱',
+  Design: '🎨',
+  'Artificial Intelligence (AI)': '🤖',
+  'Machine Learning (ML)': '🧠',
+  'NLP & Computer Vision': '🗣️',
+  'Data Services': '📊',
+  'Automation & Integration': '⚙️',
+  'Cloud & DevOps': '☁️',
+  'Database Services': '🛢️',
+  Cybersecurity: '🔐',
+  'Testing & QA': '🧪',
+  'Support & Outsourcing': '👨‍💻',
+  'Blockchain & Web3': '🔗',
+  'IoT & Emerging Tech': '🌍',
+  'Immersive Tech': '🥽',
+};
+
 // Services Data
-const services: Service[] = [
-  {
-    icon: '💻',
-    title: 'Custom Software Development',
-    description:
-      'Professional custom software development solutions tailored to your business. We build enterprise software, automation tools, and legacy system modernization solutions to increase efficiency and productivity.',
-    features: [
-      'Enterprise Resource Planning (ERP) Systems',
-      'Customer Relationship Management (CRM) Software',
-      'Inventory Management Systems',
-      'Business Process Automation Solutions',
-      'Legacy System Modernization Services',
-    ],
-    gradient: 'bg-primary/10',
-  },
-  {
-    icon: '🌐',
-    title: 'Web Application Development',
-    description:
-      'Innovative web application development for scalable and responsive websites. We specialize in single-page applications (SPA), e-commerce platforms, progressive web apps (PWA), and real-time dashboards.',
-    features: [
-      'Single Page Applications (SPA)',
-      'Progressive Web Apps (PWA)',
-      'E-commerce & Online Store Development',
-      'Content Management Systems (CMS)',
-      'Real-time Data Dashboards',
-    ],
-    gradient: 'bg-primary/10',
-  },
-  {
-    icon: '📱',
-    title: 'Mobile App Development',
-    description:
-      'High-performance mobile app development for iOS and Android platforms. We create native and cross-platform apps to deliver seamless user experiences and drive customer engagement.',
-    features: [
-      'iOS Native Apps (Swift)',
-      'Android Native Apps (Kotlin)',
-      'Cross-platform Apps (React Native, Flutter)',
-      'Mobile Commerce Applications',
-      'Enterprise Mobile Solutions',
-    ],
-    gradient: 'bg-primary/10',
-  },
-  {
-    icon: '🗄️',
-    title: 'Database Design & Management',
-    description:
-      'Expert database design and management services for secure, scalable, and high-performance data systems. We handle SQL & NoSQL solutions, data migration, and performance optimization.',
-    features: [
-      'Database Architecture Design',
-      'SQL & NoSQL Databases',
-      'Data Migration & Integration',
-      'Performance Optimization',
-      'Backup & Disaster Recovery Solutions',
-    ],
-    gradient: 'bg-primary/10',
-  },
-  {
-    icon: '☁️',
-    title: 'Cloud Solutions & DevOps',
-    description:
-      'Reliable cloud solutions and DevOps services to optimize infrastructure, automate deployment, and ensure high availability. We specialize in AWS, Azure, GCP, and container orchestration.',
-    features: [
-      'Cloud Migration (AWS, Azure, GCP)',
-      'CI/CD Pipeline Setup & Automation',
-      'Containerization with Docker & Kubernetes',
-      'Infrastructure as Code (IaC)',
-      '24/7 Monitoring & System Reliability',
-    ],
-    gradient: 'bg-primary/10',
-  },
-  {
-    icon: '🔒',
-    title: 'Cybersecurity & Compliance',
-    description:
-      'Comprehensive cybersecurity solutions to protect your digital assets and ensure regulatory compliance. We perform security audits, penetration testing, and provide enterprise-grade security solutions.',
-    features: [
-      'Security Audits & Penetration Testing',
-      'GDPR & HIPAA Compliance Services',
-      'Data Encryption & Protection',
-      'Identity & Access Management',
-      'Security Awareness & Training Programs',
-    ],
-    gradient: 'bg-primary/10',
-  },
-];
+const services: Service[] = getAllServicePages().map((service) => ({
+  icon: categoryIcons[service.category] ?? '💼',
+  title: service.title,
+  description: service.lead,
+  features: service.highlights,
+  gradient: 'bg-primary/10',
+}));
 
 // Process Steps - Enhanced with more details
 const processSteps: ProcessStep[] = [
