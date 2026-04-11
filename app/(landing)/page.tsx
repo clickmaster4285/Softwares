@@ -21,6 +21,13 @@ const AppsSection = dynamic(
   () => import('@/components/landingPage/home/AppsSection').then((m) => m.AppsSection),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
 );
+const GlobalNetworkSection = dynamic(
+  () =>
+    import('@/components/landingPage/home/GlobalNetworkSection').then(
+      (m) => m.GlobalNetworkSection
+    ),
+  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
+);
 const IndustriesSection = dynamic(
   () => import('@/components/landingPage/home/industries-section').then((m) => m.IndustriesSection),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
@@ -55,6 +62,9 @@ export default function LandingPage() {
       </Suspense>
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <AppsSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
+        <GlobalNetworkSection />
       </Suspense>
 
       {/* Hub internal links (SEO + crawler-friendly) */}
