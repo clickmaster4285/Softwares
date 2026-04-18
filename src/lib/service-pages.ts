@@ -82,6 +82,9 @@ export const serviceMenuSections: ServiceMenuSection[] = [
     label: 'Artificial Intelligence (AI)',
     items: [
       { title: 'Generative AI Solutions', description: 'LLM-powered generation and automation workflows.' },
+      { title: 'AI Experts', description: 'Expert advisors for AI strategy and implementation.' },
+      { title: 'AI Developers', description: 'Custom AI applications built by expert developers.' },
+      { title: 'AI Prompt Engineers', description: 'Prompt engineering for high-quality model outputs.' },
       { title: 'AI Chatbot Development', description: 'Conversational assistants for support and sales.' },
       { title: 'AI Agents Development', description: 'Autonomous agents for business operations.' },
       { title: 'AI Automation Systems', description: 'Intelligent automation across repetitive tasks.' },
@@ -94,10 +97,12 @@ export const serviceMenuSections: ServiceMenuSection[] = [
     label: 'Machine Learning (ML)',
     items: [
       { title: 'Machine Learning Solutions', description: 'ML systems tailored to your domain data.' },
+      { title: 'Machine Learning Experts', description: 'Expert ML practitioners for model-driven products.' },
       { title: 'Predictive Analytics', description: 'Forecasting models to guide decisions.' },
       { title: 'Recommendation Systems', description: 'Personalized recommendations for engagement.' },
       { title: 'Model Training & Optimization', description: 'Training pipelines and model performance tuning.' },
       { title: 'Deep Learning Solutions', description: 'Advanced neural models for complex problems.' },
+      { title: 'Deep Learning Experts', description: 'Specialists in deep learning architecture and deployment.' },
     ],
   },
   {
@@ -120,6 +125,33 @@ export const serviceMenuSections: ServiceMenuSection[] = [
       { title: 'Data Warehousing', description: 'Warehouse design for analytics at scale.' },
       { title: 'Data Visualization', description: 'Clear visual storytelling with data.' },
       { title: 'Big Data Solutions', description: 'Large-scale data processing infrastructure.' },
+    ],
+  },
+  {
+    label: 'Data & Intelligence',
+    items: [
+      { title: 'Data Scraping Specialists', description: 'Extract the data you need from the open web and internal sources.' },
+      { title: 'Web Scraping Specialists', description: 'Reliable web scraping services for structured data collection.' },
+      { title: 'Excel Experts', description: 'Advanced spreadsheet automation and analytics in Excel.' },
+      { title: 'Google Sheets Experts', description: 'Automated Google Sheets workflows and data solutions.' },
+      { title: 'Power BI Developers', description: 'Interactive dashboards and reporting with Power BI.' },
+      { title: 'Data Scientists', description: 'Expert data science to turn your data into business insights.' },
+      { title: 'Data Engineers', description: 'Data pipeline and infrastructure engineering for analytics-ready systems.' },
+      { title: 'Tableau Developers', description: 'Visual analytics and dashboard development in Tableau.' },
+      { title: 'SQL Database Developers', description: 'SQL database development for fast, reliable data storage and queries.' },
+    ],
+  },
+  {
+    label: 'Automation & Chatbot',
+    items: [
+      { title: 'Chatbot Developers', description: 'Custom chatbot development for support and engagement.' },
+      { title: 'Chatbot Marketing Experts', description: 'Drive conversions and lead capture with chatbot marketing.' },
+      { title: 'Chatbot UX Writers', description: 'Conversational UX writing for effective chatbot experiences.' },
+      { title: 'Process Automation Experts', description: 'Automate repetitive business processes with intelligent workflows.' },
+      { title: 'Python Automation Experts', description: 'Python automation solutions for repetitive and data-driven tasks.' },
+      { title: 'Software Automation Experts', description: 'Software automation to remove manual effort and improve quality.' },
+      { title: 'Web Automation Experts', description: 'Web automation for testing, scraping, and workflow automation.' },
+      { title: 'Marketing Automation Experts', description: 'Marketing automation systems for campaigns and lead nurture.' },
     ],
   },
   {
