@@ -1,12 +1,20 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { Toaster } from '@/components/ui/toaster';
-import { Toaster as Sonner } from '@/components/ui/sonner';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ThemeProvider } from 'next-themes';
+
+const RadixToaster = dynamic(
+  () => import('@/components/ui/toaster').then((m) => m.Toaster),
+  { ssr: false },
+);
+const SonnerToaster = dynamic(
+  () => import('@/components/ui/sonner').then((m) => m.Toaster),
+  { ssr: false },
+);
 
 // Create a client
 const queryClient = new QueryClient({
@@ -30,8 +38,8 @@ export function Providers({ children }: { children: ReactNode }) {
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         <AuthProvider>
           <TooltipProvider>
-            <Toaster />
-            <Sonner />
+            <RadixToaster />
+            <SonnerToaster />
             {children}
           </TooltipProvider>
         </AuthProvider>

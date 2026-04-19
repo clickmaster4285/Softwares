@@ -1,13 +1,11 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, FileText, Mail, User, Phone, Send, CheckCircle2, DollarSign } from "lucide-react";
-import { motion, useInView } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, FileText, Mail, User, Phone, Send, CheckCircle2, DollarSign } from 'lucide-react';
 
-// Define types
 interface CounterProps {
   end: number;
   duration?: number;
@@ -27,38 +25,58 @@ const heroBullets = [
   'Built for scalability, performance & ROI',
 ] as const;
 
-// Counter component for stats
+function useInViewOnce(ref: React.RefObject<Element | null>, threshold = 0.15): boolean {
+  const [visible, setVisible] = useState(false);
+  const done = useRef(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || done.current) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          done.current = true;
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold, rootMargin: '40px' },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [ref, threshold]);
+  return visible;
+}
+
 const Counter = ({ end, duration = 2, delay = 0 }: CounterProps): JSX.Element => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInViewOnce(ref, 0.2);
 
   useEffect(() => {
     if (!isInView) return;
 
     let startTime: number;
     let animationFrame: number;
-    
     const startValue = 0;
 
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = (timestamp - startTime) / (duration * 1000);
-      
+
       if (progress < 1) {
-        setCount(Math.min(Math.floor(startValue + (end * progress)), end));
+        setCount(Math.min(Math.floor(startValue + end * progress), end));
         animationFrame = requestAnimationFrame(animate);
       } else {
         setCount(end);
       }
     };
 
-    const timeoutId = setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       animationFrame = requestAnimationFrame(animate);
     }, delay * 1000);
 
     return () => {
-      clearTimeout(timeoutId);
+      window.clearTimeout(timeoutId);
       if (animationFrame) cancelAnimationFrame(animationFrame);
     };
   }, [isInView, end, duration, delay]);
@@ -70,7 +88,7 @@ const stats: StatItem[] = [
   { end: 1860, label: 'Projects Delivered' },
   { end: 3500, label: 'Happy Clients' },
   { end: 75, label: 'Awards Won' },
-  { end: 5, label: 'Years Experience' }
+  { end: 5, label: 'Years Experience' },
 ];
 
 const particlePositions = [
@@ -83,7 +101,6 @@ const particlePositions = [
 ] as const;
 
 export function HeroSection(): JSX.Element {
-  const [glowIntensity, setGlowIntensity] = useState<number>(1);
   const [heroForm, setHeroForm] = useState({
     name: '',
     email: '',
@@ -96,11 +113,9 @@ export function HeroSection(): JSX.Element {
   const [heroError, setHeroError] = useState<string | null>(null);
 
   const heroFieldClass =
-    'w-full rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 pl-9 text-base sm:text-sm text-white placeholder:text-gray-400 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30';
+    'w-full rounded-xl border border-white/25 bg-white/5 px-3 py-2.5 pl-9 text-base sm:text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30';
 
-  const handleHeroChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleHeroChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setHeroForm((prev) => ({ ...prev, [name]: value }));
   };
@@ -128,29 +143,17 @@ export function HeroSection(): JSX.Element {
       setHeroForm({ name: '', email: '', phone: '', budget: '', message: '' });
       setTimeout(() => setHeroSuccess(false), 5000);
     } catch (err: unknown) {
-      setHeroError(
-        err instanceof Error ? err.message : 'Failed to send. Please try again.',
-      );
+      setHeroError(err instanceof Error ? err.message : 'Failed to send. Please try again.');
     } finally {
       setHeroSending(false);
     }
   };
-
-  useEffect(() => {
-    // Pulsing glow effect
-    const interval = setInterval(() => {
-      setGlowIntensity(prev => prev === 1 ? 1.2 : 1);
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section
       className="relative min-h-screen flex items-center pt-[max(9.5rem,calc(1rem+env(safe-area-inset-top)))] pb-10 sm:pb-12 md:pt-[10rem] md:pb-12 lg:pt-[9rem] lg:pb-20"
       aria-labelledby="hero-heading"
     >
-      {/* Background Image with Overlay */}
       <div className="absolute inset-0 -z-20">
         <Image
           src="/hero.webp"
@@ -159,205 +162,122 @@ export function HeroSection(): JSX.Element {
           className="object-cover"
           priority
           sizes="100vw"
-          quality={100}
+          quality={85}
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      {/* Glowing Background Effects */}
-      <div className="absolute inset-0 -z-10">
-        {/* Main glowing orb - top right */}
-        <motion.div 
-          className="absolute top-0 right-0 w-[60%] h-[70%] rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/3"
-          style={{
-            background: `radial-gradient(circle, rgba(249,115,22,${0.2 * glowIntensity}) 0%, rgba(249,115,22,0) 70%)`,
-          }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.6, 0.9, 0.6],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
-        {/* Secondary glowing orb - bottom left */}
-        <motion.div 
-          className="absolute bottom-0 left-0 w-[40%] h-[50%] rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/3"
-          style={{
-            background: `radial-gradient(circle, rgba(249,115,22,${0.15 * glowIntensity}) 0%, rgba(249,115,22,0) 70%)`,
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.4, 0.7, 0.4],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-
-        {/* Central radial glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
-          <motion.div 
-            className="w-full h-full"
-            style={{
-              background: `radial-gradient(ellipse 80% 60% at 50% 50%, rgba(249,115,22,${0.1 * glowIntensity}), transparent)`,
-            }}
-            animate={{
-              scale: [1, 1.05, 1],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        </div>
-
-        {/* Floating particles for extra glow */}
+      {/* Static decorative layers — no infinite JS / layout-thrashing animations */}
+      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
+        <div className="absolute right-0 top-0 h-[70%] w-[60%] translate-x-1/4 -translate-y-1/3 rounded-full bg-gradient-to-br from-primary/25 to-transparent opacity-80 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-[50%] w-[40%] -translate-x-1/4 translate-y-1/3 rounded-full bg-gradient-to-tr from-primary/20 to-transparent opacity-70 blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(249,115,22,0.12),transparent)]" />
         {particlePositions.map((position, i) => (
-          <motion.div
+          <div
             key={i}
-            className="absolute w-1 h-1 bg-primary/30 rounded-full"
-            style={{
-              top: position.top,
-              left: position.left,
-            }}
-            animate={{
-              scale: [1, 2, 1],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: 2 + i,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.3,
-            }}
+            className="absolute h-1 w-1 rounded-full bg-primary/40"
+            style={{ top: position.top, left: position.left }}
           />
         ))}
       </div>
 
-      <div className="container mx-auto px-3 sm:px-4 lg:px-8 relative z-10 w-full max-w-full min-w-0">
-        <div className="mx-auto max-w-7xl w-full min-w-0">
-          <div className="grid gap-8 sm:gap-10 lg:gap-12 lg:grid-cols-[1fr_minmax(280px,400px)] xl:grid-cols-[1fr_420px] items-start mb-10 sm:mb-12 md:mb-16 lg:mb-20">
+      <div className="container relative z-10 mx-auto w-full max-w-full min-w-0 px-3 sm:px-4 lg:px-8">
+        <div className="mx-auto w-full min-w-0 max-w-7xl">
+          <div className="mb-10 grid items-start gap-8 sm:mb-12 sm:gap-10 md:mb-16 md:gap-12 lg:mb-20 lg:grid-cols-[1fr_minmax(280px,400px)] xl:grid-cols-[1fr_420px]">
             <div className="min-w-0">
-              {/* Headline — LEFT ALIGNED */}
-              <motion.div
-                className="mb-4 sm:mb-6 text-left min-w-0"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
+              <div
+                className="hero-enter mb-4 min-w-0 text-left sm:mb-6"
+                style={{ ['--hero-enter-delay' as string]: '60ms' }}
               >
                 <h1
                   id="hero-heading"
-                  className="font-display text-[1.55rem] leading-snug sm:text-2xl md:text-3xl lg:text-[2.35rem] xl:text-5xl font-bold tracking-tight text-white text-pretty text-left [overflow-wrap:anywhere]"
+                  className="font-display text-left text-[1.55rem] font-bold leading-snug tracking-tight text-white text-pretty [overflow-wrap:anywhere] sm:text-2xl md:text-3xl lg:text-[2.35rem] xl:text-5xl"
                 >
                   Custom Software Development That Scales Your Business Revenue{' '}
                   <span className="text-primary">— Not Just Code</span>
                 </h1>
-              </motion.div>
+              </div>
 
-              {/* Subheading — LEFT ALIGNED */}
-              <motion.p
-                className="text-base sm:text-lg md:text-xl text-gray-200 text-left mb-4 sm:mb-5 text-pretty leading-relaxed max-w-2xl"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
+              <p
+                className="hero-enter mb-4 max-w-2xl text-left text-pretty text-base leading-relaxed text-gray-100 sm:mb-5 sm:text-lg md:text-xl"
+                style={{ ['--hero-enter-delay' as string]: '120ms' }}
               >
                 We design, build, and deploy high-performance web, mobile, SaaS, and AI-powered
                 systems for companies in the USA, Europe &amp; Middle East.
-              </motion.p>
+              </p>
 
-              {/* Value bullets — below subheading */}
-              <motion.ul
-                className="mb-6 sm:mb-8 text-left space-y-2 sm:space-y-2.5 max-w-2xl"
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.35 }}
+              <ul
+                className="hero-enter mb-6 max-w-2xl space-y-2 text-left sm:mb-8 sm:space-y-2.5"
+                style={{ ['--hero-enter-delay' as string]: '160ms' }}
               >
                 {heroBullets.map((text) => (
                   <li
                     key={text}
-                    className="relative pl-5 text-sm sm:text-base text-gray-100 leading-snug before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary/75"
+                    className="relative pl-5 text-sm leading-snug text-gray-100 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary/90 sm:text-base"
                   >
                     {text}
                   </li>
                 ))}
-              </motion.ul>
+              </ul>
 
-              {/* CTA Buttons - LEFT ALIGNED */}
-              <motion.div 
-                className="flex flex-col sm:flex-row items-stretch sm:items-start justify-start gap-3 sm:gap-4 w-full sm:w-auto"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
+              <div
+                className="hero-enter flex w-full flex-col items-stretch justify-start gap-3 sm:w-auto sm:flex-row sm:items-start sm:gap-4"
+                style={{ ['--hero-enter-delay' as string]: '200ms' }}
               >
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                  className="w-full sm:w-auto"
-                >
-                  <Button 
-                    size="lg" 
-                    className="w-full sm:w-auto min-h-[48px] touch-manipulation bg-primary text-white hover:bg-primary px-4 py-5 sm:px-6 md:px-8 sm:py-6 text-sm sm:text-base md:text-lg rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 transition-all relative overflow-hidden group text-center leading-snug" 
+                <div className="w-full transition-transform duration-200 ease-out hover:scale-[1.02] sm:w-auto">
+                  <Button
+                    size="lg"
+                    className="group relative w-full overflow-hidden rounded-xl bg-primary px-4 py-5 text-center text-sm leading-snug text-white shadow-lg shadow-primary/30 transition-all hover:bg-primary hover:shadow-xl hover:shadow-primary/50 sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base min-h-[48px] touch-manipulation"
                     asChild
                   >
-                    <Link href="/contact-us">
+                    <Link
+                      href="/contact-us"
+                      aria-label="Book a free software strategy call with ClickMasters"
+                    >
                       <span className="relative z-10">Get Free Software Strategy Call</span>
-                      <ArrowRight className="ml-2 h-5 w-5 shrink-0 relative z-10" />
-                      <motion.span 
-                        className="absolute inset-0 bg-white/20"
-                        initial={{ x: '-100%' }}
-                        whileHover={{ x: '100%' }}
-                        transition={{ duration: 0.5 }}
+                      <ArrowRight className="relative z-10 ml-2 h-5 w-5 shrink-0" aria-hidden />
+                      <span
+                        className="pointer-events-none absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full"
+                        aria-hidden
                       />
                     </Link>
                   </Button>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                  className="w-full sm:w-auto"
-                >
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="w-full sm:w-auto min-h-[48px] touch-manipulation px-4 py-5 sm:px-6 md:px-8 sm:py-6 text-sm sm:text-base md:text-lg rounded-xl bg-black/30 backdrop-blur-sm border-2 border-white/20 hover:bg-black/40 text-white hover:border-primary/50 transition-all text-center leading-snug" 
+                <div className="w-full transition-transform duration-200 ease-out hover:scale-[1.02] sm:w-auto">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full min-h-[48px] touch-manipulation rounded-xl border-2 border-white/25 bg-black/30 px-4 py-5 text-center text-sm leading-snug text-white backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-black/40 sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base"
                     asChild
                   >
-                    <Link href="/contact-us">
-                      <FileText className="mr-2 h-5 w-5 shrink-0" />
+                    <Link
+                      href="/contact-us"
+                      aria-label="Request a formal project proposal from ClickMasters"
+                    >
+                      <FileText className="mr-2 h-5 w-5 shrink-0" aria-hidden />
                       Request Proposal
                     </Link>
                   </Button>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             </div>
 
-            {/* Hero CTA form — readable on busy background */}
-            <motion.div
-              className="w-full min-w-0 max-w-md mx-auto lg:mx-0 lg:max-w-none"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.35 }}
+            <div
+              className="hero-enter mx-auto w-full min-w-0 max-w-md lg:mx-0 lg:max-w-none"
+              style={{ ['--hero-enter-delay' as string]: '160ms' }}
             >
-              <div className="rounded-xl sm:rounded-2xl border border-white/15 bg-black/45 backdrop-blur-md p-4 sm:p-5 md:p-6 shadow-2xl shadow-black/40">
-                <h2 className="text-base sm:text-lg font-bold text-white mb-1 font-display">
+              <div className="rounded-xl border border-white/15 bg-black/45 p-4 shadow-2xl shadow-black/40 backdrop-blur-md sm:rounded-2xl sm:p-5 md:p-6">
+                <h2 className="mb-1 font-display text-base font-bold text-white sm:text-lg">
                   Get a free quote
                 </h2>
-                <p className="text-xs sm:text-sm text-gray-300 mb-3 sm:mb-4 leading-snug sm:leading-normal">
+                <p className="mb-3 text-xs leading-snug text-gray-100 sm:mb-4 sm:text-sm sm:leading-normal">
                   Share your details—we&apos;ll respond within one business day.
                 </p>
 
                 {heroError && (
                   <div
-                    className="mb-3 rounded-xl border border-red-400/40 bg-red-950/50 px-3 py-2 text-sm text-red-200"
+                    className="mb-3 rounded-xl border border-red-400/40 bg-red-950/50 px-3 py-2 text-sm text-red-100"
                     role="alert"
                   >
                     {heroError}
@@ -370,13 +290,13 @@ export function HeroSection(): JSX.Element {
                       <CheckCircle2 className="h-6 w-6 text-primary" aria-hidden />
                     </div>
                     <p className="font-semibold text-white">Message received</p>
-                    <p className="mt-1 text-sm text-gray-300">We&apos;ll be in touch shortly.</p>
+                    <p className="mt-1 text-sm text-gray-100">We&apos;ll be in touch shortly.</p>
                   </div>
                 ) : (
                   <form onSubmit={handleHeroSubmit} className="space-y-3">
                     <div className="relative">
                       <User
-                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-200"
                         aria-hidden
                       />
                       <input
@@ -392,7 +312,7 @@ export function HeroSection(): JSX.Element {
                     </div>
                     <div className="relative">
                       <Mail
-                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-200"
                         aria-hidden
                       />
                       <input
@@ -408,7 +328,7 @@ export function HeroSection(): JSX.Element {
                     </div>
                     <div className="relative">
                       <Phone
-                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-200"
                         aria-hidden
                       />
                       <input
@@ -423,7 +343,7 @@ export function HeroSection(): JSX.Element {
                     </div>
                     <div className="relative">
                       <DollarSign
-                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-200"
                         aria-hidden
                       />
                       <input
@@ -443,14 +363,14 @@ export function HeroSection(): JSX.Element {
                         value={heroForm.message}
                         onChange={handleHeroChange}
                         placeholder="What would you like to build?"
-                        className="w-full min-h-[88px] resize-y rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-gray-400 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                        className="min-h-[88px] w-full resize-y rounded-xl border border-white/25 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30"
                         required
                       />
                     </div>
                     <button
                       type="submit"
                       disabled={heroSending}
-                      className="flex w-full min-h-[48px] items-center justify-center gap-2 touch-manipulation rounded-xl bg-primary px-4 py-3 text-base sm:text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
+                      className="flex min-h-[48px] w-full touch-manipulation items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-base font-semibold text-white shadow-lg shadow-primary/30 transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
                     >
                       {heroSending ? (
                         'Sending…'
@@ -461,51 +381,39 @@ export function HeroSection(): JSX.Element {
                         </>
                       )}
                     </button>
-                    <p className="text-center text-xs text-gray-400">
-                      <Link href="/contact-us" className="text-gray-300 underline-offset-4 hover:text-white hover:underline">
-                        More contact options
+                    <p className="text-center text-xs text-gray-200">
+                      <Link
+                        href="/contact-us"
+                        className="underline-offset-4 hover:text-white hover:underline"
+                      >
+                        View phone, email, and office details on our contact page
                       </Link>
                     </p>
                   </form>
                 )}
               </div>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Stats - LEFT ALIGNED */}
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-6 sm:gap-x-6 sm:gap-y-8 md:gap-8 pt-8 sm:pt-10 border-t border-white/20 text-left"
-            role="list" 
+          <div
+            className="hero-enter grid grid-cols-2 gap-x-3 gap-y-6 border-t border-white/25 pt-8 text-left sm:gap-x-6 sm:gap-y-8 sm:pt-10 md:grid-cols-4 md:gap-8"
+            role="list"
             aria-label="Company achievements"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
+            style={{ ['--hero-enter-delay' as string]: '240ms' }}
           >
             {stats.map((stat, index) => (
-              <motion.div 
-                key={index}
-                className="text-left relative min-w-0"
-                role="listitem"
-              >
+              <div key={stat.label} className="relative min-w-0 text-left" role="listitem">
                 <div className="relative z-10 py-2 pl-0 pr-0.5 sm:p-4 sm:pl-0">
-                  <motion.p
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-display transition-colors text-left tabular-nums"
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: index * 0.3,
-                      ease: "easeInOut",
-                    }}
-                  >
+                  <p className="font-display text-left text-2xl font-bold tabular-nums text-white sm:text-3xl md:text-4xl">
                     <Counter end={stat.end} duration={2} delay={0.2 * index} />
-                  </motion.p>
-                  <p className="text-[11px] sm:text-xs md:text-sm text-gray-300 mt-1 text-left leading-snug">
+                  </p>
+                  <p className="mt-1 text-left text-[11px] leading-snug text-gray-100 sm:text-xs md:text-sm">
                     {stat.label}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -270,7 +270,7 @@ export function AboutSection() {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 mb-12">
-              <a
+              <Link
                 href="/contact-us"
                 className="group relative inline-flex items-center bg-orange-500 hover:bg-orange-600 active:scale-95 transition-all duration-200 text-white text-sm font-bold px-7 py-3.5 shadow-sm hover:shadow-orange-200 hover:shadow-lg overflow-hidden"
               >
@@ -279,8 +279,8 @@ export function AboutSection() {
                 <svg className="w-4 h-4 ml-2 relative z-10 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/case-studies"
                 className="group inline-flex items-center border border-gray-300 hover:border-orange-400 hover:text-orange-500 hover:bg-orange-50/40 active:scale-95 transition-all duration-200 text-gray-700 text-sm font-medium px-7 py-3.5"
               >
@@ -288,7 +288,7 @@ export function AboutSection() {
                 <svg className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
