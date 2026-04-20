@@ -12,6 +12,7 @@
     "analyze": "ANALYZE=true next build",
     "format": "prettier --write \"src/**/*.{ts,tsx,md}\" \"app/**/*.{ts,tsx}\"",
     "type-check": "tsc --noEmit"
+
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

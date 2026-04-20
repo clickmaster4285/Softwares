@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, ChevronDown, X } from 'lucide-react';
@@ -47,6 +48,9 @@ type ServiceMenuSection = {
   label: string;
   items: ServiceMenuItem[];
 };
+
+const LOGO_COLOR_SRC = '/images/logo.webp';
+const LOGO_WHITE_SRC = '/images/logo-white.webp';
 
 const mobileServicePageLinks: { title: string; href: string }[] = serviceMenuSections.flatMap((section) =>
   section.items.map((item) => ({
@@ -239,7 +243,7 @@ export function Navbar() {
       ? 'bg-white/95 border-b border-black/10 shadow-sm'
       : 'bg-white/10 backdrop-blur-md border-b border-transparent';
 
-  const logoToShow = isPageLoading || !isLightHero ? '/logo.webp' : '/logo-white.webp';
+  const logoToShow = isPageLoading || !isLightHero ? LOGO_COLOR_SRC : LOGO_WHITE_SRC;
 
   const linkStyle = (isActive: boolean) => {
     if (isPageLoading) {
@@ -265,7 +269,16 @@ export function Navbar() {
           className="flex items-center gap-2 transition-opacity hover:opacity-90"
           onClick={closeDropdowns}
         >
-          <img src={logoToShow} className="w-48 md:w-64 h-auto" alt="ClickMasters" />
+          <Image
+            key={logoToShow}
+            src={logoToShow}
+            alt="ClickMasters"
+            width={800}
+            height={400}
+            className="h-auto w-48 md:w-64"
+            priority
+            fetchPriority="high"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -434,7 +447,13 @@ export function Navbar() {
             <div className="flex flex-col h-full">
               {/* Mobile Header */}
               <div className="flex items-center justify-between p-6 border-b border-black/5">
-                <img src="/logo.webp" className="w-36 h-auto" alt="ClickMasters" />
+                <Image
+                  src={LOGO_COLOR_SRC}
+                  alt="ClickMasters"
+                  width={800}
+                  height={400}
+                  className="h-auto w-36"
+                />
               </div>
 
               {/* Mobile Navigation */}
@@ -579,6 +598,7 @@ export function Navbar() {
               hoverTimeoutRef.current = null;
             }
           }}
+          onMouseLeave={closeDropdowns}
           className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
         >
           <div className="container mx-auto px-4 lg:px-8 py-0">
@@ -693,6 +713,7 @@ export function Navbar() {
               hoverTimeoutRef.current = null;
             }
           }}
+          onMouseLeave={closeDropdowns}
           className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
         >
           <div className="container mx-auto px-4 lg:px-8 py-0">

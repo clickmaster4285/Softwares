@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 // import { TimerIcon, Linkedin, Github, Youtube, Mail, Send } from 'lucide-react';
@@ -156,7 +157,14 @@ export function Footer(): JSX.Element {
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
               <Link href="/" className="flex items-center gap-2">
-                <img src="/logo-white.webp" className="w-36 h-auto" alt="Logo" />
+                <Image
+                  src="/images/logo-white.webp"
+                  alt="ClickMasters"
+                  width={800}
+                  height={400}
+                  className="h-auto w-36"
+                  loading="lazy"
+                />
               </Link>
             </motion.div>
             <motion.p variants={itemVariants} className="text-background/70 max-w-md mb-6">
