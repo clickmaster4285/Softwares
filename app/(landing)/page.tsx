@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic';
 import { Suspense } from "react";
 import Link from 'next/link';
 import SchemaMarkup from '@/components/SchemaMarkup';
+import { FaqSection } from '@/components/landingPage/home/FaqSection';
+import { LandingHomeDeferredHeavy } from '@/components/landingPage/home/LandingHomeDeferredHeavy';
 import {
   homepageFaqSchema,
   homepageOrganizationSchema,
@@ -125,27 +127,6 @@ const AppsSection = dynamic(
   () => import('@/components/landingPage/home/AppsSection').then((m) => m.AppsSection),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
 );
-const IndustriesSection = dynamic(
-  () => import('@/components/landingPage/home/industries-section').then((m) => m.IndustriesSection),
-  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-const CommunitySection = dynamic(
-  () => import('@/components/landingPage/home/CommunitySection').then((m) => m.CommunitySection),
-  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-const TestimonialsSection = dynamic(
-  () => import('@/components/landingPage/home/TestimonialsSection').then((m) => m.TestimonialsSection),
-  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-const FaqSection = dynamic(
-  () => import('@/components/landingPage/home/FaqSection').then((m) => m.FaqSection),
-  { loading: () => <div className="h-80 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-const HelpSection = dynamic(
-  () => import('@/components/landingPage/home/help-section').then((m) => m.HelpSection),
-  { loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-
 export default function LandingPage() {
   return (
     <main className="min-h-screen" role="main" aria-label="ClickMasters software development company homepage">
@@ -196,21 +177,11 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <IndustriesSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <CommunitySection />
-      </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <TestimonialsSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-80 animate-pulse bg-gray-100 rounded-lg" />}>
-        <FaqSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 rounded-lg" />}>
-        <HelpSection />
-      </Suspense>
+      <LandingHomeDeferredHeavy>
+        <Suspense fallback={<div className="h-80 animate-pulse rounded-lg bg-gray-100" />}>
+          <FaqSection />
+        </Suspense>
+      </LandingHomeDeferredHeavy>
     </main>
   );
 }

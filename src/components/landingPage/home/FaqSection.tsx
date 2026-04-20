@@ -48,7 +48,7 @@ export function FaqSection() {
 
       <div className="container relative z-10 mx-auto max-w-6xl px-4">
         <div className="mb-14 text-center">
-          <span className="inline-flex items-center rounded-full border border-primary/20 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+          <span className="inline-flex items-center rounded-full border border-primary/45 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
             FAQ
           </span>
           <h2
@@ -84,6 +84,7 @@ export function FaqSection() {
                     <Link
                       href={item.more.href}
                       className="font-medium text-primary hover:underline"
+                      aria-label={`${item.more.label} — ${item.more.href}`}
                     >
                       {item.more.label}
                     </Link>

@@ -162,7 +162,7 @@ export function HeroSection(): JSX.Element {
           className="object-cover"
           priority
           sizes="100vw"
-          quality={85}
+          quality={75}
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>
@@ -287,7 +287,7 @@ export function HeroSection(): JSX.Element {
                 {heroSuccess ? (
                   <div className="rounded-xl border border-green-400/30 bg-green-950/40 px-4 py-6 text-center">
                     <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
-                      <CheckCircle2 className="h-6 w-6 text-primary" aria-hidden />
+                      <CheckCircle2 className="h-6 w-6 text-orange-300" aria-hidden />
                     </div>
                     <p className="font-semibold text-white">Message received</p>
                     <p className="mt-1 text-sm text-gray-100">We&apos;ll be in touch shortly.</p>
