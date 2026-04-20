@@ -1,6 +1,11 @@
+# *
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /api/
+Disallow: /admin
+Disallow: /api
 
+# Host
+Host: https://software.clickmasters.pk
+
+# Sitemaps
 Sitemap: https://software.clickmasters.pk/sitemap.xml

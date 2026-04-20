@@ -88,7 +88,7 @@ function useInView(threshold = 0.15) {
 function TrustedClientCard({ client, index, visible }: { client: typeof trustedClients[0]; index: number; visible: boolean }) {
   return (
     <div
-      className="group flex flex-col items-center justify-center p-6 bg-gray-50/50 hover:bg-white rounded-2xl border border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-default"
+      className="group flex flex-col items-center justify-center p-6 bg-gray-50/50 hover:bg-white rounded-2xl border border-gray-200 hover:border-orange-200 transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-default"
       style={{
         transitionDelay: visible ? `${index * 60}ms` : "0ms",
         opacity: visible ? 1 : 0,
@@ -99,7 +99,7 @@ function TrustedClientCard({ client, index, visible }: { client: typeof trustedC
         {client.logo}
       </div>
       <p className="text-lg font-bold text-gray-800 mb-1">{client.name}</p>
-      <p className="text-xs text-gray-400 uppercase tracking-wide">{client.industry}</p>
+      <p className="text-xs text-gray-600 uppercase tracking-wide">{client.industry}</p>
     </div>
   );
 }
@@ -120,7 +120,7 @@ function TechCategory({ title, items, visible, delay }: { title: string; items: 
         {items.map((tech, idx) => (
           <span
             key={tech}
-            className="text-[12px] font-medium text-gray-700 bg-gray-100 hover:bg-orange-500 hover:text-white hover:shadow-md transition-all duration-200 px-3 py-1.5 rounded-full cursor-default"
+            className="text-[12px] font-medium text-gray-700 bg-gray-100 hover:bg-orange-700 hover:text-white hover:shadow-md transition-all duration-200 px-3 py-1.5 rounded-full cursor-default"
             style={{
               transitionDelay: visible ? `${delay + idx * 20}ms` : "0ms",
               opacity: visible ? 1 : 0,
@@ -148,7 +148,7 @@ export function AboutSection() {
     <section className="bg-white text-gray-900 overflow-hidden">
 
       {/* ────────────────── TOP INTRO BAND ────────────────── */}
-      <div className="border-b border-gray-100 relative" ref={hero.ref}>
+      <div className="border-b border-gray-200 relative" ref={hero.ref}>
         {/* subtle animated bg grid */}
         <div className="absolute inset-0 pointer-events-none"
           style={{
@@ -171,7 +171,7 @@ export function AboutSection() {
                   className="h-[2px] bg-orange-500 rounded-full transition-all duration-700 delay-200"
                   style={{ width: hero.visible ? "36px" : "0px" }}
                 />
-                <span className="text-orange-500 text-[11px] font-bold tracking-[0.2em] uppercase">
+                <span className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">
                   About ClickMasters
                 </span>
               </div>
@@ -202,7 +202,7 @@ export function AboutSection() {
               style={{ opacity: hero.visible ? 1 : 0, transform: hero.visible ? "translateX(0)" : "translateX(24px)" }}
             >
               <div className="absolute left-0 top-2 bottom-2 w-[2px] bg-orange-200 lg:hidden" />
-              <p className="text-base text-gray-500 leading-relaxed max-w-sm lg:text-right lg:border-l-2 lg:border-orange-200 lg:pl-6">
+              <p className="text-base text-gray-700 leading-relaxed max-w-sm lg:text-right lg:border-l-2 lg:border-orange-200 lg:pl-6">
                 A results-driven{" "}
                 <strong className="text-gray-800 font-semibold">software house</strong>{" "}
                 building custom web apps, mobile apps, and enterprise software that powers real business growth.
@@ -235,19 +235,19 @@ export function AboutSection() {
               retail, real estate, and education sectors.
             </p>
             <div className="space-y-4 mb-8">
-              <p className="text-[15px] leading-relaxed text-gray-500">
+              <p className="text-[15px] leading-relaxed text-gray-700">
                 Our team of experienced{" "}
                 <strong className="text-gray-700 font-medium">software developers</strong>{" "}
                 works as a seamless extension of your business — translating complex requirements into reliable,
                 scalable digital products that perform under real-world conditions.
               </p>
-              <p className="text-[15px] leading-relaxed text-gray-500">
+              <p className="text-[15px] leading-relaxed text-gray-700">
                 As a full-service{" "}
                 <strong className="text-gray-700 font-medium">software house</strong>, we handle everything from
                 discovery and UI/UX design to backend development, QA testing, cloud deployment, and long-term
                 maintenance — end to end, under one roof.
               </p>
-              <p className="text-[15px] leading-relaxed text-gray-500">
+              <p className="text-[15px] leading-relaxed text-gray-700">
                 Explore our{" "}
                 <Link href="/services/web-application-development" className="font-medium text-orange-600 hover:underline">
                   web application development
@@ -270,7 +270,7 @@ export function AboutSection() {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 mb-12">
-              <a
+              <Link
                 href="/contact-us"
                 className="group relative inline-flex items-center bg-orange-500 hover:bg-orange-600 active:scale-95 transition-all duration-200 text-white text-sm font-bold px-7 py-3.5 shadow-sm hover:shadow-orange-200 hover:shadow-lg overflow-hidden"
               >
@@ -279,16 +279,16 @@ export function AboutSection() {
                 <svg className="w-4 h-4 ml-2 relative z-10 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/case-studies"
-                className="group inline-flex items-center border border-gray-300 hover:border-orange-400 hover:text-orange-500 hover:bg-orange-50/40 active:scale-95 transition-all duration-200 text-gray-700 text-sm font-medium px-7 py-3.5"
+                className="group inline-flex items-center border border-gray-300 hover:border-orange-400 hover:text-orange-800 hover:bg-orange-50/40 active:scale-95 transition-all duration-200 text-gray-700 text-sm font-medium px-7 py-3.5"
               >
                 View Our Work
                 <svg className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -301,7 +301,7 @@ export function AboutSection() {
             {/* glow blob */}
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-orange-100 rounded-full blur-3xl opacity-50 pointer-events-none" />
 
-            <div className="border border-gray-100 divide-y divide-gray-100 rounded-2xl overflow-hidden shadow-sm">
+            <div className="border border-gray-200 divide-y divide-gray-200 rounded-2xl overflow-hidden shadow-sm">
               {values.map((v, idx) => (
                 <div
                   key={v.title}
@@ -318,7 +318,7 @@ export function AboutSection() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-bold text-gray-900 mb-1.5 group-hover:text-orange-600 transition-colors duration-200">{v.title}</p>
-                    <p className="text-[13px] leading-relaxed text-gray-500">{v.desc}</p>
+                    <p className="text-[13px] leading-relaxed text-gray-700">{v.desc}</p>
                   </div>
                   {/* Arrow indicator */}
                   <svg
@@ -335,18 +335,18 @@ export function AboutSection() {
       </div>
 
       {/* ────────────────── TRUSTED CLIENTS SECTION ────────────────────── */}
-      <div className="bg-gradient-to-b from-gray-50 to-white border-y border-gray-100" ref={clients.ref}>
+      <div className="bg-gradient-to-b from-gray-50 to-white border-y border-gray-200" ref={clients.ref}>
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
-              <p className="text-orange-500 text-[11px] font-bold tracking-[0.2em] uppercase">Trusted By Industry Leaders</p>
+              <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">Trusted By Industry Leaders</p>
               <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
             </div>
             <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
               Our Trusted Partners & Clients
             </h3>
-            <p className="text-gray-500 max-w-2xl mx-auto text-sm">
+            <p className="text-gray-700 max-w-2xl mx-auto text-sm">
               Join 3,500+ businesses that trust ClickMasters to deliver exceptional software solutions
             </p>
           </div>
@@ -360,18 +360,18 @@ export function AboutSection() {
       </div>
 
       {/* ────────────────── COMPREHENSIVE TECH STACK ────────────────────── */}
-      <div className="bg-white border-b border-gray-100" ref={tech.ref}>
+      <div className="bg-white border-b border-gray-200" ref={tech.ref}>
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
-              <p className="text-orange-500 text-[11px] font-bold tracking-[0.2em] uppercase">Our Technology Stack</p>
+              <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">Our Technology Stack</p>
               <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
             </div>
             <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
               Modern Tech Stack for Future-Ready Solutions
             </h3>
-            <p className="text-gray-500 max-w-2xl mx-auto text-sm">
+            <p className="text-gray-700 max-w-2xl mx-auto text-sm">
               We leverage cutting-edge technologies to build scalable, secure, and high-performance applications
             </p>
           </div>
@@ -407,36 +407,38 @@ export function AboutSection() {
             <div className="text-center md:text-left">
               <div className="inline-flex items-center gap-2 mb-3">
                 <span className="w-6 h-[2px] bg-orange-200/80 rounded-full" />
-                <p className="text-orange-100 text-[11px] font-bold uppercase tracking-[0.15em]">
+                <p className="text-white/95 text-[11px] font-bold uppercase tracking-[0.15em]">
                   Ready to accelerate your business?
                 </p>
               </div>
               <p className="text-white text-2xl lg:text-3xl xl:text-4xl font-extrabold leading-tight max-w-xl">
                 Let&apos;s Build Your Next{" "}
-                <span className="underline underline-offset-4 decoration-orange-200/60">Software Product</span>{" "}
+                <span className="underline underline-offset-4 decoration-white/80">Software Product</span>{" "}
                 Together
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0 w-full sm:w-auto">
-              <a
+              <Link
                 href="/contact-us"
-                className="group inline-flex items-center justify-center bg-white text-orange-600 hover:bg-gray-50 active:scale-95 transition-all duration-200 text-sm font-bold px-8 py-3.5 shadow-md hover:shadow-lg overflow-hidden relative"
+                aria-label="Contact ClickMasters to book a free business consultation"
+                className="group relative inline-flex min-h-[48px] min-w-[48px] items-center justify-center overflow-hidden bg-white px-8 py-3.5 text-sm font-bold text-orange-700 shadow-md transition-all duration-200 hover:bg-gray-50 hover:shadow-lg active:scale-95"
               >
-                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-orange-50 to-transparent" />
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-orange-50 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
                 <span className="relative z-10">Get Free Consultation</span>
-                <svg className="w-4 h-4 ml-2 relative z-10 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="relative z-10 ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/about-us"
-                className="group inline-flex items-center justify-center border border-white/50 hover:border-white text-white hover:bg-white/10 active:scale-95 transition-all duration-200 text-sm font-medium px-8 py-3.5"
+                aria-label="About ClickMasters — team, values, and how we build software"
+                className="group inline-flex min-h-[48px] min-w-[48px] items-center justify-center border border-white/60 px-8 py-3.5 text-sm font-medium text-white transition-all duration-200 hover:border-white hover:bg-white/10 active:scale-95"
               >
-                Learn More
-                <svg className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                About our company &amp; team
+                <svg className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

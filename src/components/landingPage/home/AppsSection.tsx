@@ -3,6 +3,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { apiFetch } from '@/lib/api';
 import { getCategoryName, resolveImageUrl } from '@/lib/utils';
@@ -118,11 +119,12 @@ export function AppsSection() {
                     <div className="bg-white rounded-2xl border border-primary/10 overflow-hidden transition-shadow hover:shadow-lg">
                       <div className="aspect-video bg-gradient-to-br from-primary/5 to-primary/10 relative overflow-hidden">
                         {project.thumbnail ? (
-                          <img
+                          <Image
                             src={resolveImageUrl(project.thumbnail)}
-                            alt={project.title}
-                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-400 group-hover:scale-105"
-                            loading="lazy"
+                            alt={`${project.title} project thumbnail`}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         ) : (
                           <div className="absolute inset-0 flex items-center justify-center">
@@ -146,11 +148,12 @@ export function AppsSection() {
         </div>
 
         <div className="mt-16 text-center">
-          <Link href="/case-studies">
-            <button className="px-8 py-3 bg-black text-white font-medium rounded-md hover:bg-primary transition-colors inline-flex items-center gap-2">
-              View all case studies
-              <ArrowRight className="h-4 w-4" />
-            </button>
+          <Link
+            href="/case-studies"
+            className="inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-2 rounded-md bg-black px-8 py-3 text-center font-medium text-white transition-colors hover:bg-primary"
+          >
+            View all case studies
+            <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
           </Link>
         </div>
       </div>

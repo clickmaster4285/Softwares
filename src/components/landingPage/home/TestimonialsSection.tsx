@@ -232,7 +232,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
+        <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-800">
           <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
             <span className="flex items-center gap-1">
               <TrendingUp className="w-3 h-3" />
