@@ -40,6 +40,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/logo.webp",
+        destination: "/images/logo.webp",
+        permanent: true,
+      },
+      {
+        source: "/logo-white.webp",
+        destination: "/images/logo-white.webp",
+        permanent: true,
+      },
+      {
         source: "/solutions",
         destination: "/software-solutions",
         permanent: true,
@@ -101,10 +111,9 @@ const nextConfig: NextConfig = {
 
   poweredByHeader: false,
   reactStrictMode: true,
-  compiler:
-    process.env.NODE_ENV === "production"
-      ? { removeConsole: { exclude: ["error", "warn"] } }
-      : undefined,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
 };
 
 export default withBundleAnalyzer(nextConfig);
