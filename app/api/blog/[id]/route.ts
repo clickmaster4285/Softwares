@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import BlogPost from '../../../../lib/models/BlogPost';
 import dbConnect from '../../../../lib/mongoose';
+import { calculateReadTime } from '../../../../src/lib/readTime';
 
 function slugify(value: string) {
   return value
@@ -44,7 +45,19 @@ export async function PUT(
     const body = await req.json();
 
     const updates: Record<string, unknown> = {};
-    const keys = ['published', 'slug', 'title', 'excerpt', 'content', 'author', 'thumbnail', 'tags'] as const;
+    const keys = [
+      'published',
+      'slug',
+      'title',
+      'excerpt',
+      'content',
+      'author',
+      'authorLinkedin',
+      'authorImage',
+      'thumbnail',
+      'category',
+      'tags',
+    ] as const;
 
     for (const k of keys) {
       if (k in body) {
@@ -54,6 +67,30 @@ export async function PUT(
         else if (typeof body[k] === 'string') updates[k] = body[k].trim();
         else updates[k] = body[k];
       }
+    }
+
+    const nextTitle =
+      typeof updates.title === 'string' ? updates.title : typeof body.title === 'string' ? body.title.trim() : '';
+    const nextExcerpt =
+      typeof updates.excerpt === 'string'
+        ? updates.excerpt
+        : typeof body.excerpt === 'string'
+          ? body.excerpt.trim()
+          : '';
+    if (typeof updates.content === 'string') {
+      const { minutes } = calculateReadTime({
+        html: updates.content,
+        fallbackParts: [nextTitle, nextExcerpt],
+      });
+      updates.readTimeMinutes = minutes;
+    } else if ('title' in updates || 'excerpt' in updates) {
+      const existing = await BlogPost.findById(id).select('content').lean();
+      const existingContent = typeof existing?.content === 'string' ? existing.content : '';
+      const { minutes } = calculateReadTime({
+        html: existingContent,
+        fallbackParts: [nextTitle, nextExcerpt],
+      });
+      updates.readTimeMinutes = minutes;
     }
 
     if (typeof updates.slug === 'string' && updates.slug) {

@@ -2,9 +2,10 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import mongoose from 'mongoose';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Clock3, RefreshCcw, ExternalLink } from 'lucide-react';
 import BlogPost from '../../../../lib/models/BlogPost';
 import dbConnect from '../../../../lib/mongoose';
+import { calculateReadTimeText } from '../../../../src/lib/readTime';
 import { resolveImageUrl } from '../../../../lib/utils';
 import { Button } from '@/components/ui/button';
 import BlogToc from '@/components/blog/BlogToc';
@@ -35,24 +36,43 @@ function stripTags(value: string) {
 
 function buildContentWithToc(html: string) {
   const headingCounts: Record<string, number> = {};
+  const seenHeadingTexts = new Set<string>();
   const toc: Array<{ id: string; text: string; level: 1 | 2 | 3 }> = [];
+  const isLikelyParagraph = (rawInner: string, text: string) => {
+    // Guardrail: if editor accidentally stores body copy as H1/H2/H3,
+    // keep it out of TOC so only real section headings appear.
+    const hasManyBreaks = (rawInner.match(/<br\s*\/?>/gi) || []).length >= 2;
+    const hasBlockChildren = /<(p|div|ul|ol|li|table|section|article|blockquote)\b/i.test(rawInner);
+    const isVeryLong = text.length > 140;
+    return hasManyBreaks || hasBlockChildren || isVeryLong;
+  };
 
+  // Build TOC from H1 only (as requested).
   // Use [\s\S]*? so headings containing line breaks or nested blocks are captured.
   const withIds = html.replace(
     /<(h[1-3])([^>]*)>([\s\S]*?)<\/\1>/gi,
     (_m, tag: string, attrs: string, inner: string) => {
     const text = stripTags(inner);
     if (!text) return _m;
+    if (tag.toLowerCase() !== 'h1') return _m;
+    if (isLikelyParagraph(inner, text)) return _m;
+    const normalizedText = text.toLowerCase();
+    if (seenHeadingTexts.has(normalizedText)) return _m;
+    seenHeadingTexts.add(normalizedText);
 
     const base = slugify(text) || 'section';
     headingCounts[base] = (headingCounts[base] || 0) + 1;
-    const id = headingCounts[base] > 1 ? `${base}-${headingCounts[base]}` : base;
-    const level = Number(tag[1]) as 1 | 2 | 3;
+    const generatedId = headingCounts[base] > 1 ? `${base}-${headingCounts[base]}` : base;
+    const existingIdMatch = attrs.match(/\sid\s*=\s*["']([^"']+)["']/i);
+    const existingIdRaw = existingIdMatch?.[1]?.trim() || '';
+    const id = slugify(existingIdRaw) || generatedId;
+    const level = 1 as const;
 
     toc.push({ id, text, level });
 
-    if (/id\s*=\s*["'][^"']*["']/i.test(attrs)) {
-      return `<${tag}${attrs}>${inner}</${tag}>`;
+    if (existingIdMatch) {
+      const normalizedAttrs = attrs.replace(/\sid\s*=\s*["'][^"']*["']/i, ` id="${id}"`);
+      return `<${tag}${normalizedAttrs}>${inner}</${tag}>`;
     }
       return `<${tag}${attrs} id="${id}">${inner}</${tag}>`;
     }
@@ -68,6 +88,14 @@ function toMetaDescription(text: string | undefined, fallback: string): string {
   const cut = use.slice(0, 157).trimEnd();
   const lastSpace = cut.lastIndexOf(' ');
   return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut) + '…';
+}
+function formatDate(value?: string) {
+  if (!value) return '';
+  return new Date(value).toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
 }
 
 async function findPostBySlugOrId(slugOrId: string) {
@@ -137,14 +165,31 @@ export default async function BlogDetailPage({
     title: string;
     excerpt: string;
     content: string;
+    readTimeMinutes?: number;
     author?: string;
+    authorLinkedin?: string;
+    authorImage?: string;
     thumbnail?: string;
+    category?: string;
     tags?: string[];
     createdAt?: string;
+    updatedAt?: string;
   };
   const imageSrc = post.thumbnail?.trim() ? resolveImageUrl(post.thumbnail) : '/placeholder.svg';
   const htmlContent = post.content?.trim() ? post.content : '<p>No content added yet.</p>';
   const { html: htmlWithIds, toc } = buildContentWithToc(htmlContent);
+  const readTime =
+    typeof post.readTimeMinutes === 'number' && Number.isFinite(post.readTimeMinutes) && post.readTimeMinutes > 0
+      ? `${Math.ceil(post.readTimeMinutes)} min read`
+      : calculateReadTimeText({
+          html: htmlContent,
+          fallbackParts: [post.title, post.excerpt],
+        });
+  const displayAuthor = post.author?.trim() || 'ClickMasters Team';
+  const authorLinkedinUrl = post.authorLinkedin?.trim() || '';
+  const authorImageUrl = post.authorImage?.trim() ? resolveImageUrl(post.authorImage) : '';
+  const publishedDate = formatDate(post.createdAt);
+  const updatedDate = formatDate(post.updatedAt);
 
   return (
     <>
@@ -159,6 +204,34 @@ export default async function BlogDetailPage({
               { name: post.title, url: `/blog/${slug}` },
             ]),
           ),
+        }}
+      />
+      <Script
+        id="blog-detail-article-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.title,
+            description: post.excerpt,
+            articleSection: post.category || undefined,
+            keywords: post.tags?.join(', ') || undefined,
+            author: {
+              '@type': 'Person',
+              name: displayAuthor,
+              sameAs: authorLinkedinUrl || undefined,
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'ClickMasters',
+              url: 'https://software.clickmasters.pk',
+            },
+            datePublished: post.createdAt || undefined,
+            dateModified: post.updatedAt || post.createdAt || undefined,
+            mainEntityOfPage: `https://software.clickmasters.pk/blog/${encodeURIComponent(slug)}`,
+            image: imageSrc,
+          }),
         }}
       />
       <div className="min-h-screen bg-[#f5f6f8] pt-20 text-slate-900">
@@ -176,6 +249,11 @@ export default async function BlogDetailPage({
             </h1>
             {post.tags && post.tags.length > 0 ? (
               <div className="mt-4 flex flex-wrap gap-2">
+                {post.category ? (
+                  <span className="rounded-md border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+                    {post.category}
+                  </span>
+                ) : null}
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
@@ -187,14 +265,57 @@ export default async function BlogDetailPage({
               </div>
             ) : null}
             <p className="mt-5 text-lg leading-relaxed text-slate-600">{post.excerpt}</p>
-            <p className="mt-4 text-sm text-slate-500">
-              {post.author || 'ClickMasters'}
-              {post.createdAt ? ` · ${new Date(post.createdAt).toLocaleDateString()}` : ''}
-            </p>
+            <div className="mt-6 flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3">
+                {authorImageUrl ? (
+                  <img
+                    src={authorImageUrl}
+                    alt={displayAuthor}
+                    className="h-10 w-10 rounded-full border border-slate-200 object-cover"
+                  />
+                ) : (
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+                    {displayAuthor
+                      .split(/\s+/)
+                      .slice(0, 2)
+                      .map((part: string) => part.charAt(0).toUpperCase())
+                      .join('')}
+                  </div>
+                )}
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">{displayAuthor}</p>
+                  <p className="text-xs text-slate-500">Author</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600">
+                {authorLinkedinUrl ? (
+                  <a
+                    href={authorLinkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 py-1 hover:border-primary/40 hover:text-primary"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" />
+                    LinkedIn
+                  </a>
+                ) : null}
+                <span className="inline-flex items-center gap-1">
+                  <Clock3 className="h-3.5 w-3.5" />
+                  {readTime}
+                </span>
+                {updatedDate ? (
+                  <span className="inline-flex items-center gap-1">
+                    <RefreshCcw className="h-3.5 w-3.5" />
+                    Updated {updatedDate}
+                  </span>
+                ) : null}
+                {publishedDate ? <span>Published {publishedDate}</span> : null}
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <img
@@ -203,13 +324,13 @@ export default async function BlogDetailPage({
                 className="mb-10 w-full max-h-[420px] rounded-2xl border border-slate-200/90 object-cover shadow-sm"
               />
               <section
-                className="prose prose-slate max-w-none prose-headings:scroll-mt-28 prose-headings:font-display prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-headings:text-slate-900 prose-p:text-slate-700 prose-p:leading-8 prose-li:text-slate-700 prose-a:text-primary prose-blockquote:border-l-primary prose-img:rounded-xl prose-img:border prose-img:border-slate-200 prose-img:shadow-sm"
+                className="blog-content prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-headings:text-slate-900 prose-p:text-slate-700 prose-p:leading-8 prose-li:text-slate-700 prose-a:text-primary prose-blockquote:border-l-primary prose-img:rounded-xl prose-img:border prose-img:border-slate-200 prose-img:shadow-sm"
                 dangerouslySetInnerHTML={{ __html: htmlWithIds }}
               />
             </div>
 
-            <aside className="lg:col-span-4 lg:self-start lg:pt-20">
-              <div className="lg:sticky lg:top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-xl border border-slate-200 bg-white p-5">
+            <aside className="lg:col-span-4 lg:self-start">
+              <div className="rounded-xl border border-slate-200 bg-white p-5">
                 <h2 className="text-3xl font-semibold leading-none text-slate-900 sm:text-[32px]">
                   Table of contents:
                 </h2>
@@ -220,6 +341,34 @@ export default async function BlogDetailPage({
         </div>
         </article>
       </div>
+      <style>{`
+        .blog-content font[size='1'] {
+          font-size: 0.75rem;
+        }
+        .blog-content font[size='2'] {
+          font-size: 0.875rem;
+        }
+        .blog-content font[size='3'] {
+          font-size: 1rem;
+        }
+        .blog-content font[size='4'] {
+          font-size: 1.125rem;
+        }
+        .blog-content font[size='5'] {
+          font-size: 1.25rem;
+        }
+        .blog-content font[size='6'] {
+          font-size: 1.5rem;
+        }
+        .blog-content font[size='7'] {
+          font-size: 1.875rem;
+        }
+        .blog-content h1,
+        .blog-content h2,
+        .blog-content h3 {
+          scroll-margin-top: 7.5rem;
+        }
+      `}</style>
     </>
   );
 }

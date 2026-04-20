@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import {
   Bold,
   Italic,
@@ -30,6 +31,16 @@ type RichTextEditorProps = {
   placeholder?: string;
 };
 
+const FONT_SIZE_OPTIONS = [
+  { value: '1', label: '12px' },
+  { value: '2', label: '14px' },
+  { value: '3', label: '16px (Normal)' },
+  { value: '4', label: '18px' },
+  { value: '5', label: '20px' },
+  { value: '6', label: '24px' },
+  { value: '7', label: '30px' },
+] as const;
+
 function exec(command: string, value?: string) {
   document.execCommand(command, false, value);
 }
@@ -38,6 +49,9 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
   const editorRef = useRef<HTMLDivElement | null>(null);
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [currentBlock, setCurrentBlock] = useState<'p' | 'h1' | 'h2' | 'blockquote'>('p');
+  const [fontFamily, setFontFamily] = useState('Inter, sans-serif');
+  const [fontSize, setFontSize] = useState('3');
 
   useEffect(() => {
     const el = editorRef.current;
@@ -50,6 +64,20 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
   const handleInput = () => {
     onChange(editorRef.current?.innerHTML || '');
   };
+
+  const updateToolbarState = () => {
+    const block = document.queryCommandValue('formatBlock')?.toString().toLowerCase() || '';
+    if (block.includes('h1')) setCurrentBlock('h1');
+    else if (block.includes('h2')) setCurrentBlock('h2');
+    else if (block.includes('blockquote')) setCurrentBlock('blockquote');
+    else setCurrentBlock('p');
+  };
+
+  useEffect(() => {
+    const onSelectionChange = () => updateToolbarState();
+    document.addEventListener('selectionchange', onSelectionChange);
+    return () => document.removeEventListener('selectionchange', onSelectionChange);
+  }, []);
 
   const handleLink = () => {
     const url = window.prompt('Enter URL');
@@ -95,6 +123,64 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap gap-2 rounded-md border border-border/60 bg-muted/30 p-2">
+        <Select
+          value={currentBlock}
+          onValueChange={(val: 'p' | 'h1' | 'h2' | 'blockquote') => {
+            setCurrentBlock(val);
+            if (val === 'p') exec('formatBlock', '<p>');
+            else if (val === 'blockquote') exec('formatBlock', '<blockquote>');
+            else exec('formatBlock', `<${val}>`);
+            handleInput();
+          }}
+        >
+          <SelectTrigger className="h-8 w-[150px] bg-background">
+            <SelectValue placeholder="Text style" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="p">Paragraph (Simple Text)</SelectItem>
+            <SelectItem value="h1">Heading 1 (H1)</SelectItem>
+            <SelectItem value="h2">Heading 2 (H2)</SelectItem>
+            <SelectItem value="blockquote">Quote</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select
+          value={fontFamily}
+          onValueChange={(val) => {
+            setFontFamily(val);
+            exec('fontName', val);
+            handleInput();
+          }}
+        >
+          <SelectTrigger className="h-8 w-[150px] bg-background">
+            <SelectValue placeholder="Font family" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Inter, sans-serif">Inter</SelectItem>
+            <SelectItem value="Arial, sans-serif">Arial</SelectItem>
+            <SelectItem value="Georgia, serif">Georgia</SelectItem>
+            <SelectItem value="'Times New Roman', serif">Times New Roman</SelectItem>
+            <SelectItem value="'Courier New', monospace">Courier New</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select
+          value={fontSize}
+          onValueChange={(val) => {
+            setFontSize(val);
+            exec('fontSize', val);
+            handleInput();
+          }}
+        >
+          <SelectTrigger className="h-8 w-[120px] bg-background">
+            <SelectValue placeholder="Text size" />
+          </SelectTrigger>
+          <SelectContent>
+            {FONT_SIZE_OPTIONS.map((opt) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <Button type="button" variant="outline" size="sm" onClick={() => exec('undo')}>
           <Undo2 className="mr-1 h-3.5 w-3.5" /> Undo
         </Button>
@@ -202,6 +288,9 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
         className="min-h-[260px] max-h-[520px] overflow-y-auto rounded-md border border-input bg-background px-3 py-3 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
         data-placeholder={placeholder || 'Write your blog content...'}
       />
+      <p className="text-xs text-muted-foreground">
+        Tip: use <strong>Paragraph</strong> for simple text and <strong>H1/H2</strong> for headings.
+      </p>
       <style jsx>{`
         div[contenteditable='true']:empty:before {
           content: attr(data-placeholder);

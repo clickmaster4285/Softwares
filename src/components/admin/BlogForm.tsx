@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { X, Plus, Loader2, Lock, LockOpen } from 'lucide-react';
+import { X, Plus, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -19,7 +19,10 @@ export type BlogFormPayload = {
   excerpt: string;
   content: string;
   author: string;
+  authorLinkedin: string;
+  authorImage: string;
   thumbnail: string;
+  category: string;
   tags: string[];
 };
 
@@ -31,7 +34,10 @@ type BlogPost = {
   excerpt: string;
   content: string;
   author?: string;
+  authorLinkedin?: string;
+  authorImage?: string;
   thumbnail?: string;
+  category?: string;
   tags?: string[];
 };
 
@@ -53,11 +59,18 @@ interface BlogFormProps {
 export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
   const isEdit = Boolean(post);
   const [slug, setSlug] = useState(post?.slug || '');
-  const [slugLocked, setSlugLocked] = useState(true);
+  const [manualSlug, setManualSlug] = useState(Boolean(post?.slug));
   const [title, setTitle] = useState(post?.title || '');
   const [excerpt, setExcerpt] = useState(post?.excerpt || '');
   const [content, setContent] = useState(post?.content || '');
   const [author, setAuthor] = useState(post?.author || '');
+  const [authorLinkedin, setAuthorLinkedin] = useState(post?.authorLinkedin || '');
+  const [authorImage, setAuthorImage] = useState(post?.authorImage || '');
+  const [authorImageFile, setAuthorImageFile] = useState<File | null>(null);
+  const [authorImagePreviewUrl, setAuthorImagePreviewUrl] = useState(
+    post?.authorImage ? resolveImageUrl(post.authorImage) : ''
+  );
+  const [category, setCategory] = useState(post?.category || '');
   const [published, setPublished] = useState(post?.published ?? false);
   const [thumbnail, setThumbnail] = useState(post?.thumbnail || '');
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -68,9 +81,9 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
   const [previewUrl, setPreviewUrl] = useState(post?.thumbnail ? resolveImageUrl(post.thumbnail) : '');
 
   useEffect(() => {
-    if (!slugLocked) return;
+    if (manualSlug) return;
     setSlug(slugify(title));
-  }, [title, slugLocked]);
+  }, [title, manualSlug]);
 
   const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -100,6 +113,25 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
     setNewTag('');
   };
 
+  const handleAuthorImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const compressedFile = await compressAndConvertImage(file, {
+        maxWidth: 800,
+        maxHeight: 800,
+        quality: 0.85,
+        format: 'webp',
+      });
+      setAuthorImagePreviewUrl(URL.createObjectURL(compressedFile));
+      setAuthorImageFile(compressedFile);
+      setAuthorImage('');
+    } catch {
+      setAuthorImagePreviewUrl(URL.createObjectURL(file));
+      setAuthorImageFile(file);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const textOnlyContent = content.replace(/<[^>]*>/g, '').trim();
@@ -109,6 +141,7 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
     }
 
     let imageUrl = thumbnail.trim();
+    let authorImageUrl = authorImage.trim();
 
     if (imageFile) {
       setUploading(true);
@@ -136,14 +169,43 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
       setUploading(false);
     }
 
+    if (authorImageFile) {
+      setUploading(true);
+      try {
+        const { apiFetch } = await import('../../../lib/api');
+        const formData = new FormData();
+        formData.append('image', authorImageFile);
+        const res = await apiFetch('/api/projects/upload', {
+          method: 'POST',
+          credentials: 'include',
+          body: formData,
+        });
+        if (!res.ok) {
+          alert('Author image upload failed');
+          setUploading(false);
+          return;
+        }
+        const data = await res.json();
+        authorImageUrl = data.imageUrl;
+      } catch {
+        setUploading(false);
+        alert('Author image upload failed');
+        return;
+      }
+      setUploading(false);
+    }
+
     onSubmit({
       published,
-      slug: slugify(slug),
+      slug: slug.trim(),
       title: title.trim(),
       excerpt: excerpt.trim(),
       content: content.trim(),
       author: author.trim(),
+      authorLinkedin: authorLinkedin.trim(),
+      authorImage: authorImageUrl,
       thumbnail: imageUrl,
+      category: category.trim(),
       tags,
     });
   };
@@ -170,40 +232,19 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
       </div>
 
       <div className="space-y-2">
-        <div className="flex items-center justify-between gap-3">
-          <Label htmlFor="blog-slug">Slug</Label>
-          <Button
-            type="button"
-            size="sm"
-            variant="outline"
-            onClick={() => {
-              setSlugLocked((prev) => {
-                const nextLocked = !prev;
-                if (nextLocked) setSlug(slugify(title));
-                return nextLocked;
-              });
-            }}
-          >
-            {slugLocked ? (
-              <>
-                <LockOpen className="mr-1.5 h-3.5 w-3.5" />
-                Unlock
-              </>
-            ) : (
-              <>
-                <Lock className="mr-1.5 h-3.5 w-3.5" />
-                Lock
-              </>
-            )}
-          </Button>
-        </div>
+        <Label htmlFor="blog-slug">Slug</Label>
         <Input
           id="blog-slug"
           value={slug}
-          onChange={(e) => setSlug(e.target.value)}
+          onChange={(e) => {
+            setManualSlug(true);
+            setSlug(e.target.value);
+          }}
           placeholder="e.g. scaling-nextjs-apps"
-          disabled={slugLocked}
         />
+        <p className="text-xs text-muted-foreground">
+          Your custom slug stays unchanged after you type it. It will not auto-generate again.
+        </p>
       </div>
 
       <div className="space-y-2">
@@ -213,6 +254,65 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           placeholder="Optional author name"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="blog-author-linkedin">Author LinkedIn</Label>
+        <Input
+          id="blog-author-linkedin"
+          type="url"
+          value={authorLinkedin}
+          onChange={(e) => setAuthorLinkedin(e.target.value)}
+          placeholder="https://www.linkedin.com/in/your-profile"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="blog-author-image">Author Image URL</Label>
+        <Input
+          id="blog-author-image"
+          value={authorImage}
+          onChange={(e) => {
+            setAuthorImage(e.target.value);
+            if (!authorImageFile) {
+              setAuthorImagePreviewUrl(e.target.value ? resolveImageUrl(e.target.value) : '');
+            }
+          }}
+          placeholder="https://example.com/author.jpg"
+          disabled={!!authorImageFile}
+        />
+      </div>
+
+      <div className="space-y-3">
+        <Label>Author image upload (optional)</Label>
+        <div className="grid min-w-0 items-start gap-4 md:grid-cols-[1fr_minmax(0,120px)]">
+          <div className="min-w-0 space-y-2">
+            <Input type="file" accept="image/*" onChange={handleAuthorImageSelect} disabled={compressing} />
+            <p className="text-xs text-muted-foreground">
+              Select image from system. If selected, uploaded image URL will be saved automatically.
+            </p>
+          </div>
+          <div className="min-h-[5.5rem] overflow-hidden rounded-full border border-border/60 bg-secondary/40">
+            <img
+              src={authorImagePreviewUrl || '/placeholder.svg'}
+              alt=""
+              className="h-24 w-24 max-w-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = '/placeholder.svg';
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="blog-category">Category</Label>
+        <Input
+          id="blog-category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          placeholder="e.g. Custom Software Development"
         />
       </div>
 
@@ -236,7 +336,7 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
           placeholder="Write content and use the toolbar for headings, links, lists, and images."
         />
         <p className="text-xs text-muted-foreground">
-          What you write here is saved as rich text and displayed the same way on the blog page.
+          Use Paragraph for normal text, and H1/H2 for headings from the toolbar style dropdown.
         </p>
       </div>
 
