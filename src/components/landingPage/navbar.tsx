@@ -5,12 +5,32 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, ChevronDown, X } from 'lucide-react';
+import {
+  Menu,
+  ChevronDown,
+  X,
+  Brain,
+  Bot,
+  Database,
+  Code2,
+  Cloud,
+  HeartPulse,
+  Landmark,
+  Truck,
+  Headset,
+  ShoppingCart,
+  UserCheck,
+  Building2,
+  Building,
+  DollarSign,
+  Calculator,
+  type LucideIcon,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '@/lib/api';
 import { getCategoryName } from '@/lib/utils';
-import { serviceMenuSections } from '@/lib/service-pages';
+import { getServicePath, serviceMenuSections } from '@/lib/service-pages';
 
 // Types for dropdown data
 interface ProjectItem {
@@ -49,18 +69,40 @@ type ServiceMenuSection = {
   items: ServiceMenuItem[];
 };
 
+// Hire Us dropdown items
+const hireUsItems: { title: string; href: string; icon: LucideIcon }[] = [
+  { title: 'Hire AI Developers', href: '/hire-ai-developers/', icon: Brain },
+  { title: 'AI Agent Development Services', href: '/ai-agent-development-services/', icon: Bot },
+  { title: 'RAG Development Services', href: '/rag-development-services/', icon: Database },
+  { title: 'Custom Software Development', href: '/custom-software-development/', icon: Code2 },
+  { title: 'SaaS Development Services', href: '/saas-development-services/', icon: Cloud },
+  { title: 'AI Development Healthcare', href: '/ai-development-healthcare/', icon: HeartPulse },
+  { title: 'AI Development Finance', href: '/ai-development-finance/', icon: Landmark },
+  { title: 'AI Development Logistics', href: '/ai-development-logistics/', icon: Truck },
+  {
+    title: 'AI Agents for Customer Support',
+    href: '/ai-agents-for-customer-support/',
+    icon: Headset,
+  },
+  { title: 'AI Agents for Sales', href: '/ai-agents-for-sales/', icon: ShoppingCart },
+  {
+    title: 'AI Agents for Lead Qualification',
+    href: '/ai-agents-for-lead-qualification/',
+    icon: UserCheck,
+  },
+  { title: 'AI Development Company USA', href: '/ai-development-company-usa/', icon: Building2 },
+  { title: 'AI Development Company UK', href: '/ai-development-company-uk/', icon: Building },
+  { title: 'AI Development Cost', href: '/ai-development-cost/', icon: DollarSign },
+  { title: 'RAG Development Cost', href: '/rag-development-cost/', icon: Calculator },
+];
+
 const LOGO_COLOR_SRC = '/images/logo.webp';
 const LOGO_WHITE_SRC = '/images/logo-white.webp';
 
 const mobileServicePageLinks: { title: string; href: string }[] = serviceMenuSections.flatMap((section) =>
   section.items.map((item) => ({
     title: item.title,
-    href: `/services/${item.title
-      .toLowerCase()
-      .trim()
-      .replace(/['"]/g, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')}`,
+    href: getServicePath(section.label, item.title),
   }))
 );
 
@@ -101,8 +143,8 @@ export function Navbar() {
     const projectItem: ProjectItem = {
       id: project._id,
       title: project.title,
-      url: project.url || `/software-solutions/${project._id}`, // Use external URL if exists, otherwise internal
-      externalUrl: project.url, // Store external URL separately if needed
+      url: project.url || `/software-solutions/${project._id}`,
+      externalUrl: project.url,
     };
 
     if (existingCategory) {
@@ -128,10 +170,8 @@ export function Navbar() {
   const handleProjectClick = (project: ProjectItem) => {
     closeDropdowns();
     if (project.externalUrl) {
-      // If it's an external URL, open in new tab
       window.open(project.externalUrl, '_blank', 'noopener,noreferrer');
     } else {
-      // If it's internal, navigate using router
       router.push(project.url || `/software-solutions/${project.id}`);
     }
   };
@@ -140,6 +180,11 @@ export function Navbar() {
   const handleSolutionsClick = () => {
     closeDropdowns();
     router.push('/software-solutions');
+  };
+
+  const handleHireUsClick = () => {
+    closeDropdowns();
+    router.push('/contact-us');
   };
 
   const handleServicesClick = () => {
@@ -152,12 +197,7 @@ export function Navbar() {
     items: section.items.map((item) => ({
       title: item.title,
       description: item.description,
-      href: `/services/${item.title
-        .toLowerCase()
-        .trim()
-        .replace(/['"]/g, '')
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '')}`,
+      href: getServicePath(section.label, item.title),
     })),
   }));
 
@@ -352,6 +392,35 @@ export function Navbar() {
             </button>
           </div>
 
+          {/* Hire Us Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter('hire-us')}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              onClick={handleHireUsClick}
+              className={cn(
+                'text-sm font-medium transition-colors flex items-center gap-1',
+                activeDropdown === 'hire-us'
+                  ? 'text-primary'
+                  : isPageLoading
+                    ? 'text-black/70 hover:text-primary'
+                    : isLightHero
+                      ? 'text-white/90 hover:text-primary'
+                      : 'text-black/70 hover:text-primary'
+              )}
+            >
+              Hire Us
+              <ChevronDown
+                className={cn(
+                  'h-4 w-4 shrink-0 transition-transform duration-200 ease-out',
+                  activeDropdown === 'hire-us' && 'rotate-180'
+                )}
+              />
+            </button>
+          </div>
+
           <Link
             href="/case-studies"
             onClick={closeDropdowns}
@@ -362,8 +431,6 @@ export function Navbar() {
           >
             Case Studies
           </Link>
-
-
 
           <Link
             href="/about-us"
@@ -405,7 +472,6 @@ export function Navbar() {
           >
             Blog
           </Link>
-
         </nav>
 
         {/* Desktop CTA */}
@@ -508,6 +574,13 @@ export function Navbar() {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Hire Us Mobile Dropdown */}
+                  <MobileHireUsDropdown
+                    title="Hire Us"
+                    items={hireUsItems}
+                    onLinkClick={() => setIsOpen(false)}
+                  />
 
                   <Link
                     href="/case-studies"
@@ -805,11 +878,87 @@ export function Navbar() {
           </div>
         </div>
       )}
+
+      {/* Full-width Dropdown Menu for Hire Us */}
+      {activeDropdown === 'hire-us' && !isPageLoading && (
+        <div
+          onMouseEnter={() => {
+            if (hoverTimeoutRef.current) {
+              clearTimeout(hoverTimeoutRef.current);
+              hoverTimeoutRef.current = null;
+            }
+          }}
+          onMouseLeave={closeDropdowns}
+          className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
+        >
+          <div className="container mx-auto px-4 lg:px-8 py-0">
+            <div
+              ref={dropdownRef}
+              onMouseLeave={closeDropdowns}
+              className="mx-auto max-w-4xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
+            >
+              <div className="grid grid-cols-12">
+                {/* Left rail - optional, can be used for categories if needed */}
+                <div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
+                  <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+                    Hire Us
+                  </p>
+                  <ul className="space-y-1">
+                    <li>
+                      <button
+                        type="button"
+                        className="w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold bg-white text-slate-900 shadow-sm flex items-center justify-between"
+                      >
+                        <span>Development Services</span>
+                        <ChevronDown className="h-4 w-4 -rotate-90 opacity-70" aria-hidden />
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Right content - all hire us items */}
+                <div className="col-span-9 p-6">
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {hireUsItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={closeDropdowns}
+                        className="group rounded-md p-2 transition-colors hover:bg-slate-50"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex items-center gap-2">
+                            <item.icon className="h-4 w-4 text-slate-400 transition-colors group-hover:text-primary" />
+                            <p className="text-sm font-semibold text-slate-900 group-hover:text-primary">
+                              {item.title}
+                            </p>
+                          </div>
+                          <ChevronDown className="mt-0.5 h-4 w-4 -rotate-90 text-slate-300 transition-colors group-hover:text-primary" />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 border-t border-slate-200 pt-4">
+                    <Link
+                      href="/contact-us"
+                      onClick={closeDropdowns}
+                      className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                    >
+                      Contact sales →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
 
-// Mobile Dropdown Component
+// Mobile Dropdown Component for Projects/Solutions
 interface MobileDropdownProps {
   title: string;
   items: ProjectCategory[];
@@ -852,7 +1001,6 @@ function MobileDropdown({
                     className="text-black/60 hover:text-primary transition-colors block py-1 text-left w-full"
                   >
                     {item.title}
-                   
                   </button>
                 </li>
               ))}
@@ -885,6 +1033,48 @@ function MobileDropdown({
         />
       </button>
       {isExpanded && renderItems()}
+    </div>
+  );
+}
+
+// Mobile Dropdown Component for Hire Us
+interface MobileHireUsDropdownProps {
+  title: string;
+  items: { title: string; href: string; icon: LucideIcon }[];
+  onLinkClick: () => void;
+}
+
+function MobileHireUsDropdown({ title, items, onLinkClick }: MobileHireUsDropdownProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="border-b border-black/5">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="flex items-center justify-between w-full py-3 font-medium text-black/70 hover:text-primary transition-colors"
+      >
+        {title}
+        <ChevronDown
+          className={cn('h-4 w-4 transition-transform duration-300', isExpanded && 'rotate-180')}
+        />
+      </button>
+      {isExpanded && (
+        <div className="pl-4 space-y-2 mt-3 pb-3">
+          {items.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onLinkClick}
+              className="block py-1.5 text-sm text-black/60 hover:text-primary transition-colors"
+            >
+              <span className="flex items-center gap-2">
+                <item.icon className="h-4 w-4 text-black/40" />
+                <span>{item.title}</span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -21,7 +21,7 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CountUp from 'react-countup';
-import { getAllServicePages } from '@/lib/service-pages';
+import { getAllServicePages, getServicePath } from '@/lib/service-pages';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -41,8 +41,10 @@ function slugifyServiceId(title: string) {
 interface Service {
   icon: React.ElementType | string;
   title: string;
+  category: string;
   description: string;
   features: string[];
+  href: string;
   color?: string;
   gradient?: string;
 }
@@ -85,8 +87,10 @@ const categoryIcons: Record<string, string> = {
 const services: Service[] = getAllServicePages().map((service) => ({
   icon: categoryIcons[service.category] ?? '💼',
   title: service.title,
+  category: service.category,
   description: service.lead,
   features: service.highlights,
+  href: getServicePath(service.category, service.title),
   gradient: 'bg-primary/10',
 }));
 
@@ -637,7 +641,7 @@ export default function ServicesPage() {
                   </div>
 
                   <Link
-                    href={`/services/${serviceSlug}`}
+                    href={service.href}
                     className="relative z-10 inline-flex items-center text-sm font-semibold text-primary hover:underline"
                   >
                     Dedicated service page
