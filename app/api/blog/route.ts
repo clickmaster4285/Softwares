@@ -3,6 +3,8 @@ import BlogPost from '../../../lib/models/BlogPost';
 import dbConnect from '../../../lib/mongoose';
 import { calculateReadTime } from '../../../src/lib/readTime';
 
+const BlogPostModel = BlogPost as any;
+
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -17,7 +19,7 @@ async function ensureUniqueSlug(base: string) {
   if (!clean) return '';
   let slug = clean;
   let i = 2;
-  while (await BlogPost.findOne({ slug }).select('_id').lean()) {
+  while (await BlogPostModel.findOne({ slug }).select('_id').lean()) {
     slug = `${clean}-${i++}`;
   }
   return slug;
@@ -45,7 +47,7 @@ export async function GET(req: NextRequest) {
     const drafts = searchParams.get('drafts') === '1';
     const filter = drafts ? {} : { published: true };
 
-    const list = await BlogPost.find(filter).sort({ createdAt: -1 }).lean();
+    const list = await BlogPostModel.find(filter).sort({ createdAt: -1 }).lean();
     return NextResponse.json(list);
   } catch (err: unknown) {
     console.error('GET /blog error:', err);
@@ -74,11 +76,11 @@ export async function POST(req: NextRequest) {
     });
 
     if (computedSlug) {
-      const taken = await BlogPost.findOne({ slug: computedSlug }).select('_id').lean();
+      const taken = await BlogPostModel.findOne({ slug: computedSlug }).select('_id').lean();
       if (taken) return NextResponse.json({ message: 'Slug already in use' }, { status: 400 });
     }
 
-    const doc = await BlogPost.create({
+    const doc = await BlogPostModel.create({
       published: Boolean(published),
       slug: computedSlug,
       title: normalizedTitle,
