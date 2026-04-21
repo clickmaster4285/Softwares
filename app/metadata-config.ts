@@ -197,7 +197,7 @@ export const organizationSchema = {
  
   name: siteConfig.name,
   url: siteConfig.url,
-  logo: `${siteConfig.url}/logo-white.webp`,
+  logo: `${siteConfig.url}/images/logo-white.webp`,
  
   description: siteConfig.description,
  
@@ -261,7 +261,7 @@ export const homepageOrganizationSchema = {
   name: 'ClickMasters',
   alternateName: 'ClickMasters Software',
   url: siteConfig.url,
-  logo: `${siteConfig.url}/logo-white.webp`,
+  logo: `${siteConfig.url}/images/logo-white.webp`,
   image: `${siteConfig.url}/og-image.jpg`,
   description:
     'ClickMasters is a professional custom software development company ' +
@@ -559,7 +559,7 @@ export const localBusinessSchema = {
   name: siteConfig.name,
   url: siteConfig.url,
 
-  logo: `${siteConfig.url}/logo-white.webp`,
+  logo: `${siteConfig.url}/images/logo-white.webp`,
   image: `${siteConfig.url}/og/default.webp`,
 
   description: siteConfig.description,
@@ -614,9 +614,9 @@ export const defaultMetadata: Metadata = {
   },
 
   icons: {
-    icon: [{ url: '/logo-white.webp', type: 'image/webp' }],
-    apple: '/logo-white.webp',
-    shortcut: '/logo-white.webp',
+    icon: [{ url: '/images/logo-white.webp', type: 'image/webp' }],
+    apple: '/images/logo-white.webp',
+    shortcut: '/images/logo-white.webp',
   },
 
   openGraph: {

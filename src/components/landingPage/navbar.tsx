@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, ChevronDown, X } from 'lucide-react';
@@ -48,6 +49,9 @@ type ServiceMenuSection = {
   items: ServiceMenuItem[];
 };
 
+const LOGO_COLOR_SRC = '/images/logo.webp';
+const LOGO_WHITE_SRC = '/images/logo-white.webp';
+
 const mobileServicePageLinks: { title: string; href: string }[] = serviceMenuSections.flatMap((section) =>
   section.items.map((item) => ({
     title: item.title,
@@ -73,6 +77,8 @@ export function Navbar() {
   const [isPageLoading, setIsPageLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  /** Short grace period for moving from trigger to panel; keep small to avoid a “laggy” close. */
+  const HOVER_MENU_CLOSE_MS = 80;
 
   const isHome = pathname === '/';
   const isAbout = pathname === '/about-us';
@@ -179,6 +185,7 @@ export function Navbar() {
   const handleMouseEnter = (dropdown: string) => {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
     }
     if (dropdown === 'services') {
       setActiveServiceSection(serviceSections[0]?.label ?? '');
@@ -192,7 +199,8 @@ export function Navbar() {
   const handleMouseLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 200);
+      hoverTimeoutRef.current = null;
+    }, HOVER_MENU_CLOSE_MS);
   };
 
   // Close dropdown when clicking outside
@@ -212,6 +220,12 @@ export function Navbar() {
     };
   }, [activeDropdown]);
 
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    };
+  }, []);
+
   const isActivePath = (path: string) => {
     return pathname === path;
   };
@@ -229,7 +243,7 @@ export function Navbar() {
       ? 'bg-white/95 border-b border-black/10 shadow-sm'
       : 'bg-white/10 backdrop-blur-md border-b border-transparent';
 
-  const logoToShow = isPageLoading || !isLightHero ? '/logo.webp' : '/logo-white.webp';
+  const logoToShow = isPageLoading || !isLightHero ? LOGO_COLOR_SRC : LOGO_WHITE_SRC;
 
   const linkStyle = (isActive: boolean) => {
     if (isPageLoading) {
@@ -255,7 +269,16 @@ export function Navbar() {
           className="flex items-center gap-2 transition-opacity hover:opacity-90"
           onClick={closeDropdowns}
         >
-          <img src={logoToShow} className="w-48 md:w-64 h-auto" alt="ClickMasters" />
+          <Image
+            key={logoToShow}
+            src={logoToShow}
+            alt="ClickMasters"
+            width={800}
+            height={400}
+            className="h-auto w-48 md:w-64"
+            priority
+            fetchPriority="high"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -293,7 +316,7 @@ export function Navbar() {
               Solutions
               <ChevronDown
                 className={cn(
-                  'h-4 w-4 transition-transform',
+                  'h-4 w-4 shrink-0 transition-transform duration-200 ease-out',
                   activeDropdown === 'solutions' && 'rotate-180'
                 )}
               />
@@ -322,7 +345,7 @@ export function Navbar() {
               Services
               <ChevronDown
                 className={cn(
-                  'h-4 w-4 transition-transform',
+                  'h-4 w-4 shrink-0 transition-transform duration-200 ease-out',
                   activeDropdown === 'services' && 'rotate-180'
                 )}
               />
@@ -424,7 +447,13 @@ export function Navbar() {
             <div className="flex flex-col h-full">
               {/* Mobile Header */}
               <div className="flex items-center justify-between p-6 border-b border-black/5">
-                <img src="/logo.webp" className="w-36 h-auto" alt="ClickMasters" />
+                <Image
+                  src={LOGO_COLOR_SRC}
+                  alt="ClickMasters"
+                  width={800}
+                  height={400}
+                  className="h-auto w-36"
+                />
               </div>
 
               {/* Mobile Navigation */}
@@ -563,26 +592,38 @@ export function Navbar() {
       {/* Full-width Dropdown Menu for Solutions */}
       {activeDropdown === 'solutions' && !isPageLoading && (
         <div
-          ref={dropdownRef}
           onMouseEnter={() => {
             if (hoverTimeoutRef.current) {
               clearTimeout(hoverTimeoutRef.current);
+              hoverTimeoutRef.current = null;
             }
           }}
-          onMouseLeave={handleMouseLeave}
-          className="absolute left-0 right-0 top-full border-t border-black/5 animate-slideDown bg-transparent"
+          onMouseLeave={closeDropdowns}
+          className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
         >
           <div className="container mx-auto px-4 lg:px-8 py-0">
             {isLoadingProjects ? (
-              <div className="mx-auto max-w-6xl py-10 text-center">
+              <div
+                ref={dropdownRef}
+                onMouseLeave={closeDropdowns}
+                className="mx-auto max-w-6xl rounded-xl border border-slate-200 bg-white px-6 py-10 text-center shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
+              >
                 <p className="text-black/40">Loading projects...</p>
               </div>
             ) : groupedProjects.length === 0 ? (
-              <div className="mx-auto max-w-6xl py-10 text-center">
+              <div
+                ref={dropdownRef}
+                onMouseLeave={closeDropdowns}
+                className="mx-auto max-w-6xl rounded-xl border border-slate-200 bg-white px-6 py-10 text-center shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
+              >
                 <p className="text-black/40">No projects available</p>
               </div>
             ) : (
-              <div className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]">
+              <div
+                ref={dropdownRef}
+                onMouseLeave={closeDropdowns}
+                className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
+              >
                 <div className="grid grid-cols-12">
                   {/* Left rail */}
                   <div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
@@ -666,17 +707,21 @@ export function Navbar() {
       {/* Full-width Dropdown Menu for Services */}
       {activeDropdown === 'services' && !isPageLoading && (
         <div
-          ref={dropdownRef}
           onMouseEnter={() => {
             if (hoverTimeoutRef.current) {
               clearTimeout(hoverTimeoutRef.current);
+              hoverTimeoutRef.current = null;
             }
           }}
-          onMouseLeave={handleMouseLeave}
-          className="absolute left-0 right-0 top-full border-t border-black/5 animate-slideDown bg-transparent"
+          onMouseLeave={closeDropdowns}
+          className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
         >
           <div className="container mx-auto px-4 lg:px-8 py-0">
-            <div className="mx-auto max-w-6xl h-[520px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]">
+            <div
+              ref={dropdownRef}
+              onMouseLeave={closeDropdowns}
+              className="mx-auto max-w-6xl h-[520px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
+            >
               <div className="grid h-full grid-cols-12">
                 {/* Left rail */}
                 <div className="col-span-3 h-full overflow-y-auto bg-slate-50 p-4 border-r border-slate-200">

@@ -6,17 +6,13 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  modularizeImports: {
-    "lucide-react": {
-      transform: "lucide-react/dist/esm/icons/{{member}}",
-    },
-  },
   experimental: {
-    optimizePackageImports: ["lucide-react"],
+    optimizePackageImports: ["lucide-react", "framer-motion"],
   },
-   allowedDevOrigins: [
-    "http://192.168.88.33:3000", // your LAN IP + port
-    "http://localhost:3000",      // keep localhost
+  allowedDevOrigins: [
+    "http://192.168.88.33:3000",
+    "http://192.168.88.40:3000",
+    "http://localhost:3000",
   ],
   images: {
     remotePatterns: [
@@ -43,6 +39,16 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      {
+        source: "/logo.webp",
+        destination: "/images/logo.webp",
+        permanent: true,
+      },
+      {
+        source: "/logo-white.webp",
+        destination: "/images/logo-white.webp",
+        permanent: true,
+      },
       {
         source: "/solutions",
         destination: "/software-solutions",
@@ -105,31 +111,8 @@ const nextConfig: NextConfig = {
 
   poweredByHeader: false,
   reactStrictMode: true,
-  compiler:
-    process.env.NODE_ENV === "production"
-      ? { removeConsole: { exclude: ["error", "warn"] } }
-      : undefined,
-  webpack: (config, { isServer, dev }) => {
-    if (!isServer) {
-      if (dev) {
-        config.devtool = "source-map";
-      }
-      const optimization = config.optimization ?? {};
-      const splitChunks = optimization.splitChunks;
-      if (splitChunks && typeof splitChunks === "object") {
-        splitChunks.cacheGroups = {
-          ...(splitChunks.cacheGroups ?? {}),
-          lucide: {
-            test: /[\\/]node_modules[\\/]lucide-react[\\/]/,
-            name: "lucide",
-            chunks: "async",
-            priority: 30,
-            enforce: true,
-          },
-        };
-      }
-    }
-    return config;
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
   },
 };
 

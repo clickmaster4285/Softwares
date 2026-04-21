@@ -37,8 +37,12 @@ type BlogPost = {
   excerpt: string;
   content: string;
   author?: string;
+  authorLinkedin?: string;
+  authorImage?: string;
   thumbnail?: string;
+  category?: string;
   tags?: string[];
+  faqs?: Array<{ question: string; answer: string }>;
 };
 
 function postId(value: unknown): string {
@@ -218,6 +222,9 @@ export default function AdminBlog() {
                             </Badge>
                           </div>
                           <p className="line-clamp-2 text-sm text-muted-foreground">{post.excerpt}</p>
+                          {post.category ? (
+                            <p className="mt-1 text-xs font-medium text-primary">Category: {post.category}</p>
+                          ) : null}
                         </div>
                         <div className="flex shrink-0 items-center gap-2">
                           {post.published ? (

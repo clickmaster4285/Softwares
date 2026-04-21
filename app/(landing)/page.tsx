@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
 import { Suspense } from "react";
 import Link from 'next/link';
-import { HeroSection } from "@/components/landingPage/home/hero-section";
 import SchemaMarkup from '@/components/SchemaMarkup';
+import { FaqSection } from '@/components/landingPage/home/FaqSection';
+import { LandingHomeDeferredHeavy } from '@/components/landingPage/home/LandingHomeDeferredHeavy';
 import {
   homepageFaqSchema,
   homepageOrganizationSchema,
@@ -13,6 +14,111 @@ import {
 
 export const metadata = metadataConfig.home();
 
+type HomeExploreLink = {
+  href: string;
+  title: string;
+  desc: string;
+  ariaLabel: string;
+  highlight?: boolean;
+};
+
+const homeExploreLinks: HomeExploreLink[] = [
+  {
+    href: '/services',
+    title: 'Services overview',
+    desc: 'Full list of development capabilities.',
+    ariaLabel: 'Open the services overview page listing all development capabilities.',
+  },
+  {
+    href: '/services/custom-software-development',
+    title: 'Custom Software Development',
+    desc: 'End-to-end product delivery.',
+    ariaLabel: 'Learn about custom software development and end-to-end product delivery.',
+  },
+  {
+    href: '/services/web-application-development',
+    title: 'Web Application Development',
+    desc: 'SPAs, dashboards, portals.',
+    ariaLabel: 'Explore web application development for SPAs, dashboards, and portals.',
+  },
+  {
+    href: '/services/mobile-app-development',
+    title: 'Mobile App Development',
+    desc: 'Native + cross-platform builds.',
+    ariaLabel: 'Read about native and cross-platform mobile app development.',
+  },
+  {
+    href: '/services/database-design-management',
+    title: 'Database Design & Management',
+    desc: 'Modeling, migrations, tuning.',
+    ariaLabel: 'See database design and management services including modeling and tuning.',
+  },
+  {
+    href: '/services/cloud-solutions-devops',
+    title: 'Cloud Solutions & DevOps',
+    desc: 'CI/CD, containers, observability.',
+    ariaLabel: 'Discover cloud solutions and DevOps services including CI/CD and observability.',
+  },
+  {
+    href: '/services/cybersecurity-compliance',
+    title: 'Cybersecurity & Compliance',
+    desc: 'Secure SDLC + audit readiness.',
+    ariaLabel: 'Review cybersecurity and compliance offerings and secure SDLC practices.',
+  },
+  {
+    href: '/case-studies',
+    title: 'Case studies',
+    desc: 'Proof of delivery & outcomes.',
+    ariaLabel: 'Browse case studies with proof of delivery and client outcomes.',
+  },
+  {
+    href: '/software-solutions',
+    title: 'Software solutions',
+    desc: 'Portfolio by industry.',
+    ariaLabel: 'View software solutions portfolio organized by industry.',
+  },
+  {
+    href: '/testimonials',
+    title: 'Client testimonials',
+    desc: 'What businesses say after launch.',
+    ariaLabel: 'Read client testimonials from businesses after product launch.',
+  },
+  {
+    href: '/blog',
+    title: 'Blog insights',
+    desc: 'Engineering best practices.',
+    ariaLabel: 'Open the engineering blog for best practices and technical insights.',
+  },
+  {
+    href: '/about-us',
+    title: 'About ClickMasters',
+    desc: 'Team, values, and approach.',
+    ariaLabel: 'Learn about the ClickMasters team, values, and delivery approach.',
+  },
+  {
+    href: '/contact-us',
+    title: 'Contact us',
+    desc: 'Get a free consultation.',
+    ariaLabel: 'Go to the contact page to request a free consultation.',
+    highlight: true,
+  },
+];
+
+const HeroSection = dynamic(
+  () =>
+    import('@/components/landingPage/home/hero-section').then((m) => m.HeroSection),
+  {
+    loading: () => (
+      <div
+        className="relative min-h-[100svh] flex items-center justify-center bg-slate-900"
+        aria-hidden
+      >
+        <div className="h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    ),
+  },
+);
+
 const AboutSection = dynamic(
   () => import('@/components/landingPage/home/AboutSection'),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
@@ -21,39 +127,6 @@ const AppsSection = dynamic(
   () => import('@/components/landingPage/home/AppsSection').then((m) => m.AppsSection),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
 );
-// const GlobalNetworkSection = dynamic(
-//   () =>
-//     import('@/components/landingPage/home/GlobalNetworkSection').then(
-//       (m) => m.GlobalNetworkSection
-//     ),
-//   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
-// );
-const IndustriesSection = dynamic(
-  () => import('@/components/landingPage/home/industries-section').then((m) => m.IndustriesSection),
-  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-const CommunitySection = dynamic(
-  () => import('@/components/landingPage/home/CommunitySection').then((m) => m.CommunitySection),
-  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-const GlobalGlobeSection = dynamic(
-  () =>
-    import('@/components/landingPage/home/global-globe-section').then((m) => m.GlobalGlobeSection),
-  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> },
-);
-const TestimonialsSection = dynamic(
-  () => import('@/components/landingPage/home/TestimonialsSection').then((m) => m.TestimonialsSection),
-  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-const FaqSection = dynamic(
-  () => import('@/components/landingPage/home/FaqSection').then((m) => m.FaqSection),
-  { loading: () => <div className="h-80 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-const HelpSection = dynamic(
-  () => import('@/components/landingPage/home/help-section').then((m) => m.HelpSection),
-  { loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" /> }
-);
-
 export default function LandingPage() {
   return (
     <main className="min-h-screen" role="main" aria-label="ClickMasters software development company homepage">
@@ -68,9 +141,6 @@ export default function LandingPage() {
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <AppsSection />
       </Suspense>
-      {/* <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <GlobalNetworkSection />
-      </Suspense> */}
 
       {/* Hub internal links (SEO + crawler-friendly) */}
       <section className="border-y border-slate-200/80 bg-white py-16 sm:py-20" aria-labelledby="home-explore-heading">
@@ -85,92 +155,33 @@ export default function LandingPage() {
           </div>
 
           <div className="mt-10 grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Link href="/services" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Services overview</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Full list of development capabilities.</p>
-            </Link>
-
-            <Link href="/services/custom-software-development" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Custom Software Development</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">End-to-end product delivery.</p>
-            </Link>
-
-            <Link href="/services/web-application-development" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Web Application Development</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">SPAs, dashboards, portals.</p>
-            </Link>
-
-            <Link href="/services/mobile-app-development" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Mobile App Development</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Native + cross-platform builds.</p>
-            </Link>
-
-            <Link href="/services/database-design-management" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Database Design & Management</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Modeling, migrations, tuning.</p>
-            </Link>
-
-            <Link href="/services/cloud-solutions-devops" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Cloud Solutions & DevOps</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">CI/CD, containers, observability.</p>
-            </Link>
-
-            <Link href="/services/cybersecurity-compliance" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Cybersecurity & Compliance</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Secure SDLC + audit readiness.</p>
-            </Link>
-
-            <Link href="/case-studies" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Case studies</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Proof of delivery & outcomes.</p>
-            </Link>
-
-            <Link href="/software-solutions" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Software solutions</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Portfolio by industry.</p>
-            </Link>
-
-            <Link href="/testimonials" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Client testimonials</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">What businesses say after launch.</p>
-            </Link>
-
-            <Link href="/blog" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Blog insights</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Engineering best practices.</p>
-            </Link>
-
-            <Link href="/about-us" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">About ClickMasters</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Team, values, and approach.</p>
-            </Link>
-
-            <Link href="/contact-us" className="group rounded-2xl border border-primary/30 bg-white p-6 shadow-sm transition-all hover:shadow-md">
-              <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">Contact us</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Get a free consultation.</p>
-            </Link>
+            {homeExploreLinks.map((item) => {
+              const isHighlight = Boolean(item.highlight);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-label={item.ariaLabel}
+                  className={
+                    isHighlight
+                      ? 'group flex min-h-[48px] flex-col rounded-2xl border border-primary/30 bg-white p-6 shadow-sm transition-all hover:shadow-md'
+                      : 'group flex min-h-[48px] flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md'
+                  }
+                >
+                  <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-700">{item.desc}</p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <IndustriesSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <CommunitySection />
-      </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <GlobalGlobeSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <TestimonialsSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-80 animate-pulse bg-gray-100 rounded-lg" />}>
-        <FaqSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 rounded-lg" />}>
-        <HelpSection />
-      </Suspense>
+      <LandingHomeDeferredHeavy>
+        <Suspense fallback={<div className="h-80 animate-pulse rounded-lg bg-gray-100" />}>
+          <FaqSection />
+        </Suspense>
+      </LandingHomeDeferredHeavy>
     </main>
   );
 }
