@@ -5,6 +5,14 @@
 
 const API_BASE_URL = '';
 
+function getServerBaseUrl() {
+  if (typeof window !== 'undefined') return '';
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.SITE_URL) return process.env.SITE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'http://localhost:3000';
+}
+
 export interface ApiErrorResponse {
   message: string;
   error?: string;
@@ -23,7 +31,10 @@ export async function apiFetch<T = any>(
   path: string,
   options?: RequestInit & { baseURL?: string }
 ): Promise<Response> {
-  const url = `${options?.baseURL || API_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`;
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  const runtimeBase = options?.baseURL ?? API_BASE_URL ?? '';
+  const base = runtimeBase || getServerBaseUrl();
+  const url = `${base}${normalizedPath}`;
 
   const isFormData = typeof FormData !== 'undefined' && options?.body instanceof FormData;
   const headers = isFormData

@@ -1,10 +1,7 @@
 import { breadcrumbSchema, metadataConfig } from '@/app/metadata-config';
-import BlogPost from '../../../lib/models/BlogPost';
-import dbConnect from '../../../lib/mongoose';
+import { apiFetch } from '@/lib/api';
 import BlogClient, { type BlogCard } from './BlogClient';
 import Script from 'next/script';
-
-const BlogPostModel = BlogPost as any;
 
 export const metadata = metadataConfig.blog();
 
@@ -12,11 +9,12 @@ export default async function BlogPage() {
   let initialPosts: BlogCard[] = [];
 
   try {
-    await dbConnect();
-    const raw = await BlogPostModel.find({ published: true }).sort({ createdAt: -1 }).lean();
-    initialPosts = JSON.parse(JSON.stringify(raw)) as BlogCard[];
-  } catch {
-    // DB unavailable during build or at runtime — client will refetch from /api/blog
+    const res = await apiFetch('/api/blog', { method: 'GET', cache: 'no-store' });
+    if (!res.ok) throw new Error(`Failed to fetch blogs: ${res.status}`);
+    initialPosts = (await res.json()) as BlogCard[];
+  } catch (error) {
+    console.error('BlogPage SSR fetch failed:', error);
+    // API unavailable during build or at runtime — client will refetch from /api/blog
   }
 
   return (
