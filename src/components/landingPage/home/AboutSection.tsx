@@ -249,15 +249,15 @@ export function AboutSection() {
               </p>
               <p className="text-[15px] leading-relaxed text-gray-700">
                 Explore our{" "}
-                <Link href="/services/web-application-development" className="font-medium text-orange-600 hover:underline">
+                <Link href="/web-development/web-application-development" className="font-medium text-orange-600 hover:underline">
                   web application development
                 </Link>
                 ,{" "}
-                <Link href="/services/mobile-app-development" className="font-medium text-orange-600 hover:underline">
+                <Link href="/mobile-development/mobile-app-development" className="font-medium text-orange-600 hover:underline">
                   mobile app development
                 </Link>
                 , and{" "}
-                <Link href="/services/custom-software-development" className="font-medium text-orange-600 hover:underline">
+                <Link href="/software-development/custom-software-development" className="font-medium text-orange-600 hover:underline">
                   custom software development
                 </Link>{" "}
                 services, or browse the{" "}
