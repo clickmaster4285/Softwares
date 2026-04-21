@@ -90,7 +90,7 @@ const services: Service[] = getAllServicePages().map((service) => ({
   category: service.category,
   description: service.lead,
   features: service.highlights,
-  href: getServicePath(service.category, service.title),
+  href: `/${service.categorySlug}/${service.slug}`,
   gradient: 'bg-primary/10',
 }));
 
