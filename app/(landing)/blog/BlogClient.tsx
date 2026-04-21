@@ -5,8 +5,9 @@ import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Input } from '@/components/ui/input';
 import { apiFetch } from '@/lib/api';
+import { calculateReadTimeText } from '../../../src/lib/readTime';
 import { resolveImageUrl } from '@/lib/utils';
-import { ArrowRight, ChevronLeft, ChevronRight, Search } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Clock3, ExternalLink, RefreshCcw, Search } from 'lucide-react';
 
 export type BlogCard = {
   _id: string;
@@ -15,11 +16,18 @@ export type BlogCard = {
   title: string;
   excerpt: string;
   content?: string;
+  readTimeMinutes?: number;
   author?: string;
+  authorLinkedin?: string;
+  authorImage?: string;
   thumbnail?: string;
+  category?: string;
   tags?: string[];
   createdAt?: string;
+  updatedAt?: string;
 };
+
+
 
 function postId(value: unknown): string {
   if (typeof value === 'string') return value;
@@ -59,6 +67,28 @@ function postImage(post: BlogCard) {
   return post.thumbnail?.trim() ? resolveImageUrl(post.thumbnail) : '/placeholder.svg';
 }
 
+function postReadTime(post: BlogCard) {
+  if (typeof post.readTimeMinutes === 'number' && Number.isFinite(post.readTimeMinutes) && post.readTimeMinutes > 0) {
+    return `${Math.ceil(post.readTimeMinutes)} min read`;
+  }
+  return calculateReadTimeText({
+    html: post.content,
+    fallbackParts: [post.title, post.excerpt],
+  });
+}
+
+function authorName(post: BlogCard) {
+  return post.author?.trim() || 'ClickMasters Team';
+}
+
+function authorLinkedin(post: BlogCard) {
+  return post.authorLinkedin?.trim() || '';
+}
+
+function authorImage(post: BlogCard) {
+  return post.authorImage?.trim() ? resolveImageUrl(post.authorImage) : '';
+}
+
 export default function BlogClient({ initialPosts }: BlogClientProps) {
   const [query, setQuery] = useState('');
   const [activeTag, setActiveTag] = useState<string>('all');
@@ -77,6 +107,8 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
   const tags = useMemo(() => {
     const map = new Map<string, number>();
     for (const p of posts) {
+      const category = p.category?.trim();
+      if (category) map.set(category, (map.get(category) || 0) + 1);
       for (const t of p.tags || []) {
         const key = t.trim();
         if (!key) continue;
@@ -104,7 +136,11 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
 
   const filteredByTag = useMemo(() => {
     if (activeTag === 'all') return filtered;
-    return filtered.filter((p) => (p.tags || []).some((t) => t.toLowerCase() === activeTag.toLowerCase()));
+    return filtered.filter((p) => {
+      const categoryMatch = (p.category || '').toLowerCase() === activeTag.toLowerCase();
+      const tagMatch = (p.tags || []).some((t) => t.toLowerCase() === activeTag.toLowerCase());
+      return categoryMatch || tagMatch;
+    });
   }, [filtered, activeTag]);
 
   const featured = filteredByTag[0];
@@ -214,10 +250,57 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                     <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600">
                       {featured.excerpt}
                     </p>
-                    <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
-                      <span>{featured.author || 'ClickMasters'}</span>
+                    <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                      <span className="inline-flex items-center gap-2">
+                        {authorImage(featured) ? (
+                          <img
+                            src={authorImage(featured)}
+                            alt={authorName(featured)}
+                            className="h-5 w-5 rounded-full border border-slate-200 object-cover"
+                          />
+                        ) : null}
+                        {authorLinkedin(featured) ? (
+                          <a
+                            href={authorLinkedin(featured)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="hover:text-primary hover:underline"
+                          >
+                            {authorName(featured)}
+                          </a>
+                        ) : (
+                          <span>{authorName(featured)}</span>
+                        )}
+                      </span>
                       <span>•</span>
                       <span>{formatDate(featured.createdAt)}</span>
+                      <span>•</span>
+                      <span className="inline-flex items-center gap-1">
+                        <Clock3 className="h-3.5 w-3.5" />
+                        {postReadTime(featured)}
+                      </span>
+                      {featured.updatedAt ? (
+                        <>
+                          <span>•</span>
+                          <span className="inline-flex items-center gap-1">
+                            <RefreshCcw className="h-3.5 w-3.5" />
+                            Updated {formatDate(featured.updatedAt)}
+                          </span>
+                        </>
+                      ) : null}
+                      {authorLinkedin(featured) ? (
+                        <a
+                          href={authorLinkedin(featured)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="ml-1 inline-flex items-center gap-1 rounded border border-slate-200 bg-white px-2 py-0.5 text-[11px] hover:border-primary/40 hover:text-primary"
+                        >
+                          <ExternalLink className="h-3 w-3" />
+                          Profile
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 </Link>
@@ -243,8 +326,30 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                         <h3 className="line-clamp-2 text-base font-semibold leading-snug text-slate-900 group-hover:text-primary">
                           {post.title}
                         </h3>
-                        <p className="mt-2 text-xs text-slate-500">
-                          {post.author || 'ClickMasters'} • {formatDate(post.createdAt)}
+                        <p className="mt-2 flex flex-wrap items-center gap-1 text-xs text-slate-500">
+                          {authorLinkedin(post) ? (
+                            <a
+                              href={authorLinkedin(post)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="hover:text-primary hover:underline"
+                            >
+                              {authorName(post)}
+                            </a>
+                          ) : (
+                            <span>{authorName(post)}</span>
+                          )}
+                          <span>•</span>
+                          <span>{formatDate(post.createdAt)}</span>
+                          <span>•</span>
+                          <span>{postReadTime(post)}</span>
+                          {post.updatedAt ? (
+                            <>
+                              <span>•</span>
+                              <span>Updated {formatDate(post.updatedAt)}</span>
+                            </>
+                          ) : null}
                         </p>
                       </div>
                     </Link>
@@ -278,6 +383,29 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                             {post.title}
                           </h3>
                           <p className="mt-2 line-clamp-3 text-sm text-slate-600">{post.excerpt}</p>
+                          <p className="mt-3 flex flex-wrap items-center gap-1 text-xs text-slate-500">
+                            {authorLinkedin(post) ? (
+                              <a
+                                href={authorLinkedin(post)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="hover:text-primary hover:underline"
+                              >
+                                {authorName(post)}
+                              </a>
+                            ) : (
+                              <span>{authorName(post)}</span>
+                            )}
+                            <span>•</span>
+                            <span>{postReadTime(post)}</span>
+                            {post.updatedAt ? (
+                              <>
+                                <span>•</span>
+                                <span>Updated {formatDate(post.updatedAt)}</span>
+                              </>
+                            ) : null}
+                          </p>
                           <span className="mt-4 inline-flex items-center text-sm font-semibold text-primary">
                             Read more
                             <ArrowRight className="ml-1 h-4 w-4 transition group-hover:translate-x-0.5" />

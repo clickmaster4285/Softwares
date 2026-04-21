@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import BlogPost from '../../../../lib/models/BlogPost';
 import dbConnect from '../../../../lib/mongoose';
+import { calculateReadTime } from '../../../../src/lib/readTime';
 
 function slugify(value: string) {
   return value
@@ -9,6 +10,20 @@ function slugify(value: string) {
     .replace(/['"]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+function normalizeFaqs(raw: unknown) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .map((item) => {
+      if (!item || typeof item !== 'object') return null;
+      const candidate = item as { question?: unknown; answer?: unknown };
+      const question = typeof candidate.question === 'string' ? candidate.question.trim() : '';
+      const answer = typeof candidate.answer === 'string' ? candidate.answer.trim() : '';
+      if (!question || !answer) return null;
+      return { question, answer };
+    })
+    .filter((item): item is { question: string; answer: string } => Boolean(item));
 }
 
 // GET single: public if published; ?drafts=1 allows draft (admin)
@@ -44,16 +59,54 @@ export async function PUT(
     const body = await req.json();
 
     const updates: Record<string, unknown> = {};
-    const keys = ['published', 'slug', 'title', 'excerpt', 'content', 'author', 'thumbnail', 'tags'] as const;
+    const keys = [
+      'published',
+      'slug',
+      'title',
+      'excerpt',
+      'content',
+      'author',
+      'authorLinkedin',
+      'authorImage',
+      'thumbnail',
+      'category',
+      'tags',
+      'faqs',
+    ] as const;
 
     for (const k of keys) {
       if (k in body) {
         if (k === 'tags' && Array.isArray(body[k])) updates[k] = body[k].map(String);
+        else if (k === 'faqs') updates[k] = normalizeFaqs(body[k]);
         else if (k === 'published') updates[k] = Boolean(body[k]);
         else if (k === 'slug' && typeof body[k] === 'string') updates[k] = slugify(body[k].trim());
         else if (typeof body[k] === 'string') updates[k] = body[k].trim();
         else updates[k] = body[k];
       }
+    }
+
+    const nextTitle =
+      typeof updates.title === 'string' ? updates.title : typeof body.title === 'string' ? body.title.trim() : '';
+    const nextExcerpt =
+      typeof updates.excerpt === 'string'
+        ? updates.excerpt
+        : typeof body.excerpt === 'string'
+          ? body.excerpt.trim()
+          : '';
+    if (typeof updates.content === 'string') {
+      const { minutes } = calculateReadTime({
+        html: updates.content,
+        fallbackParts: [nextTitle, nextExcerpt],
+      });
+      updates.readTimeMinutes = minutes;
+    } else if ('title' in updates || 'excerpt' in updates) {
+      const existing = await BlogPost.findById(id).select('content').lean();
+      const existingContent = typeof existing?.content === 'string' ? existing.content : '';
+      const { minutes } = calculateReadTime({
+        html: existingContent,
+        fallbackParts: [nextTitle, nextExcerpt],
+      });
+      updates.readTimeMinutes = minutes;
     }
 
     if (typeof updates.slug === 'string' && updates.slug) {
