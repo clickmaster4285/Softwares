@@ -10,6 +10,7 @@ import { resolveImageUrl } from '../../../../lib/utils';
 import { Button } from '@/components/ui/button';
 import BlogToc from '@/components/blog/BlogToc';
 import BlogCta from '@/components/blog/BlogCta'; // Import the Client Component
+import BlogFaqSection from '@/components/blog/BlogFaqSection';
 import { breadcrumbSchema } from '@/app/metadata-config';
 import Script from 'next/script';
 
@@ -51,6 +52,8 @@ function buildContentWithToc(html: string) {
     (_m, tag: string, attrs: string, inner: string) => {
       const text = stripTags(inner);
       if (!text) return _m;
+      const level = parseInt(tag[1]) as 1 | 2 | 3;
+      if (level > 2) return _m;
       
       if (isLikelyParagraph(inner, text)) return _m;
       
@@ -64,8 +67,6 @@ function buildContentWithToc(html: string) {
       const existingIdMatch = attrs.match(/\sid\s*=\s*["']([^"']+)["']/i);
       const existingIdRaw = existingIdMatch?.[1]?.trim() || '';
       const id = slugify(existingIdRaw) || generatedId;
-      
-      const level = parseInt(tag[1]) as 1 | 2 | 3;
 
       toc.push({ id, text, level });
 
@@ -96,6 +97,34 @@ function formatDate(value?: string) {
     month: 'short',
     day: 'numeric',
   });
+}
+
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+function extractFaqItemsFromHtml(html: string): FaqItem[] {
+  const faqHeadingMatch = /<h[1-3][^>]*>\s*Frequently Asked Questions\s*<\/h[1-3]>/i.exec(html);
+  if (!faqHeadingMatch) return [];
+
+  const afterFaq = html.slice(faqHeadingMatch.index + faqHeadingMatch[0].length);
+  const pairRegex = /<h3[^>]*>([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/gi;
+  const items: FaqItem[] = [];
+  let match: RegExpExecArray | null = pairRegex.exec(afterFaq);
+
+  while (match && items.length < 10) {
+    const question = stripTags(match[1] || '').trim();
+    const answer = stripTags(match[2] || '').trim();
+    if (!question || !answer) {
+      match = pairRegex.exec(afterFaq);
+      continue;
+    }
+    items.push({ question, answer });
+    match = pairRegex.exec(afterFaq);
+  }
+
+  return items;
 }
 
 async function findPostBySlugOrId(slugOrId: string) {
@@ -172,12 +201,25 @@ export default async function BlogDetailPage({
     thumbnail?: string;
     category?: string;
     tags?: string[];
+    faqs?: Array<{ question?: string; answer?: string }>;
     createdAt?: string;
     updatedAt?: string;
   };
   const imageSrc = post.thumbnail?.trim() ? resolveImageUrl(post.thumbnail) : '/placeholder.svg';
   const htmlContent = post.content?.trim() ? post.content : '<p>No content added yet.</p>';
   const { html: htmlWithIds, toc } = buildContentWithToc(htmlContent);
+  const faqItems =
+    Array.isArray(post.faqs) && post.faqs.length > 0
+      ? post.faqs
+          .map((item) => ({
+            question: typeof item?.question === 'string' ? item.question.trim() : '',
+            answer: typeof item?.answer === 'string' ? item.answer.trim() : '',
+          }))
+          .filter((item) => item.question && item.answer)
+      : extractFaqItemsFromHtml(htmlContent);
+  const tocItems = faqItems.length
+    ? [...toc, { id: 'faq-section', text: 'Frequently Asked Questions', level: 2 as const }]
+    : toc;
   const readTime =
     typeof post.readTimeMinutes === 'number' && Number.isFinite(post.readTimeMinutes) && post.readTimeMinutes > 0
       ? `${Math.ceil(post.readTimeMinutes)} min read`
@@ -299,7 +341,7 @@ export default async function BlogDetailPage({
 
           {/* 2-Column Layout with proper stickiness */}
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
               
               {/* Left Column - Content (8 columns) */}
               <div className="lg:col-span-8">
@@ -312,22 +354,16 @@ export default async function BlogDetailPage({
                   className="blog-content prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-headings:text-slate-900 prose-p:text-slate-700 prose-p:leading-8 prose-li:text-slate-700 prose-a:text-primary prose-blockquote:border-l-primary prose-img:rounded-xl prose-img:border prose-img:border-slate-200 prose-img:shadow-sm"
                   dangerouslySetInnerHTML={{ __html: htmlWithIds }}
                 />
+                <BlogFaqSection items={faqItems} />
               </div>
 
               {/* Right Column - Sidebar (4 columns) */}
-              <div className="lg:col-span-4">
-                <div className="relative">
-                  <div className="lg:sticky lg:top-24">
-                    {/* TOC Component */}
-                    <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm mb-6">
-                      <BlogToc items={toc} />
-                    </div>
-
-                    {/* CTA Form - Client Component */}
-                    <BlogCta />
-                  </div>
+              <aside className="lg:col-span-4 lg:self-start lg:sticky lg:top-24">
+                <div className="mb-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <BlogToc items={tocItems} />
                 </div>
-              </div>
+                <BlogCta />
+              </aside>
             </div>
           </div>
         </article>
@@ -371,13 +407,6 @@ export default async function BlogDetailPage({
           }
           100% {
             background-color: transparent;
-          }
-        }
-        
-        /* Ensure sticky works properly */
-        @media (min-width: 1024px) {
-          .lg\\:sticky {
-            position: sticky;
           }
         }
       `}</style>

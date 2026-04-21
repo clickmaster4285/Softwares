@@ -10,6 +10,7 @@ import {
   Strikethrough,
   Heading1,
   Heading2,
+  Heading3,
   List,
   ListOrdered,
   Quote,
@@ -49,7 +50,7 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
   const editorRef = useRef<HTMLDivElement | null>(null);
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const [uploadingImage, setUploadingImage] = useState(false);
-  const [currentBlock, setCurrentBlock] = useState<'p' | 'h1' | 'h2' | 'blockquote'>('p');
+  const [currentBlock, setCurrentBlock] = useState<'p' | 'h1' | 'h2' | 'h3' | 'blockquote'>('p');
   const [fontFamily, setFontFamily] = useState('Inter, sans-serif');
   const [fontSize, setFontSize] = useState('3');
 
@@ -69,6 +70,7 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
     const block = document.queryCommandValue('formatBlock')?.toString().toLowerCase() || '';
     if (block.includes('h1')) setCurrentBlock('h1');
     else if (block.includes('h2')) setCurrentBlock('h2');
+    else if (block.includes('h3')) setCurrentBlock('h3');
     else if (block.includes('blockquote')) setCurrentBlock('blockquote');
     else setCurrentBlock('p');
   };
@@ -125,7 +127,7 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
       <div className="flex flex-wrap gap-2 rounded-md border border-border/60 bg-muted/30 p-2">
         <Select
           value={currentBlock}
-          onValueChange={(val: 'p' | 'h1' | 'h2' | 'blockquote') => {
+          onValueChange={(val: 'p' | 'h1' | 'h2' | 'h3' | 'blockquote') => {
             setCurrentBlock(val);
             if (val === 'p') exec('formatBlock', '<p>');
             else if (val === 'blockquote') exec('formatBlock', '<blockquote>');
@@ -140,6 +142,7 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
             <SelectItem value="p">Paragraph (Simple Text)</SelectItem>
             <SelectItem value="h1">Heading 1 (H1)</SelectItem>
             <SelectItem value="h2">Heading 2 (H2)</SelectItem>
+            <SelectItem value="h3">Heading 3 (H3)</SelectItem>
             <SelectItem value="blockquote">Quote</SelectItem>
           </SelectContent>
         </Select>
@@ -192,6 +195,9 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
         </Button>
         <Button type="button" variant="outline" size="sm" onClick={() => exec('formatBlock', '<h2>')}>
           <Heading2 className="mr-1 h-3.5 w-3.5" /> H2
+        </Button>
+        <Button type="button" variant="outline" size="sm" onClick={() => exec('formatBlock', '<h3>')}>
+          <Heading3 className="mr-1 h-3.5 w-3.5" /> H3
         </Button>
         <Button type="button" variant="outline" size="sm" onClick={() => exec('bold')}>
           <Bold className="mr-1 h-3.5 w-3.5" /> Bold
@@ -289,7 +295,7 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
         data-placeholder={placeholder || 'Write your blog content...'}
       />
       <p className="text-xs text-muted-foreground">
-        Tip: use <strong>Paragraph</strong> for simple text and <strong>H1/H2</strong> for headings.
+        Tip: use <strong>Paragraph</strong> for simple text and <strong>H1/H2/H3</strong> for headings.
       </p>
       <style jsx>{`
         div[contenteditable='true']:empty:before {

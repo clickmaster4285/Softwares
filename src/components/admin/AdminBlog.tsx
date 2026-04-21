@@ -42,6 +42,7 @@ type BlogPost = {
   thumbnail?: string;
   category?: string;
   tags?: string[];
+  faqs?: Array<{ question: string; answer: string }>;
 };
 
 function postId(value: unknown): string {

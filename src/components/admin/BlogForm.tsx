@@ -24,6 +24,7 @@ export type BlogFormPayload = {
   thumbnail: string;
   category: string;
   tags: string[];
+  faqs: Array<{ question: string; answer: string }>;
 };
 
 type BlogPost = {
@@ -39,6 +40,7 @@ type BlogPost = {
   thumbnail?: string;
   category?: string;
   tags?: string[];
+  faqs?: Array<{ question: string; answer: string }>;
 };
 
 function slugify(value: string) {
@@ -78,6 +80,9 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
   const [compressing, setCompressing] = useState(false);
   const [tags, setTags] = useState<string[]>(post?.tags || []);
   const [newTag, setNewTag] = useState('');
+  const [faqs, setFaqs] = useState<Array<{ question: string; answer: string }>>(
+    post?.faqs && post.faqs.length > 0 ? post.faqs : [{ question: '', answer: '' }]
+  );
   const [previewUrl, setPreviewUrl] = useState(post?.thumbnail ? resolveImageUrl(post.thumbnail) : '');
 
   useEffect(() => {
@@ -207,6 +212,9 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
       thumbnail: imageUrl,
       category: category.trim(),
       tags,
+      faqs: faqs
+        .map((item) => ({ question: item.question.trim(), answer: item.answer.trim() }))
+        .filter((item) => item.question && item.answer),
     });
   };
 
@@ -381,6 +389,57 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
             ))}
           </div>
         )}
+      </div>
+
+      <div className="space-y-3 rounded-lg border border-border/60 p-3">
+        <div className="flex items-center justify-between gap-2">
+          <Label>FAQs</Label>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setFaqs((prev) => [...prev, { question: '', answer: '' }])}
+          >
+            <Plus className="mr-1 h-3.5 w-3.5" />
+            Add FAQ
+          </Button>
+        </div>
+        <p className="text-xs text-muted-foreground">Add question-answer pairs in this separate FAQ section.</p>
+        <div className="space-y-3">
+          {faqs.map((item, idx) => (
+            <div key={`faq-${idx}`} className="space-y-2 rounded-md border border-border/50 p-3">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-xs font-medium text-muted-foreground">FAQ {idx + 1}</p>
+                {faqs.length > 1 ? (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 px-2 text-destructive"
+                    onClick={() => setFaqs((prev) => prev.filter((_, i) => i !== idx))}
+                  >
+                    Remove
+                  </Button>
+                ) : null}
+              </div>
+              <Input
+                value={item.question}
+                onChange={(e) =>
+                  setFaqs((prev) => prev.map((f, i) => (i === idx ? { ...f, question: e.target.value } : f)))
+                }
+                placeholder="Question"
+              />
+              <Textarea
+                value={item.answer}
+                onChange={(e) =>
+                  setFaqs((prev) => prev.map((f, i) => (i === idx ? { ...f, answer: e.target.value } : f)))
+                }
+                rows={3}
+                placeholder="Answer"
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="space-y-3">

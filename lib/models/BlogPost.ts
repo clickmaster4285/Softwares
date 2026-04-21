@@ -14,6 +14,18 @@ const blogPostSchema = new mongoose.Schema(
     thumbnail: { type: String, default: '' },
     category: { type: String, default: '', index: true },
     tags: { type: [String], default: [] },
+    faqs: {
+      type: [
+        new mongoose.Schema(
+          {
+            question: { type: String, required: true },
+            answer: { type: String, required: true },
+          },
+          { _id: false }
+        ),
+      ],
+      default: [],
+    },
   },
   { timestamps: true }
 );
@@ -31,6 +43,22 @@ if (existingModel) {
   }
   if (!existingModel.schema.path('authorImage')) {
     existingModel.schema.add({ authorImage: { type: String, default: '' } });
+  }
+  if (!existingModel.schema.path('faqs')) {
+    existingModel.schema.add({
+      faqs: {
+        type: [
+          new mongoose.Schema(
+            {
+              question: { type: String, required: true },
+              answer: { type: String, required: true },
+            },
+            { _id: false }
+          ),
+        ],
+        default: [],
+      },
+    });
   }
 }
 

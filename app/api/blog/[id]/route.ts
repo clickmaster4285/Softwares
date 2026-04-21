@@ -12,6 +12,20 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, '');
 }
 
+function normalizeFaqs(raw: unknown) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .map((item) => {
+      if (!item || typeof item !== 'object') return null;
+      const candidate = item as { question?: unknown; answer?: unknown };
+      const question = typeof candidate.question === 'string' ? candidate.question.trim() : '';
+      const answer = typeof candidate.answer === 'string' ? candidate.answer.trim() : '';
+      if (!question || !answer) return null;
+      return { question, answer };
+    })
+    .filter((item): item is { question: string; answer: string } => Boolean(item));
+}
+
 // GET single: public if published; ?drafts=1 allows draft (admin)
 export async function GET(
   req: NextRequest,
@@ -57,11 +71,13 @@ export async function PUT(
       'thumbnail',
       'category',
       'tags',
+      'faqs',
     ] as const;
 
     for (const k of keys) {
       if (k in body) {
         if (k === 'tags' && Array.isArray(body[k])) updates[k] = body[k].map(String);
+        else if (k === 'faqs') updates[k] = normalizeFaqs(body[k]);
         else if (k === 'published') updates[k] = Boolean(body[k]);
         else if (k === 'slug' && typeof body[k] === 'string') updates[k] = slugify(body[k].trim());
         else if (typeof body[k] === 'string') updates[k] = body[k].trim();
