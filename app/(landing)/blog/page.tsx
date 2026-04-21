@@ -4,6 +4,8 @@ import dbConnect from '../../../lib/mongoose';
 import BlogClient, { type BlogCard } from './BlogClient';
 import Script from 'next/script';
 
+const BlogPostModel = BlogPost as any;
+
 export const metadata = metadataConfig.blog();
 
 export default async function BlogPage() {
@@ -11,7 +13,7 @@ export default async function BlogPage() {
 
   try {
     await dbConnect();
-    const raw = await BlogPost.find({ published: true }).sort({ createdAt: -1 }).lean();
+    const raw = await BlogPostModel.find({ published: true }).sort({ createdAt: -1 }).lean();
     initialPosts = JSON.parse(JSON.stringify(raw)) as BlogCard[];
   } catch {
     // DB unavailable during build or at runtime — client will refetch from /api/blog
