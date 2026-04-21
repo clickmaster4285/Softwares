@@ -108,12 +108,8 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
     const map = new Map<string, number>();
     for (const p of posts) {
       const category = p.category?.trim();
-      if (category) map.set(category, (map.get(category) || 0) + 1);
-      for (const t of p.tags || []) {
-        const key = t.trim();
-        if (!key) continue;
-        map.set(key, (map.get(key) || 0) + 1);
-      }
+      if (!category) continue;
+      map.set(category, (map.get(category) || 0) + 1);
     }
     return Array.from(map.entries())
       .sort((a, b) => b[1] - a[1])
@@ -138,8 +134,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
     if (activeTag === 'all') return filtered;
     return filtered.filter((p) => {
       const categoryMatch = (p.category || '').toLowerCase() === activeTag.toLowerCase();
-      const tagMatch = (p.tags || []).some((t) => t.toLowerCase() === activeTag.toLowerCase());
-      return categoryMatch || tagMatch;
+      return categoryMatch;
     });
   }, [filtered, activeTag]);
 

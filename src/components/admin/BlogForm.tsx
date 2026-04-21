@@ -23,6 +23,7 @@ export type BlogFormPayload = {
   authorImage: string;
   thumbnail: string;
   category: string;
+  faqHeading: string;
   tags: string[];
   faqs: Array<{ question: string; answer: string }>;
 };
@@ -39,6 +40,7 @@ type BlogPost = {
   authorImage?: string;
   thumbnail?: string;
   category?: string;
+  faqHeading?: string;
   tags?: string[];
   faqs?: Array<{ question: string; answer: string }>;
 };
@@ -73,6 +75,7 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
     post?.authorImage ? resolveImageUrl(post.authorImage) : ''
   );
   const [category, setCategory] = useState(post?.category || '');
+  const [faqHeading, setFaqHeading] = useState(post?.faqHeading || 'Frequently Asked Questions');
   const [published, setPublished] = useState(post?.published ?? false);
   const [thumbnail, setThumbnail] = useState(post?.thumbnail || '');
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -211,6 +214,7 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
       authorImage: authorImageUrl,
       thumbnail: imageUrl,
       category: category.trim(),
+      faqHeading: faqHeading.trim(),
       tags,
       faqs: faqs
         .map((item) => ({ question: item.question.trim(), answer: item.answer.trim() }))
@@ -404,6 +408,11 @@ export default function BlogForm({ post, onSubmit, onCancel }: BlogFormProps) {
             Add FAQ
           </Button>
         </div>
+        <Input
+          value={faqHeading}
+          onChange={(e) => setFaqHeading(e.target.value)}
+          placeholder="FAQ section heading (e.g. Frequently Asked Questions)"
+        />
         <p className="text-xs text-muted-foreground">Add question-answer pairs in this separate FAQ section.</p>
         <div className="space-y-3">
           {faqs.map((item, idx) => (

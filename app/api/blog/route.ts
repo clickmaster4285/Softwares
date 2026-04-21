@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
   try {
     await dbConnect();
     const body = await req.json();
-    const { published, slug, title, excerpt, content, author, authorLinkedin, authorImage, thumbnail, category, tags, faqs } = body;
+    const { published, slug, title, excerpt, content, author, authorLinkedin, authorImage, thumbnail, category, faqHeading, tags, faqs } = body;
 
     if (!title || !excerpt || !content) {
       return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
@@ -92,6 +92,7 @@ export async function POST(req: NextRequest) {
       authorImage: typeof authorImage === 'string' ? authorImage.trim() : '',
       thumbnail: typeof thumbnail === 'string' ? thumbnail.trim() : '',
       category: typeof category === 'string' ? category.trim() : '',
+      faqHeading: typeof faqHeading === 'string' ? faqHeading.trim() : '',
       tags: Array.isArray(tags) ? tags.map(String) : [],
       faqs: normalizeFaqs(faqs),
     });

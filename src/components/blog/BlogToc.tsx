@@ -151,14 +151,6 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
     }
   }, [activeId]);
 
-  // Keep URL hash synced with the active section while scrolling.
-  useEffect(() => {
-    if (!activeId) return;
-    const currentHash = decodeURIComponent(window.location.hash.replace('#', ''));
-    if (currentHash === activeId) return;
-    window.history.replaceState(null, '', `#${encodeURIComponent(activeId)}`);
-  }, [activeId]);
-
   const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     

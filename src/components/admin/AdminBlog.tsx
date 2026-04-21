@@ -41,6 +41,7 @@ type BlogPost = {
   authorImage?: string;
   thumbnail?: string;
   category?: string;
+  faqHeading?: string;
   tags?: string[];
   faqs?: Array<{ question: string; answer: string }>;
 };

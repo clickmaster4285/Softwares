@@ -202,6 +202,7 @@ export default async function BlogDetailPage({
     authorImage?: string;
     thumbnail?: string;
     category?: string;
+    faqHeading?: string;
     tags?: string[];
     faqs?: Array<{ question?: string; answer?: string }>;
     createdAt?: string;
@@ -219,8 +220,9 @@ export default async function BlogDetailPage({
           }))
           .filter((item) => item.question && item.answer)
       : extractFaqItemsFromHtml(htmlContent);
+  const faqSectionHeading = post.faqHeading?.trim() || 'Frequently Asked Questions';
   const tocItems = faqItems.length
-    ? [...toc, { id: 'faq-section', text: 'Frequently Asked Questions', level: 2 as const }]
+    ? [...toc, { id: 'faq-section', text: faqSectionHeading, level: 2 as const }]
     : toc;
   const readTime =
     typeof post.readTimeMinutes === 'number' && Number.isFinite(post.readTimeMinutes) && post.readTimeMinutes > 0
@@ -356,7 +358,7 @@ export default async function BlogDetailPage({
                   className="blog-content prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-headings:text-slate-900 prose-p:text-slate-700 prose-p:leading-8 prose-li:text-slate-700 prose-a:text-primary prose-blockquote:border-l-primary prose-img:rounded-xl prose-img:border prose-img:border-slate-200 prose-img:shadow-sm"
                   dangerouslySetInnerHTML={{ __html: htmlWithIds }}
                 />
-                <BlogFaqSection items={faqItems} />
+                <BlogFaqSection title={faqSectionHeading} items={faqItems} />
               </div>
 
               {/* Right Column - Sidebar (4 columns) */}
