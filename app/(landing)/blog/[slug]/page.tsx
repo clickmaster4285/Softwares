@@ -14,6 +14,8 @@ import BlogFaqSection from '@/components/blog/BlogFaqSection';
 import { breadcrumbSchema } from '@/app/metadata-config';
 import Script from 'next/script';
 
+const BlogPostModel = BlogPost as any;
+
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -130,22 +132,22 @@ function extractFaqItemsFromHtml(html: string): FaqItem[] {
 async function findPostBySlugOrId(slugOrId: string) {
   const normalized = slugify(slugOrId);
 
-  let bySlug = await BlogPost.findOne({ slug: slugOrId, published: true }).lean();
+  let bySlug = await BlogPostModel.findOne({ slug: slugOrId, published: true }).lean();
   if (bySlug) return bySlug;
 
   if (normalized && normalized !== slugOrId) {
-    bySlug = await BlogPost.findOne({ slug: normalized, published: true }).lean();
+    bySlug = await BlogPostModel.findOne({ slug: normalized, published: true }).lean();
     if (bySlug) return bySlug;
   }
 
   if (mongoose.Types.ObjectId.isValid(slugOrId)) {
-    return BlogPost.findOne({ _id: slugOrId, published: true }).lean();
+    return BlogPostModel.findOne({ _id: slugOrId, published: true }).lean();
   }
 
-  const list = await BlogPost.find({ published: true }).select('title').lean();
+  const list = await BlogPostModel.find({ published: true }).select('title').lean();
   const match = list.find((d: { title?: string }) => slugify(String(d?.title ?? '')) === slugOrId);
   if (!match?._id) return null;
-  return BlogPost.findOne({ _id: match._id, published: true }).lean();
+  return BlogPostModel.findOne({ _id: match._id, published: true }).lean();
 }
 
 export async function generateMetadata({
@@ -157,12 +159,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const normalized = slugify(slug);
 
-  let doc = await BlogPost.findOne({ slug, published: true }).select('title excerpt').lean();
+  let doc = await BlogPostModel.findOne({ slug, published: true }).select('title excerpt').lean();
   if (!doc && normalized && normalized !== slug) {
-    doc = await BlogPost.findOne({ slug: normalized, published: true }).select('title excerpt').lean();
+    doc = await BlogPostModel.findOne({ slug: normalized, published: true }).select('title excerpt').lean();
   }
   if (!doc && mongoose.Types.ObjectId.isValid(slug)) {
-    doc = await BlogPost.findOne({ _id: slug, published: true }).select('title excerpt').lean();
+    doc = await BlogPostModel.findOne({ _id: slug, published: true }).select('title excerpt').lean();
   }
   if (!doc) return { title: 'Blog post' };
 
