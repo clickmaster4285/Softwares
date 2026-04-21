@@ -72,6 +72,7 @@ export async function PUT(
       'authorImage',
       'thumbnail',
       'category',
+      'faqHeading',
       'tags',
       'faqs',
     ] as const;

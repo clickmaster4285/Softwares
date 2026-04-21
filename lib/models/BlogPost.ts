@@ -13,6 +13,7 @@ const blogPostSchema = new mongoose.Schema(
     authorImage: { type: String, default: '' },
     thumbnail: { type: String, default: '' },
     category: { type: String, default: '', index: true },
+    faqHeading: { type: String, default: '' },
     tags: { type: [String], default: [] },
     faqs: {
       type: [
@@ -43,6 +44,9 @@ if (existingModel) {
   }
   if (!existingModel.schema.path('authorImage')) {
     existingModel.schema.add({ authorImage: { type: String, default: '' } });
+  }
+  if (!existingModel.schema.path('faqHeading')) {
+    existingModel.schema.add({ faqHeading: { type: String, default: '' } });
   }
   if (!existingModel.schema.path('faqs')) {
     existingModel.schema.add({
