@@ -36,6 +36,11 @@ const CommunitySection = dynamic(
   () => import('@/components/landingPage/home/CommunitySection').then((m) => m.CommunitySection),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
 );
+const GlobalGlobeSection = dynamic(
+  () =>
+    import('@/components/landingPage/home/global-globe-section').then((m) => m.GlobalGlobeSection),
+  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> },
+);
 const TestimonialsSection = dynamic(
   () => import('@/components/landingPage/home/TestimonialsSection').then((m) => m.TestimonialsSection),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
@@ -153,6 +158,9 @@ export default function LandingPage() {
       </Suspense>
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <CommunitySection />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
+        <GlobalGlobeSection />
       </Suspense>
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <TestimonialsSection />
