@@ -3,6 +3,8 @@ import BlogPost from '../../../../lib/models/BlogPost';
 import dbConnect from '../../../../lib/mongoose';
 import { calculateReadTime } from '../../../../src/lib/readTime';
 
+const BlogPostModel = BlogPost as any;
+
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -37,7 +39,7 @@ export async function GET(
     const { searchParams } = new URL(req.url);
     const drafts = searchParams.get('drafts') === '1';
 
-    const doc = await BlogPost.findById(id).lean();
+    const doc = await BlogPostModel.findById(id).lean();
     if (!doc) return NextResponse.json({ message: 'Not found' }, { status: 404 });
     if (!doc.published && !drafts) {
       return NextResponse.json({ message: 'Not found' }, { status: 404 });
@@ -100,7 +102,7 @@ export async function PUT(
       });
       updates.readTimeMinutes = minutes;
     } else if ('title' in updates || 'excerpt' in updates) {
-      const existing = await BlogPost.findById(id).select('content').lean();
+      const existing = await BlogPostModel.findById(id).select('content').lean();
       const existingContent = typeof existing?.content === 'string' ? existing.content : '';
       const { minutes } = calculateReadTime({
         html: existingContent,
@@ -110,7 +112,7 @@ export async function PUT(
     }
 
     if (typeof updates.slug === 'string' && updates.slug) {
-      const existing = await BlogPost.findOne({
+      const existing = await BlogPostModel.findOne({
         slug: updates.slug,
         _id: { $ne: id },
       })
@@ -119,7 +121,7 @@ export async function PUT(
       if (existing) return NextResponse.json({ message: 'Slug already in use' }, { status: 400 });
     }
 
-    const doc = await BlogPost.findByIdAndUpdate(id, updates, {
+    const doc = await BlogPostModel.findByIdAndUpdate(id, updates, {
       returnDocument: 'after',
       runValidators: true,
     }).lean();
@@ -139,7 +141,7 @@ export async function DELETE(
   try {
     const { id } = await context.params;
     await dbConnect();
-    const deleted = await BlogPost.findByIdAndDelete(id);
+    const deleted = await BlogPostModel.findByIdAndDelete(id);
     if (!deleted) return NextResponse.json({ message: 'Not found' }, { status: 404 });
     return NextResponse.json({ message: 'Deleted successfully' });
   } catch (err: unknown) {
