@@ -267,7 +267,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                 </Link>
               </Button>
               <Button variant="outline" asChild className="rounded-md border-slate-300 bg-white">
-                <Link href={`/services#${page.sectionId}`}>View on services overview</Link>
+                <Link href="/services">View all services</Link>
               </Button>
             </div>
           </div>

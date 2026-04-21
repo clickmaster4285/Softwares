@@ -1009,7 +1009,7 @@ function MobileDropdown({
         ))}
         <div className="pt-2">
           <Link
-            href="/projects"
+            href="/software-solutions"
             onClick={onLinkClick}
             className="text-primary hover:text-primary/80 text-sm font-medium inline-flex items-center gap-1"
           >

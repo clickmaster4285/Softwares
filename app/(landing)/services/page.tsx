@@ -8,7 +8,8 @@ export const metadata = metadataConfig.services();
 const servicesForJsonLd = getAllServicePages().map((service) => ({
   name: service.title,
   description: service.metaDescription,
-  hash: service.sectionId,
+  slug: service.slug,
+  categorySlug: service.categorySlug,
 }));
 
 export default function ServicesPage() {
@@ -28,12 +29,12 @@ export default function ServicesPage() {
       />
       {servicesForJsonLd.map((s, i) => (
         <Script
-          key={s.hash}
+          key={`${s.categorySlug}-${s.slug}`}
           id={`service-schema-${i}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(
-              serviceSchema(s.name, s.description, `${siteConfig.url}/services#${s.hash}`),
+              serviceSchema(s.name, s.description, `${siteConfig.url}/${s.categorySlug}/${s.slug}`),
             ),
           }}
         />
