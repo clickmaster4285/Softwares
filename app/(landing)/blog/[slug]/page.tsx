@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import BlogToc from '@/components/blog/BlogToc';
 import BlogCta from '@/components/blog/BlogCta'; // Import the Client Component
 import BlogFaqSection from '@/components/blog/BlogFaqSection';
+import BlogRelatedSlider, { type RelatedBlogCard } from '@/components/blog/BlogRelatedSlider';
 import { breadcrumbSchema } from '@/app/metadata-config';
 import Script from 'next/script';
 
@@ -150,6 +151,25 @@ async function findPostBySlugOrId(slugOrId: string) {
   return BlogPostModel.findOne({ _id: match._id, published: true }).lean();
 }
 
+async function findRelatedByCategory(category: string, excludeId: string): Promise<RelatedBlogCard[]> {
+  const cat = category.trim();
+  if (!cat || !mongoose.Types.ObjectId.isValid(excludeId)) return [];
+
+  const excludeObjectId = new mongoose.Types.ObjectId(excludeId);
+
+  const rows = await BlogPostModel.find({
+    published: true,
+    category: cat,
+    _id: { $ne: excludeObjectId },
+  })
+    .sort({ createdAt: -1 })
+    .limit(12)
+    .select('title excerpt slug thumbnail category readTimeMinutes createdAt')
+    .lean();
+
+  return JSON.parse(JSON.stringify(rows)) as RelatedBlogCard[];
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -236,6 +256,11 @@ export default async function BlogDetailPage({
   const authorImageUrl = post.authorImage?.trim() ? resolveImageUrl(post.authorImage) : '';
   const publishedDate = formatDate(post.createdAt);
   const updatedDate = formatDate(post.updatedAt);
+
+  const currentId = String((raw as { _id?: mongoose.Types.ObjectId })._id ?? '');
+  const categoryTrimmed = post.category?.trim() ?? '';
+  const relatedPosts =
+    currentId && categoryTrimmed ? await findRelatedByCategory(categoryTrimmed, currentId) : [];
 
   return (
     <>
@@ -370,6 +395,11 @@ export default async function BlogDetailPage({
               </aside>
             </div>
           </div>
+          {relatedPosts.length > 0 && categoryTrimmed ? (
+            <div className="w-full px-4 pb-12 sm:px-6 lg:px-8">
+              <BlogRelatedSlider posts={relatedPosts} categoryLabel={categoryTrimmed} />
+            </div>
+          ) : null}
         </article>
       </div>
       <style>{`

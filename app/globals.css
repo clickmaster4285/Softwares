@@ -186,3 +186,39 @@
   }
 }
 
+/* Blog related posts: seamless horizontal ticker (two equal strips) */
+@keyframes blog-related-ticker {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.blog-related-ticker-track {
+  animation: blog-related-ticker var(--blog-ticker-duration, 36s) linear infinite;
+  will-change: transform;
+}
+
+.blog-related-ticker-wrap:hover .blog-related-ticker-track,
+.blog-related-ticker-wrap:focus-within .blog-related-ticker-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-related-ticker-track {
+    animation: none;
+    transform: none;
+  }
+
+  .blog-related-ticker-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .blog-related-ticker-dup {
+    display: none;
+  }
+}
+
