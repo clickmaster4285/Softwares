@@ -486,10 +486,7 @@ const enterpriseSoftwareDevelopmentOverride: ServicePageContent = {
       heading: 'Common enterprise buyer concerns - addressed directly',
       body: 'Key concerns include enterprise complexity handling, budget/timeline control, IP ownership and handoff, migration safety, and offshore delivery risk. Our model addresses these with architecture-first delivery, fixed dedicated teams, phase-level scope control, documented migration plans, and transparent weekly reporting.',
     },
-    {
-      heading: 'Internal links and conversion path',
-      body: 'Primary CTA: /contact-us. Supporting paths include /software-development/custom-software-development, /case-studies, and related services such as web application development, API integration, cloud solutions & devops, database design & management, cybersecurity & compliance, business process automation, dedicated development teams, and SaaS product development.',
-    },
+   
   ],
   faqs: [
     {
@@ -696,10 +693,7 @@ const mobileAppDevelopmentOverride: ServicePageContent = {
       heading: 'Mobile app development pricing',
       body: 'Simple utility apps: $15k-$35k. Cross-platform MVP: $20k-$50k. Full B2B mobile apps: $40k-$100k. Enterprise mobile: $70k-$180k. Native iOS: $25k-$80k. Native Android: $25k-$75k. Rebuilds: $20k-$70k. Maintenance retainer: $3k-$12k/month.',
     },
-    {
-      heading: 'Internal links and conversion path',
-      body: 'Primary conversion CTA is /contact-us. Related links include custom software development, web app development, progressive web app development, react native development, flutter app development, iOS app development, android app development, API integration, UI/UX design, cybersecurity and cloud/devops services, plus /case-studies.',
-    },
+    
   ],
   faqs: [
     {
@@ -830,10 +824,7 @@ const saasProductDevelopmentOverride: ServicePageContent = {
       heading: 'SaaS product development pricing',
       body: 'SaaS MVP: $12k-$30k. B2B SaaS platform: $40k-$120k. Enterprise SaaS: $80k-$200k. White-label SaaS: $35k-$90k. SaaS rebuild: $30k-$100k. Growth retainer: $6k-$20k/month.',
     },
-    {
-      heading: 'Internal links and conversion path',
-      body: 'Primary CTA is /contact-us. Related conversion and authority paths include /case-studies and adjacent services for MVP, API/integration, UI/UX, cloud/devops, database design/management, cybersecurity/compliance, enterprise software, and dedicated team models.',
-    },
+    
   ],
   faqs: [
     {
@@ -993,10 +984,7 @@ const webApplicationDevelopmentOverride: ServicePageContent = {
       heading: 'Web application development pricing',
       body: 'Internal tool/dashboard: $10k-$35k. Customer/partner portal: $20k-$60k. B2B web app: $30k-$100k. SaaS web platform: $50k-$150k. Data/analytics platform: $25k-$80k. PWA: $20k-$70k. Modernization: $20k-$90k. Maintenance retainer: $3k-$15k/month.',
     },
-    {
-      heading: 'Internal links and conversion path',
-      body: 'Primary CTA is /contact-us. Supporting paths include /case-studies and adjacent services for custom software, SaaS development, PWA development, API integrations, UI/UX, frontend/backend/full-stack delivery, cloud/devops, database, cybersecurity, enterprise software, and maintenance support.',
-    },
+    
   ],
   faqs: [
     {
