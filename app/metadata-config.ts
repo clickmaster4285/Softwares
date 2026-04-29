@@ -674,78 +674,105 @@ export const defaultMetadata: Metadata = {
 export const metadataConfig = {
 
   // ── / (Home) ────────────────────────────────────────────────────────────────
- home: (): Metadata => ({
-    title: 'Best Software Development Company in Pakistan',
+home: (): Metadata => ({
+  title:
+    'Best Software Development Company in Pakistan | Web, Mobile, SaaS & AI',
+
+  description:
+    'Best software development company in Pakistan building custom web applications, mobile apps, SaaS platforms, AI solutions, ERP systems, and enterprise software. Hire expert developers from Pakistan’s leading software house for scalable digital products.',
+
+  keywords: [
+    'best software development company in Pakistan',
+    'software development company in Pakistan',
+    'top software house in Pakistan',
+    'custom software development company',
+    'software development services Pakistan',
+    'hire software developers Pakistan',
+    'web application development company',
+    'mobile app development company',
+    'SaaS development company',
+    'enterprise software solutions',
+    'AI software development company',
+    'full stack development agency',
+    'software outsourcing company',
+    'ERP software development',
+    'startup software development partner',
+  ],
+
+  alternates: {
+    canonical: siteConfig.url,
+  },
+
+  openGraph: {
+    title:
+      'Best Software Development Company in Pakistan | Web, Mobile, SaaS & AI',
+
     description:
-      'ClickMasters is a professional custom software development company. ' +
-      'We build web apps, mobile apps, SaaS platforms, AI systems, and ' +
-      'enterprise software. Get a free consultation today.',
-    keywords: [
-      'custom software development company',
-      'software development company',
-      'web application development',
-      'mobile app development',
-      'SaaS development company',
-      'enterprise software development',
-      'software house Pakistan',
-      'AI software development',
+      'Best software development company in Pakistan building custom web applications, mobile apps, SaaS platforms, AI solutions, ERP systems, and enterprise software. Hire expert developers from Pakistan’s leading software house for scalable digital products.',
+
+    url: siteConfig.url,
+    siteName: 'ClickMasters',
+    type: 'website',
+
+    images: [
+      {
+        url: `${siteConfig.url}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Best Software Development Company in Pakistan - ClickMasters',
+      },
     ],
-    alternates: { canonical: siteConfig.url },
-    openGraph: {
-      title: 'Custom Software Development Company | ClickMasters',
-      description:
-        'Professional custom software development — web apps, mobile apps, ' +
-        'SaaS, AI & enterprise solutions. Get a free consultation.',
-      url: siteConfig.url,
-      siteName: 'ClickMasters',
-      type: 'website',
-      images: [
-        {
-          url: `${siteConfig.url}/og-image.jpg`,
-          width: 1200,
-          height: 630,
-          alt: 'ClickMasters — Custom Software Development Company',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Custom Software Development That Scales Your Business Revenue — Not Just Code',
-      description:
-        'Software development company & software house: custom solutions, web & mobile, SaaS, ERP. Expert developers. Free consultation.',
-      images: [`${siteConfig.url}/og-image.jpg`],
-    },
-  }),
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+
+    title:
+      'Best Software Development Company in Pakistan | Web, Mobile, SaaS & AI',
+
+    description:
+      'Best software development company in Pakistan building custom web applications, mobile apps, SaaS platforms, AI solutions, ERP systems, and enterprise software. Hire expert developers from Pakistan’s leading software house for scalable digital products.',
+
+    images: [`${siteConfig.url}/og-image.webp`],
+  },
+}),
 
   // ── /about ──────────────────────────────────────────────────────────────────
-  about: (): Metadata => ({
-    title: 'About ClickMasters | Experienced Software Development Team',
+about: (): Metadata => ({
+  title:
+    'ClickMasters Software Development Company | The Team Behind Pakistan’s Most Trusted Tech Company',
+  description:
+    '50+ engineers. 100+ products shipped. 10+ years building web apps, mobile apps, SaaS & AI solutions for startups and global enterprises. Meet ClickMasters — a software development company, ClickMasters AI Software House, and ClickMasters Software House delivering scalable digital products worldwide.',
+  alternates: { canonical: `${siteConfig.url}/about-us` },
+  openGraph: {
+    title:
+      'Meet ClickMasters — A Leading Software Development Company Building Scalable Digital Solutions',
     description:
-      'Meet ClickMasters: a software development company & software house with 10+ years building custom software solutions for global clients. Our story & team.',
-    alternates: { canonical: `${siteConfig.url}/about-us` },
-    openGraph: {
-      title: 'About ClickMasters | Software Development Company',
-      description:
-        'Software house & development team behind custom web apps, mobile apps, and enterprise software. Decade of delivery across industries.',
-      url: `${siteConfig.url}/about-us`,
-      images: [
-        {
-          url: `${siteConfig.url}/og/about.webp`,
-          width: 1200,
-          height: 630,
-          alt: 'ClickMasters team – software development company',
-        },
-      ],
-    },
-    twitter: {
-      title: 'About ClickMasters – Our Team & Story',
-      description:
-        '10+ years, 50+ engineers, 100+ projects. Meet the team behind world-class custom software.',
-      images: [`${siteConfig.url}/og/about.webp`],
-    },
-  }),
+      'From a small development team to 50+ engineers delivering 100+ software products worldwide — ClickMasters Software House, ClickMasters AI Software House, and a trusted software development company building web, mobile, SaaS & AI solutions.',
+    url: `${siteConfig.url}/about-us`,
+    images: [
+      {
+        url: `${siteConfig.url}/og/about.webp`,
+        width: 1200,
+        height: 630,
+        alt: 'ClickMasters engineering team — software development company',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title:
+      'ClickMasters Software Development Company | AI & Software Solutions',
+    description:
+      '50+ engineers. 100+ projects. 10+ years. ClickMasters AI Software House & Software Development Company building scalable digital solutions worldwide.',
+    images: [`${siteConfig.url}/og/about.webp`],
+  },
+}),
 
-  // ── /services/[slug] ────────────────────────────────────────────────────────
+ 
+
+
+// ── /services/[slug] ────────────────────────────────────────────────────────
   serviceDetail: (title: string, description: string, slug: string): Metadata => ({
     title: `${title} Services | ClickMasters`,
     description,
@@ -799,185 +826,235 @@ export const metadataConfig = {
     },
   }),
 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   // ── /software-solutions ─────────────────────────────────────────────────────
-  solutions: (): Metadata => ({
-    title: 'Software Solutions Portfolio',
+solutions: (): Metadata => ({
+  title: 'What We’ve Built for Fast-Growing Companies | 100+ Scalable Software Systems by Clickmasters AI Software Development Company',
+  description:
+    'Explore how Clickmasters AI software development company builds software that powers real businesses at scale. From high-performance web platforms and mobile apps to enterprise SaaS and ERP systems — discover 100+ production-grade solutions used by companies in fintech, healthcare, retail, and logistics to grow faster, operate smarter, and scale without limits.',
+  alternates: { canonical: `${siteConfig.url}/software-solutions` },
+  openGraph: {
+    title: '100+ Production-Grade Software Systems Built for Growth | Clickmasters Portfolio',
     description:
-      'Portfolio of 100+ custom software projects: web platforms, mobile apps, ERP across fintech, healthcare, retail & logistics. Software house case studies.',
-    alternates: { canonical: `${siteConfig.url}/software-solutions` },
-    openGraph: {
-      title: 'Software Solutions Portfolio – 100+ Projects | ClickMasters',
-      description:
-        '100+ delivered projects across fintech, healthcare, retail, and logistics. Real results, real clients. Explore our portfolio.',
-      url: `${siteConfig.url}/software-solutions`,
-      images: [
-        {
-          url: `${siteConfig.url}/og/solutions.webp`,
-          width: 1200,
-          height: 630,
-          alt: 'ClickMasters software solutions portfolio',
-        },
-      ],
-    },
-    twitter: {
-      title: 'Software Portfolio – 100+ Projects | ClickMasters',
-      description:
-        'Real results across fintech, healthcare, retail & logistics. 100+ custom software projects delivered.',
-      images: [`${siteConfig.url}/og/solutions.webp`],
-    },
-  }),
+      'Not prototypes — production systems used by real businesses. See how Clickmasters AI software development company engineers scalable software for fintech, healthcare, retail, and logistics companies worldwide.',
+    url: `${siteConfig.url}/software-solutions`,
+    images: [
+      {
+        url: `${siteConfig.url}/og/solutions.webp`,
+        width: 1200,
+        height: 630,
+        alt: 'ClickMasters AI software portfolio of real scalable systems',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '100+ Scalable Software Systems Built for Real Businesses',
+    description:
+      'Real production software powering fintech, healthcare, retail & logistics companies — built for scale, performance, and growth.',
+    images: [`${siteConfig.url}/og/solutions.webp`],
+  },
+}),
+
+
+
+
+
+
+
+
+
+
+
 
   // ── /case-studies ────────────────────────────────────────────────────────────
-  caseStudies: (): Metadata => ({
-    title: 'Case Studies – Outcomes from Custom Software | ClickMasters',
+caseStudies: (): Metadata => ({
+  title: 'How Businesses Turn Ideas Into High-Performance Software | Clickmasters AI Software Development Company',
+  description:
+    'What does it really take to build software that scales, performs, and delivers results? Explore real transformation stories from Clickmasters AI software development company — where startups and enterprises turn complex ideas into powerful web apps, mobile apps, and SaaS platforms with measurable growth, performance gains, and real-world impact.',
+  alternates: { canonical: `${siteConfig.url}/case-studies` },
+  openGraph: {
+    title: 'From Idea to Impact — Real Software Transformations That Scaled Globally | Clickmasters',
     description:
-      'Case studies from our software development company: custom software, web & mobile apps, and SaaS outcomes for clients in the US, EU, and Middle East.',
-    alternates: { canonical: `${siteConfig.url}/case-studies` },
-    openGraph: {
-      title: 'Case Studies – Custom Software That Drives Results | ClickMasters',
-      description:
-        'Real projects, real outcomes. See how we ship high-performance software for businesses in the USA, Europe, and the Middle East.',
-      url: `${siteConfig.url}/case-studies`,
-      images: [
-        {
-          url: `${siteConfig.url}/og/solutions.webp`,
-          width: 1200,
-          height: 630,
-          alt: 'ClickMasters case studies and software project outcomes',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Case Studies | ClickMasters',
-      description:
-        'Deep dives into custom software projects: strategy, build, launch, and ROI.',
-      images: [`${siteConfig.url}/og/solutions.webp`],
-    },
-  }),
+      'Not theory. Not templates. Real engineering stories. See how Clickmasters AI software development company builds scalable systems that power businesses across the USA, Europe, and the Middle East — with proven results in performance, growth, and reliability.',
+    url: `${siteConfig.url}/case-studies`,
+    images: [
+      {
+        url: `${siteConfig.url}/og/solutions.webp`,
+        width: 1200,
+        height: 630,
+        alt: 'ClickMasters real software transformation case studies',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'From Idea to Impact | Real Software That Scales',
+    description:
+      'See how real businesses build scalable software that performs under pressure — AI, SaaS, and enterprise systems built for growth.',
+    images: [`${siteConfig.url}/og/solutions.webp`],
+  },
+}),
+
+
+
+
+
+
+
 
   // ── /blog ────────────────────────────────────────────────────────────────────
-  blog: (): Metadata => ({
-    title: 'Software Development Blog | ClickMasters Insights',
+blog: (): Metadata => ({
+  title: 'The Hidden Formula Behind Fast-Growing Software Products | Clickmasters AI Software Development Company',
+  description:
+    'Most software products never scale — but some explode in growth. Discover the real engineering principles behind successful systems from Clickmasters AI software development company, and learn how scalable AI platforms, SaaS products, and modern web applications are built to handle millions of users, real traffic, and real business pressure.',
+  alternates: { canonical: `${siteConfig.url}/blog` },
+  openGraph: {
+    title: 'What Makes Software Scale? The Engineering Truth | Clickmasters AI Software Development Company',
     description:
-      'Blog by a software development company: architecture, SaaS, mobile, AI, and engineering practices. Insights for teams building custom software solutions.',
-    alternates: { canonical: `${siteConfig.url}/blog` },
-    openGraph: {
-      title: 'ClickMasters Blog – Software Engineering and Product Insights',
-      description:
-        'Guides and insights on building, launching, and scaling modern software products.',
-      url: `${siteConfig.url}/blog`,
-      images: [
-        {
-          url: `${siteConfig.url}/og/solutions.webp`,
-          width: 1200,
-          height: 630,
-          alt: 'ClickMasters blog',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'ClickMasters Blog',
-      description:
-        'Actionable insights on architecture, delivery, and product growth from the ClickMasters team.',
-      images: [`${siteConfig.url}/og/solutions.webp`],
-    },
-  }),
+      'Not trends — real engineering. See how production-grade AI systems, SaaS platforms, and scalable applications are designed and built by Clickmasters AI software development company to survive growth, demand, and failure conditions.',
+    url: `${siteConfig.url}/blog`,
+    images: [
+      {
+        url: `${siteConfig.url}/og/solutions.webp`,
+        width: 1200,
+        height: 630,
+        alt: 'ClickMasters AI software engineering insights blog',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The Secret Behind Scalable Software | Clickmasters AI Software Development Company',
+    description:
+      'Real engineering behind high-growth SaaS, AI systems, and scalable software built for performance and millions of users.',
+    images: [`${siteConfig.url}/og/solutions.webp`],
+  },
+}),
 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   // ── /testimonials ───────────────────────────────────────────────────────────
-  testimonials: (): Metadata => ({
-    title: 'Client Reviews & Testimonials – Rated 4.9/5',
+testimonials: (): Metadata => ({
+  title: 'Why 100+ Businesses Trust Clickmasters AI Software Development Company',
+  description:
+    'See why startups and enterprises rate Clickmasters AI software development company 4.9/5. Real success stories from fintech, healthcare, retail, and logistics — building scalable web apps, mobile apps, SaaS, and AI-powered software that actually delivers results.',
+  alternates: { canonical: `${siteConfig.url}/testimonials` },
+  openGraph: {
+    title: 'They Chose Clickmasters — And Built Software That Scales',
     description:
-      'Client reviews for our software house: 4.9/5 from fintech, healthcare, retail & logistics. Real feedback on custom software and software developers.',
-    alternates: { canonical: `${siteConfig.url}/testimonials` },
-    openGraph: {
-      title: 'ClickMasters Reviews – Rated 4.9/5 by 100+ Clients',
-      description:
-        'Verified client reviews from fintech, healthcare, retail, and logistics. 100+ projects, 4.9/5 average rating.',
-      url: `${siteConfig.url}/testimonials`,
-      images: [
-        {
-          url: `${siteConfig.url}/og/testimonials.webp`,
-          width: 1200,
-          height: 630,
-          alt: 'ClickMasters client testimonials and reviews',
-        },
-      ],
-    },
-    twitter: {
-      title: 'Client Reviews – Rated 4.9/5 | ClickMasters',
-      description:
-        '100+ clients. 4.9/5 average rating. Real reviews from businesses who built their software with ClickMasters.',
-      images: [`${siteConfig.url}/og/testimonials.webp`],
-    },
-  }),
+      '100+ real businesses. 4.9/5 rating. Discover why clients trust Clickmasters AI software development company to turn ideas into powerful, revenue-driving digital products.',
+    url: `${siteConfig.url}/testimonials`,
+    images: [
+      {
+        url: `${siteConfig.url}/og/testimonials.webp`,
+        width: 1200,
+        height: 630,
+        alt: 'Client success stories at ClickMasters',
+      },
+    ],
+  },
+  twitter: {
+    title: 'Why 100+ Clients Trust Clickmasters | 4.9/5 Rated',
+    description:
+      'Real businesses. Real results. See why clients choose Clickmasters AI software development company for scalable software solutions.',
+    images: [`${siteConfig.url}/og/testimonials.webp`],
+  },
+}),
+
+
+
+
+
+
+
+
 
   // ── /contact ────────────────────────────────────────────────────────────────
-  contact: (): Metadata => ({
-    title: 'Contact ClickMasters | Get a Free Software Development Quote',
+contact: (): Metadata => ({
+  title: 'Turn Your Idea Into Software | Get a Free Expert Consultation Today',
+  description:
+    'Have a software idea or project in mind? Talk directly to ClickMasters engineers and get a free, no-obligation consultation for custom web apps, mobile apps, SaaS, and enterprise solutions. Fast response within 24 hours. Trusted worldwide from Islamabad.',
+  alternates: { canonical: `${siteConfig.url}/contact-us` },
+  openGraph: {
+    title: 'Let’s Build Your Software Idea | Free Consultation with Experts',
     description:
-      'Contact our software development company for a free quote on custom software, web apps, mobile, or SaaS. We reply within one business day. Islamabad, worldwide.',
-    alternates: { canonical: `${siteConfig.url}/contact-us` },
-    openGraph: {
-      title: 'Contact ClickMasters – Free Software Development Consultation',
-      description:
-        'Share your project requirements and hear back within 24 hours. No-obligation consultation with expert developers.',
-      url: `${siteConfig.url}/contact-us`,
-      images: [
-        {
-          url: `${siteConfig.url}/og/contact.webp`,
-          width: 1200,
-          height: 630,
-          alt: 'Contact ClickMasters – free software development consultation',
-        },
-      ],
-    },
-    twitter: {
-      title: 'Get a Free Consultation | ClickMasters',
-      description:
-        'Tell us about your project. Our team responds within 24 hours with a no-obligation quote.',
-      images: [`${siteConfig.url}/og/contact.webp`],
-    },
-  }),
+      'Speak with experienced software engineers and turn your idea into a scalable product. Get a fast, free consultation for web, mobile, SaaS, or AI solutions within 24 hours.',
+    url: `${siteConfig.url}/contact-us`,
+    images: [
+      {
+        url: `${siteConfig.url}/og/contact.webp`,
+        width: 1200,
+        height: 630,
+        alt: 'ClickMasters software engineers ready for consultation',
+      },
+    ],
+  },
+  twitter: {
+    title: 'Turn Your Idea Into Software | Free Expert Consultation',
+    description:
+      'Get a free consultation with software engineers. We help you build web apps, mobile apps, SaaS & AI products — fast response in 24 hours.',
+    images: [`${siteConfig.url}/og/contact.webp`],
+  },
+}),
 
   // ── /software-solutions/[slug] ───────────────────────────────────────────────
   solutionsDetail: (
-    title: string,
-    description: string,
-    slug: string,
-    ogImageUrl?: string,
-  ): Metadata => ({
-    title: `${title} – Custom Software Case Study`,
+  title: string,
+  description: string,
+  slug: string,
+  ogImageUrl?: string,
+): Metadata => ({
+  title: `${title} | Built by Clickmasters AI Software Development Company That Turns Ideas Into Scalable Products`,
+  description:
+    description ||
+    `What if your idea could become a high-performing digital product? Clickmasters AI software development company transforms ${title} into powerful, scalable, and revenue-ready software solutions using modern engineering and AI-driven development. Built for speed, scale, and real business growth.`,
+  alternates: {
+    canonical: `${siteConfig.url}/software-solutions/${slug}`,
+  },
+  openGraph: {
+    title: `${title} | From Idea to Impact by Clickmasters AI Software Development Company`,
     description:
       description ||
-      `See how ClickMasters built a custom ${title} solution. Explore the tech stack, challenges solved, and measurable results delivered.`,
-    alternates: {
-      canonical: `${siteConfig.url}/software-solutions/${slug}`,
-    },
-    openGraph: {
-      title: `${title} | Software Solution by ClickMasters`,
-      description:
-        description ||
-        `How ClickMasters built a custom ${title} solution – tech stack, challenges, and results.`,
-      url: `${siteConfig.url}/software-solutions/${slug}`,
-      images: [
-        {
-          url: ogImageUrl || `${siteConfig.url}/og/solutions.webp`,
-          width: 1200,
-          height: 630,
-          alt: `${title} – software solution by ClickMasters`,
-        },
-      ],
-    },
-    twitter: {
-      title: `${title} | ClickMasters Case Study`,
-      description:
-        description ||
-        `See how ClickMasters delivered a custom ${title} solution – stack, challenges, and results.`,
-      images: [ogImageUrl || `${siteConfig.url}/og/solutions.webp`],
-    },
-  }),
+      `We don’t just build software — we build growth engines. See how Clickmasters AI software development company designed and delivered a high-impact ${title} solution that solves real problems and scales with your business.`,
+    url: `${siteConfig.url}/software-solutions/${slug}`,
+    images: [
+      {
+        url: ogImageUrl || `${siteConfig.url}/og/solutions.webp`,
+        width: 1200,
+        height: 630,
+        alt: `${title} – built by Clickmasters AI software development company`,
+      },
+    ],
+  },
+  twitter: {
+    title: `${title} | Turn Ideas Into Real Software Products`,
+    description:
+      description ||
+      `Clickmasters AI software development company builds scalable ${title} solutions designed for performance, growth, and real-world business impact.`,
+    images: [ogImageUrl || `${siteConfig.url}/og/solutions.webp`],
+  },
+}),
+
+
+
+
+
+
 
   // ── Admin pages (no-index – never appear in search results) ─────────────────
   admin: {
