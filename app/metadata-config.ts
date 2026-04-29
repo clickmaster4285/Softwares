@@ -16,7 +16,7 @@ export const siteConfig = {
  
   url: process.env.NEXT_PUBLIC_APP_URL || 'https://software.clickmasters.pk',
  
-  ogImage: '/og/default.webp',
+  ogImage: '/og/logo-white.webp',
  
   twitterHandle: '@clickmasters',
  
@@ -560,7 +560,7 @@ export const localBusinessSchema = {
   url: siteConfig.url,
 
   logo: `${siteConfig.url}/images/logo-white.webp`,
-  image: `${siteConfig.url}/og/default.webp`,
+  image: `${siteConfig.url}/og/logo-white.webp`,
 
   description: siteConfig.description,
 
@@ -613,11 +613,11 @@ export const defaultMetadata: Metadata = {
     canonical: siteConfig.url,
   },
 
-  icons: {
-    icon: [{ url: '/images/logo-white.webp', type: 'image/webp' }],
-    apple: '/images/logo-white.webp',
-    shortcut: '/images/logo-white.webp',
-  },
+icons: {
+  icon: '/favicon.svg',
+  shortcut: '/favicon.svg',
+  apple: '/favicon.svg',
+},
 
   openGraph: {
     type: 'website',
@@ -646,7 +646,7 @@ export const defaultMetadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
 
-    images: [`${siteConfig.url}/og/default.webp`],
+    images: [`${siteConfig.url}/og/logo-white.webp`],
   },
 
   robots: {
@@ -752,7 +752,7 @@ about: (): Metadata => ({
     url: `${siteConfig.url}/about-us`,
     images: [
       {
-        url: `${siteConfig.url}/og/about.webp`,
+        url: `${siteConfig.url}/og/logo-white.webp`,
         width: 1200,
         height: 630,
         alt: 'ClickMasters engineering team — software development company',
@@ -765,7 +765,7 @@ about: (): Metadata => ({
       'ClickMasters Software Development Company | AI & Software Solutions',
     description:
       '50+ engineers. 100+ projects. 10+ years. ClickMasters AI Software House & Software Development Company building scalable digital solutions worldwide.',
-    images: [`${siteConfig.url}/og/about.webp`],
+    images: [`${siteConfig.url}/og/logo-white.webp`],
   },
 }),
 
@@ -783,7 +783,7 @@ about: (): Metadata => ({
       url: `${siteConfig.url}/services/${slug}`,
       images: [
         {
-          url: `${siteConfig.url}/og/services.webp`,
+          url: `${siteConfig.url}/og/logo-white.webp`,
           width: 1200,
           height: 630,
           alt: `${title} — ClickMasters software services`,
@@ -794,7 +794,7 @@ about: (): Metadata => ({
       card: 'summary_large_image',
       title: `${title} | ClickMasters`,
       description,
-      images: [`${siteConfig.url}/og/services.webp`],
+      images: [`${siteConfig.url}/og/logo-white.webp`],
     },
   }),
 
@@ -811,7 +811,7 @@ about: (): Metadata => ({
       url: `${siteConfig.url}/services`,
       images: [
         {
-          url: `${siteConfig.url}/og/services.webp`,
+          url: `${siteConfig.url}/og/logo-white.webp`,
           width: 1200,
           height: 630,
           alt: 'ClickMasters software development services',
@@ -822,7 +822,7 @@ about: (): Metadata => ({
       title: 'Software Development Services | ClickMasters',
       description:
         'Web apps, mobile apps, ERP, APIs & cloud. Full-cycle development tailored to your business. Free consultation.',
-      images: [`${siteConfig.url}/og/services.webp`],
+      images: [`${siteConfig.url}/og/logo-white.webp`],
     },
   }),
 
@@ -846,7 +846,7 @@ solutions: (): Metadata => ({
     url: `${siteConfig.url}/software-solutions`,
     images: [
       {
-        url: `${siteConfig.url}/og/solutions.webp`,
+        url: `${siteConfig.url}/og/logo-white.webp`,
         width: 1200,
         height: 630,
         alt: 'ClickMasters AI software portfolio of real scalable systems',
@@ -858,7 +858,7 @@ solutions: (): Metadata => ({
     title: '100+ Scalable Software Systems Built for Real Businesses',
     description:
       'Real production software powering fintech, healthcare, retail & logistics companies — built for scale, performance, and growth.',
-    images: [`${siteConfig.url}/og/solutions.webp`],
+    images: [`${siteConfig.url}/og/logo-white.webp`],
   },
 }),
 
@@ -886,7 +886,7 @@ caseStudies: (): Metadata => ({
     url: `${siteConfig.url}/case-studies`,
     images: [
       {
-        url: `${siteConfig.url}/og/solutions.webp`,
+        url: `${siteConfig.url}/og/logo-white.webp`,
         width: 1200,
         height: 630,
         alt: 'ClickMasters real software transformation case studies',
@@ -898,7 +898,7 @@ caseStudies: (): Metadata => ({
     title: 'From Idea to Impact | Real Software That Scales',
     description:
       'See how real businesses build scalable software that performs under pressure — AI, SaaS, and enterprise systems built for growth.',
-    images: [`${siteConfig.url}/og/solutions.webp`],
+    images: [`${siteConfig.url}/og/logo-white.webp`],
   },
 }),
 
@@ -922,7 +922,7 @@ blog: (): Metadata => ({
     url: `${siteConfig.url}/blog`,
     images: [
       {
-        url: `${siteConfig.url}/og/solutions.webp`,
+        url: `${siteConfig.url}/og/logo-white.webp`,
         width: 1200,
         height: 630,
         alt: 'ClickMasters AI software engineering insights blog',
@@ -934,7 +934,7 @@ blog: (): Metadata => ({
     title: 'The Secret Behind Scalable Software | Clickmasters AI Software Development Company',
     description:
       'Real engineering behind high-growth SaaS, AI systems, and scalable software built for performance and millions of users.',
-    images: [`${siteConfig.url}/og/solutions.webp`],
+    images: [`${siteConfig.url}/og/logo-white.webp`],
   },
 }),
 
@@ -961,7 +961,7 @@ testimonials: (): Metadata => ({
     url: `${siteConfig.url}/testimonials`,
     images: [
       {
-        url: `${siteConfig.url}/og/testimonials.webp`,
+        url: `${siteConfig.url}/og/logo-white.webp`,
         width: 1200,
         height: 630,
         alt: 'Client success stories at ClickMasters',
@@ -972,7 +972,7 @@ testimonials: (): Metadata => ({
     title: 'Why 100+ Clients Trust Clickmasters | 4.9/5 Rated',
     description:
       'Real businesses. Real results. See why clients choose Clickmasters AI software development company for scalable software solutions.',
-    images: [`${siteConfig.url}/og/testimonials.webp`],
+    images: [`${siteConfig.url}/og/logo-white.webp`],
   },
 }),
 
@@ -997,7 +997,7 @@ contact: (): Metadata => ({
     url: `${siteConfig.url}/contact-us`,
     images: [
       {
-        url: `${siteConfig.url}/og/contact.webp`,
+        url: `${siteConfig.url}/og/logo-white.webp`,
         width: 1200,
         height: 630,
         alt: 'ClickMasters software engineers ready for consultation',
@@ -1008,7 +1008,7 @@ contact: (): Metadata => ({
     title: 'Turn Your Idea Into Software | Free Expert Consultation',
     description:
       'Get a free consultation with software engineers. We help you build web apps, mobile apps, SaaS & AI products — fast response in 24 hours.',
-    images: [`${siteConfig.url}/og/contact.webp`],
+    images: [`${siteConfig.url}/og/logo-white.webp`],
   },
 }),
 
