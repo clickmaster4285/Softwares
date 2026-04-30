@@ -277,8 +277,8 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         <div className="mx-auto max-w-8xl px-5 md:px-8 lg:px-10">
           <div className="relative lg:grid lg:grid-cols-[260px_1fr] lg:gap-16">
             {/* Sticky Table of Contents - Desktop */}
-        <aside className="hidden lg:block">
-            <div className="sticky top-24 py-12">
+        <aside className="hidden lg:block sticky top-12 self-start">
+            <div className="py-12">
               <TableOfContents items={tocItems} />
             </div>
           </aside>
