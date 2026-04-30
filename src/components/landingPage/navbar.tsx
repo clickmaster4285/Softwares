@@ -433,6 +433,17 @@ export function Navbar() {
           </Link>
 
           <Link
+            href="/faqs"
+            onClick={closeDropdowns}
+            className={cn(
+              'text-sm font-medium transition-colors',
+              linkStyle(isActivePath('/faqs'))
+            )}
+          >
+FAQS  </Link>
+
+
+          <Link
             href="/about-us"
             onClick={closeDropdowns}
             className={cn(
