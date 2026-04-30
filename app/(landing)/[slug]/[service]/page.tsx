@@ -172,7 +172,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
             <div className="absolute bottom-0 left-0 h-64 w-64 -translate-x-1/2 translate-y-1/2 rounded-full bg-orange-100 blur-3xl" />
           </div>
 
-          <div className="relative mx-auto max-w-8xl px-5 pb-16 pt-20 md:px-8 lg:px-10 lg:pb-20 lg:pt-28">
+          <div className="relative mx-auto max-w-8xl px-5 pb-16 pt-20 md:px-8 lg:px-10 lg:pb-3 lg:pt-28">
             <div className="flex flex-col lg:flex-row lg:items-start lg:gap-12">
               <div className="flex-1">
                 {/* Breadcrumb */}
@@ -244,31 +244,26 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Stats Card */}
-              <div className="mt-10 lg:mt-0 lg:w-80">
-                <div className="rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-xl shadow-slate-200/50 backdrop-blur-sm">
-                  <p className="text-sm font-medium text-slate-500">Our Track Record</p>
-                  <div className="mt-4 space-y-4">
-                    {[
-                      { icon: Award, value: '8+', label: 'Years Experience' },
-                      { icon: Layers3, value: '150+', label: 'Projects Delivered' },
-                      { icon: Users, value: '98%', label: 'Client Satisfaction' },
-                      { icon: Headphones, value: '24/7', label: 'Support Available' },
-                    ].map((stat) => (
-                      <div key={stat.label} className="flex items-center gap-4">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50">
-                          <stat.icon className="h-5 w-5 text-orange-600" />
-                        </div>
-                        <div>
-                          <p className="text-2xl font-semibold text-slate-900">{stat.value}</p>
-                          <p className="text-sm text-slate-500">{stat.label}</p>
-                        </div>
-                      </div>
-                    ))}
+            {/* Stats Grid */}
+            <div className="mt-16 grid grid-cols-2 gap-6 border-t border-slate-200 pt-3 sm:gap-8 lg:grid-cols-4">
+              {[
+                { icon: Award, value: '8+', label: 'Years Experience' },
+                { icon: Layers3, value: '150+', label: 'Projects Delivered' },
+                { icon: Users, value: '98%', label: 'Client Satisfaction' },
+                { icon: Headphones, value: '24/7', label: 'Support Available' },
+              ].map((stat) => (
+                <div key={stat.label} className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50">
+                    <stat.icon className="h-5 w-5 text-orange-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-semibold text-slate-900">{stat.value}</p>
+                    <p className="text-sm text-slate-500">{stat.label}</p>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>

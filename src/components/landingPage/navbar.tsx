@@ -300,9 +300,9 @@ export function Navbar() {
 
   return (
     <header
-      className={cn('fixed inset-x-0 top-0 z-50 w-full transition-all duration-300', navStyle)}
+      className={cn('fixed inset-x-0 top-0 z-50 w-8xl transition-all duration-300', navStyle)}
     >
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
+      <div className="w-full px-5 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
