@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 
 import React, { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import { useQuery } from "@tanstack/react-query";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -519,12 +520,12 @@ export function TestimonialsSection() {
         {/* View All Button */}
         {testimonials.length > 6 && (
           <div className="text-center mt-12">
-            <a
+            <Link
               href="/testimonials"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-all"
             >
               View All Testimonials ({testimonials.length})
-            </a>
+            </Link>
           </div>
         )}
       </div>
