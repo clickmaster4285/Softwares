@@ -300,9 +300,9 @@ export function Navbar() {
 
   return (
     <header
-      className={cn('fixed inset-x-0 top-0 z-50 w-8xl transition-all duration-300', navStyle)}
+      className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', navStyle)}
     >
-      <div className="w-full px-5 flex h-20 items-center justify-between">
+      <div className="container mx-auto px-4 lg:px-8 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
@@ -315,14 +315,14 @@ export function Navbar() {
             alt="ClickMasters"
             width={800}
             height={400}
-            className="h-auto w-48 md:w-64"
+            className="h-auto w-36 sm:w-48 xl:w-64"
             priority
             fetchPriority="high"
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden xl:flex items-center gap-4 2xl:gap-8">
           {/* Home Link */}
           <Link
             href="/"
@@ -343,9 +343,7 @@ export function Navbar() {
               className={cn(
                 'text-sm font-medium transition-colors flex items-center gap-1',
                 activeDropdown === 'solutions'
-                  ? isScrolled
-                    ? 'text-primary'
-                    : 'text-primary'
+                  ? 'text-primary'
                   : isPageLoading
                     ? 'text-black/70 hover:text-primary'
                     : isLightHero
@@ -440,8 +438,8 @@ export function Navbar() {
               linkStyle(isActivePath('/faqs'))
             )}
           >
-FAQS  </Link>
-
+            FAQS
+          </Link>
 
           <Link
             href="/about-us"
@@ -486,16 +484,14 @@ FAQS  </Link>
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <Link href="/admin/login" onClick={closeDropdowns}>
             <button
               className={cn(
-                'px-5 py-2 text-sm font-medium transition-colors duration-300',
-                isPageLoading
+                'px-5 py-2 text-sm font-medium transition-colors duration-300 rounded-md',
+                isPageLoading || isScrolled || !isLightHero
                   ? 'text-white bg-primary hover:bg-primary/90'
-                  : isScrolled
-                    ? 'text-white rounded-md bg-primary hover:bg-primary/90'
-                    : 'text-white bg-primary rounded-md hover:bg-primary/90'
+                  : 'text-white bg-primary hover:bg-primary/90'
               )}
             >
               Sign In
@@ -505,7 +501,7 @@ FAQS  </Link>
 
         {/* Mobile Menu Trigger */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="lg:hidden">
+          <SheetTrigger asChild className="xl:hidden">
             <button
               className={cn(
                 'p-2 transition-colors',
@@ -535,7 +531,7 @@ FAQS  </Link>
 
               {/* Mobile Navigation */}
               <nav className="flex-1 overflow-y-auto p-6">
-                <div className="flex flex-col space-y-2">
+                <div className="flex flex-col space-y-1">
                   {/* Home */}
                   <Link
                     href="/"
@@ -560,31 +556,10 @@ FAQS  </Link>
                   />
 
                   {/* Services */}
-                  <Link
-                    href="/services"
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      'py-3 font-medium transition-colors border-b border-black/5',
-                      isActivePath('/services')
-                        ? 'text-primary font-bold'
-                        : 'text-black/70 hover:text-primary'
-                    )}
-                  >
-                    Services
-                  </Link>
-                  <ul className="mb-2 ml-1 space-y-1 border-b border-black/5 pb-3">
-                    {mobileServicePageLinks.map((s) => (
-                      <li key={s.href}>
-                        <Link
-                          href={s.href}
-                          onClick={() => setIsOpen(false)}
-                          className="block py-1.5 pl-3 text-sm text-black/60 hover:text-primary"
-                        >
-                          {s.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <MobileServicesDropdown
+                    title="Services"
+                    onLinkClick={() => setIsOpen(false)}
+                  />
 
                   {/* Hire Us Mobile Dropdown */}
                   <MobileHireUsDropdown
@@ -604,6 +579,19 @@ FAQS  </Link>
                     )}
                   >
                     Case Studies
+                  </Link>
+
+                  <Link
+                    href="/faqs"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      'py-3 font-medium transition-colors border-b border-black/5',
+                      isActivePath('/faqs')
+                        ? 'text-primary font-bold'
+                        : 'text-black/70 hover:text-primary'
+                    )}
+                  >
+                    FAQS
                   </Link>
 
                   <Link
@@ -663,7 +651,7 @@ FAQS  </Link>
               {/* Mobile Footer */}
               <div className="p-6 border-t border-black/5">
                 <Link href="/admin/login" onClick={() => setIsOpen(false)}>
-                  <button className="w-full px-5 py-3 text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors duration-300">
+                  <button className="w-full px-5 py-3 text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors duration-300 rounded-md">
                     Sign In
                   </button>
                 </Link>
@@ -1082,6 +1070,44 @@ function MobileHireUsDropdown({ title, items, onLinkClick }: MobileHireUsDropdow
                 <item.icon className="h-4 w-4 text-black/40" />
                 <span>{item.title}</span>
               </span>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Mobile Dropdown Component for Services
+interface MobileServicesDropdownProps {
+  title: string;
+  onLinkClick: () => void;
+}
+
+function MobileServicesDropdown({ title, onLinkClick }: MobileServicesDropdownProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="border-b border-black/5">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="flex items-center justify-between w-full py-3 font-medium text-black/70 hover:text-primary transition-colors"
+      >
+        {title}
+        <ChevronDown
+          className={cn('h-4 w-4 transition-transform duration-300', isExpanded && 'rotate-180')}
+        />
+      </button>
+      {isExpanded && (
+        <div className="pl-4 space-y-2 mt-3 pb-3">
+          {mobileServicePageLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={onLinkClick}
+              className="block py-1.5 text-sm text-black/60 hover:text-primary transition-colors"
+            >
+              {link.title}
             </Link>
           ))}
         </div>

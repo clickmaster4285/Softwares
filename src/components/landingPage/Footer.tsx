@@ -142,7 +142,7 @@ export function Footer(): JSX.Element {
         }}
       />
 
-      <div className="container mx-auto px-4 lg:px-8 py-16 relative z-10">
+      <div className="container mx-auto px-4 lg:px-8 py-2 relative z-10">
         {/* Top Section */}
         <motion.div
           variants={containerVariants}
