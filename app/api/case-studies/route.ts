@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import CaseStudy from '../../../lib/models/CaseStudy';
 import Project from '../../../lib/models/Project';
+import '../../../lib/models/Category';
 import dbConnect from '../../../lib/mongoose';
 
 function slugify(value: string) {
