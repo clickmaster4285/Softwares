@@ -13,9 +13,10 @@ interface TOCItem {
 
 interface TableOfContentsProps {
   items: TOCItem[];
+  title?: string;
 }
 
-export function TableOfContents({ items }: TableOfContentsProps) {
+export function TableOfContents({ items, title = "On this page" }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("");
   const [progress, setProgress] = useState(0);
 
@@ -80,7 +81,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50">
           <List className="h-4 w-4 text-orange-600" />
         </div>
-        <p className="text-sm font-semibold text-slate-900">On this page</p>
+        <p className="text-sm font-semibold text-slate-900">{title}</p>
       </div>
 
       {/* Progress bar */}

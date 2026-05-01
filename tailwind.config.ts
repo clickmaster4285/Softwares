@@ -56,6 +56,15 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontWeight: {
+        bold: "600",
+      },
+      fontFamily: {
+        sans: ["var(--font-dm-sans)", "sans-serif"],
+        serif: ["var(--font-dm-serif)", "serif"],
+        mono: ["var(--font-dm-mono)", "monospace"],
+        display: ["var(--font-dm-serif)", "serif"],
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
