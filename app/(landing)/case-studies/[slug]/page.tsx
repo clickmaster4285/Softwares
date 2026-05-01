@@ -257,7 +257,7 @@ export default async function CaseStudyDetailPage({
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-7 inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white pl-0 pr-4 py-2.5 text-[13px] font-semibold text-primary shadow-sm transition hover:border-primary/30 hover:bg-primary/5"
+                  className="mt-7 inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-[13px] font-semibold text-primary shadow-sm transition hover:border-primary/30 hover:bg-primary/5"
                 >
                   View live product
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden />
