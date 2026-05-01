@@ -142,14 +142,14 @@ export function Footer(): JSX.Element {
         }}
       />
 
-      <div className="container mx-auto px-4 lg:px-8 py-2 relative z-10">
+      <div className="max-w-8xl mx-auto px-16 md:px-8 lg:px-16 py-2 relative z-10">
         {/* Top Section */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid lg:grid-cols-2 gap-12 mb-12 pb-12 border-b border-background/20"
+          className="grid lg:grid-cols-2 gap-12 mb-12 pb-12 border-b border-background/20 items-center"
         >
           <motion.div variants={itemVariants}>
             <motion.div
@@ -162,7 +162,7 @@ export function Footer(): JSX.Element {
                   alt="ClickMasters"
                   width={800}
                   height={400}
-                  className="h-auto w-36"
+                  className="h-auto w-48"
                   loading="lazy"
                 />
               </Link>
@@ -292,7 +292,7 @@ export function Footer(): JSX.Element {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-background/20"
+          className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-background/20"
         >
           <motion.p className="text-sm text-background/60" whileHover={{ color: '#ffffff' }}>
             © {currentYear} ClickMasters. All rights reserved.
