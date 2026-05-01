@@ -149,7 +149,7 @@ export function Footer(): JSX.Element {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid lg:grid-cols-2 gap-12 mb-12 pb-12 border-b border-background/20 items-center"
+          className="grid lg:grid-cols-2 gap-12 mb-2 pb-2 border-b border-background/20 items-center"
         >
           <motion.div variants={itemVariants}>
             <motion.div
@@ -160,9 +160,9 @@ export function Footer(): JSX.Element {
                 <Image
                   src="/images/logo-white.webp"
                   alt="ClickMasters"
-                  width={800}
+                  width={600}
                   height={400}
-                  className="h-auto w-48"
+                  className="h-auto w-30 sm:w-48 xl:w-64"
                   loading="lazy"
                 />
               </Link>
@@ -247,7 +247,7 @@ export function Footer(): JSX.Element {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12"
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-2"
         >
           {(Object.entries(footerLinks) as [keyof FooterLinks, FooterLink[]][]).map(
             ([category, links]) => (
