@@ -221,7 +221,7 @@ export default async function CaseStudyDetailPage({
               )}
 
               {/* Title */}
-              <h1 className="max-w-3xl font-display text-3xl font-normal leading-[1.15] tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+              <h1 className="max-w-8xl font-display text-3xl font-normal leading-[1.15] tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
                 {cs.title}
               </h1>
 
@@ -233,7 +233,7 @@ export default async function CaseStudyDetailPage({
               )}
 
               {/* Excerpt */}
-              <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-slate-500">
+              <p className="mt-5 max-w-8xl text-[15px] leading-relaxed text-slate-500">
                 {cs.excerpt}
               </p>
 
