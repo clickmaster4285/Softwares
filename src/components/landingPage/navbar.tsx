@@ -302,7 +302,7 @@ export function Navbar() {
     <header
       className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', navStyle)}
     >
-      <div className="container mx-auto px-4 lg:px-8 flex h-20 items-center justify-between">
+      <div className="max-w-8xl mx-auto px-5 md:px-8 lg:px-10 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
@@ -313,9 +313,9 @@ export function Navbar() {
             key={logoToShow}
             src={logoToShow}
             alt="ClickMasters"
-            width={800}
+            width={600}
             height={400}
-            className="h-auto w-36 sm:w-48 xl:w-64"
+            className="h-auto w-30 sm:w-48 xl:w-64"
             priority
             fetchPriority="high"
           />
@@ -673,7 +673,7 @@ export function Navbar() {
           onMouseLeave={closeDropdowns}
           className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
         >
-          <div className="container mx-auto px-4 lg:px-8 py-0">
+          <div className="max-w-8xl mx-auto px-5 md:px-8 lg:px-10 py-0">
             {isLoadingProjects ? (
               <div
                 ref={dropdownRef}
@@ -788,7 +788,7 @@ export function Navbar() {
           onMouseLeave={closeDropdowns}
           className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
         >
-          <div className="container mx-auto px-4 lg:px-8 py-0">
+          <div className="max-w-8xl mx-auto px-5 md:px-8 lg:px-10 py-0">
             <div
               ref={dropdownRef}
               onMouseLeave={closeDropdowns}
@@ -890,7 +890,7 @@ export function Navbar() {
           onMouseLeave={closeDropdowns}
           className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
         >
-          <div className="container mx-auto px-4 lg:px-8 py-0">
+          <div className="max-w-8xl mx-auto px-5 md:px-8 lg:px-10 py-0">
             <div
               ref={dropdownRef}
               onMouseLeave={closeDropdowns}

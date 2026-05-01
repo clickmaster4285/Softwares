@@ -172,7 +172,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
             <div className="absolute bottom-0 left-0 h-64 w-64 -translate-x-1/2 translate-y-1/2 rounded-full bg-orange-100 blur-3xl" />
           </div>
 
-          <div className="relative mx-auto max-w-8xl px-5 pb-16 pt-20 md:px-8 lg:px-10 lg:pb-3 lg:pt-28">
+          <div className="relative mx-auto max-w-8xl px-12 pb-16 pt-20 md:px-8 lg:px-16 lg:pb-3 lg:pt-28">
             <div className="flex flex-col lg:flex-row lg:items-start lg:gap-12">
               <div className="flex-1">
                 {/* Breadcrumb */}
@@ -269,7 +269,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         </section>
 
         {/* Main Content with Table of Contents */}
-        <div className="mx-auto max-w-8xl px-5 md:px-8 lg:px-10">
+        <div className="mx-auto max-w-8xl px-16 md:px-8 lg:px-16">
           <div className="relative lg:grid lg:grid-cols-[260px_1fr] lg:gap-16">
             {/* Sticky Table of Contents - Desktop */}
         <aside className="hidden lg:block sticky top-12 self-start">

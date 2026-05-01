@@ -86,11 +86,11 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-inter), system-ui, sans-serif;
+    font-family: 'Aptos', 'Aptos Narrow', system-ui, -apple-system, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    font-family: 'Aptos', 'Aptos Narrow', system-ui, -apple-system, sans-serif;
   }
 }
 

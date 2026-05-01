@@ -1,5 +1,7 @@
 import { breadcrumbSchema, metadataConfig } from '@/app/metadata-config';
 import CaseStudy from '../../../lib/models/CaseStudy';
+import '../../../lib/models/Project';
+import '../../../lib/models/Category';
 import dbConnect from '../../../lib/mongoose';
 import CaseStudiesClient, { type CaseStudyCard } from './CaseStudiesClient';
 import Script from 'next/script';
@@ -21,7 +23,8 @@ export default async function CaseStudiesPage() {
       .lean();
 
     initialCaseStudies = JSON.parse(JSON.stringify(raw)) as CaseStudyCard[];
-  } catch {
+  } catch (err) {
+    console.error('CaseStudiesPage Error:', err);
     // DB unavailable during build or at runtime — client will refetch from /api/case-studies
   }
 
