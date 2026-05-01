@@ -159,7 +159,7 @@ export default async function CaseStudyDetailPage({
   const fallbackThumb =
     project?.thumbnail && typeof project.thumbnail === 'string' ? project.thumbnail : '';
   const heroImage = cs.thumbnail?.trim() ? cs.thumbnail : fallbackThumb;
-  const imageSrc = heroImage ? resolveImageUrl(heroImage) : '/placeholder.svg';
+  const imageSrc = heroImage ? resolveImageUrl(heroImage) : null;
   const categoryName = project?.category
     ? getCategoryName(project.category as string | { _id: string; name: string })
     : '';
@@ -206,7 +206,7 @@ export default async function CaseStudyDetailPage({
 
             <div className="relative mx-auto max-w-8xl px-16 pb-12 pt-16 md:px-8 lg:px-16">
               {/* Back link */}
-              <Button variant="ghost" className="-ml-2 mb-8 gap-1.5 text-[13px] text-slate-500 hover:text-slate-900" asChild>
+              <Button variant="ghost" className="-ml-2 mb-8 gap-1.5 text-[13px] text-slate-500 hover:text-orange-500 hover:bg-transparent pl-0" asChild>
                 <Link href="/case-studies">
                   <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
                   All case studies
@@ -257,7 +257,7 @@ export default async function CaseStudyDetailPage({
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-7 inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-[13px] font-semibold text-primary shadow-sm transition hover:border-primary/30 hover:bg-primary/5"
+                  className="mt-7 inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white pl-0 pr-4 py-2.5 text-[13px] font-semibold text-primary shadow-sm transition hover:border-primary/30 hover:bg-primary/5"
                 >
                   View live product
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden />
@@ -269,11 +269,13 @@ export default async function CaseStudyDetailPage({
           {/* ── Hero image ────────────────────────────────────────────────── */}
           <div className="border-b border-slate-200 bg-white px-16 md:px-8 lg:px-16 pb-0">
             <div className="mx-auto max-w-8xl">
-              <img
-                src={imageSrc}
-                alt={`${cs.title} — case study hero image`}
-                className="w-full max-h-[460px] rounded-t-2xl border border-b-0 border-slate-200 object-cover"
-              />
+              <div className="relative aspect-[16/9] overflow-hidden bg-slate-100 rounded-t-2xl border border-b-0 border-slate-200">
+                <img
+                  src={imageSrc || "/placeholder.svg"}
+                  alt={`${cs.title} — case study hero image`}
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
             </div>
           </div>
 
@@ -322,7 +324,6 @@ export default async function CaseStudyDetailPage({
               <aside className="hidden lg:block">
                 <div className="sticky top-24">
                   <TableOfContents items={tocItems} title="Case Study Navigation" />
-
                 </div>
               </aside>
 
