@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import {
   ArrowRight,
@@ -21,7 +22,7 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CountUp from 'react-countup';
-import { getAllServicePages, getServicePath } from '@/lib/service-pages';
+import { getAllServicePages, getServicePath, allTechnologies } from '@/lib/service-pages';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -177,24 +178,76 @@ const stats: StatItem[] = [
   },
 ];
 
-// Technologies
-const technologies = [
-  { name: 'React', category: 'Frontend' },
-  { name: 'Next.js', category: 'Frontend' },
-  { name: 'Vue.js', category: 'Frontend' },
-  { name: 'Angular', category: 'Frontend' },
-  { name: 'Node.js', category: 'Backend' },
-  { name: 'Python', category: 'Backend' },
-  { name: 'Java', category: 'Backend' },
-  { name: 'PHP', category: 'Backend' },
-  { name: 'AWS Cloud', category: 'Cloud' },
-  { name: 'Azure Cloud', category: 'Cloud' },
-  { name: 'Docker Containerization', category: 'DevOps' },
-  { name: 'Kubernetes Orchestration', category: 'DevOps' },
-  { name: 'MongoDB Database', category: 'Database' },
-  { name: 'PostgreSQL Database', category: 'Database' },
-  { name: 'MySQL Database', category: 'Database' },
-  { name: 'Redis Caching', category: 'Database' },
+// Structured Technologies Data - Exhaustive List
+const technologyGroups = [
+  {
+    category: 'Languages & Systems',
+    items: [
+      allTechnologies.dotnet, allTechnologies.csharp, allTechnologies.java, allTechnologies.python, 
+      allTechnologies.nodejs, allTechnologies.go, allTechnologies.rust, allTechnologies.php,
+      allTechnologies.ruby, allTechnologies.cpp, allTechnologies.c, allTechnologies.elixir,
+      allTechnologies.kotlin, allTechnologies.scala, allTechnologies.dart, allTechnologies.swift,
+      allTechnologies.typescript, allTechnologies.javascript, allTechnologies.deno, allTechnologies.bun
+    ],
+  },
+  {
+    category: 'Web & Frontend',
+    items: [
+      allTechnologies.react, allTechnologies.nextjs, allTechnologies.vuejs, allTechnologies.angular,
+      allTechnologies.svelte, allTechnologies.remix, allTechnologies.gatsby, allTechnologies.nuxtjs,
+      allTechnologies.sveltekit, allTechnologies.htmx, allTechnologies.solidjs, allTechnologies.qwik,
+      allTechnologies.tailwindcss, allTechnologies.bootstrap, allTechnologies.sass, allTechnologies.postcss,
+      allTechnologies.chakraui, allTechnologies.materialui, allTechnologies.mantine, allTechnologies.antdesign
+    ],
+  },
+  {
+    category: 'Mobile & Cross-Platform',
+    items: [
+      allTechnologies.ios, allTechnologies.android, allTechnologies.reactnative, allTechnologies.flutter,
+      allTechnologies.ionic, allTechnologies.expo, allTechnologies.xamarin, allTechnologies.capacitor,
+      allTechnologies.nativescript, allTechnologies.cordova
+    ],
+  },
+  {
+    category: 'AI & Machine Learning',
+    items: [
+      allTechnologies.openai, allTechnologies.tensorflow, allTechnologies.pytorch, allTechnologies.keras,
+      allTechnologies.scikitlearn, allTechnologies.opencv, allTechnologies.langchain, allTechnologies.huggingface,
+      allTechnologies.llama, allTechnologies.ollama, allTechnologies.numpy, allTechnologies.pandas,
+      allTechnologies.jupyter
+    ],
+  },
+  {
+    category: 'Databases & Data',
+    items: [
+      allTechnologies.postgresql, allTechnologies.mongodb, allTechnologies.mysql, allTechnologies.redis,
+      allTechnologies.firebase, allTechnologies.elasticsearch, allTechnologies.sqlserver, allTechnologies.sqlite,
+      allTechnologies.cassandra, allTechnologies.mariadb, allTechnologies.neo4j, allTechnologies.dynamodb,
+      allTechnologies.prisma, allTechnologies.mongoose, allTechnologies.spark, allTechnologies.kafka,
+      allTechnologies.hadoop, allTechnologies.airflow, allTechnologies.snowflake
+    ],
+  },
+  {
+    category: 'Cloud & Infrastructure',
+    items: [
+      allTechnologies.aws, allTechnologies.azure, allTechnologies.gcp, allTechnologies.cloudflare,
+      allTechnologies.docker, allTechnologies.kubernetes, allTechnologies.terraform, allTechnologies.ansible,
+      allTechnologies.jenkins, allTechnologies.github, allTechnologies.gitlab, allTechnologies.vercel,
+      allTechnologies.netlify, allTechnologies.digitalocean, allTechnologies.heroku, allTechnologies.nginx,
+      allTechnologies.apache, allTechnologies.prometheus, allTechnologies.grafana, allTechnologies.sentry
+    ],
+  },
+  {
+    category: 'Tools, Security & Web3',
+    items: [
+      allTechnologies.figma, allTechnologies.sketch, allTechnologies.xd, allTechnologies.photoshop,
+      allTechnologies.illustrator, allTechnologies.postman, allTechnologies.slack, allTechnologies.jira,
+      allTechnologies.confluence, allTechnologies.trello, allTechnologies.notion, allTechnologies.stripe,
+      allTechnologies.paypal, allTechnologies.graphql, allTechnologies.solidity, allTechnologies.ethereum,
+      allTechnologies.solana, allTechnologies.web3js, allTechnologies.threejs, allTechnologies.unity,
+      allTechnologies.unrealengine, allTechnologies.vscode, allTechnologies.auth0, allTechnologies.jwt
+    ],
+  },
 ];
 
 export default function ServicesPage() {
@@ -363,23 +416,50 @@ export default function ServicesPage() {
 
           // Technologies animation
           if (techRef.current) {
+            const techGroups = techRef.current.querySelectorAll('.tech-group');
             const techItems = techRef.current.querySelectorAll('.tech-item');
+            
+            if (techGroups.length > 0) {
+              gsap.fromTo(
+                techGroups,
+                {
+                  opacity: 0,
+                  x: -20,
+                },
+                {
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.8,
+                  stagger: 0.2,
+                  ease: 'power2.out',
+                  scrollTrigger: {
+                    trigger: techRef.current,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse',
+                  },
+                }
+              );
+            }
+
             if (techItems.length > 0) {
               gsap.fromTo(
                 techItems,
                 {
                   opacity: 0,
-                  scale: 0,
+                  scale: 0.5,
                 },
                 {
                   opacity: 1,
                   scale: 1,
-                  duration: 0.8,
-                  stagger: 0.03,
+                  duration: 0.5,
+                  stagger: {
+                    amount: 1,
+                    from: "random"
+                  },
                   ease: 'back.out(1.2)',
                   scrollTrigger: {
                     trigger: techRef.current,
-                    start: 'top 80%',
+                    start: 'top 70%',
                     toggleActions: 'play none none reverse',
                   },
                 }
@@ -835,22 +915,44 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="bg-white/50 backdrop-blur-sm rounded-2xl md:rounded-3xl border border-primary/10 p-4 md:p-8">
-            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-              {technologies.map((tech, index) => (
-                <div
-                  key={index}
-                  className="tech-item relative flex items-center justify-center group"
-                >
-                  <span className="relative px-4 py-2 bg-white border border-primary/10 rounded-full text-sm text-gray-700 group-hover:text-primary group-hover:border-primary/30 transition-all duration-300 cursor-default">
-                    {tech.name}
-                    <span className="absolute -top-2 -right-2 text-[10px] px-1 py-0.5 bg-primary/10 text-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {tech.category}
-                    </span>
-                  </span>
+          <div className="space-y-10">
+            {technologyGroups.map((group, groupIdx) => (
+              <div key={groupIdx} className="tech-group">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-1.5 h-6 bg-primary rounded-full" />
+                  <h3 className="text-lg font-bold text-gray-900 tracking-tight">
+                    {group.category}
+                  </h3>
+                  <div className="flex-grow h-px bg-gradient-to-r from-primary/20 to-transparent" />
                 </div>
-              ))}
-            </div>
+                
+                <div className="flex flex-wrap gap-3 md:gap-4">
+                  {group.items.map((tech, index) => (
+                    <div
+                      key={index}
+                      className="tech-item group relative flex items-center gap-3 px-4 py-2.5 bg-white border border-primary/10 rounded-xl hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 cursor-default"
+                    >
+                      {tech?.icon && (
+                        <div className="relative w-6 h-6 flex-shrink-0">
+                          <Image
+                            src={tech.icon}
+                            alt={tech.name}
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
+                      )}
+                      <span className="text-sm font-semibold text-gray-700 group-hover:text-primary transition-colors">
+                        {tech?.name}
+                      </span>
+                      
+                      {/* Hover effect background */}
+                      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity pointer-events-none" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
