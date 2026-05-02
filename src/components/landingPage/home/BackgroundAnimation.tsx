@@ -1,85 +1,111 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import * as THREE from 'three';
 
 export const BackgroundAnimation: React.FC = () => {
-  return (
-    <div className="animation-wrapper">
-      <style dangerouslySetInnerHTML={{ __html: `
-        .animation-wrapper {
-          position: absolute;
-          inset: 0;
-          overflow: hidden;
-          z-index: -20;
-          background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
-          animation: gradient 15s ease infinite;
-          background-size: 400% 400%;
-          background-attachment: fixed;
-        }
+  const containerRef = useRef<HTMLDivElement>(null);
 
-        @keyframes gradient {
-            0% {
-                background-position: 0% 0%;
-            }
-            50% {
-                background-position: 100% 100%;
-            }
-            100% {
-                background-position: 0% 0%;
-            }
-        }
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-        .wave {
-            background: rgb(255 255 255 / 25%);
-            border-radius: 1000% 1000% 0 0;
-            position: absolute;
-            width: 200%;
-            height: 12em;
-            animation: wave 10s -3s linear infinite;
-            transform: translate3d(0, 0, 0);
-            opacity: 0.8;
-            bottom: 0;
-            left: 0;
-            z-index: -1;
-        }
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    
+    // Style 3 uses a black background
+    renderer.setClearColor(0x000000, 1);
+    camera.position.set(0, 0, 400); // Increased distance slightly for better framing of the large torus
 
-        .wave:nth-of-type(2) {
-            bottom: -1.25em;
-            animation: wave 18s linear reverse infinite;
-            opacity: 0.8;
-        }
+    const texture = (function() {
+      const w = 64, h = 64; // Increased resolution for smoother particle glow
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const context = canvas.getContext('2d');
+      if (context) {
+        const gradient = context.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+        gradient.addColorStop(0, '#ffffff');
+        gradient.addColorStop(0.2, '#00ffff');
+        gradient.addColorStop(0.4, '#000040');
+        gradient.addColorStop(1, '#000000');
+        context.fillStyle = gradient;
+        context.fillRect(0, 0, w, h);
+      }
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.needsUpdate = true;
+      return tex;
+    }());
 
-        .wave:nth-of-type(3) {
-            bottom: -2.5em;
-            animation: wave 20s -1s reverse infinite;
-            opacity: 0.9;
-        }
+    const params = {
+      radius: 100,
+      tube: 40,
+      radialSegments: 512,
+      tubularSegments: 64,
+      p: 2,
+      q: 3
+    };
 
-        @keyframes wave {
-            2% {
-                transform: translateX(1);
-            }
+    // Modern TorusKnotGeometry segment order: (radius, tube, tubularSegments, radialSegments, p, q)
+    const geometry = new THREE.TorusKnotGeometry(
+      params.radius,
+      params.tube,
+      params.tubularSegments,
+      params.radialSegments,
+      params.p,
+      params.q
+    );
 
-            25% {
-                transform: translateX(-25%);
-            }
+    const material = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 3,
+      transparent: true,
+      map: texture,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false, // Helps with additive blending transparency issues
+    });
 
-            50% {
-                transform: translateX(-50%);
-            }
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
 
-            75% {
-                transform: translateX(-25%);
-            }
+    containerRef.current.appendChild(renderer.domElement);
 
-            100% {
-                transform: translateX(1);
-            }
-        }
-      `}} />
-      <div className="wave"></div>
-      <div className="wave"></div>
-      <div className="wave"></div>
-    </div>
-  );
+    let step = 0;
+    let animationId: number;
+
+    const animate = () => {
+      animationId = requestAnimationFrame(animate);
+
+      step += 0.005;
+      points.rotation.x = step;
+      points.rotation.z = step;
+
+      renderer.render(scene, camera);
+    };
+
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', handleResize);
+      if (containerRef.current && renderer.domElement) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
+      geometry.dispose();
+      material.dispose();
+      texture.dispose();
+      renderer.dispose();
+    };
+  }, []);
+
+  return <div ref={containerRef} className="absolute inset-0 -z-20 h-full w-full overflow-hidden" />;
 };
