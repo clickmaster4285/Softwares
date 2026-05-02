@@ -113,7 +113,7 @@ export function HeroSection(): JSX.Element {
   const [heroError, setHeroError] = useState<string | null>(null);
 
   const heroFieldClass =
-    'w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 pl-9 text-base sm:text-sm text-gray-900 placeholder:text-gray-400 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30';
+    'w-full rounded-xl border border-white/25 bg-white/5 px-3 py-2.5 pl-9 text-base sm:text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30';
 
   const handleHeroChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -158,13 +158,13 @@ export function HeroSection(): JSX.Element {
 
       {/* Static decorative layers — no infinite JS / layout-thrashing animations */}
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
-        <div className="absolute right-0 top-0 h-[70%] w-[60%] translate-x-1/4 -translate-y-1/3 rounded-full bg-gradient-to-br from-primary/10 to-transparent opacity-60 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-[50%] w-[40%] -translate-x-1/4 translate-y-1/3 rounded-full bg-gradient-to-tr from-primary/10 to-transparent opacity-50 blur-3xl" />
-        <div className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(249,115,22,0.08),transparent)]" />
+        <div className="absolute right-0 top-0 h-[70%] w-[60%] translate-x-1/4 -translate-y-1/3 rounded-full bg-gradient-to-br from-primary/25 to-transparent opacity-80 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-[50%] w-[40%] -translate-x-1/4 translate-y-1/3 rounded-full bg-gradient-to-tr from-primary/20 to-transparent opacity-70 blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(249,115,22,0.12),transparent)]" />
         {particlePositions.map((position, i) => (
           <div
             key={i}
-            className="absolute h-1 w-1 rounded-full bg-primary/30"
+            className="absolute h-1 w-1 rounded-full bg-primary/40"
             style={{ top: position.top, left: position.left }}
           />
         ))}
@@ -180,7 +180,7 @@ export function HeroSection(): JSX.Element {
               >
                 <h1
                   id="hero-heading"
-                  className="font-display text-left text-[1.55rem] font-bold leading-snug tracking-tight text-gray-900 text-pretty [overflow-wrap:anywhere] sm:text-2xl md:text-3xl lg:text-[2.35rem] xl:text-5xl"
+                  className="font-display text-left text-[1.55rem] font-bold leading-snug tracking-tight text-white text-pretty [overflow-wrap:anywhere] sm:text-2xl md:text-3xl lg:text-[2.35rem] xl:text-5xl"
                 >
                   Custom Software Development That Scales Your Business Revenue{' '}
                   <span className="text-primary">— Not Just Code</span>
@@ -188,7 +188,7 @@ export function HeroSection(): JSX.Element {
               </div>
 
               <p
-                className="hero-enter mb-4 max-w-2xl text-left text-pretty text-base leading-relaxed text-gray-600 sm:mb-5 sm:text-lg md:text-xl"
+                className="hero-enter mb-4 max-w-2xl text-left text-pretty text-base leading-relaxed text-gray-100 sm:mb-5 sm:text-lg md:text-xl"
                 style={{ ['--hero-enter-delay' as string]: '120ms' }}
               >
                 We design, build, and deploy high-performance web, mobile, SaaS, and AI-powered
@@ -202,7 +202,7 @@ export function HeroSection(): JSX.Element {
                 {heroBullets.map((text) => (
                   <li
                     key={text}
-                    className="relative pl-5 text-sm leading-snug text-gray-600 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary/90 sm:text-base"
+                    className="relative pl-5 text-sm leading-snug text-gray-100 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary/90 sm:text-base"
                   >
                     {text}
                   </li>
@@ -237,7 +237,7 @@ export function HeroSection(): JSX.Element {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full min-h-[48px] touch-manipulation rounded-xl border-2 border-gray-200 bg-white/50 px-4 py-5 text-center text-sm leading-snug text-gray-900 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-white sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base"
+                    className="w-full min-h-[48px] touch-manipulation rounded-xl border-2 border-white/25 bg-black/30 px-4 py-5 text-center text-sm leading-snug text-white backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-black/40 sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base"
                     asChild
                   >
                     <Link
@@ -256,17 +256,17 @@ export function HeroSection(): JSX.Element {
               className="hero-enter mx-auto w-full min-w-0 max-w-md lg:mx-0 lg:max-w-none"
               style={{ ['--hero-enter-delay' as string]: '160ms' }}
             >
-              <div className="rounded-xl border border-gray-200 bg-white/80 p-4 shadow-2xl shadow-gray-200/50 backdrop-blur-md sm:rounded-2xl sm:p-5 md:p-6">
-                <h2 className="mb-1 font-display text-base font-bold text-gray-900 sm:text-lg">
+              <div className="rounded-xl border border-white/15 bg-black/45 p-4 shadow-2xl shadow-black/40 backdrop-blur-md sm:rounded-2xl sm:p-5 md:p-6">
+                <h2 className="mb-1 font-display text-base font-bold text-white sm:text-lg">
                   Get a free quote
                 </h2>
-                <p className="mb-3 text-xs leading-snug text-gray-600 sm:mb-4 sm:text-sm sm:leading-normal">
+                <p className="mb-3 text-xs leading-snug text-gray-100 sm:mb-4 sm:text-sm sm:leading-normal">
                   Share your details—we&apos;ll respond within one business day.
                 </p>
 
                 {heroError && (
                   <div
-                    className="mb-3 rounded-xl border border-red-400 bg-red-50 px-3 py-2 text-sm text-red-800"
+                    className="mb-3 rounded-xl border border-red-400/40 bg-red-950/50 px-3 py-2 text-sm text-red-100"
                     role="alert"
                   >
                     {heroError}
@@ -274,18 +274,18 @@ export function HeroSection(): JSX.Element {
                 )}
 
                 {heroSuccess ? (
-                  <div className="rounded-xl border border-green-400 bg-green-50 px-4 py-6 text-center">
+                  <div className="rounded-xl border border-green-400/30 bg-green-950/40 px-4 py-6 text-center">
                     <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
-                      <CheckCircle2 className="h-6 w-6 text-primary-600" aria-hidden />
+                      <CheckCircle2 className="h-6 w-6 text-primary-300" aria-hidden />
                     </div>
-                    <p className="font-semibold text-gray-900">Message received</p>
-                    <p className="mt-1 text-sm text-gray-600">We&apos;ll be in touch shortly.</p>
+                    <p className="font-semibold text-white">Message received</p>
+                    <p className="mt-1 text-sm text-gray-100">We&apos;ll be in touch shortly.</p>
                   </div>
                 ) : (
                   <form onSubmit={handleHeroSubmit} className="space-y-3">
                     <div className="relative">
                       <User
-                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-200"
                         aria-hidden
                       />
                       <input
@@ -301,7 +301,7 @@ export function HeroSection(): JSX.Element {
                     </div>
                     <div className="relative">
                       <Mail
-                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-200"
                         aria-hidden
                       />
                       <input
@@ -317,7 +317,7 @@ export function HeroSection(): JSX.Element {
                     </div>
                     <div className="relative">
                       <Phone
-                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-200"
                         aria-hidden
                       />
                       <input
@@ -332,7 +332,7 @@ export function HeroSection(): JSX.Element {
                     </div>
                     <div className="relative">
                       <DollarSign
-                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+                        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-200"
                         aria-hidden
                       />
                       <input
@@ -352,7 +352,7 @@ export function HeroSection(): JSX.Element {
                         value={heroForm.message}
                         onChange={handleHeroChange}
                         placeholder="What would you like to build?"
-                        className="min-h-[88px] w-full resize-y rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                        className="min-h-[88px] w-full resize-y rounded-xl border border-white/25 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30"
                         required
                       />
                     </div>
@@ -370,10 +370,10 @@ export function HeroSection(): JSX.Element {
                         </>
                       )}
                     </button>
-                    <p className="text-center text-xs text-gray-500">
+                    <p className="text-center text-xs text-gray-200">
                       <Link
                         href="/contact-us"
-                        className="underline-offset-4 hover:text-primary hover:underline"
+                        className="underline-offset-4 hover:text-white hover:underline"
                       >
                         View phone, email, and office details on our contact page
                       </Link>
@@ -385,7 +385,7 @@ export function HeroSection(): JSX.Element {
           </div>
 
           <div
-            className="hero-enter grid grid-cols-2 gap-x-3 gap-y-6 border-t border-gray-200 pt-8 text-left sm:gap-x-6 sm:gap-y-8 sm:pt-10 md:grid-cols-4 md:gap-8"
+            className="hero-enter grid grid-cols-2 gap-x-3 gap-y-6 border-t border-white/25 pt-8 text-left sm:gap-x-6 sm:gap-y-8 sm:pt-10 md:grid-cols-4 md:gap-8"
             role="list"
             aria-label="Company achievements"
             style={{ ['--hero-enter-delay' as string]: '240ms' }}
@@ -393,10 +393,10 @@ export function HeroSection(): JSX.Element {
             {stats.map((stat, index) => (
               <div key={stat.label} className="relative min-w-0 text-left" role="listitem">
                 <div className="relative z-10 py-2 pl-0 pr-0.5 sm:p-4 sm:pl-0">
-                  <p className="font-display text-left text-2xl font-bold tabular-nums text-gray-900 sm:text-3xl md:text-4xl">
+                  <p className="font-display text-left text-2xl font-bold tabular-nums text-white sm:text-3xl md:text-4xl">
                     <Counter end={stat.end} duration={2} delay={0.2 * index} />
                   </p>
-                  <p className="mt-1 text-left text-[11px] leading-snug text-gray-500 sm:text-xs md:text-sm">
+                  <p className="mt-1 text-left text-[11px] leading-snug text-gray-100 sm:text-xs md:text-sm">
                     {stat.label}
                   </p>
                 </div>
