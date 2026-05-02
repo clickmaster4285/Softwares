@@ -532,7 +532,8 @@ export function Navbar() {
               {/* Mobile Navigation */}
               <nav className="flex-1 overflow-y-auto p-6">
                 <div className="flex flex-col space-y-1">
-                  {/* Home */}
+                  {/* 
+                   */}
                   <Link
                     href="/"
                     onClick={() => setIsOpen(false)}

@@ -330,7 +330,7 @@ const ContactInfoCard: React.FC<{
 }> = ({ icon: Icon, title, details }) => {
     return (
         <div className="relative group h-full">
-            <div className="absolute -inset-2 bg-gradient-to-r from-orange-500/20 to-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute -inset-2 bg-gradient-to-r from-primary-500/20 to-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative bg-card/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-border/70 h-full">
                 <div className="flex items-start gap-4 h-full">
                     <div className="relative p-3 rounded-xl bg-gradient-to-r from-primary to-primary group-hover:scale-110 transition-transform duration-300 flex-shrink-0">

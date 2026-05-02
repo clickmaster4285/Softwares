@@ -132,11 +132,11 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
   const cardRef = useRef<HTMLDivElement>(null);
   const gradients = [
     'from-primary/80 to-primary',
-    'from-amber-400 to-primary',
+    'from-accent-400 to-primary',
     'from-primary to-primary',
     'from-primary to-primary/80',
     'from-primary/80 to-primary',
-    'from-amber-400 to-primary/80',
+    'from-accent-400 to-primary/80',
   ];
 
   const gradient = gradients[(duplicateIndex ?? index) % gradients.length];
@@ -212,7 +212,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
               >
                 <Star
                   className={`w-4 h-4 ${i < (testimonial.rating ?? 5)
-                    ? 'fill-amber-400 text-amber-400'
+                    ? 'fill-accent-400 text-accent-400'
                     : 'text-gray-300 dark:text-gray-600'
                     }`}
                 />

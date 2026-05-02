@@ -55,12 +55,12 @@ export default function BlogCta() {
             placeholder="Enter your work email"
             required
             disabled={isSubmitting}
-            className="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-100 disabled:bg-slate-100 disabled:cursor-not-allowed"
+            className="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-orange-100 disabled:bg-slate-100 disabled:cursor-not-allowed"
           />
           <button 
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-lg bg-orange-500 px-4 py-3 text-sm font-medium text-white transition hover:bg-orange-600 disabled:bg-orange-300 disabled:cursor-not-allowed"
+            className="w-full rounded-lg bg-primary-500 px-4 py-3 text-sm font-medium text-white transition hover:bg-primary-600 disabled:bg-primary-300 disabled:cursor-not-allowed"
           >
             {isSubmitting ? 'Submitting...' : 'Start your Project'}
           </button>

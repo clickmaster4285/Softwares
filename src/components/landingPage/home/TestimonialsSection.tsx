@@ -126,11 +126,11 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
   const cardRef = useRef<HTMLDivElement>(null);
   const gradients = [
     'from-primary/80 to-primary',
-    'from-amber-400 to-primary',
+    'from-accent-400 to-primary',
     'from-primary to-primary',
     'from-primary to-primary/80',
     'from-primary/80 to-primary',
-    'from-amber-400 to-primary/80',
+    'from-accent-400 to-primary/80',
   ];
   const gradient = gradients[(duplicateIndex ?? index) % gradients.length];
 
@@ -192,7 +192,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
                 <Star
                   className={`w-4 h-4 ${
                     i < (testimonial.rating ?? 5)
-                      ? 'fill-amber-400 text-amber-400'
+                      ? 'fill-accent-400 text-accent-400'
                       : 'text-gray-300 dark:text-gray-600'
                   }`}
                 />
@@ -346,7 +346,7 @@ export function TestimonialsSection() {
       {/* Background accents */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
 

@@ -67,8 +67,8 @@ const AdminDashboard = () => {
       title: 'In Progress',
       value: inProgressCount,
       icon: Clock,
-      color: 'text-amber-400',
-      bgColor: 'bg-amber-500/10',
+      color: 'text-accent-400',
+      bgColor: 'bg-accent-500/10',
       trend: `${totalProjects > 0 ? Math.round((inProgressCount / totalProjects) * 100) : 0}%`,
     },
     {
@@ -218,7 +218,7 @@ const AdminDashboard = () => {
                             project.status === 'live'
                               ? 'bg-emerald-500/20 text-emerald-400'
                               : project.status === 'in-progress'
-                              ? 'bg-amber-500/20 text-amber-400'
+                              ? 'bg-accent-500/20 text-accent-400'
                               : 'bg-primary/20 text-primary'
                           }`}
                         >
@@ -333,8 +333,8 @@ const AdminDashboard = () => {
                     <div className="text-2xl font-bold text-emerald-400">{liveCount}</div>
                     <p className="text-xs text-muted-foreground mt-1">Live</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/20 text-center">
-                    <div className="text-2xl font-bold text-amber-400">{inProgressCount}</div>
+                  <div className="p-4 rounded-lg bg-accent-500/10 border border-accent-500/20 text-center">
+                    <div className="text-2xl font-bold text-accent-400">{inProgressCount}</div>
                     <p className="text-xs text-muted-foreground mt-1">In Progress</p>
                   </div>
                   <div className="p-4 rounded-lg bg-primary/10 border border-primary/20 text-center">

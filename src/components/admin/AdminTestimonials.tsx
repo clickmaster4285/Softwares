@@ -278,7 +278,7 @@ const AdminTestimonials = () => {
                         </div>
                         <p className="text-sm text-muted-foreground line-clamp-2">{t.content}</p>
                         {!t.isActive && (
-                          <span className="inline-block mt-2 text-xs text-amber-600 font-medium">Hidden on landing page</span>
+                          <span className="inline-block mt-2 text-xs text-accent-600 font-medium">Hidden on landing page</span>
                         )}
                       </div>
                       <div className="flex items-center gap-2 shrink-0">

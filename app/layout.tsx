@@ -35,6 +35,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </head>
       <body
         suppressHydrationWarning
+        className="bg-background text-foreground font-sans"
       >
         {/* Google Tag Manager (noscript) */}
         <noscript>

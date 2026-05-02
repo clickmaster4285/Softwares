@@ -53,7 +53,7 @@ export function ServiceDetailFeatures() {
   const m3 = marqueeData.slice((marqueeData.length / 3) * 2);
 
   return (
-    <section className="relative border-y border-slate-200/80 bg-orange-50/50 py-16 sm:py-20">
+    <section className="relative border-y border-slate-200/80 bg-primary-50/50 py-16 sm:py-20">
       <div className="mx-auto max-w-full">
         <div className="mx-auto flex max-w-5xl flex-col items-center justify-center space-y-4 px-5 text-center md:px-10">
           <h2 className="max-w-3xl text-4xl font-medium text-slate-900 sm:text-5xl lg:text-6xl">
@@ -65,14 +65,14 @@ export function ServiceDetailFeatures() {
           </p>
 
           <div className="relative mx-auto mt-3 w-full max-w-3xl overflow-hidden">
-            <div className="absolute left-0 z-10 h-full w-16 bg-gradient-to-r from-orange-50/50 to-transparent" />
-            <div className="absolute right-0 z-10 h-full w-16 bg-gradient-to-l from-orange-50/50 to-transparent" />
+            <div className="absolute left-0 z-10 h-full w-16 bg-gradient-to-r from-primary-50/50 to-transparent" />
+            <div className="absolute right-0 z-10 h-full w-16 bg-gradient-to-l from-primary-50/50 to-transparent" />
 
             <div className="-mx-6 flex w-screen flex-col md:-mx-10 lg:-mx-16">
               <Marquee className="[--duration:45s] [--gap:0.75rem]" repeat={4}>
                 {m1.map((q) => (
                   <Badge
-                    className="rounded-full border-orange-200 bg-orange-100 px-3 py-1 text-slate-700"
+                    className="rounded-full border-primary-200 bg-primary-100 px-3 py-1 text-slate-700"
                     key={q}
                     variant="outline"
                   >
@@ -84,7 +84,7 @@ export function ServiceDetailFeatures() {
               <Marquee className="[--duration:50s] [--gap:0.75rem]" repeat={4} reverse>
                 {m2.map((q) => (
                   <Badge
-                    className="rounded-full border-orange-200 bg-orange-100 px-3 py-1 text-slate-700"
+                    className="rounded-full border-primary-200 bg-primary-100 px-3 py-1 text-slate-700"
                     key={q}
                     variant="outline"
                   >
@@ -96,7 +96,7 @@ export function ServiceDetailFeatures() {
               <Marquee className="[--duration:42s] [--gap:0.75rem]" repeat={4}>
                 {m3.map((q) => (
                   <Badge
-                    className="rounded-full border-orange-200 bg-orange-100 px-3 py-1 text-slate-700"
+                    className="rounded-full border-primary-200 bg-primary-100 px-3 py-1 text-slate-700"
                     key={q}
                     variant="outline"
                   >

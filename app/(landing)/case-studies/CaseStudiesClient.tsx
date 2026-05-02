@@ -55,7 +55,7 @@ function statusLabel(status: CaseStudyCard['status']) {
 function statusClasses(status: CaseStudyCard['status']) {
   switch (status) {
     case 'live': return 'bg-emerald-600 text-white';
-    case 'in-progress': return 'bg-amber-500 text-white';
+    case 'in-progress': return 'bg-accent-500 text-white';
     case 'completed': return 'bg-slate-500 text-white';
     default: return 'bg-slate-400 text-white';
   }
@@ -444,7 +444,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
           </div>
           <Button
             asChild
-            className="shrink-0 rounded-lg bg-white px-7 py-3 text-sm font-semibold text-slate-950 hover:bg-orange-50 transition"
+            className="shrink-0 rounded-lg bg-white px-7 py-3 text-sm font-semibold text-slate-950 hover:bg-primary-50 transition"
           >
             <Link href="/contact-us">
               Start the conversation

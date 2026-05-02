@@ -18,16 +18,10 @@ export default function Error({
           An unexpected error occurred. Please try again.
         </p>
         <div className="space-x-4">
-          <button 
-            onClick={reset} 
-            className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-          >
+          <button onClick={reset} className="btn btn-primary">
             Try again
           </button>
-          <Link 
-            href="/" 
-            className="px-6 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
-          >
+          <Link href="/" className="btn btn-secondary">
             Go Home
           </Link>
         </div>
