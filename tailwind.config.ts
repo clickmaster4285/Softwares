@@ -81,6 +81,9 @@ const config: Config = {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      backgroundImage: {
+        "primary-gradient": "linear-gradient(120deg, hsl(210 88% 45%) 0%, hsl(45 100% 50%) 100%)",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -90,10 +93,10 @@ const config: Config = {
         bold: "600",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", "sans-serif"],
-        serif: ["var(--font-dm-serif)", "serif"],
+        sans: ["var(--font-poppins)", "sans-serif"],
+        montserrat: ["var(--font-montserrat)", "sans-serif"],
+        display: ["var(--font-montserrat)", "sans-serif"],
         mono: ["var(--font-dm-mono)", "monospace"],
-        display: ["var(--font-dm-serif)", "serif"],
       },
       keyframes: {
         "accordion-down": {

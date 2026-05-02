@@ -68,7 +68,12 @@ export const BackgroundAnimation: React.FC = () => {
         const color = this.waves.color;
         this.Lines.push(new Line(this, color));
         if (this.Lines.length > this.waves.options.width) {
-          this.Lines.shift();
+          // Reuse objects instead of creating new ones
+          const removed = this.Lines.shift();
+          if (removed) {
+            // Clear the removed line for garbage collection
+            removed.angle = [0, 0, 0, 0];
+          }
         }
       }
 
@@ -95,6 +100,7 @@ export const BackgroundAnimation: React.FC = () => {
           const cpy2 = y + radius3 * Math.sin(angle[2] * amplitude * 2);
 
           ctx.strokeStyle = line.color;
+          ctx.lineWidth = 1.5;
           ctx.beginPath();
           ctx.moveTo(x1, y1);
           ctx.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x2, y2);
@@ -122,12 +128,12 @@ export const BackgroundAnimation: React.FC = () => {
       constructor(holder: HTMLElement, options: any) {
         this.holder = holder;
         this.canvas = canvas;
-        this.ctx = ctx;
+        this.ctx = ctx!;
         this.options = {
           rotation: 45,
           waves: 5,
           width: 100,
-          hue: [11, 14],
+          hue: [0, 1], // Toggle between 0 and 1 for blue/gold
           amplitude: 0.5,
           background: true,
           preload: true,
@@ -136,7 +142,7 @@ export const BackgroundAnimation: React.FC = () => {
         };
 
         this.waves = [];
-        this.hue = this.options.hue[0];
+        this.hue = 0;
         this.hueFw = true;
 
         this.resize();
@@ -177,8 +183,8 @@ export const BackgroundAnimation: React.FC = () => {
 
       background() {
         const gradient = this.ctx.createLinearGradient(0, 0, 0, this.height);
-        gradient.addColorStop(0, '#000');
-        gradient.addColorStop(1, this.color);
+        gradient.addColorStop(0, '#020617'); // Dark background
+        gradient.addColorStop(1, this.color); // Color pulse at bottom
         this.ctx.fillStyle = gradient;
         this.ctx.fillRect(0, 0, this.width, this.height);
       }
@@ -199,31 +205,39 @@ export const BackgroundAnimation: React.FC = () => {
       }
 
       updateColor() {
-        this.hue += this.hueFw ? 0.01 : -0.01;
-        if (this.hue > this.options.hue[1] && this.hueFw) {
-          this.hue = this.options.hue[1];
+        this.hue += this.hueFw ? 0.001 : -0.001; // Slower color transition
+        if (this.hue > 1) {
+          this.hue = 1;
           this.hueFw = false;
-        } else if (this.hue < this.options.hue[0] && !this.hueFw) {
-          this.hue = this.options.hue[0];
+        } else if (this.hue < 0) {
+          this.hue = 0;
           this.hueFw = true;
         }
 
-        const a = Math.floor(127 * Math.sin(0.3 * this.hue + 0) + 128);
-        const b = Math.floor(127 * Math.sin(0.3 * this.hue + 2) + 128);
-        const c = Math.floor(127 * Math.sin(0.3 * this.hue + 4) + 128);
+        // Pre-calculate color values to avoid repeated calculations
+        const r = Math.floor(63 + (255 - 63) * this.hue);
+        const g = Math.floor(155 + (215 - 155) * this.hue);
+        const b = Math.floor(255 + (0 - 255) * this.hue);
 
-        this.color = `rgba(${a},${b},${c}, 0.1)`;
+        this.color = `rgba(${r},${g},${b}, 0.1)`; // Reduced opacity
       }
     }
 
     const wavesInstance = new Waves(holder, {
-      waves: 3,
-      width: 200,
+      waves: 3, // Reduced from 4 to 3
+      width: 100, // Reduced from 150 to 100
     });
 
     let animationId: number;
-    const animate = () => {
-      wavesInstance.render();
+    let lastTime = 0;
+    const targetFPS = 30; // Reduce from 60 to 30 FPS
+    const frameInterval = 1000 / targetFPS;
+
+    const animate = (currentTime: number) => {
+      if (currentTime - lastTime >= frameInterval) {
+        wavesInstance.render();
+        lastTime = currentTime;
+      }
       animationId = window.requestAnimationFrame(animate);
     };
 
@@ -232,7 +246,7 @@ export const BackgroundAnimation: React.FC = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    animate();
+    animate(0);
 
     return () => {
       window.cancelAnimationFrame(animationId);

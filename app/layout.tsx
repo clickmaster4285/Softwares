@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Poppins, Montserrat } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 import {
@@ -9,6 +10,20 @@ import {
 } from './metadata-config';
 import Script from 'next/script';
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
+
 export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
@@ -17,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${montserrat.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Google Tag Manager */}
@@ -35,7 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </head>
       <body
         suppressHydrationWarning
-        className="bg-background text-foreground font-sans"
+        className="bg-background text-foreground font-sans antialiased"
       >
         {/* Google Tag Manager (noscript) */}
         <noscript>

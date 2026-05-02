@@ -120,14 +120,14 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   };
   const faqSchema = faqs.length
     ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqs.map((faq) => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-        })),
-      }
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    }
     : null;
 
   return (
@@ -272,11 +272,11 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         <div className="mx-auto max-w-8xl px-16 md:px-8 lg:px-16">
           <div className="relative lg:grid lg:grid-cols-[260px_1fr] lg:gap-16">
             {/* Sticky Table of Contents - Desktop */}
-        <aside className="hidden lg:block sticky top-12 self-start">
-            <div className="py-12">
-              <TableOfContents items={tocItems} />
-            </div>
-          </aside>
+            <aside className="hidden lg:block sticky top-12 self-start">
+              <div className="py-12">
+                <TableOfContents items={tocItems} />
+              </div>
+            </aside>
 
             {/* Main Content */}
             <main className="py-12 lg:py-16">
