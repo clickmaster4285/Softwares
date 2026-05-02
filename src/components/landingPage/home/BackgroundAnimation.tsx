@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
 
 export const BackgroundAnimation: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -9,101 +8,238 @@ export const BackgroundAnimation: React.FC = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    
-    // Style 3 uses a black background
-    renderer.setClearColor(0x000000, 1);
-    camera.position.set(0, 0, 400); // Increased distance slightly for better framing of the large torus
+    const holder = containerRef.current;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    holder.appendChild(canvas);
 
-    const texture = (function() {
-      const w = 64, h = 64; // Increased resolution for smoother particle glow
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      const context = canvas.getContext('2d');
-      if (context) {
-        const gradient = context.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
-        gradient.addColorStop(0, '#ffffff');
-        gradient.addColorStop(0.2, '#00ffff');
-        gradient.addColorStop(0.4, '#000040');
-        gradient.addColorStop(1, '#000000');
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, w, h);
-      }
-      const tex = new THREE.CanvasTexture(canvas);
-      tex.needsUpdate = true;
-      return tex;
-    }());
+    const pi = Math.PI;
+    const pi2 = 2 * Math.PI;
 
-    const params = {
-      radius: 100,
-      tube: 40,
-      radialSegments: 512,
-      tubularSegments: 64,
-      p: 2,
-      q: 3
+    const rnd = (a: number, b?: number) => {
+      if (b === undefined) return Math.random() * a;
+      return a + Math.random() * (b - a);
     };
 
-    // Modern TorusKnotGeometry segment order: (radius, tube, tubularSegments, radialSegments, p, q)
-    const geometry = new THREE.TorusKnotGeometry(
-      params.radius,
-      params.tube,
-      params.tubularSegments,
-      params.radialSegments,
-      params.p,
-      params.q
-    );
+    const rnd_sign = () => (Math.random() > 0.5 ? 1 : -1);
+    const dtr = (deg: number) => (deg * pi) / 180;
 
-    const material = new THREE.PointsMaterial({
-      color: 0xffffff,
-      size: 3,
-      transparent: true,
-      map: texture,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false, // Helps with additive blending transparency issues
+    class Line {
+      angle: number[];
+      color: string;
+
+      constructor(wave: Wave, color: string) {
+        const angle = wave.angle;
+        const speed = wave.speed;
+
+        this.angle = [
+          Math.sin((angle[0] += speed[0])),
+          Math.sin((angle[1] += speed[1])),
+          Math.sin((angle[2] += speed[2])),
+          Math.sin((angle[3] += speed[3])),
+        ];
+
+        this.color = color;
+      }
+    }
+
+    class Wave {
+      waves: Waves;
+      Lines: Line[];
+      angle: number[];
+      speed: number[];
+
+      constructor(waves: Waves) {
+        this.waves = waves;
+        const speed = waves.options.speed;
+
+        this.Lines = [];
+        this.angle = [rnd(pi2), rnd(pi2), rnd(pi2), rnd(pi2)];
+        this.speed = [
+          rnd(speed[0], speed[1]) * rnd_sign(),
+          rnd(speed[0], speed[1]) * rnd_sign(),
+          rnd(speed[0], speed[1]) * rnd_sign(),
+          rnd(speed[0], speed[1]) * rnd_sign(),
+        ];
+      }
+
+      update() {
+        const color = this.waves.color;
+        this.Lines.push(new Line(this, color));
+        if (this.Lines.length > this.waves.options.width) {
+          this.Lines.shift();
+        }
+      }
+
+      draw() {
+        const waves = this.waves;
+        const ctx = waves.ctx;
+        const radius = waves.radius;
+        const radius3 = radius / 3;
+        const x = waves.centerX;
+        const y = waves.centerY;
+        const rotation = dtr(waves.options.rotation);
+        const amplitude = waves.options.amplitude;
+
+        this.Lines.forEach((line) => {
+          const angle = line.angle;
+
+          const x1 = x - radius * Math.cos(angle[0] * amplitude + rotation);
+          const y1 = y - radius * Math.sin(angle[0] * amplitude + rotation);
+          const x2 = x + radius * Math.cos(angle[3] * amplitude + rotation);
+          const y2 = y + radius * Math.sin(angle[3] * amplitude + rotation);
+          const cpx1 = x - radius3 * Math.cos(angle[1] * amplitude * 2);
+          const cpy1 = y - radius3 * Math.sin(angle[1] * amplitude * 2);
+          const cpx2 = x + radius3 * Math.cos(angle[2] * amplitude * 2);
+          const cpy2 = y + radius3 * Math.sin(angle[2] * amplitude * 2);
+
+          ctx.strokeStyle = line.color;
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x2, y2);
+          ctx.stroke();
+        });
+      }
+    }
+
+    class Waves {
+      holder: HTMLElement;
+      canvas: HTMLCanvasElement;
+      ctx: CanvasRenderingContext2D;
+      options: any;
+      waves: Wave[];
+      hue: number;
+      hueFw: boolean;
+      color: string = '';
+      width: number = 0;
+      height: number = 0;
+      scale: number = 1;
+      radius: number = 0;
+      centerX: number = 0;
+      centerY: number = 0;
+
+      constructor(holder: HTMLElement, options: any) {
+        this.holder = holder;
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.options = {
+          rotation: 45,
+          waves: 5,
+          width: 100,
+          hue: [11, 14],
+          amplitude: 0.5,
+          background: true,
+          preload: true,
+          speed: [0.004, 0.008],
+          ...options,
+        };
+
+        this.waves = [];
+        this.hue = this.options.hue[0];
+        this.hueFw = true;
+
+        this.resize();
+        this.init(this.options.preload);
+      }
+
+      init(preload: boolean) {
+        for (let i = 0; i < this.options.waves; i++) {
+          this.waves[i] = new Wave(this);
+        }
+        if (preload) this.preload();
+      }
+
+      preload() {
+        for (let i = 0; i < this.options.waves; i++) {
+          this.updateColor();
+          for (let j = 0; j < this.options.width; j++) {
+            this.waves[i].update();
+          }
+        }
+      }
+
+      render() {
+        this.updateColor();
+        this.clear();
+        if (this.options.background) {
+          this.background();
+        }
+        this.waves.forEach((wave) => {
+          wave.update();
+          wave.draw();
+        });
+      }
+
+      clear() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+      }
+
+      background() {
+        const gradient = this.ctx.createLinearGradient(0, 0, 0, this.height);
+        gradient.addColorStop(0, '#000');
+        gradient.addColorStop(1, this.color);
+        this.ctx.fillStyle = gradient;
+        this.ctx.fillRect(0, 0, this.width, this.height);
+      }
+
+      resize() {
+        const width = this.holder.offsetWidth;
+        const height = this.holder.offsetHeight;
+        this.scale = window.devicePixelRatio || 1;
+        this.width = width * this.scale;
+        this.height = height * this.scale;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+        this.canvas.style.width = width + 'px';
+        this.canvas.style.height = height + 'px';
+        this.radius = Math.sqrt(Math.pow(this.width, 2) + Math.pow(this.height, 2)) / 2;
+        this.centerX = this.width / 2;
+        this.centerY = this.height / 2;
+      }
+
+      updateColor() {
+        this.hue += this.hueFw ? 0.01 : -0.01;
+        if (this.hue > this.options.hue[1] && this.hueFw) {
+          this.hue = this.options.hue[1];
+          this.hueFw = false;
+        } else if (this.hue < this.options.hue[0] && !this.hueFw) {
+          this.hue = this.options.hue[0];
+          this.hueFw = true;
+        }
+
+        const a = Math.floor(127 * Math.sin(0.3 * this.hue + 0) + 128);
+        const b = Math.floor(127 * Math.sin(0.3 * this.hue + 2) + 128);
+        const c = Math.floor(127 * Math.sin(0.3 * this.hue + 4) + 128);
+
+        this.color = `rgba(${a},${b},${c}, 0.1)`;
+      }
+    }
+
+    const wavesInstance = new Waves(holder, {
+      waves: 3,
+      width: 200,
     });
 
-    const points = new THREE.Points(geometry, material);
-    scene.add(points);
-
-    containerRef.current.appendChild(renderer.domElement);
-
-    let step = 0;
     let animationId: number;
-
     const animate = () => {
-      animationId = requestAnimationFrame(animate);
-
-      step += 0.005;
-      points.rotation.x = step;
-      points.rotation.z = step;
-
-      renderer.render(scene, camera);
+      wavesInstance.render();
+      animationId = window.requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
+      wavesInstance.resize();
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize();
     animate();
 
     return () => {
-      cancelAnimationFrame(animationId);
+      window.cancelAnimationFrame(animationId);
       window.removeEventListener('resize', handleResize);
-      if (containerRef.current && renderer.domElement) {
-        containerRef.current.removeChild(renderer.domElement);
+      if (holder.contains(canvas)) {
+        holder.removeChild(canvas);
       }
-      geometry.dispose();
-      material.dispose();
-      texture.dispose();
-      renderer.dispose();
     };
   }, []);
 
