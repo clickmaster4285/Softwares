@@ -21,7 +21,7 @@ export function AboutSection() {
       <MainContent />
       <TrustedClientsSection visible={clients.visible} />
       <TechStackSection visible={tech.visible} />
-      <CTASection visible={cta.visible} />
+      <CTASection />
 
       {/* Keyframe for ping rings */}
       <style>{`

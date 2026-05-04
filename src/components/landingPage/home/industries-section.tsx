@@ -153,7 +153,9 @@ export function IndustriesSection() {
           {industries.map((industry, index) => {
             const Icon = industry.icon;
             return (
-              <div className="group relative rounded-2xl border border-white/10 bg-accent-50/15 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:bg-white/[0.06]">
+              <div 
+                key={industry.title}
+              className="group relative rounded-2xl border border-white/10 bg-accent-50/15 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:bg-white/[0.06]">
 
                 {/* Glow layer */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-[#1e3a8a]/40 to-[#c49138]/40 blur-xl" />

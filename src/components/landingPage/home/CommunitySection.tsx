@@ -28,6 +28,7 @@ interface CommunityFeature {
   stat: string;
   statLabel: string;
   color: string;
+  features?: string[];
 }
 
 interface StatItem {
@@ -247,6 +248,7 @@ export function CommunitySection() {
         });
 
         // Animate feature cards with 3D entrance
+        // Animate feature cards with 3D entrance
         cardsRef.current.forEach((card, index) => {
           if (card) {
             masterTl.fromTo(
@@ -306,7 +308,7 @@ export function CommunitySection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-accent-50"  id="community" >
+    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-accent-50" id="community" >
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section - matching IndustriesSection styling */}
         <div ref={headerRef} className="text-center mb-10">
@@ -401,64 +403,159 @@ export function CommunitySection() {
         </div>
 
         {/* Features Grid - matching IndustriesSection card styling */}
+        {/* Features Grid - Enhanced Card Design */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {communityFeatures.map((feature, index) => {
             const Icon = feature.icon;
-            const numericValue = extractNumber(feature.stat);
-            const hasPlusSign = hasPlus(feature.stat);
-            const isPercent = isPercentage(feature.stat);
-            const is247Format = is247(feature.stat);
 
             return (
-              <div className="group relative rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/30">
+              <motion.div
+                key={feature.title}
+                ref={(el) => {
+                  cardsRef.current[index] = el;
+                }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{
+                  y: -8,
+                  transition: { duration: 0.3 }
+                }}
+                className="relative group"
+              >
+                {/* Card with gradient border on hover */}
+                <div className="relative bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl">
 
-                {/* Soft hover glow (very subtle, no animation movement) */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-primary/[0.03]" />
+                  {/* Animated gradient border */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-accesnt/50 via-accent/30 to-[gold] opacity-0 group-hover:opacity-80 transition-opacity duration-700" />
 
-                <div className="relative z-10">
+                  {/* Top accent bar - animated on hover */}
+                  <motion.div
+                    className="h-1 w-full bg-gradient-to-r from-primary/40 via-primary to-primary/40"
+                    animate={{
+                      backgroundPosition: ['0% 0%', '200% 0%'],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                    style={{ backgroundSize: '200% 100%' }}
+                  />
 
-                  {/* Icon */}
-                  <div className="w-11 h-11 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center mb-4 group-hover:border-primary/30 transition">
-                    <Icon className="w-5 h-5 text-gray-700 group-hover:text-primary transition" />
+                  {/* Icon section with improved styling */}
+                  <div className="relative">
+                    <div className="absolute top-4 left-[21rem]">
+                      <motion.div
+                        className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 text-white flex items-center justify-center rounded-xl shadow-lg"
+                        whileHover={{
+                          rotate: 360,
+                          scale: 1.1,
+                          transition: { duration: 0.5 }
+                        }}
+                      >
+                        <Icon className="w-5 h-5" strokeWidth={1.5} />
+                      </motion.div>
+                    </div>
+
+                    {/* Decorative circle behind icon */}
+                    <div />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary transition">
-                    {feature.title}
-                  </h3>
+                  {/* Content */}
+                  <div className="p-6 pt-10">
+                    {/* Title with underline effect */}
+                    <div className="mb-3">
+                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <motion.div
+                        className="h-0.5 bg-[gold] mt-2 rounded-full"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: 40 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                      />
+                    </div>
 
-                  {/* Description */}
-                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                    {feature.description}
-                  </p>
+                    {/* Description with improved spacing */}
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                      {feature.description}
+                    </p>
 
-                  {/* Stats (ONLY if needed) */}
-                  {index >= 3 && (
-                    <div className="pt-4 border-t border-gray-100 flex items-baseline justify-between">
+                    {/* Features chips - improved design */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {[
+                        'Custom Solutions',
+                        'Expert Team',
+                        'Agile Process',
+                        '24/7 Support'
+                      ].slice(0, 4).map((chip, chipIndex) => (
+                        <motion.span
+                          key={chip}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: chipIndex * 0.05 }}
+                          className="text-xs px-2.5 py-1 rounded-full bg-gray-50 text-gray-600 border border-gray-100 group-hover:border-primary/30 group-hover:bg-primary/5 transition-all duration-300"
+                        >
+                          {chip}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
 
-                      <div className="flex flex-col">
-                        <span className="text-xl font-bold text-gray-900">
-                          {is247Format
-                            ? feature.stat
-                            : numericValue > 0
-                              ? feature.stat
-                              : feature.stat}
-                        </span>
-
-                        <span className="text-[11px] uppercase tracking-wide text-gray-500">
-                          {feature.statLabel}
-                        </span>
+                  {/* Bottom KPI Bar - Enhanced */}
+                  <motion.div
+                    className="border-t border-gray-100 bg-gradient-to-r from-gray-50 to-white px-6 py-4 flex items-center justify-between group-hover:border-primary/20 transition-colors duration-300"
+                    whileHover={{ backgroundColor: 'rgba(249, 115, 22, 0.02)' }}
+                  >
+                    <div className="relative">
+                      {/* Stat number with glow effect */}
+                      <motion.div
+                        className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        {feature.stat}
+                      </motion.div>
+                      <div className="text-[10px] uppercase tracking-wider text-gray-500 mt-0.5 font-medium">
+                        {feature.statLabel}
                       </div>
 
+                      {/* Progress indicator */}
+                      <motion.div
+                        className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-[gold] to-accent rounded-full"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '60%' }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: index * 0.1 }}
+                      />
                     </div>
-                  )}
 
+                    {/* Animated arrow icon */}
+                    <motion.div
+                      className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-primary/50 group-hover:bg-primary/5 transition-all duration-300"
+                      whileHover={{
+                        x: 5,
+                        rotate: 0,
+                        transition: { duration: 0.2 }
+                      }}
+                    >
+                      <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-primary transition-colors duration-300" />
+                    </motion.div>
+                  </motion.div>
+
+                  {/* Hover glow effect */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent rounded-2xl" />
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
-
         {/* Bottom CTA Section - matching IndustriesSection styling */}
         <div ref={ctaRef} className="mt-20">
           <motion.div

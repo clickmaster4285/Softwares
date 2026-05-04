@@ -89,8 +89,8 @@ export function TechStackSection({ visible }: TechStackSectionProps) {
    };
 
    return (
-      <div style={{ borderColor: '#f5bc53' }} className="border-b  overflow-hidden">
-         <div className="bg-[gold]/50 max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
+      <div style={{ borderColor: '#f5bc53' }} className="border-b overflow-hidden bg-[gold]/50">
+         <div className=" mx-auto max-w-7xl px-6 lg:px-8 py-16 lg:py-20">
             <div className="text-center mb-12">
                <div className="inline-flex items-center gap-2 mb-3">
                   <span className="w-8 h-[2px] bg-primary-400 rounded-full" />
