@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, FileText, Mail, User, Phone, Send, CheckCircle2, DollarSign } from 'lucide-react';
+import { ArrowRight, FileText, Mail, User, Phone, Send, CheckCircle2, DollarSign, Rocket, Users, Trophy, Clock } from 'lucide-react';
 import { BackgroundAnimation } from './BackgroundAnimation';
 
 interface CounterProps {
@@ -15,6 +15,8 @@ interface CounterProps {
 interface StatItem {
   end: number;
   label: string;
+  suffix?: string;
+  icon: React.ElementType;
 }
 
 const heroBullets = [
@@ -47,7 +49,7 @@ function useInViewOnce(ref: React.RefObject<Element | null>, threshold = 0.15): 
   return visible;
 }
 
-const Counter = ({ end, duration = 2, delay = 0 }: CounterProps): JSX.Element => {
+const Counter = ({ end, duration = 2, delay = 0 }: CounterProps & { suffix?: string }) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInViewOnce(ref, 0.2);
@@ -57,48 +59,67 @@ const Counter = ({ end, duration = 2, delay = 0 }: CounterProps): JSX.Element =>
 
     let startTime: number;
     let animationFrame: number;
-    const startValue = 0;
+
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
-      const progress = (timestamp - startTime) / (duration * 1000);
 
-      if (progress < 1) {
-        setCount(Math.min(Math.floor(startValue + end * progress), end));
+      const rawProgress = (timestamp - startTime) / (duration * 1000);
+      const progress = easeOut(Math.min(rawProgress, 1));
+
+      setCount(Math.floor(end * progress));
+
+      if (rawProgress < 1) {
         animationFrame = requestAnimationFrame(animate);
       } else {
         setCount(end);
       }
     };
 
-    const timeoutId = window.setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       animationFrame = requestAnimationFrame(animate);
     }, delay * 1000);
 
     return () => {
-      window.clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
       if (animationFrame) cancelAnimationFrame(animationFrame);
     };
   }, [isInView, end, duration, delay]);
 
-  return <span ref={ref}>{count}+</span>;
+  return (
+    <span ref={ref}>
+      {count}
+    </span>
+  );
 };
 
 const stats: StatItem[] = [
-  { end: 1860, label: 'Projects Delivered' },
-  { end: 3500, label: 'Happy Clients' },
-  { end: 75, label: 'Awards Won' },
-  { end: 5, label: 'Years Experience' },
+  {
+    end: 1860,
+    label: 'Projects Delivered Across SaaS & AI',
+    suffix: '+',
+    icon: Rocket,
+  },
+  {
+    end: 3500,
+    label: 'Clients Served Globally',
+    suffix: '+',
+    icon: Users,
+  },
+  {
+    end: 75,
+    label: 'Awards & Recognitions',
+    suffix: '+',
+    icon: Trophy,
+  },
+  {
+    end: 5,
+    label: 'Years Building Scalable Systems',
+    suffix: '+',
+    icon: Clock,
+  },
 ];
-
-const particlePositions = [
-  { top: '14%', left: '22%' },
-  { top: '31%', left: '68%' },
-  { top: '52%', left: '40%' },
-  { top: '67%', left: '83%' },
-  { top: '79%', left: '19%' },
-  { top: '90%', left: '56%' },
-] as const;
 
 export function HeroSection(): JSX.Element {
   const [heroForm, setHeroForm] = useState({
@@ -156,24 +177,10 @@ export function HeroSection(): JSX.Element {
     >
       <BackgroundAnimation />
 
-      {/* Static decorative layers — no infinite JS / layout-thrashing animations */}
-      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
-        <div className="absolute right-0 top-0 h-[70%] w-[60%] translate-x-1/4 -translate-y-1/3 rounded-full bg-gradient-to-br from-primary/25 to-transparent opacity-80 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-[50%] w-[40%] -translate-x-1/4 translate-y-1/3 rounded-full bg-gradient-to-tr from-primary/20 to-transparent opacity-70 blur-3xl" />
-        <div className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(249,115,22,0.12),transparent)]" />
-        {particlePositions.map((position, i) => (
-          <div
-            key={i}
-            className="absolute h-1 w-1 rounded-full bg-primary/40"
-            style={{ top: position.top, left: position.left }}
-          />
-        ))}
-      </div>
-
-      <div className="container relative z-10 mx-auto w-full max-w-full min-w-0 px-3 sm:px-4 lg:px-8">
-        <div className="mx-auto w-full min-w-0 max-w-7xl">
+      <div className="container relative z-10 mx-auto w-full px-3 sm:px-4 lg:px-8">
+        <div className="mx-auto w-full  max-w-[85rem]">
           <div className="mb-10 grid items-start gap-8 sm:mb-12 sm:gap-10 md:mb-16 md:gap-12 lg:mb-20 lg:grid-cols-[1fr_minmax(280px,400px)] xl:grid-cols-[1fr_420px]">
-            <div className="min-w-0">
+            <div className=''>
               <div
                 className="hero-enter mb-4 min-w-0 text-left sm:mb-6"
                 style={{ ['--hero-enter-delay' as string]: '60ms' }}
@@ -183,7 +190,7 @@ export function HeroSection(): JSX.Element {
                   className="font-display text-left text-[1.55rem] font-bold leading-snug tracking-tight text-white text-pretty [overflow-wrap:anywhere] sm:text-2xl md:text-3xl lg:text-[2.35rem] xl:text-5xl"
                 >
                   Custom Software Development That Scales Your Business Revenue{' '}
-                  <span className="text-primary">— Not Just Code</span>
+                  <span className="text-[gold]">— Not Just Code</span>
                 </h1>
               </div>
 
@@ -257,10 +264,10 @@ export function HeroSection(): JSX.Element {
             </div>
 
             <div
-              className="hero-enter mx-auto w-full min-w-0 max-w-md lg:mx-0 lg:max-w-none"
+              className="hero-enter mx-auto w-full w-xl"
               style={{ ['--hero-enter-delay' as string]: '160ms' }}
             >
-              <div className="rounded-xl border border-white/15 bg-black/45 p-4 shadow-2xl shadow-black/40 backdrop-blur-md sm:rounded-2xl sm:p-5 md:p-6">
+              <div className="rounded-xl border border-white/15 bg-white/15 p-4 shadow-2xl shadow-black/40 backdrop-blur-md sm:rounded-2xl sm:p-5 md:p-6">
                 <h2 className="mb-1 font-display text-base font-bold text-white sm:text-lg">
                   Get a free quote
                 </h2>
@@ -383,7 +390,7 @@ export function HeroSection(): JSX.Element {
                     <p className="text-center text-xs text-gray-200">
                       <Link
                         href="/contact-us"
-                        className="underline-offset-4 hover:text-white hover:underline"
+                        className="text-[gold] underline-offset-4 hover:text-white hover:underline"
                       >
                         View phone, email, and office details on our contact page
                       </Link>
@@ -395,23 +402,42 @@ export function HeroSection(): JSX.Element {
           </div>
 
           <div
-            className="hero-enter grid grid-cols-2 gap-x-3 gap-y-6 border-t border-white/25 pt-8 text-left sm:gap-x-6 sm:gap-y-8 sm:pt-10 md:grid-cols-4 md:gap-8"
-            role="list"
-            aria-label="Company achievements"
+            className="hero-enter mt-10 border-t border-white/10 pt-8"
             style={{ ['--hero-enter-delay' as string]: '240ms' }}
           >
-            {stats.map((stat, index) => (
-              <div key={stat.label} className="relative min-w-0 text-left" role="listitem">
-                <div className="relative z-10 py-2 pl-0 pr-0.5 sm:p-4 sm:pl-0">
-                  <p className="font-display text-left text-2xl font-bold tabular-nums text-white sm:text-3xl md:text-4xl">
-                    <Counter end={stat.end} duration={2} delay={0.2 * index} />
-                  </p>
-                  <p className="mt-1 text-left text-[11px] leading-snug text-gray-100 sm:text-xs md:text-sm">
-                    {stat.label}
-                  </p>
-                </div>
-              </div>
-            ))}
+            <p className="mb-6 text-center text-sm text-gray-300">
+              Trusted by startups, enterprises & global brands
+            </p>
+
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              {stats.map((stat, index) => {
+                const Icon = stat.icon;
+
+                return (
+                  <div
+                    key={stat.label}
+                    className="group rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] hover:border-primary/40"
+                  >
+
+                    <div className="flex items-center justify-between">
+                      <p className="text-2xl font-bold text-white sm:text-3xl">
+                        <Counter
+                          end={stat.end}
+                          duration={2}
+                          delay={0.2 * index}
+                        />
+                        {stat.suffix}
+                      </p>
+                      <Icon className="mb-2 h-9 w-9 text-accent" />
+                    </div>
+
+                    <p className="mt-1 text-xs text-gray-300 sm:text-sm">
+                      {stat.label}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

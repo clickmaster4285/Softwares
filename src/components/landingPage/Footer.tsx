@@ -2,304 +2,168 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-// import { TimerIcon, Linkedin, Github, Youtube, Mail, Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Mail } from 'lucide-react';
 
-import {  Mail } from 'lucide-react';
-
-import { motion, Variants, HTMLMotionProps } from 'framer-motion';
-
-// Type definitions
 interface FooterLink {
   label: string;
   href: string;
 }
 
-interface SocialLink {
-  icon: React.ElementType;
-  href: string;
-  label: string;
-  color: string;
-}
-
-interface FooterLinks {
-  services: FooterLink[];
-  company: FooterLink[];
-  resources: FooterLink[];
-  legal: FooterLink[];
-}
-
-const footerLinks: FooterLinks = {
+const footerLinks = {
   services: [
     { label: 'Custom Software', href: '/services' },
     { label: 'Web Development', href: '/services' },
-    { label: 'Mobile App Development', href: '/services' },
-    { label: 'ERP & Business Apps', href: '/services' },
-    { label: 'Our Solutions', href: '/software-solutions' },
+    { label: 'Mobile Apps', href: '/services' },
+    { label: 'ERP Systems', href: '/services' },
   ],
   company: [
-    { label: 'About Us', href: '/about-us' },
+    { label: 'About', href: '/about-us' },
     { label: 'Contact', href: '/contact-us' },
-    { label: 'Testimonials', href: '/testimonials' },
     { label: 'Blog', href: '/blog' },
-    { label: 'Support', href: '/#help' },
+    { label: 'Testimonials', href: '/testimonials' },
   ],
   resources: [
-    { label: 'Help & FAQ', href: '/contact-us' },
-    { label: 'Why Choose Us', href: '/#community' },
     { label: 'Case Studies', href: '/case-studies' },
-    { label: 'Blog', href: '/blog' },
-   
+    { label: 'Support', href: '/contact-us' },
+    { label: 'FAQ', href: '/contact-us' },
   ],
   legal: [
     { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Policy', href: '#' },
+    { label: 'Terms', href: '#' },
+    { label: 'Cookies', href: '#' },
   ],
 };
 
-// const socialLinks: SocialLink[] = [
-//   { icon: TimerIcon , href: '#', label: 'TimerIcon ', color: 'hover:bg-[#1DA1F2]' },
-//   { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:bg-[#0A66C2]' },
-//   { icon: Github, href: '#', label: 'GitHub', color: 'hover:bg-[#333]' },
-//   { icon: Youtube, href: '#', label: 'YouTube', color: 'hover:bg-[#FF0000]' },
-// ];
-
-// Animation variants with proper typing
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
+const socialLinks = [
+  {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com',
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">
+        <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0H12v2.2h.1C12.9 8.9 14.6 8 16.6 8 21 8 22 10.7 22 15v9h-5v-8c0-2-.04-4.6-3-4.6s-3.5 2.3-3.5 4.5V24h-5V8z" />
+      </svg>
+    ),
   },
-};
-
-const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 12,
-    },
+  {
+    label: 'GitHub',
+    href: 'https://github.com',
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.1c-3.34.72-4.04-1.6-4.04-1.6-.55-1.4-1.35-1.77-1.35-1.77-1.1-.75.08-.73.08-.73 1.22.1 1.86 1.26 1.86 1.26 1.08 1.85 2.82 1.3 3.5 1 .1-.8.42-1.3.76-1.6-2.66-.3-5.46-1.3-5.46-5.8 0-1.3.47-2.4 1.24-3.2-.12-.3-.54-1.5.12-3.1 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0C17 5.6 18 5.9 18 5.9c.66 1.6.24 2.8.12 3.1.77.8 1.24 1.9 1.24 3.2 0 4.5-2.8 5.5-5.5 5.8.43.4.81 1.1.81 2.2v3.3c0 .32.22.7.82.58C20.56 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z" />
+      </svg>
+    ),
   },
-};
-
-const linkVariants: Variants = {
-  hover: {
-    x: 5,
-    color: '#ffffff',
-    transition: {
-      type: 'spring',
-      stiffness: 400,
-      damping: 10,
-    },
+  {
+    label: 'Instagram',
+    href: 'https://instagram.com',
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">
+        <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10z" />
+      </svg>
+    ),
   },
-};
-
-const backgroundVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 0.1,
-    transition: { duration: 1.5 },
+  {
+    label: 'X',
+    href: 'https://x.com',
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">
+        <path d="M18 2h3l-7 8 8 12h-6l-5-7-6 7H2l7.5-9L2 2h6l4.5 6L18 2z" />
+      </svg>
+    ),
   },
-};
+];
 
-const footerVariants: Variants = {
-  hidden: { backgroundColor: '#000000' },
-  visible: {
-    backgroundColor: '#0a0a0a',
-    transition: { duration: 0.8 },
-  },
-};
-
-export function Footer(): JSX.Element {
-  const currentYear: number = new Date().getFullYear();
-
+export function Footer() {
   return (
-    <motion.footer
-      variants={footerVariants}
-      initial="hidden"
-      animate="visible"
-      className="bg-foreground text-background relative overflow-hidden"
-    >
-      {/* Animated background pattern */}
-      <motion.div
-        variants={backgroundVariants}
-        initial="hidden"
-        animate="visible"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)',
-          backgroundSize: '40px 40px',
-        }}
-      />
+    <footer className="bg-[#05070f] text-white border-t border-white/10">
 
-      <div className="max-w-8xl mx-auto px-16 md:px-8 lg:px-16 py-2 relative z-10">
-        {/* Top Section */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid lg:grid-cols-2 gap-12 mb-2 pb-2 border-b border-background/20 items-center"
-        >
-          <motion.div variants={itemVariants}>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            >
-              <Link href="/" className="flex items-center gap-2">
-                <Image
-                  src="/images/logo-white.webp"
-                  alt="ClickMasters"
-                  width={600}
-                  height={400}
-                  className="h-auto w-30 sm:w-48 xl:w-64"
-                  loading="lazy"
-                />
-              </Link>
-            </motion.div>
-            <motion.p variants={itemVariants} className="text-background/70 max-w-md mb-6">
-              ClickMasters is a software development company. We build custom software, web
-              applications, mobile apps, and ERP solutions for businesses worldwide.
-            </motion.p>
-            {/* <motion.div variants={itemVariants} className="flex gap-4">
-              {socialLinks.map((social: SocialLink, index: number) => {
-                const Icon = social.icon;
-                return (
-                  <motion.div
-                    key={social.label}
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={social.href}
-                      className={`h-10 w-10 rounded-full bg-background/10 flex items-center justify-center transition-colors duration-300 ${social.color}`}
-                      aria-label={social.label}
-                    >
-                      <Icon className="h-5 w-5 text-background" />
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </motion.div> */}
-          </motion.div>
+      {/* TOP SECTION */}
+      <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12">
 
-          <motion.div variants={itemVariants}>
-            <motion.h3
-              variants={itemVariants}
-              className="text-lg font-semibold text-background mb-4 flex items-center gap-2"
-            >
-              <Mail className="h-5 w-5" />
-              Subscribe to our newsletter
-            </motion.h3>
-            <motion.p variants={itemVariants} className="text-background/70 mb-4">
-              Get product updates, tech insights, and company news from your software development
-              partner.
-            </motion.p>
-            <motion.div
-              variants={itemVariants}
-              className="flex gap-2"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            >
-              <div className="relative flex-1">
-                <Input
-                  placeholder="Enter your email"
-                  className="bg-background/10 border-background/20 text-background placeholder:text-background/50 focus:border-primary pr-10 transition-all duration-300 focus:ring-2 focus:ring-primary/20"
-                  type="email"
-                  aria-label="Email for newsletter"
-                />
-              
-              </div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 whitespace-nowrap relative overflow-hidden group"
-                  aria-label="Subscribe to newsletter"
-                >
-                  <span className="relative z-10">Subscribe</span>
-                  <motion.div
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ x: '-100%' }}
-                    whileHover={{ x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+        <div>
+          <Image
+            src="/images/logo-white.webp"
+            alt="ClickMasters"
+            width={210}
+            height={50}
+          />
 
-        {/* Links Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-2"
-        >
-          {(Object.entries(footerLinks) as [keyof FooterLinks, FooterLink[]][]).map(
-            ([category, links]) => (
-              <motion.div key={category} variants={itemVariants}>
-                <motion.h4
-                  className="font-semibold text-background mb-4 capitalize relative inline-block"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {category}
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-0.5 bg-primary"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.h4>
-                <ul className="space-y-3">
-                  {links.map((link: FooterLink) => (
-                    <motion.li
-                      key={link.label}
-                      variants={linkVariants}
-                      whileHover="hover"
-                      className="origin-left"
-                    >
-                      <Link
-                        href={link.href}
-                        className="text-background/70 hover:text-background transition-colors inline-block"
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            )
-          )}
-        </motion.div>
+          <p className="text-gray-400 mt-4 max-w-md leading-relaxed">
+            We design and build scalable software systems, SaaS platforms,
+            mobile apps, and AI solutions for global businesses.
+          </p>
+        </div>
 
-        {/* Bottom */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-background/20"
-        >
-          <motion.p className="text-sm text-background/60" whileHover={{ color: '#ffffff' }}>
-            © {currentYear} ClickMasters. All rights reserved.
-          </motion.p>
-       
-        </motion.div>
+        {/* NEWSLETTER */}
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div className="flex items-center gap-2 mb-3">
+            <Mail className="h-5 w-5 text-[#c49138]" />
+            <h3 className="text-lg font-semibold">Stay Updated</h3>
+          </div>
+
+          <p className="text-gray-400 text-sm mb-4">
+            Get insights on software engineering, AI & product growth.
+          </p>
+
+          <div className="flex gap-2">
+            <Input
+              placeholder="Enter email"
+              className="bg-white/5 border-white/10 text-white"
+            />
+            <Button className="bg-gradient-to-r from-[#1e3a8a] to-[#c49138]">
+              Subscribe
+            </Button>
+          </div>
+        </div>
       </div>
-    </motion.footer>
+
+      {/* LINKS */}
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10 py-12 border-t border-white/10">
+        {Object.entries(footerLinks).map(([key, links]) => (
+          <div key={key}>
+            <h4 className="text-xs uppercase tracking-widest text-gray-500 mb-4">
+              {key}
+            </h4>
+
+            <ul className="space-y-3">
+              {links.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-white transition-all duration-200 hover:translate-x-1 inline-block"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* BOTTOM */}
+      <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/10">
+
+        <p className="text-gray-500 text-sm">
+          © {new Date().getFullYear()} ClickMasters. All rights reserved.
+        </p>
+
+        {/* SOCIAL */}
+        <div className="flex gap-3">
+          {socialLinks.map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition"
+            >
+              {social.icon}
+            </a>
+          ))}
+        </div>
+      </div>
+    </footer>
   );
 }

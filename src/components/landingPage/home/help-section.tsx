@@ -109,7 +109,7 @@ export function HelpSection() {
     <section
       ref={sectionRef}
       id="help"
-      className="relative py-24 overflow-hidden bg-white font-sans"
+      className="relative py-24 overflow-hidden bg-white"
     >
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section - YOUR ORIGINAL HEADER with premium styling */}

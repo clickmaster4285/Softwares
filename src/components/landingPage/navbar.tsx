@@ -287,7 +287,7 @@ export function Navbar() {
 
   const linkStyle = (isActive: boolean) => {
     if (isPageLoading) {
-      return isActive ? 'text-primary font-bold' : 'text-black/70 hover:text-primary';
+      return isActive ? 'text-accent-500 font-bold' : 'text-black/70 hover:text-primary';
     }
     if (isActive) {
       return 'text-primary font-bold';
@@ -488,13 +488,24 @@ export function Navbar() {
           <Link href="/admin/login" onClick={closeDropdowns}>
             <button
               className={cn(
-                'px-5 py-2 text-sm font-medium transition-colors duration-300 rounded-md',
-                isPageLoading || isScrolled || !isLightHero
-                  ? 'text-white bg-primary hover:bg-primary/90'
-                  : 'text-white bg-primary hover:bg-primary/90'
+                'relative group p-[1px] overflow-hidden rounded-md transition-all duration-300',
+                isPageLoading || !isLightHero ? 'bg-[gold]/15' : 'bg-transparent'
               )}
             >
-              Sign In
+              {/* Animated Border Layer */}
+              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_0deg,#9b6f24_0deg,#1e3a8a_180deg,#9b6f24_360deg)]" />
+
+              {/* Button Content */}
+              <div
+                className={cn(
+                  'relative px-5 py-2 text-sm font-medium rounded-md transition-colors duration-300 w-full h-full flex items-center justify-center',
+                  isPageLoading || !isLightHero
+                    ? 'text-white bg-gradient-to-r from-[#12224b] to-[#9b6f24] hover:bg-primary/90'
+                    : 'text-white bg-gradient-to-r from-[#12224b] to-[#9b6f24]'
+                )}
+              >
+                Sign In
+              </div>
             </button>
           </Link>
         </div>
@@ -652,7 +663,7 @@ export function Navbar() {
               {/* Mobile Footer */}
               <div className="p-6 border-t border-black/5">
                 <Link href="/admin/login" onClick={() => setIsOpen(false)}>
-                  <button className="w-full px-5 py-3 text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors duration-300 rounded-md">
+                  <button className="w-full px-5 py-3 text-sm font-medium text-white bg-gradient-to-r from-[#12224b] to-[#9b6f24] hover:bg-primary/90 transition-colors duration-300 rounded-md">
                     Sign In
                   </button>
                 </Link>

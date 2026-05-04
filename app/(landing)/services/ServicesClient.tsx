@@ -509,7 +509,7 @@ export default function ServicesPage() {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-white font-sans">
+    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-white">
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section */}
         <div ref={headerRef} className="mt-20 text-center max-w-4xl mx-auto mb-16">

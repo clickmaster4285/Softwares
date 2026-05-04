@@ -320,7 +320,7 @@ export function GlobeCdn({
           <span
             title={m.name ?? m.region}
             className={cn(
-              "max-w-[min(11rem,38vw)] truncate rounded px-1.5 py-0.5 text-center font-sans text-[0.52rem] font-medium leading-tight tracking-tight sm:text-[0.58rem]",
+              "max-w-[min(11rem,38vw)] truncate rounded px-1.5 py-0.5 text-center text-[0.52rem] font-medium leading-tight tracking-tight sm:text-[0.58rem]",
               regionChipClass,
             )}
           >

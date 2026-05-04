@@ -433,7 +433,7 @@ export default function SolutionsClient({
   // Loading skeletons
   if (isLoading) {
     return (
-      <section className="relative py-24 overflow-hidden bg-white font-sans min-h-screen">
+      <section className="relative py-24 overflow-hidden bg-white  min-h-screen">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
@@ -468,7 +468,7 @@ export default function SolutionsClient({
   return (
     <section 
       ref={sectionRef}
-      className="relative py-24 overflow-hidden bg-white font-sans min-h-screen"
+      className="relative py-24 overflow-hidden bg-white min-h-screen"
     >
       {/* Premium Background Layers */}
       <div className="absolute inset-0">

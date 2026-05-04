@@ -115,7 +115,7 @@ export function IndustriesSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-white font-sans">
+    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-gradient-to-b from-accent-200 via-accent-500/20 to-[gold]/80 ">
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section */}
         <div ref={headerRef} className="text-center mb-10">
@@ -153,236 +153,121 @@ export function IndustriesSection() {
           {industries.map((industry, index) => {
             const Icon = industry.icon;
             return (
-              <motion.div
-                key={industry.title}
-                ref={(el) => {
-                  cardsRef.current[index] = el;
-                }}
-                className="relative cursor-pointer"
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 25px 35px -15px rgba(249,115,22,0.3)',
-                  borderColor: 'rgb(249, 115, 22)',
-                  transition: { duration: 0.3 },
-                }}
-                onMouseEnter={() => handleCardHover(index, true)}
-                onMouseLeave={() => handleCardHover(index, false)}
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                {/* Premium Card Design */}
-                <div className="relative bg-white rounded-2xl p-6 border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden group">
-                  {/* Animated background that moves on hover (matching WhyChooseSection) */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent"
-                    animate={{
-                      x: ['-100%', '100%'],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'linear',
-                    }}
-                  />
+              <div className="group relative rounded-2xl border border-white/10 bg-accent-50/15 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:bg-white/[0.06]">
 
-                  {/* Icon with rotation on hover */}
-                  <motion.div
-                    className="card-icon relative mb-5 transform-gpu transition-transform duration-300"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <div className="relative inline-block">
-                      <div className="absolute inset-0 bg-primary/20 rounded-full blur-md scale-0 group-hover:scale-150 transition-transform duration-500" />
-                      <div className="relative w-12 h-12 flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-black/80" strokeWidth={1.5} />
-                      </div>
+                {/* Glow layer */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-[#1e3a8a]/40 to-[#c49138]/40 blur-xl" />
+
+                {/* Content */}
+                <div className="relative z-10">
+
+                  {/* Top Row */}
+                  <div className="flex items-center justify-between mb-5">
+
+                    {/* Icon */}
+                    <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 transition">
+                      <Icon className="w-5 h-5 text-white/80  transition" />
                     </div>
-                  </motion.div>
+
+                    {/* Stat */}
+                    <div className="text-right">
+                      <p className="text-lg font-bold text-white">{industry.stats}</p>
+                      <p className="text-[10px] uppercase tracking-wider text-white/50">
+                        {industry.statLabel}
+                      </p>
+                    </div>
+                  </div>
 
                   {/* Title */}
-                  <h3 className="card-title text-xl font-bold text-black mb-2 relative z-10">
+                  <h3 className="text-white font-semibold text-lg mb-2  transition">
                     {industry.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="card-desc text-gray-700 text-sm leading-relaxed mb-4 relative z-10">
+                  <p className="text-white/60 text-sm leading-relaxed mb-4">
                     {industry.description}
                   </p>
 
-                  {/* Features with staggered animation */}
-                  <div className="card-features flex flex-wrap gap-2 mb-4 relative z-10">
-                    {industry.features.map((feature: string, i: number) => (
-                      <motion.span
-                        key={feature}
-                        className="text-xs px-2 py-1 bg-gray-50 text-gray-600 rounded-full"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 * i }}
+                  {/* Features */}
+                  <ul className="space-y-2">
+                    {industry.features.map((feature, i) => (
+                      <li
+                        key={i}
+                        className="text-xs text-white/70 flex items-center gap-2"
                       >
+                        <span className="w-1.5 h-1.5 bg-primary rounded-full" />
                         {feature}
-                      </motion.span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
 
-                  {/* Stats with premium animation */}
-                  <div className="card-stats pt-3 border-t border-primary/20 flex items-baseline justify-between relative z-10">
-                    <div>
-                      <motion.span
-                        className="text-2xl font-bold text-primary block leading-none"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {industry.stats}
-                      </motion.span>
-                      <span className="text-xs uppercase tracking-wider text-gray-500">
-                        {industry.statLabel}
-                      </span>
-                    </div>
-
-                 
-                  </div>
-
-                  {/* Corner Accent with rotation */}
-                  <div className="absolute bottom-3 right-3 w-6 h-6">
-                    <motion.div
-                      className="w-full h-full border-b border-r border-primary"
-                      animate={{
-                        rotate: hoveredIndex === index ? 180 : 0,
-                        opacity: hoveredIndex === index ? 0.3 : 0.1,
-                      }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
         {/* Bottom CTA Section */}
-        <div ref={ctaRef} className="mt-20">
-          <motion.div
-            className="relative bg-gradient-to-br from-gray-50 to-primary/20 rounded-3xl p-12 overflow-hidden border border-primary/10"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            whileHover={{ scale: 1.02 }}
-          >
-            {/* Animated Pattern */}
-            <motion.div
-              className="absolute inset-0 opacity-5"
-              animate={{
-                backgroundPosition: ['0% 0%', '100% 100%'],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-              style={{
-                backgroundImage: `radial-gradient(circle at 2px 2px, #f97316 1px, transparent 0)`,
-                backgroundSize: '30px 30px',
-              }}
-            />
+        <div ref={ctaRef} className="mt-24">
+          <div className="relative bg-white rounded-3xl border border-gray-200 p-12 lg:p-16 shadow-sm">
 
-            {/* Animated light sweep (matching WhyChooseSection) */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
-              animate={{
-                x: ['-100%', '100%'],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            />
+            {/* Subtle gradient accent */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl mx-auto text-center">
-              <motion.div
-                className="w-12 h-px bg-primary mx-auto mb-8"
-                animate={{
-                  width: ['48px', '96px', '48px'],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
 
-              <h3 className="text-3xl md:text-4xl font-bold text-black mb-4">
-                Ready to Transform Your Industry?
-                <span className="font-bold block mt-2 text-primary">
-                  Let's Build Something Extraordinary
+              {/* Top Label */}
+              <div className="mb-6">
+                <span className="text-xs tracking-[0.2em] uppercase text-primary font-semibold">
+                  Start Your Project
                 </span>
+              </div>
+
+              {/* Heading */}
+              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+                Ready to Build Software That Drives Revenue?
               </h3>
 
-              <p className="text-gray-700 text-base leading-relaxed max-w-2xl mx-auto">
-                Whether you're in manufacturing, healthcare, or retail, we have the expertise to
-                build software that drives your business forward.
+              {/* Subtext */}
+              <p className="text-gray-600 text-base mt-4 max-w-2xl mx-auto leading-relaxed">
+                We design and develop scalable software solutions tailored to your business —
+                from idea to deployment and beyond.
               </p>
 
-              {/* Stats Row with premium hover */}
-              <motion.div className="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-12 mt-8 pt-8 border-t border-primary/10">
+              {/* Stats (clean, no animation) */}
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-16 mt-10 pt-8 border-t border-gray-100">
                 {stats.map((stat, idx) => (
-                  <motion.div
-                    key={idx}
-                    whileHover={{
-                      y: -5,
-                      scale: 1.05,
-                    }}
-                    className="text-center cursor-default"
-                  >
-                    <motion.div
-                      className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary"
-                      animate={{
-                        textShadow: [
-                          '0 0 0 rgba(249,115,22,0)',
-                          '0 0 10px rgba(249,115,22,0.3)',
-                          '0 0 0 rgba(249,115,22,0)',
-                        ],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: idx * 0.3,
-                      }}
-                    >
+                  <div key={idx} className="text-center">
+                    <div className="text-2xl md:text-3xl font-bold text-gray-900">
                       {stat.number}
-                    </motion.div>
-                    <div className="text-xs sm:text-sm uppercase tracking-wider text-gray-500 mt-1">
+                    </div>
+                    <div className="text-xs uppercase tracking-wider text-gray-500 mt-1">
                       {stat.label}
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
+              </div>
 
-              {/* Premium CTA Button */}
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 10px 25px -5px rgba(249,115,22,0.4)',
-                }}
-                whileTap={{ scale: 0.98 }}
-                className="mt-8 px-8 py-3 bg-black text-white text-sm font-medium tracking-wider rounded-md hover:bg-primary transition-all duration-300 relative overflow-hidden group"
-                onClick={() => router.push('/contact-us')}
-              >
-                <span className="relative z-10">Discuss Your Project</span>
-                <motion.div
-                  className="absolute inset-0 bg-primary"
-                  initial={{ x: '100%' }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
+              {/* CTA Buttons */}
+              <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+
+                <button
+                  onClick={() => router.push('/contact-us')}
+                  className="px-8 py-3 bg-primary text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:bg-primary/90 hover:shadow-lg active:scale-95"
+                >
+                  Get Free Consultation
+                </button>
+
+                <button
+                  onClick={() => router.push('/case-studies')}
+                  className="px-8 py-3 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg transition-all duration-200 hover:border-primary hover:text-primary hover:bg-primary/5 active:scale-95"
+                >
+                  View Case Studies
+                </button>
+
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

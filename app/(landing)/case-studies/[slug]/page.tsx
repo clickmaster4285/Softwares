@@ -192,7 +192,7 @@ export default async function CaseStudyDetailPage({
         }}
       />
 
-      <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pt-10">
+      <div className="min-h-screen bg-slate-50 text-slate-900 pt-10">
         <article>
 
           {/* ── Hero header ───────────────────────────────────────────────── */}

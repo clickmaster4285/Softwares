@@ -306,7 +306,7 @@ export function CommunitySection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-white font-sans"  id="community" >
+    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-accent-50"  id="community" >
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section - matching IndustriesSection styling */}
         <div ref={headerRef} className="text-center mb-10">
@@ -410,106 +410,51 @@ export function CommunitySection() {
             const is247Format = is247(feature.stat);
 
             return (
-              <motion.div
-                key={feature.title}
-                ref={(el) => {
-                  cardsRef.current[index] = el;
-                }}
-                className="relative cursor-pointer"
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 25px 35px -15px rgba(249,115,22,0.3)',
-                  borderColor: 'rgb(249, 115, 22)',
-               
-                }}
-               
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                {/* Premium Card Design */}
-                <div className="relative bg-white rounded-2xl p-6 border border-primary/10  h-full overflow-hidden group">
-                  {/* Animated background that moves on hover */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent"
-                    animate={{
-                      x: ['-100%', '100%'],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'linear',
-                    }}
-                  />
+              <div className="group relative rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/30">
 
-                  {/* Icon with rotation on hover */}
-                  <motion.div
-                    className="card-icon relative mb-5 transform-gpu transition-transform duration-300"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <div className="relative inline-block">
-                      
-                      <div className="relative w-12 h-12 flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-black/80"  />
-                      </div>
-                    </div>
-                  </motion.div>
+                {/* Soft hover glow (very subtle, no animation movement) */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-primary/[0.03]" />
+
+                <div className="relative z-10">
+
+                  {/* Icon */}
+                  <div className="w-11 h-11 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center mb-4 group-hover:border-primary/30 transition">
+                    <Icon className="w-5 h-5 text-gray-700 group-hover:text-primary transition" />
+                  </div>
 
                   {/* Title */}
-                  <h3 className="card-title text-xl font-bold text-black mb-2 relative z-10">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary transition">
                     {feature.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="card-desc text-gray-700 text-sm leading-relaxed mb-4 relative z-10">
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
                     {feature.description}
                   </p>
 
-                  {/* Stats section - ONLY show for cards 4, 5, 6 (index >= 3) */}
+                  {/* Stats (ONLY if needed) */}
                   {index >= 3 && (
-                    <div className="card-stats pt-3 border-t border-primary/20 flex items-baseline justify-between relative z-10">
-                      <div>
-                        <motion.span
-                          className="text-2xl font-bold text-primary block leading-none"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          {is247Format ? (
-                            feature.stat
-                          ) : numericValue > 0 ? (
-                            <CommunityFeatureCountUp
-                              countStarted={countStarted}
-                              numericValue={numericValue}
-                              index={index}
-                              hasPlusSign={hasPlusSign}
-                              isPercent={isPercent}
-                            />
-                          ) : (
-                            feature.stat
-                          )}
-                        </motion.span>
-                        <span className="text-xs uppercase tracking-wider text-gray-500">
+                    <div className="pt-4 border-t border-gray-100 flex items-baseline justify-between">
+
+                      <div className="flex flex-col">
+                        <span className="text-xl font-bold text-gray-900">
+                          {is247Format
+                            ? feature.stat
+                            : numericValue > 0
+                              ? feature.stat
+                              : feature.stat}
+                        </span>
+
+                        <span className="text-[11px] uppercase tracking-wide text-gray-500">
                           {feature.statLabel}
                         </span>
                       </div>
+
                     </div>
                   )}
 
-                  {/* Corner Accent with rotation */}
-                  <div className="absolute bottom-3 right-3 w-6 h-6">
-                    <motion.div
-                      className="w-full h-full border-b border-r border-primary"
-                      animate={{
-                        rotate: hoveredIndex === index ? 180 : 0,
-                        opacity: hoveredIndex === index ? 0.3 : 0.1,
-                      }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

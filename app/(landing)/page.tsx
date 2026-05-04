@@ -143,7 +143,7 @@ export default function LandingPage() {
       </Suspense>
 
       {/* Hub internal links (SEO + crawler-friendly) */}
-      <section className="border-y border-slate-200/80 bg-white py-16 sm:py-20" aria-labelledby="home-explore-heading">
+      <section className="border-y border-slate-300 bg-accent-50 py-16 sm:py-20" aria-labelledby="home-explore-heading">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 id="home-explore-heading" className="font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">

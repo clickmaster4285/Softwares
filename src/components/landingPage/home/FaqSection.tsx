@@ -41,7 +41,7 @@ const faqItems: FaqItem[] = [
 
 export function FaqSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white py-24" aria-labelledby="homepage-faq-heading">
+    <section className="relative overflow-hidden bg-gradient-to-br from-accent-200 via-accent-50/70 to-[gold] py-24" aria-labelledby="homepage-faq-heading">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>
@@ -53,11 +53,11 @@ export function FaqSection() {
           </span>
           <h2
             id="homepage-faq-heading"
-            className="mt-5 text-3xl font-bold tracking-tight text-slate-900 md:text-5xl"
+            className="mt-5 text-3xl font-bold tracking-tight text-accent-700 md:text-5xl"
           >
             Answers before you start
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-500 md:text-lg">
             Everything you need to know about our process, timelines, technology stack, and post-launch support.
           </p>
         </div>

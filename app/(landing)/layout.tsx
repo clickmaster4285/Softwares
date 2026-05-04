@@ -1,7 +1,13 @@
 import { ReactNode } from "react";
 import dynamic from "next/dynamic";
-import FooterLazy from "@/components/landingPage/FooterLazy";
-
+const Footer = dynamic(
+  () => import("@/components/landingPage/Footer").then((mod) => mod.Footer),
+  {
+    loading: () => (
+      <div className="h-20 w-full border-b border-black/10 bg-white/95" />
+    ),
+  }
+);
 const Navbar = dynamic(
   () => import("@/components/landingPage/navbar").then((mod) => mod.Navbar),
   {
@@ -23,7 +29,7 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
       <main className="">{children}</main>
 
       {/* Footer */}
-      <FooterLazy />
+      <Footer />
     </div>
   );
 }
