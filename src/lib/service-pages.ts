@@ -6980,13 +6980,13 @@ const predictiveAnalyticsOverride: ServicePageContent = {
       question: 'What is SHAP and why does it matter for ML model interpretability?',
       answer: 'SHAP (SHapley Additive exPlanations) is a framework for explaining individual ML model predictions — based on game theory\'s Shapley values. For each prediction, SHAP calculates how much each feature contributed to pushing the prediction above or below the baseline (the average prediction across all examples). This enables two types of explanation: global explanations (overall, which features drive the model\'s predictions — the most important business intelligence from the model) and local explanations (for this specific prediction, why did the model score this customer as high-risk — "decreased login frequency contributed -0.23, support ticket increase contributed +0.19"). SHAP is essential for B2B predictive analytics because business stakeholders need to understand why a model made a specific prediction before they act on it — and because regulators in many industries require model decisions to be explainable.',
     },
-    {
-      question: 'How do you ensure a predictive model performs well in production?',
-      answer: 'Production ML model performance is maintained through three practices. Evaluation methodology: time-based train/test split (simulate real production conditions by training on past data and evaluating on future data — never use random splits for time-sensitive predictions, which produce optimistic metrics that don\'t reflect real performance). Calibration: verify that the model\'s stated probability matches the actual frequency (a model that says "70% churn probability" should be right 70% of the time — use isotonic regression or Platt scaling to calibrate if needed). Monitoring: track the score distribution of new predictions vs. the training distribution — when they diverge significantly (data drift or concept drift), retrain on more recent data. ClickMasters implements monitoring dashboards with automated alerts on every production model.',
-    },
+  {
+  question: "How do you ensure a predictive model performs well in production?",
+  answer: "Production ML model performance is maintained through three practices. Evaluation methodology: time-based train/test split (simulate real production conditions by training on past data and evaluating on future data — never use random splits for time-sensitive predictions, which produce optimistic metrics that don't reflect real performance). Calibration: verify that the model's stated probability matches the actual frequency (a model that says \"70% churn probability\" should be right 70% of the time — use isotonic regression or Platt scaling to calibrate if needed). Monitoring: track the score distribution of new predictions vs. the training distribution — when they diverge significantly (data drift or concept drift), retrain on more recent data. ClickMasters implements monitoring dashboards with automated alerts on every production model."
+}
   ],
   testimonial: {
-    quote: "The churn prediction model ClickMasters built gives us 45-day advance warning with 82% precision. Our retention team now reaches at-risk customers before they cancel, not after. We\'ve reduced churn by 28% year-over-year.",
+    quote: "The churn prediction model ClickMasters built gives us 45-day advance warning with 82% precision. Our retention team now reaches at-risk customers before they cancel, not after. We have reduced churn by 28% year-over-year.",
     author: "VP of Customer Success",
     role: "B2B SaaS Company"
   },
@@ -9883,7 +9883,7 @@ export const allTechnologies: Record<string, Technology> = {
   reactnative: { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
   flutter: { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
   swift: { name: "Swift", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" },
-  kotlin: { name: "Kotlin", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+  // kotlin: { name: "Kotlin", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
   xamarin: { name: "Xamarin", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xamarin/xamarin-original.svg" },
   ionic: { name: "Ionic", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg" },
   nativescript: { name: "NativeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nativescript/nativescript-original.svg" },
@@ -10007,7 +10007,7 @@ export const allTechnologies: Record<string, Technology> = {
   magento: { name: "Magento", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/magento/magento-original.svg" },
   shopify: { name: "Shopify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/shopify/shopify-original.svg" },
   prestashop: { name: "PrestaShop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prestashop/prestashop-original.svg" },
-  strapi: { name: "Strapi", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/strapi/strapi-original.svg" },
+  // strapi: { name: "Strapi", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/strapi/strapi-original.svg" },
   sanity: { name: "Sanity", icon: "https://www.sanity.io/favicon.ico" }, // Custom icon
   contentful: { name: "Contentful", icon: "https://www.contentful.com/favicon.ico" }, // Custom icon
   ghost: { name: "Ghost", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ghost/ghost-original.svg" },
@@ -10043,7 +10043,7 @@ export const allTechnologies: Record<string, Technology> = {
   
   // ==================== BLOCKCHAIN ====================
   solidity: { name: "Solidity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg" },
-  rust: { name: "Rust", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" },
+  // rust: { name: "Rust", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" },
   web3js: { name: "Web3.js", icon: "https://web3js.org/favicon.ico" }, // Custom icon
   ethers: { name: "Ethers.js", icon: "https://ethers.org/favicon.ico" }, // Custom icon
   hardhat: { name: "Hardhat", icon: "https://hardhat.org/favicon.ico" }, // Custom icon
@@ -10057,7 +10057,7 @@ export const allTechnologies: Record<string, Technology> = {
   flink: { name: "Flink", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apacheflink/apacheflink-original.svg" },
   storm: { name: "Storm", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachestorm/apachestorm-original.svg" },
   beam: { name: "Beam", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachebeam/apachebeam-original.svg" },
-  cassandra: { name: "Cassandra", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg" },
+  // cassandra: { name: "Cassandra", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg" },
   
   // ==================== MESSAGING & API ====================
   graphql: { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
@@ -10065,8 +10065,8 @@ export const allTechnologies: Record<string, Technology> = {
   grpc: { name: "gRPC", icon: "https://grpc.io/favicon.ico" }, // Custom icon
   websocket: { name: "WebSocket", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" },
   rabbitmq: { name: "RabbitMQ", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg" },
-  kafka: { name: "Kafka", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" },
-  redis: { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
+  // kafka: { name: "Kafka", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" },
+  // redis: { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
   
   // ==================== 3D, AR & VR ====================
   unity: { name: "Unity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" },
@@ -10086,9 +10086,9 @@ export const allTechnologies: Record<string, Technology> = {
   
   // ==================== VERSION CONTROL ====================
   git: { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-  github: { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
-  gitlab: { name: "GitLab", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" },
-  bitbucket: { name: "Bitbucket", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bitbucket/bitbucket-original.svg" },
+  // github: { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+  // gitlab: { name: "GitLab", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" },
+  // bitbucket: { name: "Bitbucket", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bitbucket/bitbucket-original.svg" },
   svn: { name: "Subversion", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/subversion/subversion-original.svg" },
   mercurial: { name: "Mercurial", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mercurial/mercurial-original.svg" },
   
@@ -10098,7 +10098,7 @@ export const allTechnologies: Record<string, Technology> = {
   datadog: { name: "Datadog", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/datadog/datadog-original.svg" },
   newrelic: { name: "New Relic", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/newrelic/newrelic-original.svg" },
   sentry: { name: "Sentry", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sentry/sentry-original.svg" },
-  elasticsearch: { name: "Elasticsearch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" },
+  // elasticsearch: { name: "Elasticsearch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" },
   logstash: { name: "Logstash", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/logstash/logstash-original.svg" },
   kibana: { name: "Kibana", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kibana/kibana-original.svg" },
   splunk: { name: "Splunk", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/splunk/splunk-original.svg" },
@@ -10140,7 +10140,7 @@ export const allTechnologies: Record<string, Technology> = {
   
   // ==================== AUTHENTICATION & SECURITY ====================
   auth0: { name: "Auth0", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/auth0/auth0-original.svg" },
-  firebase: { name: "Firebase Auth", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+  // firebase: { name: "Firebase Auth", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
   okta: { name: "Okta", icon: "https://www.okta.com/favicon.ico" }, // Custom icon
   keycloak: { name: "Keycloak", icon: "https://www.keycloak.org/favicon.ico" }, // Custom icon
   jwt: { name: "JWT", icon: "https://jwt.io/img/favicon.png" }, // Custom icon
@@ -10148,7 +10148,7 @@ export const allTechnologies: Record<string, Technology> = {
   passport: { name: "Passport.js", icon: "https://www.passportjs.org/favicon.ico" }, // Custom icon
   
   // ==================== SEARCH ENGINES ====================
-  elasticsearch: { name: "Elasticsearch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" },
+  // elasticsearch: { name: "Elasticsearch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" },
   algolia: { name: "Algolia", icon: "https://www.algolia.com/favicon.ico" }, // Custom icon
   meilisearch: { name: "Meilisearch", icon: "https://www.meilisearch.com/favicon.ico" }, // Custom icon
   typesense: { name: "Typesense", icon: "https://typesense.org/favicon.ico" }, // Custom icon
