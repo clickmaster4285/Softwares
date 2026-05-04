@@ -40,6 +40,7 @@ import {
   slugify,
   type ServicePageContent,
 } from '@/lib/service-pages';
+import { IndustryCard3D } from '@/src/components/IndustryCard3D';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -124,35 +125,77 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   const url = `${siteConfig.url}${canonicalPath}`;
   const techStack = getServiceTechnologies(service);
 
-  // Standardized TOC items
+  // Standardized TOC items built dynamically
   const tocItems = [
     { id: 'overview', title: 'Overview', level: 2 as const },
-    { id: 'what-is', title: `What is ${page.title}`, level: 2 as const },
-    { id: 'our-services', title: 'Our Services', level: 2 as const },
-    { id: 'why-choose-us', title: 'Why Choose Us', level: 2 as const },
-    { id: 'our-process', title: 'Our Process', level: 2 as const },
-    { id: 'technology-stack', title: 'Technology Stack', level: 2 as const },
-    { id: 'industries', title: 'Industries', level: 2 as const },
-    { id: 'pricing', title: 'Pricing', level: 2 as const },
-    { id: 'testimonials', title: 'Testimonials', level: 2 as const },
-    { id: 'case-study', title: 'Case Study', level: 2 as const },
-    { id: 'faq', title: 'FAQ', level: 2 as const },
   ];
 
   // Helper to find and assign IDs to sections
-  const getSectionId = (heading: string) => {
+  const getSectionId = (heading: string, index: number) => {
     const h = heading.toLowerCase();
     if (h.includes('what is')) return 'what-is';
     if (h.includes('services we deliver') || h.includes('includes')) return 'our-services';
     if (h.includes('why b2b companies') || h.includes('why choose')) return 'why-choose-us';
     if (h.includes('process')) return 'our-process';
-    if (h.includes('technology stack')) return 'technology-stack';
+    if (h.includes('technology stack') || h.includes('tech stack')) return 'tech-stack';
     if (h.includes('industry use cases') || h.includes('industries')) return 'industries';
     if (h.includes('pricing')) return 'pricing';
     if (h.includes('testimonials')) return 'testimonials';
     if (h.includes('case study')) return 'case-study';
-    return slugify(heading);
+    return `section-${index}-${slugify(heading)}`;
   };
+
+  // Add generic sections to TOC
+  sections.forEach((section, index) => {
+    const id = getSectionId(section.heading, index);
+    if (!tocItems.find(item => item.id === id)) {
+      tocItems.push({ id, title: section.heading, level: 2 as const });
+    }
+  });
+
+  if (page.servicesCards && !tocItems.find(item => item.id === 'our-services')) {
+    tocItems.push({ id: 'our-services', title: 'Our Services', level: 2 as const });
+  }
+
+  if (page.differentiators && !tocItems.find(item => item.id === 'why-choose-us')) {
+    tocItems.push({ id: 'why-choose-us', title: 'Why Choose Us', level: 2 as const });
+  }
+
+  if (page.checklist) {
+    tocItems.push({ id: 'checklist', title: 'Engineering Baseline', level: 2 as const });
+  }
+
+  if (page.processPhases && !tocItems.find(item => item.id === 'our-process')) {
+    tocItems.push({ id: 'our-process', title: 'Our Process', level: 2 as const });
+  }
+
+  if (techStack.length > 0 && !tocItems.find(item => item.id === 'tech-stack')) {
+    tocItems.push({ id: 'tech-stack', title: 'Technology Stack', level: 2 as const });
+  }
+
+  if (page.industryUseCases && !tocItems.find(item => item.id === 'industries')) {
+    tocItems.push({ id: 'industries', title: 'Industries', level: 2 as const });
+  }
+
+  if (page.pricingTiers && !tocItems.find(item => item.id === 'pricing')) {
+    tocItems.push({ id: 'pricing', title: 'Pricing', level: 2 as const });
+  }
+
+  if (page.tables) {
+    page.tables.forEach((table) => {
+      const id = slugify(table.title);
+      if (!tocItems.find(item => item.id === id)) {
+        tocItems.push({ id, title: table.title, level: 2 as const });
+      }
+    });
+  }
+
+  tocItems.push({ id: 'testimonials', title: 'Testimonials', level: 2 as const });
+  tocItems.push({ id: 'case-study', title: 'Case Study', level: 2 as const });
+
+  if (faqs.length > 0) {
+    tocItems.push({ id: 'faq', title: 'FAQ', level: 2 as const });
+  }
 
   const jsonLd = serviceSchema(page.title, page.metaDescription, url);
   const professionalServiceSchema = {
@@ -358,7 +401,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               {sections.map((section, index) => (
                 <section
                   key={section.heading}
-                  id={getSectionId(section.heading)}
+                  id={getSectionId(section.heading, index)}
                   className="scroll-mt-24"
                 >
                   <div className="flex items-center gap-3">
@@ -554,7 +597,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               )}
 
               {/* Tech Stack Section */}
-              {page.techStackCategories && (
+              {techStack.length > 0 && (
              <section id="tech-stack" className="scroll-mt-24">
              <div className="flex items-center gap-3">
                <div className="h-10 w-1 rounded-full bg-orange-500" />
@@ -622,24 +665,46 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               {/* Industries Section */}
               {page.industryUseCases && (
                 <section id="industries" className="scroll-mt-24">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-1 rounded-full bg-orange-500" />
-                    <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
-                      Industries and Product Types
-                    </h2>
-                  </div>
-                  <div className="mt-10 grid gap-6 sm:grid-cols-2">
-                    {page.industryUseCases.map((useCase) => (
-                      <div key={useCase.name} className="flex gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-100">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm">
-                          <Globe className="h-5 w-5 text-orange-600" />
-                        </div>
-                        <div>
-                          <h3 className="font-semibold text-slate-900">{useCase.name}</h3>
-                          <p className="mt-2 text-sm text-slate-600 leading-relaxed">{useCase.description}</p>
-                        </div>
-                      </div>
-                    ))}
+                  <h2 className="text-xl font-semibold text-slate-900 sm:text-2xl">
+                    Industry-specific expertise
+                  </h2>
+                  <div className="mt-8 grid gap-5 grid-cols-2 lg:grid-cols-4">
+                    {page.industryUseCases.map((useCase, index) => {
+                      // Map industry names to icon names and gradients
+                      const industryConfig: Record<string, { iconName: string; gradient: string }> = {
+                        'Healthcare': { iconName: 'Heart', gradient: 'from-emerald-400 to-green-500' },
+                        'Banking': { iconName: 'Landmark', gradient: 'from-blue-400 to-blue-600' },
+                        'Insurance': { iconName: 'Umbrella', gradient: 'from-orange-400 to-orange-500' },
+                        'Lending': { iconName: 'Wallet', gradient: 'from-amber-400 to-amber-500' },
+                        'Payments': { iconName: 'CreditCard', gradient: 'from-pink-400 to-pink-500' },
+                        'Investment': { iconName: 'LineChart', gradient: 'from-red-400 to-red-500' },
+                        'Real estate': { iconName: 'Building2', gradient: 'from-teal-400 to-teal-500' },
+                        'Retail': { iconName: 'ShoppingCart', gradient: 'from-indigo-400 to-indigo-500' },
+                        'Manufacturing': { iconName: 'Factory', gradient: 'from-slate-400 to-slate-500' },
+                        'Logistics and Transportation': { iconName: 'Truck', gradient: 'from-cyan-400 to-cyan-500' },
+                        'Oil and Gas': { iconName: 'Droplets', gradient: 'from-rose-400 to-rose-500' },
+                        'Energy and utilities': { iconName: 'Lightbulb', gradient: 'from-yellow-400 to-yellow-500' },
+                        'Professional services': { iconName: 'Briefcase', gradient: 'from-red-400 to-rose-500' },
+                        'Telecoms': { iconName: 'Radio', gradient: 'from-green-400 to-emerald-500' },
+                        'Engineering and construction': { iconName: 'HardHat', gradient: 'from-sky-400 to-sky-500' },
+                        'Travel and hospitality': { iconName: 'Plane', gradient: 'from-blue-400 to-sky-500' },
+                      };
+
+                      const config = industryConfig[useCase.name] || { 
+                        iconName: 'Globe', 
+                        gradient: 'from-slate-400 to-slate-500'
+                      };
+                      
+                      return (
+                        <IndustryCard3D
+                          key={useCase.name}
+                          name={useCase.name}
+                          iconName={config.iconName}
+                          gradient={config.gradient}
+                          index={index}
+                        />
+                      );
+                    })}
                   </div>
                   <div className="my-16 flex items-center gap-4">
                     <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
@@ -890,7 +955,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
             </main>
 
             {/* Sticky Table of Contents - Desktop */}
-            <aside className="hidden lg:block sticky top-12 self-start">
+            <aside className="hidden lg:block sticky top-24 self-start z-10">
               <div className="py-12 lg:py-10">
                 <TableOfContents items={tocItems} />
               </div>

@@ -4,6 +4,13 @@ export type Technology = {
   icon: string;
 };
 
+
+export interface IndustryUseCase {
+  name: string;
+  description: string;
+  icon?: string;
+}
+
 // Technology stack organized by categories and subcategories
 export type TechStackSection = {
   category: string;
@@ -39,7 +46,7 @@ export type ServicePageContent = {
   processPhases?: { phase: string; title: string; timeline: string; text: string }[];
   techStackCategories?: { layer: string; technologies: string }[];
   pricingTiers?: { type: string; investment: string; timeline: string; bestFor: string }[];
-  industryUseCases?: { name: string; description: string }[];
+  industryUseCases?: IndustryUseCase[];
   marketStats?: { label: string; value: string }[];
   checklist?: { item: string; standard: string }[];
   tables?: { title: string; headers: string[]; rows: string[][] }[];
@@ -63,6 +70,10 @@ export function slugify(value: string): string {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 }
+
+
+
+
 
 export const serviceMenuSections: ServiceMenuSection[] = [
   {
@@ -626,93 +637,168 @@ const aiAgentsDevelopmentOverride: ServicePageContent = {
   categorySlug: 'artificial-intelligence-ai',
   sectionId: 'ai-agents-development',
   category: 'Artificial Intelligence (AI)',
-  title: 'AI Agents Development Company Building Autonomous B2B Workflows',
+  title: 'AI Agents Development Company',
   serviceName: 'AI Agents Development',
-  metaTitle: 'AI Agents Development Company | Autonomous LLM Agents | ClickMasters',
+  metaTitle: 'AI Agents Development Company | Custom Autonomous AI Agents for B2B | ClickMasters',
   metaDescription:
-    'ClickMasters builds autonomous AI agents for B2B. Agents that can plan, use tools, and execute multi-step workflows to automate complex business processes.',
-  lead: 'ClickMasters builds autonomous AI agents that don\'t just talk they act. We develop multi-agent systems using LLMs that can plan complex tasks, use external tools (APIs, databases, browsers), and execute multi-step workflows to automate high-value business processes with minimal human intervention.',
+    'ClickMasters builds production-grade autonomous AI agents — research agents, data agents, workflow agents, and multi-agent systems — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters engineers production-grade AI agent systems for B2B companies across the USA, Europe, Canada, and Australia. Research agents that investigate and synthesize. Data agents that extract, transform, and load. Workflow agents that orchestrate complex business processes end-to-end. Multi-agent systems where specialized agents collaborate on tasks no single model could handle alone.',
   highlights: [
-    '✓ Autonomous Planning',
-    '✓ Tool Use & API Integration',
+    '✓ LangGraph & ReAct Agents',
     '✓ Multi-Agent Orchestration',
-    '✓ Self-Correction Logic',
-    '✓ Audit-Ready Execution',
-    '✓ Human-in-the-Loop Control',
+    '✓ Human-in-the-Loop Design',
+    '✓ Tool Use & API Integration',
+    '✓ Full Audit Trail',
+    '✓ Production Reliability Standards',
   ],
-  // marketStats: [
-  //   { label: 'Potential productivity gain from agents', value: '50%+' },
-  //   { label: 'Reduction in manual data processing', value: '80%' },
-  //   { label: 'Complexity of tasks handled', value: 'Multi-step' },
-  //   { label: 'Enterprise API compatibility', value: 'Any' },
-  // ],
+  marketStats: [
+    { label: 'Of enterprise tasks will be agent-automatable by 2027 (Gartner)', value: '45%' },
+    { label: 'Autonomous AI agents market size by 2030', value: '$47B' },
+    { label: 'Throughput increase for knowledge work using agent pipelines', value: '10x' },
+    { label: 'Average annual savings per knowledge worker with AI agent augmentation', value: '$28K' },
+  ],
   servicesCards: [
-    { title: 'Autonomous Task Agents', description: 'Developing agents that can decompose a high-level goal into actionable steps and execute them using secure API and database tools.' },
-    { title: 'Multi-Agent Orchestration', description: 'Designing teams of specialized agents (e.g., Researcher, Coder, Reviewer) that collaborate to solve complex, cross-functional problems.' },
-    { title: 'Agentic Tooling & Bridges', description: 'Building the secure "hands" for your AI custom API connectors and sandboxed environments that allow agents to interact with your data.' },
-    { title: 'Agentic Workflow Design', description: 'Mapping manual business processes into state-machine driven agent architectures that gracefully handle errors and self-correct.' },
-    { title: 'Reasoning Optimization', description: 'Implementing Chain-of-Thought (CoT) and Tree-of-Thoughts (ToT) prompting patterns to improve agent decision-making accuracy.' },
-    { title: 'Governance & Monitoring', description: 'Building audit trails and management consoles to track agent actions, costs, and performance with mandatory human-approval gates.' },
+    { title: 'Research & Intelligence Agents', description: 'Autonomous agents that conduct structured research across web sources, internal documents, databases, and APIs — synthesizing findings into structured reports, competitive analyses, market intelligence briefings, or prospect summaries. Processing time: tasks taking a human analyst 4-8 hours are completed in 15-40 minutes.' },
+    { title: 'Data Processing & Extraction Agents', description: 'Agents that process high volumes of unstructured documents and extract structured data: contract clause extraction, invoice processing, financial report parsing, email categorization and data extraction, form digitization from scanned documents. Built with confidence scoring and human review queues.' },
+    { title: 'Workflow Orchestration Agents', description: 'Multi-step business process agents that coordinate actions across multiple systems: order processing workflows, approval chain automation, customer onboarding sequences, compliance documentation workflows, and cross-system data synchronization. Handles exceptions, unstructured inputs, and decision points requiring judgment.' },
+    { title: 'Multi-Agent Systems', description: 'For complex tasks requiring specialized expertise across multiple domains. A supervisor agent decomposes the goal, delegates to specialized sub-agents (research, analysis, writing, validation), and assembles the final output. Appropriate for complex report generation, multi-domain due diligence, and large-scale data processing pipelines.' },
+    { title: 'Coding & DevOps Agents', description: 'AI agents that generate, review, test, and deploy code under human supervision. Automated code review with issue categorization, test generation from specifications, documentation generation, dependency update assessment, infrastructure-as-code generation, and automated debugging pipelines.' },
+    { title: 'Customer-Facing Autonomous Agents', description: 'Agentic customer interaction systems that go beyond chatbot Q&A: autonomous agents that can onboard a new customer end-to-end, process refund requests, manage subscription changes, or escalate and resolve service issues without human involvement. Human-in-the-loop checkpoints for actions above defined risk thresholds.' },
+    { title: 'Agent Platform & Infrastructure', description: 'For organizations deploying multiple agent use cases: agent registry and versioning, shared tool library, centralized logging and audit trail, cost monitoring per agent run, performance dashboards, human review queue management, and admin portal for monitoring and managing agent deployments.' },
   ],
   differentiators: [
-    { feature: 'Reliability', description: 'State-Machine Orchestration | Basic: Loops and hallucination' },
-    { feature: 'Capability', description: 'Secure Tool-Use Frameworks | Basic: Chat-only interfaces' },
-    { feature: 'Security', description: 'Sandboxed Python Execution | Basic: Direct system access risks' },
-    { feature: 'Auditability', description: 'Step-by-Step Decision Logs | None: Black-box agent behavior' },
-    { feature: 'Performance', description: 'Parallel Multi-Agent Logic | Basic: Single-thread bottlenecks' },
+    { feature: 'Architecture Taxonomy', description: 'Single-agent, multi-agent, and human-in-the-loop clearly defined with use case mapping | Basic: "Autonomous AI agents" with zero architecture explanation' },
+    { feature: 'Agent Patterns', description: 'ReAct, plan-and-execute, and reflexion patterns explained with production guidance | Basic: No coverage of agent patterns' },
+    { feature: 'Honest Guardrails', description: '"When NOT to use AI agents" section — counter-intuitive credibility builder | Basic: Agents for everything, no nuance' },
+    { feature: 'Reliability Framework', description: '6-component production reliability engineering for non-deterministic systems | Basic: Research demos that break in production' },
+    { feature: 'Use Case Specificity', description: '7 production B2B use cases with specific time/cost outcomes | Basic: Generic "transform your business" claims' },
   ],
   processPhases: [
-    { phase: 'Phase 1', title: 'Workflow Decomposition', timeline: 'Week 1-2', text: 'Analyzing high-value business processes and identifying steps suitable for agentic automation and tool-use requirements.' },
-    { phase: 'Phase 2', title: 'Agent Architecture', timeline: 'Week 2-3', text: 'Selecting between single-agent and multi-agent frameworks (Autogen, LangGraph) and defining the cognitive architecture.' },
-    { phase: 'Phase 3', title: 'Tool & API Engineering', timeline: 'Week 3-6', text: 'Building and securing the APIs, databases, and computational tools the agent will need to interact with your systems.' },
-    { phase: 'Phase 4', title: 'Agent Logic Build', timeline: 'Week 4-10', text: 'Developing the core planning, reasoning, and self-correction loops. Implementing the state management for long-running tasks.' },
-    { phase: 'Phase 5', title: 'Adversarial Testing', timeline: 'Week 10-12', text: 'Running the agent in a sandboxed environment with edge cases and unexpected inputs to validate its reliability and safety.' },
-    { phase: 'Phase 6', title: 'Managed Deployment', timeline: 'Ongoing', text: 'Launching with strict human-in-the-loop controls, monitoring action logs, and continuous tuning of the agent\'s prompts.' },
+    { phase: 'Phase 1', title: 'Workflow Suitability Assessment', timeline: 'Week 1', text: 'Structured assessment: Is the task goal-oriented with variable steps? Acceptable failure rate? Consequences of agent error? Human oversight required? Deliverable: go/no-go recommendation with architecture selection rationale.' },
+    { phase: 'Phase 2', title: 'Agent Architecture Design', timeline: 'Week 1-2', text: 'Design complete agent architecture: agent pattern selection (ReAct, Plan-Execute, Multi-Agent), tool set definition, memory architecture, state management, HITL checkpoints, and output schema definition.' },
+    { phase: 'Phase 3', title: 'Tool Development & Integration', timeline: 'Week 2-5', text: 'Build the tool layer: web search integration, document parser, database query/write tools, API connectors, code execution sandbox, file operations. Tools are the most important reliability factor in any agent.' },
+    { phase: 'Phase 4', title: 'Agent Core Development', timeline: 'Week 3-6', text: 'Implement agent reasoning loop using LangGraph. System prompt engineering, state management and memory integration, planning logic for plan-and-execute architectures, sub-agent coordination for multi-agent systems.' },
+    { phase: 'Phase 5', title: 'Reliability Engineering', timeline: 'Week 5-7', text: 'Implement full reliability framework: retry and failure handling, structured output validation, human checkpoint integration, audit logging, cost controls, and timeout handling. What separates research demo from production system.' },
+    { phase: 'Phase 6', title: 'Evaluation Harness & Red-Teaming', timeline: 'Week 6-8', text: 'Build evaluation test set from real tasks. Run automated evaluation for completion rate, accuracy, latency, cost per run. Red-team adversarial inputs: prompt injection, goal hijacking, infinite loop conditions.' },
+    { phase: 'Phase 7', title: 'Deployment, Monitoring & Handoff', timeline: 'Week 8-10', text: 'Production deployment with full observability: per-run logging, cost monitoring, accuracy trend alerts, human review queue. Operator documentation, runbook, and continuous improvement playbook.' },
   ],
   techStackCategories: [
-    { layer: 'Agent Frameworks', technologies: 'LangGraph, CrewAI, AutoGen, Microsoft Semantic Kernel' },
-    { layer: 'Core Models', technologies: 'OpenAI (GPT-4o), Anthropic (Claude 3.5), Llama 3.1 (Self-hosted)' },
-    { layer: 'Execution', technologies: 'E2B (Sandboxed Code), Docker, Kubernetes' },
-    { layer: 'Memory', technologies: 'Mem0, Zep, Redis, Pinecone' },
-    { layer: 'Connectivity', technologies: 'n8n, Zapier Central, Custom API Bridges' },
-    { layer: 'Observability', technologies: 'LangSmith, Arize Phoenix, Weights & Biases' },
+    { layer: 'Foundation Models', technologies: 'GPT-4o (default — best tool-use reliability), Claude 3.5 Sonnet (long-context, strong reasoning), Gemini 1.5 Pro (very long context), Llama 3.1 (self-hosted, privacy-sensitive)' },
+    { layer: 'Agent Orchestration', technologies: 'LangGraph (primary — stateful graphs, checkpointing, HITL native), LangChain Agents (simpler ReAct), custom orchestration loops' },
+    { layer: 'Multi-Agent Framework', technologies: 'LangGraph multi-agent (supervisor + subgraphs), AutoGen (research tasks), CrewAI (role-based team agents)' },
+    { layer: 'Tool Infrastructure', technologies: 'OpenAI Function Calling / Anthropic Tool Use, custom tool wrappers with retry logic, timeout handling, structured error responses' },
+    { layer: 'Memory Architecture', technologies: 'Short-term: LangGraph state object. Long-term: pgvector (semantic), Redis (fast session), PostgreSQL (structured history)' },
+    { layer: 'Web & Search Tools', technologies: 'Tavily Search API (primary — optimized for LLM agents), Serper (Google SERP), Playwright (browser automation), BeautifulSoup (HTML parsing)' },
+    { layer: 'Document Processing', technologies: 'Unstructured.io (multi-format), LlamaParse (complex PDFs), Camelot (table extraction), custom parsers' },
+    { layer: 'Code Execution', technologies: 'E2B (secure cloud sandboxes), Modal (serverless GPU), AWS Lambda (lightweight), Docker (full isolation)' },
+    { layer: 'Evaluation Framework', technologies: 'Custom evaluation harness, LangSmith (run tracing), RAGAS (for RAG steps), human evaluation interface' },
+    { layer: 'Monitoring & Observability', technologies: 'LangSmith / Langfuse (full execution trace), custom Grafana dashboards, PagerDuty (alerting), audit log export to S3' },
+    { layer: 'Security', technologies: 'Tool scope limitation, prompt injection detection, output validation against schema, PII redaction pre-LLM' },
+    { layer: 'Infrastructure', technologies: 'AWS ECS Fargate (agent API), SQS (async task queue), Step Functions (HITL workflows), S3 (artifact storage)' },
   ],
   pricingTiers: [
-    { type: 'Agentic PoC', investment: '$10,000 – $20,000', timeline: '4 – 6 weeks', bestFor: 'Validating a single autonomous tool-use flow' },
-    { type: 'Multi-Agent System', investment: '$30,000 – $75,000', timeline: '10 – 16 weeks', bestFor: 'Complex cross-functional business process automation' },
-    { type: 'Enterprise Agent Platform', investment: '$60,000 – $150,000+', timeline: '4 – 9 months', bestFor: 'Building an internal agent layer for entire teams' },
-    { type: 'Agent Support Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'Monitoring logs and updating agent tools' },
+    { type: 'Single-Purpose Agent (PoC)', investment: '$12,000 – $25,000', timeline: '4 – 7 weeks', bestFor: 'One use case, ReAct architecture, 3-5 tools, evaluation harness, audit logging' },
+    { type: 'Production Single Agent', investment: '$25,000 – $65,000', timeline: '8 – 12 weeks', bestFor: 'Full reliability framework, HITL checkpoints, monitoring, operator docs, 30-day support' },
+    { type: 'Research / Intelligence Agent', investment: '$20,000 – $55,000', timeline: '6 – 10 weeks', bestFor: 'Web + document tools, structured output, weekly scheduling, Slack/email delivery' },
+    { type: 'Data Processing Agent', investment: '$25,000 – $70,000', timeline: '8 – 14 weeks', bestFor: 'Document ingestion pipeline, extraction schema, confidence scoring, human review queue' },
+    { type: 'Multi-Agent System', investment: '$50,000 – $130,000', timeline: '10 – 18 weeks', bestFor: 'Supervisor + specialist agents, inter-agent communication, parallel execution, evaluation' },
+    { type: 'Agentic Workflow Platform', investment: '$70,000 – $180,000', timeline: '4 – 8 months', bestFor: 'Agent registry, shared tool library, admin portal, cost controls, multi-workflow coverage' },
+    { type: 'Agent + RAG Combined', investment: '$35,000 – $90,000', timeline: '8 – 14 weeks', bestFor: 'Agentic RAG with dynamic retrieval, multi-source knowledge, reasoning + retrieval combined' },
+    { type: 'Maintenance & Improvement', investment: '$4,000 – $15,000/mo', timeline: 'Ongoing', bestFor: 'Model upgrades, tool updates, evaluation runs, accuracy improvements, new use cases' },
   ],
   industryUseCases: [
-    { name: 'Financial Operations', description: 'Agents that can reconcile transactions, research discrepancies, and draft compliance reports autonomously.' },
-    { name: 'Technical Support', description: 'Multi-agent systems that can research issues, reproduce bugs in code, and draft PRs for human review.' },
-    { name: 'Market Intelligence', description: 'Autonomous researchers that monitor competitors, analyze SEC filings, and generate daily strategic summaries.' },
-    { name: 'Legal & Contract Ops', description: 'Agents that can review contract terms against company policy and flag specific risks for legal teams.' },
+    { name: 'Competitive Intelligence Agent', description: 'Monitors 20+ competitor websites, pricing pages, job postings, press releases. Extracts structured change signals. 8 hours of analyst time replaced per week. Strategic reaction time reduced from 2 weeks to 2 days.' },
+    { name: 'Contract Review Agent', description: 'Ingests contract PDFs, extracts key clauses against 40-point checklist, flags deviations, categorizes risk. 75% reduction in contract review time. Contract-to-onboarding cycle reduced from 3 weeks to 4 days.' },
+    { name: 'Prospect Research Agent', description: 'Searches web, LinkedIn, Crunchbase, job postings, news. Extracts company profile, tech signals, pain points. 90-minute research task reduced to 8 minutes. Higher response rates.' },
+    { name: 'Financial Report Processing Agent', description: 'Ingests PDF/Excel reports, extracts standardized KPIs using Reflexion architecture, populates database, flags anomalies. 3-day process reduced to 4 hours. Month-end close accelerated by 2 days.' },
+    { name: 'Customer Onboarding Agent', description: 'Monitors activation data, detects stalled steps, sends guidance, answers configuration questions via RAG. CSM capacity increased from 15 to 40 accounts. Time-to-first-value reduced by 35%. Onboarding completion from 68% to 89%.' },
   ],
   sections: [
     {
-      heading: 'Moving Beyond Chat: The Era of AI Action',
-      body: 'AI Agents represent the next evolution of Generative AI. While chatbots provide information, agents execute work. By giving AI the ability to use tools and follow multi-step plans, we enable a level of automation that was previously impossible.',
+      heading: 'The Gap Between AI That Answers and AI That Acts',
+      body: 'Most organizations have deployed AI that answers questions. A chatbot for support. A summarizer for documents. A copilot for code. These are valuable — but they share a fundamental limitation: they respond to human prompts, one step at a time, with a human in the loop for every decision.',
       items: [
-        'Tool-use capabilities allow AI to interact with your existing software stack',
-        'Autonomous planning handles open-ended goals without rigid scripts',
-        'Self-correction loops allow agents to recover from errors mid-process',
-        'Human-in-the-loop design ensures AI actions remain safe and compliant',
+        'The next frontier is AI that acts — autonomously reading 50 competitor websites, extracting pricing data, structuring it into a comparison matrix, identifying trends, and delivering a finished briefing',
+        'Reviewing all 200 vendor contracts, flagging non-standard clauses, categorizing risk levels, and generating a board-ready risk summary — with no human involved in the intermediate steps',
+        'AI agents represent the largest efficiency unlock in enterprise operations since business process automation — but with the flexibility to handle unstructured data and variable workflows',
+      ],
+    },
+    {
+      heading: 'Signs Your Organization Is Ready for AI Agents',
+      body: '',
+      items: [
+        'Your team repeats the same multi-step research or data gathering process weekly — and the steps are predictable but the inputs vary',
+        'High-value knowledge workers spend more than 20% of their time on structured but time-consuming information processing tasks',
+        'You have AI tools (ChatGPT, Copilot, custom chatbots) but the value is limited because a human must orchestrate every step',
+        'You\'re processing high volumes of unstructured documents with manual extraction workflows',
+        'Your automation (RPA, Zapier, n8n) handles structured data well but breaks on exceptions, PDFs, or natural language inputs',
+        'Complex customer or partner workflows require coordination across 3+ systems and need a human to orchestrate',
+      ],
+    },
+    {
+      heading: 'What Are AI Agents?',
+      body: 'An AI agent is an autonomous software system that uses a large language model (LLM) as its reasoning engine to plan and execute multi-step tasks — making decisions, calling tools, processing results, and adapting its approach based on intermediate outcomes — without requiring human input at each step.',
+      items: [
+        'Unlike a standard LLM prompt-response interaction (stateless, single-step, reactive), an AI agent maintains state across multiple steps, selects from available tools, evaluates intermediate results, and revises its plan dynamically',
+        'AI agents are distinct from AI chatbots (which respond to user queries in conversation) and traditional automation (which follows rigid, pre-programmed rules)',
+        'An agent reasons about how to accomplish a goal rather than following a script, making it appropriate for variable, unstructured, and judgment-intensive workflows',
+      ],
+    },
+    {
+      heading: 'Agent Architecture Types — Which Do You Need?',
+      body: 'Not all agent architectures are appropriate for all use cases. Choosing the wrong architecture pattern is the most common cause of agent project failure.',
+      items: [],
+    },
+    {
+      heading: 'When NOT to Use AI Agents — Honest Guidance',
+      body: 'AI agents are powerful. They are also expensive to build, complex to maintain, and overkill for many use cases.',
+      items: [],
+    },
+    {
+      heading: 'The Agent Reliability Framework — Making Non-Deterministic Systems Production-Safe',
+      body: 'AI agents are inherently non-deterministic — the same input can produce different intermediate steps and outputs across runs. At ClickMasters, we address this with a structured reliability framework applied to every production agent deployment.',
+      items: [
+        'Scoped Tool Sets: Agents are given exactly the tools required for their use case — not unrestricted access',
+        'Deterministic Output Schemas: Structured output APIs constrain final delivery to a validated schema',
+        'Human-in-the-Loop Checkpoints: Mandatory human approval for irreversible or high-risk actions',
+        'Full Execution Audit Trail: Every agent run is fully logged — planning steps, tool calls, reasoning, outputs, cost',
+        'Automatic Retry and Failure Handling: Exponential backoff, tool fallback, graceful degradation, dead-letter queues',
+        'Evaluation and Regression Testing: Test set, automated eval on every deployment, regression detection, performance dashboard',
       ],
     },
   ],
   faqs: [
     {
-      question: 'What is an AI agent?',
-      answer: 'An AI agent is a system powered by an LLM that can plan, use tools, and execute multi-step workflows to achieve a high-level goal with minimal human intervention.',
+      question: 'What are AI agents?',
+      answer: 'AI agents are autonomous software systems that use a large language model (LLM) as a reasoning engine to plan and execute multi-step tasks — making decisions, calling tools (web search, APIs, databases, code execution), processing results, and adapting their approach based on intermediate outcomes — without requiring human input at each step. Unlike standard LLM interactions (single-step, stateless, reactive), an AI agent maintains state across multiple steps, selects dynamically from a set of available tools, and can complete complex workflows that previously required human judgment to orchestrate. Examples include: research agents that investigate and synthesize information, data agents that extract and process documents, workflow agents that coordinate actions across multiple systems, and multi-agent systems where specialized agents collaborate on complex tasks.',
     },
     {
-      question: 'How do you keep agents safe?',
-      answer: 'We implement "Human-in-the-Loop" checkpoints for high-stakes actions, use sandboxed execution environments for code, and build strict capability-based authorization for all agent tools.',
+      question: 'What is the difference between an AI agent and an AI chatbot?',
+      answer: 'An AI chatbot is a conversational interface that responds to user queries — it is reactive, responding to what the user asks, one message at a time. An AI agent is an autonomous system that can plan and execute multi-step tasks proactively, using tools to interact with external systems, without requiring human input at each intermediate step. A chatbot answers "What does our return policy say?" An agent can be given the goal "Review all our vendor contracts, extract payment terms, flag any that differ from standard, and send a summary to the CFO" — and execute all of those steps autonomously. The key distinction is autonomy and multi-step execution: chatbots respond, agents act.',
     },
     {
-      question: 'What is a multi-agent system?',
-      answer: 'A multi-agent system uses several specialized AI agents that collaborate to solve a problem, similar to a team of human experts, ensuring higher quality through specialized focus and peer-review.',
+      question: 'How much does AI agent development cost?',
+      answer: 'AI agent development costs range from $12,000 for a single-purpose proof-of-concept to $180,000+ for a multi-agent platform covering several workflows. The primary cost drivers are: architecture complexity (single-agent vs. multi-agent), number of tools and integrations required, reliability engineering scope (audit logging, HITL checkpoints, evaluation harness), and ongoing maintenance requirements. Ongoing costs include LLM API usage (typically $0.01–$0.50 per agent run depending on model and task length), cloud infrastructure, and third-party tool APIs. ClickMasters provides fixed-price proposals after a free feasibility assessment.',
+    },
+    {
+      question: 'What is LangGraph and why do you use it for AI agents?',
+      answer: 'LangGraph is an orchestration framework for building stateful, multi-actor AI applications — particularly AI agents with complex control flows. It models agent logic as a directed graph where nodes are processing steps and edges define transitions based on state. ClickMasters uses LangGraph as the primary agent orchestration framework because it provides: native support for human-in-the-loop checkpoints (the agent can pause and wait for human input at any graph node), built-in state persistence for long-running agents, structured support for multi-agent coordination, execution checkpointing for recovery from failures mid-run, and deterministic control flow that makes agent behavior auditable and testable. Compared to simpler agent frameworks (LangChain AgentExecutor, AutoGPT), LangGraph gives significantly more control over agent behavior — which is required for production deployment.',
+    },
+    {
+      question: 'How reliable are AI agents in production?',
+      answer: 'AI agent reliability in production depends almost entirely on the engineering discipline applied during development — not the underlying model capability. Without systematic reliability engineering, agents fail frequently: tools are unreliable, LLM reasoning drifts on edge cases, and errors cascade across multi-step workflows. With proper engineering, production agents achieve 85-97% task completion rates for well-scoped use cases. ClickMasters\' reliability framework includes: scoped tool sets, deterministic output schemas, human-in-the-loop checkpoints for high-risk actions, full execution audit trails, automatic retry and failure handling, and continuous evaluation against a regression test suite. These are the minimum requirements for any production agent deployment — not premium features.',
+    },
+    {
+      question: 'What tasks are AI agents best suited for?',
+      answer: 'AI agents perform best on tasks that are: goal-oriented rather than instruction-following (the agent can decide how to achieve the goal, not just execute steps); variable and unstructured (different inputs each time, requiring dynamic decision-making about which steps to take); multi-step (requiring the coordination of multiple tools or information sources); and judgment-intensive (requiring evaluation of intermediate results to decide what to do next). Ideal B2B use cases include: competitive research and intelligence gathering, contract and document review, prospect research, financial report processing, customer onboarding orchestration, and complex data extraction and transformation pipelines. Tasks that are single-step, fully structured, or latency-critical are typically better served by standard LLM calls or traditional automation.',
+    },
+    {
+      question: 'How do you prevent AI agents from taking harmful or unintended actions?',
+      answer: 'Preventing harmful agent actions requires architectural constraints, not just prompt instructions. ClickMasters implements: (1) scoped tool sets — agents are given only the tools required for their specific use case; (2) human-in-the-loop checkpoints — irreversible or high-risk actions require explicit human approval; (3) read-before-write separation — agents first perform read-only verification steps before writing; (4) action audit logging — every tool call and its parameters are logged with the reasoning that triggered it; (5) prompt injection detection — tool responses are screened for instruction injection attempts; and (6) sandboxed code execution — any code generated runs in an isolated environment that cannot affect production systems without explicit deployment approval.',
+    },
+    {
+      question: 'Can AI agents integrate with our existing enterprise systems?',
+      answer: 'Yes. System integration is a core component of every ClickMasters agent engagement. We build custom tools that connect agents to your internal and external systems: ERP systems (SAP, Oracle, NetSuite via API), CRM platforms (Salesforce, HubSpot, Dynamics), databases (PostgreSQL, MySQL, MongoDB via SQL/API), document repositories (SharePoint, Confluence, Google Drive, S3), communication platforms (Slack, Teams, email), and any system with a documented REST API. For systems without public APIs, we build middleware connectors. Each integration tool is built with retry logic, error handling, rate limit management, and authentication appropriate for the system — ensuring the agent can rely on its tools in production.',
     },
   ],
   testimonial: {
@@ -725,101 +811,187 @@ const aiAgentsDevelopmentOverride: ServicePageContent = {
     description: "Deployed an AI agent that identified and resolved 92% of transaction discrepancies across three payment gateways without human manual data entry.",
     slug: "fintech-agent-automation",
     badge: "Autonomous AI"
-  }
+  },
+  howToSteps: [
+    { name: 'Workflow Suitability Assessment', text: 'Determine if the task is goal-oriented with variable steps and appropriate for agent automation.' },
+    { name: 'Agent Architecture Design', text: 'Select agent pattern (ReAct, Plan-Execute, Multi-Agent), define tools, memory, and HITL checkpoints.' },
+    { name: 'Tool Development & Integration', text: 'Build secure tool layer for agent to interact with web, documents, APIs, and databases.' },
+    { name: 'Agent Core Development', text: 'Implement reasoning loop using LangGraph with state management and planning logic.' },
+    { name: 'Reliability Engineering', text: 'Add retry handling, output validation, audit logging, cost controls, and timeout handling.' },
+    { name: 'Evaluation & Red-Teaming', text: 'Build test set, run automated evaluation, test adversarial inputs and boundary conditions.' },
+    { name: 'Deployment & Monitoring', text: 'Deploy with observability, dashboards, alerts, and operator documentation.' },
+  ],
+  itemList: [
+    'Research & Intelligence Agents',
+    'Data Processing & Extraction Agents',
+    'Workflow Orchestration Agents',
+    'Multi-Agent Systems',
+    'Coding & DevOps Agents',
+    'Customer-Facing Autonomous Agents',
+    'Agent Platform & Infrastructure',
+  ],
+  definedTerms: [
+    { name: 'AI Agent', description: 'Autonomous software system using an LLM reasoning engine to plan and execute multi-step tasks, make decisions, call tools, and adapt based on intermediate outcomes without human input at each step.' },
+    { name: 'ReAct', description: 'Agent architecture pattern where the agent alternates between reasoning steps (thinking) and action steps (tool calls), self-correcting based on tool outputs.' },
+    { name: 'LangGraph', description: 'Orchestration framework for building stateful, multi-actor AI agents with native HITL support, state persistence, and deterministic control flow.' },
+    { name: 'Multi-Agent System', description: 'Architecture where a supervisor agent decomposes tasks and delegates to specialized sub-agents, aggregating results for complex, parallel execution.' },
+    { name: 'Human-in-the-Loop (HITL)', description: 'Design pattern where agent execution pauses at defined checkpoints for human review and approval before proceeding with high-risk actions.' },
+  ],
 };
-
 const aiAutomationSystemsOverride: ServicePageContent = {
   slug: 'ai-automation-systems',
   categorySlug: 'artificial-intelligence-ai',
   sectionId: 'ai-automation-systems',
   category: 'Artificial Intelligence (AI)',
-  title: 'AI Automation Systems Company Transforming Business Operations',
+  title: 'AI Automation Systems',
   serviceName: 'AI Automation Systems',
-  metaTitle: 'AI Automation Systems | End-to-End Business Process AI | ClickMasters',
+  metaTitle: 'AI Automation Systems | Intelligent Workflow Automation | ClickMasters',
   metaDescription:
-    'ClickMasters builds end-to-end AI automation systems. Combine LLMs, computer vision, and RPA to automate complex B2B operations at scale.',
-  lead: 'ClickMasters builds end-to-end AI automation systems that transform legacy business operations into intelligent, self-scaling engines. We combine LLMs, computer vision, and structured data processing to automate complex document workflows, data entry, and decision-making processes at a fraction of the manual cost.',
+    'ClickMasters builds AI-powered automation systems — intelligent document processing, workflow automation, and decision automation — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds AI-powered automation systems for B2B companies across the USA, Europe, Canada, and Australia. Intelligent document processing that extracts structured data from invoices, contracts, and forms with 95%+ accuracy. LLM-powered workflow automation that routes, categorises, summarises, and responds to inbound content. AI decision systems that apply your business rules to high-volume decisions — without a human in the loop for every case. Built with LangChain, LlamaIndex, and your existing systems.',
   highlights: [
-    '✓ Document Intelligence (IDP)',
-    '✓ High-Volume Data Entry',
-    '✓ Automated Decisioning',
-    '✓ Legacy RPA Augmentation',
-    '✓ Scalable Data Pipelines',
-    '✓ Measurable Opex Reduction',
+    '✓ LLM Workflow Automation',
+    '✓ Intelligent Document Processing',
+    '✓ AI Decision Systems',
+    '✓ n8n / Make Automation',
+    '✓ Human-in-the-Loop Design',
+    '✓ RAG Knowledge Systems',
   ],
-  // marketStats: [
-  //   { label: 'Avg reduction in operational costs', value: '35%' },
-  //   { label: 'Data entry accuracy improvement', value: '99%' },
-  //   { label: 'Time saved on document processing', value: '10x' },
-  //   { label: 'Enterprises prioritizing AI automation', value: '82%' },
-  // ],
+  marketStats: [
+    { label: 'Of work activities across all industries could be automated with current AI technology (McKinsey)', value: '45%' },
+    { label: 'Cost per GPT-4o API call — AI processes a document for less than the cost of 1 second of human attention', value: '$0.002' },
+    { label: 'Extraction accuracy achievable on structured document types (invoices, purchase orders, standard forms)', value: '95%+' },
+    { label: 'Typical time to deliver an intelligent document processing system from kickoff to production', value: '3-6 wks' },
+  ],
   servicesCards: [
-    { title: 'Intelligent Doc Processing', description: 'Using computer vision and LLMs to extract structured data from invoices, contracts, and IDs with human-level accuracy and scale.' },
-    { title: 'Automated Decision Engines', description: 'Building systems that apply complex business rules and AI reasoning to automate approvals, risk assessments, and lead scoring.' },
-    { title: 'Legacy RPA Augmentation', description: 'Upgrading existing robotic process automation (RPA) with cognitive AI layers to handle unstructured data and nuanced edge cases.' },
-    { title: 'AI-Enhanced Data Pipelines', description: 'End-to-end pipelines that ingest, clean, and enrich massive volumes of operational data using generative and predictive models.' },
-    { title: 'Inventory & Supply Chain AI', description: 'Predictive automation for inventory restocking, demand forecasting, and automated vendor communication based on real-time data.' },
-    { title: 'Compliance & Audit Automation', description: 'Systems that monitor every transaction or document against policy in real-time, automating the collection of evidence for audits.' },
+    { title: 'Intelligent Document Processing (IDP)', description: 'Extraction of structured data from unstructured documents — invoices, purchase orders, contracts, insurance claims, medical records, legal documents, financial statements. Architecture: document ingestion, OCR layer (AWS Textract/Azure Document Intelligence), LLM extraction layer (GPT-4o/Claude 3.5), validation layer, confidence scoring, and downstream delivery to ERP/CRM.' },
+    { title: 'LLM-Powered Workflow Automation', description: 'AI automation of text-based workflows: email triage and routing, content categorisation, automated summarisation, and response generation. Built with LangChain, n8n or Make.com, and OpenAI/Anthropic APIs. Every automated action is logged with the LLM\'s input, output, and confidence.' },
+    { title: 'AI Decision Automation', description: 'AI systems that apply business rules to high-volume decisions: credit risk pre-screening, content moderation, lead scoring automation, and compliance checking. Flag high-confidence approvals and rejections, refer borderline cases to human reviewers.' },
+    { title: 'RAG Knowledge Automation', description: 'Retrieval-Augmented Generation systems that apply your proprietary knowledge to automation tasks: internal knowledge base automation, customer support automation, and contract analysis automation using your documentation as the retrieval corpus.' },
   ],
   differentiators: [
-    { feature: 'Intelligence', description: 'Cognitive AI Reasoning | Basic: Rigid rule-based scripts' },
-    { feature: 'Adaptability', description: 'Handles Unstructured Data | Basic: Fails on non-standard docs' },
-    { feature: 'ROI Focus', description: 'Direct OPEX Measurement | Basic: Novelty-only deployments' },
-    { feature: 'Integrations', description: 'Deep ERP / Mainframe Sync | Basic: Surface-level API calls' },
-    { feature: 'Accuracy', description: 'Multi-Stage Validation | Basic: Single-pass AI guesses' },
+    { feature: 'Intelligent Document Processing', description: '95%+ extraction accuracy with confidence scoring and human-in-the-loop | Basic: Rules-based RPA breaks on layout changes' },
+    { feature: 'Honest Guidance', description: '"When AI automation is NOT the right solution" section — builds trust | Basic: AI for everything, no nuance' },
+    { feature: 'Auditability', description: 'Full audit trail with input, prompt, response, confidence, and human reviewer identity | Basic: Black-box decisions with no logging' },
+    { feature: 'Model Selection', description: 'Task-optimized models: GPT-4o for extraction, Claude for long documents, mini models for latency-sensitive tasks | Basic: One model for everything' },
+    { feature: 'Integration Depth', description: 'n8n, Make.com, Temporal.io, AWS Lambda, ECS Fargate | Basic: Custom code with no workflow orchestration' },
   ],
   processPhases: [
-    { phase: 'Phase 1', title: 'Operational Audit', timeline: 'Week 1-2', text: 'Mapping manual workflows, identifying data bottlenecks, and calculating the potential ROI of AI-driven automation.' },
-    { phase: 'Phase 2', title: 'Data Architecture', timeline: 'Week 2-4', text: 'Designing the pipelines for data ingestion, cleaning, and model-feeding to ensure high-quality automation inputs.' },
-    { phase: 'Phase 3', title: 'Model Orchestration', timeline: 'Week 4-8', text: 'Selecting and tuning the optimal AI models (OCR, LLM, Vision) for each step of the automation system.' },
-    { phase: 'Phase 4', title: 'End-to-End Build', timeline: 'Week 6-12', text: 'Developing the application layer, system integrations, and human-in-the-loop exception handling interfaces.' },
-    { phase: 'Phase 5', title: 'QA & Pilot Phase', timeline: 'Week 10-14', text: 'Running the system in parallel with manual processes to validate accuracy and performance against baseline targets.' },
-    { phase: 'Phase 6', title: 'Full Scale Launch', timeline: 'Ongoing', text: 'Rolling out the system across the organization with continuous performance monitoring and cost-per-task tracking.' },
+    { phase: 'Phase 1', title: 'Process Discovery & Audit', timeline: 'Week 1-2', text: 'Identify highest-volume manual workflows, map current state, calculate manual cost per transaction, and prioritize automation candidates by ROI potential.' },
+    { phase: 'Phase 2', title: 'Data Architecture Design', timeline: 'Week 2-3', text: 'Design ingestion pipeline, define extraction schema per document type, set confidence thresholds, and design human-in-the-loop review queue.' },
+    { phase: 'Phase 3', title: 'Pipeline Development', timeline: 'Week 3-5', text: 'Build document ingestion, OCR layer, LLM extraction with few-shot prompting, validation layer, and downstream delivery integration.' },
+    { phase: 'Phase 4', title: 'Human-in-the-Loop UI', timeline: 'Week 4-6', text: 'Build review dashboard for low-confidence extractions, field-level highlighting, correction interface, and audit logging.' },
+    { phase: 'Phase 5', title: 'Testing & Calibration', timeline: 'Week 5-7', text: 'Run sample documents through pipeline, measure extraction accuracy per field, calibrate prompts and confidence thresholds, iterate.' },
+    { phase: 'Phase 6', title: 'Production Deployment', timeline: 'Week 6-8', text: 'Deploy to production, monitor accuracy and latency, configure alerts, and run parallel with manual process for validation.' },
+    { phase: 'Phase 7', title: 'Continuous Improvement', timeline: 'Ongoing', text: 'Retrain on corrected extractions, monitor accuracy drift, update prompts, and expand to new document types.' },
   ],
   techStackCategories: [
-    { layer: 'OCR & Vision', technologies: 'AWS Textract, Azure AI Document Intelligence, Tesseract, Custom CNNs' },
-    { layer: 'Cognitive Layer', technologies: 'GPT-4o, Claude 3.5, Mistral, Gemini 1.5' },
-    { layer: 'Middleware', technologies: 'Apache Airflow, Temporal.io, n8n, Prefect' },
-    { layer: 'Database', technologies: 'PostgreSQL, Snowflake, BigQuery, Databricks' },
-    { layer: 'Computing', technologies: 'AWS SageMaker, Kubernetes (KServe), Google Vertex AI' },
-    { layer: 'Integrations', technologies: 'SAP, NetSuite, Salesforce, Custom Mainframe Connectors' },
+    { layer: 'Document Ingestion', technologies: 'AWS Textract (layout-preserving OCR — tables, forms, multi-column text), Azure Document Intelligence (pre-built models for invoices, receipts, ID documents), Unstructured.io (open-source — PDFs, HTML, emails into clean text chunks)' },
+    { layer: 'LLM Layer', technologies: 'GPT-4o (primary — best extraction accuracy, structured JSON output via function calling), Claude 3.5 Sonnet (alternative — strong instruction following, larger context window), Structured output via Pydantic models (type-safe JSON extraction)' },
+    { layer: 'Orchestration', technologies: 'LangChain (chain and agent orchestration — extraction pipelines, multi-step reasoning), LlamaIndex (document indexing and RAG), LangSmith (LangChain observability — trace every LLM call, debug extraction failures)' },
+    { layer: 'Workflow Automation', technologies: 'n8n (self-hosted — webhook triggers, 350+ integrations, no per-execution cost), Make.com (managed — faster setup, usage-based pricing), Temporal.io (durable workflow engine — multi-step automations with retry and state persistence)' },
+    { layer: 'Human-in-the-Loop', technologies: 'Custom review UI (React dashboard — low-confidence extractions with highlighted fields), Label Studio (open-source annotation tool), Confidence thresholds configurable per field and document type' },
+    { layer: 'Storage & Audit', technologies: 'PostgreSQL (automation run logs — input, output, confidence, human corrections), S3 (document storage — original + extracted JSON), Full audit trail for every automated decision' },
+    { layer: 'Deployment', technologies: 'AWS Lambda (serverless — event-triggered for low-volume async processing), AWS ECS Fargate (containerised — for high-volume synchronous processing), CloudWatch + Sentry (monitoring — alert on accuracy degradation, latency spikes)' },
   ],
   pricingTiers: [
-    { type: 'Automation Audit', investment: '$5,000 – $10,000', timeline: '2 weeks', bestFor: 'Identifying high-ROI automation candidates and roadmap' },
-    { type: 'Focused AI Workflow', investment: '$20,000 – $50,000', timeline: '8 – 12 weeks', bestFor: 'Automating a single complex manual process (e.g. Invoicing)' },
-    { type: 'Enterprise AI Engine', investment: '$70,000 – $200,000+', timeline: '4 – 10 months', bestFor: 'End-to-end operational transformation for large firms' },
-    { type: 'Managed Automation', investment: '$4,000 – $12,000/mo', timeline: 'Ongoing', bestFor: 'Continuous monitoring, updates, and scaling of AI flows' },
+    { type: 'Automation Discovery Workshop', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'Process audit, automation ROI analysis, prioritised opportunity roadmap' },
+    { type: 'Intelligent Document Processing', investment: '$15,000 – $45,000', timeline: '4 – 8 weeks', bestFor: 'Extraction pipeline, validation, human-in-loop review UI, ERP integration' },
+    { type: 'LLM Workflow Automation', investment: '$12,000 – $35,000', timeline: '3 – 7 weeks', bestFor: 'Email triage, classification, routing, n8n/Make integration' },
+    { type: 'AI Decision System', investment: '$15,000 – $50,000', timeline: '4 – 9 weeks', bestFor: 'Rules + LLM hybrid, confidence scoring, audit trail, human review queue' },
+    { type: 'RAG Knowledge Automation', investment: '$12,000 – $35,000', timeline: '3 – 7 weeks', bestFor: 'Document indexing, retrieval pipeline, answer generation, evaluation' },
+    { type: 'Custom Automation Build', investment: '$20,000 – $80,000', timeline: '5 – 12 weeks', bestFor: 'Multi-step complex automation — document + decision + workflow combined' },
+    { type: 'AI Automation Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'Model updates, accuracy monitoring, new automation development' },
   ],
   industryUseCases: [
-    { name: 'Legal & Insurance', description: 'Automating high-volume claims processing and contract term extraction with 99% accuracy.' },
-    { name: 'Manufacturing & 3PL', description: 'Intelligent bills of lading processing and automated inventory discrepancy resolution.' },
-    { name: 'Financial Services', description: 'Real-time AML/KYC document verification and automated loan application processing.' },
-    { name: 'E-commerce & Retail', description: 'Automated product listing enrichment and multi-channel inventory synchronization.' },
+    { name: 'Intelligent Document Processing', description: 'Extract structured data from invoices, purchase orders, contracts, and forms with 95%+ accuracy. Human-in-the-loop for low-confidence cases.' },
+    { name: 'LLM Workflow Automation', description: 'Email triage and routing, content categorisation, automated summarisation, and response generation with full audit trails.' },
+    { name: 'AI Decision Automation', description: 'Credit risk pre-screening, content moderation, lead scoring automation, and compliance checking with confidence scoring.' },
+    { name: 'RAG Knowledge Automation', description: 'Internal knowledge base automation, customer support automation, and contract analysis using proprietary documentation.' },
   ],
   sections: [
     {
-      heading: 'From Manual Drudgery to Intelligent Scale',
-      body: 'AI Automation systems do not just replace human effort; they eliminate operational bottlenecks that prevent growth. By applying cognitive AI to unstructured data, we enable your team to focus on high-value tasks while the "intelligent plumbing" handles the rest.',
+      heading: 'Replace Your Most Expensive Manual Workflows With AI That Handles Them Better',
+      body: '',
+      items: [],
+    },
+    {
+      heading: 'When AI Automation Is NOT the Right Solution',
+      body: 'AI automation adds genuine value when: the process involves unstructured content (documents, emails, text) that rules-based automation cannot parse; the decision requires pattern recognition across many variables; or the volume is high enough to justify the development investment.',
       items: [
-        'Document processing time reduced from hours to seconds',
-        'Elimination of human error in high-volume data entry tasks',
-        'Scalable operations that handle 10x volume without hiring',
-        'Consistent, policy-aligned decision making across the firm',
+        'Do NOT automate with AI when: the process is already well-handled by rules-based RPA — adding LLMs to a purely deterministic process adds cost and latency without value',
+        'The decision requires empathy, relationship context, or accountability that an AI cannot provide',
+        'The error cost is so high (medical decisions, legal filings with strict liability) that 95% accuracy is insufficient — the remaining 5% errors are catastrophic',
+        'ClickMasters will tell you honestly when a simpler rule-based or RPA solution is the correct choice',
+      ],
+    },
+    {
+      heading: 'Intelligent Document Processing (IDP) — Technical Architecture',
+      body: 'Extraction of structured data from unstructured documents: invoices, purchase orders, contracts, insurance claims, medical records, legal documents, financial statements.',
+      items: [
+        'Document ingestion (PDF, image scan, email attachment)',
+        'OCR layer (AWS Textract or Azure Document Intelligence for layout-preserving text extraction)',
+        'LLM extraction layer (GPT-4o or Claude 3.5 Sonnet with few-shot prompting — extracts named fields with JSON output)',
+        'Validation layer (business rule checks on extracted values — date formats, numeric ranges, required fields)',
+        'Confidence scoring (low-confidence extractions flagged for human review — the human-in-the-loop gate)',
+        'Downstream delivery (JSON to ERP/CRM, database insert, email notification)',
+      ],
+    },
+    {
+      heading: 'Accuracy Targets by Document Type',
+      body: '',
+      items: [
+        'Standardised forms (tax documents, insurance forms, government filings) — 98%+ field extraction accuracy',
+        'Semi-structured documents (invoices from known vendors) — 95%+ accuracy',
+        'Unstructured documents (contracts, emails, legal briefs) — 90%+ for key field extraction with human review queue for the remainder',
+      ],
+    },
+    {
+      heading: 'LLM-Powered Workflow Automation',
+      body: 'AI automation of text-based workflows:',
+      items: [
+        'Email triage and routing — classify inbound emails by intent (support request, sales inquiry, billing question, complaint) and route to correct team',
+        'Content categorisation — classify documents, tickets, or records into predefined categories accurately and at volume',
+        'Automated summarisation — generate structured summaries of long documents, meeting transcripts, or email threads',
+        'Response generation — draft responses to inbound inquiries using your knowledge base and tone guidelines — human reviews and sends, AI handles generation',
+      ],
+    },
+    {
+      heading: 'AI Decision Automation',
+      body: 'AI systems that apply business rules to high-volume decisions:',
+      items: [
+        'Credit risk pre-screening — analyse application data against policy criteria, flag high-confidence approvals and rejections, refer borderline cases to human underwriters',
+        'Content moderation — classify user-generated content against policy categories, AI handles clear cases, human reviewers handle borderline',
+        'Lead scoring automation — score inbound leads against ICP criteria using company data, engagement signals, and firmographic enrichment',
+        'Compliance checking — scan documents or communications against regulatory requirements, flag potential violations for legal review',
+      ],
+    },
+    {
+      heading: 'RAG Knowledge Automation',
+      body: 'Retrieval-Augmented Generation systems that apply your proprietary knowledge to automation tasks:',
+      items: [
+        'Internal knowledge base automation — answer employee questions by retrieving from internal documentation (HR policies, product documentation, SOPs)',
+        'Customer support automation — answer customer questions by retrieving from support documentation, FAQ, and resolved ticket history — reducing Level 1 support volume',
+        'Contract analysis automation — compare contract terms against your standard requirements, flag non-standard clauses for legal review using your clause library as the retrieval corpus',
       ],
     },
   ],
   faqs: [
     {
-      question: 'How is this different from standard RPA?',
-      answer: 'Standard RPA follows rigid "if-this-then-that" rules. AI Automation uses LLMs and Computer Vision to handle unstructured data, nuance, and edge cases that break traditional scripts.',
+      question: 'What is the difference between AI automation and RPA?',
+      answer: 'Robotic Process Automation (RPA) automates deterministic, rules-based digital tasks — clicking buttons, copying data between systems, filling forms — where the steps are always the same and the data is always structured. RPA tools (UiPath, Blue Prism, Automation Anywhere) record and replay UI interactions. AI automation handles tasks involving unstructured content or judgment: reading and extracting data from documents that are not in a fixed template, categorising inbound emails by intent, generating summaries of variable-length content, or making decisions that depend on context rather than fixed rules. The technologies are complementary — many automation architectures use RPA for the structured, deterministic steps and AI (LLMs) for the unstructured or judgment-requiring steps.',
     },
     {
-      question: 'What kind of data can you automate?',
-      answer: 'We can automate workflows involving invoices, contracts, handwritten forms, images, audio, and complex multi-system data reconciliation.',
+      question: 'How accurate is AI document processing?',
+      answer: 'AI document processing accuracy depends on document type and structure. Standardised forms (government forms, insurance forms, tax documents with fixed layouts) achieve 97-99% field extraction accuracy. Semi-structured documents (invoices from recurring vendors — consistent but variable layout) achieve 93-97% accuracy after a learning period. Unstructured documents (contracts, emails, legal briefs) achieve 85-92% accuracy for key field extraction. ClickMasters designs all IDP systems with human-in-the-loop review: a confidence threshold is set per field type, and extractions below the threshold are queued for human review rather than processed automatically. This means the overall system accuracy for downstream processes is near-perfect — AI handles the high-confidence majority, humans handle the uncertain minority.',
     },
     {
-      question: 'How do you handle errors?',
-      answer: 'We build "Human-in-the-Loop" interfaces. When the AI has low confidence in a decision or document, it flags it for a human to review, ensuring 100% accuracy for critical tasks.',
+      question: 'How do you ensure AI automation decisions are auditable?',
+      answer: 'Every AI-automated decision in a ClickMasters system is logged with: the input data (document content, email text, or structured data the AI processed), the LLM prompt used (the exact instructions given to the model), the model\'s response (full output before parsing), the parsed structured output (the extracted fields or decision), the confidence score, and whether the decision was auto-applied or routed for human review. This audit trail is stored in PostgreSQL and retained per the client\'s data retention policy. For regulated industries (financial services, healthcare, insurance), the audit log includes the human reviewer\'s identity and review timestamp for every case that required human oversight. ClickMasters can provide the audit log in formats compatible with specific compliance frameworks on request.',
+    },
+    {
+      question: 'Which AI models does ClickMasters use for automation?',
+      answer: 'ClickMasters selects AI models based on the specific requirements of each automation task. GPT-4o (OpenAI) is the primary model for document extraction — its structured output (JSON mode with function calling) and instruction-following accuracy make it the most reliable for extracting specific fields from documents. Claude 3.5 Sonnet (Anthropic) is used for long-document tasks (contracts, reports) where the larger context window and strong reasoning are advantageous. For latency-sensitive applications (real-time API responses under 500ms), GPT-4o mini or Claude 3.5 Haiku provide significantly lower latency at lower cost, with accuracy sufficient for classification and routing tasks. Model selection is documented in every engagement — clients can see which model is used for which task and why.',
     },
   ],
   testimonial: {
@@ -832,7 +1004,27 @@ const aiAutomationSystemsOverride: ServicePageContent = {
     description: "Built an intelligent document processing system that reduced claims processing time by 85% and saved the firm $1.2M in annual operational costs.",
     slug: "insurance-ai-automation",
     badge: "Operational AI"
-  }
+  },
+  howToSteps: [
+    { name: 'Process Discovery & Audit', text: 'Identify highest-volume manual workflows and calculate manual cost per transaction.' },
+    { name: 'Data Architecture Design', text: 'Design ingestion pipeline, define extraction schema, set confidence thresholds.' },
+    { name: 'Pipeline Development', text: 'Build OCR layer, LLM extraction with few-shot prompting, validation layer.' },
+    { name: 'Human-in-the-Loop UI', text: 'Build review dashboard for low-confidence extractions with correction interface.' },
+    { name: 'Testing & Calibration', text: 'Run sample documents, measure extraction accuracy, calibrate prompts and thresholds.' },
+    { name: 'Production Deployment', text: 'Deploy with monitoring, alerting, and parallel validation with manual process.' },
+    { name: 'Continuous Improvement', text: 'Retrain on corrections, monitor drift, update prompts, expand to new types.' },
+  ],
+  itemList: [
+    'Intelligent Document Processing (IDP)',
+    'LLM-Powered Workflow Automation',
+    'AI Decision Automation',
+    'RAG Knowledge Automation',
+  ],
+  definedTerms: [
+    { name: 'Intelligent Document Processing', description: 'AI-powered extraction of structured data from unstructured documents using OCR and LLMs with confidence scoring and human-in-the-loop review.' },
+    { name: 'RAG Knowledge Automation', description: 'Retrieval-Augmented Generation systems that apply proprietary knowledge bases to automation tasks like support and contract analysis.' },
+    { name: 'Human-in-the-Loop', description: 'Design pattern where low-confidence AI outputs are queued for human review rather than processed automatically.' },
+  ],
 };
 
 const aiChatbotDevelopmentOverride: ServicePageContent = {
@@ -840,106 +1032,220 @@ const aiChatbotDevelopmentOverride: ServicePageContent = {
   categorySlug: 'artificial-intelligence-ai',
   sectionId: 'ai-chatbot-development',
   category: 'Artificial Intelligence (AI)',
-  title: 'AI Chatbot Development Company Building Intelligent B2B Assistants',
+  title: 'AI Chatbot Development Company',
   serviceName: 'AI Chatbot Development',
-  metaTitle: 'AI Chatbot Development Company | Custom RAG & LLM Bots | ClickMasters',
+  metaTitle: 'AI Chatbot Development Company | Custom LLM Chatbots for B2B | ClickMasters',
   metaDescription:
-    'ClickMasters builds intelligent B2B AI chatbots using LLMs and RAG. Automated support, sales assistants, and internal knowledge bots that deliver accuracy.',
-  lead: 'ClickMasters builds intelligent AI chatbots that go beyond simple script-based responses. We leverage Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) to deliver production-ready assistants for customer support, sales automation, and internal knowledge management integrated directly with your CRM and documentation.',
+    'ClickMasters builds production-grade AI chatbots — customer support AI, internal knowledge assistants, and sales bots — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds production-grade AI chatbots for B2B companies in the USA, Europe, Canada, and Australia. Customer support AI that deflects 50-70% of tickets. Internal knowledge assistants that answer employee questions instantly. Sales qualification bots that book meetings 24/7. All built on GPT-4o, Claude, or your chosen LLM — integrated into your product, your workflow, and your data.',
   highlights: [
-    '✓ LLM-Powered (GPT-4, Claude)',
-    '✓ RAG Data Grounding',
-    '✓ CRM & API Integration',
-    '✓ Multi-Channel Deployment',
-    '✓ Hallucination Management',
-    '✓ Human-in-the-Loop Design',
+    '✓ RAG-Powered Accuracy',
+    '✓ Multi-Channel Integration',
+    '✓ Human Escalation Design',
+    '✓ Slack / Teams / WhatsApp',
+    '✓ CSAT & Analytics Dashboard',
+    '✓ CRM & Helpdesk Integration',
   ],
-  // marketStats: [
-  //   { label: 'Reduction in support tickets', value: '40%+' },
-  //   { label: 'Users preferring AI for fast answers', value: '62%' },
-  //   { label: 'Accuracy lift from RAG vs base LLM', value: '3x' },
-  //   { label: 'Avg time to first production pilot', value: '4 Weeks' },
-  // ],
+  marketStats: [
+    { label: 'Of customers prefer AI chatbot over waiting for a human agent (Salesforce)', value: '62%' },
+    { label: 'Tier 1 ticket deflection rate achievable with a well-built support AI', value: '50-70%' },
+    { label: 'Enterprise AI chatbot market size by 2027', value: '$11B' },
+    { label: 'Average response time with AI vs. 6 hours with human-only support', value: '3 min' },
+  ],
   servicesCards: [
-    { title: 'Customer Support Chatbots', description: 'Automating 1st-tier support by grounding the AI on your help center, documentation, and resolved tickets to provide instant, accurate resolutions.' },
-    { title: 'Sales & Lead Gen Assistants', description: 'Intelligent bots that qualify prospects, answer pricing questions, and book meetings directly into your sales team\'s calendar.' },
-    { title: 'Internal Knowledge Bots', description: 'Giving your employees instant access to company wikis, HR policies, and technical specs through a conversational natural language interface.' },
-    { title: 'RAG Pipeline Implementation', description: 'Designing the vector database and retrieval logic that ensures your chatbot only speaks from your verified data, minimizing hallucinations.' },
-    { title: 'Multilingual AI Assistants', description: 'Deploying bots that can understand and respond in 50+ languages with native-level fluency, enabling global support scale.' },
-    { title: 'Chatbot UI/UX Design', description: 'Creating fluid, accessible conversational interfaces that manage streaming outputs, citations, and human-handoff elegantly.' },
+    { title: 'Customer Support AI Chatbot', description: 'Production-grade support AI handling Tier 1 queries with RAG-powered accuracy on product documentation, FAQs, and resolved ticket history. Features: multi-turn conversation, intent classification, confidence scoring, escalation to human agents with full context, helpdesk integration (Zendesk, Freshdesk, Intercom), CSAT collection, and analytics dashboard.' },
+    { title: 'Internal Knowledge Assistant', description: 'AI assistant embedded in Slack or Microsoft Teams answering employee questions from internal knowledge base: HR policies, IT runbooks, product documentation, onboarding materials, legal FAQs. Permission-aware retrieval — only surfaces documents the user is authorized to access. Knowledge gap detection for unanswered questions.' },
+    { title: 'Sales Qualification Chatbot', description: 'Website or in-app conversational bot qualifying leads, capturing intent signals, booking meetings, and routing to appropriate sales rep 24/7. Integrates with Salesforce, HubSpot, or CRM. Configurable qualification logic (industry, company size, use case, budget) controllable without developer changes.' },
+    { title: 'Multilingual AI Chatbot', description: 'AI chatbots serving customers across multiple languages. LLM handles language detection and responds in user\'s language. Knowledge base can be maintained in one language with automatic translation, or in multiple languages for high accuracy. Deployed across 30+ languages with GPT-4o or Claude.' },
+    { title: 'Transactional & Agentic Chatbot', description: 'Beyond answering questions — AI chatbots that take actions. Function calling/tool-use architecture enables order status lookup, account balance retrieval, return processing, profile updates, workflow triggers. Each action logged with user identity, timestamp, and outcome for audit trail compliance.' },
+    { title: 'Chatbot Analytics & Continuous Improvement', description: 'Full observability layer: conversation volume and deflection rate trends, intent distribution analysis, accuracy drift monitoring, CSAT score tracking, escalation rate analysis, unanswered question tracking, and A/B testing infrastructure for prompt and retrieval improvements.' },
   ],
   differentiators: [
-    { feature: 'Accuracy', description: 'Advanced RAG & Citations | Basic: High hallucination risk' },
-    { feature: 'Integration', description: 'Native CRM & Database Sync | Basic: Siloed standalone bots' },
-    { feature: 'Governance', description: 'PII Redaction & Guardrails | Basic: No data privacy controls' },
-    { feature: 'Scaling', description: 'Elastic API Orchestration | Basic: Performance drops under load' },
-    { feature: 'Eval', description: 'Continuous AI Quality Monitoring | None: Ad-hoc testing only' },
+    { feature: 'Escalation Design', description: '6-component escalation architecture + anti-pattern callout | Basic: Broken handoff, dead-end UX, CSAT killer' },
+    { feature: 'Custom vs Platform Honesty', description: '11-row comparison table + amber "we\'ll tell you if no-code is right" | Basic: Sell custom regardless of fit' },
+    { feature: 'Deflection Benchmarks', description: '45-65% support, 50-70% internal, 60-80% transactional (honest ranges) | Basic: "80%+ deflection guaranteed" (unrealistic)' },
+    { feature: 'Knowledge Base Architecture', description: 'Semantic chunking, reranking, pgvector, RAGAS evaluation | Basic: Basic RAG with no evaluation' },
+    { feature: 'Production Observability', description: 'LangSmith tracing, token cost tracking, accuracy drift alerts | Basic: No analytics (can\'t improve what you can\'t measure)' },
   ],
   processPhases: [
-    { phase: 'Phase 1', title: 'Use Case Scoping', timeline: 'Week 1', text: 'Auditing your documentation quality and defining the bot\'s persona, success metrics, and handoff rules.' },
-    { phase: 'Phase 2', title: 'Data Engineering', timeline: 'Week 2-3', text: 'Implementing the RAG pipeline: chunking documents, generating embeddings, and indexing them in a vector database.' },
-    { phase: 'Phase 3', title: 'Bot Logic & Flow', timeline: 'Week 3-5', text: 'Developing the conversational logic, system prompts, and tool integrations (Calendar, CRM, Slack).' },
-    { phase: 'Phase 4', title: 'UI & Integration', timeline: 'Week 4-6', text: 'Building the chat widget or integrating with channels like WhatsApp, MS Teams, or your own web platform.' },
-    { phase: 'Phase 5', title: 'Red Teaming & Eval', timeline: 'Week 6-8', text: 'Testing the bot against edge cases, adversarial inputs, and measuring accuracy against a curated "Golden Dataset."' },
-    { phase: 'Phase 6', title: 'Deployment & Tuning', timeline: 'Ongoing', text: 'Launching the pilot, monitoring user feedback loops, and refining the RAG retrieval for continuous accuracy gains.' },
+    { phase: 'Phase 1', title: 'Use Case & Scope Definition', timeline: 'Week 1', text: 'Define primary use case, target user types, query scope, escalation triggers, channel deployment targets, and success metrics (deflection rate, CSAT, resolution time). Deliverable: Chatbot Specification Document.' },
+    { phase: 'Phase 2', title: 'Knowledge Base Architecture & Data Preparation', timeline: 'Week 1-3', text: 'Audit existing knowledge base for completeness and accuracy. Design ingestion pipeline (chunking strategy, metadata tagging). Build vector database. Identify and fill knowledge gaps based on historical ticket data. This phase determines 70% of eventual accuracy.' },
+    { phase: 'Phase 3', title: 'Chatbot Core Development', timeline: 'Week 2-5', text: 'Build conversation engine: RAG retrieval pipeline, LLM integration (streaming), multi-turn context management, intent classification, confidence scoring, escalation engine, tool-use integrations, and persona/tone configuration.' },
+    { phase: 'Phase 4', title: 'Channel Integration & UI Development', timeline: 'Week 4-7', text: 'Deploy to target channels: web widget (React, brand-customized), Slack app, Teams app, WhatsApp Business API, or embedded in product. Helpdesk integrations: Zendesk, Freshdesk, Intercom, Salesforce Service Cloud.' },
+    { phase: 'Phase 5', title: 'Evaluation, Red-Teaming & Accuracy Testing', timeline: 'Week 6-8', text: 'Test against curated set of real user queries. Measure: accuracy rate, hallucination rate, escalation trigger rate, response latency. Red-team adversarial inputs: prompt injection, topic jailbreaks, conflicting phrasing.' },
+    { phase: 'Phase 6', title: 'Soft Launch & Hypercare', timeline: 'Week 8-12', text: 'Launch to controlled cohort (10-20% via feature flag). Monitor deflection rate, CSAT, escalation rate daily. Weekly knowledge base update sprints. Graduate to full traffic when metrics stabilize above thresholds.' },
+    { phase: 'Phase 7', title: 'Analytics Dashboard & Continuous Improvement', timeline: 'Week 10-12', text: 'Deliver analytics dashboard: real-time deflection rate, weekly accuracy trend, intent distribution heatmap, unanswered question tracker, escalation reason breakdown, CSAT time series. Automated alerts for accuracy drift. Handoff playbook for ongoing management.' },
   ],
   techStackCategories: [
-    { layer: 'LLM Providers', technologies: 'OpenAI (GPT-4o), Anthropic (Claude 3.5), Google (Gemini)' },
-    { layer: 'Vector Databases', technologies: 'Pinecone, Weaviate, pgvector (PostgreSQL), Milvus' },
-    { layer: 'Orchestration', technologies: 'LangChain, LlamaIndex, Haystack' },
-    { layer: 'Embeddings', technologies: 'OpenAI Embeddings, Cohere, Voyage AI' },
-    { layer: 'Hosting', technologies: 'AWS Lambda, Vercel, Docker, GCP Vertex AI' },
-    { layer: 'Channels', technologies: 'Custom Web, Slack, WhatsApp (Twilio), MS Teams' },
+    { layer: 'Foundation Models', technologies: 'GPT-4o / GPT-4o-mini (OpenAI), Claude 3.5 Sonnet / Haiku (Anthropic), Gemini 1.5 Flash (Google) — selected per latency, cost, accuracy requirements' },
+    { layer: 'RAG / Retrieval', technologies: 'LlamaIndex or LangChain for orchestration, pgvector or Pinecone for vector storage, Cohere Rerank for relevance, OpenAI/Cohere embeddings' },
+    { layer: 'Conversation State', technologies: 'Redis for session state, PostgreSQL for conversation history, LangChain ConversationBufferWindowMemory for context window' },
+    { layer: 'Tool Use / Actions', technologies: 'OpenAI function calling / Anthropic tool use, custom tool definitions, retry logic, error handling, action audit logging' },
+    { layer: 'Backend API', technologies: 'Python FastAPI (streaming SSE endpoints), async request handling, rate limiting, token cost tracking per conversation' },
+    { layer: 'Web Chat Widget', technologies: 'React (TypeScript), streaming message rendering, markdown support, file attachment handling, brand customization, WCAG 2.1 AA' },
+    { layer: 'Channel Connectors', technologies: 'Slack Bolt SDK, Microsoft Bot Framework (Teams), WhatsApp Cloud API, Twilio (SMS), custom webhook architecture' },
+    { layer: 'Analytics', technologies: 'PostgreSQL for conversation storage + analytics queries, Grafana or custom React dashboard, automated report generation, alerting' },
+    { layer: 'Infrastructure', technologies: 'AWS ECS Fargate, Redis ElastiCache, RDS PostgreSQL, S3 (knowledge base), CloudFront (widget CDN)' },
+    { layer: 'Security', technologies: 'PII detection and redaction (Presidio), prompt injection detection, output safety classification, SOC 2 aligned data handling' },
   ],
   pricingTiers: [
-    { type: 'AI Bot Pilot', investment: '$8,000 – $15,000', timeline: '4 – 6 weeks', bestFor: 'Validating a single use case with a focused dataset' },
-    { type: 'Production RAG Bot', investment: '$20,000 – $45,000', timeline: '8 – 12 weeks', bestFor: 'Enterprise-grade support or internal knowledge tools' },
-    { type: 'Custom AI Agent', investment: '$30,000 – $70,000', timeline: '10 – 16 weeks', bestFor: 'Bots that can execute multi-step tasks and tool use' },
-    { type: 'Optimization Retainer', investment: '$2,000 – $5,000/mo', timeline: 'Ongoing', bestFor: 'Continuous data updates and accuracy tuning' },
+    { type: 'Focused AI Chatbot', investment: '$15,000 – $35,000', timeline: '6 – 10 weeks', bestFor: 'Single use case, 1 knowledge source, web widget, basic escalation, analytics' },
+    { type: 'Customer Support AI', investment: '$25,000 – $65,000', timeline: '8 – 14 weeks', bestFor: 'RAG pipeline, helpdesk integration, escalation engine, CSAT, analytics dashboard' },
+    { type: 'Internal Knowledge Bot', investment: '$20,000 – $50,000', timeline: '7 – 12 weeks', bestFor: 'RAG on internal sources, Slack/Teams integration, permission filtering, gap tracking' },
+    { type: 'Sales Qualification Bot', investment: '$20,000 – $55,000', timeline: '7 – 12 weeks', bestFor: 'Qualification logic, CRM integration, calendar booking, rep routing, analytics' },
+    { type: 'Multi-Channel AI Chatbot', investment: '$35,000 – $90,000', timeline: '10 – 16 weeks', bestFor: '3+ channels, multiple use cases, full integration suite, custom analytics' },
+    { type: 'Transactional/Agentic Bot', investment: '$40,000 – $100,000', timeline: '12 – 18 weeks', bestFor: 'Function calling, multiple system integrations, audit logging, identity verification' },
+    { type: 'Enterprise AI Chat Platform', investment: '$70,000 – $160,000', timeline: '4 – 8 months', bestFor: 'Multi-tenant, multiple use cases, admin portal, fine-tuning, full compliance suite' },
+    { type: 'Improvement Retainer', investment: '$4,000 – $12,000/mo', timeline: 'Ongoing', bestFor: 'Knowledge base updates, accuracy monitoring, new intents, channel additions' },
   ],
   industryUseCases: [
-    { name: 'SaaS Support', description: 'Reducing support load by resolving technical queries via documentation retrieval.' },
-    { name: 'Financial Services', description: 'Secure bots for policy lookup and account information with strict PII redaction.' },
-    { name: 'Professional Services', description: 'Internal bots for researching past case work and standard operating procedures.' },
-    { name: 'E-commerce Sales', description: 'Guiding customers to the right product and answering compatibility questions.' },
+    { name: 'Customer Support AI', description: 'Deflects 50-70% of Tier 1 tickets. RAG on documentation + ticketing integration + escalation engine. Reduces average response time from 6 hours to under 3 minutes.' },
+    { name: 'Internal Knowledge Assistant', description: 'Answers employee questions from HR docs, IT runbooks, product specs. Reduces HR/IT helpdesk ticket volume by 40-60%. Permission-aware retrieval.' },
+    { name: 'Sales Qualification Bot', description: 'Engages website visitors, qualifies leads, books meetings. 30-50% lead qualification rate. Integrates with CRM + calendar.' },
+    { name: 'Onboarding Assistant', description: 'Guides new users through activation. 40-60% reduction in onboarding support tickets. Proactive nudges for incomplete users.' },
   ],
   sections: [
     {
-      heading: 'The Shift from Scripted Bots to Generative AI Assistants',
-      body: 'Traditional chatbots frustrated users because they couldn\'t handle nuance. Modern AI assistants, powered by LLMs, understand intent and context, delivering a helpful experience that feels human while scaling infinitely.',
+      heading: 'Why Most Business AI Chatbots Fail Within 90 Days',
+      body: 'The AI chatbot market is full of disappointed buyers. Companies have deployed chatbots that produced wrong answers confidently, frustrated users with irrelevant responses, failed every escalation to a human, and quietly had "talk to a human" become the most-clicked button in the interface. The technology gets blamed. The technology is not the problem.',
       items: [
-        'RAG architecture ensures factual grounding on your data',
-        'Natural language understanding handles complex, multi-part queries',
-        'Automatic citations provide transparency and build user trust',
-        'Seamless handoff to human agents when complexity thresholds are met',
+        'The failure is architectural. A chatbot that doesn\'t have access to your actual knowledge base will hallucinate.',
+        'A chatbot with no escalation logic will trap users in an unhelpful loop.',
+        'A chatbot not integrated with your ticketing system cannot resolve issues — it can only describe them.',
+        'A chatbot with no analytics cannot improve because no one knows what it\'s getting wrong.',
       ],
+    },
+    {
+      heading: 'The 7 Failure Modes of Business AI Chatbots',
+      body: '',
+      items: [
+        'No RAG architecture: the chatbot answers from the LLM\'s general knowledge, not your documentation — confident, frequent, and wrong',
+        'Broken escalation: users who need a human can\'t reach one, or reach one without context — the worst possible support experience',
+        'No memory: each message is treated as a new conversation — users repeat themselves and abandon the chat',
+        'Generic persona: the bot has no brand voice, no product knowledge depth, and responses read like ChatGPT on a generic prompt',
+        'No integration: the chatbot can discuss an issue but cannot look up an order, open a ticket, trigger a refund, or take any action',
+        'No analytics: no visibility into what users ask, what the bot gets wrong, where conversations drop — impossible to improve',
+        'Launched and abandoned: the chatbot was configured once, never updated, and now answers questions about products and policies that changed 6 months ago',
+      ],
+    },
+    {
+      heading: 'What a Production AI Chatbot Actually Requires',
+      body: 'A production AI chatbot is not a prompt wrapped in a chat UI. It requires: a RAG pipeline grounded in your live knowledge base, a conversation state manager that maintains context across turns, tool-use / function calling to take actions in your systems, an escalation engine that routes to humans with full context, a feedback loop that surfaces incorrect answers for correction, and an analytics layer that tracks deflection rate, CSAT, and accuracy drift. ClickMasters builds all of this — not as optional add-ons, but as the standard architecture for every chatbot engagement.',
+      items: [],
+    },
+    {
+      heading: '5 Types of Business AI Chatbots — Which Do You Need?',
+      body: 'Different chatbot use cases require fundamentally different architectures. Understanding which type you need before engaging a developer prevents scope misalignment and architectural rework.',
+      items: [
+        'Customer Support AI: Handles Tier 1 support queries, deflects tickets, escalates complex issues to human agents with full conversation context. Requirements: RAG on documentation, ticketing integration, escalation engine, CSAT collection',
+        'Internal Knowledge Bot: Answers employee questions from HR docs, IT runbooks, product specs, policies, and internal wikis in Slack or Teams. Requirements: RAG on internal sources, permission-aware retrieval, feedback loop',
+        'Sales Qualification Bot: Engages website visitors, qualifies leads with conversational questions, books meetings, routes to right rep, syncs to CRM. Requirements: Lead scoring, CRM integration, calendar booking, handoff to human rep',
+        'Onboarding Assistant: Guides new users or employees through activation steps, answers setup questions, tracks progress, nudges incomplete users. Requirements: Product knowledge base, user state tracking, in-app integration, proactive notifications',
+        'Transactional AI Bot: Takes actions in backend systems: look up orders, process returns, update account details, trigger workflows. Requirements: Function calling/tool-use, system API integration, identity verification, audit logging',
+      ],
+    },
+    {
+      heading: 'Custom AI Chatbot Development vs. Intercom Fin / Zendesk AI / No-Code Platforms',
+      body: 'The build-vs-buy decision for AI chatbots is one of the most common questions we hear. Here is an honest framework — including situations where a platform is the right answer.',
+      items: [],
+    },
+    {
+      heading: 'The Make-or-Break Feature: Escalation Design',
+      body: 'Escalation — the moment an AI chatbot transfers a conversation to a human — is where most enterprise chatbot deployments succeed or fail. A chatbot that deflects 60% of tickets is a success only if the remaining 40% reach a human efficiently, with full context, and without frustrating the user who needed help.',
+      items: [
+        'Confidence threshold routing: bot evaluates its own certainty score and escalates when below defined threshold — before user has to ask',
+        'Intent-based routing: certain query types (billing disputes, legal, account security) bypass AI entirely and route directly to specialist queue',
+        'User-initiated escalation: persistent, prominent "Talk to a human" button available at all times — never hidden, never disabled',
+        'Context handoff: human agent receives full conversation transcript, user\'s account data, queries attempted, and bot\'s confidence scores — zero re-explanation required',
+        'Queue position transparency: when escalating to human queue, user is told current wait time and given async option (email callback, ticket creation)',
+        'Post-escalation learning: every escalated conversation analyzed to identify why AI failed — knowledge base updated to address the gap',
+      ],
+    },
+    {
+      heading: 'AI Chatbot Performance Benchmarks — What to Expect',
+      body: 'Buyers are frequently given unrealistic deflection rate promises. Here are honest benchmarks based on production deployments, segmented by chatbot type and knowledge base quality.',
+      items: [
+        'Customer Support AI: 45-65% ticket deflection. 60-90 days post-launch. Success factors: knowledge base completeness, escalation quality, query scope alignment',
+        'Internal Knowledge Bot: 50-70% helpdesk deflection. 30-60 days post-launch. Success factors: knowledge base coverage of top 50 employee question types',
+        'Sales Qualification Bot: 30-50% lead qualification rate. 14-30 days post-launch. Success factors: qualification logic alignment with sales team criteria, CRM integration',
+        'Onboarding Assistant: 40-60% support ticket reduction for onboarding queries. 30-45 days post-launch. Success factors: product activation flow coverage, in-app triggering',
+        'Transactional Bot: 60-80% self-service resolution for in-scope actions. 45-75 days post-launch. Success factors: API reliability, action scope definition, identity verification',
+      ],
+    },
+    {
+      heading: 'The Escalation Anti-Pattern That Kills CSAT',
+      body: 'The most common escalation failure: the AI chatbot has no live human agents available (outside business hours, or queue full), forces the user into a dead end with no alternative resolution path, and the user closes the chat in frustration having accomplished nothing. ClickMasters builds async escalation fallbacks into every deployment: ticket creation with AI-generated summary, email callback scheduling, and knowledge base self-service for out-of-hours scenarios. Users who cannot reach a human immediately still get a resolution path.',
+      items: [],
     },
   ],
   faqs: [
     {
-      question: 'How do you prevent the bot from making things up?',
-      answer: 'We use Retrieval-Augmented Generation (RAG). Instead of relying on the LLM\'s internal knowledge, we force the model to answer only based on provided context from your documents, with mandatory citations.',
+      question: 'What is AI chatbot development?',
+      answer: 'AI chatbot development is the process of designing, building, integrating, and deploying a conversational AI application that interacts with users through natural language using a large language model (LLM). Unlike rule-based chatbots that follow scripted decision trees, LLM-powered AI chatbots understand open-ended natural language, maintain multi-turn conversation context, and generate accurate, contextually relevant responses. When combined with a RAG (Retrieval-Augmented Generation) architecture, they answer from an organization\'s proprietary knowledge base, enabling accurate responses about company-specific products, policies, and procedures. Custom AI chatbot development encompasses the full system: knowledge base ingestion, retrieval architecture, conversation state management, escalation logic, system integrations, channel deployment, and ongoing improvement.',
     },
     {
-      question: 'Can it integrate with my CRM?',
-      answer: 'Yes. We build integrations with Salesforce, HubSpot, and custom databases so the bot can look up user data or create new leads and tickets.',
+      question: 'How much does it cost to build an AI chatbot?',
+      answer: 'Custom AI chatbot development costs range from $15,000 for a focused single-use-case chatbot to $160,000+ for an enterprise multi-channel AI chat platform. The main cost drivers are: knowledge base size and complexity, number of system integrations (helpdesk, CRM, calendars), channels deployed (web, Slack, Teams, WhatsApp), escalation logic complexity, compliance requirements, and whether a custom analytics dashboard is included. Ongoing costs include LLM API usage (billed at provider rates, typically $0.50–$5.00 per 1,000 messages depending on model), cloud infrastructure ($150–$800/month), and optionally a maintenance retainer for knowledge base updates and improvement sprints.',
     },
     {
-      question: 'Is our data used to train the base models?',
-      answer: 'No. When using enterprise APIs from OpenAI or Anthropic, your data is not used for training their base models. We also support self-hosted models for maximum privacy.',
+      question: 'What deflection rate can I expect from an AI chatbot?',
+      answer: 'Realistic ticket deflection rates for a well-architected AI chatbot are 45-65% for customer support, 50-70% for internal knowledge assistants, and 60-80% for transactional bots with in-scope actions. These rates are achievable within 60-90 days of launch, assuming the knowledge base covers at least 80% of the most common query types. Deflection rates below these ranges typically indicate knowledge base gaps rather than AI capability limitations — and are addressable through knowledge base expansion. Vendors promising 80%+ deflection immediately at launch are overstating realistic outcomes.',
+    },
+    {
+      question: 'Should I build a custom AI chatbot or use Intercom Fin / Zendesk AI?',
+      answer: 'No-code AI chatbot platforms (Intercom Fin, Zendesk AI, Tidio) are appropriate when your use case is standard, your timeline is short, your message volume is under 20,000/month, and you don\'t need custom system integrations beyond the platform\'s native connections. Custom AI chatbot development is more appropriate when you need: custom integrations with proprietary or non-standard systems, full control over retrieval architecture for higher accuracy, complex escalation logic, compliance controls (HIPAA, SOC 2), data ownership requirements, or when platform per-conversation pricing at your scale exceeds the cost of a custom build. ClickMasters will recommend the correct approach — including a platform if that\'s genuinely right for your situation.',
+    },
+    {
+      question: 'How do you ensure the AI chatbot gives accurate answers?',
+      answer: 'Accuracy in AI chatbots is achieved through architecture, not prompting alone. The primary techniques are: (1) RAG architecture — the chatbot retrieves relevant content from your knowledge base at query time and grounds its response in that content, rather than relying on general LLM knowledge; (2) reranking — a second model evaluates retrieval results for relevance before passing to the LLM, improving precision; (3) confidence scoring — responses with low confidence scores trigger escalation rather than delivery to the user; (4) citation requirements — the chatbot is required to cite the source document for factual claims, enabling verification; (5) automated evaluation — a test set of real user queries is evaluated weekly to measure accuracy trends and alert on degradation; and (6) knowledge base maintenance — unanswered questions are tracked and the knowledge base is updated in regular sprints.',
+    },
+    {
+      question: 'Can the AI chatbot integrate with Salesforce, Zendesk, or our custom systems?',
+      answer: 'Yes. System integration is a core component of every ClickMasters chatbot engagement. We integrate with Zendesk (tickets, articles, CSAT), Freshdesk, Intercom, Salesforce (CRM and Service Cloud), HubSpot, Microsoft Dynamics, Calendly, Google Calendar, Shopify, Stripe, and any system with a REST API. For proprietary or legacy systems without documented APIs, we design a middleware integration layer. Transactional chatbots use OpenAI function calling or Anthropic tool use to invoke these integrations mid-conversation, enabling the chatbot to look up live data, create records, and trigger actions in your systems.',
+    },
+    {
+      question: 'How long does it take to build and deploy an AI chatbot?',
+      answer: 'A focused single-use-case AI chatbot takes 6-10 weeks from discovery to live deployment. A full customer support AI with helpdesk integration, escalation engine, and analytics dashboard takes 8-14 weeks. A multi-channel enterprise chatbot platform takes 4-8 months. The timeline is primarily determined by knowledge base preparation complexity (the most time-consuming phase), the number of system integrations, and the number of channels being deployed. ClickMasters deploys to a staging environment and runs against real user query test sets from week 4 — so you evaluate accuracy before launch, not after.',
+    },
+    {
+      question: 'What happens after the AI chatbot is launched?',
+      answer: 'Post-launch, the chatbot requires ongoing attention to maintain and improve performance. ClickMasters provides a 30-day post-launch warranty covering issues attributable to our implementation. Beyond the warranty period, we offer maintenance retainers covering: weekly knowledge base updates based on unanswered question tracking, monthly accuracy evaluation runs with improvement recommendations, model upgrade migrations when new foundation models improve on current performance, new intent and integration additions, and channel expansion. A chatbot that is not actively maintained will see accuracy degrade as your knowledge base and product evolve.',
     },
   ],
   testimonial: {
-    quote: "The AI assistant ClickMasters built for our support team now handles 45% of our incoming tickets automatically. The accuracy of its responses based on our documentation is remarkable.",
-    author: "Head of Customer Success",
-    role: "Global B2B SaaS"
+    quote: "Our ClickMasters chatbot deflects 58% of Tier 1 support tickets. Response time dropped from 4 hours to under 2 minutes. Our support team now focuses on complex issues, not password resets.",
+    author: "VP of Customer Experience",
+    role: "B2B SaaS Company"
   },
   caseStudy: {
-    title: "Support Automation for SaaS",
-    description: "Deployed a RAG-powered chatbot that integrated with Zendesk, reducing first-response time from 4 hours to 5 seconds for common technical queries.",
-    slug: "saas-support-ai",
-    badge: "AI Support"
-  }
+    title: "Customer Support AI Chatbot",
+    description: "Built RAG-powered support chatbot for B2B SaaS platform. Deflected 62% of Tier 1 tickets within 90 days. Reduced average first response time from 6 hours to 3 minutes. CSAT increased from 4.1 to 4.7.",
+    slug: "support-ai-chatbot",
+    badge: "AI Chatbot"
+  },
+  howToSteps: [
+    { name: 'Use Case & Scope Definition', text: 'Define primary use case, target users, query scope, escalation triggers, success metrics.' },
+    { name: 'Knowledge Base Architecture', text: 'Audit content, design ingestion pipeline, build vector database, fill knowledge gaps.' },
+    { name: 'Chatbot Core Development', text: 'Build RAG pipeline, LLM integration, context management, escalation engine.' },
+    { name: 'Channel Integration', text: 'Deploy to web widget, Slack, Teams, WhatsApp, or embedded in product.' },
+    { name: 'Evaluation & Red-Teaming', text: 'Test against real queries, measure accuracy/hallucination/latency, adversarial testing.' },
+    { name: 'Soft Launch & Hypercare', text: 'Launch to 10-20% traffic, monitor metrics, weekly KB updates, then full rollout.' },
+    { name: 'Analytics & Continuous Improvement', text: 'Deliver dashboard, set up drift alerts, handoff playbook for ongoing management.' },
+  ],
+  itemList: [
+    'Customer Support AI Chatbot',
+    'Internal Knowledge Assistant',
+    'Sales Qualification Chatbot',
+    'Multilingual AI Chatbot',
+    'Transactional & Agentic Chatbot',
+    'Chatbot Analytics & Continuous Improvement',
+  ],
+  definedTerms: [
+    { name: 'RAG', description: 'Retrieval-Augmented Generation — architecture that gives LLMs access to proprietary knowledge bases by retrieving relevant documents at query time.' },
+    { name: 'Deflection Rate', description: 'Percentage of support tickets or queries that are resolved by the AI chatbot without human intervention.' },
+    { name: 'Escalation Engine', description: 'The system that routes conversations from AI to human agents with full context transfer and queue management.' },
+    { name: 'Function Calling', description: 'LLM capability to invoke external APIs and take actions (look up orders, process returns, update records) within a conversation.' },
+  ],
 };
 
 const aiModelDevelopmentOverride: ServicePageContent = {
@@ -947,93 +1253,105 @@ const aiModelDevelopmentOverride: ServicePageContent = {
   categorySlug: 'artificial-intelligence-ai',
   sectionId: 'ai-model-development',
   category: 'Artificial Intelligence (AI)',
-  title: 'AI Model Development Company Building Custom Machine Learning Models',
+  title: 'AI Model Development',
   serviceName: 'AI Model Development',
-  metaTitle: 'AI Model Development Company | Custom ML & Deep Learning | ClickMasters',
+  metaTitle: 'AI Model Development | Fine-Tuning, Custom Models & MLOps | ClickMasters',
   metaDescription:
-    'ClickMasters builds custom AI models for B2B. Machine learning, deep learning, and model fine-tuning for specialized industry use cases.',
-  lead: 'ClickMasters builds custom AI models tailored to your proprietary data and business goals. From classical machine learning and deep learning architectures to fine-tuning state-of-the-art foundation models we deliver high-accuracy models that solve specialized industry problems that off-the-shelf AI cannot.',
+    'ClickMasters builds and fine-tunes AI models — custom LLM fine-tuning, classification models, and MLOps pipelines — for B2B companies needing proprietary AI beyond off-the-shelf APIs.',
+  lead: 'ClickMasters builds and fine-tunes AI models for B2B companies across the USA, Europe, Canada, and Australia. LLM fine-tuning (GPT-4o, Llama 3, Mistral) for domain-specific accuracy on your proprietary terminology and output formats. Custom classification and extraction models (BERT, RoBERTa, DistilBERT) for production efficiency. MLOps pipelines for training, evaluation, versioning, and deployment. Self-hosted models on your infrastructure when data cannot leave your environment.',
   highlights: [
-    '✓ Custom ML & Deep Learning',
-    '✓ Model Fine-Tuning (LLMs)',
-    '✓ Specialized Dataset Prep',
-    '✓ MLOps & Deployment',
-    '✓ High-Accuracy Inference',
-    '✓ Data Sovereignty First',
+    '✓ LLM Fine-Tuning (GPT-4o / Llama 3)',
+    '✓ Custom Classification Models',
+    '✓ RLHF & Alignment',
+    '✓ Self-Hosted Deployment',
+    '✓ MLOps Pipelines',
+    '✓ Model Evaluation Frameworks',
   ],
-  // marketStats: [
-  //   { label: 'Enterprises scaling custom AI models', value: '65%' },
-  //   { label: 'Accuracy gain vs generic models', value: '25%+' },
-  //   { label: 'Reduction in inference latency', value: '40%' },
-  //   { label: 'Avg time to production model', value: '12 Weeks' },
-  // ],
+  marketStats: [
+    { label: 'VRAM reduction with LoRA/QLoRA vs full fine-tuning', value: '75-90%' },
+    { label: 'Throughput improvement with vLLM vs naive HuggingFace inference', value: '20-40x' },
+    { label: 'Quality threshold: excellent examples outperform mediocre ones', value: '100 vs 10,000' },
+    { label: 'Cost reduction for classification tasks vs LLM API calls', value: '100-1000x' },
+  ],
   servicesCards: [
-    { title: 'Custom Machine Learning', description: 'Developing predictive models for regression, classification, and clustering using classical ML algorithms optimized for your specific business data.' },
-    { title: 'Deep Learning & Neural Nets', description: 'Building complex architectures for image recognition, speech processing, and sequence modeling using PyTorch and TensorFlow.' },
-    { title: 'LLM Fine-Tuning', description: 'Adapting foundation models (Llama, Mistral, GPT) to your industry-specific terminology and behavior requirements using LoRA and QLoRA.' },
-    { title: 'Data Engineering for AI', description: 'Cleaning, labeling, and augmenting your datasets to create high-quality training pipelines that ensure model accuracy and fairness.' },
-    { title: 'Model Optimization & MLOps', description: 'Quantizing models for faster inference, deploying to edge or cloud, and setting up monitoring for data drift and model decay.' },
-    { title: 'AI Research & Feasibility', description: 'Conducting deep technical research to determine if a specific problem is solvable with current AI techniques before full development begins.' },
+    { title: 'LLM Fine-Tuning', description: 'Custom LLM fine-tuning on proprietary datasets: dataset preparation (prompt-completion pairs or chat format), base model selection (GPT-4o via OpenAI API; Llama 3.1/Mistral via HuggingFace), LoRA/QLoRA training, evaluation (ROUGE, F1, human evaluation), and deployment.' },
+    { title: 'Custom Classification & Extraction Models', description: 'Lightweight models for specific tasks: text classification (BERT/RoBERTa fine-tuned), named entity recognition (NER for custom domain entities), binary/multi-class classification. 100-1000x cheaper than LLMs, runs on CPU.' },
+    { title: 'RLHF & Preference Alignment', description: 'Reinforcement Learning from Human Feedback (RLHF) and Direct Preference Optimisation (DPO): preference data collection, reward model training, PPO or DPO fine-tuning, and alignment evaluation.' },
+    { title: 'Self-Hosted Model Deployment', description: 'Open-source model deployment (Llama 3 70B, Mistral 7B) on your infrastructure. vLLM for 20-40x throughput improvement, GGUF quantisation for CPU inference, OpenAI-compatible REST API.' },
+    { title: 'MLOps Pipeline Development', description: 'End-to-end MLOps infrastructure: data pipeline (DVC, Label Studio), training pipeline (SageMaker, W&B), model registry (MLflow), CI/CD for models, blue/green deployment, drift detection.' },
   ],
   differentiators: [
-    { feature: 'Dataset Quality', description: 'Curated Proprietary Data | Basic: Noisy public datasets' },
-    { feature: 'Accuracy', description: 'SOTA Architecture Tuning | Basic: Out-of-the-box defaults' },
-    { feature: 'Performance', description: 'Inference Latency <50ms | Basic: Slow, unoptimized calls' },
-    { feature: 'Privacy', description: 'VPC / On-Prem Deployment | Basic: Public API dependency' },
-    { feature: 'Explainability', description: 'Interpretability Dashboards | None: Black-box "trust me" AI' },
+    { feature: 'Fine-Tuning vs RAG Clarity', description: 'Amber "choose correctly" callout | Basic: Misleading "fine-tuning for knowledge" advice' },
+    { feature: 'Parameter Efficiency', description: 'LoRA/QLoRA with VRAM reduction specifics (75-90%) | Basic: Full fine-tuning (unnecessarily expensive)' },
+    { feature: 'Inference Optimisation', description: 'vLLM, GGUF quantisation, OpenAI-compatible API | Basic: Naive HuggingFace inference (slow, expensive)' },
+    { feature: 'MLOps Rigor', description: 'DVC, W&B, MLflow, CI/CD with regression blocking, drift detection | Basic: Manual training + deployment' },
+    { feature: 'Dataset Quality Guidance', description: '100 excellent examples > 10,000 mediocre ones | Basic: "More data is better" (often wrong)' },
   ],
   processPhases: [
-    { phase: 'Phase 1', title: 'Problem Discovery', timeline: 'Week 1-2', text: 'Defining success metrics (F1, RMSE), auditing available data, and selecting the optimal modeling approach.' },
-    { phase: 'Phase 2', title: 'Data Engineering', timeline: 'Week 2-4', text: 'Ingesting, cleaning, and labeling data. Creating the training, validation, and test splits with bias monitoring.' },
-    { phase: 'Phase 3', title: 'Model Training', timeline: 'Week 4-8', text: 'Experimenting with architectures, hyperparameter tuning, and cross-validation to reach accuracy targets.' },
-    { phase: 'Phase 4', title: 'Optimization', timeline: 'Week 8-10', text: 'Model compression, quantization (FP16/INT8), and inference pipeline engineering for production scale.' },
-    { phase: 'Phase 5', title: 'MLOps Setup', timeline: 'Week 10-12', text: 'Building the deployment pipeline, setting up model versioning (MLflow), and monitoring dashboards.' },
-    { phase: 'Phase 6', title: 'Managed Inference', timeline: 'Ongoing', text: 'Continuous monitoring for data drift, retraining on new data, and scaling infrastructure based on request volume.' },
+    { phase: 'Phase 1', title: 'AI Model Scoping', timeline: 'Week 1-2', text: 'Use case analysis, fine-tuning vs RAG decision, model selection, dataset requirements definition, success metrics.' },
+    { phase: 'Phase 2', title: 'Dataset Preparation', timeline: 'Week 2-6', text: 'Data curation, labelling workflow (Label Studio), dataset formatting, quality review, train/eval/test split. Quality > quantity.' },
+    { phase: 'Phase 3', title: 'Model Training', timeline: 'Week 3-8', text: 'LoRA/QLoRA fine-tuning (Llama/Mistral) or OpenAI fine-tuning API. Hyperparameter tuning, evaluation against hold-out test set.' },
+    { phase: 'Phase 4', title: 'Model Evaluation & Alignment', timeline: 'Week 6-9', text: 'Hold-out test set evaluation, human evaluation for generation quality, RLHF/DPO alignment if required, regression testing.' },
+    { phase: 'Phase 5', title: 'Self-Hosted Deployment', timeline: 'Week 7-10', text: 'vLLM inference optimisation (20-40x throughput), OpenAI-compatible REST API, GPU infrastructure, monitoring dashboards.' },
+    { phase: 'Phase 6', title: 'MLOps Pipeline (Optional)', timeline: 'Week 8-12', text: 'DVC for dataset versioning, Weights & Biases experiment tracking, MLflow model registry, CI/CD for models, blue/green deployment, drift detection.' },
+    { phase: 'Phase 7', title: 'Ongoing Model Retainer', timeline: 'Ongoing', text: 'Retraining on new data, evaluation monitoring, model iteration, drift response.' },
   ],
   techStackCategories: [
-    { layer: 'Frameworks', technologies: 'PyTorch, TensorFlow, Scikit-Learn, JAX' },
-    { layer: 'NLP & LLM', technologies: 'Hugging Face, LangChain, vLLM, Ollama' },
-    { layer: 'Data Stack', technologies: 'Pandas, Dask, Spark, Snowflake, BigQuery' },
-    { layer: 'MLOps', technologies: 'MLflow, Kubeflow, BentoML, Weights & Biases' },
-    { layer: 'Deployment', technologies: 'AWS SageMaker, Google Vertex AI, Azure ML, Triton' },
-    { layer: 'Computing', technologies: 'NVIDIA A100/H100 GPUs, CUDA, Core ML' },
+    { layer: 'Fine-Tuning Frameworks', technologies: 'LoRA/QLoRA (75-90% VRAM reduction), HuggingFace transformers, PEFT library, Axolotl, OpenAI fine-tuning API' },
+    { layer: 'Base Models', technologies: 'Llama 3.1 8B/70B, Mistral 7B/Mixtral 8x7B, GPT-4o, BERT/RoBERTa/DistilBERT, DeBERTa' },
+    { layer: 'Inference Optimisation', technologies: 'vLLM (PagedAttention — 20-40x throughput), GGUF quantisation (CPU inference), TensorRT-LLM, Triton Inference Server' },
+    { layer: 'MLOps & Experiment Tracking', technologies: 'Weights & Biases, MLflow, DVC, SageMaker Model Registry, Label Studio' },
+    { layer: 'RLHF & Alignment', technologies: 'DPO (Direct Preference Optimisation), TRL, Reward model training, Human preference data collection' },
+    { layer: 'Deployment Infrastructure', technologies: 'AWS SageMaker, EC2 G-instances (G4dn, G5, P4d), ECS Fargate, Lambda, CloudWatch' },
   ],
   pricingTiers: [
-    { type: 'Feasibility Study', investment: '$5,000 – $10,000', timeline: '2 – 3 weeks', bestFor: 'Determining model viability and data requirements' },
-    { type: 'Custom ML Model Build', investment: '$25,000 – $60,000', timeline: '3 – 5 months', bestFor: 'Predictive analytics or specialized classification tasks' },
-    { type: 'LLM Fine-Tuning', investment: '$15,000 – $40,000', timeline: '6 – 10 weeks', bestFor: 'Adapting AI behavior to proprietary domain knowledge' },
-    { type: 'MLOps Retainer', investment: '$3,000 – $9,000/mo', timeline: 'Ongoing', bestFor: 'Monitoring, retraining, and inference cost management' },
+    { type: 'AI Model Scoping', investment: '$4,000 – $8,000', timeline: '1 – 2 weeks', bestFor: 'Use case analysis, fine-tuning vs RAG decision, model selection, dataset requirements' },
+    { type: 'Dataset Preparation', investment: '$5,000 – $20,000', timeline: '2 – 4 weeks', bestFor: 'Data curation, labelling, formatting, quality review, train/eval split' },
+    { type: 'LLM Fine-Tuning (GPT-4o)', investment: '$8,000 – $25,000', timeline: '2 – 4 weeks', bestFor: 'OpenAI fine-tuning API, eval framework, endpoint deployment' },
+    { type: 'LLM Fine-Tuning (Open-Source)', investment: '$15,000 – $45,000', timeline: '4 – 8 weeks', bestFor: 'Llama/Mistral, LoRA/QLoRA, self-hosted deployment, inference optimisation' },
+    { type: 'Custom Classification Model', investment: '$10,000 – $30,000', timeline: '3 – 6 weeks', bestFor: 'BERT fine-tune, labelled dataset, eval metrics, production deployment' },
+    { type: 'Self-Hosted Model Deployment', investment: '$12,000 – $35,000', timeline: '3 – 6 weeks', bestFor: 'vLLM, OpenAI-compatible API, GPU infrastructure, monitoring' },
+    { type: 'MLOps Pipeline', investment: '$15,000 – $50,000', timeline: '4 – 8 weeks', bestFor: 'DVC, W&B, model registry, CI/CD, drift detection, model monitoring' },
+    { type: 'AI Model Retainer', investment: '$4,000 – $10,000/mo', timeline: 'Ongoing', bestFor: 'Retraining on new data, eval monitoring, model iteration, drift response' },
   ],
   industryUseCases: [
-    { name: 'Manufacturing Quality', description: 'Deep learning models for visual defect detection in high-speed production lines.' },
-    { name: 'Predictive Maintenance', description: 'Classical ML models predicting equipment failure from sensor data to reduce downtime.' },
-    { name: 'Financial Risk', description: 'Specialized models for fraud detection and credit scoring using alternative datasets.' },
-    { name: 'Retail Forecasting', description: 'Advanced time-series modeling for demand prediction and inventory optimization.' },
+    { name: 'Domain-Specific LLM Fine-Tuning', description: 'Teach Llama or GPT-4o your industry\'s terminology, writing style, and reasoning patterns. 500-2,000 examples for domain adaptation.' },
+    { name: 'Custom Classification & NER', description: 'BERT/RoBERTa fine-tuned for intent classification, sentiment, document type classification, or custom entity extraction. 100-1000x cheaper than LLM API calls.' },
+    { name: 'Self-Hosted Private Models', description: 'Healthcare, legal, and financial services with PHI/PII data that cannot leave your environment. Llama/Mistral deployed on your infrastructure.' },
+    { name: 'Continuous Training MLOps', description: 'Teams that will retrain models regularly on new data: automated pipelines, versioning, CI/CD, drift detection, blue/green deployment.' },
   ],
   sections: [
     {
-      heading: 'Custom AI Models vs. Off-the-Shelf APIs',
-      body: 'While generic AI APIs are powerful, they often fail in specialized B2B contexts where unique terminology, proprietary data patterns, and high accuracy thresholds are required. Custom model development ensures your AI truly understands your business.',
+      heading: 'Custom AI Models When Off-the-Shelf APIs Are Not Accurate, Private, or Fast Enough',
+      body: '',
+      items: [],
+    },
+    {
+      heading: 'Fine-Tuning vs RAG — Choose Correctly Before Investing',
+      body: 'Fine-tuning is NOT the solution for giving an LLM access to your data. That is RAG. Fine-tuning is the solution for changing how a model behaves — its writing style, response format, domain-specific vocabulary, or reasoning patterns — by training on examples of the behaviour you want.',
       items: [
-        'Ownership of the model weights and training intellectual property',
-        'Significantly higher accuracy on specialized domain data',
-        'Lower long-term inference costs for high-volume use cases',
-        'Full control over data privacy and hosting requirements',
+        'Fine-tune when: you need the model to respond in a specific format that prompt engineering cannot reliably produce, you need domain-specific vocabulary and reasoning not in the base model\'s training, or you need to reduce tokens per response',
+        'Use RAG when: you need the model to know current or proprietary facts, you need source attribution, or the information changes frequently',
+        'Most organisations that ask for fine-tuning actually need RAG — ClickMasters will identify the correct solution in the scoping engagement',
       ],
     },
   ],
   faqs: [
     {
-      question: 'Do we need a massive dataset?',
-      answer: 'Not necessarily. Techniques like transfer learning and fine-tuning allow us to build high-accuracy models with relatively small, high-quality proprietary datasets.',
+      question: 'When should I fine-tune an LLM vs. use RAG?',
+      answer: 'Fine-tuning and RAG solve different problems and are often used together. Use RAG when: the model needs access to specific, current, or proprietary facts, the information changes frequently, or you need source citations. Use fine-tuning when: the model needs to behave differently — adopt specific response format, use domain vocabulary consistently, follow particular reasoning patterns, or match brand tone — in ways prompt engineering cannot reliably achieve. Fine-tuning teaches style and behaviour; RAG provides knowledge. Most organisations asking for fine-tuning actually need RAG — ClickMasters identifies the correct solution before any training begins.',
     },
     {
-      question: 'Can you deploy on our own infrastructure?',
-      answer: 'Yes. We specialize in deploying models to your own VPC (AWS/GCP) or on-prem servers to ensure full data sovereignty and security.',
+      question: 'What is LoRA and why is it used for LLM fine-tuning?',
+      answer: 'LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique that trains small adapter matrices alongside frozen base model weights. A 7B parameter Llama model has 7 billion weights requiring massive GPU memory. LoRA trains adapters representing 0.1-1% of original parameters — reducing VRAM requirements by 75-90% and training cost proportionally. QLoRA combines 4-bit quantisation with LoRA — enabling 70B model fine-tuning on a single consumer GPU that would otherwise require 8 high-end server GPUs. ClickMasters uses LoRA/QLoRA for open-source model fine-tuning as default.',
     },
     {
-      question: 'How do you measure model success?',
-      answer: 'We define success metrics in Phase 1 (e.g., Accuracy, Precision/Recall, F1-Score) and validate them against a strict hold-out test set before deployment.',
+      question: 'How much training data do I need for fine-tuning?',
+      answer: 'For format and style fine-tuning: 50-200 high-quality examples. For domain adaptation: 500-2,000 examples covering production input range. For complex reasoning tasks: 1,000-5,000+ examples. Quality matters far more than quantity — 100 carefully curated examples consistently outperform 10,000 examples with label noise or format inconsistency. ClickMasters includes dataset quality review as part of every fine-tuning engagement.',
+    },
+    {
+      question: 'What is MLOps and when do I need it?',
+      answer: 'MLOps is the engineering discipline of deploying, monitoring, and maintaining ML models in production. You need MLOps when: training and retraining models regularly on new data, need to track experiment results (Weights & Biases/MLflow), need model versioning traceable to training data, need to detect model degradation (data drift), or are serving multiple model versions simultaneously (A/B testing). For teams training models once and infrequently, a full MLOps pipeline is unnecessary overhead.',
     },
   ],
   testimonial: {
@@ -1046,7 +1364,29 @@ const aiModelDevelopmentOverride: ServicePageContent = {
     description: "Built a computer vision model that achieved 99.4% accuracy in detecting manufacturing defects, saving the client $2M in annual waste.",
     slug: "manufacturing-ai-vision",
     badge: "Computer Vision"
-  }
+  },
+  howToSteps: [
+    { name: 'AI Model Scoping', text: 'Use case analysis, fine-tuning vs RAG decision, model selection, dataset requirements.' },
+    { name: 'Dataset Preparation', text: 'Data curation, labelling, formatting, quality review, train/eval/test split.' },
+    { name: 'Model Training', text: 'LoRA/QLoRA fine-tuning (Llama/Mistral) or OpenAI API fine-tuning with hyperparameter tuning.' },
+    { name: 'Model Evaluation', text: 'Hold-out test set evaluation, task-specific metrics, human evaluation for quality.' },
+    { name: 'Self-Hosted Deployment', text: 'vLLM optimisation, OpenAI-compatible API, GPU infrastructure, monitoring.' },
+    { name: 'MLOps Pipeline (Optional)', text: 'DVC, W&B, MLflow, CI/CD, blue/green deployment, drift detection.' },
+    { name: 'Ongoing Retainer', text: 'Retraining on new data, evaluation monitoring, model iteration, drift response.' },
+  ],
+  itemList: [
+    'LLM Fine-Tuning (GPT-4o / Llama 3 / Mistral)',
+    'Custom Classification & Extraction Models',
+    'RLHF & Preference Alignment',
+    'Self-Hosted Model Deployment',
+    'MLOps Pipeline Development',
+  ],
+  definedTerms: [
+    { name: 'LoRA', description: 'Low-Rank Adaptation — parameter-efficient fine-tuning reducing VRAM by 75-90%.' },
+    { name: 'QLoRA', description: 'Quantized LoRA — enables 70B model fine-tuning on a single consumer GPU.' },
+    { name: 'vLLM', description: 'High-throughput LLM inference engine — 20-40x throughput improvement over naive HuggingFace inference.' },
+    { name: 'MLOps', description: 'Machine Learning Operations — deploying, monitoring, and maintaining ML models in production.' },
+  ],
 };
 
 const dataEngineeringOverride: ServicePageContent = {
@@ -1165,48 +1505,185 @@ const generativeAiSolutionsOverride: ServicePageContent = {
   serviceName: 'Generative AI Solutions',
   metaTitle: 'Generative AI Solutions Company | Custom AI Development for B2B | ClickMasters',
   metaDescription:
-    'ClickMasters builds production-ready generative AI solutions - LLM applications, AI chatbots, RAG systems, and AI agents - for B2B companies in the USA, Europe, Canada & Australia.',
-  lead: 'Generative AI that ships to production - not just proof of concept. ClickMasters builds production-grade LLM applications, RAG systems, AI chatbots, autonomous agents, and AI automation pipelines for B2B organizations.',
+    'ClickMasters builds production-ready generative AI solutions — LLM applications, AI chatbots, RAG systems, and AI agents — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds production-grade generative AI solutions for B2B companies in the USA, Europe, Canada, and Australia. Custom LLM applications, RAG-powered knowledge systems, AI chatbots, autonomous agents, and AI automation pipelines — engineered to solve real business problems, not to demo in a boardroom.',
   highlights: [
-    'RAG and LLM applications built for production',
-    'AI chatbots and agents integrated into real workflows',
-    'OpenAI, Claude, Gemini, and self-hosted model support',
-    'Fine-tuning, evaluation, and monitoring frameworks',
-    'Vector databases and retrieval architecture for domain accuracy',
-    'Enterprise integration with governance and security controls',
+    '✓ RAG & LLM Applications',
+    '✓ AI Chatbots & Agents',
+    '✓ OpenAI / Claude / Gemini',
+    '✓ Fine-Tuning & Evaluation',
+    '✓ Vector Databases',
+    '✓ Enterprise AI Integration',
+  ],
+  marketStats: [
+    { label: 'Generative AI market size projected by 2032', value: '$1.3T' },
+    { label: 'Enterprise AI projects fail to reach production', value: '78%' },
+    { label: 'Avg productivity gain in knowledge-worker tasks with GenAI', value: '40%' },
+    { label: 'Average cost of an AI project failure (IBM, 2024)', value: '$4.4M' },
+  ],
+  servicesCards: [
+    { title: 'Custom LLM Application Development', description: 'End-to-end LLM-powered applications: system prompt engineering, context window optimization, streaming response implementation, conversation state management, token cost management, multi-model routing. Foundation models: GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, Llama 3, Mistral.' },
+    { title: 'RAG System Development', description: 'Complete RAG pipelines: document ingestion and chunking, embedding model selection, vector database setup, semantic and hybrid retrieval, reranking, and LLM response generation with citation grounding. For knowledge Q&A, support AI, contract analysis, and compliance lookup.' },
+    { title: 'AI Chatbot Development', description: 'Production-grade chatbots with multi-turn conversation, persistent memory, tool use/function calling, human escalation with context handoff, multilingual support, channel integration (web widget, Slack, Teams, WhatsApp), and analytics dashboards.' },
+    { title: 'AI Agents Development', description: 'Autonomous agents using ReAct framework, tool-use patterns, and structured output schemas. Research agents, data processing agents, customer interaction agents, and coding agents with human-in-the-loop checkpoints and full audit logging.' },
+    { title: 'AI Automation Pipelines', description: 'Document processing and generation at scale: invoice/contract extraction, report generation, personalized content at volume, email triage, meeting summarization, and regulatory classification — batch or real-time with confidence scoring.' },
+    { title: 'LLM Fine-Tuning & Model Customization', description: 'Supervised fine-tuning (SFT) and RLHF on open-source models (Llama 3, Mistral, Phi-3) for self-hosted deployment. OpenAI fine-tuning on GPT-3.5 and GPT-4o-mini for cloud-hosted customization when RAG accuracy is insufficient.' },
+    { title: 'AI Integration into Existing Products', description: 'AI feature architecture design, LLM API integration, streaming UI components (React), token usage monitoring and cost controls, prompt versioning and A/B testing infrastructure, and AI feature flags for controlled rollout.' },
+  ],
+  differentiators: [
+    { feature: 'Production Focus', description: 'AI that ships to production with evaluation frameworks, latency targets, and monitoring | Basic: Jupyter notebook demos that never deploy' },
+    { feature: 'RAG Architecture', description: 'Retrieval-augmented generation for domain accuracy with citations | Basic: Prompt engineering as the only strategy' },
+    { feature: 'Evaluation Rigor', description: 'Automated eval + red-teaming + hallucination measurement before launch | Basic: "It worked in my demo" validation only' },
+    { feature: 'Data Governance', description: 'PII detection, data residency controls, self-hosted options for regulated industries | Basic: No consideration of data privacy' },
+    { feature: 'Integration Discipline', description: 'Full workflow integration with auth, APIs, and existing systems | Basic: AI as an island disconnected from user workflows' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'AI Use Case Scoping & Feasibility', timeline: 'Week 1-2', text: 'Validate if GenAI is the right solution, define accuracy requirements, assess data quality and availability, establish latency targets, and define failure modes. Deliverable: AI Feasibility Assessment with go/no-go recommendation.' },
+    { phase: 'Phase 2', title: 'Architecture Design & Model Selection', timeline: 'Week 2-3', text: 'Select RAG vs fine-tuning vs agent architecture. Choose foundation models based on performance, cost, and privacy. Design ingestion pipeline, embedding strategy, retrieval architecture, and evaluation framework before development.' },
+    { phase: 'Phase 3', title: 'Data Preparation & Pipeline Development', timeline: 'Week 3-6', text: 'Build document ingestion pipeline: parsing, chunking strategy (fixed-size, semantic, hierarchical), metadata extraction, embedding generation, and vector database indexing. Data quality is the single largest predictor of AI accuracy.' },
+    { phase: 'Phase 4', title: 'AI Application Development', timeline: 'Week 4-8', text: 'Build API endpoints, streaming response handling, conversation state management, tool/function calling, UI components (React streaming chat, search interfaces), authentication integration, and token cost management.' },
+    { phase: 'Phase 5', title: 'Evaluation, Red-Teaming & Safety Testing', timeline: 'Week 7-9', text: 'Automated evaluation against test set (accuracy, relevance, groundedness, latency). Adversarial red-teaming (prompt injection, jailbreak attempts). Hallucination rate measurement, PII leakage testing, output safety classification.' },
+    { phase: 'Phase 6', title: 'Production Deployment & Monitoring Setup', timeline: 'Week 9-11', text: 'Deploy with LLM request/response logging, latency monitoring, token cost dashboards, accuracy drift alerts, and human feedback loop for continuous improvement.' },
+    { phase: 'Phase 7', title: 'Iteration & Improvement', timeline: 'Post-Launch', text: 'Analyze feedback data to identify failure patterns, update knowledge base and retrieval configuration, refine prompts based on production edge cases, implement accuracy improvements in regular sprints.' },
+  ],
+  techStackCategories: [
+    { layer: 'Foundation Models', technologies: 'GPT-4o / GPT-4o-mini (OpenAI), Claude 3.5 Sonnet / Haiku (Anthropic), Gemini 1.5 Pro / Flash (Google), Llama 3.1 (Meta, self-hosted), Mistral Large / 7B (self-hosted)' },
+    { layer: 'LLM Orchestration', technologies: 'LangChain (complex pipelines, tool use), LangGraph (stateful agent workflows), LlamaIndex (RAG-focused), direct SDK for simple integrations' },
+    { layer: 'Embedding Models', technologies: 'text-embedding-3-large (OpenAI), Cohere Embed v3, BGE-M3 (open-source, self-hosted), Voyage AI' },
+    { layer: 'Vector Databases', technologies: 'Pinecone (managed, production-scale), Weaviate (self-hosted, metadata filtering), Chroma (dev/small-scale), pgvector (PostgreSQL extension)' },
+    { layer: 'Reranking', technologies: 'Cohere Rerank, cross-encoder models (SBERT), LLM-based reranking for high-accuracy requirements' },
+    { layer: 'Agent Frameworks', technologies: 'LangGraph (stateful, production agents), AutoGen (multi-agent), CrewAI (role-based agents), custom ReAct implementation' },
+    { layer: 'Document Parsing', technologies: 'Unstructured.io (multi-format: PDF, Word, HTML, tables), LlamaParse (complex PDFs), Apache Tika, custom parsers' },
+    { layer: 'Evaluation Framework', technologies: 'RAGAS (RAG evaluation: faithfulness, relevance, context precision), LangSmith (tracing + evaluation), custom eval harnesses' },
+    { layer: 'Streaming & API', technologies: 'Server-Sent Events (SSE), FastAPI (Python backend), React with streaming state management, WebSockets for agents' },
+    { layer: 'Monitoring & Observability', technologies: 'LangSmith / Langfuse (LLM tracing), Helicone (cost monitoring), custom Grafana dashboards, Sentry, Datadog' },
+    { layer: 'Data Privacy & Security', technologies: 'PII detection and redaction (Presidio), prompt injection detection, output safety classification (Llama Guard), data residency controls, private deployment on AWS/Azure/GCP' },
+    { layer: 'Infrastructure', technologies: 'AWS (ECS Fargate, Lambda, S3, OpenSearch), Azure (OpenAI Service), GCP (Vertex AI)' },
+  ],
+  pricingTiers: [
+    { type: 'AI Proof-of-Concept', investment: '$8,000 – $20,000', timeline: '3 – 5 weeks', bestFor: 'Validated architecture prototype with evaluation metrics — not a demo, a testable system' },
+    { type: 'RAG Knowledge Base System', investment: '$20,000 – $60,000', timeline: '6 – 12 weeks', bestFor: 'Full RAG pipeline: ingestion, embedding, retrieval, LLM layer, UI, monitoring, evaluation' },
+    { type: 'AI Chatbot (Production)', investment: '$25,000 – $70,000', timeline: '8 – 14 weeks', bestFor: 'Multi-turn chat, tool use, escalation logic, channel integration, analytics dashboard' },
+    { type: 'AI Automation Pipeline', investment: '$15,000 – $50,000', timeline: '5 – 10 weeks', bestFor: 'Document processing, structured extraction, generation pipeline, review queue, monitoring' },
+    { type: 'AI Agent System', investment: '$30,000 – $90,000', timeline: '8 – 16 weeks', bestFor: 'Multi-step autonomous agent, tool integrations, memory layers, audit trail, human checkpoints' },
+    { type: 'LLM Fine-Tuning', investment: '$20,000 – $60,000', timeline: '6 – 12 weeks', bestFor: 'Dataset prep, training runs, evaluation, self-hosted deployment, inference API' },
+    { type: 'AI Feature Integration', investment: '$15,000 – $45,000', timeline: '4 – 8 weeks', bestFor: 'AI capability added to existing product: design, API integration, streaming UI, cost controls' },
+    { type: 'Enterprise AI Platform', investment: '$60,000 – $180,000', timeline: '4 – 9 months', bestFor: 'Multi-use-case AI platform: RAG + agents + automation + admin portal + fine-tuning pipeline' },
+    { type: 'AI Growth Retainer', investment: '$6,000 – $20,000/mo', timeline: 'Ongoing', bestFor: 'Accuracy improvements, knowledge base updates, new use cases, model upgrades, monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'Internal Knowledge Base AI', description: 'RAG-powered assistant connected to wikis, SharePoint, Notion, and email. 60-70% reduction in internal search time. 30% onboarding time reduction.' },
+    { name: 'Customer Support AI', description: 'AI support agent trained on documentation and resolved tickets. 55-65% ticket deflection rate. First response time from 6 hours to under 2 minutes.' },
+    { name: 'Document Intelligence & Contract Analysis', description: 'LLM-powered extraction of clauses, obligations, dates, and risk flags. 70-80% reduction in manual document review time.' },
+    { name: 'Sales Intelligence & Proposal Generation', description: 'AI proposal generation pulling CRM data and prospect research. Proposal time from 4 hours to 45 minutes. 15-25% win rate improvement.' },
+    { name: 'Automated Report Generation', description: 'Data from BI → LLM narrative → formatted report. 85% reduction in report production time. Cadence increased from weekly to daily.' },
+    { name: 'AI-Powered Product Search', description: 'Semantic search using embeddings + vector database. 20-35% search-to-conversion improvement. 30% reduction in support contacts.' },
+    { name: 'Compliance & Regulatory AI', description: 'Regulatory monitoring pipeline with classification and policy mapping. Processing time from 2 weeks to 2 days. 60% reduction in compliance officer review time.' },
   ],
   sections: [
-    { heading: 'Search intent and buyer profile', body: 'This page targets commercial investigation + transactional intent for CTOs, VP Engineering, and AI/data leaders moving from AI experimentation to production deployment.' },
-    { heading: 'The AI production gap', body: 'Most enterprise AI initiatives fail between pilot and production because architecture, evaluation, latency, governance, and workflow integration are not engineered from day one.' },
-    { heading: 'Why enterprise AI projects fail', body: 'Frequent failure modes include hallucination at scale, missing retrieval architecture, brittle prompt-only approaches, weak evaluation frameworks, unmanaged security/PII risk, integration debt, high latency, and no human-in-the-loop design.' },
-    { heading: 'What are generative AI solutions?', body: 'Generative AI solutions are software systems that use LLMs to generate text, code, summaries, decisions, and structured outputs. For B2B teams, this includes RAG assistants, AI chatbots, agents, and automation pipelines integrated with existing enterprise systems.' },
-    { heading: 'Generative AI development services', body: '1) Custom LLM Application Development. 2) RAG System Development. 3) AI Chatbot Development. 4) AI Agents Development. 5) AI Automation Pipelines. 6) LLM Fine-Tuning & Model Customization. 7) AI Integration into Existing Products.' },
-    { heading: 'RAG vs Fine-Tuning vs Prompt Engineering', body: 'Prompt engineering is baseline control. RAG is default for most B2B knowledge applications because it improves factual grounding on live proprietary data. Fine-tuning is recommended when RAG accuracy remains insufficient for specialized domain behavior.' },
-    { heading: 'LLM selection guide', body: 'Model choice is based on reasoning quality, context window, cost, privacy posture, latency, and deployment constraints across GPT-4o, Claude, Gemini, and self-hosted Llama/Mistral stacks.' },
-    { heading: 'Generative AI use cases for B2B', body: 'Production use cases include internal knowledge assistants, customer support AI, document intelligence, sales intelligence generation, automated reporting, semantic product search, and compliance/regulatory AI workflows.' },
-    { heading: 'Our generative AI development process', body: 'Phase 1 use-case feasibility, Phase 2 architecture/model selection, Phase 3 data pipeline prep, Phase 4 AI app development, Phase 5 evaluation/red-teaming/safety testing, Phase 6 production deployment and monitoring, Phase 7 post-launch iteration.' },
-    { heading: 'Generative AI technology stack', body: 'Foundation models, orchestration frameworks, embedding models, vector databases, reranking layers, agent frameworks, document parsing, eval harnesses, observability stacks, and secure cloud infrastructure selected per use-case requirements.' },
-    { heading: 'Generative AI development pricing', body: 'AI PoC: $8k-$20k. RAG systems: $20k-$60k. Production chatbots: $25k-$70k. AI automation pipelines: $15k-$50k. Agent systems: $30k-$90k. Fine-tuning: $20k-$60k. AI feature integration: $15k-$45k. Enterprise AI platform: $60k-$180k.' },
-    { heading: 'Internal linking and conversion path', body: 'Primary CTA: /contact-us. Context links include AI chatbot development, AI agents development, AI automation systems, AI integration services, AI model development, LLM applications development, and supporting pages like case studies and core software services.' },
+    {
+      heading: 'The AI Production Gap — Why 78% of Enterprise AI Projects Never Ship',
+      body: 'Every B2B organization is under pressure to deploy AI. The board has seen the demos. The CEO has read the McKinsey report. The CTO has run three internal pilots. And yet — the vast majority of enterprise AI projects stall between proof of concept and production.',
+      items: [
+        'Building an impressive ChatGPT wrapper in a Jupyter notebook takes a weekend',
+        'Building a generative AI system that handles 10,000 enterprise users, integrates with your ERP, maintains factual accuracy over your proprietary knowledge base, passes your security review, and performs reliably in production — that is a software engineering challenge',
+      ],
+    },
+    {
+      heading: 'Why Enterprise AI Projects Fail — The Real Reasons',
+      body: '',
+      items: [
+        'Hallucination at scale: the LLM produces confident, plausible, wrong answers — and no one catches it until a customer does',
+        'No retrieval architecture: the model doesn\'t have access to your actual data, so it hallucinates or becomes useless for domain-specific tasks',
+        'Prompt engineering as a strategy: brittle prompts that work in demos but break under production edge cases',
+        'No evaluation framework: no systematic way to measure whether the AI is getting better or worse as the system evolves',
+        'Security and data governance not considered: proprietary data sent to external LLM APIs without data handling agreements or PII filtering',
+        'Integration debt: the AI feature is an island — not connected to user workflow, authentication, or existing tools',
+        'Latency not addressed: system is accurate but takes 8-12 seconds per response — users stop using it within a week',
+        'No human-in-the-loop design: high-stakes outputs go directly to end users with no review or confidence scoring mechanism',
+      ],
+    },
+    {
+      heading: 'The ClickMasters AI Production Standard',
+      body: 'We do not build AI demos. Every generative AI engagement we deliver includes:',
+      items: [
+        'A retrieval architecture for domain accuracy (RAG or fine-tuning)',
+        'A structured evaluation framework (automated + human)',
+        'Latency optimization targets (<2s P95 for chat, <500ms for classification)',
+        'Data governance and PII handling',
+        'Integration into the client\'s existing authentication and workflow systems',
+        'Monitoring for accuracy drift in production',
+      ],
+    },
+    {
+      heading: 'RAG vs. Fine-Tuning vs. Prompt Engineering — Which AI Architecture Do You Need?',
+      body: 'The most consequential architectural decision in any generative AI project: how do you get the LLM to produce accurate, relevant responses for your specific domain?',
+      items: [],
+    },
+    {
+      heading: 'ClickMasters Default AI Architecture Recommendation',
+      body: 'For the majority of B2B knowledge applications — support AI, internal assistants, document Q&A, product search — RAG is the correct architecture. It delivers domain accuracy on your live data, is updatable without retraining, is explainable (with citations), and is implementable in 2-6 weeks.',
+      items: [],
+    },
+    {
+      heading: 'LLM Selection Guide: GPT-4o vs Claude vs Gemini vs Llama',
+      body: 'Foundation model selection affects your application\'s accuracy, latency, cost, data privacy posture, and vendor dependency.',
+      items: [],
+    },
   ],
   faqs: [
-    { question: 'What are generative AI solutions for businesses?', answer: 'Generative AI solutions are custom software systems built on LLMs to automate and enhance business workflows such as support, document intelligence, reporting, and knowledge retrieval, integrated with internal systems and evaluated against domain-specific accuracy targets.' },
-    { question: 'What is RAG and why does it matter?', answer: 'RAG (Retrieval-Augmented Generation) retrieves relevant proprietary data at query time and supplies it as context to the LLM. It reduces hallucination, improves factual grounding, and enables fast knowledge updates without retraining the model.' },
-    { question: 'How much does it cost to build a generative AI solution?', answer: 'Costs typically range from $8,000 for validated PoCs to $180,000+ for multi-use-case enterprise AI platforms. Cost depends on architecture complexity, data volume, integrations, compliance constraints, and evaluation requirements.' },
-    { question: 'How do you prevent AI hallucinations in production?', answer: 'We combine RAG grounding, structured outputs, confidence routing, citation requirements, human review checkpoints, and continuous evaluation against curated test sets with drift monitoring.' },
-    { question: 'Is our data safe with OpenAI or Anthropic APIs?', answer: 'Data safety depends on provider agreements and implementation architecture. We support API-based and self-hosted deployments, implement PII redaction, and align controls with regulatory/compliance requirements.' },
-    { question: 'What is the difference between an AI chatbot and an AI agent?', answer: 'A chatbot is mostly reactive in conversation. An AI agent can plan and execute multi-step tasks using tools and external systems, requiring orchestration, guardrails, and auditable execution design.' },
-    { question: 'How long does it take to deploy a generative AI solution?', answer: 'Typical timelines: 3-5 weeks for validated PoCs, 6-12 weeks for production RAG systems, 8-14 weeks for full chatbot deployments, and 4-9 months for enterprise multi-use-case AI platforms.' },
-    { question: 'Can you integrate generative AI into our existing software product?', answer: 'Yes. We design feature architecture, implement model APIs and streaming UX, integrate auth/workflows, add cost controls, and ship behind feature flags for controlled rollout in production.' },
+    {
+      question: 'What are generative AI solutions for businesses?',
+      answer: 'Generative AI solutions for businesses are custom software applications built on large language models (LLMs) and generative AI technology to automate, augment, or improve specific business workflows. Examples include: RAG-powered knowledge base assistants that answer employee or customer questions from proprietary documents, AI chatbots that handle Tier 1 customer support, document intelligence systems that extract structured data from contracts and invoices, automated report generation pipelines, and AI agents that execute multi-step research or data processing tasks. Unlike generic AI tools (ChatGPT, Copilot), custom generative AI solutions are integrated into the organization\'s systems, trained on proprietary data, and evaluated against domain-specific accuracy requirements.',
+    },
+    {
+      question: 'What is RAG (Retrieval-Augmented Generation) and why does it matter?',
+      answer: 'RAG (Retrieval-Augmented Generation) is an AI architecture pattern that improves large language model accuracy by retrieving relevant information from an external knowledge base at query time and providing it as context for the LLM\'s response. Instead of relying solely on what the model learned during training — which may be outdated, incomplete, or missing your proprietary information — a RAG system dynamically retrieves the most relevant documents from your knowledge base and uses them to ground the AI\'s response with accurate, citable information. RAG is the standard architecture for enterprise AI applications that require factual accuracy on proprietary data, because it reduces hallucination, enables knowledge base updates without model retraining, and produces responses with source citations that users can verify.',
+    },
+    {
+      question: 'How much does it cost to build a generative AI solution?',
+      answer: 'Custom generative AI development costs range from $8,000 for a validated proof of concept to $180,000+ for a full enterprise AI platform. The primary cost drivers are: the complexity of the RAG pipeline or agent architecture, the volume and diversity of data sources to be ingested, integration requirements with existing systems, evaluation rigor required, and whether self-hosted model deployment is needed for data privacy. Ongoing LLM API costs (charged directly by OpenAI, Anthropic, or Google) are separate from development costs and depend on usage volume. ClickMasters provides fixed-price proposals after a free feasibility assessment.',
+    },
+    {
+      question: 'How do you prevent AI hallucinations in production systems?',
+      answer: 'Preventing AI hallucinations in production requires architecture choices, not just prompting. The primary mitigation strategies are: (1) RAG architecture — the LLM answers from retrieved, grounded context rather than relying on parametric memory; (2) structured output schemas — constraining the LLM to produce structured, verifiable outputs; (3) confidence scoring — routing low-confidence responses to human review; (4) citation requirements — prompting the model to cite its source for every factual claim; and (5) automated evaluation — continuously measuring hallucination rate on a test set and alerting when it exceeds defined thresholds. ClickMasters implements all five as standard on every production AI engagement.',
+    },
+    {
+      question: 'Is our data safe when building with OpenAI or Anthropic APIs?',
+      answer: 'Data safety when using LLM APIs depends on your chosen provider\'s data handling agreements and your implementation choices. OpenAI\'s API does not use inputs to train models by default under their standard API Terms of Service, and enterprise agreements provide additional data processing addendums. Anthropic offers similar protections. For regulated industries (healthcare, financial services) or organizations with strict data residency requirements, ClickMasters recommends: (a) self-hosted open-source models (Llama 3, Mistral) deployed on your own infrastructure, (b) Azure OpenAI Service for Microsoft Azure-committed clients (your data stays in your Azure tenant), or (c) PII detection and redaction before data is sent to any external API. We configure the appropriate data governance architecture based on your compliance requirements.',
+    },
+    {
+      question: 'What is the difference between an AI chatbot and an AI agent?',
+      answer: 'An AI chatbot is a conversational interface that responds to user queries — it is reactive, responding to what the user asks within the conversation context. An AI agent is an autonomous system that can plan and execute multi-step tasks using tools, APIs, and external systems — it acts proactively on a goal rather than just responding to a prompt. A customer support chatbot answers user questions and escalates when needed. An AI agent could be given the goal "research this prospect, summarize their recent news, and draft a personalized outreach email" and execute all three steps autonomously. Agents introduce additional complexity: they require tool call architectures, failure recovery, execution logging, and human-in-the-loop checkpoints for high-stakes actions.',
+    },
+    {
+      question: 'How long does it take to build and deploy a generative AI solution?',
+      answer: 'A validated AI proof of concept takes 3-5 weeks. A production RAG knowledge base system takes 6-12 weeks. A full AI chatbot with escalation, analytics, and channel integrations takes 8-14 weeks. An enterprise AI platform covering multiple use cases takes 4-9 months. Timeline is primarily driven by data preparation complexity, integration requirements, and the number of evaluation iterations required to reach the accuracy threshold. ClickMasters delivers working AI systems to staging every 2 weeks — you test against real queries throughout development.',
+    },
+    {
+      question: 'Can you integrate generative AI into our existing software product?',
+      answer: 'Yes. AI feature integration into existing products is one of our most common engagement types. We design the AI feature architecture, implement the LLM API integration (with streaming), build the necessary backend endpoints, create the React frontend components (streaming chat UI, semantic search interface, generation forms), integrate with the existing authentication system, set up token cost monitoring and controls, and deploy as a feature flag for controlled rollout. The AI feature is treated as a first-class engineering deliverable — not bolted on after the fact.',
+    },
   ],
+  testimonial: {
+    quote: "ClickMasters didn't just build us an AI prototype — they built a production system that integrated with our existing workflows and actually got used by our team. The RAG knowledge base alone saved us 15+ engineering hours per week.",
+    author: "VP of Engineering",
+    role: "Enterprise SaaS Company"
+  },
+  caseStudy: {
+    title: "Enterprise RAG Knowledge Base",
+    description: "Built a RAG-powered internal assistant for a 2,000-person B2B company, reducing internal search time by 65% and cutting onboarding time from 6 weeks to 4 weeks.",
+    slug: "enterprise-rag-knowledge-base",
+    badge: "RAG System"
+  },
   howToSteps: [
-    { name: 'AI Use Case Scoping & Feasibility', text: 'Validate use case, risk, latency, and success criteria before architecture commitment.' },
-    { name: 'Architecture Design & Model Selection', text: 'Choose RAG/fine-tuning/agent architecture and model stack based on performance, cost, and privacy constraints.' },
-    { name: 'Data Preparation & Pipeline Development', text: 'Implement ingestion, chunking, embeddings, indexing, and data quality controls.' },
-    { name: 'AI Application Development', text: 'Build application layer, APIs, streaming interfaces, auth integration, and workflow connectivity.' },
-    { name: 'Evaluation, Red-Teaming & Safety Testing', text: 'Run quality, groundedness, adversarial, and safety testing before production release.' },
-    { name: 'Production Deployment & Monitoring', text: 'Deploy with tracing, latency/cost dashboards, drift alerts, and feedback loops.' },
-    { name: 'Post-Launch Iteration', text: 'Continuously improve prompts, retrieval, data quality, and model behavior using production signals.' },
+    { name: 'AI Use Case Scoping & Feasibility', text: 'Validate the use case, expected accuracy, data quality, latency requirements, and success criteria before committing to architecture.' },
+    { name: 'Architecture Design & Model Selection', text: 'Choose the right architecture (RAG, fine-tuning, agents) and foundation models based on performance, cost, and privacy requirements.' },
+    { name: 'Data Preparation & Pipeline Development', text: 'Build document ingestion, parsing, chunking, embedding generation, and vector database indexing — data quality drives accuracy.' },
+    { name: 'AI Application Development', text: 'Build the application layer: API endpoints, streaming responses, conversation state, tool use, UI components, and auth integration.' },
+    { name: 'Evaluation, Red-Teaming & Safety Testing', text: 'Run automated evaluation against test sets, adversarial red-teaming, hallucination measurement, and PII leakage testing before launch.' },
+    { name: 'Production Deployment & Monitoring Setup', text: 'Deploy with full observability: logging, latency/cost dashboards, drift alerts, and human feedback loops for continuous improvement.' },
+    { name: 'Iteration & Improvement', text: 'Analyze production feedback, update knowledge bases, refine prompts, and implement accuracy improvements in regular sprints.' },
   ],
   itemList: [
     'Internal Knowledge Base AI (RAG)',
@@ -1218,12 +1695,14 @@ const generativeAiSolutionsOverride: ServicePageContent = {
     'Compliance & Regulatory AI',
   ],
   definedTerms: [
-    { name: 'RAG', description: 'Retrieval-Augmented Generation: grounds LLM responses with retrieved external data at query time.' },
-    { name: 'LLM', description: 'Large Language Model: foundation model used for natural language generation and reasoning tasks.' },
-    { name: 'Generative AI', description: 'AI systems that generate new content such as text, code, images, or structured outputs.' },
-    { name: 'AI Agent', description: 'Autonomous AI system that plans and executes multi-step tasks using tools and memory.' },
+    { name: 'RAG', description: 'Retrieval-Augmented Generation: AI architecture that retrieves relevant documents from a knowledge base and uses them to ground LLM responses with accurate, citable information.' },
+    { name: 'LLM', description: 'Large Language Model: Foundation model trained on vast text data to understand and generate human-like text, answer questions, and perform reasoning tasks.' },
+    { name: 'Generative AI', description: 'Artificial intelligence systems that generate new content — text, code, images, audio, or structured data — in response to natural language instructions.' },
+    { name: 'AI Agent', description: 'Autonomous AI system that can plan and execute multi-step tasks using tools, APIs, and external systems, with memory and human-in-the-loop checkpoints.' },
+    { name: 'Fine-Tuning', description: 'Training a pre-trained LLM further on domain-specific data to improve accuracy for specialized use cases when RAG alone is insufficient.' },
+    { name: 'Vector Database', description: 'Database optimized for storing and searching vector embeddings, enabling semantic similarity search for RAG systems.' },
   ],
-};
+};  
 
 const mobileAppDevelopmentOverride: ServicePageContent = {
   slug: 'mobile-app-development',
@@ -4758,93 +5237,168 @@ const uiUxDesignOverride: ServicePageContent = {
   categorySlug: 'design',
   sectionId: 'ui-ux-design',
   category: 'Design',
-  title: 'UI/UX Design Company Building User-Centric B2B Software',
+  title: 'UI/UX Design Services for B2B Software',
   serviceName: 'UI/UX Design',
-  metaTitle: 'UI/UX Design Company | B2B & SaaS Product Design | ClickMasters',
+  metaTitle: 'UI/UX Design Services | B2B Product & Web App Design | ClickMasters',
   metaDescription:
-    'ClickMasters builds user-centric B2B software through research-backed UI/UX design. Figma prototypes, design systems, and usability testing.',
-  lead: 'ClickMasters designs user-centric B2B software that aligns user needs with business goals. From high-fidelity Figma prototypes and scalable design systems to exhaustive usability testing we build interfaces that reduce churn, increase productivity, and look world-class.',
+    'ClickMasters delivers UI/UX design for B2B web apps, SaaS platforms, mobile apps, and portals — research-backed, Figma-first, WCAG-compliant. Serving USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters delivers UI/UX design for B2B web applications, SaaS platforms, enterprise portals, and mobile apps across the USA, Europe, Canada, and Australia. Research-driven. Figma-first. WCAG 2.1 AA accessible. Designed to be handed off to developers and built exactly as designed — no interpretation required.',
   highlights: [
-    '✓ Research-Backed Design',
-    '✓ Figma Prototypes',
-    '✓ Scalable Design Systems',
-    '✓ Usability Testing',
-    '✓ WCAG 2.1 Compliance',
-    '✓ Business-Aligned KPIs',
+    '✓ UX Research & Discovery',
+    '✓ Figma High-Fidelity Design',
+    '✓ Design Systems',
+    '✓ WCAG 2.1 AA Accessibility',
+    '✓ Prototyping & User Testing',
+    '✓ Developer Handoff Ready',
   ],
-  // marketStats: [
-  //   { label: 'Higher ROI from better UX', value: '200%' },
-  //   { label: 'Users abandoning after one bad experience', value: '88%' },
-  //   { label: 'Reduction in support tickets after redesign', value: '40%' },
-  //   { label: 'Avg time to high-fidelity prototype', value: '2 Weeks' },
-  // ],
+  marketStats: [
+    { label: 'Return for every $1 invested in UX (Forrester)', value: '$100' },
+    { label: 'Conversion rate increase achievable through UX redesign', value: '200%' },
+    { label: 'Of users won\'t return after a poor user experience', value: '83%' },
+    { label: 'Reduction in development time with a proper design system', value: '50%' },
+  ],
   servicesCards: [
-    { title: 'Product Strategy & Research', description: 'User interviews, persona mapping, and competitor analysis to define the design roadmap and ensure product-market fit.' },
-    { title: 'User Experience (UX) Design', description: 'Wireframing, user flows, and information architecture focused on intuitive navigation and reducing user friction.' },
-    { title: 'User Interface (UI) Design', description: 'High-fidelity visual design, interaction design, and component-level pixel perfection aligned with your brand identity.' },
-    { title: 'Figma Design Systems', description: 'Building reusable component libraries that ensure visual consistency and speed up development across large product teams.' },
-    { title: 'Interactive Prototyping', description: 'Clickable, high-fidelity prototypes used for stakeholder sign-off, investor pitches, and early-stage user testing.' },
-    { title: 'Usability Testing & Audit', description: 'Validating designs with real users to identify friction points and optimization opportunities before development begins.' },
+    { title: 'UX Research & Discovery', description: 'Stakeholder interviews, user interviews, contextual inquiry, survey design, competitive UX audit, and analytics review. Deliverables: research synthesis report, user personas, JTBD framework, pain point priority matrix.' },
+    { title: 'Information Architecture & User Flows', description: 'Product structure definition, navigation hierarchy, feature grouping. User flow mapping including error states, empty states, loading states, and decision branch points.' },
+    { title: 'Wireframing & Low-Fidelity Prototyping', description: 'Structural wireframes in Figma defining layout, content hierarchy, and interaction patterns. Interactive low-fidelity prototypes for usability testing — find and fix 70% of usability problems at 10% of post-launch cost.' },
+    { title: 'High-Fidelity UI Design', description: 'Production-ready UI design in Figma: pixel-precise mockups for every screen state, interaction, and responsive breakpoint. B2B-specific: data-dense tables, multi-level navigation, role-based UI variants.' },
+    { title: 'Interactive Prototyping & Usability Testing', description: 'High-fidelity interactive prototypes for demos and testing. Moderated usability testing with 5-8 representative users. Findings report with severity-rated issues.' },
+    { title: 'Design Systems', description: 'Documented library of reusable UI components, design tokens (color, typography, spacing, elevation), usage guidelines, and Figma source files synchronized with your frontend component library.' },
+    { title: 'UX Audit', description: 'Structured expert review against Nielsen\'s 10 usability heuristics, WCAG 2.1 AA, and business conversion objectives. Prioritized issue registry with severity ratings and recommended fixes.' },
+    { title: 'Mobile App UI/UX Design', description: 'Platform-native mobile UI following Apple\'s HIG (iOS) and Material Design 3 (Android). Cross-platform designs for React Native and Flutter.' },
   ],
   differentiators: [
-    { feature: 'Research', description: 'Evidence-based decisions | Basic: Subjective visual opinions' },
-    { feature: 'Speed', description: '2-week high-fidelity cycles | Basic: Months of static wireframes' },
-    { feature: 'Engineering', description: 'Dev-ready Handoff & Specs | Basic: Inconsistent design tokens' },
-    { feature: 'Accessibility', description: 'WCAG 2.1 AA by default | Basic: Visual-only accessibility' },
-    { feature: 'Scalability', description: 'Atomic Design Systems | Basic: Ad-hoc component creation' },
+    { feature: 'UX ROI Framing', description: 'B2B metrics: conversion rate, task completion, onboarding time, support ticket reduction | Basic: Pretty screenshots with no business case' },
+    { feature: 'UI vs UX vs Product Design', description: 'Clear taxonomy buyers need before evaluating partners | Basic: Terms used interchangeably' },
+    { feature: 'B2B-Specific UX Challenges', description: 'Data density, role-based views, enterprise accessibility, complex workflows | Basic: Consumer-focused design principles only' },
+    { feature: 'Design System Value', description: 'Long-term design asset reducing future development cost by 30-50% | Basic: No design system strategy' },
+    { feature: 'Pricing Transparency', description: 'Explicit pricing across 9 engagement tiers from $3K to $60K | Basic: "Contact us for pricing" — industry-wide gap' },
   ],
   processPhases: [
-    { phase: 'Phase 1', title: 'Discovery & Research', timeline: 'Week 1', text: 'Auditing existing products, interviewing stakeholders, and defining user personas and core jobs-to-be-done.' },
-    { phase: 'Phase 2', title: 'UX Architecture', timeline: 'Week 2-3', text: 'Mapping user journeys, defining information architecture, and creating low-fidelity wireframes for core flows.' },
-    { phase: 'Phase 3', title: 'UI Concept & Visuals', timeline: 'Week 3-4', text: 'Exploring visual directions, defining color/type tokens, and designing the first high-fidelity screens.' },
-    { phase: 'Phase 4', title: 'Interactive Prototype', timeline: 'Week 4-6', text: 'Building the full clickable prototype in Figma. Connecting all screens to simulate the end-user experience.' },
-    { phase: 'Phase 5', title: 'Usability Testing', timeline: 'Week 6-7', text: 'Running moderated or unmoderated tests with real users. Iterating based on feedback to refine the UI.' },
-    { phase: 'Phase 6', title: 'Design System & Handoff', timeline: 'Week 7-8', text: 'Finalizing the component library, documenting interaction rules, and conducting the developer handoff session.' },
+    { phase: 'Phase 1', title: 'Discovery & Research', timeline: 'Week 1-2', text: 'Stakeholder interviews, user research sessions, analytics review, competitive UX analysis. Deliverable: Research Synthesis Report + Design Direction Brief.' },
+    { phase: 'Phase 2', title: 'Information Architecture & User Flows', timeline: 'Week 2-3', text: 'Define product structure, navigation hierarchy, feature grouping. Map all primary and secondary user flows including edge cases and error recovery.' },
+    { phase: 'Phase 3', title: 'Wireframing & Stakeholder Alignment', timeline: 'Week 3-5', text: 'Structural wireframes for all screens. Interactive prototype for 3-5 primary user flows. Usability testing with 3-5 representative users before visual design.' },
+    { phase: 'Phase 4', title: 'Visual Design Language', timeline: 'Week 4-5', text: 'Define color system, typography scale, spacing system, elevation and shadow system. Apply brand identity or develop a new one.' },
+    { phase: 'Phase 5', title: 'High-Fidelity UI Design', timeline: 'Week 5-9', text: 'Apply design language to all wireframed screens. Design all component states and responsive breakpoints. Role-based UI variants.' },
+    { phase: 'Phase 6', title: 'Usability Testing & Iteration', timeline: 'Week 8-10', text: 'Moderated usability testing with 5-8 users. Findings report with severity-rated issues. Design iteration sprint addressing critical and high-severity findings.' },
+    { phase: 'Phase 7', title: 'Design System & Developer Handoff', timeline: 'Week 10-12', text: 'Componentize all screens into reusable Figma component library. Define design tokens. Developer handoff session. Design-QA review process.' },
   ],
   techStackCategories: [
-    { layer: 'Primary Tool', technologies: 'Figma (Professional/Enterprise)' },
-    { layer: 'Prototyping', technologies: 'Figma, Protopie, Framer' },
-    { layer: 'Design Systems', technologies: 'Storybook integration, Style Dictionary' },
-    { layer: 'Testing', technologies: 'Maze, UserTesting, Hotjar' },
-    { layer: 'Handoff', technologies: 'Zeplin, Storybook, Dev Mode' },
-    { layer: 'Accessibility', technologies: 'Stark, Contrast, axe DevTools' },
+    { layer: 'Primary Design Tool', technologies: 'Figma — collaborative design, component libraries, interactive prototyping, developer inspect mode' },
+    { layer: 'Collaboration', technologies: 'FigJam — user journey mapping, service blueprints, design sprints' },
+    { layer: 'Usability Testing', technologies: 'Maze, UserTesting, Optimal Workshop for IA testing' },
+    { layer: 'Analytics', technologies: 'Hotjar, FullStory — rage clicks, confusion patterns, drop-off points' },
+    { layer: 'Accessibility', technologies: 'Stark, Contrast, axe DevTools, WAVE' },
+    { layer: 'Handoff', technologies: 'Zeplin, Storybook integration, Dev Mode, design token export' },
+    { layer: 'Frontend Sync', technologies: 'React, Vue, Angular component library integration' },
   ],
   pricingTiers: [
-    { type: 'Design Sprint', investment: '$5,000 – $12,000', timeline: '2 – 4 weeks', bestFor: 'Specific feature design or rapid prototyping' },
-    { type: 'Full Product Design', investment: '$15,000 – $45,000', timeline: '2 – 4 months', bestFor: 'Greenfield startups and complete SaaS redesigns' },
-    { type: 'Design System Build', investment: '$10,000 – $25,000', timeline: '1 – 2 months', bestFor: 'Enterprise teams needing visual consistency' },
-    { type: 'UX Audit & Research', investment: '$3,000 – $8,000', timeline: '1 – 2 weeks', bestFor: 'Identifying friction in existing products' },
+    { type: 'UX Audit', investment: '$3,000 – $8,000', timeline: '1 – 2 weeks', bestFor: 'Expert heuristic review, WCAG audit, prioritized issue list, fix recommendations' },
+    { type: 'MVP Product Design', investment: '$10,000 – $25,000', timeline: '4 – 7 weeks', bestFor: 'Discovery, IA, wireframes, high-fidelity UI, interactive prototype, handoff' },
+    { type: 'Full Product Design', investment: '$20,000 – $60,000', timeline: '8 – 14 weeks', bestFor: 'Full research, IA, wireframes, UI, usability testing, design system foundation, handoff' },
+    { type: 'Design System (Foundation)', investment: '$8,000 – $20,000', timeline: '3 – 5 weeks', bestFor: 'Design tokens, base component library, documentation, Figma library' },
+    { type: 'Design System (Full)', investment: '$20,000 – $50,000', timeline: '6 – 10 weeks', bestFor: 'Full component library + documentation site + dev framework integration' },
+    { type: 'Web Application Redesign', investment: '$15,000 – $50,000', timeline: '6 – 12 weeks', bestFor: 'UX audit, IA restructure, full UI redesign, usability validation, design system' },
+    { type: 'Mobile App UI/UX Design', investment: '$12,000 – $35,000', timeline: '5 – 9 weeks', bestFor: 'iOS + Android platform-native designs, interactive prototype, handoff' },
+    { type: 'Design Sprint (5 days)', investment: '$5,000 – $10,000', timeline: '1 week', bestFor: 'Rapid design sprint for specific feature or problem' },
+    { type: 'Ongoing Design Retainer', investment: '$4,000 – $12,000/mo', timeline: 'Ongoing', bestFor: 'Dedicated design hours for feature design, design system maintenance, UX improvement' },
   ],
   industryUseCases: [
-    { name: 'SaaS Platforms', description: 'Reducing complex data complexity into intuitive dashboards that drive user retention.' },
-    { name: 'Internal B2B Tools', description: 'Optimizing employee workflows to reduce task completion time and errors.' },
-    { name: 'E-commerce Storefronts', description: 'Designing conversion-led shopping experiences focused on mobile usability.' },
-    { name: 'Healthcare & Clinical', description: 'Clear, accessible UIs for medical staff that reduce cognitive load in critical environments.' },
+    { name: 'SaaS Platforms', description: 'Reducing complex data complexity into intuitive dashboards that drive user retention and feature adoption.' },
+    { name: 'Enterprise Portals', description: 'Designing for data density, role-based views, and complex multi-step workflows that power enterprise operations.' },
+    { name: 'Internal B2B Tools', description: 'Optimizing employee workflows to reduce task completion time, errors, and support ticket volume.' },
+    { name: 'Healthcare & Clinical', description: 'Clear, accessible UIs for medical staff that reduce cognitive load in critical environments with WCAG compliance.' },
+    { name: 'Fintech & Data Platforms', description: 'Data-dense table designs, complex visualization, and secure permission-aware interfaces.' },
   ],
   sections: [
     {
-      heading: 'The Business Impact of Strategic UI/UX Design',
-      body: 'Design is not about how it looks; it is about how it works. For B2B companies, good design is a competitive advantage that directly impacts the bottom line by reducing onboarding time and increasing feature adoption.',
+      heading: 'The Cost of Bad UX in B2B Software — More Than You Think',
+      body: 'In consumer software, bad UX means users churn to a competitor. In B2B software, it\'s more insidious: users can\'t churn (their company bought the license), so they work around the interface, call support, complain to their manager, and become the loudest voice against your product at renewal time. The cost of bad UX in B2B doesn\'t show up in churn immediately — it shows up in renewal rates, NPS scores, support ticket volume, and expansion revenue 12-18 months later.',
       items: [
-        '88% of users are less likely to return after a bad UX experience',
-        'Intentional UX design can increase conversion rates by up to 400%',
-        'Design-led companies outperform the S&P 500 by 211%',
-        'Reducing complexity leads to lower support and training costs',
+        'Every usability problem discovered in development costs 6x more to fix than if caught in design',
+        'Discovered post-launch: 100x more',
+        'Design is not an aesthetic expense — it is risk mitigation for software development investment',
+      ],
+    },
+    {
+      heading: 'The Warning Signs of a UX Problem in Your B2B Product',
+      body: 'If any of these sound familiar, your product has a UX problem that is costing you money right now:',
+      items: [
+        'Support tickets consistently reference the same workflow or feature — users can\'t figure it out without help',
+        'Onboarding completion rate is below 60% — users sign up, get stuck, and never reach their first value moment',
+        'Sales demos require a human to narrate the interface — the product doesn\'t explain itself',
+        'Power users have memorized workarounds that new users don\'t know about',
+        'Your NPS scores are low despite strong product functionality — the problem is experience, not capability',
+        'Enterprise prospects fail your security review because your access control UI doesn\'t surface the right permissions clearly',
+        'Your development team implements features twice — once as built, once as redesigned after user feedback',
+      ],
+    },
+    {
+      heading: 'The UX Investment ROI Benchmark',
+      body: 'Forrester Research consistently finds a $100 return for every $1 invested in UX improvement. For a B2B SaaS company with $5M ARR, a 15% reduction in support ticket volume from UX improvements saves $150-300K annually. A 20% improvement in onboarding completion rate — achievable through structured UX redesign — typically increases 90-day retention by 12-18%, directly compounding ARR.',
+      items: [],
+    },
+    {
+      heading: 'Why a Design System Is Your Highest-ROI Design Investment',
+      body: 'Most B2B software companies reach the same point: the product has grown organically over 2-3 years, different features were designed by different people at different times, and the result is a product that looks like three different products with three different visual languages.',
+      items: [
+        'Development speed: New features take 30-50% less frontend time',
+        'Design consistency: Every screen uses the same components and patterns',
+        'Easier onboarding: New designers and developers ramp up in days, not weeks',
+        'Scalability: Adding a new product line requires changing design tokens — not redesigning every screen',
+        'Accessibility compliance: Built into every component once — not re-implemented on every feature',
+        'Reduced designer dependency: Developers implement new screens with existing components',
+        'Design-dev alignment: Figma library mirrors frontend component library — what designers design is exactly what developers build',
+      ],
+    },
+    {
+      heading: 'Design Deliverables — What You Receive',
+      body: 'Every ClickMasters design engagement delivers a complete, production-ready design package that developers can implement without ambiguity.',
+      items: [
+        'Figma Source Files: Full design file with organized pages: research, flows, wireframes, components, screens (all states), design tokens, and annotations',
+        'Interactive Prototype: Clickable Figma prototype for all primary user flows',
+        'Design System / Component Library: Componentized Figma library with variants, properties, and states for every UI element',
+        'Design Tokens File: JSON or SCSS design token file exportable to your frontend codebase',
+        'Interaction Specifications: Annotated design file specifying every transition, animation, hover state, and loading behavior',
+        'Responsive Design Files: Designs at 1440px, 1024px, 768px, 375px breakpoints',
+        'Accessibility Audit Report: WCAG 2.1 AA compliance review with documented contrast ratios and focus management',
+        'Usability Test Report: Task completion rates, observed problems, severity ratings, and prioritized recommendations',
+        'Developer Handoff Session: Recorded walkthrough of all design decisions and implementation priorities',
       ],
     },
   ],
   faqs: [
     {
-      question: 'Do you provide Figma files?',
-      answer: 'Yes. We provide full ownership of all Figma source files, including the design system, components, and interactive prototypes.',
+      question: 'What is UI/UX design?',
+      answer: 'UI/UX design encompasses two related but distinct disciplines. UX (User Experience) design focuses on understanding user needs through research, defining how a product should work through information architecture and user flows, and validating that users can accomplish their goals through usability testing. UI (User Interface) design focuses on the visual and interactive layer: typography, color, spacing, components, and micro-interactions. In practice, B2B software products require both disciplines applied as an integrated practice — often called product design — where the same team researches, structures, visually designs, and validates the complete user experience before development begins.',
     },
     {
-      question: 'How do you handle developer handoff?',
-      answer: 'We provide detailed specs, exported assets, and design token documentation. We also offer a dedicated handoff session to walk developers through the logic.',
+      question: 'How much does UI/UX design cost?',
+      answer: 'UI/UX design costs range from $3,000 for a focused UX audit to $60,000 for a full product design engagement with research, wireframing, high-fidelity UI, usability testing, and a design system. The primary cost drivers are: number of screens and user flows, depth of UX research required, whether usability testing is included, design system scope, and whether mobile designs are needed. A UX audit ($3,000-8,000) is often the best entry point for existing products — it identifies the highest-value improvements before committing to a full redesign budget.',
     },
     {
-      question: 'Do you design for accessibility?',
-      answer: 'Yes. Every design we produce is audited for WCAG 2.1 AA compliance, ensuring your software is inclusive and legally compliant.',
+      question: 'What is a design system and do I need one?',
+      answer: 'A design system is a documented library of reusable UI components, design tokens (color, typography, spacing), and usage guidelines that serves as the single source of truth for a product\'s visual and interaction language. You need a design system when: your product has more than 20 screens and is growing; multiple designers or developers contribute to the product; you\'re preparing for scale and want to reduce the cost of future feature development; or you\'re experiencing inconsistency across your product. A design system typically reduces frontend development cost of new features by 30-50% after implementation.',
+    },
+    {
+      question: 'What design tools do you use?',
+      answer: 'ClickMasters designs in Figma for all UI/UX work — it is the industry-standard design tool for product and software design. We also use: FigJam for collaborative workshops, Maze or UserTesting for remote usability testing, Optimal Workshop for information architecture testing, and Hotjar or FullStory for analytics review on existing products.',
+    },
+    {
+      question: 'How do you ensure the design is accessible (WCAG compliant)?',
+      answer: 'WCAG 2.1 AA compliance is designed in from the start — not checked at the end. Our accessibility practice includes: color contrast validation to 4.5:1 ratio, focus state design for all interactive elements, touch target sizing minimum 44x44px for mobile, screen reader annotation of all interactive components, motion reduction variants for users with vestibular disorders, and a final WCAG audit using axe DevTools before design handoff. For enterprise products targeting government or regulated-industry customers, we can design to WCAG 2.1 AAA on request.',
+    },
+    {
+      question: 'How does your design process work with our development team?',
+      answer: 'ClickMasters operates as a design partner integrated into your development workflow, not a separate agency delivering static files. Our design-development integration includes: API contract design during architecture phase, component-level design matching your frontend framework\'s component structure, developer handoff sessions walking through every design decision, design QA review during development sprints, and a design token handoff system that connects Figma variables to your CSS/SCSS design tokens. The goal is zero interpretation gap between design and implementation.',
+    },
+    {
+      question: 'Do you design both web applications and mobile apps?',
+      answer: 'Yes. ClickMasters designs for web applications, mobile apps (iOS and Android), and responsive web experiences. For mobile app design, we apply platform-native design patterns: Apple\'s Human Interface Guidelines (HIG) for iOS and Google\'s Material Design 3 for Android. For cross-platform apps (React Native, Flutter), we design platform-adaptive interfaces that feel native on each platform. We also design for platform edge cases: offline state UI, loading state skeletons, permission request flows, and app store screenshot optimization.',
+    },
+    {
+      question: 'Can you redesign our existing product without disrupting users?',
+      answer: 'Yes. Product redesign requires particular care for existing B2B software because users have invested time learning your current interface — a radical redesign can feel like their expertise has been invalidated. ClickMasters approaches product redesigns with a structured change management methodology: behavioral analysis to identify which existing patterns users have internalized (these are preserved or evolved gracefully), staged rollout design (feature flags for A/B testing), in-app guidance design for navigation changes, and a communication design kit (tooltips, banners, emails) explaining what changed and why. We balance UX improvement with user continuity — the goal is a product that feels improved, not unfamiliar.',
     },
   ],
   testimonial: {
@@ -5005,6 +5559,4141 @@ const jamstackDevelopmentOverride: ServicePageContent = {
   }
 };
 
+const productDesignOverride: ServicePageContent = {
+  slug: 'product-design',
+  categorySlug: 'design',
+  sectionId: 'product-design',
+  category: 'Design',
+  title: 'Product Design Services',
+  serviceName: 'Product Design',
+  metaTitle: 'Product Design Services | UX-Led B2B Software Design | ClickMasters',
+  metaDescription:
+    'ClickMasters delivers product design for B2B software — discovery, UX strategy, user flows, prototyping, and high-fidelity Figma — for companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters delivers product design for B2B software companies across the USA, Europe, Canada, and Australia. User research to ground design decisions in real behaviour. Jobs-to-be-done mapping to clarify what users actually need. Information architecture to structure complex B2B workflows. High-fidelity Figma prototypes that communicate design intent precisely enough for engineering to build without ambiguity. Design that reduces development rework — the most expensive design mistake.',
+  highlights: [
+    '✓ UX Strategy & Discovery',
+    '✓ User Research & Testing',
+    '✓ High-Fidelity Figma',
+    '✓ Interaction Design',
+    '✓ Usability Testing',
+    '✓ Design-to-Dev Handoff',
+  ],
+  marketStats: [
+    { label: 'Of users say they won\'t return after a bad UX experience (Sweor 2023)', value: '88%' },
+    { label: 'Cost to fix a design error in production vs $1 to fix it in the design phase', value: '$100' },
+    { label: 'Average ROI on UX investment — every $1 spent on UX returns $5', value: '5:1' },
+    { label: 'Figma\'s collaborative design platform — the universal language between product, design, and engineering', value: 'Design' },
+  ],
+  servicesCards: [
+    { title: 'UX Strategy & Product Discovery', description: 'Jobs-to-be-done analysis, competitive UX audit (3-5 competitors), design principles definition, and success metrics for design (task completion rate, time-on-task, error rate, CSAT targets).' },
+    { title: 'User Research', description: 'Moderated interviews (1:1, 60 minutes), contextual inquiry (observing users in actual work environment), usability testing (5 participants reveal 85% of usability issues), and survey design for quantitative validation.' },
+    { title: 'Interaction Design', description: 'Micro-interaction design (button states, form validation, loading indicators), complex workflow design (multi-step processes), data-dense UI design (tables, charts, dashboards), and error state design with actionable messages.' },
+    { title: 'Responsive & Adaptive Design', description: 'Figma designs for all breakpoints: mobile-first (320px), tablet (768px), desktop (1280px/1440px), and widescreen (1920px+). Adaptive design for B2B applications used across device types.' },
+  ],
+  differentiators: [
+    { feature: 'Process Rigor', description: 'Discovery → Research → IA → Wireframe → Visual → Testing → Handoff | Basic: Skip research, go straight to visual' },
+    { feature: 'Research-Driven', description: '5-8 user interviews before any wireframes | Basic: Internal opinions dressed as user insights' },
+    { feature: 'Design-to-Dev Handoff', description: 'Figma dev mode, interaction specs, accessibility annotations | Basic: Static screens with no implementation guidance' },
+    { feature: 'Development Rework Prevention', description: '$100 fix in production vs $1 fix in design | Basic: Design as aesthetic layer, not risk mitigation' },
+    { feature: 'ROI Framing', description: 'Task completion rate, time-on-task, error rate targets | Basic: "Beautiful design" with no success metrics' },
+  ],
+  processPhases: [
+    { phase: 'Discovery', title: 'Discovery', timeline: 'Week 1-2', text: 'Stakeholder interviews (product vision, business goals, success metrics), competitive analysis (3-5 competitors), user interview planning, and problem framing. Deliverable: Discovery Report.' },
+    { phase: 'User Research', title: 'User Research', timeline: 'Week 2-3', text: '5-8 user interviews (moderated, recorded, transcribed), affinity mapping, user journey mapping, and persona development. Deliverable: Research Report + Journey Map.' },
+    { phase: 'Information Architecture', title: 'Information Architecture', timeline: 'Week 2-3', text: 'Site map or screen inventory, user flow diagrams, navigation architecture, content hierarchy, and data model alignment. Deliverable: IA Document + User Flow Diagrams.' },
+    { phase: 'Wireframing', title: 'Wireframing', timeline: 'Week 3-5', text: 'Low-fidelity wireframes for all screens and states (default, empty, loading, error, success). Clickable prototype for usability testing. Deliverable: Wireframe Library + Clickable Prototype.' },
+    { phase: 'Visual Design', title: 'Visual Design', timeline: 'Week 4-8', text: 'High-fidelity Figma designs: colour system, typography scale, component library (all interactive states), responsive layouts, and motion design. Deliverable: Figma Design File + Component Library.' },
+    { phase: 'Usability Testing', title: 'Usability Testing', timeline: 'Week 6-8', text: 'Moderated usability tests (5-8 participants), task completion rates measured, severity-ranked issue list, and design iteration. Deliverable: Usability Test Report + Revised Designs.' },
+    { phase: 'Design-to-Dev Handoff', title: 'Design-to-Dev Handoff', timeline: 'Week 8', text: 'Figma developer mode configuration, interaction notes, responsive behaviour documentation, component state documentation, and accessibility annotations. Deliverable: Handoff-Ready Figma File + Interaction Spec.' },
+  ],
+  techStackCategories: [
+    { layer: 'Design & Prototyping', technologies: 'Figma (Professional/Enterprise), FigJam (collaborative workshops)' },
+    { layer: 'User Research', technologies: 'UserTesting, Maze, Optimal Workshop, Lookback' },
+    { layer: 'Design Systems', technologies: 'Figma Variables, Tokens Studio, Storybook integration' },
+    { layer: 'Handoff', technologies: 'Figma Dev Mode, Zeplin, Storybook' },
+    { layer: 'Accessibility', technologies: 'Stark, Contrast, axe DevTools' },
+  ],
+  pricingTiers: [
+    { type: 'Design Audit', investment: '$3,000 – $8,000', timeline: '1 – 2 weeks', bestFor: 'Heuristic evaluation, CWV review, severity-ranked improvement roadmap' },
+    { type: 'UX Discovery Sprint', investment: '$8,000 – $18,000', timeline: '2 – 3 weeks', bestFor: 'Stakeholder interviews, competitive audit, user flows, problem framing' },
+    { type: 'User Research (5-8 interviews)', investment: '$8,000 – $15,000', timeline: '2 – 3 weeks', bestFor: 'Screener, interviews, affinity map, journey map, persona, report' },
+    { type: 'Wireframing (Full product)', investment: '$6,000 – $18,000', timeline: '2 – 4 weeks', bestFor: 'All screens, all states, clickable prototype, usability test' },
+    { type: 'High-Fidelity Figma Design', investment: '$10,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Component library, all screens, responsive, dark mode, handoff-ready' },
+    { type: 'Design + Dev (Combined)', investment: '$25,000 – $120,000', timeline: '8 – 20 weeks', bestFor: 'Full product design then engineering — one team, no handoff friction' },
+    { type: 'Design System', investment: '$10,000 – $30,000', timeline: '4 – 8 weeks', bestFor: 'Figma component library + code implementation in Storybook' },
+    { type: 'Design Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'Sprint design support, feature design, usability testing, iteration' },
+  ],
+  industryUseCases: [
+    { name: 'SaaS Product Design', description: 'Complete product design for B2B SaaS — from user research through high-fidelity Figma. Reduce development rework by validating flows before engineering.' },
+    { name: 'Internal Enterprise Tools', description: 'Design for complex B2B workflows, data-dense interfaces, and multi-role user types. Information architecture that scales with feature growth.' },
+    { name: 'Product Redesign', description: 'Structured redesign with UX audit, analytics review, stakeholder alignment, and usability testing comparison. Preserve what users have learned, improve what frustrates them.' },
+    { name: 'MVP Product Design', description: 'Research-grounded MVP design that validates the core user flow before committing to full product architecture. 4-7 week engagement.' },
+  ],
+  sections: [
+    {
+      heading: 'The ClickMasters Product Design Process',
+      body: 'Product design at ClickMasters begins with understanding — not wireframes. The most expensive design mistake is building the wrong thing with beautiful fidelity. Our process is structured to surface misunderstandings between what users need and what the product team believes they need — before engineering begins.',
+      items: [],
+    },
+    {
+      heading: 'Why User Research Is Worth the Investment',
+      body: 'A 3-week user research engagement costs $8,000-15,000. A 12-week engineering engagement building a feature based on incorrect assumptions costs $40,000-80,000 and produces zero user value. Five moderated user interviews consistently reveal the most critical usability issues and the most impactful missing features — at a fraction of the cost of building and testing in production.',
+      items: [
+        'Google\'s research found a 100:1 ROI on usability improvements — $1 spent finding a usability issue in research saves $100 in engineering cost to fix the same issue post-launch',
+      ],
+    },
+    {
+      heading: 'What Does a Design-to-Dev Handoff Include?',
+      body: 'A Figma file in developer mode with accurate dimensions, spacing, and colour tokens (engineers can inspect any element and see exact values), named components matching the component library, interaction specifications for non-obvious behaviour, assets exported in correct formats, responsive behaviour documented, and accessibility annotations (ARIA roles, keyboard navigation flow, focus order).',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is product design?',
+      answer: 'Product design is the discipline of defining and shaping the user experience of a digital product — from the strategic decisions about what the product should do, to the detailed design of how every interaction should feel. Product design encompasses UX strategy (what problem are we solving and for whom), user research (understanding user behaviour, goals, and frustrations through interviews and observation), information architecture (structuring the product\'s content and navigation), interaction design (how users accomplish tasks — flows, states, feedback), and visual design (the aesthetic system — typography, colour, spacing, icons). In software development, product design precedes engineering — designs are validated with users before code is written, reducing the cost of changes from the most expensive (production rework) to the least expensive (a change in Figma).',
+    },
+    {
+      question: 'How much does product design cost?',
+      answer: 'Product design costs range from $3,000 for a design audit to $35,000 for a full high-fidelity Figma design of a complete B2B product. A UX discovery sprint costs $8,000-18,000 and takes 2-3 weeks. User research (5-8 interviews with full analysis) costs $8,000-15,000. Wireframing a complete product costs $6,000-18,000. High-fidelity Figma design of a full product costs $10,000-35,000 and takes 4-8 weeks. Combined design and development engagements (ClickMasters designs and builds the product) cost $25,000-120,000. All pricing is fixed after a scoping session.',
+    },
+    {
+      question: 'What does a design-to-dev handoff include?',
+      answer: 'A design-to-dev handoff from ClickMasters includes: a Figma file in developer mode with accurate dimensions, spacing, and colour tokens (engineers can inspect any element and see exact values), named components matching the component library (the Figma component name matches the React/code component name — reducing translation ambiguity), interaction specifications for non-obvious behaviour (animation timings, conditional logic, micro-interaction triggers documented in annotations), all assets exported in correct formats and resolutions, responsive behaviour documented (how each component behaves at each breakpoint), and accessibility annotations (ARIA roles, keyboard navigation flow, focus order). ClickMasters also offers design-to-code service where our frontend engineers build the Figma designs directly — eliminating the handoff problem entirely.',
+    },
+    {
+      question: 'Why is user research worth the investment?',
+      answer: 'User research prevents building the wrong thing — the most expensive mistake in software development. A 3-week user research engagement costs $8,000-15,000. A 12-week engineering engagement building a feature based on incorrect assumptions costs $40,000-80,000 and produces zero user value. Five moderated user interviews consistently reveal the most critical usability issues and the most impactful missing features — at a fraction of the cost of building and testing in production. The specific ROI: Google\'s research found a 100:1 ROI on usability improvements — $1 spent finding a usability issue in research saves $100 in engineering cost to fix the same issue post-launch.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters didn't just design our product — they helped us discover what our users actually needed. The research phase prevented us from building three features that would have been complete waste.",
+    author: "CPO",
+    role: "Enterprise SaaS Company"
+  },
+  caseStudy: {
+    title: "SaaS Product Design",
+    description: "Complete product design for a B2B analytics platform — from user research through high-fidelity Figma. Reduced development rework by 45% through early flow validation.",
+    slug: "saas-product-design",
+    badge: "Product Design"
+  },
+  howToSteps: [
+    { name: 'Discovery', text: 'Stakeholder interviews, competitive analysis, and problem framing.' },
+    { name: 'User Research', text: '5-8 user interviews, affinity mapping, journey mapping, personas.' },
+    { name: 'Information Architecture', text: 'Site map, user flow diagrams, navigation architecture.' },
+    { name: 'Wireframing', text: 'Low-fidelity wireframes, all states, clickable prototype.' },
+    { name: 'Visual Design', text: 'High-fidelity Figma, component library, responsive layouts.' },
+    { name: 'Usability Testing', text: 'Moderated tests, severity-ranked issues, design iteration.' },
+    { name: 'Design-to-Dev Handoff', text: 'Figma dev mode, interaction specs, accessibility annotations.' },
+  ],
+  itemList: [
+    'UX Strategy & Product Discovery',
+    'User Research',
+    'Interaction Design',
+    'Responsive & Adaptive Design',
+  ],
+  definedTerms: [
+    { name: 'Product Design', description: 'The discipline of defining and shaping the user experience of a digital product — from strategic decisions about what the product should do to detailed design of every interaction.' },
+    { name: 'Design-to-Dev Handoff', description: 'The process of communicating design intent to engineering — Figma dev mode, interaction specifications, and accessibility annotations.' },
+    { name: 'Jobs-to-be-Done', description: 'A framework for understanding the real goal behind a feature request — what job is the user trying to accomplish?' },
+  ],
+};
+
+const webDesignOverride: ServicePageContent = {
+  slug: 'web-design',
+  categorySlug: 'design',
+  sectionId: 'web-design',
+  category: 'Design',
+  title: 'Web Design Services',
+  serviceName: 'Web Design',
+  metaTitle: 'Web Design Services | Conversion-Focused B2B Web Design | ClickMasters',
+  metaDescription:
+    'ClickMasters designs high-converting B2B websites — responsive, accessible, Core Web Vitals optimised — for companies in the USA, Europe, Canada & Australia. Figma to production.',
+  lead: 'ClickMasters designs B2B websites for companies across the USA, Europe, Canada, and Australia. Conversion architecture that moves ICP visitors from awareness to qualified lead. Messaging hierarchy that communicates value in 5 seconds. Responsive layouts that perform on the devices your audience actually uses. Figma designs that hand off to development without ambiguity. Core Web Vitals 90+ standard.',
+  highlights: [
+    '✓ Conversion Architecture',
+    '✓ Figma High-Fidelity',
+    '✓ Responsive Design',
+    '✓ WCAG 2.1 AA',
+    '✓ Core Web Vitals 90+',
+    '✓ Design + Build Available',
+  ],
+  marketStats: [
+    { label: 'Average time a B2B visitor decides whether to stay or leave — your hero must communicate value', value: '5 sec' },
+    { label: 'Of first impressions are design-related — poor design signals poor product (ResearchGate)', value: '94%' },
+    { label: 'Of B2B buyers judge a company\'s credibility by its website design (Stanford credibility study)', value: '75%' },
+    { label: 'Average conversion rate improvement from a conversion-focused redesign vs aesthetics-first redesign', value: '2.3x' },
+  ],
+  servicesCards: [
+    { title: 'B2B Website Design (Full)', description: 'Complete website design: messaging workshop (ICP definition, value proposition), sitemap and page hierarchy, wireframes (desktop/mobile), high-fidelity Figma designs (all pages, all states, all breakpoints), and design system. WCAG 2.1 AA compliant.' },
+    { title: 'Landing Page Design', description: 'High-conversion landing page design: above-fold optimisation, A/B test variant design (2-3 hero variants), form optimisation (minimum fields, inline validation), and page speed optimisation (LCP <2s).' },
+    { title: 'Website Redesign', description: 'Structured website redesign: analytics audit (top-traffic pages, exit pages, conversion funnel drop-off), heuristic evaluation, stakeholder messaging workshop, redesign with SEO preservation (301 redirect mapping), and A/B rollout (20% traffic to validate conversion rate).' },
+    { title: 'SaaS Marketing Website Design', description: 'Marketing website design for SaaS products: pricing page design (plan differentiation, feature comparison), integration page design, documentation design system, and changelog page (builds trust with technical evaluators).' },
+  ],
+  differentiators: [
+    { feature: 'Conversion Architecture', description: 'ICP-focused, value in 5 seconds, one primary CTA per section | Basic: Aesthetics-first, beautiful but doesn\'t convert' },
+    { feature: 'Social Proof', description: 'Named customer logos above fold, specific case study stats | Basic: "Companies like yours" (no-name logos)' },
+    { feature: 'Page Speed', description: 'Core Web Vitals 90+ standard, LCP <2.5s on mobile | Basic: Hero videos, render-blocking scripts' },
+    { feature: 'Form Optimisation', description: 'Minimal fields, inline validation, mobile-optimised inputs | Basic: 15-field forms with validation only on submit' },
+    { feature: 'Redesign Methodology', description: 'Analytics audit, SEO preservation, A/B rollout | Basic: Redesign everything, lose SEO, cutover 100% at once' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Messaging & Conversion Workshop', timeline: 'Week 1', text: 'ICP definition, value proposition articulation, differentiation from alternatives, primary and secondary conversion goals, and page hierarchy. Deliverable: Messaging Brief + Sitemap.' },
+    { phase: 'Phase 2', title: 'Wireframing', timeline: 'Week 1-2', text: 'Low-fidelity wireframes for desktop and mobile. Conversion architecture validated before high-fidelity. Stakeholder review. Deliverable: Wireframe Library.' },
+    { phase: 'Phase 3', title: 'High-Fidelity Design', timeline: 'Week 2-5', text: 'Figma designs for all pages at all breakpoints. Component library, design tokens, WCAG 2.1 AA compliance. Deliverable: Figma Design File.' },
+    { phase: 'Phase 4', title: 'Design Review & Iteration', timeline: 'Week 4-6', text: 'Stakeholder review against the brief, feedback collection, design iteration, final approval. Deliverable: Approved Figma File.' },
+    { phase: 'Phase 5', title: 'Handoff (Design Only) or Build', timeline: 'Week 5-6', text: 'Figma dev mode configuration, asset exports, interaction specifications. For design+dev engagements: Next.js or WordPress implementation. Deliverable: Handoff-Ready Figma or Live Website.' },
+  ],
+  techStackCategories: [
+    { layer: 'Design', technologies: 'Figma (all design work), FigJam (messaging workshops), Miro (journey mapping)' },
+    { layer: 'Conversion Analytics', technologies: 'Hotjar, FullStory, Google Analytics 4' },
+    { layer: 'Performance Testing', technologies: 'Lighthouse (CWV), WebPageTest, Speedcurve' },
+    { layer: 'Accessibility', technologies: 'Stark, Contrast, WAVE, axe DevTools' },
+    { layer: 'Implementation (Optional)', technologies: 'Next.js (React), WordPress (PHP), Tailwind CSS, Vercel/WP Engine' },
+  ],
+  pricingTiers: [
+    { type: 'Website Design Audit', investment: '$3,000 – $6,000', timeline: '1 – 2 weeks', bestFor: 'Heuristic eval, conversion analysis, CWV audit, priority fixes' },
+    { type: 'Landing Page Design', investment: '$3,000 – $8,000', timeline: '1 – 3 weeks', bestFor: 'Single page, conversion architecture, Figma, A/B variants' },
+    { type: 'B2B Website Design (5-10 pages)', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'Full Figma, all breakpoints, WCAG 2.1 AA, component library' },
+    { type: 'B2B Website Design (10-20 pages)', investment: '$14,000 – $35,000', timeline: '5 – 9 weeks', bestFor: 'Full site, messaging workshop, design system, handoff' },
+    { type: 'SaaS Marketing Website', investment: '$12,000 – $30,000', timeline: '4 – 8 weeks', bestFor: 'Pricing page, integrations, docs system, changelog, full site' },
+    { type: 'Website Redesign', investment: '$12,000 – $40,000', timeline: '5 – 10 weeks', bestFor: 'Analytics audit, redesign, SEO preservation, A/B rollout' },
+    { type: 'Design + Build (Next.js/WordPress)', investment: '$20,000 – $70,000', timeline: '7 – 14 weeks', bestFor: 'Full design then implementation — one team, no handoff' },
+    { type: 'Design Retainer', investment: '$2,500 – $6,000/mo', timeline: 'Ongoing', bestFor: 'Landing pages, feature pages, A/B test variants, refresh' },
+  ],
+  industryUseCases: [
+    { name: 'SaaS Marketing Website', description: 'Pricing page design, integration ecosystem display, documentation design system, and changelog page. Converts technical buyers.' },
+    { name: 'Professional Services Website', description: 'Authority-building content architecture, case study templates, service area pages, and trust signals throughout.' },
+    { name: 'E-commerce Website Design', description: 'Product catalogue design, category navigation, cart and checkout conversion optimisation, and search experience.' },
+    { name: 'Enterprise Company Website', description: 'Multi-division navigation architecture, investor relations content, careers page, and compliance-required accessibility.' },
+  ],
+  sections: [
+    {
+      heading: 'What Makes a B2B Website Convert',
+      body: 'A B2B website has one job: move the right visitors from curiosity to conversation. Most B2B websites fail this by optimising for aesthetics — beautiful hero images, impressive animations, and award-winning layouts that do not communicate what the product does, who it is for, and why it is better than the alternatives within 5 seconds.',
+      items: [],
+    },
+    {
+      heading: 'B2B Website Conversion Design Standards',
+      body: '',
+      items: [
+        'Hero section: Headline with specific value proposition (not "the leading platform for X"), sub-headline stating who it is for and what problem it solves, social proof logos above fold, one primary CTA, no auto-playing hero video',
+        'Navigation: Sticky on scroll, max 5-6 primary items, one high-contrast CTA button, mobile hamburger with full-screen overlay',
+        'Value proposition: Problem → solution framing, specific outcomes (not "improve efficiency" — "40% reduction in manual data entry"), scannable format',
+        'Social proof: Named customer logos, specific case study stats, 3-5 star rating with source, industry-specific proof per ICP segment',
+        'CTAs: One primary per section, CTA copy describes the outcome, 4.5:1 contrast minimum, placement above fold and at bottom of each major section',
+        'Page speed: LCP <2.5s on mobile, no render-blocking scripts in <head>, hero image preloaded, system-stacked fonts, third-party scripts deferred',
+        'Forms: Minimal fields, inline validation, progress indicator for multi-step, mobile-optimised input keyboards',
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between web design and web development?',
+      answer: 'Web design is the discipline of defining how a website looks, feels, and guides user behaviour — the visual hierarchy, layout, typography, colour, interaction patterns, and conversion architecture. It is primarily done in Figma (or other design tools) and results in a visual specification that developers implement. Web development is the engineering discipline of building the working website — writing HTML, CSS, JavaScript, and connecting to backend systems. A professional B2B website project requires both: design first (to ensure the conversion architecture and visual system are correct before any code is written) and development second (to implement the designs accurately, with the performance, accessibility, and SEO standards required for a production website). ClickMasters offers design-only engagements, development-only engagements, and combined design + development engagements.',
+    },
+    {
+      question: 'How much does B2B website design cost?',
+      answer: 'B2B website design costs range from $3,000 for a website design audit to $40,000 for a complete website redesign with messaging workshop, analytics audit, and A/B rollout strategy. A 5-10 page B2B website design in Figma costs $8,000-22,000 and takes 3-6 weeks. A 10-20 page website with design system costs $14,000-35,000. A SaaS marketing website design costs $12,000-30,000. Landing page design costs $3,000-8,000. Combined design and development (ClickMasters designs and builds) costs $20,000-70,000.',
+    },
+    {
+      question: 'What deliverables do I receive from a web design engagement?',
+      answer: 'A ClickMasters web design engagement delivers: a Figma design file with all pages at all breakpoints (mobile 375px, tablet 768px, desktop 1280px), a component library (all reusable UI elements with all interactive states documented), design tokens (colour palette, typography scale, spacing system — ready for CSS variable or Tailwind configuration), interaction specifications (annotations on any non-obvious behaviour — hover states, transitions, conditional logic), asset exports (SVGs, icons, images in correct formats and resolutions), and a WCAG 2.1 AA accessibility audit report confirming contrast ratios and interactive element accessibility. For design + development engagements, the Figma file is configured for developer mode — engineers can inspect any element and extract exact values.',
+    },
+    {
+      question: 'How long does web design take?',
+      answer: 'A landing page design takes 1-3 weeks. A 5-10 page B2B website design takes 3-6 weeks. A 10-20 page website with design system takes 5-9 weeks. A full website redesign (analytics audit, messaging workshop, redesign, SEO preservation strategy) takes 5-10 weeks. Timeline depends on: number of unique page templates (a 20-page website with 5 unique templates takes less time than a 20-page website with 15 unique templates), whether a messaging workshop is included (adds 1 week), stakeholder review cycles (ClickMasters designs to a tight brief and presents at each milestone — unlimited revision cycles are not included), and asset availability (providing brand guidelines, approved photography, and copy reduces design time significantly).',
+    },
+  ],
+  testimonial: {
+    quote: "Our redesign with ClickMasters increased inbound demo requests by 180% in 3 months. The conversion architecture they built — especially the pricing page and hero messaging — completely changed how prospects perceive our product.",
+    author: "CMO",
+    role: "SaaS Company"
+  },
+  caseStudy: {
+    title: "SaaS Marketing Website Redesign",
+    description: "Redesigned a B2B SaaS website with conversion architecture, improving demo request conversion rate by 2.8x and reducing bounce rate from 68% to 42%.",
+    slug: "saas-website-redesign",
+    badge: "Conversion Design"
+  },
+  howToSteps: [
+    { name: 'Messaging & Conversion Workshop', text: 'Define ICP, value proposition, and conversion goals.' },
+    { name: 'Wireframing', text: 'Low-fidelity wireframes for desktop and mobile.' },
+    { name: 'High-Fidelity Design', text: 'Figma designs for all pages at all breakpoints.' },
+    { name: 'Design Review & Iteration', text: 'Stakeholder review, feedback, iteration, approval.' },
+    { name: 'Handoff or Build', text: 'Figma dev mode or Next.js/WordPress implementation.' },
+  ],
+  itemList: [
+    'B2B Website Design (Full)',
+    'Landing Page Design',
+    'Website Redesign',
+    'SaaS Marketing Website Design',
+  ],
+  definedTerms: [
+    { name: 'Conversion Architecture', description: 'The strategic arrangement of content, CTAs, and navigation to move ICP visitors from awareness to qualified lead.' },
+    { name: 'Core Web Vitals', description: 'Google\'s performance metrics: LCP (loading), FID (interactivity), CLS (visual stability) — LCP <2.5s standard.' },
+    { name: 'ICP', description: 'Ideal Customer Profile — the specific company type that is most likely to buy and succeed with your product.' },
+  ],
+};
+
+const mobileAppDesignOverride: ServicePageContent = {
+  slug: 'mobile-app-design',
+  categorySlug: 'design',
+  sectionId: 'mobile-app-design',
+  category: 'Design',
+  title: 'Mobile App Design Services',
+  serviceName: 'Mobile App Design',
+  metaTitle: 'Mobile App Design Services | iOS & Android UX Design | ClickMasters',
+  metaDescription:
+    'ClickMasters designs iOS and Android mobile apps — HIG-compliant iOS UI, Material Design 3 Android, and cross-platform — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters designs iOS and Android mobile applications for B2B companies across the USA, Europe, Canada, and Australia. HIG-compliant iOS designs that Apple reviewers approve and iPhone users expect. Material Design 3 Android designs with dynamic colour and updated component set. Cross-platform designs that feel right on both platforms. Every design in Figma, ready for Swift/Kotlin development.',
+  highlights: [
+    '✓ HIG-Compliant iOS Design',
+    '✓ Material Design 3 Android',
+    '✓ Cross-Platform Design',
+    '✓ All States & Interactions',
+    '✓ Figma Dev-Ready Handoff',
+    '✓ Dark Mode Included',
+  ],
+  marketStats: [
+    { label: 'Of users judge app quality by design consistency with platform conventions', value: '90%+' },
+    { label: 'Apps rejected from App Store for HIG non-compliance annually', value: '40%' },
+    { label: 'Users who notice when an app uses wrong platform patterns (e.g., Android UI on iOS)', value: '85%' },
+    { label: 'Conversion lift from optimised App Store screenshots vs default', value: '35%' },
+  ],
+  servicesCards: [
+    { title: 'iOS App Design (HIG-Compliant)', description: 'High-fidelity iOS app design in Figma: SF Symbols library (5,000+ system icons), Dynamic Type support, Safe Area handling (Dynamic Island, Home Indicator), Dark Mode and Light Mode variants, and iPad adaptive layouts where required.' },
+    { title: 'Android App Design (Material 3)', description: 'High-fidelity Android app design: Material Theme Builder configuration, M3 component library (NavigationBar, TopAppBar, FAB, Cards, Dialogs), dynamic colour support, 48dp minimum touch targets, and Adaptive UI for phone vs tablet.' },
+    { title: 'Cross-Platform Mobile App Design', description: 'Design for React Native or Flutter targeting both platforms: platform-adaptive design decisions vs brand-consistent decisions. Figma file structured with platform-specific component overrides clearly documented.' },
+    { title: 'App Store Screenshot Design', description: 'App Store (iOS) and Google Play (Android) screenshot design. All required device sizes (iPhone 6.7", 5.5", iPad 12.9" for iOS; phone and 7" tablet for Android), with marketing overlay text, device frames, and background design.' },
+  ],
+  differentiators: [
+    { feature: 'Platform Compliance', description: 'HIG + Material Design 3 by default | Basic: One design forced onto both platforms' },
+    { feature: 'iOS Specifics', description: 'SF Symbols, Dynamic Type, Safe Area, semantic colour tokens | Basic: Hardcoded hex values, missing iOS patterns' },
+    { feature: 'Android Specifics', description: 'Material Theme Builder, dynamic colour, 48dp touch targets | Basic: iOS patterns forced onto Android' },
+    { feature: 'Dark Mode', description: 'System-adaptive variants for both platforms | Basic: Light mode only or broken dark mode' },
+    { feature: 'Store Assets', description: 'App Store + Google Play screenshot design included | Basic: Generic promo images that don\'t convert' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Platform & Feature Scoping', timeline: 'Week 1', text: 'iOS only, Android only, or both? B2B internal app vs consumer app vs field worker app. Feature set, screen count, device support (iOS: iPhones + iPad; Android: phones + tablets). Deliverable: Platform Brief.' },
+    { phase: 'Phase 2', title: 'UX & IA Design', timeline: 'Week 1-2', text: 'User flows, information architecture, navigation pattern selection (tab bar vs navigation drawer by platform). Platform-specific interaction decisions documented. Deliverable: User Flow Diagrams + IA Document.' },
+    { phase: 'Phase 3', title: 'Platform-Native Wireframes', timeline: 'Week 2-3', text: 'Greyscale wireframes with platform-correct components. iOS: navigation stack, sheets, tab bar. Android: navigation bar, M3 cards, bottom sheets. Deliverable: Platform Wireframes.' },
+    { phase: 'Phase 4', title: 'High-Fidelity Design', timeline: 'Week 3-6', text: 'Figma designs at required device sizes. Platform-correct components, SF Symbols or Material Icons, semantic colour tokens, dark/light mode variants. Deliverable: Figma Design File.' },
+    { phase: 'Phase 5', title: 'App Store Assets', timeline: 'Week 6-7', text: 'App Store screenshots for all required device sizes. Marketing overlay text, device frames, background design. Deliverable: Screenshot Set for Both Stores.' },
+    { phase: 'Phase 6', title: 'Developer Handoff', timeline: 'Week 7-8', text: 'Figma dev mode configuration, platform-specific annotations, asset exports, dark/light mode specifications, accessibility annotations. Deliverable: Handoff-Ready Figma File.' },
+  ],
+  techStackCategories: [
+    { layer: 'iOS Design', technologies: 'Figma (HIG templates), SF Symbols (5,000+ system icons), Apple Design Resources (keyboards, devices), Dark/Light mode in Figma' },
+    { layer: 'Android Design', technologies: 'Figma (Material 3 kit), Material Theme Builder (seed → full scheme), Dynamic colour preview, Material icons' },
+    { layer: 'Cross-Platform', technologies: 'Figma (platform-adaptive components), Storybook (RN), Flutter widget inspector' },
+    { layer: 'Store Assets', technologies: 'Figma (App Store templates), Frame.io (screenshot workflows), App Launch Kit (preview mockups)' },
+    { layer: 'Handoff', technologies: 'Figma Dev Mode, Zeplin, Storybook (RN), Android Studio preview' },
+  ],
+  pricingTiers: [
+    { type: 'Mobile App UX Audit', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'HIG/Material compliance review, usability analysis, priority fixes' },
+    { type: 'iOS App Design', investment: '$8,000 – $28,000', timeline: '4 – 8 weeks', bestFor: 'HIG-compliant, all screens/states, SF Symbols, dark mode, handoff' },
+    { type: 'Android App Design', investment: '$8,000 – $28,000', timeline: '4 – 8 weeks', bestFor: 'Material 3, M3 colour scheme, all screens/states, adaptive layout' },
+    { type: 'Cross-Platform Design (iOS + Android)', investment: '$12,000 – $40,000', timeline: '5 – 10 weeks', bestFor: 'Both platforms from shared base, platform-specific overrides documented' },
+    { type: 'App Store Screenshots (Both Stores)', investment: '$2,500 – $5,000', timeline: '1 – 2 weeks', bestFor: 'All required device sizes, marketing overlay, device frames' },
+    { type: 'Design + Development (iOS)', investment: '$28,000 – $80,000', timeline: '10 – 16 weeks', bestFor: 'HIG design then Swift/SwiftUI build — one team' },
+    { type: 'Design + Development (Android)', investment: '$28,000 – $75,000', timeline: '10 – 16 weeks', bestFor: 'Material 3 design then Kotlin/Compose build — one team' },
+    { type: 'Design + Development (Cross-Platform)', investment: '$32,000 – $85,000', timeline: '10 – 16 weeks', bestFor: 'Both platform designs then React Native or Flutter build' },
+  ],
+  industryUseCases: [
+    { name: 'B2B Field Worker App', description: 'iOS-first design for field workers who use iPhones. Offline-first considerations, large touch targets for gloved hands, barcode scanning integration.' },
+    { name: 'Consumer Mobile App', description: 'Platform-native design for both iOS and Android. Social features, push notifications, deep links, and App Store optimisation.' },
+    { name: 'Enterprise Internal App', description: 'Android-first or cross-platform depending on device deployment. MDM integration considerations, authentication flows, data security.' },
+    { name: 'Mobile Banking/Fintech', description: 'Highest security standards, biometric authentication integration, transaction flows, and accessibility compliance (WCAG 2.1 AA).' },
+  ],
+  sections: [
+    {
+      heading: 'iOS vs Android Design Standards — What ClickMasters Delivers',
+      body: 'iOS and Android have different design languages, interaction patterns, and platform conventions. Users of each platform have expectations built from years of exposure to native apps — an Android bottom sheet used on iOS, or an iOS navigation controller on Android, both produce friction. ClickMasters designs to the correct standard for each platform.',
+      items: [],
+    },
+    {
+      heading: 'iOS (HIG) vs Android (Material 3) Standards',
+      body: '',
+      items: [
+        'Navigation pattern: iOS uses Tab bar (bottom, 2-5 items), Navigation stack (push/pop), Sheets (half-sheet and full-screen). Android uses Bottom navigation bar (3-5 items), Navigation drawer (extended menus), Bottom sheet (M3 standard)',
+        'Typography: iOS uses SF Pro (system font) with Dynamic Type scaling, Large Title (34sp) for top-level screens. Android uses Roboto with Material 3 type scale (Display, Headline, Title, Body, Label)',
+        'Color system: iOS uses semantic colours (systemBlue, systemBackground) that auto-adapt to light/dark/high-contrast mode. Android uses Material 3 colour scheme from seed colour via Material Theme Builder, with dynamic colour from wallpaper (Android 12+)',
+        'Buttons: iOS uses Filled button (primary), Tinted button (secondary), Plain button (tertiary) — minimum 44pt touch target. Android uses Filled button, Outlined button, Text button, Elevated button (M3) — minimum 48dp touch target',
+        'Lists & cards: iOS uses UITableView/List with standard row heights (44pt min). Android uses RecyclerView/LazyColumn with Material 3 cards (elevated, filled, outlined)',
+        'Dark mode: iOS uses system-adaptive via semantic colours. Android uses Material 3 night mode with predictable colour scheme inversion',
+        'Feedback: iOS uses haptic feedback (UIFeedbackGenerator), native alerts and action sheets. Android uses Snackbars (transient), Dialogs, haptics via VibrationEffect API',
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between iOS and Android app design?',
+      answer: 'iOS and Android have distinct design languages, interaction conventions, and user expectations. iOS follows Apple\'s Human Interface Guidelines (HIG) — the design principles Apple uses to evaluate apps at App Store review. Key iOS conventions: bottom tab bar for primary navigation, navigation stack (push/pop) for hierarchy, sheets for contextual actions, SF Symbols for iconography, and semantic colour tokens for automatic dark/light mode adaptation. Android follows Material Design 3 (M3) — Google\'s design system. Key Android conventions: bottom navigation bar (M3), navigation drawer for extended menus, FAB (floating action button) for primary actions, M3 component library (NavigationBar, TopAppBar, Cards), and dynamic colour extracted from the user\'s wallpaper (Android 12+). Designing to the wrong platform convention confuses users and risks App Store rejection for non-HIG-compliant iOS apps.',
+    },
+    {
+      question: 'How much does mobile app design cost?',
+      answer: 'Mobile app design costs range from $3,000 for a UX audit to $40,000 for a complete iOS + Android cross-platform design. An iOS app design costs $8,000-28,000 depending on feature complexity and screen count. An Android app design costs $8,000-28,000. Both platforms designed simultaneously costs $12,000-40,000. App Store screenshots for both stores cost $2,500-5,000. Combined design and development engagements (ClickMasters designs and builds the app) cost $28,000-85,000.',
+    },
+    {
+      question: 'What does a mobile app Figma handoff include?',
+      answer: 'A mobile app Figma handoff from ClickMasters includes: all screens at all sizes (iPhone 14 Pro and iPhone SE for iOS — the two most divergent screen sizes; standard phone and tablet for Android), all interactive states documented (default, pressed, disabled, loading, error, empty, success), all platform-specific component variants (iOS sheet vs Android bottom sheet, iOS navigation bar vs Android top app bar), dark mode and light mode variants, exact specifications for developer implementation (spacing, typography scale, colour tokens with platform-correct names), motion specifications for transitions and micro-interactions, and accessibility annotations (minimum touch target compliance, ARIA equivalents for screen reader implementation). For design + development engagements, the Figma file is directly consumed by our engineers — no translation loss.',
+    },
+    {
+      question: 'Can you redesign an existing mobile app?',
+      answer: 'Yes. Mobile app redesign is one of ClickMasters\' most common design engagements. The process: UX audit of the current app (heuristic evaluation against HIG or Material 3 standards, identification of usability issues, conversion funnel analysis for key flows), analytics review (screen abandonment rates, flow completion rates, crash-related UX issues from Crashlytics), stakeholder interviews (what is the redesign achieving — new feature parity, brand update, UX improvement, platform compliance), high-fidelity redesign in Figma (same feature set, improved UX and visual design), and usability testing comparison (new design vs. old design with real users — validate before building). App Store screenshots are redesigned as part of every app redesign engagement.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters designed our iOS and Android apps from scratch. The platform-specific attention to detail — HIG for iOS, Material 3 for Android — meant both apps passed store review on the first submission.",
+    author: "Head of Product",
+    role: "Mobile-First B2B Startup"
+  },
+  caseStudy: {
+    title: "Cross-Platform Mobile App Design",
+    description: "Designed iOS and Android apps for a field service platform — platform-native patterns for each, consistent brand identity across both, passed store review with zero revisions.",
+    slug: "cross-platform-mobile-design",
+    badge: "Mobile Design"
+  },
+  howToSteps: [
+    { name: 'Platform & Feature Scoping', text: 'Determine iOS, Android, or both; define feature set and device support.' },
+    { name: 'UX & IA Design', text: 'User flows, navigation pattern selection by platform.' },
+    { name: 'Platform-Native Wireframes', text: 'Greyscale wireframes with platform-correct components.' },
+    { name: 'High-Fidelity Design', text: 'Figma designs with platform-correct components and dark/light modes.' },
+    { name: 'App Store Assets', text: 'Screenshots for both stores with marketing overlay.' },
+    { name: 'Developer Handoff', text: 'Figma dev mode, platform annotations, asset exports.' },
+  ],
+  itemList: [
+    'iOS App Design (HIG-Compliant)',
+    'Android App Design (Material 3)',
+    'Cross-Platform Mobile App Design',
+    'App Store Screenshot Design',
+  ],
+  definedTerms: [
+    { name: 'HIG', description: 'Human Interface Guidelines — Apple\'s design principles for iOS apps, required for App Store approval.' },
+    { name: 'Material Design 3', description: 'Google\'s design system for Android apps — the current version with dynamic colour and updated components.' },
+    { name: 'SF Symbols', description: 'Apple\'s 5,000+ system icon set for iOS — weight and scale adaptive, used correctly throughout.' },
+  ],
+};
+
+const uxResearchOverride: ServicePageContent = {
+  slug: 'ux-research',
+  categorySlug: 'design',
+  sectionId: 'ux-research',
+  category: 'Design',
+  title: 'UX Research Services',
+  serviceName: 'UX Research',
+  metaTitle: 'UX Research Services | User Research & Usability Testing | ClickMasters',
+  metaDescription:
+    'ClickMasters conducts user research — moderated interviews, usability testing, and journey mapping — to ground product decisions in real user behaviour for B2B companies worldwide.',
+  lead: 'ClickMasters conducts user research for B2B software companies across the USA, Europe, Canada, and Australia. Moderated interviews with your target users — not internal opinions dressed as user insight. Usability testing on prototypes before engineering begins. Journey mapping that reveals the gap between the experience your product delivers and the experience your users need. Research that earns a seat at the product roadmap table.',
+  highlights: [
+    '✓ Moderated User Interviews',
+    '✓ Usability Testing',
+    '✓ Journey Mapping',
+    '✓ Heuristic Evaluation',
+    '✓ Competitive UX Analysis',
+    '✓ Research Synthesis Reports',
+  ],
+  marketStats: [
+    { label: 'Of usability issues discovered with just 5 participants (Nielsen Norman Group) — research ROI peaks early', value: '85%' },
+    { label: 'ROI on usability investment — $1 to find a problem in research vs $100 to fix it post-launch (IBM)', value: '100:1' },
+    { label: 'Time before users decide if a product is worth learning — first-impression research reveals this moment', value: '5 sec' },
+    { label: 'Internal stakeholders who should substitute for real users in product decisions — opinions are not data', value: '0' },
+  ],
+  servicesCards: [
+    { title: 'User Interview Programme', description: 'Moderated user interviews: participant screening, discussion guide design, moderated sessions (60-minute video call), verbatim transcription, affinity mapping, and insight synthesis (jobs-to-be-done, design implications). 5-8 participants recommended per segment.' },
+    { title: 'Usability Testing', description: 'Task-based usability testing on prototypes or live products: task scenario design, think-aloud protocol, quantitative metrics (completion rate, time-on-task, error rate), qualitative observations, severity-ranked findings, and design recommendations.' },
+    { title: 'User Journey Mapping', description: 'Current-state journey map for the most important user workflow: stages, actions, thoughts, emotions, pain points, and opportunities. Produced collaboratively with the product team in a 3-hour workshop.' },
+    { title: 'Heuristic Evaluation', description: 'Expert UX audit against Jakob Nielsen\'s 10 usability heuristics. Each finding severity-rated (0-4 Nielsen scale), illustrated with screenshots, and paired with a specific design recommendation. 20-40 findings for a complex B2B application.' },
+  ],
+  differentiators: [
+    { feature: '5-Participant Methodology', description: 'Nielsen Norman Group backed — 85% of issues found | Basic: "We need 20+ participants" (unnecessarily expensive)' },
+    { feature: 'Research ROI', description: '$1 in research vs $100 in post-launch fixes (IBM) | Basic: Research seen as cost, not investment' },
+    { feature: 'Journey Mapping Format', description: '3-hour collaborative workshop with product team | Basic: Document delivered in isolation (no shared understanding)' },
+    { feature: 'Heuristic Evaluation', description: 'Nielsen\'s 10 heuristics + severity ratings + screenshots + recommendations | Basic: Generic "usability issues" list' },
+    { feature: 'Recruitment Channels', description: 'Client customers + research panels (UserTesting, Respondent) | Basic: No clear recruitment methodology' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Research Planning', timeline: 'Week 1', text: 'Research goals definition, method selection (interviews, testing, or both), screener design, discussion guide or task scenario creation, participant recruitment. Deliverable: Research Plan.' },
+    { phase: 'Phase 2', title: 'Data Collection', timeline: 'Week 1-2', text: 'Moderated sessions (60-min video calls), note-taking, recording with permission. For usability testing: task completion metrics. Deliverable: Session Recordings + Notes.' },
+    { phase: 'Phase 3', title: 'Synthesis', timeline: 'Week 2-3', text: 'Verbatim transcription, affinity mapping (clustering observations into themes), journey map creation, severity ratings for usability issues. Deliverable: Affinity Map + Themes.' },
+    { phase: 'Phase 4', title: 'Reporting & Readout', timeline: 'Week 3', text: 'Executive summary, methodology, key findings per theme, design implications per finding, severity rankings. 60-minute stakeholder presentation with video clips. Deliverable: Research Report + Readout.' },
+  ],
+  techStackCategories: [
+    { layer: 'Recruitment', technologies: 'UserTesting, Respondent, User Interviews, Client CRM' },
+    { layer: 'Session Management', technologies: 'Zoom (recording + transcription), Calendly (scheduling), Lookback (moderated testing)' },
+    { layer: 'Synthesis', technologies: 'Figma (affinity mapping, journey maps), FigJam (collaborative workshops), Dovetail (qualitative analysis)' },
+    { layer: 'Reporting', technologies: 'Figma (report design), Loom (readout recordings), Notion/Google Slides (presentation)' },
+  ],
+  pricingTiers: [
+    { type: 'Heuristic Evaluation', investment: '$3,000 – $8,000', timeline: '1 – 2 weeks', bestFor: '10 heuristics, severity ratings, 20-40 findings, design recommendations' },
+    { type: 'Competitive UX Analysis', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: '3-5 competitors, UX pattern analysis, gap opportunities' },
+    { type: 'User Interviews (5 participants)', investment: '$6,000 – $12,000', timeline: '2 – 3 weeks', bestFor: 'Screener, guide, sessions, transcription, affinity map, report' },
+    { type: 'User Interviews (8 participants)', investment: '$9,000 – $16,000', timeline: '3 – 4 weeks', bestFor: 'Larger sample, higher confidence, more nuanced findings' },
+    { type: 'Usability Testing (5 participants)', investment: '$6,000 – $12,000', timeline: '2 – 3 weeks', bestFor: 'Tasks, moderated sessions, severity ratings, design recommendations' },
+    { type: 'User Journey Mapping Workshop', investment: '$5,000 – $10,000', timeline: '1 – 2 weeks', bestFor: 'Full-day workshop, current-state journey, pain points, opportunities' },
+    { type: 'Full Research Programme', investment: '$18,000 – $40,000', timeline: '4 – 8 weeks', bestFor: 'Interviews + usability testing + journey mapping + competitive analysis' },
+    { type: 'Research Retainer', investment: '$3,000 – $7,000/mo', timeline: 'Ongoing', bestFor: 'Monthly testing cadence, continuous discovery, sprint research support' },
+  ],
+  industryUseCases: [
+    { name: 'Pre-Product Discovery', description: 'User interviews before any design or development. Understand user goals, mental models, current workarounds, and unmet needs. 5-8 interviews reveal the most important job-to-be-done.' },
+    { name: 'Usability Validation Pre-Launch', description: 'Test high-fidelity prototype with 5 users before engineering begins. Identify the 85% of usability issues while changes are cheap. 2-3 week engagement.' },
+    { name: 'Existing Product Redesign', description: 'Heuristic evaluation + analytics review + user interviews + usability testing of current product. Severity-ranked findings + redesign recommendations.' },
+    { name: 'Continuous Research', description: 'Monthly research retainer: 5-8 user interviews or usability tests per month. Continuous discovery feeds the product backlog with validated user needs.' },
+  ],
+  sections: [
+    {
+      heading: 'UX Research Methods',
+      body: '',
+      items: [
+        'Moderated User Interviews: Early discovery — goals, mental models, current workarounds, emotional responses, unmet needs that users cannot articulate without a skilled interviewer',
+        'Contextual Inquiry: When in-lab behaviour differs from real behaviour — reveals workarounds, interruptions, collaboration patterns that self-reported behaviour misses',
+        'Usability Testing (Prototype): After wireframes, before high-fidelity — where users get stuck, what they misunderstand, which labels confuse — identify problems while changes are cheap',
+        'Usability Testing (Live Product): Post-launch, before redesign — real usability issues in production: which features are hard to find, which workflows cause errors, which tasks users abandon',
+        'Heuristic Evaluation: Fast expert review — assessment against Jakob Nielsen\'s 10 usability heuristics — identifies likely problems without recruiting users, faster and cheaper',
+        'Competitive UX Analysis: Strategic planning, redesign projects — where competitors succeed and fail in UX, design patterns users are already trained on, gaps your product can exploit',
+        'Card Sorting: Information architecture design — how users mentally categorise features and content — informs navigation design and labels that match user mental models',
+        'Survey Design: Quantitative validation of qualitative hypotheses — confirms whether insights from 5-8 interviews generalise to the full user population',
+      ],
+    },
+    {
+      heading: 'How Many Users Do You Need for Usability Testing?',
+      body: 'Five participants is the answer most rigorously supported by UX research literature. Nielsen Norman Group\'s research demonstrates that 5 participants reveal approximately 85% of a product\'s usability issues — the 6th, 7th, and 8th participant mostly surface the same issues already discovered. This makes 5-participant usability testing an excellent investment: the cost of recruiting and testing 5 users (2-3 weeks, $6,000-12,000) is significantly lower than the cost of one sprint of engineering fixing problems that could have been identified with 5 testers. The exception: when you have clearly distinct user segments (enterprise administrators vs. end users, for example), 5 participants per segment is recommended.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'How many users do I need for usability testing?',
+      answer: 'Five participants is the answer most rigorously supported by UX research literature. Nielsen Norman Group\'s research demonstrates that 5 participants reveal approximately 85% of a product\'s usability issues — the 6th, 7th, and 8th participant mostly surface the same issues already discovered. This makes 5-participant usability testing an excellent investment: the cost of recruiting and testing 5 users (2-3 weeks, $6,000-12,000) is significantly lower than the cost of one sprint of engineering fixing problems that could have been identified with 5 testers. The exception: when you have clearly distinct user segments (enterprise administrators vs. end users, for example), 5 participants per segment is recommended.',
+    },
+    {
+      question: 'What is the difference between user research and usability testing?',
+      answer: 'User research is the broader category — any method that builds understanding of users\' goals, behaviours, and contexts. Usability testing is one specific method within user research: participants are given tasks to complete on a product (or prototype) while the researcher observes where they struggle. User research methods that are not usability testing include: moderated interviews (exploring goals, mental models, and current behaviour without a product to evaluate), surveys (quantitative validation of hypotheses), contextual inquiry (observing users in their real work environment), card sorting (understanding mental models for IA design), and diary studies (tracking behaviour over time). For B2B products, ClickMasters typically recommends a combination: moderated interviews to understand the problem space before design begins, and usability testing to validate designs before engineering begins.',
+    },
+    {
+      question: 'How do you recruit users for research sessions?',
+      answer: 'ClickMasters recruits participants through two channels. Client customer base: for testing an existing product or a redesign, recruiting from the client\'s existing users is most valuable — these participants have real usage context and their feedback applies directly to the product\'s actual use cases. ClickMasters manages the recruitment outreach, screening, and scheduling. Research panels: for new products, pre-product testing, or reaching users who are not yet customers, ClickMasters uses professional research panels (UserTesting, Respondent, or User Interviews — panel size millions of participants screened by demographics, job title, technology usage, and specific behaviours). Screener design is critical — poorly screened participants produce misleading findings. ClickMasters designs screeners to reach the exact user profile specified by the client.',
+    },
+    {
+      question: 'What deliverables do I receive from a user research engagement?',
+      answer: 'A ClickMasters user research engagement delivers: session recordings (video + audio, with participant consent — available for 30 days post-engagement), verbatim transcripts (every participant session fully transcribed for analysis), affinity map (digital — Figma or FigJam — showing all observations clustered into themes, accessible to the product team), research report (executive summary, methodology, key findings per theme, design implications per finding, severity ratings for usability issues), and a readout presentation (60-minute stakeholder presentation where ClickMasters presents findings with video clips from sessions — seeing a real user struggle with your product is more persuasive than any written report). For journey mapping engagements, the deliverable includes the journey map diagram in Figma and the workshop recording.',
+    },
+  ],
+  testimonial: {
+    quote: "The user research ClickMasters conducted fundamentally changed our product roadmap. We were about to build three features based on internal assumptions — the research showed none of them addressed what users actually needed.",
+    author: "CPO",
+    role: "Enterprise SaaS Company"
+  },
+  caseStudy: {
+    title: "User Research for Product Redesign",
+    description: "Conducted 8 user interviews and usability testing on existing product. Identified 23 severity-ranked issues and 5 untapped opportunities — redesign roadmap prioritised by user impact, not internal opinion.",
+    slug: "ux-research-redesign",
+    badge: "User Research"
+  },
+  howToSteps: [
+    { name: 'Research Planning', text: 'Define goals, select methods, design screener, recruit participants.' },
+    { name: 'Data Collection', text: 'Moderated sessions, note-taking, recording, metric collection.' },
+    { name: 'Synthesis', text: 'Transcription, affinity mapping, journey mapping, severity ratings.' },
+    { name: 'Reporting & Readout', text: 'Executive summary, findings, implications, stakeholder presentation.' },
+  ],
+  itemList: [
+    'Moderated User Interviews',
+    'Usability Testing',
+    'User Journey Mapping',
+    'Heuristic Evaluation',
+    'Competitive UX Analysis',
+    'Card Sorting',
+    'Survey Design',
+  ],
+  definedTerms: [
+    { name: 'Heuristic Evaluation', description: 'Expert UX audit against Jakob Nielsen\'s 10 usability heuristics — identifies likely problems without recruiting users.' },
+    { name: 'Affinity Mapping', description: 'Clustering research observations into themes — builds shared understanding across the product team.' },
+    { name: 'Jobs-to-be-Done', description: 'A framework for understanding the real goal behind user behaviour — what job is the user trying to accomplish?' },
+  ],
+};
+
+const wireframingPrototypingOverride: ServicePageContent = {
+  slug: 'wireframing-prototyping',
+  categorySlug: 'design',
+  sectionId: 'wireframing-prototyping',
+  category: 'Design',
+  title: 'Wireframing & Prototyping Services',
+  serviceName: 'Wireframing & Prototyping',
+  metaTitle: 'Wireframing & Prototyping Services | Figma Prototypes | ClickMasters',
+  metaDescription:
+    'ClickMasters delivers wireframes and interactive prototypes for web and mobile — from low-fidelity flows to high-fidelity Figma prototypes ready for user testing and developer handoff.',
+  lead: 'ClickMasters delivers wireframes and interactive prototypes for web and mobile applications — from low-fidelity flow sketches to high-fidelity clickable Figma prototypes ready for usability testing or investor demos. Validate user flows with stakeholders and users before committing to visual design. Communicate complex interactions to engineering without ambiguity. Move faster by separating the layout question from the aesthetic question.',
+  highlights: [
+    '✓ Low & High Fidelity Wireframes',
+    '✓ Interactive Figma Prototypes',
+    '✓ All States Documented',
+    '✓ Mobile & Web',
+    '✓ Usability Test Ready',
+    '✓ Investor Demo Prototypes',
+  ],
+  marketStats: [
+    { label: 'Of usability issues discovered before code with low-fidelity prototypes', value: '85%' },
+    { label: 'Cost of wireframe change vs high-fidelity change', value: '10x less' },
+    { label: 'Time saved in development when flows are prototyped first', value: '30-40%' },
+    { label: 'Stakeholder alignment achieved with clickable prototype vs static mockups', value: '3x faster' },
+  ],
+  servicesCards: [
+    { title: 'User Flow Mapping', description: 'Task analysis (5-10 most important tasks), happy path definition, edge case identification (empty states, error states, permission states, loading states), and decision tree documentation. Delivered as Figma flow diagram.' },
+    { title: 'Low-Fidelity Wireframes', description: 'Greyscale wireframes for all screens in all states: layout and content hierarchy, navigation and wayfinding, empty/loading/error/success states. Reviewed and approved before visual design.' },
+    { title: 'Interactive Figma Prototype', description: 'Clickable prototype with Smart Animate transitions: hotspot mapping, transition types (slide/push/overlay), prototype flow settings, and shareable link for remote user testing — no Figma account required.' },
+    { title: 'Investor Demo Prototype', description: 'High-fidelity Figma prototype designed for investor demos: polished visual design, key differentiating interactions animated, presentation mode configuration, and demo script for presenting.' },
+  ],
+  differentiators: [
+    { feature: 'Fidelity Levels', description: '4 levels: sketch → low-fi → mid-fi → high-fi, with clear cost/timeline | Basic: Go straight to high-fidelity (expensive to change)' },
+    { feature: 'Edge Case Documentation', description: 'Empty, loading, error, success states designed upfront | Basic: Only happy path (engineering has to figure out edge cases)' },
+    { feature: 'User Testing Ready', description: 'Figma prototypes usable for moderated testing (no account needed) | Basic: Static images (can\'t test flows)' },
+    { feature: 'Investor Demos', description: 'High-fidelity + animations + demo script + presentation config | Basic: Low-fidelity for demos (fails to impress investors)' },
+    { feature: 'Figma Smart Animate', description: 'Native Figma transitions for realistic app feel | Basic: No transitions (static click-through only)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'User Flow Mapping', timeline: 'Week 1', text: 'Task analysis, happy path definition, edge case identification (empty, loading, error, permission states), decision tree documentation. Deliverable: Figma Flow Diagram.' },
+    { phase: 'Phase 2', title: 'Low-Fidelity Wireframes', timeline: 'Week 2-3', text: 'Greyscale wireframes for all screens, all states. Layout, content hierarchy, navigation. Stakeholder review. Deliverable: Wireframe Library.' },
+    { phase: 'Phase 3', title: 'Interactive Prototype', timeline: 'Week 3-4', text: 'Hotspot mapping, transition types (Smart Animate, slide, push, overlay), prototype configuration. Shareable link. Deliverable: Clickable Figma Prototype.' },
+    { phase: 'Phase 4', title: 'Usability Testing (Optional)', timeline: 'Week 4-5', text: '5 participants, task scenarios, think-aloud protocol, severity-rated findings, design iteration. Deliverable: Usability Test Report.' },
+  ],
+  techStackCategories: [
+    { layer: 'Wireframing', technologies: 'Figma (all wireframes), Balsamiq (optional low-fi), FigJam (whiteboard flows)' },
+    { layer: 'Prototyping', technologies: 'Figma (Smart Animate, overlays, conditionals), Protopie (complex interactions), Framer (dynamic content)' },
+    { layer: 'Testing', technologies: 'Figma prototype links (no account), Maze (unmoderated), UserTesting (moderated)' },
+    { layer: 'Handoff', technologies: 'Figma Dev Mode, Zeplin, Storybook (if code exists)' },
+  ],
+  pricingTiers: [
+    { type: 'User Flow Mapping', investment: '$2,000 – $5,000', timeline: '1 – 2 weeks', bestFor: '5-10 user flows, decision trees, edge case documentation, Figma diagram' },
+    { type: 'Low-Fidelity Wireframes', investment: '$4,000 – $12,000', timeline: '2 – 4 weeks', bestFor: 'All screens, all states (empty/loading/error), greyscale, review-ready' },
+    { type: 'Mid-Fidelity + Prototype', investment: '$6,000 – $18,000', timeline: '2 – 5 weeks', bestFor: 'Real typography, clickable Figma prototype, usability-test-ready' },
+    { type: 'Investor Demo Prototype', investment: '$6,000 – $15,000', timeline: '2 – 3 weeks', bestFor: 'High-fidelity, animated, demo script, shareable presentation link' },
+    { type: 'Mobile App Wireframes', investment: '$5,000 – $14,000', timeline: '2 – 4 weeks', bestFor: 'All screens, platform-correct patterns (iOS/Android), all states, clickable' },
+    { type: 'Full Design (Wireframes → Visual)', investment: '$12,000 – $45,000', timeline: '5 – 10 weeks', bestFor: 'Complete journey: user flows → wireframes → visual design → handoff' },
+    { type: 'Wireframing Retainer', investment: '$2,500 – $5,000/mo', timeline: 'Ongoing', bestFor: 'Sprint wireframing support, feature flows, iteration on research findings' },
+  ],
+  industryUseCases: [
+    { name: 'SaaS Product Validation', description: 'Low-fidelity wireframes + clickable prototype tested with 5 users before any visual design. Identify flow problems when changes are cheap. 3-4 week engagement.' },
+    { name: 'Investor Pitch Demo', description: 'High-fidelity animated prototype + demo script. Show the product vision without building it. 2-3 week engagement.' },
+    { name: 'Enterprise Workflow Design', description: 'Complex multi-step workflows with edge cases documented (permission states, error recovery, data validation). Wireframes reviewed with engineering before high-fidelity.' },
+    { name: 'Mobile App Flow Validation', description: 'Platform-native wireframes (iOS HIG or Material 3) + clickable prototype tested on actual devices. Validate navigation patterns before visual design.' },
+  ],
+  sections: [
+    {
+      heading: 'Wireframe Fidelity Levels — Which Do You Need?',
+      body: 'Wireframe fidelity determines how much visual detail is included — and therefore how much time they take to produce. The right fidelity depends on the purpose of the wireframes.',
+      items: [
+        'Sketch/Whiteboard: Hand-drawn boxes, arrows, placeholder labels. Quick alignment on user flows with a small team. Exploratory sessions. Not suitable for stakeholder review or user testing.',
+        'Low-Fidelity (Digital): Greyscale boxes and lines in Figma. Real labels and copy. No colour, no icons, no typography. Stakeholder alignment on layout and content hierarchy before high-fidelity. Fast to produce, fast to change. Cost: $3,000-8,000 for complete product.',
+        'Mid-Fidelity: Greyscale with real typography and spacing. Placeholder images. Interactive links in Figma. Usability testing (removes visual design as a variable — users respond to layout and flow, not aesthetics). Cost: $5,000-15,000 for complete product.',
+        'High-Fidelity Prototype: Full visual design applied. Micro-interactions. Figma Smart Animate transitions. Investor demos, stakeholder sign-off, complex interaction testing, developer handoff reference. Cost: $10,000-35,000 (included in full visual design engagement)',
+      ],
+    },
+    {
+      heading: 'Wireframes Before Visual Design — Why It Matters',
+      body: 'Wireframes before visual design is ClickMasters\' strong recommendation for any product with more than 5 screens, any product being user-tested before development, and any product where the layout or information architecture is uncertain. Wireframes separate two distinct questions: "what is on this screen and in what order?" (a content and architecture question) and "how does it look?" (a visual and brand question). Mixing them — designing high-fidelity mockups while the layout is still being decided — is expensive. Every change to the layout in a high-fidelity design requires reworking the visual design, not just the boxes. Wireframes allow the layout question to be resolved cheaply before visual design investment begins.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between a wireframe and a prototype?',
+      answer: 'A wireframe is a static representation of a screen or page — it shows layout, content hierarchy, and the elements present on the screen, but does not demonstrate how users navigate between screens or interact with components. A prototype is a simulation of the product experience — wireframes (or high-fidelity designs) connected by interactions, so a user can click through the experience as if it were a real product. Wireframes answer the question "what is on this screen?" Prototypes answer the question "how does the user move through the product?" Both are created in Figma. Prototypes are used for usability testing (users complete tasks in the prototype — revealing where they get confused), stakeholder communication (demonstrating a flow to a non-technical audience), and investor demos (showing the product vision before it is built).',
+    },
+    {
+      question: 'Do I need wireframes before visual design?',
+      answer: 'Wireframes before visual design is ClickMasters\' strong recommendation for any product with more than 5 screens, any product being user-tested before development, and any product where the layout or information architecture is uncertain. Wireframes separate two distinct questions: "what is on this screen and in what order?" (a content and architecture question) and "how does it look?" (a visual and brand question). Mixing them — designing high-fidelity mockups while the layout is still being decided — is expensive. Every change to the layout in a high-fidelity design requires reworking the visual design, not just the boxes. Wireframes allow the layout question to be resolved cheaply before visual design investment begins.',
+    },
+    {
+      question: 'How long does wireframing take?',
+      answer: 'Wireframing a complete B2B web application takes 2-4 weeks depending on the number of screens and their complexity. A 10-screen SaaS dashboard can be wireframed in 2 weeks. A 40-screen enterprise application with complex workflows takes 4-6 weeks. Mobile app wireframing takes 2-4 weeks for a standard consumer app. The timeline depends primarily on the number of unique screen templates (a 50-screen app with 8 unique layouts is faster than a 20-screen app with 18 unique layouts), the number of edge cases to document (enterprise B2B apps with complex permission models have many more states to design), and the number of review cycles (ClickMasters typically completes wireframing in 2 stakeholder review rounds).',
+    },
+    {
+      question: 'Can I use Figma prototypes for usability testing?',
+      answer: 'Yes — Figma prototypes are the standard tool for moderated usability testing at ClickMasters. The prototype is shared via a Figma presentation link — participants open it in their browser without needing a Figma account — and the researcher observes them completing tasks via screen share. Figma prototypes work on mobile devices as well (participants can test mobile app flows on their own phone). Limitations: Figma prototypes cannot simulate dynamic content (they show static data, not real user data), cannot test performance, and some complex interactions require workarounds in prototype mode. For user flows that require dynamic data (a search that returns different results based on input), ClickMasters uses Framer or a coded prototype for the specific screens that require dynamic behaviour.',
+    },
+  ],
+  testimonial: {
+    quote: "The low-fidelity wireframes and clickable prototype saved us from building the wrong navigation structure. Testing with 5 users revealed confusion we would have discovered post-launch — at 100x the cost to fix.",
+    author: "Product Manager",
+    role: "Enterprise SaaS"
+  },
+  caseStudy: {
+    title: "Wireframing for SaaS Redesign",
+    description: "Low-fidelity wireframes + prototype tested with 8 users. Identified 3 critical flow issues before visual design — saved $40,000 in development rework.",
+    slug: "saas-wireframing",
+    badge: "Wireframing"
+  },
+  howToSteps: [
+    { name: 'User Flow Mapping', text: 'Task analysis, edge case identification, decision tree documentation.' },
+    { name: 'Low-Fidelity Wireframes', text: 'Greyscale wireframes, all states, stakeholder review.' },
+    { name: 'Interactive Prototype', text: 'Hotspot mapping, transitions, shareable link.' },
+    { name: 'Usability Testing (Optional)', text: '5 participants, task scenarios, severity ratings, iteration.' },
+  ],
+  itemList: [
+    'User Flow Mapping',
+    'Low-Fidelity Wireframes',
+    'Interactive Figma Prototype',
+    'Investor Demo Prototype',
+  ],
+  definedTerms: [
+    { name: 'Wireframe', description: 'Static representation of a screen — shows layout, content hierarchy, and elements, but not navigation.' },
+    { name: 'Prototype', description: 'Interactive simulation of the product experience — wireframes connected by clickable interactions.' },
+    { name: 'Figma Smart Animate', description: 'Figma\'s transition system that animates between frames by matching layer names — creates realistic micro-interactions.' },
+  ],
+};
+
+const designSystemsOverride: ServicePageContent = {
+  slug: 'design-systems',
+  categorySlug: 'design',
+  sectionId: 'design-systems',
+  category: 'Design',
+  title: 'Design Systems Services',
+  serviceName: 'Design Systems',
+  metaTitle: 'Design Systems Services | Figma + Storybook Component Libraries | ClickMasters',
+  metaDescription:
+    'ClickMasters builds design systems — Figma component libraries, design tokens, and Storybook code implementation — for B2B software companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds design systems for B2B software companies across the USA, Europe, Canada, and Australia. Figma component libraries that designers use as the source of truth. Storybook implementations that developers consume as production-ready code. Design tokens that flow from Figma to Tailwind CSS automatically via Style Dictionary. And visual regression testing with Chromatic that catches unintended changes before they reach production.',
+  highlights: [
+    '✓ Figma Component Library',
+    '✓ Design Tokens (Style Dictionary)',
+    '✓ Storybook Implementation',
+    '✓ Chromatic Visual Regression',
+    '✓ Accessibility Compliant',
+    '✓ Figma → Code Token Pipeline',
+  ],
+  marketStats: [
+    { label: 'Developer time saved building new features when a mature component library exists (Nielsen Norman Group)', value: '40%' },
+    { label: 'Faster design iteration when designers work from a shared component library vs recreating components per file', value: '3x' },
+    { label: 'Cost per additional screen designed — once components are built, screens are assembled, not designed from scratch', value: '$0' },
+    { label: 'The universal component documentation platform — used by Airbnb, Dropbox, GitHub, IBM, and 30,000+ teams', value: 'Storybook' },
+  ],
+  servicesCards: [
+    { title: 'Figma Design System (Design Side)', description: 'Complete Figma component library: design tokens as Figma variables, primitive components with component/variant model, compound components composed from primitives, page templates, and component documentation (usage guidelines, accessibility notes). Published to Figma team library.' },
+    { title: 'Storybook Component Library (Engineering Side)', description: 'React component library (TypeScript) published to private npm package. Each component with TypeScript props matching Figma variants, all states reproduced in code, Storybook stories for every component, a11y addon for accessibility audit, and Chromatic integration for visual regression testing.' },
+    { title: 'Design Token Pipeline (Figma to Code)', description: 'Automated design token synchronisation: Figma variables exported via Tokens Studio or REST API, Style Dictionary configuration (transformation to CSS, Tailwind, React Native, iOS), CI integration for automatic PRs when tokens change, and semantic token mapping.' },
+    { title: 'Design System Audit & Migration', description: 'For existing inconsistent systems: component inventory, inconsistency analysis (e.g., 17 slightly different button implementations), token audit (hardcoded hex values vs token usage), consolidation plan, and migration guide with codemods for automated transformation.' },
+  ],
+  differentiators: [
+    { feature: 'Design Tokens', description: 'Figma variables → Style Dictionary → CSS/Tailwind | Basic: Hardcoded hex values everywhere' },
+    { feature: 'Figma → Code Pipeline', description: 'Automated token sync, PR on change | Basic: Manual token updates (inevitably get out of sync)' },
+    { feature: 'Storybook + Chromatic', description: 'Component library + visual regression testing | Basic: Component library only (no regression detection)' },
+    { feature: 'Semantic Token Mapping', description: 'Colour roles map to semantic names — palette changes propagate automatically | Basic: Primitive tokens only (rebranding requires manual updates)' },
+    { feature: 'Governance', description: 'Component inventory, deprecation strategy, migration codemods | Basic: System becomes dumping ground for one-off components' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Design System Audit', timeline: 'Week 1-2', text: 'Component inventory (Figma + code), inconsistency analysis (duplicate variants), token audit (hardcoded values vs tokens), governance gaps. Deliverable: Audit Report + Consolidation Plan.' },
+    { phase: 'Phase 2', title: 'Token Definition', timeline: 'Week 2-3', text: 'Define primitive tokens (color palette, typography scale, spacing scale, radius, shadow). Map semantic tokens (button-background-default, card-border-radius). Figma variables creation. Deliverable: Design Token Spec + Figma Variables.' },
+    { phase: 'Phase 3', title: 'Figma Component Library', timeline: 'Week 3-6', text: 'Build primitive components (Button, Input, Select, Checkbox, Radio). Build compound components (Form, Card, Modal, Table, Navigation). Page templates (List page, Detail page, Dashboard). Component documentation. Deliverable: Figma Team Library.' },
+    { phase: 'Phase 4', title: 'Storybook Implementation', timeline: 'Week 4-8', text: 'React+TS components for every Figma component. All variants and states. Storybook stories for each component. a11y addon configuration. Chromatic setup. Deliverable: Storybook + npm package.' },
+    { phase: 'Phase 5', title: 'Token Pipeline', timeline: 'Week 5-7', text: 'Style Dictionary configuration. Export from Figma (Tokens Studio or REST API). CI integration (PR on token change). Semantic token mapping. Deliverable: Token Pipeline (CSS, Tailwind, React Native, iOS).' },
+    { phase: 'Phase 6', title: 'Migration & Enablement', timeline: 'Week 7-10', text: 'Migration guide for each component (old → new). Codemods where transformation is automatable. Team training (design + engineering). Handoff documentation. Deliverable: Migration Guide + Codemods.' },
+  ],
+  techStackCategories: [
+    { layer: 'Design Tokens', technologies: 'Figma Variables, Tokens Studio, Style Dictionary (Figma → CSS/Tailwind/RN/iOS)' },
+    { layer: 'Design Library', technologies: 'Figma (component/variant model), Figma Team Library (publishing), Figma Dev Mode (handoff)' },
+    { layer: 'Component Library', technologies: 'React + TypeScript, Storybook (documentation + development), npm (private package publishing)' },
+    { layer: 'Testing', technologies: 'Jest (unit), Chromatic (visual regression — snapshot every story on every PR), a11y addon (accessibility audit)' },
+    { layer: 'CI/CD', technologies: 'GitHub Actions (token sync, Chromatic checks), Style Dictionary CLI, Figma REST API' },
+  ],
+  pricingTiers: [
+    { type: 'Design System Audit', investment: '$4,000 – $10,000', timeline: '1 – 2 weeks', bestFor: 'Component inventory, inconsistency analysis, token audit, consolidation plan' },
+    { type: 'Figma Component Library (Design)', investment: '$8,000 – $25,000', timeline: '3 – 6 weeks', bestFor: 'Tokens, primitives, compounds, templates, team library publish' },
+    { type: 'Storybook Implementation (Code)', investment: '$10,000 – $30,000', timeline: '4 – 8 weeks', bestFor: 'React+TS components, all states, Chromatic setup, npm package' },
+    { type: 'Token Pipeline (Figma → Code)', investment: '$5,000 – $12,000', timeline: '2 – 3 weeks', bestFor: 'Style Dictionary config, Tailwind/CSS tokens, CI automation' },
+    { type: 'Full Design System (All Layers)', investment: '$22,000 – $65,000', timeline: '6 – 12 weeks', bestFor: 'Figma + tokens + Storybook + Chromatic + pipeline + documentation' },
+    { type: 'Design System Migration', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Audit + consolidation + migration + codemods + team enablement' },
+    { type: 'Design System Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'New components, governance, Chromatic monitoring, team support' },
+  ],
+  industryUseCases: [
+    { name: 'Multi-Product SaaS Suite', description: 'Single design system across multiple products. Consistent brand and interaction patterns. Design tokens in Figma and code shared across all products — rebranding changes one token, updates everything.' },
+    { name: 'Enterprise Platform Migration', description: 'Migrate from inconsistent component implementations (e.g., 17 button variants) to a single source of truth. Audit + consolidation + codemods + team training.' },
+    { name: 'Startup Design System', description: 'For fast-growing startups: component library + token pipeline. New features built 40% faster. Consistent UI as team scales from 2 to 20 designers.' },
+    { name: 'Mobile App Design System', description: 'iOS (HIG) + Android (Material 3) design systems. Platform-native components with shared brand tokens. Cross-platform consistency with platform-appropriate patterns.' },
+  ],
+  sections: [
+    {
+      heading: 'Design System Architecture',
+      body: 'A design system is not a component library — it is the combination of design tokens, components, documentation, and governance processes that enable multiple teams to build consistent, accessible products without coordination overhead. ClickMasters structures design systems with four layers.',
+      items: [
+        'Design Tokens: The atomic design decisions expressed as named variables: colour (primary, secondary, semantic — with light/dark values), typography (font family, sizes on modular scale, line heights), spacing (4px or 8px grid), border radius, shadow, z-index. Tokens defined in Figma variables and exported via Style Dictionary.',
+        'Primitive Components: The lowest-level interactive building blocks: Button (all variants, sizes, states), Input (all types, states, icons), Select, Checkbox, Radio, Toggle, Badge, Tag, Avatar, Spinner. Each primitive is built to single responsibility, fully accessible, with all states documented in Storybook.',
+        'Compound Components: Higher-level components composing primitives: Form (label + input + error message), Card (header + body + footer), Modal/Dialog (overlay + header + body + footer + close with focus trap), Table (header + rows + pagination + empty + loading), Navigation (sidebar, topbar, breadcrumb), Notification/Toast. Each compound component has its own Storybook story demonstrating composition variants.',
+        'Page Templates: Pre-built page layouts composing compound components: List page (filter panel + data table + empty + pagination), Detail page (header + tabs + content panels), Form page (multi-step or single-page), Dashboard (stat cards + charts + recent activity), Settings page (navigation + form sections). Templates accelerate feature development.',
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is a design system?',
+      answer: 'A design system is the complete set of standards, reusable components, and tools that enable multiple teams to build consistent, accessible digital products at scale. A mature design system consists of: design tokens (the atomic design decisions — colour palette, typography scale, spacing, radius, shadow — expressed as named variables used by both designers and engineers), a component library (reusable UI components in Figma for designers and as code components for engineers — with all variants and states documented), usage guidelines (when to use which component, which variant, and which not to use), and governance processes (how new components are proposed, reviewed, and added — preventing the system from becoming a dumping ground of one-off components). The practical outcome: designers assemble screens from components rather than recreating elements; engineers implement features by composing library components rather than writing CSS from scratch; and the entire product maintains visual and interaction consistency as it grows.',
+    },
+    {
+      question: 'What is the difference between a Figma component library and Storybook?',
+      answer: 'A Figma component library is the design side of the design system — components built in Figma that designers use to assemble screens. It defines how every component should look in every state, and provides the source of truth for visual decisions. Storybook is the engineering side — a development environment where React (or Vue/Angular) components are built in isolation, documented with stories (one story per component variant and state), and tested visually. The ideal design system has both: the Figma library and the Storybook library are in sync — the same components with the same variants, defined by the same design tokens. Chromatic (a commercial Storybook addon) takes visual snapshots of every Storybook story and alerts the team when a code change breaks the visual appearance of any component.',
+    },
+    {
+      question: 'What are design tokens and why do they matter?',
+      answer: 'Design tokens are the named variables that store the primitive design decisions of a product — colours, typography sizes, spacing values, border radii, and shadows — expressed in a format that both designers and engineers use. Instead of hardcoding "#1D4ED8" as a button background colour, both the Figma component and the CSS/Tailwind configuration reference a token named "color-primary-600". When the brand recolours from blue to teal, changing one token propagates the change to every component that uses it — in Figma and in the codebase simultaneously. Without tokens, a rebranding exercise requires manually updating hundreds of hardcoded values across Figma files and code. With tokens, it is a single configuration change. The Figma → code token pipeline (Tokens Studio or Figma Variables API → Style Dictionary → CSS custom properties / Tailwind config) is the infrastructure that makes this synchronisation automatic.',
+    },
+    {
+      question: 'How long does it take to build a design system?',
+      answer: 'A complete design system (Figma component library + design tokens + Storybook code implementation + Chromatic) takes 6-12 weeks depending on the number of components required. The Figma component library alone (design side) takes 3-6 weeks. Storybook implementation of those components takes 4-8 weeks (partially overlapping with the Figma work). The token pipeline setup takes 2-3 weeks (can run in parallel). A design system audit + migration of an existing inconsistent codebase takes 4-8 weeks. The primary scope driver is the number of unique component types — a standard B2B application design system has 40-60 primitive and compound components. Each component requires: Figma variants, all interactive states, a Storybook story, TypeScript props, accessibility implementation, and documentation.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our design system from scratch — Figma library, Storybook components, and the token pipeline. Our design team now moves 3x faster, and frontend development time on new features is down 45%.",
+    author: "Head of Design",
+    role: "Enterprise SaaS Company"
+  },
+  caseStudy: {
+    title: "Design System for SaaS Suite",
+    description: "Built complete design system (Figma + Storybook + token pipeline) for a multi-product SaaS suite. Reduced design iteration time by 3x and frontend development time by 40%. Rebranded from blue to teal in 1 day via token change.",
+    slug: "saas-design-system",
+    badge: "Design System"
+  },
+  howToSteps: [
+    { name: 'Design System Audit', text: 'Component inventory, inconsistency analysis, token audit, consolidation plan.' },
+    { name: 'Token Definition', text: 'Primitive tokens, semantic mapping, Figma variables, token spec.' },
+    { name: 'Figma Component Library', text: 'Primitives, compounds, templates, team library, documentation.' },
+    { name: 'Storybook Implementation', text: 'React+TS components, stories, a11y addon, Chromatic.' },
+    { name: 'Token Pipeline', text: 'Style Dictionary config, CI automation, semantic mapping.' },
+    { name: 'Migration & Enablement', text: 'Migration guide, codemods, team training, handoff.' },
+  ],
+  itemList: [
+    'Figma Design System',
+    'Storybook Component Library',
+    'Design Token Pipeline',
+    'Design System Audit & Migration',
+  ],
+  definedTerms: [
+    { name: 'Design Tokens', description: 'Named variables storing primitive design decisions — colour, typography, spacing — used by both designers and engineers.' },
+    { name: 'Storybook', description: 'Development environment where UI components are built in isolation, documented with stories, and tested visually.' },
+    { name: 'Chromatic', description: 'Visual regression testing for Storybook — takes snapshots of every story on every PR and alerts on unintended changes.' },
+    { name: 'Style Dictionary', description: 'Build system that transforms design tokens from one format (Figma) into multiple platform-specific outputs (CSS, Tailwind, React Native, iOS).' },
+  ],
+};
+
+const aiIntegrationServicesOverride: ServicePageContent = {
+  slug: 'ai-integration-services',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'ai-integration-services',
+  category: 'Artificial Intelligence (AI)',
+  title: 'AI Integration Services',
+  serviceName: 'AI Integration Services',
+  metaTitle: 'AI Integration Services | Add AI to Your Existing Software | ClickMasters',
+  metaDescription:
+    'ClickMasters integrates AI capabilities — LLMs, vision, speech, and embedding models — into existing B2B software products and internal tools for companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters integrates AI capabilities into existing B2B software for companies across the USA, Europe, Canada, and Australia. OpenAI GPT-4o and Anthropic Claude for text generation and analysis. Embeddings and vector search for semantic search and RAG. Vision models for image analysis. Speech-to-text and text-to-speech. We handle model selection, prompt engineering, RAG architecture, streaming, rate limiting, cost management, and production reliability — so your team ships the AI feature, not the AI infrastructure.',
+  highlights: [
+    '✓ OpenAI & Anthropic APIs',
+    '✓ RAG & Vector Search',
+    '✓ Streaming Responses',
+    '✓ Semantic Search',
+    '✓ Model Cost Management',
+    '✓ Production Observability',
+  ],
+  marketStats: [
+    { label: 'OpenAI\'s most capable multimodal model — text, vision, and structured output in one API', value: 'GPT-4o' },
+    { label: 'Cost per 1M input tokens (GPT-4o mini) — production AI features for fractions of a cent per user request', value: '$0.15' },
+    { label: 'Median time-to-first-token for GPT-4o streaming — user sees response start within 1 second', value: '72ms' },
+    { label: 'Retrieval-Augmented Generation — the architecture that gives LLMs access to your proprietary data', value: 'RAG' },
+  ],
+  servicesCards: [
+    { title: 'LLM Feature Integration', description: 'Adding LLM-powered features to existing product: API client setup (OpenAI/Anthropic SDK with retry logic, timeout configuration), streaming response implementation (Server-Sent Events from backend to frontend), prompt engineering (system prompts, few-shot examples, chain-of-thought), structured output (JSON mode with Pydantic/Zod schema validation), and model fallback.' },
+    { title: 'RAG Implementation', description: 'Adding proprietary knowledge to LLM responses: document chunking strategy (semantic chunking, not fixed-size), embedding generation (OpenAI text-embedding-3-small), vector database setup (pgvector or Pinecone), retrieval pipeline (query embedding + similarity search + top-k retrieval + reranking), and augmented generation with source attribution.' },
+    { title: 'Semantic Search Integration', description: 'Replacing or augmenting keyword search with semantic search: embedding generation pipeline (product descriptions, documentation, support tickets), search API (query embedding, cosine similarity, ranked results), filter integration (semantic + structured filters), and search analytics with LLM-based relevance judge.' },
+    { title: 'Vision AI Integration', description: 'Adding visual understanding: image analysis (GPT-4o vision — describe content, extract text, classify images, identify objects), document image processing (extract structured data from scans, forms, receipts), quality control (compare images against specifications), and visual content moderation.' },
+    { title: 'Speech AI Integration', description: 'Adding voice capabilities: speech-to-text (Whisper API — transcription with speaker diarisation via AssemblyAI/Deepgram), text-to-speech (OpenAI TTS or ElevenLabs), voice interface (React with Web Audio API for microphone capture, streaming transcription, TTS playback), and meeting intelligence (transcribe + summarise + extract action items).' },
+  ],
+  differentiators: [
+    { feature: 'Cost Management', description: '4 mechanisms: token counting, response caching, model tiering, rate limiting | Basic: No cost controls (unexpected bills)' },
+    { feature: 'RAG Implementation', description: 'Semantic chunking, pgvector, Cohere reranking, RAGAS evaluation | Basic: Basic RAG with no evaluation' },
+    { feature: 'Observability', description: 'LangSmith/Halicone tracing, token costs, latency metrics, drift alerts | Basic: No observability (can\'t debug failures)' },
+    { feature: 'Model Selection Guidance', description: '8-row use-case-to-model table | Basic: One-size-fits-all model selection' },
+    { feature: 'Streaming', description: 'SSE + ReadableStream API — users see tokens as generated | Basic: No streaming (blank screen for 10+ seconds)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'AI Integration Scoping', timeline: 'Week 1', text: 'Use case analysis, model selection (GPT-4o vs Claude vs Gemini vs Whisper), architecture design, cost estimation, and success metrics definition. Deliverable: Integration Specification Document.' },
+    { phase: 'Phase 2', title: 'API Integration & Prompt Engineering', timeline: 'Week 1-3', text: 'API client setup with retry logic, timeout configuration. System prompt design, few-shot examples, chain-of-thought instructions. Structured output with JSON schema validation. Deliverable: Working API Integration.' },
+    { phase: 'Phase 3', title: 'Streaming & Response Handling', timeline: 'Week 2-4', text: 'Server-Sent Events from backend to frontend. ReadableStream API on frontend for token-by-token display. Error handling, timeout management, cancellation support. Deliverable: Streaming Implementation.' },
+    { phase: 'Phase 4', title: 'RAG Pipeline (If Required)', timeline: 'Week 3-6', text: 'Document chunking strategy, embedding generation, vector database setup, retrieval pipeline with reranking, augmented generation with citations. Deliverable: Production RAG Pipeline.' },
+    { phase: 'Phase 5', title: 'Cost Management & Observability', timeline: 'Week 4-6', text: 'Token counting pre-request, response caching, model tiering logic, per-user rate limiting. LangSmith/Halicone setup for tracing, latency measurement, token tracking, and alerting. Deliverable: Cost Dashboard + Observability Stack.' },
+    { phase: 'Phase 6', title: 'Testing & Deployment', timeline: 'Week 5-7', text: 'Unit tests for prompt outputs, integration tests for API calls, load testing for concurrency. Deploy with feature flag, gradual rollout. Deliverable: Production AI Feature.' },
+  ],
+  techStackCategories: [
+    { layer: 'LLM APIs', technologies: 'OpenAI (GPT-4o, GPT-4o mini, text-embedding-3-small, Whisper, TTS), Anthropic (Claude 3.5 Sonnet, Haiku), Google (Gemini 1.5 Pro, Flash)' },
+    { layer: 'Orchestration', technologies: 'LangChain (chains, agents, memory), LlamaIndex (RAG pipelines), custom lightweight orchestration for simple features' },
+    { layer: 'RAG Stack', technologies: 'pgvector (PostgreSQL — default), Pinecone (high-volume), Cohere Rerank (precision), OpenAI embeddings' },
+    { layer: 'Streaming', technologies: 'FastAPI + Server-Sent Events (backend), ReadableStream API (frontend), WebSocket (bidirectional for agents)' },
+    { layer: 'Observability', technologies: 'LangSmith (LLM tracing), Helicone (OpenAI proxy — cost + logging), Sentry (errors), Prometheus + Grafana (metrics)' },
+    { layer: 'Cost Management', technologies: 'tiktoken (token counting), Redis (response caching), custom rate limiting middleware' },
+    { layer: 'Security', technologies: 'Presidio (PII redaction), prompt injection detection, output validation against schema' },
+  ],
+  pricingTiers: [
+    { type: 'AI Integration Scoping', investment: '$3,000 – $6,000', timeline: '1 – 2 weeks', bestFor: 'Use case analysis, model selection, architecture design, cost estimate' },
+    { type: 'LLM Feature (1-2 features)', investment: '$8,000 – $22,000', timeline: '3 – 5 weeks', bestFor: 'API integration, prompt engineering, streaming, cost management' },
+    { type: 'RAG Implementation', investment: '$12,000 – $35,000', timeline: '4 – 7 weeks', bestFor: 'Chunking, embeddings, vector DB, retrieval, reranking, evaluation' },
+    { type: 'Semantic Search', investment: '$8,000 – $22,000', timeline: '3 – 5 weeks', bestFor: 'Embedding pipeline, pgvector/Algolia, query API, analytics' },
+    { type: 'Vision AI Integration', investment: '$8,000 – $20,000', timeline: '3 – 5 weeks', bestFor: 'Image analysis, document OCR, structured output, moderation' },
+    { type: 'Speech AI (STT + TTS)', investment: '$8,000 – $20,000', timeline: '3 – 5 weeks', bestFor: 'Whisper transcription, TTS generation, voice interface' },
+    { type: 'Full AI Feature Suite', investment: '$20,000 – $70,000', timeline: '6 – 12 weeks', bestFor: 'Multiple features, RAG, semantic search, observability, cost monitoring' },
+    { type: 'AI Integration Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'Model updates, prompt optimisation, new features, cost monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'Add AI to Existing SaaS', description: 'Add RAG-powered Q&A, document analysis, or content generation to existing product. 6-12 week integration. No rebuild required.' },
+    { name: 'Semantic Search Upgrade', description: 'Replace keyword search with semantic search in documentation, e-commerce, or internal tools. 3-5 week integration.' },
+    { name: 'Voice-Enabled Features', description: 'Add speech-to-text for meeting transcription or text-to-speech for accessibility. 3-5 week integration.' },
+    { name: 'Document Processing Pipeline', description: 'Add vision + LLM extraction for invoice processing, contract analysis, or form digitization. 4-7 week integration.' },
+  ],
+  sections: [
+    {
+      heading: 'AI Integration Services',
+      body: '',
+      items: [],
+    },
+    {
+      heading: 'LLM Feature Integration — Technical Architecture',
+      body: 'Adding LLM-powered features to an existing product requires: API client setup (OpenAI SDK or Anthropic SDK with TypeScript types, retry logic with exponential backoff, timeout configuration), streaming response implementation (Server-Sent Events from backend to frontend — users see tokens appear as they are generated, not a blank screen for 10 seconds), prompt engineering (system prompts that define model behaviour precisely, few-shot examples for consistent output formatting, chain-of-thought instructions for reasoning-intensive tasks), structured output (JSON mode with Pydantic/Zod schema — LLM responses validated against a type definition before they reach the application layer), and model fallback (primary model + fallback model — automatically switch if primary is rate-limited or unavailable).',
+      items: [],
+    },
+    {
+      heading: 'Cost Management in Production AI Features',
+      body: 'Cost management requires four mechanisms: token counting and budget limits (count tokens before each API call — reject or truncate requests that would exceed a per-user or per-request budget), response caching (cache responses to repeated or semantically similar queries — a user asking "what is your refund policy?" should not trigger a new LLM call every time), model tiering (route requests to cheaper, faster models — GPT-4o mini at $0.15/1M tokens vs GPT-4o at $2.50/1M tokens — based on task complexity), and per-user rate limiting (cap the number of AI requests per user per day — prevents any single user or abuse pattern from exhausting your API budget). ClickMasters implements all four mechanisms and sets up a cost monitoring dashboard (usage per model, per user, per feature — with budget alert thresholds) as standard.',
+      items: [],
+    },
+    {
+      heading: 'Model Selection Guide',
+      body: '',
+      items: [
+        'Text generation (complex): GPT-4o or Claude 3.5 Sonnet — best reasoning, instruction following, structured output. Alternative: Gemini 1.5 Pro (large context window)',
+        'Text generation (fast/cheap): GPT-4o mini or Claude 3.5 Haiku — 10x cheaper, 3x faster, sufficient for classification, routing, summarisation',
+        'RAG / embeddings: text-embedding-3-small (OpenAI) — best cost/performance, 1536 dimensions, $0.02/1M tokens. Alternative: Cohere embed-v3 (better for multilingual)',
+        'Vision / image analysis: GPT-4o — native multimodal (text + image in one request). Alternative: Claude 3.5 Sonnet (strong vision)',
+        'Speech-to-text: Whisper via API — best accuracy, multilingual, speaker timestamps. Alternative: Deepgram (lower latency streaming)',
+        'Text-to-speech: OpenAI TTS — natural voices, 6 voice options, streaming. Alternative: ElevenLabs (highest quality, voice cloning)',
+        'Long documents (>100K tokens): Claude 3.5 Sonnet (200K ctx) — analyze entire long documents without chunking. Alternative: Gemini 1.5 Pro (1M ctx)',
+        'Code generation: GPT-4o or Claude 3.5 Sonnet — both excel at code. Alternative: DeepSeek Coder (self-hosted, lower cost)',
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: 'How do I add AI features to my existing SaaS product?',
+      answer: 'Adding AI features to an existing SaaS product involves four steps: use case selection (which specific user problem does this AI feature solve — not "add AI" but "help users draft email replies faster"), model selection (which AI API is right for this use case — text generation, embeddings, vision, or speech), API integration (implementing the model API call in your backend with proper error handling, retry logic, rate limiting, and streaming), and production reliability (monitoring token costs, latency, and model error rates — AI APIs fail differently from regular APIs and need specific observability). ClickMasters handles all four steps as part of an AI integration engagement — you define the user problem, we design and build the AI feature.',
+    },
+    {
+      question: 'What is RAG and when do I need it?',
+      answer: 'RAG (Retrieval-Augmented Generation) is the architecture for giving an LLM access to information it was not trained on — your product documentation, your customer data, your internal knowledge base. Without RAG, an LLM can only answer from its training data (which cuts off at a point in the past and does not include your proprietary information). With RAG, when a user asks a question, the system first retrieves the most relevant documents from your knowledge base (using semantic search — vector similarity), then passes those documents to the LLM as context, and the LLM generates an answer grounded in your specific content. RAG is the right architecture when: the AI feature needs to answer questions about your specific product, documentation, or policies; the information changes frequently (model training data does not update, but your RAG database does); or you need the AI to cite its sources (retrieved document references are available as metadata). Fine-tuning is an alternative for behaviour and style, not for knowledge — do not fine-tune when RAG is the correct solution.',
+    },
+    {
+      question: 'How do you manage AI API costs in production?',
+      answer: 'AI API costs in production are managed with four mechanisms: token counting and budget limits (count tokens before each API call — reject or truncate requests that would exceed a per-user or per-request budget), response caching (cache responses to repeated or semantically similar queries — a user asking "what is your refund policy?" should not trigger a new LLM call every time), model tiering (route requests to cheaper, faster models — GPT-4o mini at $0.15/1M tokens vs GPT-4o at $2.50/1M tokens — based on the complexity of the task), and per-user rate limiting (cap the number of AI requests per user per day — prevents any single user or abuse pattern from exhausting your API budget). ClickMasters implements all four mechanisms and sets up a cost monitoring dashboard (usage per model, per user, per feature — with budget alert thresholds) as standard on every AI integration engagement.',
+    },
+    {
+      question: 'How do you handle AI response quality and hallucinations?',
+      answer: 'Hallucination mitigation in production AI systems uses several techniques. Structured output (JSON mode with schema validation — the model cannot hallucinate a field that isn\'t in the schema; numeric values can be validated against ranges; required fields must be present). RAG grounding (provide the LLM with retrieved source documents and instruct it to answer only from those documents — answers not supported by the context should be refused). Temperature control (lower temperature for factual tasks — temperature 0 produces more deterministic, less creative output, reducing the probability of confabulation). Output validation (a second LLM call or a rules check that validates the first response against known-good criteria — for high-stakes use cases where a hallucinated response is costly). Confidence thresholds (for classification tasks, require a minimum confidence before acting on the result — uncertain classifications go to a human review queue). Human-in-the-loop for high-stakes decisions (AI generates a recommendation, a human approves before action is taken).',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters integrated semantic search into our product in 4 weeks. Now our users can search using natural language — not just keywords — and find what they need 3x faster. The team handled everything from embedding pipeline to API design.",
+    author: "CTO",
+    role: "SaaS Platform"
+  },
+  caseStudy: {
+    title: "Semantic Search Integration",
+    description: "Integrated semantic search into existing SaaS product. Replaced keyword search with embedding-based retrieval. Reduced failed searches by 65% and increased search-to-result success rate from 42% to 89%.",
+    slug: "semantic-search-integration",
+    badge: "AI Integration"
+  },
+  howToSteps: [
+    { name: 'AI Integration Scoping', text: 'Use case analysis, model selection, architecture design, cost estimate.' },
+    { name: 'API Integration & Prompt Engineering', text: 'API client setup, system prompts, few-shot examples, structured output.' },
+    { name: 'Streaming & Response Handling', text: 'SSE from backend, ReadableStream on frontend, token-by-token display.' },
+    { name: 'RAG Pipeline (If Required)', text: 'Chunking, embeddings, vector DB, retrieval, reranking, citations.' },
+    { name: 'Cost Management & Observability', text: 'Token counting, caching, tiering, rate limiting, LangSmith/Halicone.' },
+    { name: 'Testing & Deployment', text: 'Unit tests, integration tests, load testing, feature flag rollout.' },
+  ],
+  itemList: [
+    'LLM Feature Integration',
+    'RAG Implementation',
+    'Semantic Search Integration',
+    'Vision AI Integration',
+    'Speech AI Integration',
+  ],
+  definedTerms: [
+    { name: 'RAG', description: 'Retrieval-Augmented Generation — architecture giving LLMs access to proprietary knowledge bases by retrieving relevant documents at query time.' },
+    { name: 'Time-to-First-Token', description: 'TTFT — latency from request to first token received. Essential for perceived responsiveness.' },
+    { name: 'Speech-to-Text (STT)', description: 'Converting spoken audio to written text. Used for meeting transcription, voice commands, call analytics.' },
+    { name: 'Text-to-Speech (TTS)', description: 'Converting written text to spoken audio. Used for accessibility, voice interfaces, content creation.' },
+  ],
+};
+
+const llmApplicationsDevelopmentOverride: ServicePageContent = {
+  slug: 'llm-applications-development',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'llm-applications-development',
+  category: 'Artificial Intelligence (AI)',
+  title: 'LLM Applications Development',
+  serviceName: 'LLM Applications Development',
+  metaTitle: 'LLM Application Development | Production LLM Products | ClickMasters',
+  metaDescription:
+    'ClickMasters builds production LLM applications — RAG systems, AI writing tools, document analysis platforms, and LLM-powered SaaS features — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds production LLM applications for B2B companies across the USA, Europe, Canada, and Australia. Document Q&A systems that answer questions from your proprietary knowledge base with cited sources. AI writing assistants that generate on-brand content at scale. Contract analysis platforms that extract and compare terms across thousands of documents. Code review tools. Report generation systems. Every LLM application built with streaming, cost management, evaluation frameworks, and production observability — not just a wrapper around an API call.',
+  highlights: [
+    '✓ RAG Document Q&A',
+    '✓ AI Writing Tools',
+    '✓ Contract Analysis',
+    '✓ LLM Evaluation (RAGAS, DeepEval)',
+    '✓ Streaming + Cost Monitoring',
+    '✓ LangSmith Observability',
+  ],
+  marketStats: [
+    { label: 'The most widely used LLM orchestration framework — 90M+ downloads, production-proven', value: 'LangChain' },
+    { label: 'The evaluation framework for RAG systems — automated faithfulness, relevance, and completeness scoring', value: 'RAGAS' },
+    { label: 'PostgreSQL vector extension — production RAG without a separate vector database for most B2B use cases', value: 'pgvector' },
+    { label: 'The unit of LLM cost — 1 token ≈ 0.75 words. Cost management is architecture, not an afterthought', value: 'Token' },
+  ],
+  servicesCards: [
+    { title: 'Document Q&A / Knowledge Base Application', description: 'LLM application answering questions from document corpus: ingestion pipeline (PDFs, Word docs, web pages via Unstructured.io, semantic chunking, embeddings in pgvector), query pipeline (question embedded → top-k retrieval → Cohere reranking → GPT-4o answer with citations), streaming response, source attribution UI, and admin interface for knowledge base management.' },
+    { title: 'AI Writing Assistant', description: 'LLM-powered content generation for B2B: brand-voice writing assistant (system prompt encodes voice, few-shot examples demonstrate style), email and proposal generator (first-draft from template + CRM context), content repurposing tool (blog → social posts, summaries, newsletters), and multilingual content generation.' },
+    { title: 'Contract & Document Analysis Platform', description: 'LLM-powered contract analysis: clause extraction (payment terms, liability caps, termination provisions — structured JSON output), contract comparison (flag deviations from standard, severity rating), risk scoring, bulk analysis (hundreds of contracts), and contract Q&A with clause-level citations.' },
+    { title: 'AI-Powered Report Generation', description: 'Automated report generation from structured data: data-to-narrative (financial metrics, survey results → narrative interpretation), executive summary generation, personalised report generation (each user sees analysis of their specific data), and scheduled report generation (weekly/monthly automated reports).' },
+    { title: 'Code Review & Analysis Tool', description: 'LLM-powered developer tooling: automated code review (GitHub PR integration — bugs, security vulnerabilities, style violations, test gaps), code explanation (plain language for onboarding), technical debt identification, and natural language to SQL (business questions → SQL queries against schema).' },
+  ],
+  differentiators: [
+    { feature: 'Production Architecture', description: '7 layers: LLM + orchestration + RAG + streaming + evaluation + observability + cost | Basic: API call wrapped in a UI' },
+    { feature: 'RAG Evaluation', description: 'RAGAS metrics: faithfulness, context relevance, answer relevance, context recall | Basic: No evaluation (can\'t measure quality)' },
+    { feature: 'Observability', description: 'LangSmith tracing, token costs, latency metrics, replay production traces | Basic: No observability (black-box failures)' },
+    { feature: 'Cost Management', description: 'Token budgets, response caching, model tiering, per-user rate limits | Basic: No cost controls (unexpected bills)' },
+    { feature: 'Streaming Standard', description: 'SSE + ReadableStream API — tokens displayed as generated | Basic: No streaming (blank screen, poor UX)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'LLM Application Scoping', timeline: 'Week 1', text: 'Architecture design (RAG vs fine-tuning vs agents), model selection, RAG pipeline design, evaluation strategy, cost model, and success metrics. Deliverable: Architecture Specification.' },
+    { phase: 'Phase 2', title: 'RAG Pipeline Development', timeline: 'Week 2-5', text: 'Document ingestion pipeline (Unstructured.io), semantic chunking (meaning boundaries, not character count), embedding generation (text-embedding-3-small), vector store (pgvector), retrieval with reranking (Cohere Rerank). Deliverable: Production RAG Pipeline.' },
+    { phase: 'Phase 3', title: 'LLM Integration & Orchestration', timeline: 'Week 3-6', text: 'LangChain or LlamaIndex orchestration, chain definition, prompt engineering (system prompts, few-shot, chain-of-thought), structured output (JSON schema), response streaming (SSE). Deliverable: Core LLM Integration.' },
+    { phase: 'Phase 4', title: 'Application Backend & Frontend', timeline: 'Week 4-8', text: 'FastAPI backend with streaming endpoints, React frontend with ReadableStream API for token-by-token display, source attribution UI, admin interfaces. Deliverable: Full-stack Application.' },
+    { phase: 'Phase 5', title: 'Evaluation & Observability', timeline: 'Week 6-9', text: 'RAGAS evaluation (faithfulness, context relevance, answer relevance), DeepEval unit tests, LangSmith tracing setup, cost monitoring dashboard, accuracy drift alerts. Deliverable: Evaluation Framework + Dashboard.' },
+    { phase: 'Phase 6', title: 'Production Deployment & Retainer', timeline: 'Week 8-12', text: 'Deploy with feature flag, gradual rollout. Post-launch: prompt optimisation, evaluation monitoring, model updates, feature development. Deliverable: Production Application + Retainer Option.' },
+  ],
+  techStackCategories: [
+    { layer: 'Orchestration', technologies: 'LangChain (chains, agents, memory), LlamaIndex (RAG-specific — indexing, query pipelines), LangGraph (stateful multi-step workflows)' },
+    { layer: 'LLM Layer', technologies: 'GPT-4o (complex reasoning), GPT-4o mini (cost-sensitive), Claude 3.5 Sonnet (long documents), model router (complexity-based selection)' },
+    { layer: 'RAG Pipeline', technologies: 'Unstructured.io (document parsing), OpenAI text-embedding-3-small, pgvector (vector store), Cohere Rerank (precision), RAGAS (evaluation)' },
+    { layer: 'Streaming', technologies: 'FastAPI + Server-Sent Events (backend), ReadableStream API (frontend), tiktoken (token counting pre-stream)' },
+    { layer: 'Evaluation', technologies: 'RAGAS (faithfulness, relevance, completeness), DeepEval (pytest-style LLM unit tests), LangSmith (production trace eval)' },
+    { layer: 'Observability', technologies: 'LangSmith (LLM tracing — full chain trace with token counts, latency, cost), Helicone (OpenAI proxy dashboard), Prometheus + Grafana, Sentry' },
+    { layer: 'Cost Management', technologies: 'Token budget per request, Redis (response caching), model tiering logic, per-user rate limiting, daily/monthly spend alerts' },
+    { layer: 'Infrastructure', technologies: 'AWS ECS Fargate, RDS PostgreSQL (pgvector), Redis ElastiCache (session, cache), S3 (document storage), CloudFront' },
+  ],
+  pricingTiers: [
+    { type: 'LLM Application Scoping', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'Architecture design, RAG strategy, evaluation plan, cost model, proposal' },
+    { type: 'Document Q&A System', investment: '$15,000 – $45,000', timeline: '5 – 9 weeks', bestFor: 'Ingestion pipeline, RAG, streaming, source attribution, admin UI' },
+    { type: 'AI Writing Assistant', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Brand-voice system prompt, generation API, React UI, streaming' },
+    { type: 'Contract Analysis Platform', investment: '$20,000 – $60,000', timeline: '6 – 11 weeks', bestFor: 'Clause extraction, comparison, risk scoring, bulk processing, dashboard' },
+    { type: 'Report Generation System', investment: '$15,000 – $45,000', timeline: '5 – 9 weeks', bestFor: 'Data-to-narrative, templates, personalisation, scheduled delivery' },
+    { type: 'Code Review Tool', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'GitHub integration, diff analysis, PR comments, structured findings' },
+    { type: 'Custom LLM Application', investment: '$18,000 – $80,000', timeline: '5 – 14 weeks', bestFor: 'Any LLM-native product — streaming + RAG + eval + observability standard' },
+    { type: 'LLM Application Retainer', investment: '$4,000 – $10,000/mo', timeline: 'Ongoing', bestFor: 'Prompt optimisation, eval monitoring, model updates, feature development' },
+  ],
+  industryUseCases: [
+    { name: 'Document Q&A / Knowledge Base', description: 'Internal HR policy Q&A, product documentation assistant, regulatory compliance assistant. Users ask questions, system retrieves from knowledge base and gives cited answers.' },
+    { name: 'AI Writing Assistant', description: 'Brand-voice content generation, email/proposal generation, content repurposing (blog → social posts, summaries). Generates on-brand content at scale.' },
+    { name: 'Contract Analysis Platform', description: 'Clause extraction, contract comparison against standard, risk scoring, bulk analysis, contract Q&A with clause-level citations.' },
+    { name: 'Report Generation', description: 'Data-to-narrative from financial metrics or survey results, executive summary generation, personalised reports per user, scheduled automated reports.' },
+  ],
+  sections: [
+    {
+      heading: 'The LLM Application Architecture Stack',
+      body: 'Production LLM applications require more than API calls. The gap between a demo that works in a Jupyter notebook and a product that reliably serves 10,000 users is the production architecture — streaming, error handling, evaluation, cost management, and observability. ClickMasters builds every LLM application on this foundation from day one.',
+      items: [
+        'LLM Layer: Primary GPT-4o for complex reasoning; GPT-4o mini for cost-sensitive tasks. Alternative Claude 3.5 Sonnet for long documents. Model router automatically selects based on input complexity and cost budget',
+        'Orchestration: LangChain for chains, agents, memory; LlamaIndex for RAG-specific document indexing; LangGraph for stateful multi-step workflows',
+        'RAG Pipeline: Unstructured.io for document parsing, semantic chunking (split on meaning boundaries, not character count), OpenAI text-embedding-3-small, pgvector vector store, Cohere Rerank for precision',
+        'Streaming: FastAPI + Server-Sent Events backend, ReadableStream API frontend — tokens displayed as generated, no blank screen',
+        'Evaluation: RAGAS for faithfulness, context relevance, answer relevance, context recall; DeepEval for pytest-style LLM unit tests; LangSmith for production trace evaluation',
+        'Observability: LangSmith for full chain trace with token counts, latency, cost per call; Helicone for real-time cost dashboard; Prometheus + Grafana for infrastructure metrics',
+        'Cost Management: Token budget per request, response caching (Redis), model tiering, per-user rate limiting, daily/monthly spend alerts',
+      ],
+    },
+    {
+      heading: 'LangChain vs LlamaIndex — When to Use Which',
+      body: 'LangChain and LlamaIndex are both LLM orchestration frameworks, but they have different design philosophies and strengths. LangChain is a general-purpose LLM application framework — it provides abstractions for chains (sequences of LLM calls), agents (LLMs that decide which tools to call), memory (conversation history management), and tool integration. LangChain is the better choice for complex multi-step LLM workflows, agent-based systems, and applications requiring broad tool integration. LlamaIndex is specialised for data-intensive LLM applications — specifically RAG systems. It excels at document ingestion, chunking strategies, index construction, query pipeline configuration, and RAG evaluation (RAGAS integration). LlamaIndex is the better choice when the primary use case is Q&A or analysis over a document corpus. ClickMasters uses LangChain for orchestration-heavy applications and LlamaIndex for RAG-heavy applications — often combining both in the same system.',
+      items: [],
+    },
+    {
+      heading: 'How to Evaluate LLM Application Quality',
+      body: 'LLM application evaluation uses automated and human evaluation methods. For RAG systems, RAGAS provides four automated metrics: Faithfulness (does the answer contain only information from the retrieved context — no hallucinations?), Context Relevance (does the retrieved context contain information relevant to the question?), Answer Relevance (does the answer actually address the question asked?), and Context Recall (did the retrieval find all the relevant context?). For generation quality, DeepEval provides pytest-style unit tests for LLM outputs — assert that a response contains specific information, does not contain specific words, is within a character length range, or matches a semantic pattern. LangSmith captures production traces — real user queries and LLM responses can be reviewed, annotated, and used to build an evaluation dataset from production traffic. ClickMasters implements RAGAS or DeepEval evaluation as standard on all RAG and generation applications — providing a quantitative quality baseline and a regression detection mechanism for future model or prompt changes.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is an LLM application?',
+      answer: 'An LLM application is a software product that uses a large language model (LLM) as a core component of its functionality — not as a chatbot overlay, but as the intelligence engine that powers a specific workflow. Examples: a document Q&A system that answers questions from an enterprise knowledge base with cited sources (the LLM understands the question and generates an answer from retrieved documents); a contract analysis platform that extracts and compares clause terms across thousands of contracts (the LLM understands legal text and produces structured analysis); an AI writing assistant that generates on-brand sales emails from CRM context (the LLM generates personalised content matching company tone guidelines). LLM applications differ from chatbots in that they are task-specific, their outputs have defined structure and evaluation criteria, and they are integrated into business workflows rather than being standalone conversation interfaces.',
+    },
+    {
+      question: 'What is the difference between LangChain and LlamaIndex?',
+      answer: 'LangChain and LlamaIndex are both LLM orchestration frameworks, but they have different design philosophies and strengths. LangChain is a general-purpose LLM application framework — it provides abstractions for chains (sequences of LLM calls and other operations), agents (LLMs that decide which tools to call), memory (conversation history management), and tool integration. LangChain is the better choice for complex multi-step LLM workflows, agent-based systems, and applications requiring broad tool integration. LlamaIndex is specialised for data-intensive LLM applications — specifically RAG systems. It excels at document ingestion, chunking strategies, index construction, query pipeline configuration, and RAG evaluation (RAGAS integration). LlamaIndex is the better choice when the primary use case is Q&A or analysis over a document corpus. ClickMasters uses LangChain for orchestration-heavy applications and LlamaIndex for RAG-heavy applications — often combining both in the same system.',
+    },
+    {
+      question: 'How do you evaluate LLM application quality?',
+      answer: 'LLM application evaluation uses automated and human evaluation methods. For RAG systems, RAGAS provides four automated metrics: Faithfulness (does the answer contain only information from the retrieved context — no hallucinations?), Context Relevance (does the retrieved context actually contain information relevant to the question?), Answer Relevance (does the answer actually address the question asked?), and Context Recall (did the retrieval find all the relevant context?). For generation quality, DeepEval provides pytest-style unit tests for LLM outputs — assert that a response contains specific information, does not contain specific words, is within a character length range, or matches a semantic pattern. LangSmith captures production traces — real user queries and LLM responses can be reviewed, annotated, and used to build an evaluation dataset from production traffic. ClickMasters implements RAGAS or DeepEval evaluation as standard on all RAG and generation applications — providing a quantitative quality baseline and a regression detection mechanism for future model or prompt changes.',
+    },
+    {
+      question: 'How do you handle LLM latency in production?',
+      answer: 'LLM latency has two components: time-to-first-token (TTFT — how long before the user sees any response) and generation speed (tokens per second — how fast the full response appears). For user-facing features, streaming is essential: the backend starts forwarding tokens to the frontend as soon as the LLM begins generating — the user sees the response start within 1-2 seconds even if the complete response takes 10-20 seconds. Without streaming, users see a blank screen until the full response is ready. At the architecture level, latency is managed with: model selection (GPT-4o mini has 3-5x lower TTFT than GPT-4o — use the smaller model when the task does not require full capability), response caching (identical or semantically similar queries are served from cache — zero LLM latency), prompt length optimisation (shorter prompts = faster responses — reduce few-shot examples to the minimum required), and parallel retrieval (in RAG systems, retrieve from the vector database and any other data sources in parallel — not sequentially).',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our document Q&A platform. Our sales team now answers technical questions in seconds instead of hours, with citations directly from our product docs. The RAG pipeline accuracy is above 95% on our corpus.",
+    author: "Head of Product",
+    role: "B2B SaaS Company"
+  },
+  caseStudy: {
+    title: "Document Q&A Platform",
+    description: "Built RAG-powered document Q&A system for enterprise knowledge base. 95% answer accuracy on first query. Reduced time-to-answer from 4 hours to under 30 seconds. Source citations eliminated hallucination risk.",
+    slug: "document-qa-platform",
+    badge: "LLM Application"
+  },
+  howToSteps: [
+    { name: 'LLM Application Scoping', text: 'Architecture design, model selection, RAG strategy, evaluation plan, cost model.' },
+    { name: 'RAG Pipeline Development', text: 'Document ingestion, semantic chunking, embeddings, vector store, retrieval with reranking.' },
+    { name: 'LLM Integration & Orchestration', text: 'LangChain/LlamaIndex orchestration, prompt engineering, structured output, streaming.' },
+    { name: 'Application Backend & Frontend', text: 'FastAPI streaming endpoints, React token-by-token display, source attribution UI.' },
+    { name: 'Evaluation & Observability', text: 'RAGAS evaluation, DeepEval unit tests, LangSmith tracing, cost dashboard.' },
+    { name: 'Production Deployment', text: 'Feature flag rollout, post-launch optimisation, retainer for continuous improvement.' },
+  ],
+  itemList: [
+    'Document Q&A / Knowledge Base Application',
+    'AI Writing Assistant',
+    'Contract & Document Analysis Platform',
+    'AI-Powered Report Generation',
+    'Code Review & Analysis Tool',
+  ],
+  definedTerms: [
+    { name: 'RAG', description: 'Retrieval-Augmented Generation — architecture that gives LLMs access to proprietary knowledge bases by retrieving relevant documents at query time.' },
+    { name: 'Time-to-First-Token', description: 'TTFT — latency from request to first token received. Streaming reduces perceived latency.' },
+    { name: 'LangChain', description: 'General-purpose LLM orchestration framework for chains, agents, memory, and tool integration. 90M+ downloads.' },
+    { name: 'LlamaIndex', description: 'Specialised RAG framework for document ingestion, indexing, query pipelines, and RAGAS evaluation.' },
+    { name: 'RAGAS', description: 'Evaluation framework for RAG systems — metrics: faithfulness, context relevance, answer relevance, context recall.' },
+  ],
+};
+
+const machineLearningSolutionsOverride: ServicePageContent = {
+  slug: 'machine-learning-solutions',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'machine-learning-solutions',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Machine Learning Solutions Company',
+  serviceName: 'Machine Learning Solutions',
+  metaTitle: 'Machine Learning Solutions Company | Custom ML Models for B2B | ClickMasters',
+  metaDescription:
+    'ClickMasters builds production-grade machine learning solutions — predictive models, recommendation systems, classification, NLP, and computer vision — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds, deploys, and operates machine learning solutions for B2B companies across the USA, Europe, Canada, and Australia. Churn prediction models that identify at-risk customers before they cancel. Demand forecasting models that optimize inventory and capacity. Fraud detection models that flag risk before transactions complete. Recommendation engines that drive product discovery and revenue. Deployed in production with monitoring, retraining pipelines, and measurable business outcomes.',
+  highlights: [
+    '✓ Predictive & Classification Models',
+    '✓ Recommendation Systems',
+    '✓ NLP & Text Analytics',
+    '✓ Computer Vision',
+    '✓ MLOps & Model Deployment',
+    '✓ Model Monitoring & Retraining',
+  ],
+  marketStats: [
+    { label: 'Global machine learning market by 2029 (MarketsandMarkets)', value: '$209B' },
+    { label: 'ROI from ML model deployment vs. analytical reporting alone', value: '3.5x' },
+    { label: 'Of ML projects fail to reach production — the \'lab to production\' gap', value: '85%' },
+    { label: 'Annual value of a well-deployed churn prediction model per $10M ARR', value: '$1.6M' },
+  ],
+  servicesCards: [
+    { title: 'Predictive Analytics Models', description: 'Supervised learning models predicting continuous outcomes (regression) or classifying inputs (classification). Business applications: churn prediction, revenue forecasting, demand forecasting, CLV prediction, sales pipeline forecasting. Feature engineering drives most predictive value.' },
+    { title: 'Anomaly Detection & Fraud Detection', description: 'Unsupervised and semi-supervised models identifying unusual patterns in high-volume transaction streams. Isolation Forest, DBSCAN, autoencoders, and XGBoost with real-time scoring API (<100ms latency).' },
+    { title: 'Recommendation Systems', description: 'Collaborative filtering, content-based, and hybrid recommendation systems. Matrix factorization (ALS), neural two-tower models, and LLM-based semantic similarity. Real-time serving (<50ms).' },
+    { title: 'Natural Language Processing (NLP)', description: 'Fine-tuned transformer models (BERT, RoBERTa, DeBERTa) for classification, sentiment analysis, NER, and document classification. Combining with LLM APIs for reasoning-heavy tasks.' },
+    { title: 'Computer Vision Models', description: 'CNNs and vision transformers for image analysis: quality control defect detection, document digitization, safety compliance monitoring. YOLO for real-time detection, ResNet/EfficientNet for classification.' },
+    { title: 'MLOps — Production ML Infrastructure', description: 'Complete MLOps stack: experiment tracking (MLflow), model registry, automated retraining pipelines, feature store (Feast), model serving (FastAPI/SageMaker), and monitoring (Evidently AI).' },
+  ],
+  differentiators: [
+    { feature: 'Production Gap Focus', description: '85% failure rate acknowledgment + full lifecycle ownership | Basic: Build models, hand over file, no deployment responsibility' },
+    { feature: 'Honest Feasibility', description: '"When ML is NOT right" amber callout + go/no-go recommendation | Basic: Sell ML for every problem regardless of fit' },
+    { feature: 'ML vs AI Taxonomy', description: '4-row clarity table (ML, Deep Learning, GenAI, Traditional) | Basic: ML and AI used interchangeably, buyer confusion' },
+    { feature: 'Algorithm Selection', description: 'XGBoost/LightGBM default for tabular data — simplest model that meets requirement | Basic: Deep learning for everything (overkill, slower, less interpretable)' },
+    { feature: 'MLOps Standard', description: 'MLflow + Evidently AI + Feast + monitoring + retraining pipelines | Basic: Model file delivered, monitoring absent' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Problem Definition & Data Assessment', timeline: 'Week 1-2', text: 'Define prediction target, success metrics (business), cost matrix (false positive vs false negative), data audit (sufficiency, quality, labeling). Deliverable: ML Feasibility Report with go/no-go recommendation.' },
+    { phase: 'Phase 2', title: 'Data Engineering & Feature Pipeline', timeline: 'Week 2-5', text: 'Raw data ingestion, data cleaning, feature engineering (domain-specific features, temporal features, aggregations, encodings), train/validation/test split with temporal awareness. Primary determinant of model accuracy.' },
+    { phase: 'Phase 3', title: 'Model Development & Experimentation', timeline: 'Week 3-7', text: 'Baseline model (logistic regression), candidate algorithm evaluation (XGBoost, LightGBM, Random Forest, neural networks), feature selection, hyperparameter optimization (Optuna), cross-validation. All experiments tracked in MLflow.' },
+    { phase: 'Phase 4', title: 'Model Evaluation & Business Validation', timeline: 'Week 6-8', text: 'Technical metrics (AUC-ROC, precision/recall/F1, RMSE/MAE/MAPE), calibration check, fairness evaluation, business outcome translation (expected catch rate, false alarm rate). Approve before deployment.' },
+    { phase: 'Phase 5', title: 'Production Deployment & Serving', timeline: 'Week 7-10', text: 'Model serialization (pickle, ONNX, MLflow), serving API (FastAPI), containerization (Docker), CI/CD for model deployment, A/B testing infrastructure. Latency target: <100ms P95 for real-time.' },
+    { phase: 'Phase 6', title: 'Monitoring, Drift Detection & Retraining', timeline: 'Ongoing', text: 'Data drift monitoring (Evidently AI), concept drift detection, performance monitoring on labelled production samples, automated retraining triggers, model health dashboard. Determines sustained business value.' },
+  ],
+  techStackCategories: [
+    { layer: 'Core ML Frameworks', technologies: 'scikit-learn (classical ML), XGBoost/LightGBM (gradient boosting — best for tabular), PyTorch (deep learning), TensorFlow/Keras, CatBoost (native categorical features)' },
+    { layer: 'NLP', technologies: 'Hugging Face Transformers (BERT, RoBERTa, DeBERTa), spaCy (NER, dependency parsing), NLTK, Gensim, OpenAI/Anthropic APIs (reasoning-heavy tasks)' },
+    { layer: 'Computer Vision', technologies: 'PyTorch + torchvision, Ultralytics YOLOv8 (object detection), OpenCV, Detectron2, Albumentations, CLIP' },
+    { layer: 'Experiment Tracking', technologies: 'MLflow (primary — open-source), Weights & Biases (richer visualization for DL projects)' },
+    { layer: 'Feature Engineering', technologies: 'pandas + numpy, Feature-engine, Feast (feature store), Great Expectations (quality validation)' },
+    { layer: 'Hyperparameter Opt.', technologies: 'Optuna (Bayesian optimization — primary), Ray Tune (distributed), scikit-learn GridSearchCV/RandomizedSearchCV' },
+    { layer: 'Model Serving', technologies: 'FastAPI (primary), BentoML (batching), TorchServe (PyTorch), SageMaker Endpoints, ONNX Runtime (optimized inference)' },
+    { layer: 'MLOps Infrastructure', technologies: 'MLflow Model Registry, Apache Airflow/Prefect (pipeline orchestration), Docker + Kubernetes, GitHub Actions' },
+    { layer: 'Monitoring', technologies: 'Evidently AI (drift — primary), Whylogs (statistical profiling), SageMaker Model Monitor, Prometheus + Grafana' },
+    { layer: 'Data Infrastructure', technologies: 'PostgreSQL, Snowflake/BigQuery, Apache Spark, dbt' },
+  ],
+  pricingTiers: [
+    { type: 'ML Feasibility Study', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'Data audit, problem definition, feasibility assessment, expected accuracy range, roadmap' },
+    { type: 'Predictive Model (Single)', investment: '$12,000 – $35,000', timeline: '5 – 10 weeks', bestFor: 'Feature engineering, model training + evaluation, API deployment, basic monitoring' },
+    { type: 'Churn Prediction System', investment: '$15,000 – $40,000', timeline: '6 – 10 weeks', bestFor: 'Full churn model, Salesforce integration, CRM alerts, 90-day accuracy review' },
+    { type: 'Demand / Revenue Forecasting', investment: '$15,000 – $45,000', timeline: '6 – 12 weeks', bestFor: 'Multi-model ensemble, confidence intervals, dashboard, automated retraining pipeline' },
+    { type: 'Fraud / Anomaly Detection', investment: '$18,000 – $50,000', timeline: '7 – 12 weeks', bestFor: 'Real-time scoring API (<100ms), threshold calibration, false positive management' },
+    { type: 'Recommendation System', investment: '$20,000 – $60,000', timeline: '8 – 14 weeks', bestFor: 'Collaborative/content-based/hybrid, real-time or batch serving, A/B testing' },
+    { type: 'NLP Classification / Extraction', investment: '$15,000 – $45,000', timeline: '6 – 12 weeks', bestFor: 'Fine-tuned transformer, pipeline, API, evaluation framework' },
+    { type: 'Computer Vision Model', investment: '$20,000 – $65,000', timeline: '8 – 14 weeks', bestFor: 'Custom training pipeline, transfer learning, inference API, model card, monitoring' },
+    { type: 'MLOps Implementation', investment: '$15,000 – $45,000', timeline: '5 – 10 weeks', bestFor: 'Experiment tracking, model registry, retraining pipeline, drift monitoring, dashboards' },
+    { type: 'ML Model Audit & Improvement', investment: '$8,000 – $20,000', timeline: '3 – 5 weeks', bestFor: 'Performance audit, drift analysis, feature improvement, retraining, new baseline' },
+    { type: 'ML Growth Retainer', investment: '$5,000 – $15,000/mo', timeline: 'Ongoing', bestFor: 'Model retraining, feature engineering, new use cases, monitoring, performance reports' },
+  ],
+  industryUseCases: [
+    { name: 'Churn Prediction', description: 'Identify at-risk customers 30-90 days before cancellation. Enable proactive retention outreach. 3.5x ROI vs analytical reporting.' },
+    { name: 'Demand Forecasting', description: 'Predict product/service demand for inventory and capacity planning. Reduce stockouts and waste. Quantile forecasts with confidence intervals.' },
+    { name: 'Fraud Detection', description: 'Real-time anomaly detection on transaction streams. <100ms latency. Isolation Forest or XGBoost with threshold calibration for false positive management.' },
+    { name: 'Lead Scoring & CLV', description: 'Replace static rule-based scoring with ML trained on historical win/loss data. Probability of conversion + SHAP explanations per lead.' },
+  ],
+  sections: [
+    {
+      heading: 'The Machine Learning Production Gap — Why 85% of ML Projects Never Deliver Business Value',
+      body: 'Data scientists are excellent at building models. Jupyter notebooks are filled with impressive accuracy metrics. Cross-validation scores are optimized. Feature importance charts are beautiful. And then — the model sits in a notebook. The engineering team does not know how to deploy it. The business team does not know what to do with its outputs. Six months later, the model has not been retrained on new data. The data it was trained on is no longer representative. The model\'s predictions are wrong, but nobody knows it because there is no monitoring.',
+      items: [
+        'The machine learning production gap is the distance between a model that works in a data scientist\'s environment and a model that delivers business value in production.',
+        'Closing that gap requires software engineering, not data science. It requires MLOps — the discipline of treating ML models as software systems that need deployment pipelines, versioning, monitoring, and maintenance.',
+        'ClickMasters approaches machine learning as a software engineering problem: we own the full lifecycle from data requirements and model development through production deployment, monitoring, and retraining.',
+      ],
+    },
+    {
+      heading: 'When Machine Learning Is NOT the Right Answer',
+      body: 'ML is not appropriate for every decision problem. You do not need ML if: the problem can be solved with a small set of explicit rules (use a rules engine instead); you have fewer than 1,000 labeled examples for a classification problem (use statistical analysis or heuristics instead); your decision process requires a human-readable explanation for every output (use a linear model or decision tree instead of deep learning); or the cost of a wrong prediction exceeds the benefit of automation (add human review, not more model complexity). ClickMasters will tell you when a simpler analytical approach delivers better business value than a machine learning model.',
+      items: [],
+    },
+    {
+      heading: 'Machine Learning vs. AI vs. Deep Learning — What Are You Actually Buying?',
+      body: 'These three terms are used interchangeably in vendor marketing and inconsistently understood by buyers. Here is a precise taxonomy.',
+      items: [
+        'Machine Learning (ML): Algorithms that learn patterns from labeled or unlabeled data to make predictions or decisions without being explicitly programmed. Use when: you have historical data with outcomes and want to predict future outcomes. Examples: churn prediction, fraud detection, credit scoring, demand forecasting, lead scoring.',
+        'Deep Learning (DL): A subset of ML using multi-layer neural networks. Learns complex hierarchical features automatically. Requires large datasets and GPU compute. Use when: unstructured data at scale (images, audio, text, video). Examples: image classification, speech recognition, language models, object detection.',
+        'Generative AI (GenAI): AI models that generate new content (text, images, code, audio) — distinct from discriminative ML which classifies or predicts. Use when: content generation, document understanding, conversational interfaces, code assistance. Examples: GPT-4, Claude, Stable Diffusion, GitHub Copilot.',
+        'Traditional ML: Classical statistical algorithms — linear/logistic regression, decision trees, random forests, gradient boosting (XGBoost, LightGBM), SVMs, clustering. Use when: structured tabular data — the most common B2B ML use case. Outperforms deep learning on tabular data.',
+      ],
+    },
+    {
+      heading: 'ClickMasters Default ML Recommendation for B2B Tabular Data',
+      body: 'For the vast majority of B2B ML use cases — churn prediction, fraud detection, demand forecasting, lead scoring, risk classification — gradient boosting (XGBoost or LightGBM) outperforms deep learning on structured tabular data at a fraction of the compute cost and training time, with interpretable feature importance. Deep learning is reserved for unstructured data (images, audio, text) at scale. ClickMasters selects the simplest model that meets the accuracy requirement — not the most impressive-sounding one.',
+      items: [],
+    },
+    {
+      heading: 'ML Model Evaluation — How We Measure Success',
+      body: 'Model evaluation is where many ML projects go wrong: optimizing for the wrong metric, evaluating on test data that leaks future information, or reporting overall accuracy on an imbalanced dataset where 99% of examples belong to one class. ClickMasters uses the correct evaluation metrics for each problem type and always aligns technical metrics to business outcomes.',
+      items: [
+        'Binary Classification (Churn, Fraud): Primary metric AUC-ROC (discrimination ability). Secondary: Precision, Recall, F1, KS Statistic. Business translation: At threshold 0.7, catch X% of churners, contact Y% of non-churners — net retention revenue saved.',
+        'Multi-Class Classification: Primary metric Macro F1 / Weighted F1. Secondary: Per-class precision/recall, Confusion Matrix. Business translation: Correct routing rate, cost of misrouting — ops efficiency impact.',
+        'Regression (Forecasting): Primary metrics RMSE, MAE, MAPE. Secondary: R-squared, residual analysis, directional accuracy. Business translation: Inventory days-of-stock error, forecast bias, planning accuracy.',
+        'Ranking / Recommendation: Primary metrics NDCG@K, MRR, Hit Rate@K. Secondary: Coverage, diversity, novelty. Business translation: Click-through rate lift, revenue per session, conversion rate improvement.',
+        'Anomaly Detection: Primary metric Precision@K (top K flagged are actual anomalies). Secondary: Recall, F1, AUC-PR. Business translation: True positive rate of flagged items, false alarm rate, investigation cost per correct detection.',
+        'Time Series Forecasting: Primary metrics SMAPE, MASE (scale-independent). Secondary: Directional accuracy, interval coverage. Business translation: Inventory over/under-stock cost, revenue forecast accuracy for financial planning.',
+      ],
+    },
+    {
+      heading: 'What is MLOps and why does it matter?',
+      body: 'MLOps (Machine Learning Operations) is the set of practices, tools, and cultural norms that enable reliable, scalable, and maintainable deployment of ML models in production. It is the discipline that bridges the gap between data science (building models) and software engineering (deploying and operating systems). MLOps encompasses: experiment tracking (recording every training run\'s parameters, data, and metrics for reproducibility), model versioning (managing multiple model versions with promotion workflows), automated training pipelines (retrain models on schedule or triggered by performance degradation), model serving (reliable, low-latency inference APIs), and model monitoring (detect data drift and performance degradation before they impact business outcomes). Without MLOps, ML models become stale as the world changes around them — producing increasingly inaccurate predictions while the business assumes they are still reliable.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What are machine learning solutions for business?',
+      answer: 'Machine learning solutions for business are software systems that use statistical algorithms trained on historical data to make predictions, classify inputs, or detect patterns — enabling automated decisions at scale that would otherwise require manual analysis. Common B2B machine learning applications include: churn prediction (identify at-risk customers before they cancel), fraud detection (flag suspicious transactions in real-time), demand forecasting (predict product or service demand for inventory and capacity planning), recommendation systems (personalize product or content discovery for each user), lead scoring (rank sales pipeline by conversion probability), and document classification (automatically route or categorize incoming documents). Production machine learning solutions differ from analytical reporting in that they generate automated predictions or decisions in real-time, not retrospective summaries of what has already happened.',
+    },
+    {
+      question: 'What is the difference between machine learning and AI?',
+      answer: 'Artificial Intelligence (AI) is the broad field of computer science concerned with creating systems that can perform tasks typically requiring human intelligence. Machine Learning (ML) is a subset of AI — specifically the approach where systems learn patterns from data rather than following explicitly programmed rules. All ML is AI, but not all AI is ML: rule-based systems, expert systems, and search algorithms are AI without being ML. In practice, when B2B buyers say \'AI\', they often mean ML (statistical models trained on data to make predictions) or Generative AI (models that generate text, images, or code). Machine learning is the appropriate tool for prediction and classification problems with sufficient historical data. Generative AI is the appropriate tool for content generation, document understanding, and conversational interfaces.',
+    },
+    {
+      question: 'How much data do I need for a machine learning model?',
+      answer: 'Data requirements depend on the model type and problem complexity. For binary classification (churn prediction, fraud detection) using gradient boosting: a minimum of 1,000-5,000 labeled examples per class, with 10,000+ producing meaningfully better models. For regression (demand forecasting): 2+ years of historical data at the granularity you want to forecast (daily, weekly, monthly). For NLP classification using fine-tuned transformers: 500-2,000 labeled examples per class (transfer learning dramatically reduces data requirements vs. training from scratch). For computer vision: 1,000-10,000 labeled images per class (transfer learning from ImageNet-pretrained models reduces this significantly). ClickMasters always starts with a data audit — if the available data is insufficient for a ML model that exceeds a simple analytical baseline, we will tell you before you invest in model development.',
+    },
+    {
+      question: 'What is MLOps and why does it matter?',
+      answer: 'MLOps (Machine Learning Operations) is the set of practices, tools, and cultural norms that enable reliable, scalable, and maintainable deployment of ML models in production. It is the discipline that bridges the gap between data science (building models) and software engineering (deploying and operating systems). MLOps encompasses: experiment tracking (recording every training run\'s parameters, data, and metrics for reproducibility), model versioning (managing multiple model versions with promotion workflows before production deployment), automated training pipelines (retrain models on schedule or triggered by performance degradation), model serving (reliable, low-latency inference APIs), and model monitoring (detect data drift and performance degradation before they impact business outcomes). Without MLOps, ML models become stale as the world changes around them — producing increasingly inaccurate predictions while the business assumes they are still reliable. MLOps is what converts an ML project from a one-time experiment into a self-improving business asset.',
+    },
+    {
+      question: 'What is data drift and model drift in machine learning?',
+      answer: 'Data drift occurs when the statistical distribution of input features in production differs from the distribution in the training data — for example, a fraud model trained on 2022 transaction patterns deployed in 2025 when transaction patterns have changed significantly. Data drift is an early warning signal that model accuracy may be degrading, even before accuracy measurements can confirm it. Model drift (concept drift) occurs when the relationship between input features and the prediction target changes — the model\'s learned patterns are no longer correct, even if the feature distribution is stable. Both types of drift require monitoring and can trigger model retraining. ClickMasters implements drift monitoring using Evidently AI or custom Prometheus metrics as standard in all production ML engagements.',
+    },
+    {
+      question: 'How do you deploy a machine learning model to production?',
+      answer: 'Production ML model deployment involves: serializing the trained model to a portable format (pickle for scikit-learn, TorchScript for PyTorch, ONNX for cross-framework compatibility, or MLflow model format), building a serving API (FastAPI or BentoML inference endpoint with input validation, output schema, and error handling), containerizing the model server with Docker for environment reproducibility, deploying the container to a serving infrastructure (AWS ECS Fargate, SageMaker Endpoint, or Kubernetes), setting up a CI/CD pipeline that runs inference tests before each model promotion, and implementing monitoring for prediction latency, error rate, and accuracy metrics. ClickMasters deploys all production ML models with this full infrastructure stack — not as a Python script running on a shared server.',
+    },
+    {
+      question: 'What is feature engineering in machine learning?',
+      answer: 'Feature engineering is the process of transforming raw data into the input variables (features) that a machine learning model uses to make predictions. It is the most labor-intensive and impactful step in the ML development pipeline — better features consistently produce better models regardless of algorithm choice. Feature engineering includes: numerical transformations (log-transforming skewed variables, normalizing scales), temporal features (converting timestamps into lag features, rolling aggregates, day-of-week, seasonality indicators), categorical encoding (one-hot encoding, target encoding, embedding for high-cardinality categories), interaction features (multiply or divide two features to capture non-linear relationships), behavioral features (aggregate customer actions over 30/60/90-day windows), and domain-specific features that encode expert knowledge about what drives the target variable. ClickMasters invests 30-40% of total model development time in feature engineering — because a logistic regression with excellent features frequently outperforms a deep learning model with poor features.',
+    },
+    {
+      question: 'Can you improve or audit an existing machine learning model?',
+      answer: 'Yes. ML model audit and improvement is a common ClickMasters engagement type. We evaluate existing models against: current performance on fresh test data (models often degrade significantly from the accuracy reported at training time), data drift from the training distribution (has the world changed enough that the training data is no longer representative?), feature quality (are there data leakage issues? Are features still available in the same format?), threshold calibration (is the decision threshold still optimal for the current business cost matrix?), and fairness assessment (are predictions biased against any subgroup?). Based on the audit, we recommend the minimum intervention required: threshold recalibration (cheapest), feature engineering improvement, retraining on fresh data with the same architecture, or full model rebuild with new algorithm selection if the existing approach is fundamentally flawed.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our churn prediction model and MLOps infrastructure. We now identify at-risk customers 45 days before cancellation with 82% precision. The retention team has reduced churn by 28% in the first year.",
+    author: "VP of Data",
+    role: "B2B SaaS Company"
+  },
+  caseStudy: {
+    title: "Churn Prediction & MLOps",
+    description: "Built churn prediction system for $50M ARR SaaS company. 85% precision at 40% recall, 45-day advance warning. Integrated with Salesforce for automated alerts. Reduced churn by 28% in first year. Full MLOps pipeline with monthly retraining.",
+    slug: "churn-prediction-mlops",
+    badge: "Machine Learning"
+  },
+  howToSteps: [
+    { name: 'Problem Definition & Data Assessment', text: 'Define prediction target, success metrics, data audit, feasibility assessment.' },
+    { name: 'Data Engineering & Feature Pipeline', text: 'Data ingestion, cleaning, feature engineering, train/validation/test split.' },
+    { name: 'Model Development & Experimentation', text: 'Baseline model, candidate evaluation, hyperparameter tuning, cross-validation.' },
+    { name: 'Model Evaluation & Business Validation', text: 'Technical metrics, calibration check, business outcome translation, approval.' },
+    { name: 'Production Deployment & Serving', text: 'Model serialization, serving API, containerization, CI/CD, A/B testing.' },
+    { name: 'Monitoring, Drift Detection & Retraining', text: 'Data/concept drift monitoring, performance tracking, automated retraining, health dashboard.' },
+  ],
+  itemList: [
+    'Predictive Analytics Models',
+    'Anomaly Detection & Fraud Detection',
+    'Recommendation Systems',
+    'Natural Language Processing (NLP)',
+    'Computer Vision Models',
+    'MLOps — Production ML Infrastructure',
+  ],
+  definedTerms: [
+    { name: 'Machine Learning', description: 'Algorithms learning patterns from data to make predictions without being explicitly programmed.' },
+    { name: 'MLOps', description: 'Practices and tools for reliable, scalable ML model deployment, monitoring, and maintenance in production.' },
+    { name: 'Feature Engineering', description: 'Transforming raw data into input variables that ML models use for predictions — the highest-ROI ML investment.' },
+    { name: 'Data Drift', description: 'When input feature distribution in production differs from training distribution — early warning of model degradation.' },
+    { name: 'Model Drift (Concept Drift)', description: 'When relationship between features and prediction target changes — the model\'s patterns are no longer correct.' },
+    { name: 'AUC-ROC', description: 'Area Under the ROC Curve — primary metric for binary classification measuring discrimination ability across all thresholds.' },
+    { name: 'XGBoost', description: 'Gradient boosting framework — top performer on structured tabular data in Kaggle and production systems.' },
+  ],
+};
+
+const predictiveAnalyticsOverride: ServicePageContent = {
+  slug: 'predictive-analytics',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'predictive-analytics',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Predictive Analytics Services',
+  serviceName: 'Predictive Analytics',
+  metaTitle: 'Predictive Analytics Services | ML Forecasting & Prediction | ClickMasters',
+  metaDescription:
+    'ClickMasters builds predictive analytics systems — churn prediction, demand forecasting, lead scoring, and anomaly detection — using scikit-learn, XGBoost, and LightGBM for B2B companies worldwide.',
+  lead: 'ClickMasters builds predictive analytics systems for B2B companies across the USA, Europe, Canada, and Australia. Churn prediction that identifies at-risk customers 30-90 days before they cancel. Demand forecasting that reduces inventory waste and stockouts. Lead scoring that ranks your pipeline by close probability. Anomaly detection that surfaces fraud and operational issues in real time. Built on scikit-learn, XGBoost, and LightGBM — deployed as production APIs your applications can call.',
+  highlights: [
+    '✓ Churn & Retention Prediction',
+    '✓ Demand Forecasting',
+    '✓ Lead Scoring & CLV',
+    '✓ Anomaly Detection',
+    '✓ Feature Engineering',
+    '✓ Deployed ML APIs',
+  ],
+  marketStats: [
+    { label: 'Advance warning achievable with a well-trained churn model — enough time to intervene and retain', value: '30-90 days' },
+    { label: 'Gradient boosting framework — top performer on structured tabular data in Kaggle competitions and B2B production systems', value: 'XGBoost' },
+    { label: 'SHapley Additive exPlanations — the model interpretability standard. Each prediction explained by contributing features', value: 'SHAP' },
+    { label: 'The primary evaluation metric for classification models — measures discrimination ability across all thresholds', value: 'AUC-ROC' },
+  ],
+  servicesCards: [
+    { title: 'Churn Prediction', description: 'Per-customer churn probability score enabling proactive retention outreach. Feature engineering from event data (product usage frequency, feature adoption, support tickets, billing history, contract proximity). Gradient boosting (LightGBM/XGBoost) on labeled examples. SHAP explanations for each at-risk account. Daily scoring pipeline with CRM/Slack alerts.' },
+    { title: 'Demand Forecasting', description: 'Time series forecasting for inventory management, workforce planning, capacity optimization. Lag features, rolling statistics, calendar effects. LightGBM with time-series CV or Prophet/N-BEATS/TFT. Confidence intervals via quantile regression or conformal prediction. Day-ahead to 12-week-ahead horizons.' },
+    { title: 'Lead Scoring & CLV', description: 'Replace static rule-based scoring with ML trained on historical win/loss. Features: firmographic (company size, industry, tech stack), behavioural (pages visited, content downloads, email engagement), CRM history (stage progression, time-in-stage). Output: conversion probability + SHAP attribution per lead. CLV prediction for acquisition budget allocation.' },
+    { title: 'Anomaly Detection', description: 'Real-time and batch anomaly detection for fraud, operational monitoring, QC. Statistical (Z-score/IQR), Isolation Forest (unsupervised — fast, effective without labeled anomalies), autoencoder (neural network, high reconstruction error for anomalies), or LSTM for time series. Streaming on Kafka with PagerDuty/Slack alerts.' },
+    { title: 'Propensity Models', description: 'Probability that a customer/prospect will take a specific action: upsell propensity (which customers likely to upgrade), cross-sell propensity (adjacent product purchase), campaign response propensity, reactivation propensity (churned customers likely to return). Ranked scores integrated with CRM for sales/marketing prioritization.' },
+  ],
+  differentiators: [
+    { feature: '30-90 Day Advance Warning', description: 'Churn models that give retention teams time to intervene | Basic: Post-hoc analysis with no proactive window' },
+    { feature: 'SHAP Interpretability', description: 'Every prediction explained — "why is this customer at risk?" | Basic: Black-box predictions with no explanation' },
+    { feature: 'Time-Based Evaluation', description: 'Never random splits — temporal cutoffs simulate real prediction scenarios | Basic: Optimistic metrics from random splits' },
+    { feature: 'Confidence Intervals', description: 'Quantile regression or conformal prediction — decision-makers need ranges, not point estimates | Basic: Point forecasts only (no uncertainty quantification)' },
+    { feature: 'Business Validation', description: 'Translate model performance to business outcomes before deployment | Basic: Technical metrics only (no business impact projection)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Data Audit', timeline: 'Week 1', text: 'Review available data sources, assess data quality (completeness, consistency, recency), identify labeling approach, calculate baseline rate, confirm sufficient sample size (minimum 500-1000 positive examples). Deliverable: Data Audit Report with feasibility assessment.' },
+    { phase: 'Phase 2', title: 'Feature Engineering', timeline: 'Week 2-4', text: 'Extract and transform raw data into model-ready features: event aggregation (count, sum, mean over time windows), time-based features (recency, tenure, days-since), ratio features, encoding (one-hot, target), missing value strategy. Deliverable: Feature pipeline code.' },
+    { phase: 'Phase 3', title: 'Model Development', timeline: 'Week 3-5', text: 'Time-based train/validation/test split (never random for time series), baseline model (logistic regression), candidate models (LightGBM, XGBoost, Random Forest), hyperparameter tuning (Optuna — Bayesian, 100-300 trials), evaluation (AUC-ROC, F1, precision-recall, calibration curve). Deliverable: Model Comparison Report.' },
+    { phase: 'Phase 4', title: 'Interpretability', timeline: 'Week 5-6', text: 'SHAP values: global feature importance, local explanations (per-prediction), SHAP summary plots. Partial Dependence Plots for non-linear relationships. Deliverable: Model Explainability Report.' },
+    { phase: 'Phase 5', title: 'Production Deployment', timeline: 'Week 6-8', text: 'FastAPI prediction endpoint (input: features → output: probability + SHAP), batch scoring pipeline (daily/weekly updates to CRM), monitoring setup (prediction distribution drift alerts), A/B test design (business impact measurement). Deliverable: Production API + monitoring dashboard.' },
+  ],
+  techStackCategories: [
+    { layer: 'Core Libraries', technologies: 'scikit-learn, XGBoost, LightGBM, Prophet, statsmodels' },
+    { layer: 'Time Series', technologies: 'Darts, PyTorch Forecasting (TFT, N-BEATS), Nixtla, statsmodels' },
+    { layer: 'Feature Engineering', technologies: 'pandas, numpy, Feature-engine, Feast' },
+    { layer: 'Model Tuning', technologies: 'Optuna (Bayesian optimization), Hyperopt, GridSearchCV' },
+    { layer: 'Interpretability', technologies: 'SHAP, LIME, Eli5, Partial Dependence Plots' },
+    { layer: 'Deployment', technologies: 'FastAPI, MLflow, BentoML, SageMaker Endpoints' },
+    { layer: 'Monitoring', technologies: 'Evidently AI (drift), custom Prometheus + Grafana' },
+  ],
+  pricingTiers: [
+    { type: 'Data Feasibility Audit', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'Data review, label definition, baseline analysis, feasibility report' },
+    { type: 'Churn Prediction Model', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Feature engineering, LightGBM/XGBoost, SHAP, CRM integration, monitoring' },
+    { type: 'Demand Forecasting', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Time series features, model selection, quantile intervals, forecast API' },
+    { type: 'Lead Scoring / CLV Model', investment: '$10,000 – $30,000', timeline: '3 – 7 weeks', bestFor: 'Firmographic + behavioural features, conversion model, SHAP, CRM sync' },
+    { type: 'Anomaly Detection', investment: '$10,000 – $30,000', timeline: '3 – 7 weeks', bestFor: 'Isolation forest or autoencoder, streaming or batch, alert routing' },
+    { type: 'Propensity Model Suite', investment: '$15,000 – $45,000', timeline: '4 – 9 weeks', bestFor: 'Upsell/cross-sell/response/reactivation — 2-4 models with shared feature pipeline' },
+    { type: 'Full Predictive Stack', investment: '$25,000 – $80,000', timeline: '6 – 14 weeks', bestFor: 'Multiple models + feature store + batch pipeline + production APIs + monitoring' },
+    { type: 'ML Retainer', investment: '$4,000 – $10,000/mo', timeline: 'Ongoing', bestFor: 'Retraining, drift monitoring, new features, model iteration' },
+  ],
+  industryUseCases: [
+    { name: 'SaaS Churn Prediction', description: 'Predict which subscription customers will cancel. 30-90 day advance warning. Feature engineering from product usage, support tickets, billing history. SHAP explanations for each at-risk account.' },
+    { name: 'Retail Demand Forecasting', description: 'Forecast product demand by SKU and location. Reduce inventory waste and stockouts. Multi-horizon forecasts with confidence intervals.' },
+    { name: 'B2B Lead Scoring', description: 'Rank sales pipeline by conversion probability. Replace static rules with ML trained on historical win/loss. SHAP explanations for each lead.' },
+    { name: 'Fraud Detection', description: 'Real-time anomaly detection on transaction streams. <100ms latency. Isolation Forest or autoencoder with threshold calibration.' },
+  ],
+  sections: [
+    {
+      heading: 'Predictive Analytics Services',
+      body: '',
+      items: [],
+    },
+    {
+      heading: 'The ML Development Process for Predictive Analytics',
+      body: '',
+      items: [],
+    },
+    {
+      heading: 'SHAP — Model Interpretability',
+      body: 'SHAP (SHapley Additive exPlanations) is a framework for explaining individual ML model predictions — based on game theory\'s Shapley values. For each prediction, SHAP calculates how much each feature contributed to pushing the prediction above or below the baseline (the average prediction across all examples). This enables two types of explanation: global explanations (overall, which features drive the model\'s predictions — the most important business intelligence from the model) and local explanations (for this specific prediction, why did the model score this customer as high-risk — "decreased login frequency contributed -0.23, support ticket increase contributed +0.19"). SHAP is essential for B2B predictive analytics because business stakeholders need to understand why a model made a specific prediction before they act on it — and because regulators in many industries require model decisions to be explainable.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is predictive analytics and how does it differ from reporting?',
+      answer: 'Reporting describes what happened — dashboards, charts, and aggregations of historical data. Predictive analytics uses statistical and ML models trained on historical data to estimate the probability of a future outcome. A dashboard tells you that 15% of customers churned last quarter. A churn prediction model tells you which specific customers are at risk of churning in the next 30 days — enabling proactive intervention before the churn happens. Predictive analytics does not replace reporting — it adds a forward-looking layer that converts historical patterns into actionable probability scores that operations, sales, and customer success teams can act on.',
+    },
+    {
+      question: 'How much data do I need to build a predictive model?',
+      answer: 'The minimum viable dataset depends on the prediction task, but a practical rule of thumb for binary classification (churn/no-churn, convert/no-convert): at least 500-1,000 positive examples (churned customers, converted leads) in your training dataset. Below this threshold, models typically overfit and do not generalise reliably. For time series forecasting (demand, revenue), a minimum of 2 full seasonal cycles (24 months for monthly data, 730 days for daily data) is recommended to capture seasonal patterns. Data quality matters more than quantity — a clean, complete dataset of 2,000 examples consistently outperforms a noisy, inconsistent dataset of 20,000. ClickMasters performs a data feasibility audit as the first step of every predictive analytics engagement.',
+    },
+    {
+      question: 'What is SHAP and why does it matter for ML model interpretability?',
+      answer: 'SHAP (SHapley Additive exPlanations) is a framework for explaining individual ML model predictions — based on game theory\'s Shapley values. For each prediction, SHAP calculates how much each feature contributed to pushing the prediction above or below the baseline (the average prediction across all examples). This enables two types of explanation: global explanations (overall, which features drive the model\'s predictions — the most important business intelligence from the model) and local explanations (for this specific prediction, why did the model score this customer as high-risk — "decreased login frequency contributed -0.23, support ticket increase contributed +0.19"). SHAP is essential for B2B predictive analytics because business stakeholders need to understand why a model made a specific prediction before they act on it — and because regulators in many industries require model decisions to be explainable.',
+    },
+    {
+      question: 'How do you ensure a predictive model performs well in production?',
+      answer: 'Production ML model performance is maintained through three practices. Evaluation methodology: time-based train/test split (simulate real production conditions by training on past data and evaluating on future data — never use random splits for time-sensitive predictions, which produce optimistic metrics that don\'t reflect real performance). Calibration: verify that the model\'s stated probability matches the actual frequency (a model that says "70% churn probability" should be right 70% of the time — use isotonic regression or Platt scaling to calibrate if needed). Monitoring: track the score distribution of new predictions vs. the training distribution — when they diverge significantly (data drift or concept drift), retrain on more recent data. ClickMasters implements monitoring dashboards with automated alerts on every production model.',
+    },
+  ],
+  testimonial: {
+    quote: "The churn prediction model ClickMasters built gives us 45-day advance warning with 82% precision. Our retention team now reaches at-risk customers before they cancel, not after. We\'ve reduced churn by 28% year-over-year.",
+    author: "VP of Customer Success",
+    role: "B2B SaaS Company"
+  },
+  caseStudy: {
+    title: "Churn Prediction Model",
+    description: "Built churn prediction system for $50M ARR SaaS company. 85% precision at 40% recall, 45-day advance warning. SHAP explanations for each at-risk account. Integrated with Salesforce for automated alerts. Reduced churn by 28% in first year.",
+    slug: "churn-prediction",
+    badge: "Predictive Analytics"
+  },
+  howToSteps: [
+    { name: 'Data Audit', text: 'Data sources, quality assessment, labeling approach, baseline analysis, feasibility.' },
+    { name: 'Feature Engineering', text: 'Event aggregation, temporal features, encoding, missing value strategy.' },
+    { name: 'Model Development', text: 'Time-based split, baseline, candidates, hyperparameter tuning, evaluation.' },
+    { name: 'Interpretability', text: 'SHAP global importance, local explanations, PDPs.' },
+    { name: 'Production Deployment', text: 'FastAPI endpoint, batch scoring, monitoring, A/B test design.' },
+  ],
+  itemList: [
+    'Churn Prediction',
+    'Demand Forecasting',
+    'Lead Scoring & CLV',
+    'Anomaly Detection',
+    'Propensity Models',
+  ],
+  definedTerms: [
+    { name: 'SHAP', description: 'SHapley Additive exPlanations — framework for explaining individual ML predictions based on game theory Shapley values.' },
+    { name: 'AUC-ROC', description: 'Area Under the ROC Curve — primary metric for binary classification measuring discrimination ability across all thresholds.' },
+    { name: 'Propensity Model', description: 'ML model estimating probability a customer/prospect will take a specific action (upsell, cross-sell, response, reactivation).' },
+  ],
+};
+
+const recommendationSystemsOverride: ServicePageContent = {
+  slug: 'recommendation-systems',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'recommendation-systems',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Recommendation Systems',
+  serviceName: 'Recommendation Systems',
+  metaTitle: 'Recommendation System Development | Collaborative & Content-Based | ClickMasters',
+  metaDescription:
+    'ClickMasters builds recommendation systems — collaborative filtering, content-based, and hybrid — for B2B e-commerce, SaaS, and content platforms in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds recommendation systems for B2B e-commerce, SaaS, and content platforms across the USA, Europe, Canada, and Australia. Collaborative filtering that learns from collective user behaviour. Content-based recommendations from item features and user preferences. Hybrid models that combine both signals. Two-tower neural architectures for large-scale retrieval. Real-time recommendation APIs that respond in under 50ms.',
+  highlights: [
+    '✓ Collaborative Filtering',
+    '✓ Content-Based Recommendations',
+    '✓ Hybrid Models',
+    '✓ Two-Tower Neural Retrieval',
+    '✓ Real-Time Recommendation API',
+    '✓ A/B Testing Framework',
+  ],
+  marketStats: [
+    { label: 'Of Amazon\'s revenue attributed to its recommendation engine', value: '35%' },
+    { label: 'Of Netflix viewing driven by its recommendation system', value: '75%' },
+    { label: 'Real-time recommendation API response target — below perception threshold', value: '<50ms' },
+    { label: 'Click-through rate — the primary online evaluation metric for recommendation quality', value: 'CTR' },
+  ],
+  servicesCards: [
+    { title: 'E-commerce Product Recommendations', description: '\'Customers also bought\' (collaborative on co-purchase patterns), \'Similar products\' (content-based on category/attributes/price), \'Frequently bought together\' (association rules + ML ranking), cart page upsell. Real-time API connected to Shopify/WooCommerce/custom backend. A/B testing for CTR and revenue-per-session lift.' },
+    { title: 'SaaS Feature Recommendations', description: 'In-product recommendations: onboarding feature suggestions (next feature based on role and similar users), relevant documentation (help articles based on current screen), report/dashboard templates (based on industry and usage), integration recommendations (suggest integrations used by similar customers). Reduces time-to-value and support tickets.' },
+    { title: 'Content Recommendation Engine', description: 'Article/blog recommendations (\'You may also like\' — history + embedding similarity), course/learning path recommendations (collaborative on learning sequences), video recommendations (hybrid), search result personalisation (re-rank based on engagement). Offline: NDCG, MAP. Online: A/B test CTR and engagement time.' },
+    { title: 'Real-Time Recommendation API', description: 'Production API serving recommendations in <50ms. Candidate generation: ANN (FAISS/ScaNN) — retrieves top-K from millions in <10ms. Re-ranking: lightweight ML model with real-time context, business rules. API: REST endpoint input user_id+context → output ranked item_ids+scores. Redis cache, FAISS in-memory, FastAPI serving.' },
+  ],
+  differentiators: [
+    { feature: 'RT API Performance', description: '<50ms response target — FAISS ANN + lightweight re-ranking | Basic: Precomputed batch recommendations (stale, not real-time)' },
+    { feature: 'Cold Start Solutions', description: 'LLM-based semantic recommendations when no interaction data exists | Basic: No recommendations for new users/items' },
+    { feature: 'Evaluation Rigor', description: 'NDCG, MAP offline + CTR, revenue lift online A/B tests | Basic: Basic precision/recall only' },
+    { feature: 'Two-Tower Architecture', description: 'Neural retrieval for large-scale catalogues (millions of items) | Basic: Matrix factorization only (slows at scale)' },
+    { feature: 'Hybrid Models', description: 'Collaborative + content-based blending for best overall performance | Basic: Single approach (limited coverage)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Recommendation Scoping', timeline: 'Week 1', text: 'Data analysis (interaction density, user count, item catalogue size), approach selection (collaborative vs content-based vs hybrid), architecture design (batch vs real-time), success metrics definition (CTR, conversion, revenue). Deliverable: Recommendation Architecture Design.' },
+    { phase: 'Phase 2', title: 'Candidate Generation', timeline: 'Week 2-4', text: 'Collaborative filtering (ALS matrix factorisation for implicit feedback) or content-based embeddings (LLM/TF-IDF on item descriptions). Two-tower neural for large-scale retrieval. ANN index (FAISS) for real-time search. Deliverable: Candidate Generation Pipeline.' },
+    { phase: 'Phase 3', title: 'Re-Ranking & Filtering', timeline: 'Week 3-5', text: 'Lightweight ML model (XGBoost) for re-ranking candidates with real-time features. Business rules: filter out-of-stock, diversity constraints, suppress purchased/recently viewed. Deliverable: Re-ranking API.' },
+    { phase: 'Phase 4', title: 'API & Integration', timeline: 'Week 4-6', text: 'REST API with user_id + context input → ranked item_ids + scores output. Redis cache for session consistency. Integration with e-commerce/SaaS platform. Deliverable: Production Recommendation API.' },
+    { phase: 'Phase 5', title: 'A/B Testing Framework', timeline: 'Week 5-7', text: 'Experiment assignment (user or session-based), variant configuration (model A vs model B), metric collection (CTR, conversion, revenue, engagement time), statistical significance calculation. Deliverable: A/B Testing Dashboard.' },
+    { phase: 'Phase 6', title: 'Retraining & Monitoring', timeline: 'Ongoing', text: 'Scheduled retraining (daily/weekly) on fresh interaction data. Monitor recommendation CTR, coverage, and diversity over time. Alert on performance degradation. Deliverable: Monitoring Dashboard + Retraining Pipeline.' },
+  ],
+  techStackCategories: [
+    { layer: 'Collaborative Filtering', technologies: 'ALS (Spark MLlib), implicit (Python library), Surprise, LightFM' },
+    { layer: 'Neural Recommenders', technologies: 'PyTorch (two-tower models), TensorFlow Recommenders (TFRS), SpotLight' },
+    { layer: 'ANN / Candidate Retrieval', technologies: 'FAISS (Facebook), ScaNN (Google), Annoy (Spotify), NMSLIB' },
+    { layer: 'Content-Based / Embeddings', technologies: 'sentence-transformers (LLM embedding), TF-IDF + cosine, spaCy' },
+    { layer: 'Ranking / Optimization', technologies: 'XGBoost/LightGBM (re-ranking), LambdaRank (learning to rank)' },
+    { layer: 'Serving', technologies: 'FastAPI, Redis (candidate cache), FAISS in-memory index, SageMaker Endpoints' },
+    { layer: 'Evaluation', technologies: 'Spark (offline — NDCG, MAP, Recall@K), A/B testing framework (online — CTR, revenue)' },
+  ],
+  pricingTiers: [
+    { type: 'Recommendation Scoping', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'Data analysis, approach selection, architecture design, proposal' },
+    { type: 'Content-Based Engine (Cold Start)', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'LLM or TF-IDF embeddings, similarity search, recommendation API' },
+    { type: 'Collaborative Filtering Engine', investment: '$12,000 – $32,000', timeline: '4 – 8 weeks', bestFor: 'ALS matrix factorisation, implicit feedback, real-time API, A/B framework' },
+    { type: 'Hybrid Recommendation System', investment: '$15,000 – $45,000', timeline: '5 – 9 weeks', bestFor: 'Collaborative + content-based, blending layer, real-time API' },
+    { type: 'Two-Tower Neural Model', investment: '$20,000 – $60,000', timeline: '6 – 12 weeks', bestFor: 'User + item towers, ANN retrieval (FAISS), re-ranking, API' },
+    { type: 'E-commerce Recommendation Suite', investment: '$15,000 – $50,000', timeline: '5 – 10 weeks', bestFor: '\'Also bought\', \'similar\', cart upsell, homepage personalisation' },
+    { type: 'A/B Testing Framework', investment: '$5,000 – $12,000', timeline: '2 – 3 weeks', bestFor: 'Experiment design, variant assignment, CTR + revenue lift measurement' },
+    { type: 'Recommendation Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'Model retraining, A/B test analysis, new recommendation surfaces' },
+  ],
+  industryUseCases: [
+    { name: 'E-commerce Product Recommendations', description: '\'Also bought\', \'similar products\', cart upsell. Real-time API. 35% of Amazon\'s revenue driven by recommendations.' },
+    { name: 'SaaS Feature Recommendations', description: 'Onboarding suggestions, relevant documentation, integration recommendations. Reduces time-to-value and support tickets.' },
+    { name: 'Content Recommendations', description: 'Articles, courses, videos. Personalised discovery. 75% of Netflix viewing driven by recommendations.' },
+    { name: 'B2B Cross-Sell', description: 'Recommend next product for existing customers based on peer behaviour. Increases CLV and retention.' },
+  ],
+  sections: [
+    {
+      heading: 'Recommendation System Approaches',
+      body: '',
+      items: [
+        'Collaborative Filtering: Finds users with similar behaviour and recommends what those similar users liked. "Users like you also engaged with..." Best for products/content with rich user-item interaction history. Strong for cross-sell and surprise discovery. Data requirement: High — needs sufficient user-item interactions.',
+        'Content-Based: Recommends items similar to what the user has previously engaged with, based on item features (category, tags, description embedding). Works for new items without interaction history. Good for "similar to this item". Data requirement: Low — item features only, no interaction data required.',
+        'Hybrid: Combines collaborative + content-based signals — collaborative for users with interaction history, content-based for cold-start. Best overall performance when both interaction and feature data exist. Data requirement: Moderate — benefits from both.',
+        'Matrix Factorisation: Decomposes user-item interaction matrix into latent user and item vectors. ALS (Alternating Least Squares) for implicit feedback (clicks, views without explicit ratings). Classical production baseline. Efficient at scale. Data requirement: High — dense-enough matrix for factorisation.',
+        'Two-Tower Neural: Two separate neural networks — one for users, one for items — each producing an embedding. Recommendations = approximate nearest neighbour search in embedding space. Large-scale retrieval (millions of items). YouTube, Pinterest, TikTok-style recommendation at scale.',
+        'LLM-based (Semantic): Uses LLM embeddings of item descriptions/content for similarity. Items with semantically similar descriptions are recommended. No interaction data required. Best for cold start — new platforms with no interaction history.',
+      ],
+    },
+    {
+      heading: 'Cold Start Problem in Recommendation Systems',
+      body: 'The cold start problem refers to the difficulty of making recommendations for new users or new items that have no interaction history. For new users (user cold start), the system cannot rely on their personal interaction history — it must fall back to popularity-based recommendations, onboarding questions that capture explicit preferences, or content-based recommendations based on item features. For new items (item cold start), collaborative filtering cannot recommend the item until enough users have interacted with it — content-based approaches using item metadata (description, category, tags) are used to recommend new items alongside established ones. Two-tower neural models mitigate item cold start by representing items through their features rather than learned interaction embeddings.',
+      items: [],
+    },
+    {
+      heading: 'Measuring Recommendation System Quality — Offline vs Online',
+      body: 'Recommendation quality is measured offline (using held-out interaction data) and online (through A/B testing on real users). Offline metrics: Precision@K (of the top-K recommendations, what fraction did the user actually engage with?), Recall@K (of all items the user engaged with, what fraction appeared in the top-K recommendations?), NDCG@K (Normalised Discounted Cumulative Gain — weights hits higher when they appear earlier in the ranked list), and Coverage (what fraction of the item catalogue is recommended to at least one user — low coverage means the model only recommends popular items). Online metrics: CTR (click-through rate on recommendations), conversion rate (purchases from recommendations), and revenue lift (measured against a control group in an A/B test). Offline metrics are fast and cheap; online metrics are the business-relevant ground truth.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is a recommendation system and how does it work?',
+      answer: 'A recommendation system is a machine learning system that predicts which items (products, content, features) a specific user is most likely to find relevant or engage with, and presents those items in ranked order. The prediction is based on: the user\'s historical interaction patterns (what they have clicked, purchased, or consumed), the patterns of similar users (collaborative filtering — users who liked what you liked also liked this), and the properties of items themselves (content-based — this item is similar to others you\'ve engaged with). In production, recommendation systems have two stages: candidate generation (efficiently retrieve a shortlist of potentially relevant items from a large catalogue — too many items to score all of them in real time) and re-ranking (score and rank the candidate shortlist using a more precise model with additional context — the final ranked list served to the user).',
+    },
+    {
+      question: 'What is the cold start problem in recommendation systems?',
+      answer: 'The cold start problem refers to the difficulty of making recommendations for new users or new items that have no interaction history. For new users (user cold start), the system cannot rely on their personal interaction history — it must fall back to popularity-based recommendations, onboarding questions that capture explicit preferences, or content-based recommendations based on item features. For new items (item cold start), collaborative filtering cannot recommend the item until enough users have interacted with it — content-based approaches using item metadata (description, category, tags) are used to recommend new items alongside established ones. Two-tower neural models mitigate item cold start by representing items through their features rather than learned interaction embeddings.',
+    },
+    {
+      question: 'How do you measure recommendation system quality?',
+      answer: 'Recommendation quality is measured offline (using held-out interaction data) and online (through A/B testing on real users). Offline metrics: Precision@K (of the top-K recommendations, what fraction did the user actually engage with?), Recall@K (of all items the user engaged with, what fraction appeared in the top-K recommendations?), NDCG@K (Normalised Discounted Cumulative Gain — weights hits higher when they appear earlier in the ranked list), and Coverage (what fraction of the item catalogue is recommended to at least one user — low coverage means the model only recommends popular items). Online metrics: CTR (click-through rate on recommendations), conversion rate (purchases from recommendations), and revenue lift (measured against a control group in an A/B test). Offline metrics are fast and cheap; online metrics are the business-relevant ground truth.',
+    },
+    {
+      question: 'How many users and interactions do I need for a recommendation system?',
+      answer: 'Collaborative filtering requires sufficient user-item interaction density to learn meaningful patterns. Practical minimums: at least 1,000 active users (users with at least 5-10 interactions each) and at least 10,000-50,000 total interactions for a matrix factorisation model to produce reliable recommendations. Below these thresholds, content-based or LLM-embedding-based recommendations (which require no interaction data) are more reliable. For a content-based system based on item metadata, there is no minimum interaction requirement — the system can recommend from day one using item features. ClickMasters assesses interaction data density as part of the scoping engagement and recommends the approach that fits the current data state, with a migration path to hybrid or collaborative as interaction data grows.',
+    },
+  ],
+  testimonial: {
+    quote: "The recommendation engine ClickMasters built increased our average order value by 28% and conversion rate by 15%. The real-time API serves personalised recommendations in under 30ms.",
+    author: "CTO",
+    role: "B2B E-commerce Platform"
+  },
+  caseStudy: {
+    title: "Product Recommendation Engine",
+    description: "Built hybrid recommendation system for B2B e-commerce platform. Collaborative filtering + content-based. Real-time API (<50ms). Increased AOV by 28%, conversion rate by 15%.",
+    slug: "ecommerce-recommendations",
+    badge: "Recommendation System"
+  },
+  howToSteps: [
+    { name: 'Recommendation Scoping', text: 'Data analysis, approach selection, architecture design, success metrics.' },
+    { name: 'Candidate Generation', text: 'CF (ALS matrix factorisation) or content-based embeddings, ANN index (FAISS).' },
+    { name: 'Re-Ranking & Filtering', text: 'Lightweight ML model (XGBoost) with real-time features, business rules.' },
+    { name: 'API & Integration', text: 'REST API with user_id+context input, ranked outputs, Redis cache.' },
+    { name: 'A/B Testing Framework', text: 'Experiment assignment, variant config, metric collection, significance calculation.' },
+    { name: 'Retraining & Monitoring', text: 'Scheduled retraining, CTR/coverage/diversity monitoring, performance alerts.' },
+  ],
+  itemList: [
+    'Collaborative Filtering',
+    'Content-Based Recommendations',
+    'Hybrid Models',
+    'Matrix Factorisation (ALS)',
+    'Two-Tower Neural Models',
+    'LLM-based (Semantic) Recommendations',
+  ],
+  definedTerms: [
+    { name: 'Collaborative Filtering', description: 'Recommends items based on behaviour patterns of similar users — "users who liked X also liked Y".' },
+    { name: 'Cold Start Problem', description: 'Difficulty recommending for new users or new items with no interaction history.' },
+    { name: 'NDCG@K', description: 'Normalised Discounted Cumulative Gain — offline metric weighting hits higher when they appear earlier in ranked list.' },
+    { name: 'Two-Tower Model', description: 'Neural architecture with separate user and item towers producing embeddings for large-scale retrieval.' },
+  ],
+};
+
+const modelTrainingOptimisationOverride: ServicePageContent = {
+  slug: 'model-training-optimisation',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'model-training-optimisation',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Model Training & Optimisation',
+  serviceName: 'Model Training & Optimisation',
+  metaTitle: 'Model Training & Optimisation Services | Hyperparameter Tuning | ClickMasters',
+  metaDescription:
+    'ClickMasters trains and optimises ML models — hyperparameter tuning, cross-validation, model selection, and MLOps deployment — for B2B companies needing production-quality predictive models.',
+  lead: 'ClickMasters trains and optimises ML models for B2B companies across the USA, Europe, Canada, and Australia. Hyperparameter tuning with Optuna that systematically finds the model configuration your team\'s manual grid search missed. Feature selection that reduces overfitting and improves generalisation. Cross-validation that gives you honest performance estimates. And the MLOps infrastructure to retrain, evaluate, and deploy model updates without manual intervention.',
+  highlights: [
+    '✓ Hyperparameter Tuning (Optuna)',
+    '✓ Cross-Validation & Evaluation',
+    '✓ Feature Selection & Engineering',
+    '✓ Model Distillation',
+    '✓ AutoML',
+    '✓ MLOps Retraining Pipelines',
+  ],
+  marketStats: [
+    { label: 'Training accuracy vs validation accuracy gap indicating overfitting', value: '95% vs 72%' },
+    { label: 'Compute cost reduction vs grid search using Optuna pruning', value: '50-80%' },
+    { label: 'Inference speed improvement with ONNX Runtime vs native PyTorch', value: '2-5x' },
+    { label: 'Model size reduction with distillation + quantisation', value: '5-10x' },
+  ],
+  servicesCards: [
+    { title: 'Hyperparameter Optimisation', description: 'Systematic hyperparameter search using Optuna (Bayesian optimisation). Search space definition, sampler selection (TPE, CMA-ES), pruning (MedianPruner — reduces compute cost 50-80% vs grid search), hyperparameter importance analysis. Consistently finds better configurations in fewer trials than grid or random search.' },
+    { title: 'Cross-Validation & Evaluation', description: 'Proper evaluation methodology for reliable performance estimates: k-fold CV (5/10-fold), stratified k-fold (preserve class balance for imbalanced data), time series CV (TimeSeriesSplit — no leakage), nested CV (model selection + tuning), and calibration assessment (reliability diagrams).' },
+    { title: 'Feature Selection & Importance', description: 'Reducing model complexity to improve generalisation and inference speed. Filter methods (variance, correlation), wrapper methods (Recursive Feature Elimination with CV), embedded methods (L1/Lasso), permutation importance, SHAP-based selection.' },
+    { title: 'Model Distillation & Compression', description: 'Reducing model size and inference latency without proportional accuracy loss. Knowledge distillation (student-teacher), quantisation (float32 to int8 — 2-4x reduction), pruning (remove low-magnitude weights), ONNX export for cross-framework optimized inference.' },
+    { title: 'AutoML Pipeline', description: 'Automated model selection and hyperparameter tuning: FLAML (Microsoft — fast, resource-aware), AutoGluon (Amazon — strong ensembling), H2O AutoML (enterprise-grade), PyCaret (low-code, compares 15+ algorithms). Establishes strong baseline quickly before specialist optimisation.' },
+  ],
+  differentiators: [
+    { feature: 'Optuna Bayesian Optimisation', description: 'Learns from previous trials, prunes unpromising runs — 50-80% compute reduction | Basic: Grid search (exhaustive, blind) or random search (uninformed)' },
+    { feature: 'Overfitting Diagnosis', description: 'Amber callout with specific signs, causes, fixes | Basic: No overfitting detection or resolution' },
+    { feature: 'Proper Evaluation', description: 'Time series CV, nested CV, calibration assessment — never random splits for time-sensitive data | Basic: Random splits (optimistic, leaky metrics)' },
+    { feature: 'Model Distillation', description: 'Student-teacher + quantisation + ONNX — 5-10x smaller, 2-5x faster | Basic: Model as-is (overly large, slow inference)' },
+    { feature: 'Data Leakage Prevention', description: 'Systematic review of every feature for leakage potential | Basic: Leakage missed until model fails in production' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Model Audit & Evaluation Review', timeline: 'Week 1', text: 'Current performance assessment, overfitting diagnosis (training vs validation gap), data leakage review, evaluation methodology audit, improvement opportunity identification. Deliverable: Model Audit Report with Improvement Plan.' },
+    { phase: 'Phase 2', title: 'Hyperparameter Optimisation', timeline: 'Week 2-3', text: 'Search space definition, sampler selection (TPE/CMA-ES), pruning configuration (MedianPruner), Optuna study execution (100-500 trials), hyperparameter importance analysis, retrain with optimal config. Deliverable: Optimised Model + Hyperparameter Importance Report.' },
+    { phase: 'Phase 3', title: 'Feature Engineering & Selection', timeline: 'Week 2-4', text: 'Feature importance analysis, Recursive Feature Elimination with CV, SHAP-based selection, L1 regularisation, new feature engineering if gaps identified. Deliverable: Reduced Feature Set + Performance Comparison.' },
+    { phase: 'Phase 4', title: 'Model Distillation (Optional)', timeline: 'Week 3-5', text: 'Teacher model (current/large) → Student model (smaller architecture) training, quantisation (int8/float16), ONNX export, latency benchmarking. Deliverable: Distilled Model + Latency Report.' },
+    { phase: 'Phase 5', title: 'MLOps Retraining Pipeline', timeline: 'Week 4-6', text: 'Automated retraining triggers (schedule or drift), evaluation gate (performance must not regress vs current), model registry promotion workflow, deployment CI/CD. Deliverable: Retraining Pipeline + Dashboard.' },
+  ],
+  techStackCategories: [
+    { layer: 'Hyperparameter Tuning', technologies: 'Optuna (primary — Bayesian, pruning), Ray Tune (distributed), Hyperopt, scikit-learn GridSearchCV/RandomizedSearchCV' },
+    { layer: 'Cross-Validation', technologies: 'scikit-learn (KFold, StratifiedKFold, TimeSeriesSplit, cross_val_score), custom nested CV' },
+    { layer: 'Feature Selection', technologies: 'scikit-learn (RFE, SelectFromModel, mutual_info_classif), SHAP, Boruta' },
+    { layer: 'Model Distillation', technologies: 'Custom distillation training loop, ONNX Runtime (optimized inference), Intel OpenVINO, TensorRT' },
+    { layer: 'AutoML', technologies: 'FLAML (Microsoft), AutoGluon (Amazon), H2O AutoML, PyCaret' },
+    { layer: 'MLOps / Retraining', technologies: 'MLflow (model registry, pipeline tracking), Apache Airflow/Prefect, GitHub Actions, Evidently AI (drift triggers)' },
+  ],
+  pricingTiers: [
+    { type: 'Model Audit & Evaluation Review', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'Evaluation methodology review, overfitting diagnosis, improvement plan' },
+    { type: 'Hyperparameter Optimisation', investment: '$5,000 – $15,000', timeline: '2 – 3 weeks', bestFor: 'Optuna search, search space design, result analysis, retrained model' },
+    { type: 'Cross-Validation Framework', investment: '$4,000 – $10,000', timeline: '1 – 2 weeks', bestFor: 'CV strategy, stratification, time series CV, calibration assessment' },
+    { type: 'Feature Engineering & Selection', investment: '$6,000 – $18,000', timeline: '2 – 4 weeks', bestFor: 'Feature importance, RFE, SHAP selection, dimensionality reduction' },
+    { type: 'Model Distillation / Compression', investment: '$8,000 – $22,000', timeline: '2 – 5 weeks', bestFor: 'Student-teacher distillation, quantisation, ONNX export, latency benchmark' },
+    { type: 'Full Model Optimisation', investment: '$15,000 – $45,000', timeline: '4 – 8 weeks', bestFor: 'All above: evaluation + tuning + feature + compression + deployment' },
+    { type: 'MLOps Retraining Pipeline', investment: '$10,000 – $30,000', timeline: '3 – 6 weeks', bestFor: 'Automated retraining, eval gate, model registry, deployment CI/CD' },
+    { type: 'ML Optimisation Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'Monthly retraining, drift monitoring, continuous improvement' },
+  ],
+  industryUseCases: [
+    { name: 'Overfitting Diagnosis', description: 'Model with 95% training accuracy but 72% validation accuracy. Diagnosis + regularisation + cross-validation + retraining.' },
+    { name: 'Hyperparameter Tuning', description: 'XGBoost/LightGBM default parameters leaving performance on the table. Optuna search with 100-500 trials finds better configuration.' },
+    { name: 'Model Distillation', description: 'Large ensemble model too slow for real-time inference. Distill to smaller student model with minimal accuracy loss.' },
+    { name: 'MLOps Retraining', description: 'Manual retraining process — no automated pipeline. Build automated retraining triggered by data drift.' },
+  ],
+  sections: [
+    {
+      heading: 'The Most Common ML Model Problem: Overfitting',
+      body: 'Overfitting is the most frequent reason a model that performs well in training underperforms in production. An overfit model has memorised the training data — including its noise and idiosyncrasies — rather than learning the underlying patterns that generalise to new data. Signs: training accuracy 95%, validation accuracy 72%. Causes: too many features relative to training examples, insufficient regularisation, data leakage (future information in training features), or a model that is too complex for the available data. Fixes: regularisation (L1/L2, dropout for neural networks), feature selection (remove low-information features), cross-validation (proper evaluation methodology), early stopping (stop training when validation metric stops improving), and ensemble methods (average multiple models — reduces variance). ClickMasters diagnoses the specific cause before prescribing a fix.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is hyperparameter tuning and why does it matter?',
+      answer: 'Every ML model has hyperparameters — settings that control how the model learns, set before training begins — as opposed to parameters, which the model learns from data during training. Examples: the learning rate, the maximum depth of a tree in XGBoost, the number of estimators, the regularisation coefficient. The default hyperparameter values provided by libraries are reasonable starting points, not optimal values for your specific dataset and task. Systematic hyperparameter tuning — searching for the combination that produces the best validation performance — consistently improves model performance by 5-20% over defaults. Optuna\'s Bayesian optimisation approach (which learns from previous trials) consistently finds better configurations in fewer trials than grid search (which tests all combinations) or random search (which tests random combinations). ClickMasters uses Optuna with a defined compute budget for all production model training.',
+    },
+    {
+      question: 'What is the difference between underfitting and overfitting?',
+      answer: 'Underfitting occurs when the model is too simple to capture the patterns in the training data — low training accuracy and low validation accuracy. Causes: model capacity too low for task complexity, insufficient training data, poor feature engineering. Fixes: increase model complexity, engineer better features, train for more epochs, reduce regularisation. Overfitting occurs when the model is too complex and memorises training data idiosyncrasies rather than learning generalisable patterns — high training accuracy but low validation accuracy. Causes: too many parameters relative to training examples, insufficient regularisation, data leakage. Fixes: regularisation, early stopping, cross-validation with proper data splits, feature selection, more training data, ensemble methods. The goal is the bias-variance tradeoff sweet spot — a model complex enough to learn the true patterns but not so complex it memorises noise.',
+    },
+    {
+      question: 'What is model distillation and when is it useful?',
+      answer: 'Model distillation (knowledge distillation) is a technique for compressing a large, accurate model (the "teacher") into a smaller, faster model (the "student") that approximates the teacher\'s behaviour. Instead of training the student on original hard labels (0 or 1), the student is trained to match the teacher\'s soft probability outputs — which carry more information about the model\'s uncertainty and inter-class relationships than hard labels. The result: a student model that is 5-10x smaller and faster than the teacher, with accuracy only marginally lower. Distillation is appropriate when: inference latency is a constraint (real-time applications where 100ms is too slow), infrastructure cost is a concern (deploying a large model on every inference request is expensive), or edge deployment is required (running a model on a device with limited compute). ClickMasters uses distillation for production scenarios where accuracy/latency tradeoffs are explicit requirements.',
+    },
+    {
+      question: 'What is data leakage in ML models and how do you prevent it?',
+      answer: 'Data leakage occurs when information from the test set or future time periods "leaks" into the training data, causing the model to appear more accurate than it actually is on new data. Common leakage sources: using the full dataset to compute normalisation statistics (mean, standard deviation) before splitting into train/test — the test set statistics influence the training data; including features that are derived from or correlated with the target variable in a way that would not be available at prediction time (e.g., using the account cancellation date as a feature to predict churn); and improper temporal splits (using future data in training for a time series prediction task — the model effectively "cheats" by looking forward). Prevention: all preprocessing (normalisation, encoding, imputation) must be fitted on training data only and applied to test data; feature engineering must respect the prediction timestamp (no features derived from information available after the prediction time); and time series evaluation must always use temporal splits. ClickMasters reviews every feature for potential leakage as part of the feature engineering phase.',
+    },
+  ],
+  testimonial: {
+    quote: "Our internal model was stuck at 68% validation accuracy. ClickMasters used Optuna to tune hyperparameters and we reached 82% with the same feature set — and their cross-validation fix eliminated our data leakage issue.",
+    author: "Lead Data Scientist",
+    role: "Fintech Company"
+  },
+  caseStudy: {
+    title: "ML Model Optimisation",
+    description: "Optimised existing fraud detection model. Diagnosed overfitting (train 97%, validation 71%). Applied regularisation, feature selection, and cross-validation. Improved validation accuracy to 85% without new features. Reduced inference latency by 40% via distillation.",
+    slug: "ml-model-optimisation",
+    badge: "Model Training",
+  },
+  howToSteps: [
+    { name: 'Model Audit & Evaluation Review', text: 'Performance assessment, overfitting diagnosis, leakage review, improvement plan.' },
+    { name: 'Hyperparameter Optimisation', text: 'Optuna search space, pruning, importance analysis, retrain with optimal config.' },
+    { name: 'Feature Engineering & Selection', text: 'Feature importance, RFE, SHAP selection, new feature engineering.' },
+    { name: 'Model Distillation (Optional)', text: 'Student-teacher training, quantisation, ONNX export, latency benchmarking.' },
+    { name: 'MLOps Retraining Pipeline', text: 'Automated retraining triggers, evaluation gate, model registry, deployment CI/CD.' },
+  ],
+  itemList: [
+    'Hyperparameter Optimisation',
+    'Cross-Validation & Evaluation',
+    'Feature Selection & Importance',
+    'Model Distillation & Compression',
+    'AutoML Pipeline',
+  ],
+  definedTerms: [
+    { name: 'Optuna', description: 'Bayesian hyperparameter optimisation framework — learns from trials, prunes unpromising runs, 50-80% compute reduction vs grid search.' },
+    { name: 'Overfitting', description: 'Model memorises training data noise rather than generalisable patterns — high training accuracy, low validation accuracy.' },
+    { name: 'Data Leakage', description: 'Information from test set or future periods leaks into training — model appears artificially accurate.' },
+    { name: 'Model Distillation', description: 'Compressing a large "teacher" model into smaller "student" model — 5-10x smaller, minimal accuracy loss.' },
+  ],
+};
+
+const deepLearningSolutionsOverride: ServicePageContent = {
+  slug: 'deep-learning-solutions',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'deep-learning-solutions',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Deep Learning Solutions',
+  serviceName: 'Deep Learning Solutions',
+  metaTitle: 'Deep Learning Solutions | Neural Networks & PyTorch | ClickMasters',
+  metaDescription:
+    'ClickMasters builds deep learning solutions — computer vision CNNs, NLP transformers, time series LSTMs, and tabular neural networks — using PyTorch and TensorFlow for B2B companies worldwide.',
+  lead: 'ClickMasters builds deep learning solutions for B2B companies across the USA, Europe, Canada, and Australia. CNN-based image classification and object detection. Transformer-based NLP models for text classification and named entity recognition. LSTM and Transformer models for time series forecasting. Tabular deep learning for high-dimensional structured data. Transfer learning from pre-trained models when labelled data is limited. Deployed with ONNX Runtime or TorchServe for production inference.',
+  highlights: [
+    '✓ PyTorch + Hugging Face',
+    '✓ CNN Image Classification',
+    '✓ Transformer NLP Models',
+    '✓ LSTM / Temporal Fusion Transformer',
+    '✓ Transfer Learning',
+    '✓ TorchServe / ONNX Runtime Deployment',
+  ],
+  marketStats: [
+    { label: 'PyTorch research paper dominance — the framework standard for deep learning R&D', value: '85%+' },
+    { label: 'Pre-trained models available via Hugging Face and timm', value: '500,000+' },
+    { label: 'Inference speedup with ONNX Runtime vs native PyTorch', value: '2-5x' },
+    { label: 'Transfer learning reduces labelled image requirement vs training from scratch', value: '1,000-10,000 vs millions' },
+  ],
+  servicesCards: [
+    { title: 'Computer Vision — Image Classification & Object Detection', description: 'CNN-based vision: image classification (ResNet, EfficientNet, ViT with transfer learning), object detection (YOLO v8 or DETR for real-time, Faster R-CNN for high accuracy), instance segmentation, OCR + layout analysis (Tesseract + LayoutLM). Transfer learning from ImageNet-pretrained weights requires only 1,000-10,000 domain-specific labelled examples.' },
+    { title: 'NLP — Text Classification & Sequence Modelling', description: 'Transformer-based NLP: text classification (fine-tune BERT, RoBERTa, DeBERTa on labelled examples), named entity recognition (domain-specific entity types), sequence-to-sequence (T5/BART for summarisation, translation), multi-label classification. Hugging Face Transformers with 500,000+ pre-trained checkpoints.' },
+    { title: 'Time Series Deep Learning', description: 'Neural architectures for forecasting when classical models insufficient: LSTM (long-range dependencies), Temporal Fusion Transformer (attention-based, interpretable multi-horizon probabilistic forecasts), N-BEATS (univariate, interpretable trend/seasonality), N-HiTS (hierarchical forecasting).' },
+    { title: 'Tabular Deep Learning', description: 'Neural networks for high-dimensional structured tabular data where gradient boosting hits limits: TabNet (attention-based, interpretable feature selection), FT-Transformer (feature tokenisation + transformer, strong on high-cardinality categoricals), SAINT (self-attention + intersample attention), NODE (neural oblivious decision ensembles).' },
+    { title: 'Transfer Learning & Few-Shot Learning', description: 'Maximising performance with limited labelled data: pre-trained model fine-tuning, few-shot learning (prototypical/siamese networks — 5-20 examples per class), active learning (reduce labelling cost 50-70%), semi-supervised learning (consistency regularisation, pseudo-labelling).' },
+  ],
+  differentiators: [
+    { feature: 'DL vs GB Honesty', description: '"When DL is NOT the right choice" amber callout — XGBoost for tabular | Basic: Deep learning for everything (overkill, slower, less interpretable)' },
+    { feature: 'Transfer Learning Standard', description: 'Pre-trained models from ImageNet (vision) and Hugging Face (NLP) — 1,000-10,000 examples sufficient | Basic: Training from scratch (requires millions of examples)' },
+    { feature: 'Production Inference', description: 'ONNX Runtime (2-5x faster), TorchServe, quantisation | Basic: Naive PyTorch inference (slow, high latency)' },
+    { feature: 'Temporal Fusion Transformer', description: 'Interpretable multi-horizon probabilistic forecasts with variable importance | Basic: Black-box LSTM (no explanation of drivers)' },
+    { feature: 'Distributed Training', description: 'PyTorch DDP for multi-GPU training | Basic: Single GPU training (slow on large datasets)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Deep Learning Scoping', timeline: 'Week 1', text: 'Use case analysis, deep learning vs classical decision (tabular DL only for high-dim/high-cardinality data), architecture selection (CNN/Transformer/LSTM/TFT), data requirements assessment (minimum labelled examples for transfer learning), transfer learning strategy. Deliverable: Deep Learning Architecture Design.' },
+    { phase: 'Phase 2', title: 'Data Preparation & Augmentation', timeline: 'Week 1-3', text: 'Dataset curation, labelling (Label Studio), data augmentation (vision: random crop, flip, rotation, MixUp, CutMix; NLP: back-translation, word dropout), train/validation/test split stratified by key attributes. Deliverable: Prepared Dataset + Augmentation Pipeline.' },
+    { phase: 'Phase 3', title: 'Model Training (Transfer Learning)', timeline: 'Week 2-5', text: 'Load pre-trained model (ImageNet for vision, Hugging Face for NLP), freeze backbone, train new head on domain data, unfreeze backbone for fine-tuning (lower learning rate), early stopping, learning rate scheduling (cosine annealing). GPU training with PyTorch DDP for multi-GPU. Deliverable: Trained Model + Checkpoints.' },
+    { phase: 'Phase 4', title: 'Model Evaluation', timeline: 'Week 4-6', text: 'Test set performance: classification (accuracy, precision/recall, F1, AUC-ROC), object detection (mAP), segmentation (IoU). Calibration check, failure case analysis, model card documentation (intended use, limitations, performance across groups). Deliverable: Model Evaluation Report + Model Card.' },
+    { phase: 'Phase 5', title: 'Production Deployment', timeline: 'Week 5-7', text: 'ONNX export (2-5x faster inference than PyTorch), TorchServe or Triton Inference Server deployment, batching for throughput, GPU inference (G5 instances) or CPU for batch, monitoring (latency distribution, throughput, prediction drift). Deliverable: Production Inference API.' },
+  ],
+  techStackCategories: [
+    { layer: 'Frameworks', technologies: 'PyTorch (primary — dynamic computation graph, HuggingFace native), TensorFlow/Keras, JAX (XLA compilation)' },
+    { layer: 'Vision Libraries', technologies: 'torchvision (datasets, transforms, pre-trained models), timm (700+ pre-trained vision architectures), Ultralytics YOLO v8 (object detection — production-ready), Detectron2 (Faster R-CNN, Mask R-CNN)' },
+    { layer: 'NLP Libraries', technologies: 'Hugging Face Transformers (500,000+ pre-trained models: BERT, RoBERTa, T5, BART, DeBERTa), PEFT (LoRA, prefix tuning), spaCy (tokenisation, NER, parsing)' },
+    { layer: 'Time Series', technologies: 'PyTorch Forecasting (TFT, N-BEATS, N-HiTS), Darts, Nixtla (TimeGPT, StatsForecast)' },
+    { layer: 'Experiment Tracking', technologies: 'Weights & Biases (primary — richer visualisation), MLflow, TensorBoard' },
+    { layer: 'Deployment', technologies: 'TorchServe (PyTorch serving — batching, versioning), ONNX Runtime (2-5x faster, cross-framework), TorchScript (C++ deployment), SageMaker Inference' },
+    { layer: 'Hardware', technologies: 'AWS EC2 G5 (NVIDIA A10G), P4d (A100), CUDA, DDP (distributed training)' },
+  ],
+  pricingTiers: [
+    { type: 'Deep Learning Scoping', investment: '$4,000 – $8,000', timeline: '1 – 2 weeks', bestFor: 'Use case analysis, DL vs classical decision, architecture design, data requirements' },
+    { type: 'Image Classification Model', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'CNN + transfer learning, data augmentation, evaluation, deployment' },
+    { type: 'Object Detection Model', investment: '$15,000 – $45,000', timeline: '5 – 10 weeks', bestFor: 'YOLO/DETR, custom class training, evaluation, API deployment' },
+    { type: 'NLP Classification (BERT fine-tune)', investment: '$10,000 – $30,000', timeline: '3 – 7 weeks', bestFor: 'HuggingFace fine-tune, evaluation, batch + real-time API' },
+    { type: 'Time Series Deep Learning', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'TFT/N-BEATS, probabilistic forecasts, evaluation, API' },
+    { type: 'Transfer Learning (Limited Data)', investment: '$10,000 – $30,000', timeline: '3 – 7 weeks', bestFor: 'Fine-tune pre-trained model, data augmentation, few-shot if needed' },
+    { type: 'Custom Neural Architecture', investment: '$20,000 – $70,000', timeline: '6 – 14 weeks', bestFor: 'Novel architecture, research-grade implementation, GPU training, deployment' },
+    { type: 'Deep Learning Retainer', investment: '$4,000 – $12,000/mo', timeline: 'Ongoing', bestFor: 'Model retraining, dataset expansion, architecture iteration, monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'Quality Control (CV)', description: 'Detect manufacturing defects from production line images. CNN classification or YOLO detection. Transfer learning from ImageNet requires only 1,000-10,000 labelled defect images.' },
+    { name: 'Document Understanding (CV + NLP)', description: 'Extract structured data from scanned forms, invoices, ID documents. OCR (Tesseract) + LayoutLM for spatial layout understanding.' },
+    { name: 'Customer Support Ticket Classification (NLP)', description: 'Fine-tune BERT on support ticket corpus. Route tickets to correct team, sentiment analysis, urgency detection. 500-2,000 labelled examples sufficient with transfer learning.' },
+    { name: 'Energy / IoT Forecasting (Time Series)', description: 'TFT for multi-horizon probabilistic forecasts. Interpretable via variable importance scores. 2+ years historical data at forecast granularity.' },
+  ],
+  sections: [
+    {
+      heading: 'When Deep Learning Is NOT the Right Choice',
+      body: 'Deep learning is not universally better than classical ML. Choose gradient boosting (XGBoost, LightGBM) over deep learning when: the data is tabular and structured (gradient boosting consistently outperforms neural networks on tabular data with fewer samples); the dataset is small (<10,000 labelled examples — deep networks overfit on small datasets where gradient boosting generalises better); interpretability is required (gradient boosting + SHAP is more interpretable than a deep network); or inference latency and computational cost are constraints (gradient boosting inference is orders of magnitude cheaper than a neural network on the same hardware). Choose deep learning when: the input is unstructured (images, text, audio, video); the dataset is large (100,000+ labelled examples); the prediction task requires learned representations that feature engineering cannot capture; or transfer learning from a pre-trained model provides a shortcut that makes the dataset size problem tractable.',
+      items: [],
+    },
+    {
+      heading: 'Transfer Learning — How It Reduces Data Requirements',
+      body: 'Transfer learning uses a model pre-trained on a large general dataset as the starting point for training on a smaller task-specific dataset — rather than training from random weights. For computer vision: a ResNet or EfficientNet pre-trained on ImageNet (1.2M labelled images, 1,000 classes) has learned general visual features — edges, textures, shapes — that transfer usefully to almost any visual recognition task. Fine-tuning this pre-trained model on 1,000-10,000 domain-specific labelled images produces better results than training from scratch on the same data. For NLP: BERT and its variants (RoBERTa, DeBERTa) pre-trained on billions of words have learned language representations that transfer to classification, NER, and QA tasks with 100-10,000 labelled examples. Transfer learning makes deep learning practical for B2B use cases where labelling costs limit dataset size.',
+      items: [],
+    },
+    {
+      heading: 'PyTorch vs TensorFlow',
+      body: 'PyTorch and TensorFlow are both production-grade deep learning frameworks, but they have evolved differently. PyTorch uses a dynamic computation graph (define-by-run) — operations execute immediately when called, making debugging intuitive and code that looks like standard Python. PyTorch is the dominant framework in ML research (85%+ of papers) and increasingly in production. TensorFlow uses a static computation graph that is defined and then executed — offering production deployment advantages (TensorFlow Serving, TFLite for mobile, TFX for pipelines) but historically more complex debugging. With the adoption of PyTorch 2.0\'s torch.compile and TorchServe for production serving, and ONNX for cross-framework deployment, the production deployment gap has largely closed. ClickMasters uses PyTorch as the primary framework for all new deep learning work, with TensorFlow for legacy model maintenance and TFLite targets.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'When should I use deep learning instead of gradient boosting?',
+      answer: 'Gradient boosting (XGBoost, LightGBM) should be your first choice for structured tabular data — it consistently outperforms neural networks on tabular data with moderate dataset sizes, is faster to train, and is more interpretable. Use deep learning when: the input data is unstructured — images, text, audio, or video — where learned representations (convolutional features, transformer attention) capture patterns that hand-crafted features cannot; the dataset is large (100,000+ labelled examples) and the feature space is complex enough to justify the additional capacity of a neural network; or transfer learning from a pre-trained model (ImageNet-pretrained CNN, BERT-pretrained language model) dramatically reduces the labelled data requirement for a vision or NLP task. For tabular data, tabular deep learning methods (TabNet, FT-Transformer) can outperform gradient boosting specifically when high-cardinality categorical features benefit from learned embeddings.',
+    },
+    {
+      question: 'What is transfer learning and how does it reduce data requirements?',
+      answer: 'Transfer learning uses a model pre-trained on a large general dataset as the starting point for training on a smaller task-specific dataset — rather than training from random weights. For computer vision: a ResNet or EfficientNet pre-trained on ImageNet (1.2M labelled images, 1,000 classes) has learned general visual features — edges, textures, shapes — that transfer usefully to almost any visual recognition task. Fine-tuning this pre-trained model on 1,000-10,000 domain-specific labelled images produces better results than training from scratch on the same data. For NLP: BERT and its variants (RoBERTa, DeBERTa) pre-trained on billions of words have learned language representations that transfer to classification, NER, and QA tasks with 100-10,000 labelled examples. Transfer learning makes deep learning practical for B2B use cases where labelling costs limit dataset size.',
+    },
+    {
+      question: 'What is the difference between PyTorch and TensorFlow?',
+      answer: 'PyTorch and TensorFlow are both production-grade deep learning frameworks, but they have evolved differently. PyTorch uses a dynamic computation graph (define-by-run) — operations execute immediately when called, making debugging intuitive and code that looks like standard Python. PyTorch is the dominant framework in ML research (85%+ of papers) and increasingly in production. TensorFlow uses a static computation graph that is defined and then executed — offering production deployment advantages (TensorFlow Serving, TFLite for mobile, TFX for pipelines) but historically more complex debugging. With the adoption of PyTorch 2.0\'s torch.compile and TorchServe for production serving, and ONNX for cross-framework deployment, the production deployment gap has largely closed. ClickMasters uses PyTorch as the primary framework for all new deep learning work, with TensorFlow for legacy model maintenance and TFLite targets.',
+    },
+    {
+      question: 'How do you deploy a deep learning model for production inference?',
+      answer: 'Deep learning model deployment for production inference requires specific considerations beyond standard API deployment. Model serialisation: PyTorch models exported to TorchScript (graph mode, no Python runtime required) or ONNX (cross-framework, optimised by ONNX Runtime). Inference optimisation: ONNX Runtime applies graph optimisations and hardware-specific kernels — typically 2-5x faster than naive PyTorch inference. Batching: TorchServe or Triton Inference Server batch multiple inference requests together, amortising the GPU/CPU overhead — critical for throughput at scale. Hardware selection: GPU inference (AWS EC2 G5 instances) for throughput-sensitive applications; CPU inference (AWS ECS Fargate) for latency-tolerant batch processing at lower cost. Monitoring: track inference latency distribution, throughput, and model prediction distribution drift — alert when the distribution shifts significantly from the training baseline.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built a vision model for our manufacturing quality control. The YOLO-based defect detection system runs in real-time on the production line, catching defects our human inspectors were missing. Defect escape rate dropped by 85%.",
+    author: "Head of Manufacturing",
+    role: "Industrial Equipment Company"
+  },
+  caseStudy: {
+    title: "Visual Defect Detection",
+    description: "Built YOLO-based defect detection system for manufacturing quality control. Transfer learning from ImageNet-pretrained model. Real-time inference on production line. Defect escape rate reduced by 85%, inspection time reduced by 60%.",
+    slug: "vision-defect-detection",
+    badge: "Computer Vision"
+  },
+  howToSteps: [
+    { name: 'Deep Learning Scoping', text: 'Use case analysis, DL vs classical decision, architecture selection, transfer learning strategy.' },
+    { name: 'Data Preparation & Augmentation', text: 'Dataset curation, labelling, augmentation (vision: crop/flip/rotation/MixUp).' },
+    { name: 'Model Training (Transfer Learning)', text: 'Load pre-trained model, freeze backbone, train new head, fine-tune with lower LR.' },
+    { name: 'Model Evaluation', text: 'Test set performance, calibration check, failure analysis, model card documentation.' },
+    { name: 'Production Deployment', text: 'ONNX export (2-5x faster), TorchServe deployment, batching, GPU inference, monitoring.' },
+  ],
+  itemList: [
+    'Computer Vision — Image Classification & Object Detection',
+    'NLP — Text Classification & Sequence Modelling',
+    'Time Series Deep Learning',
+    'Tabular Deep Learning',
+    'Transfer Learning & Few-Shot Learning',
+  ],
+  definedTerms: [
+    { name: 'Transfer Learning', description: 'Starting from a pre-trained model on a large dataset, fine-tuning on task-specific data — reduces labelled data requirements from millions to thousands.' },
+    { name: 'Temporal Fusion Transformer', description: 'Attention-based time series model with interpretable multi-horizon probabilistic forecasts and variable importance scores.' },
+    { name: 'ONNX Runtime', description: 'Cross-framework inference accelerator — 2-5x faster inference than native PyTorch through graph optimisation and hardware-specific kernels.' },
+    { name: 'YOLO', description: 'You Only Look Once — real-time object detection framework. YOLO v8 is production-ready with easy deployment.' },
+  ],
+};
+
+const naturalLanguageProcessingOverride: ServicePageContent = {
+  slug: 'natural-language-processing',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'natural-language-processing',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Natural Language Processing Services',
+  serviceName: 'Natural Language Processing',
+  metaTitle: 'Natural Language Processing Services | NLP Development | ClickMasters',
+  metaDescription:
+    'ClickMasters builds NLP systems — text classification, NER, sentiment analysis, semantic search, and summarisation — using Hugging Face Transformers for B2B companies worldwide.',
+  lead: 'ClickMasters builds NLP systems for B2B companies across the USA, Europe, Canada, and Australia. Text classification that categorises thousands of documents per second. Named entity recognition that extracts specific information from unstructured text. Sentiment analysis that monitors customer voice at scale. Semantic search that understands what users mean, not just what they type. Summarisation that condenses long documents to decision-ready briefs. All built on Hugging Face Transformers.',
+  highlights: [
+    '✓ Text Classification & NER',
+    '✓ Sentiment Analysis',
+    '✓ Semantic Search',
+    '✓ Document Summarisation',
+    '✓ Information Extraction',
+    '✓ NLP APIs',
+  ],
+  marketStats: [
+    { label: 'Google\'s Bidirectional Encoder Representations from Transformers — the pre-trained model that transformed NLP accuracy', value: 'BERT' },
+    { label: 'Pre-trained models available on Hugging Face Hub — the universal source for NLP model starting points', value: '500K+' },
+    { label: 'Industrial-strength NLP library — 100x faster than NLTK for production text pipelines', value: 'spaCy' },
+    { label: 'Text classification accuracy achievable on domain-specific tasks with BERT fine-tuning on 1,000+ labelled examples', value: '~95%' },
+  ],
+  servicesCards: [
+    { title: 'Text Classification', description: 'Fine-tune BERT, RoBERTa, or DeBERTa on labelled examples. Single-label and multi-label classification. Use cases: document type classification, intent detection, topic categorisation, spam detection, content moderation. Evaluation: F1, precision, recall at threshold. Deployment: FastAPI endpoint returning class probabilities.' },
+    { title: 'Named Entity Recognition (NER)', description: 'Fine-tune transformer NER models on domain-specific entity types not covered by spaCy\'s general models — product names, contract parties, medical terms, financial instruments. Token-level classification with BIO or BIOES tagging. Evaluation: entity-level F1. Integration: REST API returning entity spans with type and confidence.' },
+    { title: 'Semantic Search', description: 'Replace keyword search with meaning-based search. Bi-encoder models (sentence-transformers) generate embeddings for queries and documents — cosine similarity retrieval via pgvector or FAISS. Re-ranking with cross-encoders for precision. Handles synonyms, paraphrases, and conceptually related queries.' },
+    { title: 'Text Summarisation', description: 'Abstractive summarisation (T5, BART, Pegasus — generate summaries not constrained to source phrases) and extractive summarisation (LexRank, TextRank — select representative sentences). Use cases: executive summary generation, meeting transcript summarisation, document digest. Evaluation: ROUGE-1, ROUGE-2, ROUGE-L.' },
+    { title: 'Information Extraction', description: 'Extract structured data from unstructured text: relation extraction (identify relationships between named entities), event extraction (identify events and their participants), table extraction (convert tabular content to structured tables), and question answering (locate answer span to factual question — SQuAD-style extractive QA).' },
+  ],
+  differentiators: [
+    { feature: 'BERT vs GPT Clarity', description: 'Encoder-only (BERT) for classification, decoder-only (GPT) for generation — choose the right architecture | Basic: GPT for everything (expensive overkill for classification)' },
+    { feature: 'Production Stack', description: 'Hugging Face + spaCy (100x faster than NLTK) + ONNX Runtime FastAPI | Basic: Slow inference library' },
+    { feature: 'Entity Recognition', description: 'BIOES tagging for precise boundary detection | Basic: Simple token classification (less accurate on boundaries)' },
+    { feature: 'Search Architecture', description: 'Bi-encoder (recall) + cross-encoder (precision) — two-stage retrieval | Basic: Single-vector similarity (speed but lower precision)' },
+    { feature: 'Data Privacy', description: 'Self-hosted Hugging Face models — on-premises or VPC deployment | Basic: OpenAI API only (data leaves your environment)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'NLP Scoping & Data Audit', timeline: 'Week 1-2', text: 'Task definition (classification, NER, search, summarisation), data quality review (labelled examples available? class balance?), model selection (BERT vs RoBERTa vs DeBERTa), labelling requirements (active learning to reduce cost). Deliverable: NLP Architecture Plan + Data Requirements.' },
+    { phase: 'Phase 2', title: 'Model Fine-Tuning', timeline: 'Week 2-5', text: 'Load pre-trained model from Hugging Face Hub, fine-tune on labelled examples (classification: sequence classification head; NER: token classification head). Hyperparameter tuning, evaluation (F1, precision/recall), calibration (confidence scores). Deliverable: Fine-tuned Model + Evaluation Report.' },
+    { phase: 'Phase 3', title: 'Model Optimisation', timeline: 'Week 4-6', text: 'Distillation (BERT → DistilBERT if inference speed requirement <50ms), quantisation (int8), ONNX export (2-5x faster inference), containerisation (Docker). Deliverable: Optimised Inference Endpoint.' },
+    { phase: 'Phase 4', title: 'API & Integration', timeline: 'Week 5-7', text: 'FastAPI REST endpoint (input: text → output: structured JSON with predictions/entities/embeddings), batch processing pipeline for high volume, monitoring (prediction distribution drift, latency). Deliverable: Production NLP API.' },
+  ],
+  techStackCategories: [
+    { layer: 'Libraries', technologies: 'Hugging Face Transformers (fine-tuning), spaCy (production pipelines — 100x faster than NLTK), sentence-transformers (embeddings), PyTorch (training)' },
+    { layer: 'Classification/NER', technologies: 'BERT, RoBERTa, DeBERTa (state-of-the-art on GLUE/SuperGLUE), ALBERT (parameter-efficient), DistilBERT (faster inference)' },
+    { layer: 'Search', technologies: 'Bi-encoder (sentence-transformers), cross-encoder (ms-marco-MiniLM), pgvector/FAISS (vector retrieval)' },
+    { layer: 'Summarisation', technologies: 'T5, BART, Pegasus (abstractive), LexRank, TextRank (extractive), evaluation: ROUGE' },
+    { layer: 'Deployment', technologies: 'FastAPI, ONNX Runtime (2-5x faster), TorchServe, AWS SageMaker' },
+  ],
+  pricingTiers: [
+    { type: 'NLP Scoping & Data Audit', investment: '$3,000 – $6,000', timeline: '1 – 2 weeks', bestFor: 'Task definition, data quality review, model selection, labelling requirements' },
+    { type: 'Text Classification Model', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'BERT fine-tune, evaluation, REST API, monitoring' },
+    { type: 'Named Entity Recognition', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'Token classifier, custom entity types, evaluation, API' },
+    { type: 'Sentiment Analysis System', investment: '$8,000 – $20,000', timeline: '3 – 5 weeks', bestFor: 'Doc-level or aspect-based, dashboard integration' },
+    { type: 'Semantic Search Engine', investment: '$10,000 – $28,000', timeline: '4 – 7 weeks', bestFor: 'Bi-encoder, pgvector/FAISS, re-ranking, search API' },
+    { type: 'Summarisation Pipeline', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'T5/BART fine-tune or prompting, batch + on-demand API' },
+    { type: 'Full NLP Suite', investment: '$20,000 – $65,000', timeline: '6 – 12 weeks', bestFor: 'Multiple NLP tasks sharing data pipeline and API gateway' },
+    { type: 'NLP Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'Model retraining, new entity types, accuracy monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'Support Ticket Classification', description: 'Classify 10,000+ tickets per hour by issue type, priority, sentiment. BERT fine-tuned on labelled tickets. Automate routing, priority escalation, and sentiment tracking.' },
+    { name: 'Contract NER', description: 'Extract parties, effective dates, termination clauses, liability caps from contracts. Evaluate clause deviations against standard terms. Reduce legal review time by 60-80%.' },
+    { name: 'Semantic Product Search', description: 'Replace keyword search with meaning-based retrieval. "Waterproof boots for hiking" finds relevant products even if description doesn\'t contain exact words.' },
+    { name: 'Meeting Summarisation', description: 'Generate executive summaries from meeting transcripts. BART fine-tuned on meeting notes. Send summaries to stakeholders within minutes of meeting end.' },
+  ],
+  sections: [
+    {
+      heading: 'BERT vs GPT for NLP Tasks',
+      body: 'BERT (Bidirectional Encoder Representations from Transformers) is an encoder-only model — it reads text bidirectionally and produces dense representations for each token. It excels at classification, NER, and extractive QA tasks where understanding the full context of a text matters. GPT models are decoder-only — they generate text autoregressively (token by token). They excel at generation tasks (summarisation, translation, creative writing). For classification and extraction NLP tasks in production, fine-tuned BERT variants (RoBERTa, DeBERTa, ALBERT) are typically preferred over using a large GPT model via API — they are smaller (faster, cheaper inference), can be self-hosted (no data leaving your environment), and achieve comparable or better accuracy on classification tasks when properly fine-tuned.',
+      items: [],
+    },
+    {
+      heading: 'BIOES Tagging for NER',
+      body: 'Token-level classification for NER uses BIOES (Begin, Inside, Outside, End, Single) tagging scheme — each token is labelled with its entity type and position. For a three-word product name "Apple AirPods Pro": B-PRODUCT (Apple), I-PRODUCT (AirPods), E-PRODUCT (Pro). Single-token entities get S-ENTITY tag. This precise boundary detection enables extraction of multi-token entities and correct handling of adjacent entities of different types. ClickMasters uses BIOES tagging for all production NER models.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is NLP and what problems does it solve?',
+      answer: 'Natural Language Processing (NLP) is the field of machine learning focused on enabling computers to understand, interpret, and generate human language. In B2B software, NLP solves the problem of unstructured text data — the contracts, support tickets, customer emails, product reviews, and meeting transcripts that contain valuable business intelligence but cannot be analysed at scale by human teams. NLP systems convert this unstructured text into structured, actionable signals: a text classifier that categorises 10,000 support tickets per hour by issue type (no human triage team can do this); a sentiment analysis system that monitors customer sentiment across 50,000 reviews in real time; a semantic search engine that finds documents by meaning, not just keyword match. The underlying technology is transformer models (BERT and its variants, trained on billions of words) fine-tuned on labelled examples from your specific domain.',
+    },
+    {
+      question: 'How many labelled examples do I need for text classification?',
+      answer: 'For binary text classification using BERT fine-tuning: 200-500 labelled examples per class (400-1,000 total) can produce usable accuracy (75-85% F1) on clear-cut classification tasks. For 90%+ F1 on a domain-specific task: 1,000-5,000 labelled examples per class. The exact requirement depends on how distinct the classes are (if the decision is clear-cut, fewer examples suffice), the vocabulary complexity (highly technical domain language needs more examples), and class balance (imbalanced datasets require more examples of the minority class). ClickMasters provides a data labelling strategy as part of every NLP engagement — including when to use active learning (label the examples the model is most uncertain about first) to reduce total labelling cost by 50-70%.',
+    },
+    {
+      question: 'What is the difference between BERT and GPT models for NLP tasks?',
+      answer: 'BERT (Bidirectional Encoder Representations from Transformers) is an encoder-only model — it reads text bidirectionally and produces dense representations for each token. It excels at classification, NER, and extractive QA tasks where understanding the full context of a text matters. GPT models are decoder-only — they generate text autoregressively (token by token). They excel at generation tasks (summarisation, translation, creative writing). For classification and extraction NLP tasks in production, fine-tuned BERT variants (RoBERTa, DeBERTa, ALBERT) are typically preferred over using a large GPT model via API — they are smaller (faster, cheaper inference), can be self-hosted (no data leaving your environment), and achieve comparable or better accuracy on classification tasks when properly fine-tuned.',
+    },
+    {
+      question: 'Can NLP models be deployed on-premises for data privacy?',
+      answer: 'Yes. All Hugging Face Transformer models used by ClickMasters can be deployed on-premises (on your own servers or private cloud) without sending text data to external APIs. The model weights are downloaded once from Hugging Face Hub and served from your infrastructure using HuggingFace\'s transformers inference pipeline, TorchServe, or ONNX Runtime. This makes on-premises NLP deployment appropriate for healthcare (PHI), legal (attorney-client privilege), and financial services (customer data) environments where text data cannot leave the organisation\'s infrastructure. ClickMasters deploys self-hosted NLP models on AWS EC2 (within the client\'s VPC), on-premises GPU servers, or air-gapped environments depending on security requirements.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our support ticket classification system. We now process 10,000+ tickets per week with 94% routing accuracy — saving our support team 20+ hours per week. The BERT model handles industry-specific terminology perfectly.",
+    author: "Head of Customer Support",
+    role: "B2B SaaS Company"
+  },
+  caseStudy: {
+    title: "Support Ticket Classification",
+    description: "Built BERT-based multi-label classification for support tickets. 94% F1 on 15 issue types. Reduced ticket routing time from 5 minutes to instant. Saved support team 20+ hours/week. Integrated with Zendesk API.",
+    slug: "nlp-ticket-classification",
+    badge: "NLP"
+  },
+  howToSteps: [
+    { name: 'NLP Scoping & Data Audit', text: 'Task definition, data quality review, model selection, labelling requirements.' },
+    { name: 'Model Fine-Tuning', text: 'Load pre-trained model, fine-tune on labelled examples, hyperparameter tuning, evaluation.' },
+    { name: 'Model Optimisation', text: 'Distillation, quantisation, ONNX export, containerisation.' },
+    { name: 'API & Integration', text: 'FastAPI REST endpoint, batch processing, monitoring.' },
+  ],
+  itemList: [
+    'Text Classification',
+    'Named Entity Recognition (NER)',
+    'Semantic Search',
+    'Text Summarisation',
+    'Information Extraction',
+  ],
+  definedTerms: [
+    { name: 'BERT', description: 'Bidirectional Encoder Representations from Transformers — encoder-only transformer model optimised for classification, NER, and extractive QA tasks.' },
+    { name: 'BIOES Tagging', description: 'Begin, Inside, Outside, End, Single — token-level labelling scheme for precise named entity boundary detection.' },
+    { name: 'Semantic Search', description: 'Search based on meaning using embedding vectors, not keyword matching — handles synonyms, paraphrases, conceptual queries.' },
+    { name: 'ROUGE', description: 'Recall-Oriented Understudy for Gisting Evaluation — primary metric for summarisation (ROUGE-1, ROUGE-2, ROUGE-L).' },
+  ],
+};
+
+const speechRecognitionOverride: ServicePageContent = {
+  slug: 'speech-recognition',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'speech-recognition',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Speech Recognition Services',
+  serviceName: 'Speech Recognition',
+  metaTitle: 'Speech Recognition Services | Transcription & Voice AI | ClickMasters',
+  metaDescription:
+    'ClickMasters builds speech recognition systems — meeting transcription, voice command interfaces, call analytics, and multilingual ASR — using Whisper and Deepgram for B2B companies worldwide.',
+  lead: 'ClickMasters builds speech recognition systems for B2B companies across the USA, Europe, Canada, and Australia. Meeting transcription with speaker diarisation — who said what, when. Call centre analytics — transcribe, analyse sentiment, and extract action items from thousands of calls daily. Voice command interfaces for mobile and web applications. Real-time and batch transcription in 100+ languages. Built on OpenAI Whisper and Deepgram.',
+  highlights: [
+    '✓ Whisper Transcription',
+    '✓ Speaker Diarisation',
+    '✓ Real-Time Streaming ASR',
+    '✓ Call Centre Analytics',
+    '✓ Voice Command Interface',
+    '✓ 100+ Language Support',
+  ],
+  marketStats: [
+    { label: 'Word Error Rate of Whisper large-v3 on standard English benchmarks — near-human accuracy', value: '4.4%' },
+    { label: 'Languages supported by Whisper — multilingual transcription without separate per-language models', value: '100+' },
+    { label: 'Latency of Deepgram streaming ASR — real-time transcription for live voice interfaces', value: '<300ms' },
+    { label: 'Speaker diarisation — identifying who spoke when — transforms transcript into structured conversation', value: 'Diarisation' },
+  ],
+  servicesCards: [
+    { title: 'Meeting Transcription', description: 'Batch transcription of recorded meetings (Zoom, Teams, Google Meet exports). Whisper large-v3 for high accuracy. Speaker diarisation via pyannote-audio (identifies each speaker\'s segments). Structured output: timestamped transcript with speaker labels. Post-processing: punctuation restoration, custom vocabulary.' },
+    { title: 'Real-Time Streaming ASR', description: 'Live transcription for video conferencing plugins, contact centre dashboards, or real-time captioning. Deepgram Nova-2 (primary for streaming — <300ms latency) or AWS Transcribe Streaming. WebSocket-based streaming with partial/final transcripts.' },
+    { title: 'Call Centre Analytics', description: 'Transcribe inbound/outbound call recordings at scale. Post-transcription analysis: sentiment per utterance, topic extraction (LLM-based), action item extraction, compliance phrase detection, silence analysis. Dashboard with agent performance metrics and escalation scoring.' },
+    { title: 'Voice Command Interface', description: 'Embedded voice input for mobile (iOS + Android) and web applications. Architecture: device microphone capture → streaming ASR → intent classification → application action. Wake word detection (Porcupine — lightweight on-device). Push-to-talk and always-listening modes.' },
+    { title: 'Audio Processing Pipeline', description: 'Pre-processing for optimal ASR accuracy: noise reduction (RNNoise), voice activity detection (Silero VAD — skip silent segments), audio normalisation, format conversion (→ 16kHz mono WAV), and diarisation (pyannote-audio speaker segmentation).' },
+  ],
+  differentiators: [
+    { feature: 'Whisper vs Deepgram Guidance', description: 'Batch: Whisper (4.4% WER, self-hostable). Real-time: Deepgram (<300ms) | Basic: One-size-fits-all ASR choice' },
+    { feature: 'Speaker Diarisation', description: 'pyannote-audio — "who spoke when" with speaker labels | Basic: Single-stream transcript only (no speaker attribution)' },
+    { feature: 'On-Premises Option', description: 'Self-hosted Whisper (faster-whisper — 4x faster) for data privacy | Basic: Cloud API only (audio leaves environment)' },
+    { feature: 'Call Analytics', description: 'Sentiment + topics + action items + compliance phrase detection | Basic: Transcription only (no analysis layer)' },
+    { feature: 'Wake Word', description: 'Porcupine — on-device detection, no cloud round-trip | Basic: Push-to-talk only (mic always requires user button)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'ASR Scoping', timeline: 'Week 1', text: 'Use case analysis (batch vs real-time, latency requirements, languages, privacy constraints), model selection (Whisper vs Deepgram), diarisation plan, API design. Deliverable: ASR Architecture Plan.' },
+    { phase: 'Phase 2', title: 'Batch Transcription Pipeline', timeline: 'Week 2-4', text: 'Whisper large-v3 or faster-whisper (4x faster) deployment. Audio pre-processing (RNNoise noise reduction, Silero VAD). Diarisation (pyannote-audio). S3 ingestion, JSON output, webhook delivery. Deliverable: Batch Transcription Pipeline.' },
+    { phase: 'Phase 3', title: 'Real-Time Streaming', timeline: 'Week 3-5', text: 'Deepgram WebSocket or self-hosted streaming. Browser microphone capture (Web Audio API), partial transcript streaming, final transcript assembly. Integration with application UI. Deliverable: Real-Time ASR Integration.' },
+    { phase: 'Phase 4', title: 'Post-Processing Analytics', timeline: 'Week 4-6', text: 'Call centre: sentiment analysis per utterance, topic extraction (LLM), action item extraction, compliance phrase detection, dashboard. Deliverable: Analytics Pipeline + Dashboard.' },
+  ],
+  techStackCategories: [
+    { layer: 'Batch ASR', technologies: 'Whisper large-v3 (OpenAI — 4.4% WER, 100+ languages), faster-whisper (4x faster, CTranslate2), WhisperX (word-level timestamps)' },
+    { layer: 'Real-Time ASR', technologies: 'Deepgram Nova-2 (<300ms latency), AWS Transcribe Streaming, self-hosted Whisper with chunking' },
+    { layer: 'Diarisation', technologies: 'pyannote-audio (speaker segmentation model), faster-whisper + pyannote pipeline' },
+    { layer: 'Wake Word', technologies: 'Porcupine (Picovoice — on-device, no cloud), Vosk (lightweight on-device ASR for wake word)' },
+    { layer: 'Audio Processing', technologies: 'Noise reduction: RNNoise, spectral subtraction; VAD: Silero VAD; format: pydub, ffmpeg' },
+    { layer: 'Infrastructure', technologies: 'AWS EC2 G5 (GPU for Whisper), Lambda (serverless batch), WebSockets (real-time)' },
+  ],
+  pricingTiers: [
+    { type: 'ASR Scoping', investment: '$2,000 – $5,000', timeline: '1 week', bestFor: 'Use case analysis, model selection, diarisation plan, API design' },
+    { type: 'Batch Transcription Pipeline', investment: '$8,000 – $22,000', timeline: '3 – 5 weeks', bestFor: 'Whisper + diarisation, S3 ingestion, JSON output, webhook delivery' },
+    { type: 'Real-Time Streaming ASR', investment: '$10,000 – $28,000', timeline: '4 – 7 weeks', bestFor: 'Deepgram WebSocket, partial transcripts, React/mobile UI' },
+    { type: 'Call Centre Analytics', investment: '$15,000 – $45,000', timeline: '5 – 9 weeks', bestFor: 'Transcription + sentiment + topics + action items + compliance + dashboard' },
+    { type: 'Voice Command Interface', investment: '$10,000 – $28,000', timeline: '4 – 7 weeks', bestFor: 'Wake word + streaming ASR + intent classification + app integration' },
+    { type: 'Custom Vocabulary Fine-Tuning', investment: '$6,000 – $15,000', timeline: '2 – 4 weeks', bestFor: 'Domain vocabulary injection or Whisper fine-tune on specialised audio' },
+    { type: 'ASR Retainer', investment: '$2,500 – $6,000/mo', timeline: 'Ongoing', bestFor: 'Model updates, WER monitoring, new language support, feature expansion' },
+  ],
+  industryUseCases: [
+    { name: 'Meeting Transcription', description: 'Transcribe Zoom/Teams calls with speaker diarisation. Timestamped transcript showing who said what. Post-process: extract decisions and action items with LLM. 60-minute meeting transcribed in ~2 minutes.' },
+    { name: 'Call Centre Analytics', description: 'Transcribe thousands of calls daily. Sentiment per utterance, topic extraction, compliance phrase detection. Agent performance dashboard. Reduce QA time by 80%.' },
+    { name: 'Voice Command Interface', description: 'Voice-activated controls for mobile/web apps. "Schedule a meeting with John tomorrow at 2pm" → intent classification → calendar action. Wake word for hands-free activation.' },
+    { name: 'Medical Dictation', description: 'Self-hosted Whisper for HIPAA-compliant medical dictation. Specialist vocabulary fine-tuning. Structured output to EHR.' },
+  ],
+  sections: [
+    {
+      heading: 'Whisper vs Deepgram for Transcription',
+      body: 'OpenAI Whisper and Deepgram are both production-grade ASR systems but optimised for different use cases. Whisper is an open-source model that can be self-hosted (data stays on your infrastructure) or called via the OpenAI API. It has near-human accuracy on English (4.4% WER on standard benchmarks), supports 100+ languages, and is the best choice for batch transcription where latency is not a constraint. Deepgram is a managed API service optimised for real-time streaming transcription — delivering partial transcripts with <300ms latency, making it the correct choice for live captioning, real-time agent assist, and voice interfaces where users see transcription as they speak. For batch transcription of meeting recordings or call logs: Whisper. For real-time streaming: Deepgram. ClickMasters uses both depending on the latency requirement.',
+      items: [],
+    },
+    {
+      heading: 'Speaker Diarisation',
+      body: 'Speaker diarisation is the process of determining "who spoke when" in a multi-speaker audio recording — segmenting the transcript by speaker identity. Without diarisation, a meeting transcript is a single stream of text with no attribution: "The deadline is Friday. What about the API integration? We need to finish that first." With diarisation: "Speaker 1 (CEO): The deadline is Friday. Speaker 2 (CTO): What about the API integration? Speaker 1 (CEO): We need to finish that first." Diarisation is implemented with pyannote-audio (a speaker segmentation model) applied before transcription — the audio is segmented by speaker, each segment is transcribed, and the transcript is reconstructed with speaker labels. For meeting intelligence, call analytics, and interview transcription, diarisation is essential — without it, the transcript has limited business value.',
+      items: [],
+    },
+    {
+      heading: 'On-Premises Speech Recognition for Sensitive Data',
+      body: 'OpenAI Whisper is fully open-source and can be deployed on your own infrastructure — either on-premises GPU servers or within your private AWS/GCP/Azure VPC. Audio never leaves your environment. Deployment options: Whisper served via a FastAPI endpoint on an AWS EC2 G5 instance (GPU-accelerated — processes a 60-minute meeting in ~2 minutes), or faster-whisper (a CTranslate2-optimised Whisper implementation — 4x faster than the original with the same accuracy) for high-throughput batch transcription. For real-time streaming in a private environment, NVIDIA Riva (enterprise-grade on-premises ASR) or a self-hosted Whisper with streaming chunking can replace Deepgram. ClickMasters deploys self-hosted ASR for healthcare, legal, and financial services clients where audio content cannot be sent to external APIs.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between Whisper and Deepgram for transcription?',
+      answer: 'OpenAI Whisper and Deepgram are both production-grade ASR systems but optimised for different use cases. Whisper is an open-source model that can be self-hosted (data stays on your infrastructure) or called via the OpenAI API. It has near-human accuracy on English (4.4% WER on standard benchmarks), supports 100+ languages, and is the best choice for batch transcription where latency is not a constraint. Deepgram is a managed API service optimised for real-time streaming transcription — delivering partial transcripts with <300ms latency, making it the correct choice for live captioning, real-time agent assist, and voice interfaces where users see transcription as they speak. For batch transcription of meeting recordings or call logs: Whisper. For real-time streaming: Deepgram. ClickMasters uses both depending on the latency requirement.',
+    },
+    {
+      question: 'What is speaker diarisation and why does it matter?',
+      answer: 'Speaker diarisation is the process of determining "who spoke when" in a multi-speaker audio recording — segmenting the transcript by speaker identity. Without diarisation, a meeting transcript is a single stream of text with no attribution: "The deadline is Friday. What about the API integration? We need to finish that first." With diarisation: "Speaker 1 (CEO): The deadline is Friday. Speaker 2 (CTO): What about the API integration? Speaker 1 (CEO): We need to finish that first." Diarisation is implemented with pyannote-audio (a speaker segmentation model) applied before transcription — the audio is segmented by speaker, each segment is transcribed, and the transcript is reconstructed with speaker labels. For meeting intelligence, call analytics, and interview transcription, diarisation is essential — without it, the transcript has limited business value.',
+    },
+    {
+      question: 'Can speech recognition work for heavily accented or technical speech?',
+      answer: 'Yes, with proper configuration and fine-tuning. Whisper\'s multilingual model has broad accent coverage because it was trained on diverse web audio — it handles most global English accents (Indian, Australian, British, South African, etc.) better than many commercial ASR systems. For highly specialised vocabulary (medical terminology, legal Latin phrases, proprietary product names, financial instrument tickers), custom vocabulary can be injected into the Whisper prompt (the model is primed with expected terms — significantly reducing hallucination of unfamiliar words). For persistent specialised vocabulary use cases, Whisper can be fine-tuned on a domain-specific dataset — typically 10-100 hours of labelled audio from the target domain — reducing WER by 30-50% on in-domain audio. ClickMasters recommends starting with custom vocabulary injection (fast and cheap) before committing to fine-tuning.',
+    },
+    {
+      question: 'Is it possible to deploy speech recognition on-premises for sensitive data?',
+      answer: 'Yes. OpenAI Whisper is fully open-source and can be deployed on your own infrastructure — either on-premises GPU servers or within your private AWS/GCP/Azure VPC. Audio never leaves your environment. Deployment options: Whisper served via a FastAPI endpoint on an AWS EC2 G5 instance (GPU-accelerated — processes a 60-minute meeting in ~2 minutes), or faster-whisper (a CTranslate2-optimised Whisper implementation — 4x faster than the original with the same accuracy) for high-throughput batch transcription. For real-time streaming in a private environment, NVIDIA Riva (enterprise-grade on-premises ASR) or a self-hosted Whisper with streaming chunking can replace Deepgram. ClickMasters deploys self-hosted ASR for healthcare, legal, and financial services clients where audio content cannot be sent to external APIs.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our meeting transcription pipeline. We process 500+ hours of customer calls weekly with Whisper + speaker diarisation. The 4.4% WER accuracy is remarkable, even on technical vocabulary.",
+    author: "VP of Engineering",
+    role: "Conversational AI Platform"
+  },
+  caseStudy: {
+    title: "Call Centre Transcription & Analytics",
+    description: "Built Whisper-based transcription with speaker diarisation for 50-agent call centre. Post-processing: sentiment analysis, topic extraction, compliance phrase detection. Reduced QA time by 80%, identified 3 systemic workflow issues.",
+    slug: "call-centre-asr",
+    badge: "Speech Recognition"
+  },
+  howToSteps: [
+    { name: 'ASR Scoping', text: 'Use case analysis, model selection (Whisper vs Deepgram), diarisation plan, API design.' },
+    { name: 'Batch Transcription Pipeline', text: 'Whisper deployment, pre-processing, diarisation, S3 ingestion, JSON output.' },
+    { name: 'Real-Time Streaming', text: 'Deepgram WebSocket, browser microphone capture, partial/final transcripts.' },
+    { name: 'Post-Processing Analytics', text: 'Sentiment, topics, action items, compliance dashboard.' },
+  ],
+  itemList: [
+    'Meeting Transcription',
+    'Real-Time Streaming ASR',
+    'Call Centre Analytics',
+    'Voice Command Interface',
+    'Audio Processing Pipeline',
+  ],
+  definedTerms: [
+    { name: 'WER', description: 'Word Error Rate — primary transcription accuracy metric (lower is better). Whisper large-v3: 4.4% on standard English benchmarks.' },
+    { name: 'Speaker Diarisation', description: 'Determining "who spoke when" — segmenting transcript by speaker identity.' },
+    { name: 'RTSP', description: 'Real-Time Streaming Protocol — standard for IP camera live video feeds consumed by analytics systems.' },
+  ],
+};
+
+const textAnalyticsOverride: ServicePageContent = {
+  slug: 'text-analytics',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'text-analytics',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Text Analytics Services',
+  serviceName: 'Text Analytics',
+  metaTitle: 'Text Analytics Services | Customer Feedback & Contract Analysis | ClickMasters',
+  metaDescription:
+    'ClickMasters builds text analytics systems — topic modelling, sentiment monitoring, contract analysis, and customer feedback intelligence — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds text analytics systems for B2B companies across the USA, Europe, Canada, and Australia. Topic modelling that surfaces the 12 recurring themes in 50,000 customer support tickets — automatically. Sentiment monitoring dashboards that track brand health across review platforms. Contract analytics that flags non-standard clauses before legal review. Voice-of-customer systems that translate customer language into product roadmap evidence.',
+  highlights: [
+    '✓ Topic Modelling (BERTopic)',
+    '✓ Sentiment Monitoring Dashboard',
+    '✓ Contract & Document Analytics',
+    '✓ Voice of Customer Systems',
+    '✓ Theme Extraction',
+    '✓ Text Mining Pipelines',
+  ],
+  marketStats: [
+    { label: 'Transformer-based topic modelling — clusters by semantic meaning, far superior to LDA on short texts', value: 'BERTopic' },
+    { label: 'Standard evaluation metric for topic modelling quality', value: 'Topic Coherence' },
+    { label: 'Review time reduction for routine commercial contracts with automated clause extraction', value: '60-80%' },
+    { label: 'Latent Dirichlet Allocation — classical topic modelling (BERTopic now standard)', value: 'LDA' },
+  ],
+  servicesCards: [
+    { title: 'Topic Modelling (BERTopic)', description: 'Transformer-based topic modelling — clusters semantically similar documents into topics using sentence embeddings + UMAP + HDBSCAN — far superior to LDA on short texts like support tickets, reviews, and social posts. Output: named topics with representative keywords and example documents. Interactive dashboard: topic hierarchy visualisation, trend over time, drill-down to representative documents.' },
+    { title: 'Sentiment Monitoring Dashboard', description: 'Multi-source sentiment tracking: product reviews (G2, Trustpilot, Capterra, App Store), support tickets, NPS survey verbatim, social mentions. Sentiment classification (positive/negative/neutral + intensity). Aspect-based sentiment (sentiment per product feature). Trend dashboards with Slack/email alert when sentiment drops significantly.' },
+    { title: 'Contract & Legal Text Analytics', description: 'Clause extraction and classification: identify specific clause types (payment terms, liability caps, IP ownership, data processing, termination, non-compete, SLA), risk flagging (clauses deviating from standard — highlighted with severity), comparison (compare contract to template), and bulk analysis (process 1,000 contracts → structured spreadsheet). Reduces review time by 60-80%.' },
+    { title: 'Voice of Customer (VoC) System', description: 'Systematic extraction of customer insight from qualitative data: interview transcripts, survey open-ends, support conversations, churn reasons, NPS verbatim. Jobs-to-be-done extraction, pain point taxonomy, feature request extraction, competitor mention analysis. Deliverable: structured VoC report with evidence quotes per finding.' },
+    { title: 'Competitive Intelligence', description: 'Monitor competitor mentions, product release notes, pricing pages, and customer reviews at scale. Web scraping + NLP pipeline: scrape target sources on schedule, extract relevant mentions and features, classify by category, surface changes in monitoring dashboard. Identifies competitor pricing changes, new feature announcements, customer sentiment shifts, and marketing messaging changes.' },
+  ],
+  differentiators: [
+    { feature: 'BERTopic vs LDA', description: 'Transformer embeddings + UMAP + HDBSCAN — works on short texts where LDA fails | Basic: LDA (requires long documents, bag-of-words only)' },
+    { feature: 'Aspect-Based Sentiment', description: 'Sentiment per product feature — "pricing negative, support positive" | Basic: Document-level sentiment only' },
+    { feature: 'Contract Analytics ROI', description: '60-80% legal review time reduction with clause extraction + risk flagging | Basic: Keyword search only' },
+    { feature: 'VoC Jobs-to-be-Done', description: 'Extract what customers are trying to accomplish, not just what they say | Basic: Word clouds and frequency counts' },
+    { feature: 'Data Source Connectors', description: 'Zendesk, Salesforce, HubSpot, Intercom, Snowflake, S3 — wherever your text lives | Basic: File upload only' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Text Analytics Discovery', timeline: 'Week 1-2', text: 'Data inventory (sources, volume, format), use case prioritisation, NLP task selection (topic modelling, sentiment, extraction), analytics architecture design. Deliverable: Text Analytics Plan.' },
+    { phase: 'Phase 2', title: 'Topic Modelling (BERTopic)', timeline: 'Week 2-4', text: 'Sentence embeddings generation (sentence-transformers), dimensionality reduction (UMAP), clustering (HDBSCAN), topic representation extraction (c-TF-IDF), topic reduction, interactive dashboard (Plotly/Dash). Deliverable: Topic Model + Interactive Dashboard.' },
+    { phase: 'Phase 3', title: 'Sentiment Analysis Pipeline', timeline: 'Week 2-5', text: 'Fine-tune sentiment classifier (BERT) or use zero-shot for new domains. Aspect-based sentiment extraction. Integration with review APIs (G2, Trustpilot). Trend dashboard with Slack alerts. Deliverable: Sentiment Monitoring Dashboard.' },
+    { phase: 'Phase 4', title: 'Contract Analytics Pipeline', timeline: 'Week 3-6', text: 'Clause extraction model (BERT-based token classification), clause library (standard terms per clause type), risk flagging rules, bulk processing pipeline, review workflow UI. Deliverable: Contract Analytics System.' },
+  ],
+  techStackCategories: [
+    { layer: 'Topic Modelling', technologies: 'BERTopic (sentence-transformers + UMAP + HDBSCAN), c-TF-IDF, Plotly/Dash dashboard' },
+    { layer: 'Sentiment', technologies: 'BERT fine-tune, zero-shot (for new domains with no labelled data), TextBlob/VADER (baseline)' },
+    { layer: 'Contract Analytics', technologies: 'BERT token classification (clause boundaries), spaCy (NER), custom rule engine (risk flagging)' },
+    { layer: 'VoC', technologies: 'sentence-transformers (clustering), BERTopic (theme extraction), LLM (job-to-be-done extraction)' },
+    { layer: 'Data Integration', technologies: 'Zendesk API, Salesforce API, HubSpot API, Intercom API, Snowflake, S3' },
+    { layer: 'Dashboard', technologies: 'Metabase, Looker, Tableau, or custom React + Plotly' },
+  ],
+  pricingTiers: [
+    { type: 'Text Analytics Discovery', investment: '$3,000 – $6,000', timeline: '1 – 2 weeks', bestFor: 'Data inventory, use case prioritisation, analytics architecture plan' },
+    { type: 'Topic Modelling System', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'BERTopic, interactive dashboard, trend monitoring, alerts' },
+    { type: 'Sentiment Monitoring Dashboard', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'Multi-source, aspect-based, trend dashboard, Slack/email alerts' },
+    { type: 'Contract Analytics Pipeline', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Clause extraction, risk flagging, bulk analysis, review workflow' },
+    { type: 'Voice of Customer System', investment: '$10,000 – $28,000', timeline: '4 – 7 weeks', bestFor: 'Transcript/survey analysis, theme taxonomy, insight report' },
+    { type: 'Competitive Intelligence', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'Web scraping + NLP, monitoring dashboard, change alerts' },
+    { type: 'Full Text Analytics Platform', investment: '$20,000 – $65,000', timeline: '6 – 12 weeks', bestFor: 'All above sharing data pipeline + BI dashboard integration' },
+    { type: 'Text Analytics Retainer', investment: '$3,000 – $7,000/mo', timeline: 'Ongoing', bestFor: 'New data sources, topic refresh, model improvement, reporting' },
+  ],
+  industryUseCases: [
+    { name: 'Customer Feedback Analysis', description: 'Analyse 50,000+ support tickets, surveys, reviews. Identify top 10 recurring issues. Track sentiment by product feature. Prioritise product roadmap by customer pain point frequency.' },
+    { name: 'Contract Review Automation', description: 'Extract clauses (payment terms, liability, IP, termination) from 1,000+ contracts. Flag non-standard deviations. Reduce legal review time by 60-80%. Structured spreadsheet output.' },
+    { name: 'Voice of Customer (VoC)', description: 'Extract Jobs-to-be-Done from interview transcripts. Build pain point taxonomy. Identify competitor substitution mentions. Quantify feature request frequency.' },
+    { name: 'Competitive Monitoring', description: 'Scrape competitor websites, release notes, customer reviews. Alert on pricing changes, new features, sentiment shifts. Weekly competitor intelligence brief.' },
+  ],
+  sections: [
+    {
+      heading: 'BERTopic vs LDA for Topic Modelling',
+      body: 'BERTopic is a topic modelling technique that uses transformer embeddings (sentence-transformers) to represent document meaning, then applies UMAP (dimensionality reduction) and HDBSCAN (density-based clustering) to group semantically similar documents into topics. This produces topics defined by actual semantic meaning — not just co-occurring words. LDA (Latent Dirichlet Allocation), the classical topic modelling approach, represents documents as bags of words — it misses semantic relationships (synonyms counted as different, polysemous words counted the same regardless of meaning). On short texts typical in B2B text analytics (support tickets, reviews, survey responses), BERTopic dramatically outperforms LDA because transformer embeddings capture meaning even from 5-20 word documents that LDA cannot model reliably. ClickMasters uses BERTopic as the default topic modelling approach for all text analytics engagements.',
+      items: [],
+    },
+    {
+      heading: 'Text Analytics ROI — Real Examples',
+      body: 'Text analytics ROI depends on the specific use case. Contract analytics: typical B2B legal teams spend 4-8 hours reviewing a non-standard commercial contract. An analytics system that pre-classifies and flags deviations reduces this to 1-2 hours — 50-75% time reduction at the fully-loaded cost of a legal professional. At $150/hour and 500 contracts/year, that is $150,000-$300,000 in annual time savings. Customer feedback analytics: product teams manually tagging support tickets spend 15-30 minutes per ticket categorising and routing. At 2,000 tickets/week, automating this saves 500-1,000 hours/week — allowing the team to spend that time acting on insights rather than generating them. Sentiment monitoring: identifying a significant sentiment drop 2 weeks before it shows in churn data gives the customer success team an intervention window that manual review cannot provide. ClickMasters estimates ROI for each specific use case as part of the discovery engagement.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is text analytics and how is it different from NLP?',
+      answer: 'Text analytics is the application of NLP techniques to extract business intelligence from unstructured text — the practitioner\'s term for deploying NLP in business contexts. NLP is the underlying scientific field (algorithms, models, linguistic theory); text analytics is the applied discipline (building systems that answer business questions using NLP). A text analytics system might use NLP techniques like transformer embeddings (for topic modelling), sentiment classification models (for sentiment monitoring), and named entity recognition (for contract analytics) — all deployed in a pipeline that ingests raw text, processes it through multiple NLP stages, and outputs structured insights to a business dashboard. The deliverable of text analytics is always a business insight or decision, not a model accuracy metric.',
+    },
+    {
+      question: 'What is BERTopic and why is it better than LDA for topic modelling?',
+      answer: 'BERTopic is a topic modelling technique that uses transformer embeddings (sentence-transformers) to represent document meaning, then applies UMAP (dimensionality reduction) and HDBSCAN (density-based clustering) to group semantically similar documents into topics. This produces topics defined by actual semantic meaning — not just co-occurring words. LDA (Latent Dirichlet Allocation), the classical topic modelling approach, represents documents as bags of words — it misses semantic relationships (synonyms counted as different, polysemous words counted the same regardless of meaning). On short texts typical in B2B text analytics (support tickets, reviews, survey responses), BERTopic dramatically outperforms LDA because transformer embeddings capture meaning even from 5-20 word documents that LDA cannot model reliably. ClickMasters uses BERTopic as the default topic modelling approach for all text analytics engagements.',
+    },
+    {
+      question: 'Can text analytics integrate with our existing data tools (Salesforce, Zendesk, Snowflake)?',
+      answer: 'Yes. Text analytics data pipelines connect to the sources where your text data lives. Common integrations: Zendesk (support tickets via Zendesk API — classify, analyse sentiment, tag topics automatically), Salesforce (CRM notes and deal descriptions via Salesforce API), HubSpot (conversation history, survey responses), Intercom (chat transcripts), Snowflake or BigQuery (bulk text data warehoused for analytics), and S3 (raw text files, email exports, document corpora). Processed outputs are written back to the same data warehouse (Snowflake, BigQuery, PostgreSQL) or directly to BI tools (Metabase, Looker, Tableau) for dashboard visualisation. ClickMasters designs the integration architecture in the discovery phase — mapping each text source to the appropriate NLP task and output destination.',
+    },
+    {
+      question: 'What ROI can I expect from a text analytics system?',
+      answer: 'Text analytics ROI depends on the specific use case. Contract analytics: typical B2B legal teams spend 4-8 hours reviewing a non-standard commercial contract. An analytics system that pre-classifies and flags deviations reduces this to 1-2 hours — 50-75% time reduction at the fully-loaded cost of a legal professional. At $150/hour and 500 contracts/year, that is $150,000-$300,000 in annual time savings. Customer feedback analytics: product teams manually tagging support tickets spend 15-30 minutes per ticket categorising and routing. At 2,000 tickets/week, automating this saves 500-1,000 hours/week — allowing the team to spend that time acting on insights rather than generating them. Sentiment monitoring: identifying a significant sentiment drop 2 weeks before it shows in churn data gives the customer success team an intervention window that manual review cannot provide. ClickMasters estimates ROI for each specific use case as part of the discovery engagement.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our contract analytics pipeline. We processed 3,000 contracts in 2 days — something our legal team would have taken months to do manually. The clause extraction accuracy is above 92% on 15 clause types.",
+    author: "General Counsel",
+    role: "Enterprise B2B Company"
+  },
+  caseStudy: {
+    title: "Contract Analytics Pipeline",
+    description: "Built clause extraction system for legal team. 15 clause types (payment terms, liability, IP, termination). 92% extraction F1. Bulk processing: 3,000 contracts in 2 days. Reduced legal review time by 70%.",
+    slug: "contract-analytics",
+    badge: "Text Analytics"
+  },
+  howToSteps: [
+    { name: 'Text Analytics Discovery', text: 'Data inventory, use case prioritisation, NLP task selection, architecture plan.' },
+    { name: 'Topic Modelling (BERTopic)', text: 'Sentence embeddings, UMAP, HDBSCAN, topic representation, interactive dashboard.' },
+    { name: 'Sentiment Analysis Pipeline', text: 'Fine-tune classifier, aspect-based extraction, review API integration, trend dashboard.' },
+    { name: 'Contract Analytics Pipeline', text: 'Clause extraction model, clause library, risk flagging, bulk processing, review UI.' },
+  ],
+  itemList: [
+    'Topic Modelling (BERTopic)',
+    'Sentiment Monitoring Dashboard',
+    'Contract & Legal Text Analytics',
+    'Voice of Customer (VoC) System',
+    'Competitive Intelligence',
+    'Text Mining Pipeline',
+  ],
+  definedTerms: [
+    { name: 'BERTopic', description: 'Transformer-based topic modelling using sentence embeddings + UMAP + HDBSCAN — works on short texts where LDA fails.' },
+    { name: 'Aspect-Based Sentiment', description: 'Sentiment analysis per product feature — "pricing negative, support positive" rather than document-level.' },
+    { name: 'VoC', description: 'Voice of Customer — systematic extraction of customer insight from qualitative data (interviews, surveys, tickets).' },
+    { name: 'Jobs-to-be-Done', description: 'Framework for understanding what goal the customer is trying to accomplish — not just what they say.' },
+  ],
+};
+
+const computerVisionOverride: ServicePageContent = {
+  slug: 'computer-vision',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'computer-vision',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Computer Vision Services',
+  serviceName: 'Computer Vision',
+  metaTitle: 'Computer Vision Services | Image Recognition & Object Detection | ClickMasters',
+  metaDescription:
+    'ClickMasters builds computer vision systems — image classification, object detection, defect detection, and visual inspection — using YOLO, DETR, and EfficientNet for B2B companies worldwide.',
+  lead: 'ClickMasters builds computer vision systems for B2B companies across the USA, Europe, Canada, and Australia. Image classification that categorises millions of product images per day. Object detection that locates and identifies items in real-time video streams. Defect detection that replaces manual visual inspection on manufacturing lines. Document layout analysis that understands the structure of complex PDF documents. Medical image analysis. Satellite and aerial image processing.',
+  highlights: [
+    '✓ Image Classification (EfficientNet/ViT)',
+    '✓ Object Detection (YOLO v8)',
+    '✓ Instance Segmentation',
+    '✓ Defect Detection',
+    '✓ Document Layout Analysis',
+    '✓ Transfer Learning',
+  ],
+  marketStats: [
+    { label: 'State-of-the-art real-time object detection — 50+ FPS on GPU, production-deployed in thousands of B2B systems', value: 'YOLO v8' },
+    { label: '1.2M labelled images across 1,000 classes — the pre-training corpus that gives transfer learning its power', value: 'ImageNet' },
+    { label: 'Mean Average Precision — the standard object detection evaluation metric across all IoU thresholds', value: 'mAP' },
+    { label: 'Microsoft\'s document understanding model — combines text, visual, and positional features', value: 'LayoutLM' },
+  ],
+  servicesCards: [
+    { title: 'Image Classification', description: 'Classify images into predefined categories using fine-tuned CNN or ViT models. Transfer learning from ImageNet pre-trained weights (EfficientNet, ResNet, ViT) requires 1,000-10,000 labelled images. Multi-label classification (an image can belong to multiple categories). Use cases: product category classification, document type classification, manufacturing defect category, medical image classification. Real-time REST API (<100ms per image) or batch processing pipeline.' },
+    { title: 'Object Detection (YOLO v8)', description: 'Locate and classify multiple objects within an image with bounding boxes. YOLO v8 (Ultralytics — state-of-the-art real-time detection) for real-time applications. DETR (DEtection TRansformer) for high-accuracy offline applications. Custom class training on annotated images. Evaluation: mAP@50, mAP@50-95. Use cases: product detection, safety equipment detection, vehicle detection, document region detection.' },
+    { title: 'Defect Detection System', description: 'Automated quality control for manufacturing lines. Anomaly detection approach (PatchCore, FastFlow — learns distribution of normal appearances, flags deviations) preferred when defect examples are rare. Integration with production line cameras (GigE Vision, USB3 Vision — image capture triggered by PLC, result in <100ms). Achieves 99%+ detection accuracy while eliminating human inspector fatigue.' },
+    { title: 'Document Layout Analysis', description: 'Understand the structure of complex documents — PDF reports, scientific papers, invoices, contracts — beyond raw text extraction. LayoutLM (Microsoft — combines textual, visual, and positional features). Use cases: table extraction (detect table boundaries → extract cell contents), form field detection (identify label-value pairs), section classification, and page-level document classification.' },
+    { title: 'Medical & Satellite Image Analysis', description: 'Specialist computer vision for regulated and high-precision domains. Medical imaging: pathology slide analysis, radiology (chest X-ray classification, lesion detection — for research, not clinical diagnosis without appropriate regulatory approval). Satellite and aerial: building footprint detection, land use classification, change detection (before/after imagery). All medical AI work scoped with regulatory pathway consideration.' },
+  ],
+  differentiators: [
+    { feature: 'Real-Time Speed', description: 'YOLO v8 at 50+ FPS on GPU — production-line ready | Basic: Slow detection models (cannot keep up with camera feed)' },
+    { feature: 'Anomaly Detection for Defects', description: 'PatchCore/FastFlow — learn normal appearances, flag deviations (works with rare defect examples) | Basic: Classification requires many defect examples per class' },
+    { feature: 'Transfer Learning Standard', description: 'ImageNet pre-trained weights — 1,000-10,000 labelled images sufficient | Basic: Training from scratch (requires millions of labelled images)' },
+    { feature: 'Document Layout Understanding', description: 'LayoutLM — combines text, visual, and positional features for complex document structure | Basic: OCR only (no table/cell/field detection)' },
+    { feature: 'Industrial Camera Integration', description: 'GigE Vision, USB3 Vision, PLC trigger, <100ms response for production line | Basic: Manual image upload only (not real-time)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'CV Scoping & Data Audit', timeline: 'Week 1-2', text: 'Use case analysis (classification, detection, segmentation, defect detection), dataset assessment (labelled images available, class balance), labelling requirements, architecture selection (YOLO v8, EfficientNet, LayoutLM). Deliverable: CV Architecture Plan + Data Requirements.' },
+    { phase: 'Phase 2', title: 'Model Training (Transfer Learning)', timeline: 'Week 2-5', text: 'Load pre-trained model (ImageNet weights for vision), freeze backbone, train new head on domain data, unfreeze for fine-tuning. Data augmentation (random crop, flip, rotation, MixUp, CutMix). Hyperparameter tuning, evaluation (accuracy, mAP). Deliverable: Trained Model + Checkpoints.' },
+    { phase: 'Phase 3', title: 'Model Optimisation', timeline: 'Week 4-6', text: 'TensorRT optimisation for YOLO (3-5x faster), ONNX export, GPU inference pipeline. For edge: NVIDIA Jetson deployment. Deliverable: Optimised Inference Pipeline.' },
+    { phase: 'Phase 4', title: 'Production Integration', timeline: 'Week 5-7', text: 'REST API (FastAPI) for on-demand inference or RTSP stream ingestion for video. Industrial camera integration (GigE Vision, PLC trigger). Alerting (defect detected → reject signal). Deliverable: Production CV System.' },
+  ],
+  techStackCategories: [
+    { layer: 'Classification', technologies: 'EfficientNet (best accuracy/compute trade-off), ResNet (classic), ViT (vision transformer), ConvNeXt (modern CNN architecture)' },
+    { layer: 'Detection', technologies: 'YOLO v8 (Ultralytics — real-time, 50+ FPS), DETR (end-to-end transformer), Faster R-CNN (high accuracy), Detectron2' },
+    { layer: 'Segmentation', technologies: 'YOLOv8-seg, Mask R-CNN (Detectron2), SAM (Segment Anything Model — zero-shot)' },
+    { layer: 'Defect Detection (Anomaly)', technologies: 'PatchCore, FastFlow, PaDiM, SPADE — learn normal appearance distribution' },
+    { layer: 'Document Understanding', technologies: 'LayoutLM (Microsoft — text + visual + layout), Donut (document understanding transformer), Tesseract (OCR baseline)' },
+    { layer: 'Hardware/Deployment', technologies: 'TensorRT (3-5x faster), NVIDIA Jetson Orin (edge), ONNX Runtime, GigE Vision industrial cameras' },
+  ],
+  pricingTiers: [
+    { type: 'CV Scoping & Data Audit', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'Use case analysis, dataset assessment, labelling requirements, architecture plan' },
+    { type: 'Image Classification Model', investment: '$10,000 – $28,000', timeline: '3 – 7 weeks', bestFor: 'Transfer learning, fine-tuning, evaluation, REST API deployment' },
+    { type: 'Object Detection (YOLO v8)', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Custom class training, annotation, evaluation, real-time API' },
+    { type: 'Defect Detection System', investment: '$15,000 – $45,000', timeline: '5 – 9 weeks', bestFor: 'Anomaly detection or classification, production line integration, alerting' },
+    { type: 'Instance Segmentation', investment: '$15,000 – $45,000', timeline: '5 – 10 weeks', bestFor: 'Mask R-CNN or YOLOv8-seg, precision boundary annotation' },
+    { type: 'Document Layout Analysis', investment: '$12,000 – $32,000', timeline: '4 – 8 weeks', bestFor: 'LayoutLM fine-tune, table + form extraction, PDF pipeline' },
+    { type: 'Medical / Satellite Specialist', investment: '$20,000 – $65,000', timeline: '6 – 12 weeks', bestFor: 'Domain-specific model, regulatory scoping, precision benchmarking' },
+    { type: 'CV Retainer', investment: '$3,500 – $9,000/mo', timeline: 'Ongoing', bestFor: 'Model retraining, new class addition, performance monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'Quality Control / Defect Detection', description: 'Automated visual inspection on manufacturing line. YOLO v8 detection or PatchCore anomaly detection. <100ms latency. Achieves 99%+ detection accuracy. Replaces fatigued human inspectors.' },
+    { name: 'Document Understanding', description: 'Extract tables, form fields, signatures from scanned PDFs. LayoutLM combines text + layout + visual features. Automate invoice processing, contract analysis.' },
+    { name: 'Retail Product Detection', description: 'Detect products on shelves, monitor inventory levels, identify out-of-stock items. YOLO v8 real-time from CCTV.' },
+    { name: 'Safety Compliance Monitoring', description: 'Detect PPE violations (hard hat, high-vis vest) from camera feeds. Real-time alerting for safety incidents.' },
+  ],
+  sections: [
+    {
+      heading: 'YOLO v8 — Real-Time Object Detection',
+      body: 'YOLO v8 (Ultralytics) is the state-of-the-art real-time object detection framework. It processes 50+ frames per second on a standard GPU while maintaining high accuracy (mAP comparable to larger, slower models). Architecture: single neural network that predicts bounding boxes and class probabilities directly from full images in one evaluation — unlike Faster R-CNN which has separate region proposal and classification stages. YOLO v8 uses an anchor-free detection head (simpler, faster, more flexible) and mosaic data augmentation (improves performance on small objects). Deployment: TensorRT optimisation (3-5x faster than PyTorch inference), export to ONNX, Edge TPU, or NVIDIA Jetson. ClickMasters uses YOLO v8 as the default detection architecture for real-time B2B computer vision applications.',
+      items: [],
+    },
+    {
+      heading: 'Transfer Learning for Computer Vision',
+      body: 'Transfer learning uses a model pre-trained on a large general dataset as the starting point for training on a smaller task-specific dataset — rather than training from random weights. A ResNet or EfficientNet pre-trained on ImageNet (1.2M labelled images, 1,000 classes) has learned general visual features — edges, textures, shapes — that transfer usefully to almost any visual recognition task. Fine-tuning this pre-trained model on 1,000-10,000 domain-specific labelled images produces better results than training from scratch on the same data. For NLP: BERT and its variants pre-trained on billions of words have learned language representations that transfer to classification tasks with 100-10,000 labelled examples. Transfer learning makes deep learning practical for B2B use cases where labelling costs limit dataset size.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is computer vision and what can it do for my business?',
+      answer: 'Computer vision is the field of AI that enables computers to extract structured information from images and video — answering questions like "what objects are in this image?", "where are they located?", "is this product defective?", and "what type of document is this?". For B2B companies, computer vision creates value in three main categories: quality control (automated visual inspection of manufactured products — detecting defects, missing components, assembly errors at speeds and consistencies a human inspector cannot match); document processing (extracting structured data from image-based documents — scanned invoices, ID documents, forms — understanding layout as well as text); and operational awareness (monitoring environments via camera — detecting safety violations, tracking inventory, identifying anomalies in facilities). Modern computer vision uses deep learning (CNNs for classification, YOLO for detection) with transfer learning from large pre-trained models — requiring far less labelled data than training from scratch.',
+    },
+    {
+      question: 'How much labelled data do I need for a computer vision model?',
+      answer: 'With transfer learning from ImageNet pre-trained models: 500-2,000 labelled images per class for image classification, and 200-1,000 annotated images per class for object detection (annotation is more expensive than classification labelling — each object in each image must be bounded and labelled). Without transfer learning (training from scratch): 10,000-100,000+ images per class. Data augmentation (random crop, flip, rotation, colour jitter, MixUp) multiplies effective dataset size by 5-20x — reducing the absolute labelling requirement. For defect detection where defect examples are rare, anomaly detection approaches (PatchCore, FastFlow) that learn only from normal examples eliminate the need to label defect images. ClickMasters performs a data audit as the first step — assessing what is available, what needs labelling, and which approach minimises labelling cost for your accuracy requirement.',
+    },
+    {
+      question: 'What is the difference between image classification and object detection?',
+      answer: 'Image classification answers "what is in this image?" — it produces a single label (or probability distribution over labels) for the entire image. It does not tell you where in the image the object is. Object detection answers both "what is in this image?" AND "where is it?" — it produces bounding boxes with class labels for every instance of every target class in the image. A classification model is simpler, faster, and requires less labelled data. An object detection model is more powerful but requires bounding box annotations (drawing a box around each object in each training image) rather than simple image-level labels. The correct choice depends on the use case: "is this product image in category A or B?" is a classification problem. "Where are the defects on this PCB surface?" requires detection or segmentation.',
+    },
+    {
+      question: 'Can computer vision work in real time on a production line?',
+      answer: 'Yes — this is one of the most commercially deployed computer vision applications. Production line visual inspection with sub-100ms latency is achievable with YOLO v8 on a GPU-equipped inference server. Architecture: industrial camera (GigE Vision or USB3 Vision) triggered by a PLC signal when a product arrives at the inspection station, image captured and sent to the inference server (YOLO v8 or EfficientNet classification), result returned in 50-100ms (pass/fail with defect location), and a reject signal sent to the PLC to divert the defective product. GPU hardware: NVIDIA Jetson Orin (edge deployment — on the production line, no network round-trip) or a server-side GPU (AWS EC2 G5 or on-premises NVIDIA A10) for higher throughput. ClickMasters designs the complete vision pipeline including camera integration, inference server, and PLC communication protocol.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our manufacturing defect detection system with YOLO v8. We now inspect 100% of products in real time — catching defects our human inspectors were missing. Defect escape rate dropped by 85%.",
+    author: "Plant Manager",
+    role: "Automotive Parts Manufacturer"
+  },
+  caseStudy: {
+    title: "Manufacturing Defect Detection",
+    description: "Built YOLO v8-based defect detection for automotive parts production line. 50+ FPS real-time inspection. 99.2% detection accuracy on 15 defect types. Replaced manual visual inspection. Defect escape rate reduced by 85%.",
+    slug: "defect-detection",
+    badge: "Computer Vision"
+  },
+  howToSteps: [
+    { name: 'CV Scoping & Data Audit', text: 'Use case analysis, dataset assessment, labelling requirements, architecture plan.' },
+    { name: 'Model Training (Transfer Learning)', text: 'Load pre-trained model, data augmentation, fine-tuning, evaluation.' },
+    { name: 'Model Optimisation', text: 'TensorRT/ONNX optimisation, edge deployment (Jetson), GPU inference pipeline.' },
+    { name: 'Production Integration', text: 'REST API or RTSP stream ingestion, industrial camera integration, alerting.' },
+  ],
+  itemList: [
+    'Image Classification (EfficientNet/ViT)',
+    'Object Detection (YOLO v8)',
+    'Instance Segmentation',
+    'Defect Detection System',
+    'Document Layout Analysis (LayoutLM)',
+    'Medical & Satellite Image Analysis',
+  ],
+  definedTerms: [
+    { name: 'YOLO', description: 'You Only Look Once — real-time object detection framework. YOLO v8 processes 50+ FPS on GPU.' },
+    { name: 'mAP', description: 'Mean Average Precision — standard object detection evaluation metric across all IoU thresholds (mAP@50, mAP@50-95).' },
+    { name: 'Transfer Learning', description: 'Starting from a pre-trained model (ImageNet) and fine-tuning on domain data — reduces labelled data requirements from millions to thousands.' },
+    { name: 'LayoutLM', description: 'Microsoft document understanding model combining text, visual, and layout features for table extraction, form field detection.' },
+  ],
+};
+
+const imageProcessingOverride: ServicePageContent = {
+  slug: 'image-processing',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'image-processing',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Image Processing Services',
+  serviceName: 'Image Processing',
+  metaTitle: 'Image Processing Services | Automated Image Enhancement & Analysis | ClickMasters',
+  metaDescription:
+    'ClickMasters builds image processing pipelines — automated enhancement, OCR, background removal, image denoising, and batch processing at scale — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds image processing pipelines for B2B companies across the USA, Europe, Canada, and Australia. Batch image enhancement (brightness, contrast, noise reduction, sharpening) at millions of images per day. Background removal and product image standardisation for e-commerce. OCR pipelines that extract text from scanned documents with 99% accuracy. Image quality assessment that filters unusable images before they reach production. Medical image processing and DICOM pipelines.',
+  highlights: [
+    '✓ Batch Image Enhancement',
+    '✓ Background Removal',
+    '✓ OCR Document Processing',
+    '✓ Image Quality Assessment',
+    '✓ Super-Resolution',
+    '✓ Medical / DICOM Pipelines',
+  ],
+  marketStats: [
+    { label: 'State-of-the-art super-resolution — 4x upscaling with realistic detail hallucination', value: 'Real-ESRGAN' },
+    { label: 'Open-source background removal — production-ready, high accuracy for product images', value: 'rembg (U2-Net)' },
+    { label: 'No-reference image quality metric — fast, no ground truth required', value: 'BRISQUE' },
+    { label: 'DICOM medical image processing framework — PyTorch-based torchvision equivalent for medical imaging', value: 'MONAI' },
+  ],
+  servicesCards: [
+    { title: 'Batch Image Enhancement', description: 'Automated image quality improvement at scale: brightness/contrast normalisation (CLAHE), noise reduction (Gaussian blur, bilateral filter, deep learning denoising), sharpening, colour correction, format standardisation (resize, crop, WebP/AVIF conversion). Libraries: OpenCV, Pillow. Throughput: 1,000-10,000 images/minute on CPU, 100,000+ on GPU.' },
+    { title: 'Background Removal & Product Images', description: 'AI-powered background removal for e-commerce product images: semantic segmentation to isolate product from background (U2-Net or SAM), clean white or transparent background, shadow addition/removal, consistent aspect ratio padding. rembg (U2-Net) — production-ready. Batch S3 pipeline with e-commerce platform integration (Shopify, WooCommerce via webhook).' },
+    { title: 'OCR & Document Image Processing', description: 'Optical character recognition pipelines for scanned documents. Pre-processing: deskewing, denoising, binarisation, contrast enhancement. OCR: Tesseract 5 (open-source, self-hostable), AWS Textract (layout-preserving structured extraction), Google Document AI (pre-built invoice/form models). Post-processing: spell correction, confidence filtering, format reconstruction. Handles multi-column layouts, tables, handwriting.' },
+    { title: 'Image Quality Assessment (IQA)', description: 'Automated filtering of low-quality images before they reach production or annotation pipelines: BRISQUE (no-reference quality score, fast), NIQE, focus detection (Laplacian variance — identify blurry images), overexposure/underexposure detection, ML-based IQA (MUSIQ, NIMA). Use cases: filter blurry product images, prioritise manual review queue by quality, reject uploads below threshold in real time.' },
+    { title: 'Medical Image Processing (DICOM)', description: 'DICOM (Digital Imaging and Communications in Medicine) pipeline development: DICOM file parsing and metadata extraction (pydicom), pixel data conversion (windowing — map raw DICOM values to 8-bit display values per modality), series reconstruction (3D volume from CT/MRI slice stacks — SimpleITK), anonymisation (remove patient identifiers for research), format conversion (DICOM to PNG/JPEG for ML training), pre-processing for ML (MONAI framework — the medical imaging equivalent of torchvision).' },
+  ],
+  differentiators: [
+    { feature: 'Scale & Speed', description: '100,000+ images/minute on GPU — serverless architecture | Basic: Single-image processing (no batch)' },
+    { feature: 'Background Removal', description: 'SAM (Segment Anything Model) + U2-Net — state-of-the-art segmentation | Basic: Colour keying (fails on complex backgrounds)' },
+    { feature: 'OCR Engine Selection', description: 'Tesseract (open-source) vs Textract (layout) vs Document AI (forms) — clear guidance | Basic: Tesseract only (poor on complex layouts)' },
+    { feature: 'Medical DICOM', description: 'pydicom + MONAI — HIPAA-aware, modality-specific windowing | Basic: Generic image processing (doesn\'t understand DICOM)' },
+    { feature: 'Quality Assessment', description: 'BRISQUE + ML-based MUSIQ/NIMA — multiple IQA metrics | Basic: Manual inspection' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Image Processing Scoping', timeline: 'Week 1', text: 'Volume analysis (images/day, peak load), processing requirements (enhancement types, formats, quality thresholds), pipeline architecture (batch vs streaming), throughput targets, API plan. Deliverable: Image Processing Architecture.' },
+    { phase: 'Phase 2', title: 'Batch Enhancement Pipeline', timeline: 'Week 2-4', text: 'OpenCV/Pillow pipeline development (CLAHE, denoising, sharpening, colour correction). AWS Lambda (serverless) or ECS (higher throughput). S3 trigger, processed image storage. Deliverable: Batch Enhancement Pipeline.' },
+    { phase: 'Phase 3', title: 'Background Removal Pipeline', timeline: 'Week 2-4', text: 'U2-Net or SAM model deployment, rembg wrapper, batch S3 pipeline, e-commerce platform webhook integration. Deliverable: Background Removal System.' },
+    { phase: 'Phase 4', title: 'OCR Pipeline', timeline: 'Week 3-6', text: 'Pre-processing (deskew, denoise, binarise), OCR engine (Tesseract/Textract), post-processing (spell correction, confidence filtering), structured JSON output. Deliverable: OCR Pipeline + API.' },
+  ],
+  techStackCategories: [
+    { layer: 'Image Enhancement', technologies: 'OpenCV (CLAHE, denoising, sharpening), Pillow (resize, crop, format), scikit-image (advanced filtering)' },
+    { layer: 'Background Removal', technologies: 'rembg (U2-Net), SAM (Segment Anything Model — zero-shot), YOLOv8-seg (custom training)' },
+    { layer: 'OCR', technologies: 'Tesseract 5 (open-source), AWS Textract (layout-preserving), Google Document AI (pre-built forms), AWS Rekognition' },
+    { layer: 'Quality Assessment', technologies: 'BRISQUE, NIQE, Laplacian variance, MUSIQ, NIMA (neural IQA), OpenCV focus measure' },
+    { layer: 'Super-Resolution', technologies: 'Real-ESRGAN (4x upscaling), GFPGAN (face restoration), SwinIR (transformer-based)' },
+    { layer: 'Medical DICOM', technologies: 'pydicom (DICOM parsing), SimpleITK (3D reconstruction), MONAI (medical ML preprocessing), NiBabel' },
+    { layer: 'Infrastructure', technologies: 'AWS Lambda (serverless — event-triggered), AWS ECS (batch), S3, CloudFront, API Gateway' },
+  ],
+  pricingTiers: [
+    { type: 'Image Processing Scoping', investment: '$2,000 – $5,000', timeline: '1 week', bestFor: 'Volume analysis, pipeline design, throughput requirements, API plan' },
+    { type: 'Batch Enhancement Pipeline', investment: '$6,000 – $18,000', timeline: '2 – 5 weeks', bestFor: 'OpenCV/Pillow pipeline, S3 trigger, Lambda/ECS deployment' },
+    { type: 'Background Removal System', investment: '$6,000 – $16,000', timeline: '2 – 4 weeks', bestFor: 'U2-Net/SAM, batch S3 pipeline, e-commerce platform integration' },
+    { type: 'OCR Document Pipeline', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'Pre-processing + Textract/Tesseract + post-processing + JSON output' },
+    { type: 'Image Quality Assessment', investment: '$5,000 – $14,000', timeline: '2 – 4 weeks', bestFor: 'BRISQUE + blur detection + ML IQA, filtering API, monitoring' },
+    { type: 'Super-Resolution Pipeline', investment: '$6,000 – $16,000', timeline: '2 – 4 weeks', bestFor: 'Real-ESRGAN batch upscaling, S3 pipeline, quality validation' },
+    { type: 'DICOM Medical Pipeline', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'pydicom parsing, anonymisation, windowing, MONAI preprocessing' },
+    { type: 'Image Processing Retainer', investment: '$2,000 – $5,000/mo', timeline: 'Ongoing', bestFor: 'Pipeline maintenance, new processing steps, throughput scaling' },
+  ],
+  industryUseCases: [
+    { name: 'E-commerce Product Images', description: 'Background removal + enhancement + format standardisation for 100,000+ product images. Uniform white background, consistent sizing, WebP conversion.' },
+    { name: 'Document Digitisation', description: 'OCR pipeline for scanned invoices/purchase orders. Deskew, denoise, text extraction, structured JSON output. 99% text accuracy on clean scans.' },
+    { name: 'Medical Imaging Pipeline', description: 'DICOM to PNG conversion with modality-specific windowing (CT/MRI). Anonymisation for research. MONAI preprocessing for ML training.' },
+    { name: 'Photo Quality Filtering', description: 'BRISQUE + Laplacian variance to filter blurry or overexposed user uploads. Reject low-quality images before storage.' },
+  ],
+  sections: [
+    {
+      heading: 'Image Processing vs Computer Vision',
+      body: 'Image processing transforms images — changing their appearance, quality, or format — without necessarily understanding their content. Examples: resizing, cropping, noise reduction, colour correction, format conversion, background removal. Computer vision understands image content — answering questions about what is depicted. Examples: "is this image a cat or a dog?", "where are the defects on this PCB?", "how many people are in this crowd?". In practice, image processing is often a preprocessing step for computer vision: raw images are cleaned, normalised, and standardised by an image processing pipeline before being fed to a computer vision model. A document image processing pipeline might deskew and denoise a scanned page (image processing) before passing it to an OCR engine (computer vision) that extracts the text.',
+      items: [],
+    },
+    {
+      heading: 'OCR Engine Selection Guide',
+      body: 'Tesseract 5 is the best open-source OCR engine — free, self-hosted (data stays on your infrastructure), good accuracy on clean printed text, and supports 100+ languages. It is the right choice when: data privacy prevents using cloud APIs, the volume is very high (cloud API costs would be prohibitive), and the document quality is good (clean, well-scanned). AWS Textract is the best managed cloud OCR for structured documents — it preserves table structure, identifies form fields (label + value pairs), and handles multi-column layouts with significantly better accuracy than Tesseract on complex layouts. Use when: you are already on AWS, table and form extraction matters, and a per-page cost ($0.0015-$0.015/page) is acceptable. Google Document AI has pre-built models specifically for invoices, receipts, ID documents, and custom forms — use when you have a specific document type that matches a Google pre-built model.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between image processing and computer vision?',
+      answer: 'Image processing transforms images — changing their appearance, quality, or format — without necessarily understanding their content. Examples: resizing, cropping, noise reduction, colour correction, format conversion, background removal. Computer vision understands image content — answering questions about what is depicted. Examples: "is this image a cat or a dog?", "where are the defects on this PCB?", "how many people are in this crowd?". In practice, image processing is often a preprocessing step for computer vision: raw images are cleaned, normalised, and standardised by an image processing pipeline before being fed to a computer vision model. A document image processing pipeline might deskew and denoise a scanned page (image processing) before passing it to an OCR engine (computer vision) that extracts the text.',
+    },
+    {
+      question: 'How do you process large volumes of images efficiently?',
+      answer: 'High-throughput image processing uses a combination of parallelisation, hardware acceleration, and serverless architecture. For event-triggered processing (process each image as it is uploaded): AWS Lambda functions triggered by S3 object creation events — each image processed independently, AWS Lambda scales automatically to hundreds of concurrent invocations without infrastructure management. For batch processing large existing image archives: AWS Batch (managed batch compute — spin up GPU or CPU instances for duration of batch job, shut down when complete), Python multiprocessing (parallel processing on CPU cores for non-GPU workloads), and GPU acceleration via OpenCV CUDA or PyTorch transforms for processing-intensive operations (denoising, super-resolution). A well-designed pipeline can process 100,000-1,000,000 images per hour depending on processing complexity and GPU allocation.',
+    },
+    {
+      question: 'Which OCR engine should I use — Tesseract, AWS Textract, or Google Document AI?',
+      answer: 'Tesseract 5 is the best open-source OCR engine — free, self-hosted (data stays on your infrastructure), good accuracy on clean printed text, and supports 100+ languages. It is the right choice when: data privacy prevents using cloud APIs, the volume is very high (cloud API costs would be prohibitive), and the document quality is good (clean, well-scanned). AWS Textract is the best managed cloud OCR for structured documents — it preserves table structure, identifies form fields (label + value pairs), and handles multi-column layouts with significantly better accuracy than Tesseract on complex layouts. Use when: you are already on AWS, table and form extraction matters, and a per-page cost ($0.0015-$0.015/page) is acceptable. Google Document AI has pre-built models specifically for invoices, receipts, ID documents, and custom forms — use when you have a specific document type that matches a Google pre-built model.',
+    },
+    {
+      question: 'Can image processing pipelines handle medical images (DICOM)?',
+      answer: 'Yes, with appropriate tooling and data handling. DICOM (Digital Imaging and Communications in Medicine) is the standard format for medical imaging — CT scans, MRI, X-ray, ultrasound — and requires specialist handling. pydicom is the Python library for reading and writing DICOM files, extracting pixel data, and accessing DICOM metadata (patient information, acquisition parameters). MONAI (Medical Open Network for AI) is the PyTorch-based framework for medical image preprocessing and ML training — analogous to torchvision but with medical imaging primitives (intensity normalisation, spatial transforms, DICOM loading). For research and development pipelines, ClickMasters builds DICOM processing systems including anonymisation (DICOM metadata de-identification to remove PHI for research compliance), format conversion, windowing (correct pixel value mapping per modality), and preprocessing for ML training. All medical data handling is scoped with the client\'s HIPAA or equivalent regulatory requirements.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our product image processing pipeline. We process 500,000 product images per week — background removal, enhancement, WebP conversion — reducing our page load time by 40% and increasing conversion by 12%.",
+    author: "CTO",
+    role: "E-commerce Platform"
+  },
+  caseStudy: {
+    title: "E-commerce Image Pipeline",
+    description: "Built end-to-end image processing pipeline for 500K+ SKU e-commerce platform. Background removal (U2-Net), enhancement (CLAHE, sharpening), format standardisation (WebP). 100,000+ images/hour throughput. Reduced page load time by 40%, increased conversion by 12%.",
+    slug: "ecommerce-image-pipeline",
+    badge: "Image Processing"
+  },
+  howToSteps: [
+    { name: 'Image Processing Scoping', text: 'Volume analysis, processing requirements, pipeline architecture, throughput targets.' },
+    { name: 'Batch Enhancement Pipeline', text: 'OpenCV/Pillow pipeline, S3 trigger, Lambda/ECS deployment.' },
+    { name: 'Background Removal Pipeline', text: 'U2-Net/SAM deployment, batch S3 pipeline, e-commerce webhook integration.' },
+    { name: 'OCR Pipeline', text: 'Pre-processing, OCR engine selection, post-processing, JSON output.' },
+  ],
+  itemList: [
+    'Batch Image Enhancement',
+    'Background Removal & Product Images',
+    'OCR & Document Image Processing',
+    'Image Quality Assessment (IQA)',
+    'Medical Image Processing (DICOM)',
+  ],
+  definedTerms: [
+    { name: 'DICOM', description: 'Digital Imaging and Communications in Medicine — standard format for medical images (CT, MRI, X-ray, ultrasound).' },
+    { name: 'CLAHE', description: 'Contrast Limited Adaptive Histogram Equalisation — advanced contrast enhancement that limits noise amplification.' },
+    { name: 'BRISQUE', description: 'Blind/Referenceless Image Spatial Quality Evaluator — no-reference image quality metric (fast, no ground truth required).' },
+    { name: 'MONAI', description: 'Medical Open Network for AI — PyTorch-based medical imaging framework (torchvision equivalent for medical images).' },
+  ],
+};
+
+const videoAnalyticsOverride: ServicePageContent = {
+  slug: 'video-analytics',
+  categorySlug: 'artificial-intelligence-ai',
+  sectionId: 'video-analytics',
+  category: 'Artificial Intelligence (AI)',
+  title: 'Video Analytics Services',
+  serviceName: 'Video Analytics',
+  metaTitle: 'Video Analytics Services | AI Video Analysis & Object Tracking | ClickMasters',
+  metaDescription:
+    'ClickMasters builds video analytics systems — object tracking, action recognition, crowd analysis, and real-time surveillance analytics — using YOLO, DeepSORT, and SlowFast for B2B companies worldwide.',
+  lead: 'ClickMasters builds video analytics systems for B2B companies across the USA, Europe, Canada, and Australia. Object detection and tracking in live video streams — detect, identify, and follow every object of interest. Retail analytics — customer flow, dwell time, queue length, conversion zone heatmaps. Crowd analysis and density estimation. Action recognition — detect specific events and behaviours. License plate recognition. All analytics delivered as real-time event streams your operations team can act on.',
+  highlights: [
+    '✓ Object Detection & Tracking (YOLO+DeepSORT)',
+    '✓ Action Recognition',
+    '✓ Retail & Crowd Analytics',
+    '✓ License Plate Recognition',
+    '✓ Real-Time RTSP Streams',
+    '✓ Privacy-Preserving Analytics',
+  ],
+  marketStats: [
+    { label: 'Real-time multi-class object detection at 50+ FPS — production standard for video analytics', value: 'YOLO v8' },
+    { label: 'Deep Simple Online and Realtime Tracking — maintains object identity across video frames', value: 'DeepSORT' },
+    { label: 'Facebook\'s dual-path action recognition network — slow pathway for spatial, fast for temporal features', value: 'SlowFast' },
+    { label: 'Real-Time Streaming Protocol — standard for IP camera live video feeds consumed by analytics systems', value: 'RTSP' },
+  ],
+  servicesCards: [
+    { title: 'Object Detection & Tracking', description: 'YOLO v8 (detection) + DeepSORT or ByteTrack (tracking) — detect objects each frame, assign persistent IDs, track trajectory across frames. Output: per-object trajectory (entry time, path, exit time, dwell zone), object count, object classification. Use cases: retail customer tracking (anonymous), vehicle tracking on logistics sites, equipment tracking. Real-time or batch processing. Privacy-preserving: trajectories without storing identifiable images.' },
+    { title: 'Action Recognition', description: 'Detect specific human or machine behaviours from video sequences. Approaches: two-stream networks (spatial + optical flow), SlowFast networks (Facebook — dual temporal pathway), Video Swin Transformer. Use cases: safety compliance (PPE detection — hard hat/high-vis worn?), workplace safety event detection (slip/fall), retail customer behaviour (picking up product, comparing items), manufacturing process monitoring (correct assembly sequence).' },
+    { title: 'Retail Video Analytics', description: 'In-store analytics from existing CCTV cameras: footfall counting (accurate people counting at entrance/exit), customer flow heatmaps (where customers spend most time, which aisles are undervisited), queue length estimation (number waiting at checkout — trigger staffing alerts), zone dwell time, conversion zone analysis (percentage who enter product zone that convert to checkout). Dashboard: real-time and historical analytics, shift comparison, A/B zone experiment analysis.' },
+    { title: 'Licence Plate Recognition (ANPR/ALPR)', description: 'Automatic Number Plate Recognition for parking, access control, and logistics. Pipeline: vehicle detection (YOLO v8), plate localisation, character recognition (YOLO-based character segmentation + OCR, or end-to-end CNN), database lookup (check plate against access whitelist, trigger gate open/close). Accuracy: 95-99% on clean, well-lit footage. Multiple plate standards (UK, US, EU). Real-time: <200ms end-to-end.' },
+    { title: 'Crowd Analysis & Density Estimation', description: 'Density estimation and crowd monitoring: CSRNet or MCNN (crowd counting — estimate density without tracking individuals), occupancy monitoring (real-time room/zone capacity compliance — alert when exceeds threshold), crowd flow analysis (direction and speed of movement — event safety planning), social distancing monitoring (historical analysis only — inter-person distances). Privacy-preserving: aggregate counts and density maps, not individual tracking.' },
+  ],
+  differentiators: [
+    { feature: 'Tracking with DeepSORT', description: 'Persistent object IDs across frames — entry, path, exit, dwell time analysis | Basic: Frame-by-frame detection only (no object continuity)' },
+    { feature: 'Action Recognition', description: 'SlowFast + Video Swin Transformer — detect behaviours over time, not just objects | Basic: Object detection only (what, not what action)' },
+    { feature: 'Real-Time Pipeline', description: 'RTSP stream ingestion + TensorRT optimisation (3-5x faster) + Kafka event streaming | Basic: Batch processing on recorded video only' },
+    { feature: 'NVIDIA Jetson Edge', description: 'Edge deployment (Jetson Orin) — low latency, no cloud round-trip | Basic: Cloud-only (network latency, video leaves site)' },
+    { feature: 'Privacy-Preserving', description: 'Anonymous trajectories, aggregate density maps, no facial identification | Basic: Stores identifiable images' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Video Analytics Scoping', timeline: 'Week 1-2', text: 'Camera inventory (RTSP endpoints, resolution, placement), use case analysis (tracking, action, counting, crowd), latency requirements (real-time <100ms vs batch), privacy constraints, infrastructure plan. Deliverable: Video Analytics Architecture.' },
+    { phase: 'Phase 2', title: 'Object Detection + Tracking', timeline: 'Week 2-5', text: 'YOLO v8 fine-tuning on custom object classes (if needed), DeepSORT tracking integration, RTSP stream ingestion (GStreamer/FFmpeg), trajectory output, dashboard (heatmaps, counts). Deliverable: Detection + Tracking Pipeline.' },
+    { phase: 'Phase 3', title: 'Action Recognition (Optional)', timeline: 'Week 4-7', text: 'SlowFast or Video Swin Transformer training on custom action dataset (if labelled video available), action detection pipeline, real-time alerting. Deliverable: Action Recognition System.' },
+    { phase: 'Phase 4', title: 'Retail/Crowd Analytics', timeline: 'Week 3-6', text: 'Footfall counting (entrance/exit zones), heatmap generation, queue length estimation, CSRNet for crowd density, dashboard (real-time metrics, historical trends). Deliverable: Analytics Dashboard.' },
+  ],
+  techStackCategories: [
+    { layer: 'Detection', technologies: 'YOLO v8 (Ultralytics — real-time, 50+ FPS), TensorRT optimisation (3-5x faster), DETR (offline high accuracy)' },
+    { layer: 'Tracking', technologies: 'DeepSORT (Deep Simple Online and Realtime Tracking), ByteTrack (association-only, faster), BoT-SORT (State-of-the-art SOTA)' },
+    { layer: 'Action Recognition', technologies: 'SlowFast (Facebook — dual pathway), Video Swin Transformer (transformer-based), X3D (efficient 3D CNN), I3D (Inflated 3D ConvNets)' },
+    { layer: 'Crowd Counting', technologies: 'CSRNet (dilated CNN), MCNN (multi-column), DM-Count (distribution matching), P2PNet (point-to-point)' },
+    { layer: 'Stream Ingestion', technologies: 'GStreamer (production pipeline), FFmpeg (decode), RTSP, ONVIF (camera discovery), WebRTC (browser streams)' },
+    { layer: 'Hardware', technologies: 'NVIDIA Jetson Orin (AGX — edge, 200+ TOPS), Tesla T4/A10 (cloud), AWS EC2 G5, Intel OpenVINO' },
+    { layer: 'Event Streaming', technologies: 'Apache Kafka (real-time events), AWS Kinesis, RabbitMQ, Redis Streams' },
+  ],
+  pricingTiers: [
+    { type: 'Video Analytics Scoping', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'Camera inventory, use case analysis, latency requirements, infrastructure plan' },
+    { type: 'Object Detection + Tracking', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'YOLO v8 + DeepSORT, custom classes, real-time stream, dashboard' },
+    { type: 'Retail Analytics Platform', investment: '$15,000 – $45,000', timeline: '5 – 10 weeks', bestFor: 'Footfall + heatmap + queue + dwell time + shift dashboard' },
+    { type: 'Action Recognition System', investment: '$15,000 – $45,000', timeline: '5 – 10 weeks', bestFor: 'SlowFast/Video Swin, custom action dataset, real-time alert API' },
+    { type: 'ANPR / Licence Plate System', investment: '$12,000 – $32,000', timeline: '4 – 8 weeks', bestFor: 'Plate detection + OCR + access control integration' },
+    { type: 'Crowd Analytics', investment: '$10,000 – $28,000', timeline: '4 – 8 weeks', bestFor: 'CSRNet density estimation, occupancy monitoring, event safety' },
+    { type: 'Full Video Intelligence Platform', investment: '$25,000 – $80,000', timeline: '7 – 14 weeks', bestFor: 'Multiple analytics + RTSP ingestion + Kafka events + BI dashboard' },
+    { type: 'Video Analytics Retainer', investment: '$3,500 – $9,000/mo', timeline: 'Ongoing', bestFor: 'Model retraining, new camera integration, performance monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'Retail Store Analytics', description: 'Footfall counting, dwell time per zone, queue length at checkout. Staffing alerts, merchandise effectiveness measurement, conversion zone analysis. CCTV only, no new hardware.' },
+    { name: 'Safety Compliance Monitoring', description: 'PPE detection (hard hat, high-vis, safety glasses) from camera feeds. Real-time alert when violation detected. Workplace safety incident reduction.' },
+    { name: 'Manufacturing Process Monitoring', description: 'Track assembly sequence correctness. Detect if operator follows correct steps or skips critical operations. Alert supervisor immediately.' },
+    { name: 'Parking Access Control', description: 'ANPR at entry/exit. Whitelist lookup, automatic gate open for authorised vehicles. <200ms end-to-end latency. Log entry/exit times.' },
+  ],
+  sections: [
+    {
+      heading: 'Object Tracking with DeepSORT',
+      body: 'DeepSORT (Deep Simple Online and Realtime Tracking) is the production standard for object tracking in video analytics. It extends SORT by adding a deep appearance descriptor (a CNN embedding of the object\'s appearance) that enables re-identification when objects are occluded or cross. Tracking workflow: detection (YOLO v8 produces bounding boxes each frame), Kalman filter (predicts object location in next frame), Hungarian algorithm (matches detections to existing tracks), appearance feature extraction (CNN embedding of the detected object, used for matching after occlusion), and track management (initialise new tracks, terminate tracks that exit the frame). Output: each tracked object receives a persistent ID across frames, enabling trajectory analysis (path, dwell time, entry/exit zones). ClickMasters uses DeepSORT as the default tracker for all video analytics applications.',
+      items: [],
+    },
+    {
+      heading: 'Privacy-Preserving Video Analytics',
+      body: 'Privacy-preserving video analytics is a design principle, not an afterthought. For retail and workplace analytics, ClickMasters systems output aggregate metrics and anonymised trajectories — not facial recognition or persistent individual identification. Technically: object tracking assigns temporary IDs per session (ID does not persist across camera views or days), bounding box blurring (faces and identifying features blurred in any stored video clips), no biometric data collection, aggregate dashboard outputs (counts, heatmaps, density maps — no individual-level data), and data retention policies (raw video not stored beyond the minimum required buffer; derived analytics data retained per policy). GDPR compliance: processing is based on legitimate interest for operational safety and efficiency, with appropriate signage notifying visitors. ClickMasters documents the data processing activities for GDPR Article 30 records.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is video analytics and how is it different from computer vision?',
+      answer: 'Computer vision is the broader discipline of extracting structured information from images. Video analytics is computer vision applied to video — sequential frames over time — where the temporal dimension enables capabilities not possible on still images: object tracking (following the same person or vehicle across many frames), action recognition (detecting behaviours that unfold over seconds), crowd flow analysis (movement patterns over time), and anomaly detection in operational sequences. The added technical complexity of video analytics vs image analysis: managing streaming data (continuous frames at 25-60 FPS), efficient frame processing (cannot run a full detection model on every frame at camera resolution), and temporal modelling (understanding what happens across frames, not just within a single frame).',
+    },
+    {
+      question: 'Can video analytics work with our existing CCTV cameras?',
+      answer: 'Yes — most modern IP cameras stream video via RTSP (Real-Time Streaming Protocol) or ONVIF (Open Network Video Interface Forum), which our video analytics infrastructure connects to directly without requiring hardware replacement. Camera requirements for good analytics accuracy: minimum 720p resolution (1080p preferred for ANPR), adequate lighting (low-light cameras with IR illumination for 24/7 monitoring), appropriate field of view for the use case (entrance counting requires a top-down or angled view of the doorway; product zone monitoring requires a view of the shelf area). ClickMasters reviews camera specifications and placement as part of the scoping engagement — recommending any camera upgrades needed for the target accuracy, and designing analytics systems around existing hardware where possible.',
+    },
+    {
+      question: 'How do you handle privacy compliance in video analytics?',
+      answer: 'Privacy-preserving video analytics is a design principle, not an afterthought. For retail and workplace analytics, ClickMasters systems output aggregate metrics and anonymised trajectories — not facial recognition or persistent individual identification. Technically: object tracking assigns temporary IDs per session (ID does not persist across camera views or days), bounding box blurring (faces and identifying features blurred in any stored video clips), no biometric data collection, aggregate dashboard outputs (counts, heatmaps, density maps — no individual-level data), and data retention policies (raw video not stored beyond the minimum required buffer; derived analytics data retained per policy). GDPR compliance: processing is based on legitimate interest for operational safety and efficiency, with appropriate signage notifying visitors. ClickMasters documents the data processing activities for GDPR Article 30 records.',
+    },
+    {
+      question: 'What hardware is needed for real-time video analytics?',
+      answer: 'Hardware requirements depend on the number of camera streams and the complexity of the analytics. Rule of thumb: an NVIDIA RTX 4090 GPU or equivalent can process 10-20 camera streams simultaneously with YOLO v8 detection at 25 FPS. For enterprise deployments: NVIDIA A10 or A30 in an on-premises server handles 30-50 streams. For edge deployment (analytics running at the camera without cloud round-trip): NVIDIA Jetson Orin (AGX model — 200+ TOPS) handles 5-10 streams on-device with sub-100ms latency — appropriate for low-connectivity environments or high-security sites where video cannot leave the premises. Cloud deployment (AWS EC2 G5 instances) is appropriate when the analytics result (event flags, counts) is less sensitive than the raw video, and network bandwidth to the cloud is available. ClickMasters recommends the hardware configuration that meets the latency and privacy requirements at minimum cost.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our retail analytics platform using existing CCTV cameras. We now measure footfall, dwell time per zone, and queue length in real time — without adding any new hardware. Staffing optimisation alone paid back the project in 4 months.",
+    author: "Operations Director",
+    role: "National Retail Chain"
+  },
+  caseStudy: {
+    title: "Retail Store Analytics",
+    description: "Built YOLO + DeepSORT retail analytics from existing CCTV. Footfall counting (98% accuracy), zone dwell time heatmaps, queue length alerts. Staffing optimisation: reduced overstaffing by 15 hours/week per store. Conversion zone analysis: identified product placement opportunities increasing conversion by 8%.",
+    slug: "retail-video-analytics",
+    badge: "Video Analytics"
+  },
+  howToSteps: [
+    { name: 'Video Analytics Scoping', text: 'Camera inventory, use case analysis, latency requirements, privacy constraints, infrastructure plan.' },
+    { name: 'Object Detection + Tracking', text: 'YOLO v8 fine-tuning, DeepSORT integration, RTSP ingestion, trajectory dashboard.' },
+    { name: 'Action Recognition (Optional)', text: 'SlowFast/Video Swin training, action detection, real-time alerting.' },
+    { name: 'Retail/Crowd Analytics', text: 'Footfall counting, heatmap generation, queue estimation, CSRNet density, dashboard.' },
+  ],
+  itemList: [
+    'Object Detection & Tracking (YOLO+DeepSORT)',
+    'Action Recognition',
+    'Retail Video Analytics',
+    'Licence Plate Recognition (ANPR/ALPR)',
+    'Crowd Analysis & Density Estimation',
+  ],
+  definedTerms: [
+    { name: 'DeepSORT', description: 'Deep Simple Online and Realtime Tracking — tracks object identities across video frames using detection + Kalman filter + appearance features.' },
+    { name: 'SlowFast', description: 'Facebook\'s dual-pathway action recognition network — slow pathway for spatial features, fast pathway for temporal motion.' },
+    { name: 'RTSP', description: 'Real-Time Streaming Protocol — standard for IP camera live video feeds consumed by analytics systems.' },
+    { name: 'ANPR', description: 'Automatic Number Plate Recognition — pipeline: vehicle detection → plate localisation → character recognition → whitelist lookup.' },
+  ],
+};
+
+const dataScienceAnalyticsOverride: ServicePageContent = {
+  slug: 'data-science-analytics',
+  categorySlug: 'data-science-analytics',
+  sectionId: 'data-science-analytics',
+  category: 'Data Science & Analytics',
+  title: 'Data Science & Analytics Services',
+  serviceName: 'Data Science & Analytics',
+  metaTitle: 'Data Science & Analytics Services | BI, Data Engineering & Insights | ClickMasters',
+  metaDescription:
+    'ClickMasters delivers data science, business intelligence, data engineering, and analytics platforms for B2B companies in the USA, Europe, Canada & Australia. Turn data into decisions.',
+  lead: 'ClickMasters builds data platforms, BI dashboards, analytics pipelines, and predictive models for B2B companies across the USA, Europe, Canada, and Australia. We turn scattered data across your CRM, ERP, billing system, and product database into a unified intelligence layer that tells you what is happening, why it is happening, and what will happen next.',
+  highlights: [
+    '✓ Data Engineering & Pipelines',
+    '✓ BI Dashboards & Reporting',
+    '✓ Predictive Analytics',
+    '✓ Data Warehouse & Lakehouse',
+    '✓ dbt, Snowflake, BigQuery',
+    '✓ Self-Service Analytics',
+  ],
+  marketStats: [
+    { label: 'Global data analytics market size by 2026', value: '$274B' },
+    { label: 'ROI from data-driven decision making vs. intuition-driven', value: '5x' },
+    { label: 'Data generated globally every day — most organizations use <1%', value: '2.5EB' },
+    { label: 'Of enterprise data goes unused for analytics (Forrester)', value: '73%' },
+  ],
+  servicesCards: [
+    { title: 'Data Engineering & Pipeline Development', description: 'ELT/ETL pipelines moving data from source systems to centralized data warehouse. Modern data stack: Airbyte/Fivetran for ingestion, dbt for transformation, Snowflake/BigQuery/Redshift as warehouse, Airflow/Prefect for orchestration. Data quality with Great Expectations/dbt tests.' },
+    { title: 'Business Intelligence & Dashboard Development', description: 'Interactive BI dashboards and self-service analytics platforms. Executive dashboards (KPIs, revenue trends), operational dashboards (real-time monitoring), self-service analytics portals. Tool selection: Metabase (open-source), Superset, Looker, Tableau, or custom React dashboards.' },
+    { title: 'Data Warehouse & Lakehouse Architecture', description: 'Centralized data storage as single source of truth. Dimensional modeling (star schema, fact/dimension tables), metric layer design (dbt metrics/MetricFlow), slowly changing dimensions, partitioning strategy. Databricks/Delta Lake for lakehouse architecture.' },
+    { title: 'Predictive Analytics & Machine Learning', description: 'Build and deploy predictive models: customer churn prediction (30-60 day advance warning), revenue forecasting, lead scoring, demand forecasting, LTV prediction, anomaly detection. Model deployment lifecycle: training → evaluation → A/B testing → production serving → drift monitoring.' },
+    { title: 'Customer Analytics & Retention Intelligence', description: 'Analytics focused on customer behavior: cohort analysis, product engagement funnels, feature adoption analysis, NPS driver analysis, churn indicator identification. Connect findings to action: Salesforce alerts, automated intervention triggers, retention campaign segmentation.' },
+    { title: 'Data Strategy Consulting', description: 'Structured data strategy engagement: current state assessment (data audit, maturity level, gap analysis), target state definition, roadmap and phased investment plan, team structure recommendation, tooling selection recommendation based on scale, budget, and technical capability.' },
+  ],
+  differentiators: [
+    { feature: '73% Data Unused Stat', description: 'Forrester benchmark + practical urgency framing | Basic: "We turn data into insights" (overused, zero differentiation)' },
+    { feature: 'Data Maturity Model', description: '5-level model with investment ranges — skip levels and waste money framing | Basic: One-size-fits-all analytics (wrong level = waste)' },
+    { feature: 'Analytics Taxonomy', description: '4-row table (Data Engineering, BI, Data Science, Analytics) | Basic: Terms used interchangeably (buyer confusion)' },
+    { feature: 'Modern Data Stack', description: '8-layer table with tools + what it does (Airbyte, dbt, Snowflake, Metabase, etc.) | Basic: Legacy ETL references (outdated expertise)' },
+    { feature: 'ROI Quantification', description: '$90K wasted analyst capacity + churn model $500K ARR recovered | Basic: No ROI framing (CFO unconvinced)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Data Audit & Strategy', timeline: 'Week 1-2', text: 'Inventory all data sources (systems, data quality, access), business objective alignment (what decisions should data enable?), data maturity assessment (current level, target level, investment justification). Deliverable: Data Audit Report + Data Strategy Document with phased roadmap.' },
+    { phase: 'Phase 2', title: 'Data Architecture Design', timeline: 'Week 2-3', text: 'Design target data architecture: warehouse selection (Snowflake vs BigQuery vs Redshift), ingestion tool selection (Airbyte vs Fivetran), dbt project structure, metrics layer design, BI tool selection, orchestration design. Architecture Decision Record (ADR) documented.' },
+    { phase: 'Phase 3', title: 'Data Infrastructure Build', timeline: 'Week 3-7', text: 'Set up data warehouse, configure ingestion connectors, build dbt project (staging → intermediate → mart models), implement data quality tests, set up orchestration (Airflow/dbt Cloud), establish monitoring and alerting.' },
+    { phase: 'Phase 4', title: 'Analytics Model Development', timeline: 'Week 5-10', text: 'Build analytical models: revenue and subscription models (MRR, ARR, NRR, LTV, CAC), customer analytics models (cohort retention, engagement scoring, churn indicators), operational models, financial consolidation models. All models tested, documented, peer-reviewed.' },
+    { phase: 'Phase 5', title: 'Dashboard & Visualization Build', timeline: 'Week 7-11', text: 'Build BI dashboards and self-service analytics portals. Executive dashboards (company KPIs, revenue trends), operational dashboards (real-time metrics), self-service exploration interfaces. Stakeholder review at wireframe stage and after first build.' },
+    { phase: 'Phase 6', title: 'Predictive Model Development', timeline: 'Week 8-14', text: 'Feature engineering, model training and selection (cross-validated evaluation), production deployment via REST API or batch scoring, A/B testing against baseline, monitoring setup for data drift and prediction quality.' },
+    { phase: 'Phase 7', title: 'Enablement, Documentation & Handoff', timeline: 'Week 11-14', text: 'Documentation: data dictionary, pipeline architecture guide, dashboard user guide, model documentation. Enablement: analyst training, engineer handoff, stakeholder training. Ongoing retainer available.' },
+  ],
+  techStackCategories: [
+    { layer: 'Data Ingestion', technologies: 'Airbyte (open-source, 300+ connectors), Fivetran (managed), Stitch, custom Python extractors' },
+    { layer: 'Data Warehouse', technologies: 'Snowflake (primary — multi-cloud, elastic), BigQuery (GCP-native, serverless), Redshift (AWS-native), DuckDB (embedded analytics)' },
+    { layer: 'Data Transformation', technologies: 'dbt (data build tool — industry standard), dbt Cloud (managed), dbt Semantic Layer/MetricFlow' },
+    { layer: 'Orchestration', technologies: 'Apache Airflow (primary — DAG-based), Prefect (Python-native), Dagster (asset-based), dbt Cloud' },
+    { layer: 'Data Quality', technologies: 'Great Expectations (expectations framework), dbt tests (not_null, unique, relationships), Soda Core, Monte Carlo' },
+    { layer: 'BI & Visualization', technologies: 'Metabase (open-source, self-service), Apache Superset (customizable), Looker (Google), Tableau, Power BI, custom React (Recharts, Nivo, D3.js)' },
+    { layer: 'Data Science / ML', technologies: 'Python (pandas, scikit-learn, XGBoost, LightGBM), MLflow (experiment tracking), BentoML/FastAPI (model serving), Feast (feature store)' },
+    { layer: 'Metrics Layer', technologies: 'dbt Semantic Layer / MetricFlow, Cube.dev — defines company-wide metric definitions consistently across all BI tools' },
+  ],
+  pricingTiers: [
+    { type: 'Data Audit & Strategy', investment: '$3,000 – $8,000', timeline: '1 – 2 weeks', bestFor: 'Data inventory, maturity assessment, architecture recommendation, phased roadmap' },
+    { type: 'Data Foundation (Modern Stack)', investment: '$15,000 – $40,000', timeline: '4 – 8 weeks', bestFor: 'Warehouse setup, ingestion pipelines (3-5 sources), dbt models, data quality tests, orchestration' },
+    { type: 'BI Dashboard Platform', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: '3-5 dashboards, metric definitions, self-service analytics, automated reporting' },
+    { type: 'Full Data Platform', investment: '$30,000 – $80,000', timeline: '8 – 14 weeks', bestFor: 'Full stack: ingestion, warehouse, dbt, metrics layer, BI dashboards, documentation' },
+    { type: 'Customer Analytics Platform', investment: '$20,000 – $55,000', timeline: '6 – 12 weeks', bestFor: 'Cohort analysis, churn indicators, engagement scoring, retention dashboard, action integration' },
+    { type: 'Churn Prediction Model', investment: '$20,000 – $50,000', timeline: '6 – 12 weeks', bestFor: 'Feature engineering, model training, Salesforce deployment, monitoring, 90-day review' },
+    { type: 'Revenue Intelligence', investment: '$18,000 – $50,000', timeline: '5 – 10 weeks', bestFor: 'SaaS metrics (MRR/ARR/NRR/LTV), unified revenue warehouse, CFO/board dashboard' },
+    { type: 'Financial Consolidation', investment: '$15,000 – $45,000', timeline: '4 – 9 weeks', bestFor: 'Multi-entity ingestion, currency normalization, consolidation rules, board pack automation' },
+    { type: 'Data Science Retainer', investment: '$5,000 – $18,000/mo', timeline: 'Ongoing', bestFor: 'Model retraining, new data sources, new dashboards, analytics iteration, data quality monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'SaaS Revenue Intelligence', description: 'Unified revenue warehouse from Stripe, Salesforce, product DB. MRR/ARR/NRR/churn metrics defined once. 3-day close → same-day automated reporting. Improved 90-day retention by 8%.' },
+    { name: 'Customer Churn Prediction', description: 'Churn classifier from product usage + account data. Identifies 73% of churned accounts 30+ days before cancellation. Reduced monthly churn from 2.5% to 1.8% — $500K+ ARR recovered.' },
+    { name: 'Operations Intelligence', description: 'Real-time pipeline from TMS + GPS carriers to Snowflake. Live shipment status, exception flags, SLA alerts. Customer escalations reduced by 45%.' },
+    { name: 'Financial Consolidation', description: 'Ingest from 12 subsidiary accounting systems. Currency normalization, intercompany elimination. Month-end close reduced from 8 days to 2 days.' },
+  ],
+  sections: [
+    {
+      heading: 'Why Most B2B Companies Are Sitting on Valuable Data and Getting Nothing From It',
+      body: 'Every B2B company has more data than it had 5 years ago. Customer data in Salesforce. Transaction data in the billing system. Product usage data in the application database. Marketing data in HubSpot and GA4. Operations data in the ERP. And 73% of it, according to Forrester, is never analyzed.',
+      items: [
+        'The gap is not data volume — it is data infrastructure. When data lives in 6 separate systems with no common identifier, no agreed definitions, and no automated pipeline connecting them, answering "what is our 90-day revenue forecast by segment?" takes a data analyst 3 days, a data engineer 2 weeks, and a CFO losing patience with a spreadsheet that is outdated the moment it is sent.',
+        'The organizations that win in data-intensive markets are not the ones with the most data — they are the ones with the infrastructure to turn data into decisions faster than competitors.',
+      ],
+    },
+    {
+      heading: 'Signs Your Organization Has a Data Infrastructure Problem',
+      body: '',
+      items: [
+        'Monthly reporting takes your analytics team more than 2 days to produce — manual extraction, reconciliation, and formatting',
+        'Different teams quote different numbers for the same metric in the same meeting — no single source of truth',
+        'You know you have churn risk signals in your product data but cannot act on them because the data is not accessible to the team who could respond',
+        'Executive dashboards are built in Excel by a senior analyst who is the only person who knows how the formulas work',
+        'Your product team cannot answer "which feature drives retention?" because usage data is not connected to subscription data',
+        'You made a significant business decision in the last 6 months based on incomplete data because getting complete data would have taken too long',
+        'You have hired data analysts who spend more than 50% of their time on data preparation rather than analysis',
+      ],
+    },
+    {
+      heading: 'The True Cost of Data Infrastructure Debt',
+      body: 'A B2B SaaS company with $10M ARR typically has 2 data analysts spending 50% of their time on data wrangling rather than analysis. At $90,000 average analyst salary, that is $90,000/year in wasted analytical capacity. A modern data stack built for $30,000-60,000 reallocates that capacity to actual analysis — compounding returns through better decisions, earlier churn detection, and more effective growth investment.',
+      items: [],
+    },
+    {
+      heading: 'Analytics vs. BI vs. Data Science vs. Data Engineering — What Do You Actually Need?',
+      body: 'These terms are used interchangeably by vendors and inconsistently understood by buyers. Here is a clear taxonomy — and how ClickMasters delivers each as distinct but integrated practices.',
+      items: [
+        'Data Engineering: "How is data collected, transformed, and stored reliably?" The infrastructure layer. Deliverables: ETL/ELT pipelines, data warehouse, data lake, data quality monitoring. When you need it: data is siloed, manual reporting is slow, or you need to consolidate multiple sources.',
+        'Business Intelligence (BI): "What happened and why?" Descriptive and diagnostic analytics for business users. Deliverables: Dashboards, KPI reports, self-service analytics portals, automated reporting, alerting. When you need it: faster, more reliable reporting that business users can explore without analyst help.',
+        'Data Science: "What will happen, and what should we do?" Predictive and prescriptive analytics. Deliverables: Predictive models, churn scoring, demand forecasting, recommendation systems. When you need it: enough historical data to build predictive models and want to automate complex decisions.',
+        'Data Analytics: Broader discipline covering all analytical work — from reporting to experimentation. The umbrella engagement when you need strategic analytical capability across multiple layers.',
+      ],
+    },
+    {
+      heading: 'The Data Maturity Model — Where Is Your Organization?',
+      body: 'Before investing in data infrastructure, it is important to understand your current maturity level. Skipping levels creates waste — companies that invest in machine learning before they have reliable reporting frequently waste $200,000+ on models that cannot be trusted because the underlying data is not clean or consistent.',
+      items: [
+        'Level 1 Reactive: Decisions made on gut and spreadsheets. Data in silos, manual reporting, no data team, Excel as data warehouse. Investment: $10K-25K for data audit + modern stack foundation + first dashboard.',
+        'Level 2 Descriptive: Regular reporting on what happened. Basic BI tool, some pipelines, inconsistent definitions across teams. Investment: $20K-50K for data warehouse, dbt models, unified BI layer, metric definitions.',
+        'Level 3 Diagnostic: Understanding why things happen. Unified data warehouse, clean data models, self-service analytics, data team, some A/B testing. Investment: $30K-80K for advanced analytics, experimentation framework, customer analytics.',
+        'Level 4 Predictive: Forecasting what will happen. Reliable historical data, ML-capable infrastructure, data science team, initial models in production. Investment: $40K-120K for predictive churn, demand forecasting, recommendation systems.',
+        'Level 5 Prescriptive: Automated optimization recommendations. MLOps platform, real-time decisions, AI-driven product features, data product mindset. Investment: Enterprise AI platform engagement — see Generative AI Solutions page.',
+      ],
+    },
+    {
+      heading: 'The Modern Data Stack — What It Is and Why It Matters',
+      body: 'The modern data stack is a collection of cloud-native, composable tools that have replaced legacy ETL systems and on-premise data warehouses as the standard architecture for data-driven organizations.',
+      items: [
+        'Data Ingestion: Airbyte (open-source, 300+ connectors) or Fivetran — moves raw data from source systems to the data warehouse automatically.',
+        'Data Warehouse: Snowflake (primary — multi-cloud, elastic), BigQuery (GCP-native, serverless), or Redshift (AWS-native) — centralized columnar storage optimized for analytical queries.',
+        'Data Transformation: dbt (data build tool) — industry standard for SQL-based data transformation with version control, testing, and documentation.',
+        'Data Orchestration: Apache Airflow or Prefect — schedules and monitors data pipelines, ensures data freshness, handles failures.',
+        'Data Quality: Great Expectations or dbt tests — detects data quality issues before they reach dashboards.',
+        'BI & Visualization: Metabase (open-source, self-service), Apache Superset, Looker, Tableau, or custom React dashboards.',
+        'Data Science / ML: Python (pandas, scikit-learn, XGBoost), MLflow (experiment tracking), BentoML/FastAPI (model serving).',
+        'Metrics Layer: dbt Semantic Layer / MetricFlow — defines company-wide metric definitions once, consistent across all BI tools.',
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is data science and how is it different from business intelligence?',
+      answer: 'Data science is the discipline of extracting insights and building predictive models from data using statistical analysis, machine learning, and programming. Business intelligence (BI) focuses on descriptive and diagnostic analytics — reporting on what has happened and why, typically through dashboards and visualizations. The key difference is: BI answers "what happened?", while data science answers "what will happen?" and "what should we do?". In practice, a mature data organization needs both: solid BI infrastructure for operational decision-making, and data science capabilities for predictive modeling and advanced analytics. Most organizations benefit from investing in BI infrastructure before data science, because predictive models require clean, reliable historical data — which only a well-engineered BI layer provides.',
+    },
+    {
+      question: 'What is the modern data stack?',
+      answer: 'The modern data stack is a collection of cloud-native, composable tools that together form a complete data infrastructure: data ingestion tools (Airbyte, Fivetran) that automatically move data from source systems to a data warehouse, a cloud data warehouse (Snowflake, BigQuery, Redshift) for centralized analytical storage, a data transformation tool (dbt — data build tool) for modeling raw data into clean analytical tables, a BI tool (Metabase, Superset, Looker) for visualization and self-service analytics, and a metrics layer (dbt Semantic Layer, Cube.dev) for consistent metric definitions. The modern data stack replaced legacy ETL tools and on-premise data warehouses as the standard architecture because it is faster to implement, easier to maintain, more scalable, and significantly less expensive at mid-market scale.',
+    },
+    {
+      question: 'What is dbt and why do data engineers use it?',
+      answer: 'dbt (data build tool) is an open-source SQL-based data transformation tool that enables data engineers to build, test, document, and version-control data transformation logic in a software engineering workflow. Before dbt, data transformation was done in complex stored procedures, custom ETL scripts, or proprietary ETL tools — code that was hard to test, version, document, and collaborate on. dbt applies software engineering best practices (version control with Git, automated testing, code review, documentation) to SQL-based data transformation. It is the de facto standard for data transformation in the modern data stack because it dramatically improves the reliability, maintainability, and transparency of analytical data models.',
+    },
+    {
+      question: 'How much does it cost to build a data analytics platform?',
+      answer: 'Building a data analytics platform costs between $15,000 for a basic modern data stack foundation (data warehouse, ingestion pipelines, initial dbt models) to $80,000 for a full platform including customer analytics, predictive models, and self-service BI. The primary cost drivers are: number of data sources to ingest, complexity of data transformation and metric definitions, whether predictive modeling is in scope, and the number of dashboards and analytics use cases. Cloud data warehouse running costs (Snowflake, BigQuery) are typically $300-3,000/month depending on data volume. ClickMasters provides fixed-price proposals after a free data audit session.',
+    },
+    {
+      question: 'What is a data warehouse and do I need one?',
+      answer: 'A data warehouse is a centralized repository designed for analytical queries, storing historical data from multiple source systems in a structured, query-optimized format. Unlike operational databases (which are optimized for fast read/write transactions), data warehouses are optimized for complex analytical queries across large datasets — running a query across 3 years of customer transactions in seconds rather than minutes. You need a data warehouse when: you have data in multiple systems that needs to be analyzed together, your operational database is too slow for analytical queries, you need reliable historical data for reporting or machine learning, or you need a single source of truth across business functions. Cloud data warehouses (Snowflake, BigQuery, Redshift) have reduced the cost and complexity of implementation to the point where mid-market B2B companies can benefit significantly.',
+    },
+    {
+      question: 'What is predictive analytics and when does it make sense for B2B companies?',
+      answer: 'Predictive analytics uses statistical models and machine learning to forecast future outcomes based on historical data patterns. For B2B companies, the most impactful predictive models are: customer churn prediction (identifying accounts likely to cancel 30-60 days before cancellation, enabling proactive retention), lead scoring (ranking sales pipeline by conversion probability to prioritize sales effort), revenue forecasting (MRR/ARR projections with confidence intervals for financial planning), and demand forecasting (inventory and capacity planning). Predictive analytics makes business sense when: you have at least 12-18 months of reliable historical data, the predicted outcome has a significant business impact (churn, conversion, revenue), and you have a clear action you can take based on the prediction. Without a reliable data foundation, predictive models produce unreliable outputs — which is why ClickMasters always ensures data infrastructure is solid before investing in ML.',
+    },
+    {
+      question: 'Can you connect and analyze data from Salesforce, Stripe, and our product database together?',
+      answer: 'Yes. Cross-system data integration is one of the most common and highest-value data engineering engagements. ClickMasters connects Salesforce (customer and deal data), Stripe (subscription and revenue data), your product database (usage and behavioral data), and any other source systems into a unified Snowflake or BigQuery data warehouse using Airbyte or Fivetran connectors. dbt models then join these sources on common identifiers (customer ID, email, account ID) to produce unified analytical views: customer 360 profiles combining CRM, billing, and product data; revenue analytics reconciling Stripe transactions with Salesforce ARR; and retention analysis connecting product engagement to subscription status. This unified view typically produces insights that are invisible when each system is analyzed in isolation.',
+    },
+    {
+      question: 'Do you provide ongoing data engineering and analytics support after delivery?',
+      answer: 'Yes. ClickMasters offers ongoing data engineering and analytics retainers from $5,000-18,000/month covering: new data source integration (connecting additional systems as your stack grows), pipeline maintenance and incident response (fixing broken pipelines, handling source system API changes), model retraining (refreshing predictive models with new data and evaluating for drift), new dashboard and report development, data quality monitoring, and analytics iteration based on business question evolution. Most clients transition to a retainer after initial delivery because data needs grow with the business — new products, new markets, new reporting requirements.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our revenue intelligence platform from the ground up. We went from 3-day manual financial closes to same-day automated reporting. The CFO now has real-time visibility into MRR trends, cohort retention, and churn indicators — all in one dashboard.",
+    author: "VP of Finance",
+    role: "B2B SaaS Company"
+  },
+  caseStudy: {
+    title: "Revenue Intelligence Platform",
+    description: "Built unified data warehouse from Stripe, Salesforce, and product database. dbt models for MRR/ARR/NRR/churn metrics. Metabase executive dashboard. Reduced month-end close from 3 days to same-day automated reporting. CFO now has real-time cohort retention and churn visibility.",
+    slug: "revenue-intelligence",
+    badge: "Data Analytics"
+  },
+  howToSteps: [
+    { name: 'Data Audit & Strategy', text: 'Inventory data sources, business objective alignment, maturity assessment, phased roadmap.' },
+    { name: 'Data Architecture Design', text: 'Warehouse selection, ingestion tool selection, dbt project structure, metrics layer design.' },
+    { name: 'Data Infrastructure Build', text: 'Warehouse setup, ingestion connectors, dbt models, data quality tests, orchestration.' },
+    { name: 'Analytics Model Development', text: 'Revenue models, customer analytics, operational models, financial models.' },
+    { name: 'Dashboard & Visualization Build', text: 'BI dashboards, self-service analytics, executive dashboards, operational dashboards.' },
+    { name: 'Predictive Model Development', text: 'Feature engineering, model training, production deployment, A/B testing, monitoring.' },
+    { name: 'Enablement & Handoff', text: 'Documentation, data dictionary, analyst training, engineer handoff, stakeholder training.' },
+  ],
+  itemList: [
+    'Data Engineering & Pipeline Development',
+    'Business Intelligence & Dashboard Development',
+    'Data Warehouse & Lakehouse Architecture',
+    'Predictive Analytics & Machine Learning',
+    'Customer Analytics & Retention Intelligence',
+    'Data Strategy Consulting',
+  ],
+  definedTerms: [
+    { name: 'Modern Data Stack', description: 'Cloud-native, composable tools: Airbyte (ingestion), Snowflake/BigQuery (warehouse), dbt (transformation), Airflow (orchestration), Metabase/Looker (BI).' },
+    { name: 'dbt', description: 'Data Build Tool — SQL-based transformation framework with version control, testing, and documentation.' },
+    { name: 'Data Maturity Model', description: '5-level framework (Reactive → Descriptive → Diagnostic → Predictive → Prescriptive) for assessing analytics capability.' },
+    { name: 'Metrics Layer', description: 'Consistent business-logic definition of metrics (revenue, churn, LTV) shared across all dashboards — eliminates "different people get different numbers" problem.' },
+  ],
+};
+
+const businessIntelligenceOverride: ServicePageContent = {
+  slug: 'business-intelligence',
+  categorySlug: 'data-science-analytics',
+  sectionId: 'business-intelligence',
+  category: 'Data Science & Analytics',
+  title: 'Business Intelligence Services',
+  serviceName: 'Business Intelligence',
+  metaTitle: 'Business Intelligence Services | BI Dashboards & Analytics | ClickMasters',
+  metaDescription:
+    'ClickMasters builds business intelligence systems — data warehouses, BI dashboards, self-service analytics, and KPI reporting — using Metabase, Looker, and dbt for B2B companies worldwide.',
+  lead: 'ClickMasters builds business intelligence systems for B2B companies across the USA, Europe, Canada, and Australia. Data warehouses that consolidate your fragmented data sources into a single, queryable source of truth. dbt data models that define your business metrics in code — version-controlled, tested, and consistent. Metabase or Looker dashboards that let your business teams answer their own questions. Embedded analytics in your product. KPI monitoring that alerts before problems become crises.',
+  highlights: [
+    '✓ dbt Data Modelling',
+    '✓ Metabase / Looker Dashboards',
+    '✓ Snowflake / BigQuery Warehouse',
+    '✓ Self-Service Analytics',
+    '✓ Embedded Analytics',
+    '✓ Automated KPI Alerts',
+  ],
+  marketStats: [
+    { label: 'Data Build Tool — SQL-based transformation framework. Version-controlled, tested data models. The standard for modern analytics engineering.', value: 'dbt' },
+    { label: 'Open-source BI tool — self-service analytics for non-technical business users. Free tier, rapid deployment, embedded analytics support.', value: 'Metabase' },
+    { label: 'Google\'s enterprise BI platform — LookML semantic layer, governed metrics, embedded analytics for B2B SaaS products.', value: 'Looker' },
+    { label: 'A consistent definition of business metrics (revenue, churn rate, CAC) shared across all dashboards — eliminates the "different people get different numbers" problem.', value: 'Semantic Layer' },
+  ],
+  servicesCards: [
+    { title: 'Data Warehouse Design', description: 'Centralized analytics data store: star schema or medallion architecture (Bronze raw → Silver cleaned → Gold business-ready), source system identification, refresh strategy, technology selection. Snowflake (primary), BigQuery, Redshift, or DuckDB for smaller volumes.' },
+    { title: 'dbt Data Modelling', description: 'Transform raw source data into business-ready analytics models: staging models (clean column names, type casts), intermediate models (business logic transformations), mart models (customer 360, product metrics, financial summary), tests (not_null, unique, accepted_values, relationships), and documentation.' },
+    { title: 'Metabase Deployment', description: 'Self-hosted Metabase (no per-seat licensing, full control) or Metabase Cloud. Connect to data warehouse, configure question builder and SQL editor, build native SQL dashboards, configure automatic refresh and email delivery, set up row-level security, embed dashboards via signed embedding URL.' },
+    { title: 'Looker / LookML Development', description: 'LookML semantic layer development: define business metrics once in LookML (revenue, churn, conversion rate), build Looks and Dashboards, configure user access controls, use Embedded Analytics SDK to embed charts and dashboards in SaaS product.' },
+    { title: 'KPI Monitoring & Alerts', description: 'Automated KPI monitoring with anomaly detection and threshold alerts: define KPI thresholds, anomaly detection (statistical process control — alert when metric moves outside normal variation bounds), alert routing (Slack, PagerDuty, email), executive digest (weekly automated KPI summary email).' },
+  ],
+  differentiators: [
+    { feature: 'dbt Testing Standard', description: 'not_null, unique, accepted_values, relationships tests on every model | Basic: Untested SQL scripts (silent data quality failures)' },
+    { feature: 'Semantic Layer', description: 'dbt MetricFlow/LookML — defines metrics once, consistent across all dashboards | Basic: No semantic layer (different numbers from different dashboards)' },
+    { feature: 'Medallion Architecture', description: 'Bronze (raw) → Silver (cleaned) → Gold (business-ready) — increasing quality at each layer | Basic: Single flat layer (no line of trust)' },
+    { feature: 'BI Tool Selection Guide', description: 'Metabase for internal analytics, Looker for product embedding — clear decision framework | Basic: One tool for everything (suboptimal fit)' },
+    { feature: 'Embedded Analytics', description: 'Metabase signed embedding or Looker Embedded SDK — tenant isolation via JWT | Basic: No embedding (analytics only internal)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'BI Discovery & Architecture', timeline: 'Week 1-2', text: 'Source system audit, warehouse design, tool selection (Metabase vs Looker vs Superset), metric definition workshop, roadmap. Deliverable: BI Architecture Plan.' },
+    { phase: 'Phase 2', title: 'Data Warehouse Build', timeline: 'Week 2-5', text: 'Schema design (star schema or medallion), ingestion pipelines (Airbyte/Fivetran), staging tables, access control. Deliverable: Production Data Warehouse.' },
+    { phase: 'Phase 3', title: 'dbt Data Modelling', timeline: 'Week 3-5', text: 'Staging models (clean source data), intermediate models (business logic), mart models (business-facing tables), dbt tests, dbt docs generation. Deliverable: dbt Project + Documentation.' },
+    { phase: 'Phase 4', title: 'Dashboard Development', timeline: 'Week 4-7', text: 'Connect BI tool to warehouse, build native SQL dashboards, configure auto-refresh, set up row-level security, embed dashboards if required. Deliverable: Production Dashboards.' },
+    { phase: 'Phase 5', title: 'KPI Monitoring & Alerts', timeline: 'Week 6-8', text: 'Define KPI thresholds, configure anomaly detection, set up alert routing (Slack/email), build executive digest. Deliverable: KPI Monitoring System.' },
+  ],
+  techStackCategories: [
+    { layer: 'Data Warehouse', technologies: 'Snowflake (primary — separation of compute/storage), BigQuery (serverless), Redshift (AWS-native), DuckDB (embedded)' },
+    { layer: 'Data Transformation', technologies: 'dbt (data build tool — staging/intermediate/mart models), dbt tests, dbt docs, dbt Semantic Layer/MetricFlow' },
+    { layer: 'BI Tool', technologies: 'Metabase (open-source — self-service, embedded), Looker (enterprise — LookML semantic layer), Superset (customizable), Tableau/Power BI' },
+    { layer: 'Embedded Analytics', technologies: 'Metabase signed embedding (JWT, tenant isolation), Looker Embedded SDK, custom chart components (Recharts, Nivo, D3.js)' },
+    { layer: 'Orchestration', technologies: 'dbt Cloud (scheduling), Apache Airflow, Prefect' },
+  ],
+  pricingTiers: [
+    { type: 'BI Discovery & Architecture', investment: '$4,000 – $8,000', timeline: '1 – 2 weeks', bestFor: 'Source system audit, warehouse design, tool selection, roadmap' },
+    { type: 'Data Warehouse Build (Snowflake/BQ)', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Schema design, ingestion pipelines, medallion layers, access control' },
+    { type: 'dbt Data Modelling', investment: '$8,000 – $25,000', timeline: '3 – 6 weeks', bestFor: 'Staging + intermediate + mart models, tests, documentation' },
+    { type: 'Metabase Deployment', investment: '$5,000 – $14,000', timeline: '2 – 4 weeks', bestFor: 'Self-hosted, dashboards, row-level security, email delivery' },
+    { type: 'Looker / LookML Build', investment: '$10,000 – $30,000', timeline: '3 – 7 weeks', bestFor: 'LookML semantic layer, Looks, Dashboards, user permissions' },
+    { type: 'Embedded Analytics', investment: '$10,000 – $28,000', timeline: '3 – 6 weeks', bestFor: 'Metabase signed or Looker embedded in SaaS product, tenant isolation' },
+    { type: 'KPI Monitoring System', investment: '$6,000 – $16,000', timeline: '2 – 4 weeks', bestFor: 'Threshold + anomaly detection, Slack/email alerts, executive digest' },
+    { type: 'BI Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'New metrics, dashboard maintenance, source system additions, training' },
+  ],
+  industryUseCases: [
+    { name: 'SaaS Executive Dashboard', description: 'Unified revenue view from Stripe + Salesforce + product DB. MRR, ARR, NRR, churn, LTV, CAC. Self-service for executives. Real-time KPI monitoring with Slack alerts.' },
+    { name: 'E-commerce BI Platform', description: 'Sales, inventory, customer analytics in one dashboard. Product performance, cohort retention, LTV by acquisition channel. Metabase with row-level security per brand.' },
+    { name: 'Financial Consolidation', description: 'Multi-entity P&L consolidation. Automated currency normalization, intercompany elimination. Board pack generation. Close reduced from 8 days to 2 days.' },
+    { name: 'Embedded Analytics for SaaS', description: 'Customer-facing analytics embedded in product. Each customer sees their own usage metrics, billing history, team activity. Looker embedded with tenant isolation.' },
+  ],
+  sections: [
+    {
+      heading: 'Metabase vs Looker — Which BI Tool Should I Choose?',
+      body: 'Metabase is the better choice for most B2B companies that primarily need internal dashboards and self-service analytics for their own team: it is open-source (self-hosted at no licensing cost), has a simple, approachable UI that non-technical business users can use without training, and deploys in hours. Looker is the better choice when: you need to embed BI in your product (Looker\'s Embedded Analytics SDK and LookML semantic layer are significantly more powerful for product embedding), you have a large team with multiple stakeholders who need governed, consistent metric definitions (LookML enforces the "one source of truth" for each metric), or you are on the Google Cloud Platform (BigQuery integration is native). ClickMasters defaults to Metabase for internal analytics and Looker (or custom chart libraries) for customer-facing embedded analytics.',
+      items: [],
+    },
+    {
+      heading: 'What is a Semantic Layer in BI and Why Does It Matter?',
+      body: 'A semantic layer is a consistent business-logic definition of metrics — revenue, churn rate, conversion rate, LTV — that sits between the raw data and the dashboards. Without a semantic layer, different dashboard builders write slightly different SQL to calculate the "same" metric — one includes free trial users in monthly active users, another doesn\'t; one calculates MRR per subscription start date, another per calendar month. The result: two dashboards show different revenue numbers for the same period, and stakeholders lose trust in both. The semantic layer defines each metric once, in one place, with the correct business logic — and every dashboard that uses that metric gets the same answer. dbt Semantic Layer (with MetricFlow), Looker\'s LookML, and Cube.js are the leading semantic layer implementations. ClickMasters builds the semantic layer as part of every BI engagement.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between BI and data science?',
+      answer: 'Business intelligence (BI) answers the question "what happened?" — it aggregates, organises, and visualises historical data to describe business performance. A BI dashboard shows last quarter\'s revenue by segment, daily active users, or monthly churn rate. Data science and machine learning answer "what will happen?" and "why?" — they build predictive models from historical data to forecast future outcomes. In practice, BI is the prerequisite for data science: you need reliable, clean, consolidated data (which a BI data warehouse provides) before you can build models on top of it. ClickMasters often combines both — building the data warehouse and BI layer first, then adding predictive analytics models that feed back into the same BI dashboards.',
+    },
+    {
+      question: 'What is dbt and why does it matter?',
+      answer: 'dbt (data build tool) is a SQL-based framework for transforming data in your data warehouse. Before dbt, data transformation (turning raw source data into clean, business-ready analytics tables) was done with a mix of ad-hoc SQL scripts, stored procedures, and Python jobs — scattered across multiple people\'s laptops, undocumented, untested, and inconsistent. dbt treats SQL transformations as software: transformations are version-controlled in Git, tested automatically (data quality tests run on every model update), documented (every table and column has a description), and dependency-managed (dbt knows which models depend on which others and runs them in the correct order). The result: reliable, trustworthy analytics models that the whole team can understand, extend, and maintain.',
+    },
+    {
+      question: 'Metabase vs Looker — which BI tool should I choose?',
+      answer: 'Metabase is the better choice for most B2B companies that primarily need internal dashboards and self-service analytics for their own team: it is open-source (self-hosted at no licensing cost), has a simple, approachable UI that non-technical business users can use without training, and deploys in hours. Looker is the better choice when: you need to embed BI in your product (Looker\'s Embedded Analytics SDK and LookML semantic layer are significantly more powerful for product embedding), you have a large team with multiple stakeholders who need governed, consistent metric definitions (LookML enforces the "one source of truth" for each metric), or you are on the Google Cloud Platform (BigQuery integration is native). ClickMasters defaults to Metabase for internal analytics and Looker (or custom chart libraries) for customer-facing embedded analytics.',
+    },
+    {
+      question: 'What is a semantic layer in BI and why does it matter?',
+      answer: 'A semantic layer is a consistent business-logic definition of metrics — revenue, churn rate, conversion rate, LTV — that sits between the raw data and the dashboards. Without a semantic layer, different dashboard builders write slightly different SQL to calculate the "same" metric — one includes free trial users in monthly active users, another doesn\'t; one calculates MRR per subscription start date, another per calendar month. The result: two dashboards show different revenue numbers for the same period, and stakeholders lose trust in both. The semantic layer defines each metric once, in one place, with the correct business logic — and every dashboard that uses that metric gets the same answer. dbt Semantic Layer (with MetricFlow), Looker\'s LookML, and Cube.js are the leading semantic layer implementations. ClickMasters builds the semantic layer as part of every BI engagement.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our entire BI platform from scratch — Snowflake warehouse, dbt models, Metabase dashboards. Our finance team went from 3-day manual reporting to same-day automated analytics. The CFO now has real-time MRR, churn, and cohort retention at her fingertips.",
+    author: "CTO",
+    role: "B2B SaaS Company"
+  },
+  caseStudy: {
+    title: "SaaS Executive Dashboard",
+    description: "Built Snowflake warehouse + dbt models + Metabase dashboard for B2B SaaS. Unified Stripe, Salesforce, product DB. MRR, ARR, NRR, churn, LTV, CAC metrics. Real-time KPI monitoring with Slack alerts. Reduced reporting time by 90%.",
+    slug: "saas-executive-dashboard",
+    badge: "Business Intelligence"
+  },
+  howToSteps: [
+    { name: 'BI Discovery & Architecture', text: 'Source system audit, warehouse design, tool selection, metric definition workshop.' },
+    { name: 'Data Warehouse Build', text: 'Schema design, ingestion pipelines, staging tables, access control.' },
+    { name: 'dbt Data Modelling', text: 'Staging, intermediate, mart models, dbt tests, dbt documentation.' },
+    { name: 'Dashboard Development', text: 'Connect BI tool, build dashboards, configure auto-refresh, row-level security.' },
+    { name: 'KPI Monitoring & Alerts', text: 'Define thresholds, anomaly detection, alert routing, executive digest.' },
+  ],
+  itemList: [
+    'Data Warehouse Design (Snowflake/BigQuery/Redshift)',
+    'dbt Data Modelling',
+    'Metabase Deployment',
+    'Looker / LookML Development',
+    'KPI Monitoring & Alerts',
+  ],
+  definedTerms: [
+    { name: 'dbt', description: 'Data Build Tool — SQL-based transformation framework with version control, testing, and documentation.' },
+    { name: 'Semantic Layer', description: 'Consistent business-logic definition of metrics shared across all dashboards — eliminates conflicting numbers.' },
+    { name: 'Medallion Architecture', description: 'Bronze (raw) → Silver (cleaned) → Gold (business-ready) — data quality tiers in lakehouse.' },
+    { name: 'LookML', description: 'Looker\'s semantic layer language — defines metrics once, server at query time, consistent across all consumers.' },
+  ],
+};
+
+const dataWarehousingOverride: ServicePageContent = {
+  slug: 'data-warehousing',
+  categorySlug: 'data-science-analytics',
+  sectionId: 'data-warehousing',
+  category: 'Data Science & Analytics',
+  title: 'Data Warehousing Services',
+  serviceName: 'Data Warehousing',
+  metaTitle: 'Data Warehousing Services | Snowflake, BigQuery & Redshift | ClickMasters',
+  metaDescription:
+    'ClickMasters builds cloud data warehouses on Snowflake, BigQuery, and Redshift — schema design, optimisation, migration, and cost management — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds cloud data warehouses for B2B companies across the USA, Europe, Canada, and Australia. Snowflake for organisations that want near-zero infrastructure management and pay-as-you-use compute. BigQuery for GCP-native teams and event-heavy workloads. Redshift for AWS-native architectures. Schema designs that your data team will still understand in 3 years. Query optimisation that keeps costs predictable. And migrations from legacy on-premises warehouses to the cloud.',
+  highlights: [
+    '✓ Snowflake Architecture',
+    '✓ BigQuery Implementation',
+    '✓ Star Schema / Medallion Design',
+    '✓ Query Optimisation & Cost Control',
+    '✓ Warehouse Migration',
+    '✓ Secure Data Sharing',
+  ],
+  servicesCards: [
+    { title: 'Snowflake Implementation', description: 'End-to-end Snowflake setup: account configuration (cloud provider + region), virtual warehouse sizing and auto-suspend (right-size compute — overspending is idle warehouse time), role-based access control (RBAC), network policy (IP whitelisting), Snowflake Data Sharing, cost monitoring (resource monitor — budget limits, email alert at 80%).' },
+    { title: 'BigQuery Implementation', description: 'BigQuery setup for GCP-native teams: project and dataset organisation (dev/staging/prod), partitioning strategy (partition pruning is primary cost control), clustering (reduce bytes scanned further), scheduled queries, BigQuery ML (train and serve ML with SQL), cost monitoring (Quotas + budget alerts).' },
+    { title: 'Schema Design (Star/Medallion)', description: 'Dimensional modelling (star schema — fact tables + dimension tables, standard for analytical performance) and medallion architecture (Bronze raw → Silver cleaned → Gold business-ready). Principles: appropriate grain, slowly changing dimensions (SCD Type 2), surrogate keys, naming conventions enforced via dbt contracts.' },
+    { title: 'Query Optimisation & Cost Control', description: 'Query profiling (identify most expensive queries by bytes scanned/credits), partitioning and clustering (add partition filters — 5-10x cost reduction), materialised views (pre-compute expensive aggregations), result caching (Snowflake caches identical queries for 24 hours), warehouse right-sizing (downsize idle warehouses, auto-suspend to 1-5 minutes).' },
+    { title: 'Data Warehouse Migration', description: 'Migrate from legacy warehouses (Teradata, Netezza, Oracle, Azure SQL DW) to modern cloud: SQL translation (automated via Schema Conversion Tool, custom functions manual), data validation (compare row counts/aggregates between legacy and target), ETL/ELT migration (SSIS/Informatica → dbt + Airflow), parallel run period (validate before decommission).' },
+  ],
+  differentiators: [
+    { feature: '3-Way Comparison Table', description: 'Snowflake vs BigQuery vs Redshift — 8 rows covering pricing, compute/storage, concurrency, SQL, semi-structured, cloud, best for | Basic: One-size recommendation' },
+    { feature: 'Auto-Suspend Savings', description: '"Auto-suspend saves 40-60% on Snowflake spend" — specific, checkable claim | Basic: No cost optimisation guidance' },
+    { feature: 'Partition Pruning', description: 'Primary BigQuery cost control — 5-10x cost reduction with proper partitioning | Basic: No partitioning (full scans, high costs)' },
+    { feature: 'SCD Type 2', description: 'Preserve historical state of changing dimensions — essential for audit and trend analysis | Basic: Overwrite only (lost history)' },
+    { feature: 'Medallion Architecture', description: 'Bronze (raw) → Silver (cleaned) → Gold (business-ready) — quality tiers | Basic: Single flat layer' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Warehouse Assessment', timeline: 'Week 1-2', text: 'Technology selection (Snowflake vs BigQuery vs Redshift), schema review (current state), cost model estimation, migration plan. Deliverable: Warehouse Assessment + Selection Recommendation.' },
+    { phase: 'Phase 2', title: 'Warehouse Implementation', timeline: 'Week 2-5', text: 'Account/project setup, virtual warehouse configuration (Snowflake) or dataset structure (BigQuery), RBAC/IAM, network policies, auto-suspend, cost monitoring. Deliverable: Production Data Warehouse.' },
+    { phase: 'Phase 3', title: 'Schema Design', timeline: 'Week 2-4', text: 'Star schema or medallion architecture, fact/dimension table design, slowly changing dimensions (SCD Type 2), surrogate keys, naming conventions. Deliverable: Schema Documentation + dbt model contracts.' },
+    { phase: 'Phase 4', title: 'Query Optimisation', timeline: 'Week 3-5', text: 'Profile top 10 most expensive queries, add partitioning/clustering, create materialised views, configure caching, right-size warehouses. Deliverable: Query Cost Report + Optimised Warehouse.' },
+    { phase: 'Phase 5', title: 'Migration (if legacy)', timeline: 'Week 4-8', text: 'SQL translation (automated + manual), data validation (row counts, aggregates), ETL/ELT pipeline migration, parallel run, cutover. Deliverable: Migrated Warehouse + Validation Report.' },
+  ],
+  techStackCategories: [
+    { layer: 'Cloud Warehouse', technologies: 'Snowflake (primary — separation of compute/storage, multi-cloud), BigQuery (GCP-native, serverless), Redshift (AWS-native, PostgreSQL-compatible), DuckDB (embedded OLAP)' },
+    { layer: 'Schema Design', technologies: 'Star schema (fact + dimensions), Medallion (Bronze/Silver/Gold), SCD Type 2, dbt model contracts' },
+    { layer: 'Cost Optimisation', technologies: 'Auto-suspend (Snowflake), Partitioning/clustering (BigQuery), Materialised views, Result caching, Warehouse right-sizing' },
+    { layer: 'Migration', technologies: 'AWS Schema Conversion Tool (SQL translation), Great Expectations (data validation), dbt + Airflow (pipeline migration)' },
+  ],
+  pricingTiers: [
+    { type: 'Warehouse Assessment', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'Technology selection, schema review, cost model, migration plan' },
+    { type: 'Snowflake Implementation', investment: '$10,000 – $28,000', timeline: '3 – 6 weeks', bestFor: 'Setup, RBAC, schema, monitoring, cost controls, dbt integration' },
+    { type: 'BigQuery Implementation', investment: '$8,000 – $24,000', timeline: '3 – 6 weeks', bestFor: 'Project structure, partitioning, clustering, IAM, cost monitoring' },
+    { type: 'Redshift Implementation', investment: '$8,000 – $24,000', timeline: '3 – 6 weeks', bestFor: 'Cluster or serverless, schema, vacuum/analyze, monitoring' },
+    { type: 'Schema Design (Star/Medallion)', investment: '$6,000 – $16,000', timeline: '2 – 4 weeks', bestFor: 'Dimensional model, SCD Type 2, naming conventions, dbt contracts' },
+    { type: 'Query Optimisation', investment: '$5,000 – $14,000', timeline: '2 – 3 weeks', bestFor: 'Profile top queries, add partitioning/clustering, materialised views' },
+    { type: 'Warehouse Migration', investment: '$15,000 – $45,000', timeline: '5 – 10 weeks', bestFor: 'SQL translation, ETL migration, parallel validation, cutover' },
+    { type: 'Warehouse Retainer', investment: '$3,000 – $7,000/mo', timeline: 'Ongoing', bestFor: 'Cost monitoring, schema evolution, performance optimisation' },
+  ],
+  industryUseCases: [
+    { name: 'SaaS Revenue Warehouse', description: 'Snowflake warehouse from Stripe, Salesforce, product DB. Star schema: fact_subscription_transactions, dim_customer, dim_date, dim_product_plan. 3-day financial close → same-day automated reporting.' },
+    { name: 'E-commerce Analytics', description: 'BigQuery warehouse from Shopify, GA4, Klaviyo. Partition by event_date, cluster by customer_id. Customer 360, cohort retention, LTV by channel. Query costs reduced 80% via partitioning.' },
+    { name: 'Legacy Migration to Snowflake', description: 'Migrate from Teradata (on-prem) to Snowflake. 20TB data, 5 years history. SQL translation via SCT + manual for stored procedures. Parallel run 2 weeks then cutover. Query performance improved 10x.' },
+    { name: 'Financial Consolidation', description: 'Redshift warehouse from 12 subsidiary Xero instances. Unified chart of accounts mapping, currency normalization, intercompany elimination. 8-day close → 2-day close.' },
+  ],
+  sections: [
+    {
+      heading: 'Snowflake vs BigQuery vs Redshift Comparison',
+      body: '',
+      items: [
+        'Pricing model: Snowflake per-second compute credit + storage, predictable scaling. BigQuery serverless — pay per query (bytes scanned), zero idle cost. Redshift reserved instances or serverless RA3, predictable for steady workloads.',
+        'Compute/storage separation: Snowflake full separation — scale compute independently of storage. BigQuery full separation — no clusters to manage. Redshift RA3 — managed storage separate from compute.',
+        'Concurrency: Snowflake excellent — multiple virtual warehouses share same data. BigQuery excellent — serverless auto-scales. Redshift good — concurrency scaling adds clusters on demand.',
+        'SQL dialect: Snowflake ANSI SQL + extensions (FLATTEN, VARIANT JSON). BigQuery Standard SQL + extensions (ARRAY_AGG, STRUCT). Redshift PostgreSQL-compatible — easiest migration from Postgres.',
+        'Semi-structured data: Snowflake VARIANT type — query JSON natively without schema. BigQuery ARRAY/STRUCT types — nested records, JSON functions. Redshift SUPER type — PartiQL for semi-structured.',
+        'Cloud provider: Snowflake multi-cloud (AWS, GCP, Azure). BigQuery GCP only. Redshift AWS only.',
+        'Best for: Snowflake — multi-cloud, near-zero DBA overhead, strong partner ecosystem. BigQuery — GCP workloads, very large-scale event analytics, serverless preference. Redshift — AWS-native teams, PostgreSQL familiarity, predictable workloads.',
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is a data warehouse and how is it different from an operational database?',
+      answer: 'An operational database (PostgreSQL, MySQL, SQL Server) is optimised for OLTP — Online Transaction Processing: many concurrent small reads and writes, row-level operations, ACID transactions. It powers your application — the database that stores your users, orders, and products. A data warehouse is optimised for OLAP — Online Analytical Processing: fewer, larger queries that scan millions of rows to produce aggregated results. It powers your analytics — the database that answers "what was our revenue by region last quarter?" Mixing analytical queries in your operational database creates performance problems: a complex analytical query that scans millions of rows blocks the application queries that need to complete in milliseconds. A data warehouse separates the analytics workload from the operational workload, storing denormalised data in column-oriented storage (optimised for scanning many rows of a few columns) rather than row-oriented storage.',
+    },
+    {
+      question: 'How much does it cost to run Snowflake?',
+      answer: 'Snowflake costs have two components: compute (virtual warehouse credits — charged per second of warehouse activity) and storage (compressed data storage — approximately $23/TB/month). A typical startup with one X-Small virtual warehouse running 8 hours/day, 250GB of data, and ELT pipelines costs approximately $150-400/month. A growing B2B SaaS company with multiple warehouses, 1TB data, and active BI usage costs $500-2,000/month. Enterprise deployments with multiple teams, heavy ML workloads, and terabytes of data can cost $5,000-50,000+/month. The most common Snowflake overspending pattern is virtual warehouses that do not auto-suspend (running 24/7 when queries only run for 2 hours/day). ClickMasters configures auto-suspend to 1-5 minutes on all warehouses — typically reducing Snowflake spend by 40-60% on new deployments where auto-suspend was not configured.',
+    },
+    {
+      question: 'What is the star schema and why is it used in data warehouses?',
+      answer: 'The star schema is a data modelling approach for analytical databases: a central fact table (which records events or transactions — each row represents one order, one session, one payment) surrounded by dimension tables (which describe the entities involved — each customer, each product, each date). The "star" shape comes from the fact table at the centre with dimension tables radiating outward. The star schema is optimised for analytical queries because: joins are simple (fact-to-dimension, never dimension-to-dimension in a properly normalised star schema), query optimisers can efficiently prune irrelevant data using dimension filters, and the model is intuitive for business users and BI tools. Alternative: the medallion architecture (Bronze/Silver/Gold) is increasingly used for modern data lakehouses — it describes data quality tiers rather than a specific table structure, and can incorporate star schema at the Gold (business-ready) layer.',
+    },
+    {
+      question: 'When should I migrate from my current database to a data warehouse?',
+      answer: 'Signs you need a data warehouse: your operational database is slow because of analytical queries running alongside application queries; you are joining data from multiple source systems (CRM + product database + billing) in ad-hoc Python scripts rather than a single queryable store; different analysts produce different numbers for the "same" metric because they each write their own SQL with slightly different logic; dashboard queries take minutes to run; or your data team spends more time extracting and joining data than analysing it. The data warehouse does not replace your operational databases — it supplements them by providing a separate, optimised store for analytics that does not compete with application workloads.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters migrated our on-premise Teradata warehouse to Snowflake. The migration was seamless — we ran parallel for 2 weeks, validated every table, then cut over. Query performance improved 10x. Cloud costs are 40% of what we paid for on-prem hardware maintenance.",
+    author: "Head of Data Platforms",
+    role: "Enterprise B2B Company"
+  },
+  caseStudy: {
+    title: "Teradata to Snowflake Migration",
+    description: "Migrated 20TB, 5-year history Teradata warehouse to Snowflake. SQL translation via SCT + manual for stored procedures. Parallel run 2 weeks. Query performance improved 10x, costs reduced 40%.",
+    slug: "teradata-to-snowflake",
+    badge: "Data Warehousing"
+  },
+  howToSteps: [
+    { name: 'Warehouse Assessment', text: 'Technology selection, schema review, cost model, migration plan.' },
+    { name: 'Warehouse Implementation', text: 'Account setup, warehouse configuration, RBAC, auto-suspend, cost monitoring.' },
+    { name: 'Schema Design', text: 'Star schema or medallion, fact/dimension tables, SCD Type 2, surrogate keys.' },
+    { name: 'Query Optimisation', text: 'Profile expensive queries, add partitioning/clustering, materialised views, caching.' },
+    { name: 'Migration (if legacy)', text: 'SQL translation, data validation, pipeline migration, parallel run, cutover.' },
+  ],
+  itemList: [
+    'Snowflake Implementation',
+    'BigQuery Implementation',
+    'Redshift Implementation',
+    'Schema Design (Star/Medallion)',
+    'Query Optimisation & Cost Control',
+    'Data Warehouse Migration',
+  ],
+  definedTerms: [
+    { name: 'Star Schema', description: 'Fact table (events/transactions) surrounded by dimension tables (customers, products, dates) — standard for analytical query performance.' },
+    { name: 'SCD Type 2', description: 'Slowly Changing Dimension Type 2 — preserves historical state of changing dimensions via versioning and effective date ranges.' },
+    { name: 'Medallion Architecture', description: 'Bronze (raw) → Silver (cleaned) → Gold (business-ready) — data quality tiers in lakehouse.' },
+    { name: 'Auto-Suspend', description: 'Snowflake warehouse auto-suspend — idle warehouses stop after N minutes, saving 40-60% on compute costs.' },
+  ],
+};
+
+const dataVisualizationOverride: ServicePageContent = {
+  slug: 'data-visualization',
+  categorySlug: 'data-science-analytics',
+  sectionId: 'data-visualization',
+  category: 'Data Science & Analytics',
+  title: 'Data Visualization Services',
+  serviceName: 'Data Visualization',
+  metaTitle: 'Data Visualization Services | Dashboards & Interactive Charts | ClickMasters',
+  metaDescription:
+    'ClickMasters builds data visualisation systems — interactive dashboards, D3.js custom charts, React data visualisation, and embedded analytics — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds data visualisation systems for B2B companies across the USA, Europe, Canada, and Australia. Custom D3.js and Recharts dashboards for data-dense B2B products. Interactive React dashboards that let users explore their data without contacting support. Embedded analytics that make your SaaS product feel data-native. And data storytelling that converts raw numbers into decisions.',
+  highlights: [
+    '✓ D3.js Custom Charts',
+    '✓ Recharts + Nivo Dashboards',
+    '✓ React Data Visualisation',
+    '✓ Embedded Analytics',
+    '✓ Real-Time Charts (WebSocket)',
+    '✓ SVG + Canvas Rendering',
+  ],
+  marketStats: [
+    { label: 'Recharts — composable React chart library via components. Primary for standard business charts.', value: 'Recharts' },
+    { label: 'D3.js — low-level data visualisation library. Custom chart types for any visualisation.', value: 'D3.js' },
+    { label: 'WebWorker for heavy data transformations off main thread — 60fps smooth scrolling', value: 'WebWorker' },
+  ],
+  servicesCards: [
+    { title: 'React Dashboard Development', description: 'Production React dashboards with TypeScript: Recharts (AreaChart, BarChart, ScatterChart, RadarChart — primary), Nivo (heatmaps, treemaps, Voronoi — for data-dense B2B dashboards), Victory (animation-native — good for mobile), Chart.js with react-chartjs-2 (legacy). Dashboard patterns: KPI card row + trend chart + breakdown table, date range picker, dimension filter, drill-down interactions as standard.' },
+    { title: 'D3.js Custom Visualisation', description: 'When no charting library has the right chart type: D3.js provides SVG element binding, scales (linear, log, ordinal, time), axes, transitions (smooth data updates), layouts (force simulation for network graphs, treemap, chord diagram, Sankey). ClickMasters uses D3.js for: network/graph visualisations, geospatial visualisations (custom map projections, choropleth), financial charts (candlestick, waterfall, tornado), any chart type not in standard libraries.' },
+    { title: 'Real-Time Dashboards', description: 'Dashboards that update as data changes: WebSocket connection (new data pushed in real time — no polling), Server-Sent Events (simpler than WebSocket for one-way data push — live metrics, leaderboards), TanStack Query with short polling (5-second refresh for near-real-time). Use cases: operations monitoring, live sales performance, real-time customer-facing analytics.' },
+    { title: 'Embedded Chart Components', description: 'Customer-facing data visualisation embedded in SaaS products: chart components as React component library (TypeScript props, theming via CSS variables), Recharts or Nivo as rendering engine (no BI tool dependency), data fetching from product\'s own API, performance optimisation (WebWorker for heavy transformations, canvas rendering for charts with 100,000+ data points via ECharts or Vega-Lite).' },
+    { title: 'Data Storytelling & Scrollytelling', description: 'Long-form data narratives with interactive charts: scrollytelling (chart updates as user scrolls through data story — annual reports, research presentations), annotated chart design (callouts highlighting key data points, contextual annotations, trend indicators), print-quality chart export (PNG/SVG/PDF from React charts). Libraries: Scrollama (scrollytelling), html2canvas (capture React components as images), jsPDF (generate PDF reports).' },
+  ],
+  differentiators: [
+    { feature: 'Recharts vs D3.js vs BI Tool', description: 'Clear decision framework: Recharts for standard charts, D3 for custom, BI for internal dashboards | Basic: One tool for everything (suboptimal)' },
+    { feature: 'SVG vs Canvas Threshold', description: '10,000-50,000 points threshold — canvas for large datasets (performance), SVG for smaller (interactivity) | Basic: SVG only (slow on large data)' },
+    { feature: 'Real-Time Stack', description: 'WebSocket/SSE + TanStack Query — live dashboards without polling | Basic: Polling only (wasteful, laggy)' },
+    { feature: 'Scrollytelling', description: 'Scrollama + chart updates — data narratives for annual reports, investor decks | Basic: Static charts in reports' },
+    { feature: 'Export Capabilities', description: 'html2canvas + jsPDF — PDF report generation from React dashboards | Basic: No export (screenshots only)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Visualisation Discovery', timeline: 'Week 1', text: 'Chart type selection, data model review (what fields available, cardinality, granularity), component architecture plan, performance requirements. Deliverable: Visualisation Architecture Plan.' },
+    { phase: 'Phase 2', title: 'React Dashboard Build', timeline: 'Week 2-5', text: 'Recharts/Nivo implementation, KPI cards + trend charts + breakdown tables, date range picker, dimension filters, drill-down interactions, TypeScript types. Deliverable: Production React Dashboard.' },
+    { phase: 'Phase 3', title: 'D3.js Custom Chart', timeline: 'Week 2-4', text: 'Custom SVG layout, D3 scales and axes, transitions, interactions (tooltips, zoom, pan), responsive sizing. Deliverable: D3.js Component + Documentation.' },
+    { phase: 'Phase 4', title: 'Real-Time Integration', timeline: 'Week 3-5', text: 'WebSocket/SSE connection, real-time data feed, chart animations on data update, performance optimisation (throttling, debouncing). Deliverable: Real-Time Dashboard.' },
+  ],
+  techStackCategories: [
+    { layer: 'React Charting', technologies: 'Recharts (composable — primary), Nivo (rich interactive — heatmaps, treemaps), Victory (animation-native), Chart.js (legacy)' },
+    { layer: 'Custom Visualisation', technologies: 'D3.js (low-level — scales, axes, layouts, transitions, force simulation), Visx (Airbnb\'s D3+React primitives)' },
+    { layer: 'High-Volume', technologies: 'ECharts (Apache — auto SVG/canvas switching), Vega-Lite (declarative), Deck.gl (WebGL — millions of points)' },
+    { layer: 'Geospatial', technologies: 'Mapbox GL JS (vector tiles, custom styling), React-Leaflet (OSM-based), Deck.gl (WebGL geospatial)' },
+    { layer: 'Real-Time', technologies: 'WebSocket (full-duplex), Server-Sent Events (one-way), TanStack Query (polling), Recharts animate prop' },
+    { layer: 'Export', technologies: 'html2canvas (render to PNG/JPEG), SVG export (native chart libraries), jsPDF (multi-chart PDF reports), Scrollama (scrollytelling)' },
+  ],
+  pricingTiers: [
+    { type: 'Visualisation Discovery', investment: '$2,000 – $5,000', timeline: '1 week', bestFor: 'Chart type selection, data model review, component architecture plan' },
+    { type: 'React Dashboard (Standard)', investment: '$6,000 – $18,000', timeline: '3 – 6 weeks', bestFor: 'Recharts/Nivo, KPI cards, filters, drill-down, date range, TypeScript' },
+    { type: 'Custom D3.js Chart', investment: '$5,000 – $15,000', timeline: '2 – 4 weeks', bestFor: 'Custom SVG layout, transitions, interactions, responsive' },
+    { type: 'Real-Time Dashboard', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'WebSocket/SSE, live updates, performance optimisation' },
+    { type: 'Embedded Chart Library', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'React component library, theming, TypeScript, design system integration' },
+    { type: 'Geospatial Visualisation', investment: '$8,000 – $22,000', timeline: '3 – 6 weeks', bestFor: 'Mapbox/Leaflet/Deck.gl, custom layers, interactive filters' },
+    { type: 'Data Storytelling / Scrollytelling', investment: '$6,000 – $16,000', timeline: '2 – 5 weeks', bestFor: 'Scrollama, annotated charts, PDF export, responsive' },
+    { type: 'Visualisation Retainer', investment: '$2,500 – $6,000/mo', timeline: 'Ongoing', bestFor: 'New chart types, dataset additions, performance, design refresh' },
+  ],
+  industryUseCases: [
+    { name: 'Executive Dashboard', description: 'React + Recharts dashboard for company KPIs. MRR trend (area chart), churn by cohort (grouped bar), revenue by segment (treemap). Date range picker, drill-down to customer-level data.' },
+    { name: 'Supply Chain Network Map', description: 'D3.js force-directed graph of supplier relationships. Nodes = facilities, edges = shipments. Color by region, size by volume. Interactive tooltips, zoom/pan.' },
+    { name: 'Real-Time Operations Board', description: 'WebSocket dashboard for warehouse operations. Live order volume (line chart updating every second), queue length (progress bar), exception alerts (real-time notification list). 5-second refresh polling fallback.' },
+    { name: 'Embedded Customer Analytics', description: 'React chart components embedded in SaaS product. Each customer sees their own usage metrics. Theming matches product design system. No BI tool dependency.' },
+  ],
+  sections: [
+    {
+      heading: 'Recharts vs D3.js vs BI Tool for Data Visualisation',
+      body: 'Recharts (and similar libraries — Nivo, Victory, Chart.js) are React component libraries — they provide pre-built chart types (bar, line, area, scatter) as composable React components that consume data via props. They are the right choice for standard business charts in React applications — fast to implement, well-documented, and maintained. D3.js is a low-level data visualisation library — it binds data to SVG elements and provides the building blocks (scales, axes, layouts) to construct any possible visualisation. Use D3 when no pre-built chart library has the chart type you need (network graphs, Sankey diagrams, custom geospatial charts, animated data stories). BI tools (Metabase, Looker, Tableau) are drag-and-drop tools for non-developers — they are fast for standard charts but cannot produce custom interactive chart experiences or integrate deeply with a React product\'s design system. ClickMasters uses Recharts/Nivo for product-embedded standard charts, D3.js for custom chart types, and BI tools for internal analytics.',
+      items: [],
+    },
+    {
+      heading: 'SVG vs Canvas Rendering for Charts',
+      body: 'SVG (Scalable Vector Graphics) is the default for most charts: each element is a DOM node (hoverable, interactive, accessible, easy to style with CSS), renders sharply at any resolution, and is the output format of D3.js and most React chart libraries. Use canvas rendering when: the chart has more than 10,000-50,000 data points (SVG performance degrades significantly — each data point is a DOM node, and 100,000 DOM nodes make the browser sluggish), real-time updates at 60fps are required (canvas redraws are faster than DOM mutations), or WebGL rendering is needed for 3D or GPU-accelerated visualisation (Deck.gl uses WebGL for millions-of-points geospatial visualisations). ECharts (Apache) and Vega-Lite support automatic switching between SVG and canvas based on data size. ClickMasters uses SVG for standard business charts and canvas/WebGL for high-volume or high-performance visualisation requirements.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between Recharts, D3.js, and a BI tool for data visualisation?',
+      answer: 'Recharts (and similar libraries — Nivo, Victory, Chart.js) are React component libraries — they provide pre-built chart types (bar, line, area, scatter) as composable React components that consume data via props. They are the right choice for standard business charts in React applications — fast to implement, well-documented, and maintained. D3.js is a low-level data visualisation library — it binds data to SVG elements and provides the building blocks (scales, axes, layouts) to construct any possible visualisation. Use D3 when no pre-built chart library has the chart type you need (network graphs, Sankey diagrams, custom geospatial charts, animated data stories). BI tools (Metabase, Looker, Tableau) are drag-and-drop tools for non-developers — they are fast for standard charts but cannot produce custom interactive chart experiences or integrate deeply with a React product\'s design system. ClickMasters uses Recharts/Nivo for product-embedded standard charts, D3.js for custom chart types, and BI tools for internal analytics.',
+    },
+    {
+      question: 'When should I use canvas rendering vs SVG for charts?',
+      answer: 'SVG (Scalable Vector Graphics) is the default for most charts: each element is a DOM node (hoverable, interactive, accessible, easy to style with CSS), renders sharply at any resolution, and is the output format of D3.js and most React chart libraries. Use canvas rendering when: the chart has more than 10,000-50,000 data points (SVG performance degrades significantly — each data point is a DOM node, and 100,000 DOM nodes make the browser sluggish), real-time updates at 60fps are required (canvas redraws are faster than DOM mutations), or WebGL rendering is needed for 3D or GPU-accelerated visualisation (Deck.gl uses WebGL for millions-of-points geospatial visualisations). ECharts (Apache) and Vega-Lite support automatic switching between SVG and canvas based on data size. ClickMasters uses SVG for standard business charts and canvas/WebGL for high-volume or high-performance visualisation requirements.',
+    },
+    {
+      question: 'Can I export charts from my React dashboard to PDF or image?',
+      answer: 'Yes. Chart export from React dashboards uses html2canvas (captures a React component — including its styled contents — as an HTML5 canvas element, then exports to PNG or JPEG) for screenshot-style exports, and SVG export (many chart libraries — Recharts, Nivo — can export the chart\'s SVG element directly — scalable, high-quality). For multi-chart PDF reports, jsPDF combines multiple chart exports into a single PDF document. For production-quality publication-ready charts, visx (Airbnb\'s React + D3 primitives library) produces SVG output that is directly exportable and styleable. ClickMasters implements chart export with correct rendering (chart must be fully visible in the DOM — off-screen charts require workarounds) and appropriate resolution scaling for print quality.',
+    },
+    {
+      question: 'What chart type should I use for my data?',
+      answer: 'Chart type selection depends on what relationship you are communicating. Time series (how does a metric change over time?): line chart or area chart. Comparison (how do values compare across categories?): bar chart (vertical for small category counts, horizontal for many categories or long labels). Part-to-whole (what is the composition of a total?): stacked bar or pie/donut chart (use sparingly — humans read bar lengths more accurately than pie angles). Distribution (how are values distributed?): histogram, box plot, or violin plot. Correlation (is there a relationship between two variables?): scatter plot. Flow (how does a quantity move between states?): Sankey diagram. Hierarchy (how is a quantity broken down into nested categories?): treemap or sunburst. Geographic (how does a metric vary by location?): choropleth map. Network (how are entities connected?): force-directed graph. The most common data visualisation mistake is using a pie chart for data with more than 3-4 categories — a horizontal bar chart communicates the same information far more accurately.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our customer-facing analytics dashboard with Recharts. It's fast, responsive, and matches our design system perfectly. Our users love being able to explore their own data without contacting support.",
+    author: "Head of Product",
+    role: "B2B SaaS Company"
+  },
+  caseStudy: {
+    title: "Customer Analytics Dashboard",
+    description: "Built React + Recharts dashboard for customer-facing analytics. KPI cards, trend charts, dimension filters, real-time updates. Embedded in SaaS product. Reduced support tickets about \"how do I see my data?\" by 65%.",
+    slug: "customer-analytics-dashboard",
+    badge: "Data Visualisation"
+  },
+  howToSteps: [
+    { name: 'Visualisation Discovery', text: 'Chart type selection, data model review, component architecture plan, performance requirements.' },
+    { name: 'React Dashboard Build', text: 'Recharts/Nivo implementation, KPI cards, filters, drill-down, TypeScript.' },
+    { name: 'D3.js Custom Chart', text: 'Custom SVG layout, D3 scales/axes, transitions, interactions, responsive.' },
+    { name: 'Real-Time Integration', text: 'WebSocket/SSE connection, live data feed, chart animations, performance optimisation.' },
+  ],
+  itemList: [
+    'React Dashboard Development (Recharts/Nivo)',
+    'D3.js Custom Visualisation',
+    'Real-Time Dashboards (WebSocket/SSE)',
+    'Embedded Chart Components (SaaS)',
+    'Data Storytelling & Scrollytelling',
+  ],
+  definedTerms: [
+    { name: 'D3.js', description: 'Data-Driven Documents — low-level data visualisation library providing SVG binding, scales, axes, layouts for custom charts.' },
+    { name: 'Recharts', description: 'React chart library — composable charts via React components. Primary for standard business charts in React.' },
+    { name: 'Scrollytelling', description: 'Interactive data narrative where chart updates as user scrolls — combines D3.js with Scrollama.' },
+    { name: 'Canvas vs SVG', description: 'Canvas (bitmap) for >50K points (performance), SVG (vector) for standard charts (interactivity, accessibility).' },
+  ],
+};
+
+const bigDataSolutionsOverride: ServicePageContent = {
+  slug: 'big-data-solutions',
+  categorySlug: 'data-science-analytics',
+  sectionId: 'big-data-solutions',
+  category: 'Data Science & Analytics',
+  title: 'Big Data Solutions',
+  serviceName: 'Big Data Solutions',
+  metaTitle: 'Big Data Solutions | Spark, Kafka & Data Lakehouse | ClickMasters',
+  metaDescription:
+    'ClickMasters builds big data infrastructure — Apache Spark processing, Kafka streaming, data lakehouses on Delta Lake, and petabyte-scale analytics — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds big data infrastructure for B2B companies across the USA, Europe, Canada, and Australia. Apache Spark on Databricks or AWS EMR for distributed processing of terabyte to petabyte datasets. Apache Kafka for event streams at millions of events per second. Delta Lake and Apache Iceberg for data lakehouse architectures that combine the scale of object storage with ACID transaction guarantees. When your data has genuinely outgrown your SQL warehouse, we build the infrastructure that scales.',
+  highlights: [
+    '✓ Apache Spark (Databricks / EMR)',
+    '✓ Apache Kafka Event Streaming',
+    '✓ Delta Lake / Apache Iceberg',
+    '✓ PySpark Data Processing',
+    '✓ AWS Glue + S3 Lakehouse',
+    '✓ Real-Time Stream Processing',
+  ],
+  marketStats: [
+    { label: 'Apache Spark — distributed processing for petabyte-scale datasets. Catalyst optimiser + Tungsten engine.', value: 'Spark' },
+    { label: 'Apache Kafka — event streaming backbone. Processes 1 trillion+ messages/day at LinkedIn, Netflix, Uber.', value: 'Kafka' },
+    { label: 'Delta Lake — ACID transactions on Parquet for data lakehouses. Time travel, schema enforcement, upserts.', value: 'Delta Lake' },
+    { label: 'Databricks Photon engine — 2-5x faster than open-source Spark', value: 'Photon' },
+  ],
+  servicesCards: [
+    { title: 'Apache Spark (Databricks / AWS EMR)', description: 'Distributed data processing for large-scale workloads: PySpark DataFrame API (typed transformations, Catalyst optimiser), Spark SQL (SQL over DataFrames), Spark Streaming/Structured Streaming (micro-batch streaming, exactly-once semantics), Spark MLlib (distributed ML for datasets too large for scikit-learn). Deployment: Databricks (managed — auto-scaling, Delta Lake native, Unity Catalog) or AWS EMR (managed Hadoop/Spark — lower cost for steady workloads).' },
+    { title: 'Data Lakehouse (Delta Lake / Iceberg)', description: 'Unified data platform combining data lake scale with data warehouse ACID guarantees: Delta Lake (ACID on Parquet, time travel, schema enforcement, MERGE INTO, Z-ORDER clustering), Apache Iceberg (Netflix/Apple — multi-engine, same table queryable from Spark, Flink, Trino, Athena), Apache Hudi (Uber — optimised for incremental ingestion).' },
+    { title: 'Apache Kafka at Scale', description: 'High-throughput event streaming: Confluent Platform (managed — Schema Registry, Kafka Connect, KSQL) or AWS MSK (managed Kafka), topic design (partition count, replication factor, retention), Kafka Connect (source/sink connectors), KSQL/Kafka Streams (stream processing in Kafka), Schema Registry (Avro/Protobuf — backward/forward compatibility).' },
+    { title: 'Real-Time Stream Processing', description: 'Sub-second event processing pipelines: Apache Flink (stateful — event time windowing, exactly-once, stateful joins, the most capable open-source stream processor), AWS Kinesis Data Analytics (managed Flink), Spark Structured Streaming (micro-batch — 100ms-1s latency, simpler than Flink). Use cases: real-time fraud detection (<100ms), live analytics aggregation, IoT sensor processing.' },
+    { title: 'AWS Glue + S3 Data Lake', description: 'Serverless big data processing on AWS: AWS Glue (serverless Spark ETL — pay-per-DPU-second), AWS Glue Data Catalog (centralised metadata — accessible from Athena, Redshift Spectrum, EMR), Amazon Athena (serverless interactive SQL on S3 — pay per bytes scanned, partition pruning essential), S3 Intelligent-Tiering (automatic cost optimisation).' },
+    { title: 'Data Governance & Security', description: 'Enterprise data governance for large-scale data platforms: Unity Catalog (Databricks — column-level access control, data lineage, PII tagging and masking, row-level security), Apache Ranger (policy-based access control), data masking (PII columns for non-production access), data lineage (OpenLineage + Marquez — trace from raw source to BI dashboard, essential for GDPR).' },
+  ],
+  differentiators: [
+    { feature: 'When Big Data is NOT Right', description: 'Amber callout — Spark adds complexity without benefit for data <1TB | Basic: Spark for everything (overkill, expensive)' },
+    { feature: 'Databricks vs EMR Guide', description: 'Databricks for speed (Photon 2-5x faster, Delta native), EMR for cost (steady workloads, strong Spark expertise) | Basic: One-size recommendation' },
+    { feature: 'Delta Lake vs Iceberg vs Hudi', description: 'Delta Lake (Databricks native — Z-ORDER), Iceberg (multi-engine — Spark/Flink/Trino), Hudi (Uber — incremental ingestion) | Basic: One lakehouse format' },
+    { feature: 'Flink for Real-Time', description: 'Sub-second latency with stateful event-time processing — more capable than Spark Streaming | Basic: Spark Streaming only (1s latency, simpler but less capable)' },
+    { feature: 'Cost Optimisation', description: 'Auto-termination (idle clusters waste), spot instances (60-80% cheaper), partition pruning (single most impactful lever) | Basic: Always-on clusters (expensive waste)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Big Data Architecture Review', timeline: 'Week 1-2', text: 'Volume assessment (TB/PB scale), velocity assessment (batch vs streaming), technology selection (Spark vs Flink, Delta vs Iceberg), cost model (Databricks vs EMR vs Glue), migration plan. Deliverable: Big Data Architecture Plan.' },
+    { phase: 'Phase 2', title: 'Spark / Databricks Setup', timeline: 'Week 2-5', text: 'Cluster configuration (auto-scaling, spot instances), Delta Lake setup, Unity Catalog (governance), notebook environment, PySpark/Spark SQL pipelines, optimisation (partitioning, caching, broadcast joins). Deliverable: Production Spark Platform.' },
+    { phase: 'Phase 3', title: 'Kafka Infrastructure', timeline: 'Week 2-5', text: 'MSK/Confluent cluster, topic design (partitions/replication), Kafka Connect (CDC Debezium, S3 sink), Schema Registry (Avro), KSQL/Kafka Streams applications, monitoring (latency, consumer lag). Deliverable: Streaming Platform.' },
+    { phase: 'Phase 4', title: 'Data Lakehouse Build', timeline: 'Week 3-6', text: 'Storage layer (S3/ADLS/GCS), Delta Lake/Iceberg table format, ACID transactions, time travel, Z-ORDER clustering, metadata catalog (Glue/Hive Metastore). Deliverable: Production Data Lakehouse.' },
+    { phase: 'Phase 5', title: 'Governance & Security', timeline: 'Week 4-7', text: 'Unity Catalog setup (Databricks) or Ranger (EMR), column-level access control, PII tagging and masking, data lineage tracking (OpenLineage), audit logging. Deliverable: Governed Data Platform.' },
+  ],
+  techStackCategories: [
+    { layer: 'Compute (Batch)', technologies: 'Apache Spark (Catalyst optimiser), Databricks (Photon engine — 2-5x faster), AWS EMR, PySpark' },
+    { layer: 'Compute (Streaming)', technologies: 'Apache Flink (stateful, event-time), Kafka Streams (lightweight), Spark Structured Streaming (micro-batch)' },
+    { layer: 'Storage (Lakehouse)', technologies: 'Delta Lake (Databricks — Z-ORDER), Apache Iceberg (Netflix/Apple), Apache Hudi (Uber)' },
+    { layer: 'Streaming Backbone', technologies: 'Apache Kafka (event streaming), AWS MSK (managed Kafka), Confluent Platform (Schema Registry, Connect, KSQL)' },
+    { layer: 'CDC', technologies: 'Debezium (PostgreSQL/MySQL to Kafka — real-time), AWS DMS, Confluent CDC connectors' },
+    { layer: 'Serverless ETL', technologies: 'AWS Glue (serverless Spark — pay-per-DPU-second), Athena (serverless SQL on S3)' },
+    { layer: 'Governance', technologies: 'Unity Catalog (Databricks — column-level access, lineage, masking), Apache Ranger (policy-based), OpenLineage + Marquez (lineage)' },
+    { layer: 'Storage', technologies: 'AWS S3 (primary), GCS, ADLS, S3 Intelligent-Tiering (auto cost optimisation)' },
+  ],
+  pricingTiers: [
+    { type: 'Big Data Architecture Review', investment: '$5,000 – $10,000', timeline: '1 – 2 weeks', bestFor: 'Volume assessment, technology selection, cost model, migration plan' },
+    { type: 'Spark / Databricks Setup', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Cluster config, Delta Lake, Unity Catalog, notebook environment' },
+    { type: 'Kafka Infrastructure', investment: '$10,000 – $30,000', timeline: '3 – 7 weeks', bestFor: 'MSK/Confluent, topic design, Connect, Schema Registry, monitoring' },
+    { type: 'Data Lakehouse (Delta/Iceberg)', investment: '$12,000 – $32,000', timeline: '3 – 7 weeks', bestFor: 'Storage layer, ACID transactions, time travel, query optimisation' },
+    { type: 'Flink Stream Processing', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Stateful processing, event-time windows, exactly-once, deployment' },
+    { type: 'AWS Glue + Athena Data Lake', investment: '$8,000 – $24,000', timeline: '3 – 6 weeks', bestFor: 'Serverless ETL, Glue Catalog, Athena queries, cost optimisation' },
+    { type: 'Data Governance Layer', investment: '$10,000 – $28,000', timeline: '3 – 6 weeks', bestFor: 'Unity Catalog / Ranger, PII masking, lineage, access policies' },
+    { type: 'Big Data Retainer', investment: '$5,000 – $12,000/mo', timeline: 'Ongoing', bestFor: 'Cluster optimisation, new pipeline development, governance, monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'Real-Time Fraud Detection', description: 'Kafka stream of transactions (100K/sec) → Flink real-time risk scoring (stateful, event-time windows) → alert within 100ms. Debezium CDC from PostgreSQL to Kafka for immediate transaction capture. Databricks for fraud pattern analysis on historical data.' },
+    { name: 'IoT Sensor Processing', description: '10,000+ IoT devices streaming to Kafka. Flink windowed aggregations (rolling 5-minute averages, anomaly detection). Delta Lake storage with time travel for sensor state reconstruction. Real-time alerts for threshold violations.' },
+    { name: 'Clickstream Analytics Platform', description: '100B+ click events/year from web/mobile to Kafka. Spark Structured Streaming for sessionisation. Delta Lake for ACID storage. Athena for ad-hoc analyst queries. Glue for ETL to Snowflake for BI.' },
+    { name: 'Data Lakehouse Migration', description: 'Migrate from Hadoop HDFS (on-prem) to Delta Lake on S3. 500TB data, 10-year history. Z-ORDER optimisation for query performance. Unity Catalog for governance. Query performance improved 5x, costs reduced 60%.' },
+  ],
+  sections: [
+    {
+      heading: 'When Big Data Technology Is NOT the Right Solution',
+      body: 'Big data infrastructure (Spark, Kafka, data lakehouse) is significantly more complex and expensive to build and maintain than standard SQL analytics. Do NOT adopt big data technology when: your data fits in a single Snowflake or BigQuery table under 1TB — both can query this efficiently without Spark; your analytics team is small (fewer than 3-5 data engineers) — the operational overhead of Kafka and Spark requires specialist expertise; or your bottleneck is data quality or business logic complexity rather than raw data volume. ClickMasters will tell you honestly when Snowflake or BigQuery can solve your problem — and when you genuinely need Spark. The most common big data implementation mistake is using Spark to process 10GB of data that a single Postgres query would handle in 30 seconds.',
+      items: [],
+    },
+    {
+      heading: 'Data Lakehouse vs Data Lake vs Data Warehouse',
+      body: 'A data lake stores raw data in its native format (CSV, JSON, Parquet) on cheap object storage (S3, GCS) — it is inexpensive, scalable, and flexible, but lacks ACID transactions, schema enforcement, and the query performance of a warehouse. A data warehouse (Snowflake, BigQuery) provides ACID transactions, schema enforcement, and fast analytical queries, but is more expensive per byte and less flexible for raw data formats. A data lakehouse combines both: it stores data in open table formats (Delta Lake, Iceberg) on cheap object storage, adding ACID transaction semantics (concurrent writes without corruption), schema enforcement (reject data that violates the schema), time travel (query historical states), and upserts/deletes (update or delete rows — not possible with raw Parquet files). The result: the scale and cost of a data lake with the reliability and queryability of a data warehouse.',
+      items: [],
+    },
+    {
+      heading: 'Databricks vs AWS EMR',
+      body: 'Both Databricks and AWS EMR run Apache Spark, but they have different operational models. Databricks is a managed Spark platform (multi-cloud: AWS, GCP, Azure) with significant value-adds: Delta Lake as the native table format, Unity Catalog for data governance, collaborative notebooks with real-time co-editing, MLflow for experiment tracking, and the Photon native vectorised execution engine (2-5x faster than open-source Spark). Databricks charges a premium over raw cloud infrastructure costs, but reduces operational overhead significantly. AWS EMR is managed Hadoop/Spark on EC2 — you get the infrastructure management handled (cluster provisioning, scaling), but without Databricks\' platform layer. EMR is cheaper for steady, high-volume batch workloads where the team has strong Spark expertise. Databricks is better for teams that want to move faster, use Delta Lake natively, and reduce infrastructure management overhead. ClickMasters uses Databricks as the default for new Spark engagements.',
+      items: [],
+    },
+    {
+      heading: 'Big Data Cost Management — Five Levers',
+      body: '',
+      items: [
+        'Cluster auto-termination: Spark clusters that run continuously when idle are the most common big data cost waste — configure auto-terminate after 30-60 minutes of inactivity, spin up on schedule or trigger',
+        'Spot/preemptible instances: AWS Spot or GCP Preemptible instances for worker nodes — 60-80% cheaper than on-demand, with automatic replacement on spot interruption — appropriate for fault-tolerant batch workloads',
+        'Data partition pruning: Design partition schemes on S3/Delta Lake so queries only scan relevant partitions — the single most impactful query cost optimisation',
+        'Caching: Spark RDD/DataFrame caching for iteratively queried datasets — reduces recomputation',
+        'Storage tiering: S3 Intelligent-Tiering automatically moves infrequently accessed data to cheaper storage classes — reduces long-term data lake storage costs by 30-40%',
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: 'When do I actually need big data technology like Spark?',
+      answer: 'The threshold where Spark becomes appropriate is roughly: data processing tasks that take more than 2-4 hours on a single machine (Spark\'s distributed processing splits the work across a cluster, reducing time proportionally), datasets larger than 1-2TB that make cloud data warehouse query costs prohibitive (Snowflake and BigQuery bill by bytes scanned — a 10TB full table scan on BigQuery costs $50 each time), streaming requirements with sub-second latency across millions of events per second (standard SQL databases and even Kafka Streams have throughput limits), or ML model training on datasets too large for scikit-learn on a single machine (Spark MLlib distributes the training across a cluster). If your data fits in Snowflake or BigQuery and your queries complete in under 5 minutes, Spark adds complexity without benefit.',
+    },
+    {
+      question: 'What is a data lakehouse and how is it different from a data lake or data warehouse?',
+      answer: 'A data lake stores raw data in its native format (CSV, JSON, Parquet) on cheap object storage (S3, GCS) — it is inexpensive, scalable, and flexible, but lacks ACID transactions, schema enforcement, and the query performance of a warehouse. A data warehouse (Snowflake, BigQuery) provides ACID transactions, schema enforcement, and fast analytical queries, but is more expensive per byte and less flexible for raw data formats. A data lakehouse combines both: it stores data in open table formats (Delta Lake, Iceberg) on cheap object storage, adding ACID transaction semantics (concurrent writes without corruption), schema enforcement (reject data that violates the schema), time travel (query historical states), and upserts/deletes (update or delete rows — not possible with raw Parquet files). The result: the scale and cost of a data lake with the reliability and queryability of a data warehouse.',
+    },
+    {
+      question: 'What is the difference between Databricks and AWS EMR?',
+      answer: 'Both Databricks and AWS EMR run Apache Spark, but they have different operational models. Databricks is a managed Spark platform (multi-cloud: AWS, GCP, Azure) with significant value-adds: Delta Lake as the native table format, Unity Catalog for data governance, collaborative notebooks with real-time co-editing, MLflow for experiment tracking, and the Photon native vectorised execution engine (2-5x faster than open-source Spark). Databricks charges a premium over raw cloud infrastructure costs, but reduces operational overhead significantly. AWS EMR is managed Hadoop/Spark on EC2 — you get the infrastructure management handled (cluster provisioning, scaling), but without Databricks\' platform layer. EMR is cheaper for steady, high-volume batch workloads where the team has strong Spark expertise. Databricks is better for teams that want to move faster, use Delta Lake natively, and reduce infrastructure management overhead. ClickMasters uses Databricks as the default for new Spark engagements.',
+    },
+    {
+      question: 'How do you manage costs for big data infrastructure?',
+      answer: 'Big data infrastructure cost management focuses on five levers. Cluster auto-termination (Spark clusters that run continuously when idle are the most common big data cost waste — configure auto-terminate after 30-60 minutes of inactivity, spin up on schedule or trigger). Spot/preemptible instances (AWS Spot or GCP Preemptible instances for worker nodes — 60-80% cheaper than on-demand, with automatic replacement on spot interruption — appropriate for fault-tolerant batch workloads). Data partition pruning (design partition schemes on S3/Delta Lake so queries only scan relevant partitions — the single most impactful query cost optimisation). Caching (Spark RDD/DataFrame caching for iteratively queried datasets — reduces recomputation). Storage tiering (S3 Intelligent-Tiering automatically moves infrequently accessed data to cheaper storage classes — reduces long-term data lake storage costs by 30-40%). ClickMasters implements monitoring dashboards for all big data engagements — daily cost per pipeline and cluster — with budget alerts.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our data lakehouse on Delta Lake. We migrated 500TB from on-prem Hadoop to S3 + Databricks. Query performance improved 5x, costs dropped 60%, and Unity Catalog gave us column-level governance we never had before.",
+    author: "Head of Data Platforms",
+    role: "Enterprise B2B Company"
+  },
+  caseStudy: {
+    title: "Data Lakehouse Migration",
+    description: "Migrated 500TB from on-prem Hadoop HDFS to Delta Lake on S3 + Databricks. Z-ORDER clustering for query optimisation. Unity Catalog for governance. Query performance improved 5x, storage costs reduced 60%. Real-time streaming via Kafka + Flink added.",
+    slug: "data-lakehouse-migration",
+    badge: "Big Data"
+  },
+  howToSteps: [
+    { name: 'Big Data Architecture Review', text: 'Volume assessment, velocity assessment, technology selection, cost model, migration plan.' },
+    { name: 'Spark / Databricks Setup', text: 'Cluster config, Delta Lake, Unity Catalog, notebook environment, PySpark pipelines.' },
+    { name: 'Kafka Infrastructure', text: 'MSK/Confluent cluster, topic design, Connect, Schema Registry, monitoring.' },
+    { name: 'Data Lakehouse Build', text: 'Storage layer, Delta Lake/Iceberg, ACID transactions, time travel, Z-ORDER clustering.' },
+    { name: 'Governance & Security', text: 'Unity Catalog, column-level access control, PII masking, lineage tracking.' },
+  ],
+  itemList: [
+    'Apache Spark (Databricks / AWS EMR)',
+    'Data Lakehouse (Delta Lake / Apache Iceberg)',
+    'Apache Kafka at Scale',
+    'Real-Time Stream Processing (Apache Flink)',
+    'AWS Glue + S3 Data Lake',
+    'Data Governance & Security (Unity Catalog)',
+  ],
+  definedTerms: [
+    { name: 'Data Lakehouse', description: 'Data lake with ACID transactions — Delta Lake or Iceberg on S3. Combines lake scale with warehouse reliability.' },
+    { name: 'Delta Lake', description: 'Linux Foundation open-source — ACID transactions on Parquet, time travel, schema enforcement, Z-ORDER clustering.' },
+    { name: 'Apache Iceberg', description: 'Netflix/Apple-developed — multi-engine table format (Spark, Flink, Trino, Athena simultaneously).' },
+    { name: 'Unity Catalog', description: 'Databricks governance — column-level access control, data lineage, PII tagging and masking, row-level security.' },
+    { name: 'Databricks Photon', description: 'Native vectorised execution engine — 2-5x faster than open-source Spark.' },
+    { name: 'Debezium', description: 'CDC (Change Data Capture) — streams database changes (inserts/updates/deletes) to Kafka in real time.' },
+  ],
+};
+
+const webScrapingDataExtractionOverride: ServicePageContent = {
+  slug: 'web-scraping-data-extraction',
+  categorySlug: 'automation-integration',
+  sectionId: 'web-scraping-data-extraction',
+  category: 'Automation & Integration',
+  title: 'Web Scraping & Data Extraction Services',
+  serviceName: 'Web Scraping & Data Extraction',
+  metaTitle: 'Web Scraping & Data Extraction Services | Python Crawlers | ClickMasters',
+  metaDescription:
+    'ClickMasters builds web scraping and data extraction systems — Python crawlers, Playwright automation, anti-bot bypass, and structured data pipelines — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds web scraping and data extraction systems for B2B companies across the USA, Europe, Canada, and Australia. Competitor price monitoring that updates your pricing dashboard daily. Lead data extraction that builds targeted prospect lists from business directories. Product catalogue extraction from supplier websites to your ERP. Market intelligence scraping from news sites, job boards, and public filings. Python-based crawlers using Playwright and Scrapy, with proxy rotation and anti-detection measures where legally appropriate.',
+  highlights: [
+    '✓ Playwright / Scrapy Crawlers',
+    '✓ Proxy Rotation & Anti-Detection',
+    '✓ Structured Data Pipelines',
+    '✓ Competitor Price Monitoring',
+    '✓ Lead Data Extraction',
+    '✓ Scheduled Cloud Crawlers',
+  ],
+  marketStats: [
+    { label: 'Residential proxies (Oxylabs, Bright Data) — IP addresses from real ISPs, significantly harder to block than datacenter proxies', value: 'Residential Proxies' },
+    { label: 'Playwright stealth plugin — masks headless browser indicators, patches navigator.plugins, WebGL, canvas fingerprint', value: 'Stealth Plugin' },
+    { label: 'Poisson-distributed random delays — human-realistic timing, not fixed intervals that are statistically detectable', value: '2-8 sec' },
+    { label: 'CAPTCHA solving services — used only where legally appropriate', value: '2captcha / Anti-Captcha' },
+  ],
+  servicesCards: [
+    { title: 'Python Web Crawlers (Playwright / Scrapy)', description: 'Production web crawlers using Playwright (browser automation for JavaScript-rendered content, SPAs, dynamic loading) and Scrapy (async spider framework for high-throughput HTML scraping). Spider design: URL discovery (sitemap parsing, pagination detection, category traversal), data extraction (CSS selectors/XPath), data validation, and incremental crawling (only re-crawl changed pages).' },
+    { title: 'Anti-Detection & Proxy Rotation', description: 'User agent rotation (realistic browser agents), request rate limiting (Poisson-distributed random delays), proxy rotation (residential proxies via Oxylabs/Bright Data/Smartproxy), browser fingerprint masking (Playwright stealth plugin), CAPTCHA handling (2captcha/Anti-Captcha).' },
+    { title: 'Competitor Price & Product Monitoring', description: 'Scheduled scraping of competitor pricing pages, product catalogues, availability data. Structured extraction of price, product name, SKU, availability, promotional flags. Change detection (alert only on changes). Dashboard delivery via Metabase/Google Sheets or ERP/PIM API push.' },
+    { title: 'Lead Data Extraction', description: 'Extract structured business data from public directories (LinkedIn company search, Apollo.io public data, Crunchbase, industry directories, government registrations): company name, website, industry, employee count, location, decision-maker titles. Output: CSV or CRM import (Salesforce/HubSpot). Enrichment via Clearbit/Apollo.io. GDPR/CAN-SPAM compliant.' },
+    { title: 'Document & PDF Data Extraction', description: 'Extract structured data from publicly available documents: government filings (SEC EDGAR), patent databases (USPTO/EPO), academic publications (arXiv/PubMed), planning applications, procurement notices. Pipeline: document download → OCR/text extraction (AWS Textract/Tesseract) → structured field extraction → database storage → scheduled refresh.' },
+    { title: 'Scheduled Cloud Crawlers', description: 'Production-grade scheduled crawling infrastructure on AWS: Lambda (serverless, auto-scaling), ECS Fargate (containerised long-running crawlers), SQS queue (distributed crawling, multiple workers process URLs in parallel), S3 storage (raw HTML and structured JSON, full crawl history for change detection), CloudWatch scheduling (cron-based triggers), monitoring (failed URL tracking, extraction quality metrics).' },
+  ],
+  differentiators: [
+    { feature: 'Legal Boundaries', description: 'Amber callout — CFAA, hiQ v LinkedIn, GDPR, ToS compliance, no login/paywall bypass | Basic: No legal guidance (risk to client)' },
+    { feature: 'Playwright vs Scrapy Clarity', description: 'Scrapy for static HTML (high-volume), Playwright for JavaScript-heavy SPAs | Basic: One tool for everything (suboptimal)' },
+    { feature: 'Residential Proxies', description: 'Oxylabs/Bright Data — real ISP IPs, significantly harder to block | Basic: Datacenter proxies only (easily blocked)' },
+    { feature: 'Poisson-Distributed Delays', description: 'Random delays (2-8 sec) + occasional pauses — human-realistic, not fixed intervals | Basic: Fixed intervals (statistically detectable)' },
+    { feature: 'Change Detection', description: 'Compare current extraction to previous — alert only on changes, not every run | Basic: Full scrape every time (no diff, noise)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Scraping Feasibility Assessment', timeline: 'Week 1', text: 'Target site analysis (structure, JavaScript usage, anti-bot measures), ToS and legal review, technical approach selection (Scrapy vs Playwright), cost model (proxy costs, compute). Deliverable: Feasibility Report + Technical Approach.' },
+    { phase: 'Phase 2', title: 'Crawler Development', timeline: 'Week 1-3', text: 'Spider design (URL discovery, pagination, selectors), data extraction logic (CSS/XPath/regex), data validation, incremental crawling logic, anti-detection configuration (proxy rotation, user agents, delays). Deliverable: Production Crawler.' },
+    { phase: 'Phase 3', title: 'Data Pipeline & Storage', timeline: 'Week 2-4', text: 'Structured data schema, validation rules, PostgreSQL storage, S3 backup (raw HTML + JSON), change detection logic, scheduled delivery (API/CSV/database). Deliverable: Data Pipeline + Storage.' },
+    { phase: 'Phase 4', title: 'Cloud Infrastructure', timeline: 'Week 3-5', text: 'Lambda/ECS crawler deployment, SQS queue for distributed crawling, CloudWatch scheduling, monitoring (failures, extraction quality, volume). Deliverable: Scheduled Cloud Crawlers.' },
+  ],
+  techStackCategories: [
+    { layer: 'Crawler Frameworks', technologies: 'Scrapy (async, high-throughput HTML scraping), Playwright (browser automation — JS rendering, SPAs), Selenium (legacy), BeautifulSoup (lightweight parsing)' },
+    { layer: 'Anti-Detection', technologies: 'Playwright stealth plugin (fingerprint masking), Scrapy-rotating-proxies, custom user agent rotation, Poisson-distributed delays' },
+    { layer: 'Proxies', technologies: 'Oxylabs (residential — real ISPs), Bright Data (formerly Luminati), Smartproxy, datacenter proxies (AWS, GCP — cheaper but more detectable)' },
+    { layer: 'CAPTCHA', technologies: '2captcha (human solvers), Anti-Captcha, Capsolver' },
+    { layer: 'Storage', technologies: 'PostgreSQL (structured queryable data), S3 (raw HTML + JSON backups, change history), SQS (URL queue for distributed crawling)' },
+    { layer: 'Infrastructure', technologies: 'AWS Lambda (serverless, event-triggered), ECS Fargate (containerised long-running), CloudWatch (scheduling + monitoring), CloudFront' },
+  ],
+  pricingTiers: [
+    { type: 'Scraping Feasibility Assessment', investment: '$1,500 – $4,000', timeline: '1 week', bestFor: 'Target site analysis, ToS review, technical approach, cost model' },
+    { type: 'Simple HTML Scraper', investment: '$3,000 – $8,000', timeline: '1 – 3 weeks', bestFor: 'Single site, Scrapy/Playwright, structured output, scheduling' },
+    { type: 'JavaScript SPA Scraper', investment: '$5,000 – $12,000', timeline: '2 – 4 weeks', bestFor: 'Playwright, dynamic content, state management, output pipeline' },
+    { type: 'Anti-Detection Scraper', investment: '$6,000 – $16,000', timeline: '2 – 5 weeks', bestFor: 'Proxy rotation, fingerprint masking, rate limiting, reliability' },
+    { type: 'Price / Product Monitor', investment: '$6,000 – $16,000', timeline: '2 – 4 weeks', bestFor: 'Multi-competitor, change detection, dashboard, daily schedule' },
+    { type: 'Lead Data Pipeline', investment: '$5,000 – $14,000', timeline: '2 – 4 weeks', bestFor: 'Directory extraction, enrichment, CRM delivery, GDPR compliance' },
+    { type: 'Document / PDF Extraction', investment: '$6,000 – $18,000', timeline: '2 – 5 weeks', bestFor: 'Textract/OCR, structured extraction, scheduled refresh' },
+    { type: 'Enterprise Scraping Infrastructure', investment: '$10,000 – $30,000', timeline: '3 – 7 weeks', bestFor: 'AWS Lambda/ECS, SQS queue, S3 storage, monitoring, distributed' },
+    { type: 'Scraping Retainer', investment: '$2,000 – $5,000/mo', timeline: 'Ongoing', bestFor: 'Maintenance, site change response, new targets, data quality monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'Competitor Price Monitoring', description: 'Daily scrape of competitor pricing pages. Extract price, SKU, availability, promotions. Change detection alerts. Pricing intelligence dashboard. E-commerce price matching.' },
+    { name: 'Lead Data Extraction', description: 'Extract company data from business directories (LinkedIn, Crunchbase, industry directories). Company name, size, industry, location, decision-maker titles. Enrich with Clearbit/Apollo. CRM import.' },
+    { name: 'Market Intelligence', description: 'Scrape news sites, job boards, public filings for market signals. Extract job postings (hiring trends), press releases (product launches), SEC filings (financial health). Weekly intelligence digest.' },
+    { name: 'Supplier Product Catalogue', description: 'Extract product catalogues from supplier websites. Product name, SKU, price, availability, specifications. Scheduled sync to ERP/PIM. Automate supplier data ingestion.' },
+  ],
+  sections: [
+    {
+      heading: 'Legal and Ethical Boundaries of Web Scraping',
+      body: 'Web scraping is legal when: scraping publicly available data (no login required), the data does not include personal information protected by GDPR/CCPA without appropriate basis, and the scraping does not violate the target site\'s Terms of Service in a way that creates legal risk for your organisation. ClickMasters only builds scrapers for publicly accessible, non-login-required data, and advises clients on ToS compliance before building. ClickMasters will not build scrapers that: bypass authentication or paywalls, scrape personal data without a lawful basis, or intentionally circumvent security measures in violation of the Computer Fraud and Abuse Act (CFAA) or equivalent laws. If the data you need requires a login, the correct approach is negotiating a data partnership or API access with the target.',
+      items: [],
+    },
+    {
+      heading: 'Playwright vs Scrapy for Web Scraping',
+      body: 'Scrapy is an asynchronous Python spider framework optimised for high-throughput scraping of server-rendered HTML — it is fast, memory-efficient, and well-suited for static HTML pages where the data is in the page source. Playwright is a browser automation library that runs a full Chromium/Firefox/WebKit browser — it handles JavaScript-rendered content (React SPAs, dynamically loaded data, infinite scroll) that Scrapy cannot access because Scrapy only sees the server\'s HTML response, not the page after JavaScript execution. ClickMasters uses Scrapy for high-volume static HTML scraping (news sites, product catalogues, directories) and Playwright for JavaScript-heavy sites (modern SPAs, sites with dynamic loading, sites requiring JavaScript interaction to reveal data). For anti-detection requirements, Playwright with stealth plugins is more effective than Scrapy\'s built-in features.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'Is web scraping legal?',
+      answer: 'Web scraping of publicly accessible data (no login required, no authentication bypassed) is generally legal in the USA, EU, and most jurisdictions — the hiQ v. LinkedIn ruling (9th Circuit, 2022) affirmed that scraping publicly available data does not violate the Computer Fraud and Abuse Act. The legal considerations are: Terms of Service (most websites\' ToS prohibit scraping — violating ToS is a contract breach but typically not a criminal offence for public data; ClickMasters advises on the legal risk profile of specific targets), GDPR/CCPA (scraping personal data of EU or California residents requires a lawful basis — business contact information in professional directories has a legitimate interest basis in many cases but requires careful analysis), and copyright (scraped content may be copyright-protected — extracting structured data facts is generally acceptable, reproducing full copyrighted text is not). ClickMasters reviews ToS and legal considerations for each scraping target before building.',
+    },
+    {
+      question: 'What is the difference between Playwright and Scrapy for web scraping?',
+      answer: 'Scrapy is an asynchronous Python spider framework optimised for high-throughput scraping of server-rendered HTML — it is fast, memory-efficient, and well-suited for static HTML pages where the data is in the page source. Playwright is a browser automation library that runs a full Chromium/Firefox/WebKit browser — it handles JavaScript-rendered content (React SPAs, dynamically loaded data, infinite scroll) that Scrapy cannot access because Scrapy only sees the server\'s HTML response, not the page after JavaScript execution. ClickMasters uses Scrapy for high-volume static HTML scraping (news sites, product catalogues, directories) and Playwright for JavaScript-heavy sites (modern SPAs, sites with dynamic loading, sites requiring JavaScript interaction to reveal data). For anti-detection requirements, Playwright with stealth plugins is more effective than Scrapy\'s built-in features.',
+    },
+    {
+      question: 'How do you handle sites that block scraping?',
+      answer: 'Anti-bot blocking is handled at several layers. Rate limiting: human-realistic request timing (random delays following a Poisson distribution — 2-8 seconds between requests, occasionally pausing for 30-60 seconds to simulate reading) rather than fixed intervals that are statistically detectable. User agent rotation: rotating realistic, up-to-date browser user agent strings matched to the proxy\'s apparent browser type. Proxy rotation: residential proxies (Oxylabs, Bright Data) provide IP addresses from real ISPs — significantly harder to block than datacenter proxies. Browser fingerprint masking: Playwright stealth plugin patches headless browser detection — removes webdriver properties, patches navigator.plugins, WebGL, canvas fingerprint. Session management: maintain cookies and session state across requests — appear as a returning user rather than a fresh connection on every request. CAPTCHA solving: 2captcha or Anti-Captcha API for sites with CAPTCHA challenges — used only where legally appropriate.',
+    },
+    {
+      question: 'How do you structure and deliver scraped data?',
+      answer: 'Scraped data is structured and delivered via: schema design (define the exact fields to extract — product name, price, availability, URL, last updated — with data types and validation rules before writing the crawler), data validation (validate extracted fields against the schema — required fields must be present, numeric prices within expected ranges, URLs valid — reject or flag invalid records before storage), storage (PostgreSQL for structured queryable data, S3 for raw HTML backups and change history), and delivery (REST API for real-time access to the extracted data, scheduled CSV/Excel export to S3 for downstream consumption, direct database connection for BI tools, webhook notification on significant data changes). ClickMasters designs the delivery mechanism to match the consuming system — data warehouse, BI tool, CRM, or ERP — rather than requiring the client to build their own ETL from raw scraped files.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our competitor price monitoring system. We now scrape 15 competitor sites daily, tracking 5,000+ SKUs. The change detection alerts us within hours of a competitor price change — our repricing speed improved from weekly to daily.",
+    author: "Head of E-commerce",
+    role: "Retail Company"
+  },
+  caseStudy: {
+    title: "Competitor Price Monitoring",
+    description: "Built daily scraper for 15 competitor sites, 5,000+ SKUs. Extract price, availability, promotions. Change detection alerts. Repricing speed improved from weekly to daily. 12% margin improvement on competitive categories.",
+    slug: "competitor-price-monitoring",
+    badge: "Web Scraping"
+  },
+  howToSteps: [
+    { name: 'Scraping Feasibility Assessment', text: 'Target analysis, ToS review, technical approach selection, cost model.' },
+    { name: 'Crawler Development', text: 'Spider design, data extraction logic, incremental crawling, anti-detection config.' },
+    { name: 'Data Pipeline & Storage', text: 'Schema design, validation rules, PostgreSQL storage, S3 backup, change detection.' },
+    { name: 'Cloud Infrastructure', text: 'Lambda/ECS deployment, SQS queue, CloudWatch scheduling, monitoring.' },
+  ],
+  itemList: [
+    'Python Web Crawlers (Playwright / Scrapy)',
+    'Anti-Detection & Proxy Rotation',
+    'Competitor Price & Product Monitoring',
+    'Lead Data Extraction',
+    'Document & PDF Data Extraction',
+    'Scheduled Cloud Crawlers',
+  ],
+  definedTerms: [
+    { name: 'Residential Proxy', description: 'IP address from a real ISP (home user) — significantly harder to block than datacenter proxies.' },
+    { name: 'Playwright Stealth', description: 'Plugin that masks headless browser indicators — patches navigator.webdriver, plugins, WebGL, canvas fingerprint.' },
+    { name: 'Poisson Distribution', description: 'Random delay pattern — human-realistic request timing, not fixed intervals that are statistically detectable.' },
+    { name: 'Change Detection', description: 'Compare current extraction to previous — alert only when data actually changes, not on every run.' },
+  ],
+};
+
+const businessProcessAutomationOverride: ServicePageContent = {
+  slug: 'business-process-automation',
+  categorySlug: 'automation-integration',
+  sectionId: 'business-process-automation',
+  category: 'Automation & Integration',
+  title: 'Business Process Automation Services',
+  serviceName: 'Business Process Automation',
+  metaTitle: 'Business Process Automation Services | Custom BPA for B2B | ClickMasters',
+  metaDescription:
+    'ClickMasters automates manual B2B workflows — approval chains, document processing, system integrations, and reporting — for companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters engineers custom business process automation for B2B companies across the USA, Europe, Canada, and Australia. Approval workflows that route themselves. Documents that process without human intervention. Reports that generate and deliver on schedule. Integrations that keep your systems in sync without manual data entry. Built to handle exceptions — not just happy paths.',
+  highlights: [
+    '✓ Approval Workflow Automation',
+    '✓ Document Processing',
+    '✓ System Integration',
+    '✓ Report Automation',
+    '✓ CRM / ERP / Billing Sync',
+    '✓ AI-Augmented Automation',
+  ],
+  marketStats: [
+    { label: 'Potential value unlocked by automation globally by 2030 (McKinsey)', value: '$15.9T' },
+    { label: 'Cost reduction achievable through intelligent process automation', value: '40-75%' },
+    { label: 'Of current work activities are automatable with existing technology', value: '45%' },
+    { label: 'Average payback period for a well-scoped automation investment', value: '6 months' },
+  ],
+  servicesCards: [
+    { title: 'Approval Workflow Automation', description: 'Replace email-based approval chains with structured, routable, time-limited workflow systems. Purchase order approvals, contract approvals, expense approvals, hiring approvals — all with conditional routing based on amount/category, automatic escalation when idle beyond SLAs, full audit trail, Slack/Teams integration, operations dashboard.' },
+    { title: 'Document Processing Automation', description: 'Eliminate manual extraction, entry, and filing of document-based data. Invoice processing (extract vendor, amount, GL codes — match PO — route for approval), contract data extraction (key dates, obligations, payment terms), onboarding document collection, expense receipt processing. Built with AI document intelligence where documents vary.' },
+    { title: 'System Integration Automation', description: 'Keep business systems in sync without manual data entry: Salesforce-to-ERP account and order sync, Stripe subscription events → provisioning + CRM updates, HubSpot deal closure → contract creation + project setup, HRIS new hire → IT provisioning + access grants + onboarding checklists. Engineered with error handling, retry logic, conflict resolution.' },
+    { title: 'Reporting & Analytics Automation', description: 'Replace manual report assembly with automated scheduled delivery. Weekly operations reports from live data to Slack/email, board pack generation from data warehouse, customer health scores from product usage to Salesforce, financial variance reports with automated commentary. Built on existing data sources.' },
+    { title: 'Customer Onboarding & Lifecycle Automation', description: 'Automate customer journey from contract signature through onboarding completion. Contract signature → provisioning + welcome communication, onboarding milestones → next-step sequences, product engagement signals → health scores + CS alerts, renewals → 90-day pre-launch workflow.' },
+    { title: 'HR & People Operations Automation', description: 'New hire onboarding (IT provisioning, equipment, system access, training), offboarding (access revocation, equipment return, exit survey), performance review cycles (opening, distribution, reminders, calibration), compliance training tracking (completion monitoring, reminders, certificate storage).' },
+  ],
+  differentiators: [
+    { feature: 'Zapier vs RPA vs Custom BPA', description: '11-row decision framework — honest guidance on which technology fits | Basic: One-size-fits-all recommendation' },
+    { feature: 'Automation ROI', description: 'Specific calculation: $150K-500K/year wasted labor in top 3 automatable processes | Basic: No ROI quantification' },
+    { feature: 'Process Prioritisation', description: '10-process matrix with colour-coded priority (green/amber/gray) | Basic: "Automate everything" (no priority)' },
+    { feature: 'Exception Handling', description: 'Documented from day one — every known exception path, dead-letter queues | Basic: No exception handling (silent failures)' },
+    { feature: 'Parallel Run', description: '2-4 week parallel run with manual process, documented rollback plan | Basic: Cutover without validation (risk)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Process Discovery & Documentation', timeline: 'Week 1-2', text: 'Current-state mapping (every step, decision, exception), volume measurement (frequency, duration, people involved), error analysis, integration inventory. Deliverable: As-Is Process Map + Automation ROI Business Case.' },
+    { phase: 'Phase 2', title: 'Automation Architecture Design', timeline: 'Week 2-3', text: 'Technology selection (custom vs workflow engine vs iPaaS), exception handling design (every known exception path), integration architecture, audit trail design. Deliverable: Automation Architecture Document.' },
+    { phase: 'Phase 3', title: 'Integration Development', timeline: 'Week 3-6', text: 'API connectors (authentication, retry logic, rate limiting), webhook receivers, data transformation logic, test harness. Test against real sandboxes — not mocks.' },
+    { phase: 'Phase 4', title: 'Workflow Logic Development', timeline: 'Week 4-8', text: 'Conditional routing logic, approval engine, notification system, escalation timers, exception handler, human review queue, orchestration layer. State persisted — resumes correctly after restart.' },
+    { phase: 'Phase 5', title: 'Testing & UAT', timeline: 'Week 7-10', text: 'Unit tests, integration tests, end-to-end tests (including exception paths), volume testing (10x current volume), user acceptance testing with process owners. No go-live without UAT sign-off.' },
+    { phase: 'Phase 6', title: 'Parallel Run & Cutover', timeline: 'Week 9-11', text: 'Run automation in parallel with manual process for 2-4 weeks. Compare outputs. Validate on real production data. Documented rollback plan.' },
+    { phase: 'Phase 7', title: 'Monitoring & Handoff', timeline: 'Week 11-12', text: 'Execution success dashboard, exception rate trending, latency monitoring, integration health checks, alerts. Process owner training. Handoff documentation.' },
+  ],
+  techStackCategories: [
+    { layer: 'Workflow Orchestration', technologies: 'Temporal.io (durable execution — failures, retries, long-running), Apache Airflow (data pipelines), custom state machines' },
+    { layer: 'Backend / API', technologies: 'Python FastAPI (async event processing), Node.js (Express/Fastify), designed for horizontal scaling' },
+    { layer: 'Integration Connectors', technologies: 'Custom REST/GraphQL clients (retry logic, exponential backoff, circuit breakers), Airbyte (data-centric), webhooks' },
+    { layer: 'Document Intelligence', technologies: 'AWS Textract (structured extraction), Azure Form Recognizer, LLM-based extraction (GPT-4o/Claude) for unstructured' },
+    { layer: 'Message Queue / Events', technologies: 'AWS SQS + SNS (reliable async), Apache Kafka (high-throughput), Redis (low-latency)' },
+    { layer: 'Notification', technologies: 'Slack (webhook + Bolt SDK), Microsoft Teams (Graph API), SendGrid/Postmark (email), Twilio (SMS)' },
+    { layer: 'Storage & Audit', technologies: 'PostgreSQL (workflow state, audit log), S3 (document storage), Elasticsearch (full-text search)' },
+    { layer: 'Monitoring', technologies: 'Prometheus + Grafana (dashboards), PagerDuty (alerting), Sentry (error tracking)' },
+    { layer: 'AI/LLM', technologies: 'OpenAI GPT-4o (document understanding, classification, commentary), Claude 3.5 Sonnet (long-context), structured output APIs' },
+  ],
+  pricingTiers: [
+    { type: 'Process Assessment & ROI Study', investment: '$3,000 – $6,000', timeline: '1 – 2 weeks', bestFor: 'Process mapping, volume/error analysis, ROI calculation, build recommendation' },
+    { type: 'Simple Workflow Automation', investment: '$8,000 – $20,000', timeline: '3 – 5 weeks', bestFor: '1-2 systems, linear workflow, basic conditional routing, notification, audit log' },
+    { type: 'Approval Workflow Automation', investment: '$12,000 – $30,000', timeline: '4 – 7 weeks', bestFor: 'Multi-step approval engine, routing rules, escalation timers, Slack/Teams, dashboard' },
+    { type: 'Document Processing Automation', investment: '$15,000 – $45,000', timeline: '5 – 10 weeks', bestFor: 'AI/rule-based extraction, validation, routing, human review, ERP/CRM integration' },
+    { type: 'Multi-System Integration Workflow', investment: '$20,000 – $60,000', timeline: '6 – 12 weeks', bestFor: '3+ systems, complex conditional logic, exception handling, parallel run, monitoring' },
+    { type: 'End-to-End Process Automation', investment: '$30,000 – $90,000', timeline: '8 – 16 weeks', bestFor: 'Full process reimagining, multiple workflows, all exception paths, compliance audit trail' },
+    { type: 'AI-Augmented Automation', investment: '$25,000 – $70,000', timeline: '7 – 14 weeks', bestFor: 'LLM-based classification/extraction, HITL review, structured output validation' },
+    { type: 'Automation Maintenance Retainer', investment: '$3,000 – $10,000/mo', timeline: 'Ongoing', bestFor: 'Monitoring, exception resolution, integration updates, new rules, enhancements' },
+  ],
+  industryUseCases: [
+    { name: 'Contract-to-Cash Automation', description: 'DocuSign signature → contract extraction → CRM update → billing schedule → welcome sequence → first invoice. Reduced 5-day process to 4 hours. Zero invoicing delays on $18M annual contract value.' },
+    { name: 'Invoice Processing Automation', description: 'Invoice ingestion → AI extraction → PO matching → tiered approval → payment scheduling. 78% of invoices processed without human touch. Error rate 6% → 0.8%.' },
+    { name: 'Employee Onboarding Automation', description: 'Offer acceptance → IT equipment → access requests → facilities → payroll → training → check-ins. 22 manual steps → 2 human touchpoints. Onboarding completion 71% → 97%. Day 1 readiness from 12 days to 4 days.' },
+    { name: 'Financial Reporting Automation', description: 'Monthly trigger → data pull from 6 systems → dbt KPI models → LLM narrative commentary → PDF generation → board distribution. 2-day manual process → 90-minute automated run.' },
+  ],
+  sections: [
+    {
+      heading: 'Automation Technology Decision Framework: Zapier vs. RPA vs. Custom BPA',
+      body: 'The most consequential automation decision is not which process to automate — it is what technology to use to automate it.',
+      items: [
+        'Zapier/Make/n8n: Setup hours to days, low complexity, limited business logic, poor exception handling, surface-level API integration only. Best for simple 2-3 step integrations, quick wins.',
+        'RPA (UiPath/AA): Setup weeks to months, medium complexity, moderate logic depth, moderate exception handling, UI automation (screen scraping). Best for legacy system UI automation where no API exists.',
+        'Custom BPA (ClickMasters): Setup weeks with architecture first, high complexity, unlimited business logic, robust exception handling (designed from day one), deep API/database/event-driven integration. Best for complex workflows, compliance, scale, where no-code tools cannot handle.',
+      ],
+    },
+    {
+      heading: 'Process Prioritization Matrix',
+      body: 'Most organizations have more automatable processes than budget. Prioritize highest ROI first, not highest visibility first.',
+      items: [
+        '🟢 Automate First: Invoice processing (8-15 hrs/wk, 5-15% error rate), New employee onboarding (4-8 hrs/wk), Contract execution (6-10 hrs/wk), Monthly reporting (10-20 hrs/cycle), Customer onboarding (3-6 hrs/customer), CRM-ERP data sync (5-10 hrs/wk)',
+        '🟩 High Priority: Purchase order approval chain (4-8 hrs/wk), Compliance documentation collection (8-12 hrs/cycle — high criticality)',
+        '🟨 Consider After Above: Expense report processing (2-4 hrs/wk), Sales quote generation (3-5 hrs/wk)',
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is business process automation?',
+      answer: 'Business process automation (BPA) is the use of software to automatically execute repeatable business tasks and workflows — replacing or reducing manual human effort in processes that are rule-based, high-volume, or error-prone. Examples: invoice processing automation (extract data, match to PO, route for approval, schedule payment), employee onboarding automation (trigger IT provisioning, access grants, training enrollment from HRIS event), contract-to-cash workflows (contract signature triggers billing setup, provisioning, and welcome communications), and approval workflow automation (route requests to appropriate approver based on amount, category, with escalation if idle).',
+    },
+    {
+      question: 'What is the difference between BPA, RPA, and workflow automation?',
+      answer: 'Business Process Automation (BPA) is the broad category. Robotic Process Automation (RPA) is a specific BPA technology that automates processes by simulating human interactions with software interfaces — clicking buttons, reading screens, entering data — typically for legacy systems with no API. Workflow Automation refers specifically to automating the routing, approval, and progression of tasks between people and systems — a subset of BPA. Custom BPA (as delivered by ClickMasters) operates at the API and data layer: connecting systems through their APIs and webhooks rather than simulating user interfaces, making automations faster, more reliable, and less brittle to UI changes than RPA.',
+    },
+    {
+      question: 'How much does business process automation cost?',
+      answer: 'Business process automation costs range from $8,000 for a simple workflow automation to $90,000 for a full end-to-end process reimagining with multiple integrated systems. Primary cost drivers: number of systems to integrate, complexity of conditional logic and exception handling, document intelligence requirements (AI extraction costs more than rule-based), volume requirements, and compliance requirements (audit trail and documentation). ClickMasters provides a free process assessment with ROI calculation before scoping — so clients know the payback period before committing.',
+    },
+    {
+      question: 'When should I use Zapier/Make instead of custom automation?',
+      answer: 'Zapier/Make is right when: 2-3 steps, no complex conditional logic, both systems have well-maintained Zapier connectors, low volume (<10K tasks/month), no audit trail required, and process has no meaningful exception paths. Custom automation is more appropriate when: more than 5 steps, conditional routing based on data values, exceptions need graceful handling, volume makes per-task pricing expensive, process is business-critical requiring monitoring and SLA alerting, or compliance requires an audit trail. If you are already using Zapier and finding it breaking on exceptions, hitting rate limits, or requiring constant maintenance, that is a signal the process has outgrown a no-code tool.',
+    },
+    {
+      question: 'What processes are best suited for automation?',
+      answer: 'The highest automation ROI processes are: high-frequency (repeated multiple times per day/week — payback scales with volume), rule-based (decision logic expressible as explicit rules), data-intensive (moving, transforming, validating data between systems), time-sensitive (delays have downstream cost), and multi-system (requires human coordination between 3+ systems — exactly the task that custom integration automation eliminates). Classic high-ROI candidates: invoice processing, employee onboarding, contract-to-cash, customer onboarding, approval workflows, and periodic reporting.',
+    },
+    {
+      question: 'How do you handle automation failures and exceptions?',
+      answer: 'Exception handling is designed from day one. Every known exception path is documented before development begins. Mechanisms include: automatic retry with exponential backoff for transient failures, dead-letter queues for failed items requiring human intervention, human review queues for low-confidence AI decisions, automated alerting when exception rates exceed thresholds, full execution logging for traceability, and graceful degradation paths that route to manual process when automation encounters an unhandled exception — preventing complete process stoppage.',
+    },
+    {
+      question: 'Can you automate processes with legacy systems that have no modern API?',
+      answer: 'Yes. For legacy systems without REST APIs: (1) database-layer integration using read replicas or stored procedure calls if the database can be accessed directly; (2) file-based integration workflows processing exports (CSV, XML, EDI) and pushing results as imports; (3) RPA (Robotic Process Automation using UiPath) simulating UI interactions — though less stable and more expensive to maintain; (4) in some cases, replacing the legacy component with a modern API-capable alternative. ClickMasters evaluates all options and recommends the most maintainable approach.',
+    },
+    {
+      question: 'How long does it take to build and deploy?',
+      answer: 'Simple workflow automation (2-3 systems, linear flow): 3-5 weeks. Multi-system approval workflow: 4-7 weeks. Complex end-to-end process automation with document intelligence, multiple exception paths, and parallel run validation: 8-16 weeks. Timeline drivers: number of systems to integrate, conditional logic complexity, exception handling depth, and whether a parallel run period is required. ClickMasters delivers automation in incremental phases — core workflow typically live in staging within 4 weeks.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters automated our contract-to-cash process. Contract signature to first invoice went from 5 days to 4 hours. Our finance team stopped manually setting up billing schedules and started focusing on cash flow optimization.",
+    author: "COO",
+    role: "Professional Services Firm"
+  },
+  caseStudy: {
+    title: "Contract-to-Cash Automation",
+    description: "Automated contract-to-cash workflow: DocuSign → extraction → CRM → billing → welcome → invoice. Reduced 5-day, 7-handoff process to 4-hour automated run. Zero invoicing delays on $18M annual contract value.",
+    slug: "contract-to-cash",
+    badge: "Business Process Automation"
+  },
+  howToSteps: [
+    { name: 'Process Discovery', text: 'Current-state mapping, volume measurement, error analysis, integration inventory.' },
+    { name: 'Automation Architecture', text: 'Technology selection, exception handling design, integration architecture, audit trail.' },
+    { name: 'Integration Development', text: 'API connectors, webhook receivers, data transformation, test harness.' },
+    { name: 'Workflow Logic', text: 'Conditional routing, approval engine, escalation timers, exception handler.' },
+    { name: 'Testing & UAT', text: 'Unit, integration, end-to-end, volume, and user acceptance testing.' },
+    { name: 'Parallel Run & Cutover', text: '2-4 week parallel run with manual process, validation, rollback plan.' },
+    { name: 'Monitoring & Handoff', text: 'Dashboard, alerting, training, runbook.' },
+  ],
+  itemList: [
+    'Approval Workflow Automation',
+    'Document Processing Automation',
+    'System Integration Automation',
+    'Reporting & Analytics Automation',
+    'Customer Onboarding & Lifecycle Automation',
+    'HR & People Operations Automation',
+  ],
+  definedTerms: [
+    { name: 'BPA', description: 'Business Process Automation — using software to automatically execute repeatable business tasks and workflows.' },
+    { name: 'RPA', description: 'Robotic Process Automation — simulates human UI interactions for legacy systems without APIs.' },
+    { name: 'Temporal.io', description: 'Durable workflow orchestration engine — handles failures, retries, and long-running workflows natively.' },
+    { name: 'Dead Letter Queue', description: 'Queue for failed automation items requiring human intervention — nothing is silently dropped.' },
+  ],
+};
+
+const workflowAutomationOverride: ServicePageContent = {
+  slug: 'workflow-automation',
+  categorySlug: 'automation-integration',
+  sectionId: 'workflow-automation',
+  category: 'Automation & Integration',
+  title: 'Workflow Automation Services',
+  serviceName: 'Workflow Automation',
+  metaTitle: 'Workflow Automation Services | n8n, Make & Zapier | ClickMasters',
+  metaDescription:
+    'ClickMasters builds workflow automation systems — n8n, Make.com, Zapier, and custom automation pipelines — that connect your tools and eliminate manual handoffs for B2B companies worldwide.',
+  lead: 'ClickMasters builds workflow automation for B2B companies across the USA, Europe, Canada, and Australia. n8n self-hosted for complete control and no per-execution pricing. Make.com for rapid deployment of complex multi-step workflows. Custom Python/Node.js automation for workflows that no-code tools cannot handle. Connect your CRM, billing, communication, and operations tools into seamless automated processes that run while your team focuses on the work that actually requires human judgment.',
+  highlights: [
+    '✓ n8n Self-Hosted Automation',
+    '✓ Make.com Workflows',
+    '✓ Zapier Enterprise',
+    '✓ Custom Python/Node.js Pipelines',
+    '✓ CRM + Billing Automation',
+    '✓ Slack & Email Workflows',
+  ],
+  marketStats: [
+    { label: 'Open-source workflow automation — self-hosted, no per-execution fees, 400+ integrations, fair-code licence', value: 'n8n' },
+    { label: 'Make.com (formerly Integromat) — powerful visual workflow builder, complex multi-path logic, 1,500+ app integrations', value: 'Make' },
+    { label: 'Average hours per week saved per employee by eliminating manual data entry between connected tools', value: '4 hrs' },
+    { label: 'Manual steps in a well-designed workflow automation — humans only involved in exception handling', value: '0' },
+  ],
+  servicesCards: [
+    { title: 'Lead-to-Customer Automation', description: 'Automate journey from new lead to onboarded customer: new CRM lead → enrich with Clearbit/Apollo → score against ICP → route to correct sales rep in Slack → deal closes → trigger billing setup in Stripe → Slack notification to onboarding team → create onboarding task in PM tool → send welcome email. Each step triggered automatically — zero manual handoffs between systems.' },
+    { title: 'Customer Onboarding Workflows', description: 'Automate post-sale onboarding: deal closed in CRM → create project in ClickUp/Asana → invite customer to Slack channel → send onboarding checklist → trigger provisioning API call → schedule kickoff calendar invite → after N days, check product activation → if not activated, trigger intervention workflow → escalate to CSM if no activation by day 14.' },
+    { title: 'Invoice & Finance Automation', description: 'Connect billing and finance tools: Stripe subscription events (payment succeeded/failed/cancelled) → update CRM opportunity → update accounting software → send invoice/receipt via SendGrid → dunning flow (payment failed → reminder day 1 → Slack alert to finance day 3 → escalation day 7) → revenue recognition event to data warehouse.' },
+    { title: 'HR & Operations Automation', description: 'Automate people operations: new employee Rippling/BambooHR event → provision Google Workspace account → create Slack account and channels → create accounts in all SaaS tools (GitHub, Notion, Figma, Jira) → send onboarding checklist → schedule 30-60-90 day check-ins → after probation, trigger performance review. Offboarding: termination → deprovision all tool access → archive data → final payroll trigger.' },
+    { title: 'Data Sync Automation', description: 'Keep data consistent across tools without copy-paste: Salesforce opportunity update → sync to HubSpot → update Intercom company record → push deal stage change to Slack digest → log to data warehouse via webhook → update customer success platform (Gainsight, ChurnZero). Bidirectional sync with conflict resolution (last-write-wins or field-level priority).' },
+    { title: 'Alert & Monitoring Automation', description: 'Operational awareness without manual checking: connect monitoring sources (AWS CloudWatch, Datadog, PagerDuty, Google Analytics, Salesforce dashboards) → route alerts to correct Slack channels by severity and team → aggregate daily digest of key metrics → trigger escalation workflows when thresholds breached → create follow-up tasks automatically from alerts → post-incident trigger post-mortem workflow with template and assigned owner.' },
+  ],
+  differentiators: [
+    { feature: 'n8n vs Make vs Zapier Guide', description: '8-row comparison — pricing, technical skill, integration depth, self-hosting, complex logic, AI, best for | Basic: One tool for everything' },
+    { feature: 'n8n Self-Hosted Focus', description: 'No per-execution pricing, runs on your VPS/AWS/Docker | Basic: Cloud-only (vendor lock-in, per-execution cost)' },
+    { feature: 'Error Handling', description: 'Retry logic + error branches + dead letter queues + idempotency + monitoring | Basic: No error handling (silent failures)' },
+    { feature: 'Custom Code', description: 'Python/Node.js when no-code tools insufficient — custom business logic beyond drag-and-drop | Basic: No-code only (limited)' },
+    { feature: 'Queue Mode for Scale', description: 'n8n queue mode with Redis — decouples trigger from execution, handles burst traffic | Basic: No queue (drops on burst)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Automation Discovery Workshop', timeline: 'Week 1', text: 'Process mapping, ROI analysis, tool selection (n8n vs Make vs custom), automation roadmap. Deliverable: Automation Blueprint + ROI Estimate.' },
+    { phase: 'Phase 2', title: 'Tool Setup & Integration', timeline: 'Week 1-2', text: 'n8n self-hosted deployment (Docker/AWS) or Make.com account setup. Connect source/target APIs (authentication, webhooks, OAuth). Test connectivity. Deliverable: Tool Infrastructure + Connected APIs.' },
+    { phase: 'Phase 3', title: 'Workflow Build', timeline: 'Week 2-4', text: 'Build n8n/Make workflow: trigger → data transformation → conditional branches → error handling → actions. For custom: Python/Node.js pipeline. Deliverable: Production Workflow.' },
+    { phase: 'Phase 4', title: 'Error Handling & Monitoring', timeline: 'Week 3-4', text: 'Retry logic (exponential backoff), error branches (Slack notification on failure), dead letter queues, idempotency, monitoring dashboard (execution history, failure rate). Deliverable: Production-Ready Automation + Dashboard.' },
+  ],
+  techStackCategories: [
+    { layer: 'Automation Tools', technologies: 'n8n (open-source, self-hosted — 400+ integrations), Make.com (managed — 1,500+ apps), Zapier (cloud), custom Python/Node.js' },
+    { layer: 'Self-Hosting', technologies: 'Docker, AWS ECS, VPS, n8n queue mode + Redis (high-volume, burst handling)' },
+    { layer: 'CRM', technologies: 'Salesforce, HubSpot, Pipedrive, Zoho' },
+    { layer: 'Billing', technologies: 'Stripe (subscriptions, payments), Chargebee, Recurly, Zuora' },
+    { layer: 'Communication', technologies: 'Slack (webhook + Bolt SDK), Microsoft Teams, SendGrid/Postmark (email), Twilio (SMS)' },
+    { layer: 'Project Management', technologies: 'ClickUp, Asana, Jira, Linear, Monday.com' },
+    { layer: 'HR/People', technologies: 'Rippling, BambooHR, Gusto, Deel' },
+    { layer: 'Data Sync', technologies: 'Webhooks, custom SQL, API triggers, Change Data Capture' },
+    { layer: 'Monitoring', technologies: 'n8n execution history, Grafana, Datadog, PagerDuty, Slack alerts' },
+  ],
+  pricingTiers: [
+    { type: 'Automation Discovery Workshop', investment: '$2,500 – $5,000', timeline: '1 week', bestFor: 'Process mapping, ROI analysis, tool selection, automation roadmap' },
+    { type: 'Simple Workflow (1-3 steps)', investment: '$2,000 – $6,000', timeline: '1 – 2 weeks', bestFor: 'Single trigger, 1-3 actions, error handling, monitoring' },
+    { type: 'Multi-Step Workflow (3-10 steps)', investment: '$4,000 – $12,000', timeline: '2 – 4 weeks', bestFor: 'Complex logic, multiple apps, conditional branches, retry' },
+    { type: 'Complex Automation Suite', investment: '$8,000 – $25,000', timeline: '3 – 6 weeks', bestFor: 'Multiple connected workflows, error recovery, monitoring dashboard' },
+    { type: 'n8n Self-Hosted Setup', investment: '$3,000 – $8,000', timeline: '1 – 2 weeks', bestFor: 'Docker/AWS deployment, auth, backup, monitoring, initial workflows' },
+    { type: 'CRM Automation (Full)', investment: '$6,000 – $18,000', timeline: '2 – 5 weeks', bestFor: 'Lead-to-customer, deal stages, onboarding, renewal workflows' },
+    { type: 'HR/Finance Automation Suite', investment: '$6,000 – $18,000', timeline: '2 – 5 weeks', bestFor: 'Employee lifecycle, billing events, finance sync, alert workflows' },
+    { type: 'Automation Retainer', investment: '$2,000 – $6,000/mo', timeline: 'Ongoing', bestFor: 'New workflows, maintenance, tool updates, optimisation' },
+  ],
+  industryUseCases: [
+    { name: 'Lead-to-Customer Automation', description: 'CRM lead → enrich → score → route to Slack → deal closed → Stripe billing → onboarding tasks → welcome email. Zero manual handoffs between 6 systems.' },
+    { name: 'Invoice Dunning', description: 'Stripe payment failed → reminder email day 1 → Slack alert to finance day 3 → escalation email day 7 → final notification. Reduce payment failure resolution time.' },
+    { name: 'New Employee Onboarding', description: 'HRIS new hire → provision Google Workspace → create Slack accounts → create SaaS tool access → send checklist → schedule check-ins. 22 manual steps → automated.' },
+    { name: 'Alert Routing', description: 'CloudWatch alarm → route to correct Slack channel by severity → escalate to PagerDuty if no response → create follow-up task → post-mortem workflow.' },
+  ],
+  sections: [
+    {
+      heading: 'Workflow Automation: Tool Selection Guide',
+      body: '',
+      items: [
+        'n8n (Self-Hosted): Pricing — free self-hosted, ~$20/mo cloud. Technical skill — medium (JSON, expressions). Integration depth — deep (full API access, custom nodes). Self-hosting — full (runs on your VPS/AWS/Docker). Complex logic — excellent (if/else, loops, sub-workflows, code nodes). AI integration — native AI nodes (OpenAI, Anthropic, LangChain). Best for: data-sensitive workflows, high volume, complex logic.',
+        'Make.com: Pricing — pay per operation, $9-650/mo. Technical skill — low (visual builder, logic branches). Integration depth — deep (modules with full API fields). Self-hosting — no. Complex logic — excellent (routers, iterators, aggregators). AI integration — AI modules + HTTP request to LLM APIs. Best for: complex multi-app workflows, rapid deployment, Make-familiar teams.',
+        'Zapier: Pricing — pay per task, $20-600+/mo. Technical skill — very low (template-first). Integration depth — shallow (curated fields only). Self-hosting — no. Complex logic — limited (basic conditionals). AI integration — native OpenAI integration. Best for: simple 2-3 app triggers, non-technical teams.',
+        'Custom Code: Pricing — dev cost + hosting only. Technical skill — high (Python/Node.js required). Integration depth — unlimited (any API, any data). Self-hosting — full (your infrastructure). Complex logic — unlimited. AI integration — full (any AI SDK). Best for: unique APIs, custom logic beyond no-code capability.',
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is workflow automation and which tools does ClickMasters use?',
+      answer: 'Workflow automation connects software tools and automates the manual steps between them — the copy-paste, data entry, Slack messages, and email notifications that happen after each business event. When a deal closes in Salesforce, workflow automation can automatically create an onboarding project in Asana, provision a customer account, send a welcome email, and notify the customer success team in Slack — without any human touching the keyboard. ClickMasters primarily uses n8n (open-source, self-hosted — ideal for data-sensitive workflows and high-volume automation where per-execution pricing would be prohibitive) and Make.com (managed cloud — ideal for rapid deployment of complex multi-path workflows). For workflows requiring custom logic beyond no-code tools, ClickMasters writes Python or Node.js automation scripts.',
+    },
+    {
+      question: 'What is the difference between n8n and Zapier?',
+      answer: 'n8n and Zapier both automate workflows, but differ significantly in capabilities and pricing model. Zapier is designed for simplicity — a non-technical user can build a simple "if trigger then action" in minutes. But it has limitations: shallow API field access (not all API fields exposed), limited complex logic (basic conditional branches), and usage-based pricing that becomes expensive at volume. n8n is more powerful: it exposes the full API of every connected application (every field, every endpoint), has full if/else logic, loops, sub-workflows, code nodes (write JavaScript/Python directly), and runs self-hosted on your own infrastructure (no per-execution cost at any volume). ClickMasters uses n8n for enterprise workflows and recommends Zapier only for very simple, low-volume automations in non-technical teams.',
+    },
+    {
+      question: 'How do you handle workflow automation errors and failures?',
+      answer: 'Robust workflow automation requires error handling as a first-class concern. ClickMasters implements: retry logic (on transient failures — network timeouts, API rate limits — retry with exponential backoff before marking as failed), error branches (n8n Error Trigger node — when workflow fails, a separate error workflow fires — typically Slack notification with failed item, error message, and execution log link), dead letter queues (failed items stored for manual review or re-processing — nothing is silently dropped), idempotency (design workflows to be safely re-runnable — retries do not create duplicate records or send duplicate emails), and monitoring dashboards (n8n\'s built-in execution history, alerting on failure rate increase). A workflow that fails silently is worse than no automation — ClickMasters designs error handling into every workflow before production.',
+    },
+    {
+      question: 'Can workflow automation handle high volumes of transactions?',
+      answer: 'Yes, with the correct infrastructure. For high-volume automation (thousands of executions per hour): n8n self-hosted on AWS ECS (horizontally scalable — multiple n8n worker instances consuming a shared queue), queue-based execution (n8n\'s queue mode with Redis as job queue — decouples trigger from execution, handles burst traffic without dropping triggers), and rate limit handling (respect downstream API rate limits — n8n\'s wait nodes and retry-after headers prevent API quota exhaustion). For very high-volume use cases (millions of events per day), custom Python/Node.js automation deployed as a microservice on AWS Lambda or ECS is more appropriate than a general-purpose workflow tool — offering full code control and horizontal scaling at cloud-native cost.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters built our lead-to-customer automation with n8n. New leads are enriched, scored, routed to sales in Slack, and when a deal closes, Stripe billing and onboarding tasks trigger automatically. Zero manual handoffs between our 6 different tools.",
+    author: "RevOps Director",
+    role: "B2B SaaS Company"
+  },
+  caseStudy: {
+    title: "Lead-to-Customer Automation",
+    description: "Built n8n workflow connecting CRM + enrichment + Slack + billing + PM tools. 6-system integration. 0 manual handoffs. 80% reduction in sales ops time.",
+    slug: "lead-to-customer-automation",
+    badge: "Workflow Automation"
+  },
+  howToSteps: [
+    { name: 'Automation Discovery', text: 'Process mapping, ROI analysis, tool selection, automation roadmap.' },
+    { name: 'Tool Setup & Integration', text: 'n8n/Make deployment, API connections, webhooks, OAuth, test connectivity.' },
+    { name: 'Workflow Build', text: 'Trigger → transformation → branches → error handling → actions.' },
+    { name: 'Error Handling & Monitoring', text: 'Retry logic, error branches, dead letter queues, idempotency, dashboard.' },
+  ],
+  itemList: [
+    'Lead-to-Customer Automation',
+    'Customer Onboarding Workflows',
+    'Invoice & Finance Automation',
+    'HR & Operations Automation',
+    'Data Sync Automation',
+    'Alert & Monitoring Automation',
+  ],
+  definedTerms: [
+    { name: 'n8n', description: 'Open-source workflow automation — self-hosted, no per-execution fees, 400+ integrations, fair-code licence.' },
+    { name: 'Make.com', description: 'Managed visual workflow builder — complex multi-path logic, 1,500+ app integrations.' },
+    { name: 'Queue Mode', description: 'n8n queue mode with Redis — decouples trigger from execution, handles burst traffic without dropping.' },
+    { name: 'Dead Letter Queue', description: 'Queue for failed automation items requiring human intervention — nothing is silently dropped.' },
+  ],
+};
+
+const systemIntegrationOverride: ServicePageContent = {
+  slug: 'system-integration',
+  categorySlug: 'automation-integration',
+  sectionId: 'system-integration',
+  category: 'Automation & Integration',
+  title: 'System Integration Services',
+  serviceName: 'System Integration',
+  metaTitle: 'System Integration Services | ERP, CRM & SaaS Integration | ClickMasters',
+  metaDescription:
+    'ClickMasters builds system integrations — ERP, CRM, SaaS, and custom API integrations — that connect your enterprise software stack for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters builds system integrations for B2B companies across the USA, Europe, Canada, and Australia. ERP integrations (NetSuite, SAP, Microsoft Dynamics) connected to your e-commerce, WMS, and CRM. Salesforce and HubSpot integrated with billing, finance, and customer success tools. Custom middleware that translates between legacy system data formats and modern API standards. Event-driven integrations using webhooks and message queues for real-time data consistency.',
+  highlights: [
+    '✓ ERP + CRM Integration',
+    '✓ Salesforce & HubSpot Integration',
+    '✓ Custom Middleware Development',
+    '✓ iPaaS (Boomi, MuleSoft)',
+    '✓ Event-Driven Webhook Integration',
+    '✓ Legacy System Connectivity',
+  ],
+  marketStats: [
+    { label: 'Integration Pattern — direct REST API calls between systems', value: 'Point-to-Point REST API' },
+    { label: 'Integration Pattern — publish webhook events, consumer responds in real time', value: 'Webhook / Event-Driven' },
+    { label: 'Integration Pattern — publish to queue, consumer processes at own pace', value: 'Message Queue (Kafka/SQS)' },
+    { label: 'Integration Pattern — managed middleware with pre-built connectors', value: 'iPaaS (Boomi, MuleSoft)' },
+  ],
+  servicesCards: [
+    { title: 'ERP Integration', description: 'Connect ERP systems (NetSuite, SAP Business One, Microsoft Dynamics 365, Sage, Epicor) to e-commerce (Shopify, WooCommerce), WMS (ShipBob, ShipStation), CRM (Salesforce, HubSpot), and accounting. Bidirectional sync: inventory ERP → e-commerce (prevent oversells), orders e-commerce → ERP (fulfillment), shipments WMS → ERP/e-commerce (customer notification). Error handling: failed order syncs queued, duplicate detection, retry logic.' },
+    { title: 'CRM Integration', description: 'Salesforce, HubSpot, Pipedrive connected to billing (Stripe — deal Closed Won → create Stripe customer/subscription → sync invoice status), customer success (Gainsight, ChurnZero — product usage → health score → risk alerts), marketing automation (Klaviyo, Marketo — CRM changes → email lists, deal stage changes → campaign enrollment), support (Zendesk, Intercom — ticket volume → CRM account health). Bi-directional with conflict resolution.' },
+    { title: 'SaaS-to-SaaS Integration', description: 'Connect fragmented SaaS stack: identity provider (Okta, Azure AD) → SCIM provisioning to all tools (user created/disabled auto-provisions/deprovisions), project management sync (Linear ↔ Jira, GitHub PR status → Linear status), billing + subscription (Stripe webhooks → customer.io, HubSpot deal update, Slack finance alert).' },
+    { title: 'Legacy System Connectivity', description: 'Integrate with systems predating REST APIs: EDI (AS2/SFTP-based EDI → modern JSON API for trading partners), SOAP web services (WSDL-based SOAP wrapped in REST adapter), flat-file integration (CSV/fixed-width file processing — parse exports, transform, load to modern), mainframe connectivity (IBM MQ — publish/subscribe to mainframe queues from modern microservices).' },
+    { title: 'Integration Monitoring & Ops', description: 'Production integration monitoring: integration health dashboards (data flow volume, latency, error rate — Datadog/Grafana), data reconciliation reports (daily record count comparison between source and destination — detect silent failures), alert routing (Slack/PagerDuty on failure rate threshold), integration runbook (recovery procedures for each failure type).' },
+  ],
+  differentiators: [
+    { feature: '6 Integration Patterns', description: 'REST, webhook, queue, iPaaS, ETL/ELT, custom middleware — with use-case guidance | Basic: One pattern for everything' },
+    { feature: 'ERP Integration Depth', description: 'Full bidirectional sync: inventory, orders, fulfillment, accounting, multi-currency, multi-location | Basic: Basic order sync only' },
+    { feature: 'Legacy Connectivity', description: 'EDI (AS2), SOAP, flat-file, IBM MQ — adapters to modern REST APIs | Basic: REST API only (legacy data inaccessible)' },
+    { feature: 'Single Source of Truth', description: 'Each data field has one authoritative system — integration reads from source, not writes everywhere | Basic: Bi-directional without authority (conflicts)' },
+    { feature: 'Reconciliation Reports', description: 'Daily comparison of record counts between source and destination — detect divergence early | Basic: No reconciliation (silent divergence)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'Integration Architecture Review', timeline: 'Week 1-2', text: 'System map (all systems, data flows, volume), integration pattern selection (REST/webhook/queue/iPaaS), error handling strategy, data validation rules. Deliverable: Integration Architecture Document.' },
+    { phase: 'Phase 2', title: 'API Connector Development', timeline: 'Week 2-4', text: 'API authentication (OAuth, API keys), REST/webhook endpoints, error handling (retry logic, exponential backoff), data transformation (field mapping, schema conversion). Deliverable: API Connectors + Documentation.' },
+    { phase: 'Phase 3', title: 'Integration Logic & Sync', timeline: 'Week 3-6', text: 'Bidirectional sync logic, conflict resolution strategy (last-write-wins or field priority), data validation before write, idempotency (unique external IDs prevent duplicates). Deliverable: Production Integration.' },
+    { phase: 'Phase 4', title: 'Monitoring & Reconciliation', timeline: 'Week 5-7', text: 'Health dashboards (volume, latency, error rate), reconciliation reports (daily record count comparison), alert routing (Slack/PagerDuty), integration runbook. Deliverable: Monitoring + Runbook.' },
+  ],
+  techStackCategories: [
+    { layer: 'Integration Patterns', technologies: 'Point-to-point REST APIs, webhooks (event-driven), message queues (Kafka/SQS), iPaaS (Boomi/MuleSoft), ETL/ELT pipelines, custom middleware' },
+    { layer: 'ERP Systems', technologies: 'NetSuite (SuiteScript, RESTlets), SAP Business One (DI API, Service Layer), Microsoft Dynamics 365, Sage, Epicor' },
+    { layer: 'CRM Systems', technologies: 'Salesforce (SOAP/REST API, Bulk API, Change Data Capture), HubSpot (API, webhooks, Private Apps), Pipedrive' },
+    { layer: 'Legacy Protocols', technologies: 'EDI (AS2, SFTP, X12/EDIFACT), SOAP (WSDL, XML), flat-file (CSV, fixed-width), IBM MQ' },
+    { layer: 'iPaaS', technologies: 'MuleSoft (Anypoint Platform), Dell Boomi, Workato, Tray.io' },
+    { layer: 'Monitoring', technologies: 'Datadog, Prometheus + Grafana, PagerDuty, Slack alerts, custom reconciliation SQL' },
+  ],
+  pricingTiers: [
+    { type: 'Integration Architecture Review', investment: '$3,000 – $7,000', timeline: '1 – 2 weeks', bestFor: 'System map, data flow design, pattern selection, error strategy' },
+    { type: 'Simple Integration (2 systems)', investment: '$5,000 – $14,000', timeline: '2 – 4 weeks', bestFor: 'REST/webhook, bidirectional sync, error handling, monitoring' },
+    { type: 'ERP Integration (NetSuite/SAP)', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Inventory + orders + fulfillment + accounting — full ERP sync' },
+    { type: 'CRM Integration Suite', investment: '$8,000 – $24,000', timeline: '3 – 6 weeks', bestFor: 'Salesforce/HubSpot + billing + CS + support + marketing' },
+    { type: 'Legacy / EDI Integration', investment: '$10,000 – $30,000', timeline: '4 – 8 weeks', bestFor: 'EDI/SOAP/flat-file adapter, transformation, modern API wrapper' },
+    { type: 'Custom Middleware Service', investment: '$10,000 – $30,000', timeline: '3 – 7 weeks', bestFor: 'Microservice with queue, transformation, retry, monitoring' },
+    { type: 'iPaaS Implementation (Boomi/Workato)', investment: '$12,000 – $40,000', timeline: '4 – 9 weeks', bestFor: 'Enterprise iPaaS setup, connector config, transformation, governance' },
+    { type: 'Integration Retainer', investment: '$3,000 – $8,000/mo', timeline: 'Ongoing', bestFor: 'New integrations, maintenance, API changes, performance monitoring' },
+  ],
+  industryUseCases: [
+    { name: 'ERP + E-commerce Integration', description: 'NetSuite + Shopify bidirectional sync. Inventory levels from ERP to e-commerce (prevent oversells). Orders from Shopify to NetSuite (fulfillment trigger). 99.5% sync accuracy.' },
+    { name: 'Salesforce + Stripe Integration', description: 'Deal Closed Won → create Stripe customer/subscription → sync invoice status to Salesforce opportunity. 100% manual data entry eliminated.' },
+    { name: 'SCIM Provisioning', description: 'Okta/Azure AD user changes → auto-provision/deprovision in Slack, GitHub, Jira, Notion, Figma. 0 manual access management.' },
+    { name: 'EDI Trading Partner Integration', description: 'AS2 EDI transactions (850 purchase orders, 856 ship notices) → modern JSON API → warehouse WMS. Legacy retail compliance without custom coding.' },
+  ],
+  sections: [
+    {
+      heading: 'Common System Integration Patterns',
+      body: '',
+      items: [
+        'Point-to-Point REST API: Direct REST API calls between System A and B. Best for simple integrations (2-3 systems), when both have REST APIs, low-to-moderate data volumes. Easy to understand and debug.',
+        'Webhook / Event-Driven: System A publishes webhook event when something changes. System B (or middleware) receives and responds. No polling required. Best for real-time data sync, CRM deal stage changes, payment events, user lifecycle events.',
+        'Message Queue (Kafka/SQS): System A publishes messages to queue. System B consumes at its own pace. Queue absorbs burst traffic, provides delivery guarantee. Best for high-volume, systems with different throughput capacities, integration resilience.',
+        'iPaaS Middleware: Integration Platform as a Service (Boomi, MuleSoft, Workato) — managed middleware with pre-built connectors to hundreds of enterprise systems. Best for enterprise ERP/CRM integration with complex transformation, large organisations with dedicated integration team and iPaaS licensing budget.',
+        'ETL/ELT Pipeline: Batch extraction from source, transformation, loading to destination on schedule. Best for analytics integrations (data warehouse population), non-real-time data sync, large data volumes requiring full replication.',
+        'Custom Middleware Service: Custom-built service translating between systems with incompatible data models or protocols. Deployed as standalone microservice. Best for legacy system connectivity (SOAP, EDI, proprietary protocols), complex transformation logic, high-performance integrations.',
+      ],
+    },
+    {
+      heading: 'iPaaS vs Custom Integration — When to Use Which',
+      body: 'iPaaS (Integration Platform as a Service) is appropriate when: the organisation has 10+ integrations to manage, the technical team lacks API development expertise, centralised integration governance is required, or target systems are large enterprise apps (SAP, Salesforce, Workday) with complex data models. iPaaS is NOT appropriate when: integrations are simple (2-3 API calls — direct REST is cheaper), budget is limited (iPaaS licensing is $1,000-5,000+/month), or integration requires complex custom logic that iPaaS visual editor cannot express. ClickMasters implements iPaaS for enterprise clients and builds custom integrations for SMB clients where iPaaS licensing cost is not justified.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is system integration and why do B2B companies need it?',
+      answer: 'System integration connects separate software systems so they share data automatically — eliminating manual data re-entry and the inconsistencies it creates. A typical B2B company runs 15-30 SaaS tools (CRM, ERP, billing, customer success, marketing automation, project management). Without integration, data about the same customer exists in multiple systems with different values — the CRM says customer is active, billing system has payment failure, customer success shows no recent login. System integration connects these systems so each data source feeds the others — creating a consistent, real-time view of each customer, order, and operation across every system. Business value: faster decision-making (correct data everywhere), reduced manual work (no copy-paste), and fewer errors (single source of truth per data type).',
+    },
+    {
+      question: 'What is iPaaS and when should I use it?',
+      answer: 'iPaaS (Integration Platform as a Service) is a managed middleware platform with pre-built connectors to hundreds of enterprise applications — MuleSoft, Dell Boomi, Workato, Tray.io. iPaaS is appropriate when: the organisation has 10+ integrations to manage, the technical team lacks API development expertise, centralised integration governance is required, or target systems are large enterprise apps with complex data models that iPaaS vendors have modelled correctly (SAP, Salesforce, ServiceNow, Workday). iPaaS is NOT appropriate when: integrations are simple (2-3 API calls — direct REST is cheaper), budget is limited (iPaaS licensing is $1,000-5,000+/month), or integration requires complex custom logic. ClickMasters implements iPaaS for enterprise clients and builds custom integrations for SMB clients where iPaaS licensing cost is not justified.',
+    },
+    {
+      question: 'How do you ensure data integrity across integrated systems?',
+      answer: 'Data integrity across integrations requires: single source of truth per data type (each data field has one authoritative system — customer billing address lives in Stripe, not CRM; inventory level lives in ERP, not e-commerce; integration reads from authoritative source), idempotent operations (same data processed multiple times without duplicates — unique external ID prevents duplicate creation on retry), conflict resolution strategy (last-write-wins or field-level priority where authoritative system always wins), data validation before write (validate format, required fields, business rules before writing — reject invalid data to exception queue), and reconciliation reports (daily comparison of record counts between source and destination — detect divergence before serious problem).',
+    },
+    {
+      question: 'How long does a system integration take to build?',
+      answer: 'Simple two-system REST API integration (e.g., Stripe webhook → HubSpot deal update): 2-4 weeks including error handling and monitoring. Complex ERP integration (NetSuite + Shopify + ShipBob + accounting — full order lifecycle): 4-8 weeks. Legacy system integration (EDI or SOAP): 4-8 weeks due to legacy protocol complexity. Primary timeline factors: number of data objects synced (10 objects takes longer than 2), data transformation complexity (field mapping vs complex business logic), and error handling requirements (enterprise clients require comprehensive error handling, retry logic, and audit logging). ClickMasters delivers working integration endpoints to staging at the end of every week — clients validate data flow before next stage begins.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters integrated our NetSuite ERP with Shopify and ShipBob. Inventory levels now sync in real time — we've completely eliminated oversells. Order fulfillment time dropped from 24 hours to 2 hours.",
+    author: "COO",
+    role: "DTC E-commerce Brand"
+  },
+  caseStudy: {
+    title: "ERP + E-commerce Integration",
+    description: "Built NetSuite + Shopify + ShipBob integration. Bidirectional sync: inventory (ERP→e-commerce), orders (e-commerce→ERP→WMS), shipments (WMS→ERP→e-commerce). Eliminated oversells. Order fulfillment: 24hrs → 2hrs.",
+    slug: "erp-ecommerce-integration",
+    badge: "System Integration"
+  },
+  howToSteps: [
+    { name: 'Integration Architecture Review', text: 'System map, integration pattern selection, error strategy.' },
+    { name: 'API Connector Development', text: 'Authentication, REST/webhook endpoints, error handling, data transformation.' },
+    { name: 'Integration Logic & Sync', text: 'Bidirectional sync, conflict resolution, idempotency, data validation.' },
+    { name: 'Monitoring & Reconciliation', text: 'Health dashboards, reconciliation reports, alert routing, runbook.' },
+  ],
+  itemList: [
+    'ERP Integration (NetSuite/SAP/Dynamics)',
+    'CRM Integration (Salesforce/HubSpot)',
+    'Legacy System Connectivity (EDI/SOAP)',
+    'Integration Monitoring & Reconciliation',
+  ],
+  definedTerms: [
+    { name: 'iPaaS', description: 'Integration Platform as a Service — managed middleware with pre-built connectors to hundreds of enterprise apps.' },
+    { name: 'SCIM', description: 'System for Cross-domain Identity Management — automates user provisioning/deprovisioning across SaaS tools.' },
+    { name: 'EDI', description: 'Electronic Data Interchange — legacy B2B document exchange standard (purchase orders, invoices, ship notices).' },
+    { name: 'Change Data Capture', description: 'CDC — streams database changes (inserts/updates/deletes) to external systems in real time.' },
+  ],
+};
+
+const apiIntegrationOverride: ServicePageContent = {
+  slug: 'api-integration',
+  categorySlug: 'automation-integration',
+  sectionId: 'api-integration',
+  category: 'Automation & Integration',
+  title: 'API Integration Services',
+  serviceName: 'API Integration',
+  metaTitle: 'API Integration Services | Third-Party API Development | ClickMasters',
+  metaDescription:
+    'ClickMasters builds API integrations — Stripe, Salesforce, Twilio, SendGrid, Google, and custom REST/GraphQL APIs — for B2B companies in the USA, Europe, Canada & Australia.',
+  lead: 'ClickMasters integrates third-party APIs into B2B products across the USA, Europe, Canada, and Australia. Stripe for payments, subscriptions, and marketplace payouts. Twilio for SMS, voice, and WhatsApp. SendGrid for transactional and marketing email. Salesforce, HubSpot, and Pipedrive CRM integration. Google Maps, Calendar, and Workspace. OAuth 2.0 social login. Webhook consumer infrastructure. Any REST or GraphQL API your product depends on.',
+  highlights: [
+    '✓ Stripe Payments & Billing',
+    '✓ Twilio SMS + Voice + WhatsApp',
+    '✓ SendGrid / Postmark Email',
+    '✓ OAuth 2.0 Social Login',
+    '✓ Salesforce / HubSpot CRM',
+    '✓ Webhook Consumer APIs',
+  ],
+  marketStats: [
+    { label: 'Stripe API — payments, subscriptions, marketplace payouts. PCI scope reduction via Stripe.js.', value: 'Stripe' },
+    { label: 'Twilio API — SMS, voice, WhatsApp. A2P 10DLC registration for US SMS campaigns.', value: 'Twilio' },
+    { label: 'SendGrid — transactional email. DKIM/SPF/DMARC setup for deliverability.', value: 'SendGrid' },
+    { label: 'Salesforce API — 10M+ API calls/day. Governor limits (API call limits per 24h).', value: 'Salesforce' },
+  ],
+  servicesCards: [
+    { title: 'Payment API (Stripe)', description: 'Stripe integration: Charges (PaymentIntents), Subscriptions (recurring billing, customer portal, prorations), Stripe Connect (marketplace payouts), webhook consumer (payment events — succeeded, failed, refunded, dispute), SCA/3DS compliance, Idempotency keys on all charge requests, PCI scope reduction via Stripe.js (card data never touches your server).' },
+    { title: 'Communications API (Twilio)', description: 'Twilio integration: SMS (Programmable Messaging), Voice (Programmable Voice — IVR, call routing, recording), WhatsApp Business API, Verify (OTP verification), Conversations (multi-channel messaging). Rate limits per phone number, A2P 10DLC registration for US SMS campaigns, webhook for delivery status.' },
+    { title: 'Email API (SendGrid/Postmark)', description: 'Email integration: Transactional email (order confirmations, password reset, notifications), dynamic templates, bounce/unsubscribe handling, email analytics (open rate, click rate, delivery). DKIM/SPF/DMARC setup for deliverability, suppression list management, transactional vs marketing stream separation.' },
+    { title: 'CRM Integration (Salesforce/HubSpot)', description: 'CRM integration: REST API CRUD (create/update/delete records), SOQL query (search Salesforce objects), webhook subscriptions for real-time sync, Change Data Capture (stream record changes), OAuth 2.0 Connected App setup. HubSpot: Contacts, Companies, Deals API, Private App vs OAuth App, Custom Properties, Workflows triggered by API events.' },
+    { title: 'OAuth 2.0 / Social Login', description: 'OAuth 2.0 integration: Social login (Google, GitHub, Microsoft, Apple Sign In), enterprise SSO (Azure AD, Okta, Ping Identity via OIDC), OAuth 2.0 Authorization Code with PKCE (secure mobile and SPA flows), token storage (HttpOnly cookie — no localStorage). Security: PKCE (prevents code interception), state parameter (CSRF protection), refresh token rotation.' },
+    { title: 'Webhook Consumer Infrastructure', description: 'Build infrastructure to receive and process webhooks: signature verification (validate HMAC signature — reject unsigned/invalid requests), idempotency (deduplicate webhook events — same event may be delivered multiple times), async processing (immediately return 200, process in background queue — prevent timeout), retry handling (design consumer to be idempotent, services retry on non-2xx).' },
+  ],
+  differentiators: [
+    { feature: '8 API Tables', description: 'Stripe, Twilio, SendGrid, Salesforce, HubSpot, Google, OAuth, Webhooks — each with key considerations | Basic: Generic "we integrate APIs" (no specifics)' },
+    { feature: 'PCI Scope Reduction', description: 'Stripe.js — card data never touches your server, PCI SAQ A | Basic: Custom payment form (PCI SAQ D-expensive)' },
+    { feature: 'A2P 10DLC', description: 'US SMS campaign registration — legal compliance for Twilio messaging | Basic: No registration (delivery issues, blocks)' },
+    { feature: 'DKIM/SPF/DMARC', description: 'Email deliverability authentication — prevents spoofing, improves inbox placement | Basic: No authentication (goes to spam)' },
+    { feature: 'PKCE + State + HttpOnly', description: 'OAuth 2.0 security — prevents code interception, CSRF, XSS token theft | Basic: Implicit flow (deprecated, insecure)' },
+  ],
+  processPhases: [
+    { phase: 'Phase 1', title: 'API Integration Scoping', timeline: 'Week 1', text: 'API selection, auth flow design (OAuth vs API key), error handling strategy, rate limit analysis, cost model. Deliverable: API Integration Spec + Cost Estimate.' },
+    { phase: 'Phase 2', title: 'Authentication & API Client', timeline: 'Week 1-2', text: 'OAuth setup (client ID/secret, redirect URIs, token exchange), API client with retry logic (exponential backoff), timeout configuration, error handling, logging. Deliverable: API Client + Auth.' },
+    { phase: 'Phase 3', title: 'Endpoint Implementation', timeline: 'Week 2-4', text: 'Implement required API endpoints (CRUD operations, search, batch), data transformation (field mapping, schema conversion), response validation, webhook consumer (signature verification, idempotency, async processing queue). Deliverable: Production API Integration.' },
+    { phase: 'Phase 4', title: 'Rate Limit & Cost Management', timeline: 'Week 3-4', text: 'Rate limit header inspection (X-RateLimit-Remaining), exponential backoff with jitter (on 429), request queuing (BullMQ rate limiter), request batching (Salesforce Bulk API, HubSpot Batch API), cost monitoring dashboard. Deliverable: Rate Limit Handling + Dashboard.' },
+  ],
+  techStackCategories: [
+    { layer: 'Payment APIs', technologies: 'Stripe (Charges, PaymentIntents, Subscriptions, Connect, webhooks), Braintree, PayPal, Adyen' },
+    { layer: 'Communications', technologies: 'Twilio (SMS, Voice, WhatsApp, Verify, Conversations), MessageBird, Vonage' },
+    { layer: 'Email', technologies: 'SendGrid (transactional/marketing), Postmark (focused on transactional), AWS SES, Resend' },
+    { layer: 'CRM', technologies: 'Salesforce (REST/SOAP API, Bulk API, CDC), HubSpot (API, webhooks, Private Apps), Pipedrive' },
+    { layer: 'OAuth 2.0', technologies: 'OAuth 2.0 Authorization Code + PKCE, OIDC (OpenID Connect), Okta, Auth0, Azure AD, Google Identity' },
+    { layer: 'Webhooks', technologies: 'Express/FastAPI (webhook endpoints), signature verification (HMAC), BullMQ (async queue), idempotency keys, dead letter queue' },
+    { layer: 'Rate Limiting', technologies: 'BullMQ rate limiter (queue-based), token bucket, sliding window, exponential backoff with jitter' },
+  ],
+  pricingTiers: [
+    { type: 'API Integration Scoping', investment: '$1,500 – $4,000', timeline: '1 week', bestFor: 'API selection, auth flow design, error strategy, cost model' },
+    { type: 'Payment API (Stripe)', investment: '$5,000 – $14,000', timeline: '2 – 4 weeks', bestFor: 'Charges/subscriptions/Connect, webhooks, PCI scope, testing' },
+    { type: 'Communications API (Twilio)', investment: '$4,000 – $10,000', timeline: '2 – 3 weeks', bestFor: 'SMS/Voice/WhatsApp, templates, delivery webhooks, 10DLC' },
+    { type: 'Email API (SendGrid/Postmark)', investment: '$3,000 – $8,000', timeline: '1 – 3 weeks', bestFor: 'Templates, webhooks, DKIM/SPF/DMARC, suppression, analytics' },
+    { type: 'CRM Integration (Salesforce/HubSpot)', investment: '$6,000 – $18,000', timeline: '2 – 5 weeks', bestFor: 'CRUD, webhooks, field mapping, sync strategy, error handling' },
+    { type: 'OAuth 2.0 / Social Login', investment: '$4,000 – $10,000', timeline: '2 – 3 weeks', bestFor: 'Provider setup, PKCE, token storage, refresh rotation' },
+    { type: 'Webhook Consumer Infrastructure', investment: '$4,000 – $10,000', timeline: '2 – 3 weeks', bestFor: 'Signature verification, idempotency, async queue, DLQ, monitoring' },
+    { type: 'Multi-API Integration Suite', investment: '$12,000 – $35,000', timeline: '4 – 8 weeks', bestFor: 'Multiple third-party APIs, shared error handling, monitoring dashboard' },
+  ],
+  industryUseCases: [
+    { name: 'Stripe Payment Integration', description: 'SaaS subscription billing: PaymentIntents for one-time charges, Subscriptions for recurring billing, Customer Portal for self-serve plan changes, webhooks for payment events. PCI SAQ A compliance.' },
+    { name: 'Twilio SMS Verification', description: '2FA via SMS: Twilio Verify API for OTP generation and verification. Rate limiting per phone number. Webhook for delivery status. 99.9% deliverability.' },
+    { name: 'Salesforce to Stripe Sync', description: 'Deal Closed Won → create Stripe customer, create subscription, sync invoice status back to Salesforce opportunity. 100% manual data entry eliminated.' },
+    { name: 'Google OAuth Social Login', description: 'Sign in with Google: OAuth 2.0 Authorization Code with PKCE. Retrieve email and profile. HttpOnly cookie token storage. Redirect to onboarding or dashboard.' },
+  ],
+  sections: [
+    {
+      heading: 'High-Demand API Integrations',
+      body: '',
+      items: [
+        'Stripe: Payments, subscriptions, marketplace payouts. Key considerations: PCI scope reduction via Stripe.js (card data never touches your server), idempotency keys on all charge requests, webhook signature verification, SCA/3DS compliance, test mode validation before live.',
+        'Twilio: SMS, voice, WhatsApp. Key considerations: rate limits per phone number, A2P 10DLC registration for US SMS campaigns (legal compliance), webhook for delivery status, phone number provisioning and management.',
+        'SendGrid/Postmark: Transactional email. Key considerations: DKIM/SPF/DMARC setup for deliverability, suppression list management, bounce webhook handling, transactional vs marketing stream separation.',
+        'Salesforce: REST API CRUD, SOQL query, Apex triggers, Change Data Capture. Key considerations: API version management (Salesforce updates twice yearly), governor limits (API call limits per 24h), OAuth 2.0 Connected App setup, sandbox testing before production.',
+        'HubSpot: Contacts, Companies, Deals API, webhooks, Custom Properties. Key considerations: rate limits (100 calls/10s), Private App vs OAuth App, webhook subscriptions for real-time sync, custom object API for non-standard data.',
+        'Google APIs: Maps, Calendar, Workspace. Key considerations: OAuth 2.0 scope minimisation, API quota management, Service Account for server-to-server, Google Cloud Console API key management.',
+      ],
+    },
+    {
+      heading: 'OAuth 2.0 Security Best Practices',
+      body: 'OAuth 2.0 Authorization Code with PKCE is the correct implementation for web and mobile applications. Security requirements: PKCE (Proof Key for Code Exchange — prevents authorisation code interception attacks), state parameter (CSRF protection), HttpOnly cookie for token storage (not localStorage — prevents XSS theft), and refresh token rotation (each refresh generates new refresh token, invalidating the old one). ClickMasters implements all four security mechanisms as standard on every OAuth 2.0 integration.',
+      items: [],
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is API integration and how long does it take?',
+      answer: 'API integration connects a software product to a third-party service\'s Application Programming Interface (API) — enabling the product to read and write data from that service programmatically. Examples: integrating Stripe\'s API to process payments, connecting Twilio\'s API to send SMS, or linking HubSpot\'s API to synchronise customer data. Timeline: simple single-API integration (one service, standard authentication, 3-5 API endpoints) takes 2-3 weeks including authentication setup, endpoint implementation, error handling, webhook consumer, and testing. Complex integrations (multiple endpoints, complex data transformation, bidirectional sync) take 3-6 weeks. ClickMasters prices all API integrations as fixed-price after a scoping call.',
+    },
+    {
+      question: 'What is a webhook and how is it different from polling?',
+      answer: 'A webhook is an HTTP callback from a third-party service to your application when an event occurs — instead of your application repeatedly asking the service "has anything changed?" (polling), the service proactively tells you when something happens. Example: Stripe sends a webhook every time a payment is processed, subscription renews, or payment fails — your application processes each event in real time rather than checking Stripe every 5 minutes. Webhooks are preferred because they are real-time, lower in API usage (no wasted polling calls), and more reliable (no missed events due to polling frequency). Key webhook implementation requirements: return 200 OK within 5-10 seconds, verify webhook signature (HMAC validation — reject unsigned requests), and handle duplicate delivery idempotently (same event may be delivered multiple times).',
+    },
+    {
+      question: 'What is OAuth 2.0 and why does it matter for API integrations?',
+      answer: 'OAuth 2.0 is the industry-standard protocol for authorising third-party applications to access a user\'s data on a service — without sharing the user\'s password. It enables "Sign in with Google/GitHub/Microsoft" (user authorises your application to read their email and profile) and "Connect your Salesforce account" (user authorises your application to read/write their Salesforce data). The OAuth 2.0 Authorization Code with PKCE flow is correct for web and mobile: user redirected to provider\'s authorisation page, approves scopes, redirected back with authorisation code → exchanged for access and refresh tokens. Security requirements: PKCE (prevents authorisation code interception), state parameter (CSRF protection), HttpOnly cookie for token storage (not localStorage), and refresh token rotation (each refresh generates new token, invalidating old one).',
+    },
+    {
+      question: 'How do you handle API rate limits in production?',
+      answer: 'Third-party API rate limits are a common production integration failure mode. ClickMasters implements: rate limit header inspection (most APIs return X-RateLimit-Remaining and X-RateLimit-Reset — read these to know when limit resets), exponential backoff with jitter (on 429 Too Many Requests, wait with random jitter before retrying — prevents thundering herd), request queuing (put API calls into job queue with rate limiter — BullMQ limits queue to N requests/second across all workers), and request batching (Salesforce Bulk API, HubSpot Batch API — send 100-200 records in one request instead of separate requests). ClickMasters documents the rate limit of every API integrated and designs the integration architecture to stay within limits at peak load.',
+    },
+  ],
+  testimonial: {
+    quote: "ClickMasters integrated Stripe subscriptions and Twilio SMS into our SaaS product. The implementation handles webhooks, idempotency, and rate limits perfectly. We've processed $2M in subscription revenue with zero payment integration issues.",
+    author: "CTO",
+    role: "SaaS Startup"
+  },
+  caseStudy: {
+    title: "Stripe + Twilio Integration",
+    description: "Integrated Stripe subscriptions (PaymentIntents, webhooks) and Twilio SMS (Verify API for 2FA). PCI SAQ A compliance. 99.99% webhook processing reliability. Zero payment issues over $2M+ processed.",
+    slug: "stripe-twilio-integration",
+    badge: "API Integration"
+  },
+  howToSteps: [
+    { name: 'API Integration Scoping', text: 'API selection, auth flow design, error handling strategy, rate limit analysis, cost model.' },
+    { name: 'Authentication & API Client', text: 'OAuth setup, API client with retry logic, timeout, error handling.' },
+    { name: 'Endpoint Implementation', text: 'CRUD operations, data transformation, webhook consumer, async processing queue.' },
+    { name: 'Rate Limit & Cost Management', text: 'Rate limit inspection, exponential backoff, request queuing/batching, monitoring dashboard.' },
+  ],
+  itemList: [
+    'Payment API (Stripe)',
+    'Communications API (Twilio)',
+    'Email API (SendGrid/Postmark)',
+    'CRM Integration (Salesforce/HubSpot)',
+    'OAuth 2.0 / Social Login',
+    'Webhook Consumer Infrastructure',
+  ],
+  definedTerms: [
+    { name: 'PKCE', description: 'Proof Key for Code Exchange — OAuth 2.0 extension preventing authorisation code interception attacks.' },
+    { name: 'Idempotency', description: 'Same operation produces same result when run multiple times — prevents duplicate charges/records on retry.' },
+    { name: 'A2P 10DLC', description: 'Application-to-Person 10-Digit Long Code — US SMS campaign registration for legal compliance and deliverability.' },
+    { name: 'SCA', description: 'Strong Customer Authentication — PSD2 requirement for European payments. Stripe handles via 3D Secure.' },
+  ],
+};
+
+
 const serviceOverrides = new Map<string, ServicePageContent>([
   [customSoftwareDevelopmentOverride.slug, customSoftwareDevelopmentOverride],
   [enterpriseSoftwareDevelopmentOverride.slug, enterpriseSoftwareDevelopmentOverride],
@@ -5038,6 +9727,35 @@ const serviceOverrides = new Map<string, ServicePageContent>([
   [backendDevelopmentOverride.slug, backendDevelopmentOverride],
   [frontendDevelopmentOverride.slug, frontendDevelopmentOverride],
   [fullStackDevelopmentOverride.slug, fullStackDevelopmentOverride],
+  [productDesignOverride.slug, productDesignOverride],
+  [webDesignOverride.slug, webDesignOverride],
+  [mobileAppDesignOverride.slug, mobileAppDesignOverride],
+  [uxResearchOverride.slug, uxResearchOverride],
+  [wireframingPrototypingOverride.slug, wireframingPrototypingOverride],
+  [designSystemsOverride.slug, designSystemsOverride],
+  [aiIntegrationServicesOverride.slug, aiIntegrationServicesOverride],
+  [llmApplicationsDevelopmentOverride.slug, llmApplicationsDevelopmentOverride],
+  [machineLearningSolutionsOverride.slug, machineLearningSolutionsOverride],
+  [predictiveAnalyticsOverride.slug, predictiveAnalyticsOverride],
+  [recommendationSystemsOverride.slug, recommendationSystemsOverride],
+  [modelTrainingOptimisationOverride.slug, modelTrainingOptimisationOverride],
+  [deepLearningSolutionsOverride.slug, deepLearningSolutionsOverride],
+  [naturalLanguageProcessingOverride.slug, naturalLanguageProcessingOverride],
+  [speechRecognitionOverride.slug, speechRecognitionOverride],
+  [textAnalyticsOverride.slug, textAnalyticsOverride],
+  [computerVisionOverride.slug, computerVisionOverride],
+  [imageProcessingOverride.slug, imageProcessingOverride],
+  [videoAnalyticsOverride.slug, videoAnalyticsOverride],
+  [dataScienceAnalyticsOverride.slug, dataScienceAnalyticsOverride],
+  [businessIntelligenceOverride.slug, businessIntelligenceOverride],
+  [dataWarehousingOverride.slug, dataWarehousingOverride],
+  [dataVisualizationOverride.slug, dataVisualizationOverride],
+  [bigDataSolutionsOverride.slug, bigDataSolutionsOverride],
+  [webScrapingDataExtractionOverride.slug, webScrapingDataExtractionOverride],
+  [businessProcessAutomationOverride.slug, businessProcessAutomationOverride],
+  [workflowAutomationOverride.slug, workflowAutomationOverride],
+  [systemIntegrationOverride.slug, systemIntegrationOverride],
+  [apiIntegrationOverride.slug, apiIntegrationOverride],
 ]);
 
 const services: ServicePageContent[] = baseServices.map(
@@ -5062,89 +9780,195 @@ export function getServicePath(category: string, title: string): string {
   return `/${slugify(category)}/${slugify(title)}`;
 }
 
+
 // ============================================
 // TECHNOLOGY DEFINITIONS
 // ============================================
 
 // Master list of all technologies with icons
+// Master list of all technologies with icons - COMPLETE EDITION
 export const allTechnologies: Record<string, Technology> = {
-  // Backend Languages
+  // ==================== BACKEND LANGUAGES ====================
   dotnet: { name: ".NET", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" },
+  dotnetframework: { name: ".NET Framework", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" },
+  csharp: { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
+  fsharp: { name: "F#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fsharp/fsharp-original.svg" },
   java: { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+  kotlin: { name: "Kotlin", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+  scala: { name: "Scala", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg" },
   python: { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
   nodejs: { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  deno: { name: "Deno", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/denojs/denojs-original.svg" },
+  bun: { name: "Bun", icon: "https://bun.sh/icon.png" }, // Custom icon
   php: { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
   go: { name: "Go", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg" },
   ruby: { name: "Ruby", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg" },
   rust: { name: "Rust", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" },
+  elixir: { name: "Elixir", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elixir/elixir-original.svg" },
+  erlang: { name: "Erlang", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/erlang/erlang-original.svg" },
+  haskell: { name: "Haskell", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/haskell/haskell-original.svg" },
+  clojure: { name: "Clojure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/clojure/clojure-original.svg" },
+  groovy: { name: "Groovy", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/groovy/groovy-original.svg" },
+  perl: { name: "Perl", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/perl/perl-original.svg" },
+  lua: { name: "Lua", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" },
+  r: { name: "R", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" },
+  julia: { name: "Julia", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/julia/julia-original.svg" },
+  dart: { name: "Dart", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" },
+  crystal: { name: "Crystal", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/crystal/crystal-original.svg" },
+  nim: { name: "Nim", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nim/nim-original.svg" },
+  vlang: { name: "V", icon: "https://vlang.io/img/v-logo.svg" }, // Custom icon
+  zig: { name: "Zig", icon: "https://ziglang.org/logo.svg" }, // Custom icon
+  ocaml: { name: "OCaml", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ocaml/ocaml-original.svg" },
+  pascal: { name: "Pascal", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pascal/pascal-original.svg" },
+  cobol: { name: "COBOL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cobol/cobol-original.svg" },
+  fortran: { name: "Fortran", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fortran/fortran-original.svg" },
   
-  // Frontend Languages
+  // ==================== FRONTEND LANGUAGES ====================
   html5: { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
   css3: { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
   javascript: { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
   typescript: { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  coffeescript: { name: "CoffeeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/coffeescript/coffeescript-original.svg" },
+  pug: { name: "Pug", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pug/pug-original.svg" },
+  haml: { name: "Haml", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/haml/haml-original.svg" },
+  slim: { name: "Slim", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slim/slim-original.svg" },
+  markdown: { name: "Markdown", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/markdown/markdown-original.svg" },
   
-  // Frontend Frameworks
+  // ==================== FRONTEND FRAMEWORKS & LIBRARIES ====================
   react: { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  reactquery: { name: "React Query", icon: "https://react-query.tanstack.com/_next/static/images/logo-8b1eb159dc1b7787f96196cfbaa9b449.svg" }, // Custom icon
+  redux: { name: "Redux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" },
+  mobx: { name: "MobX", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mobx/mobx-original.svg" },
+  recoil: { name: "Recoil", icon: "https://recoiljs.org/img/logo.svg" }, // Custom icon
+  zustand: { name: "Zustand", icon: "https://zustand-demo.pmnd.rs/favicon.ico" }, // Custom icon
   nextjs: { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-  vuejs: { name: "Vue.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" },
-  angular: { name: "Angular", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
-  svelte: { name: "Svelte", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg" },
-  nuxtjs: { name: "Nuxt.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg" },
+  remix: { name: "Remix", icon: "https://remix.run/favicon.ico" }, // Custom icon
   gatsby: { name: "Gatsby", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gatsby/gatsby-original.svg" },
+  vuejs: { name: "Vue.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" },
+  vuex: { name: "Vuex", icon: "https://vuex.vuejs.org/logo.png" }, // Custom icon
+  nuxtjs: { name: "Nuxt.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg" },
+  angular: { name: "Angular", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
+  angularjs: { name: "AngularJS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
+  svelte: { name: "Svelte", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg" },
+  sveltekit: { name: "SvelteKit", icon: "https://kit.svelte.dev/images/favicon.png" }, // Custom icon
+  alpinejs: { name: "Alpine.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/alpinejs/alpinejs-original.svg" },
+  htmx: { name: "htmx", icon: "https://htmx.org/img/logo.png" }, // Custom icon
+  preact: { name: "Preact", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/preact/preact-original.svg" },
+  solidjs: { name: "SolidJS", icon: "https://www.solidjs.com/img/logo/without-wordmark/logo.svg" }, // Custom icon
+  qwik: { name: "Qwik", icon: "https://qwik.io/favicon.svg" }, // Custom icon
+  lit: { name: "Lit", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lit/lit-original.svg" },
+  stimulus: { name: "Stimulus", icon: "https://stimulus.hotwired.dev/favicon.ico" }, // Custom icon
   
-  // CSS Frameworks
+  // ==================== CSS FRAMEWORKS & PREPROCESSORS ====================
   tailwindcss: { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
   bootstrap: { name: "Bootstrap", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" },
   sass: { name: "Sass", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" },
+  less: { name: "Less", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/less/less-plain-wordmark.svg" },
+  stylus: { name: "Stylus", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/stylus/stylus-original.svg" },
+  postcss: { name: "PostCSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postcss/postcss-original.svg" },
+  bulma: { name: "Bulma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bulma/bulma-plain.svg" },
+  foundation: { name: "Foundation", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/foundation/foundation-original.svg" },
+  materialize: { name: "Materialize", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialize/materialize-original.svg" },
+  semanticui: { name: "Semantic UI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/semanticui/semanticui-original.svg" },
+  uikit: { name: "UIkit", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uikit/uikit-original.svg" },
+  tachyons: { name: "Tachyons", icon: "https://tachyons.io/img/logo.jpg" }, // Custom icon
+  chakraui: { name: "Chakra UI", icon: "https://chakra-ui.com/favicon.png" }, // Custom icon
+  mantine: { name: "Mantine", icon: "https://mantine.dev/favicon.svg" }, // Custom icon
+  antdesign: { name: "Ant Design", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/antdesign/antdesign-original.svg" },
+  materialui: { name: "Material-UI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg" },
   
-  // Mobile
+  // ==================== MOBILE DEVELOPMENT ====================
   ios: { name: "iOS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" },
   android: { name: "Android", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" },
   reactnative: { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
   flutter: { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
   swift: { name: "Swift", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" },
   kotlin: { name: "Kotlin", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+  xamarin: { name: "Xamarin", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xamarin/xamarin-original.svg" },
+  ionic: { name: "Ionic", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg" },
+  nativescript: { name: "NativeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nativescript/nativescript-original.svg" },
+  cordova: { name: "Cordova", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cordova/cordova-original.svg" },
+  capacitor: { name: "Capacitor", icon: "https://capacitorjs.com/favicon.ico" }, // Custom icon
+  expo: { name: "Expo", icon: "https://expo.dev/favicon.ico" }, // Custom icon
   
-  // Databases - SQL
+  // ==================== DATABASES - SQL ====================
   postgresql: { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
   mysql: { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
   sqlserver: { name: "SQL Server", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" },
   oracle: { name: "Oracle", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" },
   sqlite: { name: "SQLite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" },
+  mariadb: { name: "MariaDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg" },
+  cockroachdb: { name: "CockroachDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cockroachdb/cockroachdb-original.svg" },
+  db2: { name: "DB2", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/db2/db2-original.svg" },
   
-  // Databases - NoSQL
+  // ==================== DATABASES - NoSQL ====================
   mongodb: { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
   redis: { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
   cassandra: { name: "Cassandra", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg" },
   firebase: { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
   elasticsearch: { name: "Elasticsearch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" },
+  dynamodb: { name: "DynamoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+  couchdb: { name: "CouchDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/couchdb/couchdb-original.svg" },
+  neo4j: { name: "Neo4j", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neo4j/neo4j-original.svg" },
+  influxdb: { name: "InfluxDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/influxdb/influxdb-original.svg" },
+  rethinkdb: { name: "RethinkDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rethinkdb/rethinkdb-original.svg" },
+  arangodb: { name: "ArangoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arangodb/arangodb-original.svg" },
   
-  // Cloud - AWS
+  // ==================== ORMs & DATABASE TOOLS ====================
+  prisma: { name: "Prisma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" },
+  sequelize: { name: "Sequelize", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sequelize/sequelize-original.svg" },
+  typeorm: { name: "TypeORM", icon: "https://typeorm.io/favicon.ico" }, // Custom icon
+  drizzle: { name: "Drizzle", icon: "https://drizzle.team/favicon.ico" }, // Custom icon
+  mongoose: { name: "Mongoose", icon: "https://mongoosejs.com/docs/images/favicon.png" }, // Custom icon
+  
+  // ==================== CLOUD PLATFORMS ====================
   aws: { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-  
-  // Cloud - Azure
   azure: { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
-  
-  // Cloud - Google
   gcp: { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
+  cloudflare: { name: "Cloudflare", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg" },
+  digitalocean: { name: "DigitalOcean", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg" },
+  heroku: { name: "Heroku", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" },
+  netlify: { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" },
+  vercel: { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
+  render: { name: "Render", icon: "https://render.com/favicon.ico" }, // Custom icon
+  railway: { name: "Railway", icon: "https://railway.app/favicon.ico" }, // Custom icon
+  flyio: { name: "Fly.io", icon: "https://fly.io/favicon.ico" }, // Custom icon
+  linode: { name: "Linode", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linode/linode-original.svg" },
+  vultr: { name: "Vultr", icon: "https://www.vultr.com/favicon.ico" }, // Custom icon
+  ovh: { name: "OVHcloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ovh/ovh-original.svg" },
   
-  // DevOps - Containers
+  // ==================== DEVOPS & CI/CD ====================
   docker: { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
   kubernetes: { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
-  
-  // DevOps - CI/CD
   jenkins: { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
   github: { name: "GitHub Actions", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
   gitlab: { name: "GitLab CI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" },
   circleci: { name: "CircleCI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/circleci/circleci-plain.svg" },
+  travisci: { name: "Travis CI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/travis/travis-plain.svg" },
+  bitbucket: { name: "Bitbucket Pipelines", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bitbucket/bitbucket-original.svg" },
+  azurepipelines: { name: "Azure Pipelines", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+  bamboo: { name: "Bamboo", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bamboo/bamboo-original.svg" },
+  teamcity: { name: "TeamCity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/teamcity/teamcity-original.svg" },
+  concourse: { name: "Concourse", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/concourse/concourse-original.svg" },
+  drone: { name: "Drone", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/drone/drone-original.svg" },
   
-  // DevOps - Infrastructure
+  // ==================== INFRASTRUCTURE AS CODE ====================
   terraform: { name: "Terraform", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" },
   ansible: { name: "Ansible", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" },
-  nginx: { name: "Nginx", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" },
+  pulumi: { name: "Pulumi", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pulumi/pulumi-original.svg" },
+  chef: { name: "Chef", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chef/chef-original.svg" },
+  puppet: { name: "Puppet", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/puppet/puppet-original.svg" },
+  saltstack: { name: "SaltStack", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/saltstack/saltstack-original.svg" },
+  cloudformation: { name: "CloudFormation", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
   
-  // Backend Frameworks
+  // ==================== WEB SERVERS & PROXIES ====================
+  nginx: { name: "Nginx", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" },
+  apache: { name: "Apache", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" },
+  caddy: { name: "Caddy", icon: "https://caddyserver.com/favicon.ico" }, // Custom icon
+  tomcat: { name: "Tomcat", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tomcat/tomcat-original.svg" },
+  iis: { name: "IIS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/iis/iis-original.svg" },
+  
+  // ==================== BACKEND FRAMEWORKS ====================
   django: { name: "Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" },
   fastapi: { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
   flask: { name: "Flask", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" },
@@ -5153,56 +9977,195 @@ export const allTechnologies: Record<string, Technology> = {
   spring: { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
   express: { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
   nestjs: { name: "NestJS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg" },
+  koa: { name: "Koa", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/koa/koa-original.svg" },
+  hapi: { name: "Hapi", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hapi/hapi-original.svg" },
+  fastify: { name: "Fastify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastify/fastify-original.svg" },
+  adonisjs: { name: "AdonisJS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/adonisjs/adonisjs-original.svg" },
+  strapi: { name: "Strapi", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/strapi/strapi-original.svg" },
+  directus: { name: "Directus", icon: "https://directus.io/favicon.ico" }, // Custom icon
+  pocketbase: { name: "PocketBase", icon: "https://pocketbase.io/favicon.ico" }, // Custom icon
   
-  // AI/ML
+  // ==================== AI & MACHINE LEARNING ====================
   tensorflow: { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
   pytorch: { name: "PyTorch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" },
+  keras: { name: "Keras", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg" },
+  scikitlearn: { name: "Scikit-learn", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" },
   opencv: { name: "OpenCV", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" },
   numpy: { name: "NumPy", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
   pandas: { name: "Pandas", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
   jupyter: { name: "Jupyter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" },
+  huggingface: { name: "Hugging Face", icon: "https://huggingface.co/favicon.ico" }, // Custom icon
+  langchain: { name: "LangChain", icon: "https://langchain.com/favicon.ico" }, // Custom icon
+  llama: { name: "Llama", icon: "https://llama.meta.com/favicon.ico" }, // Custom icon
+  ollama: { name: "Ollama", icon: "https://ollama.ai/favicon.ico" }, // Custom icon
   
-  // CMS
+  // ==================== CMS & E-COMMERCE ====================
   wordpress: { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" },
-  
-  // E-commerce
   woocommerce: { name: "WooCommerce", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/woocommerce/woocommerce-original.svg" },
+  drupal: { name: "Drupal", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/drupal/drupal-original.svg" },
+  joomla: { name: "Joomla", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/joomla/joomla-original.svg" },
+  magento: { name: "Magento", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/magento/magento-original.svg" },
+  shopify: { name: "Shopify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/shopify/shopify-original.svg" },
+  prestashop: { name: "PrestaShop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prestashop/prestashop-original.svg" },
+  strapi: { name: "Strapi", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/strapi/strapi-original.svg" },
+  sanity: { name: "Sanity", icon: "https://www.sanity.io/favicon.ico" }, // Custom icon
+  contentful: { name: "Contentful", icon: "https://www.contentful.com/favicon.ico" }, // Custom icon
+  ghost: { name: "Ghost", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ghost/ghost-original.svg" },
   
-  // Testing
+  // ==================== TESTING ====================
   jest: { name: "Jest", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" },
+  vitest: { name: "Vitest", icon: "https://vitest.dev/favicon.ico" }, // Custom icon
   selenium: { name: "Selenium", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" },
+  cypress: { name: "Cypress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cypressio/cypressio-original.svg" },
+  playwright: { name: "Playwright", icon: "https://playwright.dev/favicon.ico" }, // Custom icon
+  puppeteer: { name: "Puppeteer", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/puppeteer/puppeteer-original.svg" },
+  mocha: { name: "Mocha", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mocha/mocha-plain.svg" },
+  chai: { name: "Chai", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chai/chai-original.svg" },
+  jasmine: { name: "Jasmine", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jasmine/jasmine-original.svg" },
+  karma: { name: "Karma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/karma/karma-original.svg" },
+  cucumber: { name: "Cucumber", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cucumber/cucumber-plain.svg" },
+  junit: { name: "JUnit", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/junit/junit-original.svg" },
+  pytest: { name: "Pytest", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytest/pytest-original.svg" },
   
-  // Design
+  // ==================== DESIGN TOOLS ====================
   figma: { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
   sketch: { name: "Sketch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketch/sketch-original.svg" },
   xd: { name: "Adobe XD", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg" },
+  photoshop: { name: "Photoshop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
+  illustrator: { name: "Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" },
+  indesign: { name: "InDesign", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/indesign/indesign-original.svg" },
+  aftereffects: { name: "After Effects", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" },
+  premiere: { name: "Premiere Pro", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-plain.svg" },
+  lightroom: { name: "Lightroom", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lightroom/lightroom-original.svg" },
+  canva: { name: "Canva", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" },
+  gimp: { name: "GIMP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gimp/gimp-original.svg" },
+  inkscape: { name: "Inkscape", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/inkscape/inkscape-original.svg" },
   
-  // Blockchain
+  // ==================== BLOCKCHAIN ====================
   solidity: { name: "Solidity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg" },
+  rust: { name: "Rust", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" },
+  web3js: { name: "Web3.js", icon: "https://web3js.org/favicon.ico" }, // Custom icon
+  ethers: { name: "Ethers.js", icon: "https://ethers.org/favicon.ico" }, // Custom icon
+  hardhat: { name: "Hardhat", icon: "https://hardhat.org/favicon.ico" }, // Custom icon
+  truffle: { name: "Truffle", icon: "https://trufflesuite.com/favicon.ico" }, // Custom icon
   
-  // Big Data
+  // ==================== BIG DATA & STREAMING ====================
   spark: { name: "Apache Spark", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachespark/apachespark-original.svg" },
   kafka: { name: "Apache Kafka", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" },
   hadoop: { name: "Hadoop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hadoop/hadoop-original.svg" },
+  airflow: { name: "Airflow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apacheairflow/apacheairflow-original.svg" },
+  flink: { name: "Flink", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apacheflink/apacheflink-original.svg" },
+  storm: { name: "Storm", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachestorm/apachestorm-original.svg" },
+  beam: { name: "Beam", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachebeam/apachebeam-original.svg" },
+  cassandra: { name: "Cassandra", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg" },
   
-  // Messaging
+  // ==================== MESSAGING & API ====================
   graphql: { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
+  rest: { name: "REST API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/restapi/restapi-original.svg" }, // Custom
+  grpc: { name: "gRPC", icon: "https://grpc.io/favicon.ico" }, // Custom icon
+  websocket: { name: "WebSocket", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" },
+  rabbitmq: { name: "RabbitMQ", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg" },
+  kafka: { name: "Kafka", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" },
+  redis: { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
   
-  // 3D/AR/VR
+  // ==================== 3D, AR & VR ====================
   unity: { name: "Unity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" },
   unrealengine: { name: "Unreal Engine", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unrealengine/unrealengine-original.svg" },
   threejs: { name: "Three.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
+  babylonjs: { name: "Babylon.js", icon: "https://www.babylonjs.com/favicon.ico" }, // Custom icon
+  blender: { name: "Blender", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" },
+  maya: { name: "Maya", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maya/maya-original.svg" },
+  arkit: { name: "ARKit", icon: "https://developer.apple.com/favicon.ico" }, // Custom icon
+  arcore: { name: "ARCore", icon: "https://developers.google.com/favicon.ico" }, // Custom icon
   
-  // IoT
+  // ==================== IOT & EMBEDDED ====================
   raspberrypi: { name: "Raspberry Pi", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" },
   arduino: { name: "Arduino", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
+  esp32: { name: "ESP32", icon: "https://www.espressif.com/sites/all/themes/espressif/favicon.ico" }, // Custom
+  mqtt: { name: "MQTT", icon: "https://mqtt.org/favicon.ico" }, // Custom icon
   
-  // Version Control
+  // ==================== VERSION CONTROL ====================
   git: { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+  github: { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+  gitlab: { name: "GitLab", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" },
+  bitbucket: { name: "Bitbucket", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bitbucket/bitbucket-original.svg" },
+  svn: { name: "Subversion", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/subversion/subversion-original.svg" },
+  mercurial: { name: "Mercurial", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mercurial/mercurial-original.svg" },
   
-  // Monitoring
+  // ==================== MONITORING & OBSERVABILITY ====================
   grafana: { name: "Grafana", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" },
   prometheus: { name: "Prometheus", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" },
+  datadog: { name: "Datadog", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/datadog/datadog-original.svg" },
+  newrelic: { name: "New Relic", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/newrelic/newrelic-original.svg" },
+  sentry: { name: "Sentry", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sentry/sentry-original.svg" },
+  elasticsearch: { name: "Elasticsearch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" },
+  logstash: { name: "Logstash", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/logstash/logstash-original.svg" },
+  kibana: { name: "Kibana", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kibana/kibana-original.svg" },
+  splunk: { name: "Splunk", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/splunk/splunk-original.svg" },
+  
+  // ==================== PACKAGE MANAGERS ====================
+  npm: { name: "npm", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" },
+  yarn: { name: "Yarn", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/yarn/yarn-original.svg" },
+  pnpm: { name: "pnpm", icon: "https://pnpm.io/favicon.ico" }, // Custom icon
+  pip: { name: "pip", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  poetry: { name: "Poetry", icon: "https://python-poetry.org/favicon.ico" }, // Custom icon
+  gradle: { name: "Gradle", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-original.svg" },
+  maven: { name: "Maven", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" },
+  composer: { name: "Composer", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/composer/composer-original.svg" },
+  bundler: { name: "Bundler", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bundler/bundler-original.svg" },
+  cargo: { name: "Cargo", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" },
+  go_modules: { name: "Go Modules", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg" },
+  
+  // ==================== BUILD TOOLS ====================
+  webpack: { name: "Webpack", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg" },
+  vite: { name: "Vite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg" },
+  rollup: { name: "Rollup", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rollup/rollup-original.svg" },
+  esbuild: { name: "esbuild", icon: "https://esbuild.github.io/favicon.ico" }, // Custom icon
+  parcel: { name: "Parcel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/parcel/parcel-original.svg" },
+  babel: { name: "Babel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/babel/babel-original.svg" },
+  grunt: { name: "Grunt", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grunt/grunt-original.svg" },
+  gulp: { name: "Gulp", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gulp/gulp-plain.svg" },
+  
+  // ==================== OPERATING SYSTEMS ====================
+  linux: { name: "Linux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
+  ubuntu: { name: "Ubuntu", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" },
+  debian: { name: "Debian", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg" },
+  centos: { name: "CentOS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/centos/centos-original.svg" },
+  fedora: { name: "Fedora", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fedora/fedora-original.svg" },
+  redhat: { name: "Red Hat", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redhat/redhat-original.svg" },
+  alpine: { name: "Alpine", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/alpinejs/alpinejs-original.svg" },
+  windows: { name: "Windows", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" },
+  macos: { name: "macOS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" },
+  freebsd: { name: "FreeBSD", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/freebsd/freebsd-original.svg" },
+  
+  // ==================== AUTHENTICATION & SECURITY ====================
+  auth0: { name: "Auth0", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/auth0/auth0-original.svg" },
+  firebase: { name: "Firebase Auth", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+  okta: { name: "Okta", icon: "https://www.okta.com/favicon.ico" }, // Custom icon
+  keycloak: { name: "Keycloak", icon: "https://www.keycloak.org/favicon.ico" }, // Custom icon
+  jwt: { name: "JWT", icon: "https://jwt.io/img/favicon.png" }, // Custom icon
+  oauth: { name: "OAuth", icon: "https://oauth.net/images/favicon.ico" }, // Custom icon
+  passport: { name: "Passport.js", icon: "https://www.passportjs.org/favicon.ico" }, // Custom icon
+  
+  // ==================== SEARCH ENGINES ====================
+  elasticsearch: { name: "Elasticsearch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" },
+  algolia: { name: "Algolia", icon: "https://www.algolia.com/favicon.ico" }, // Custom icon
+  meilisearch: { name: "Meilisearch", icon: "https://www.meilisearch.com/favicon.ico" }, // Custom icon
+  typesense: { name: "Typesense", icon: "https://typesense.org/favicon.ico" }, // Custom icon
+  
+  // ==================== EMAIL SERVICES ====================
+  sendgrid: { name: "SendGrid", icon: "https://sendgrid.com/favicon.ico" }, // Custom icon
+  mailgun: { name: "Mailgun", icon: "https://www.mailgun.com/favicon.ico" }, // Custom icon
+  resend: { name: "Resend", icon: "https://resend.com/favicon.ico" }, // Custom icon
+  nodemailer: { name: "Nodemailer", icon: "https://nodemailer.com/favicon.ico" }, // Custom icon
+  
+  // ==================== PAYMENT GATEWAYS ====================
+  stripe: { name: "Stripe", icon: "https://stripe.com/favicon.ico" }, // Custom icon
+  paypal: { name: "PayPal", icon: "https://www.paypal.com/favicon.ico" }, // Custom icon
+  braintree: { name: "Braintree", icon: "https://www.braintreepayments.com/favicon.ico" }, // Custom icon
+  square: { name: "Square", icon: "https://squareup.com/favicon.ico" }, // Custom icon
+  lemon: { name: "Lemon Squeezy", icon: "https://www.lemonsqueezy.com/favicon.ico" }, // Custom icon
+  paddle: { name: "Paddle", icon: "https://www.paddle.com/favicon.ico" }, // Custom icon
 };
 
 // Technology mappings by service category
