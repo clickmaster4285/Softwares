@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { apiFetch } from '@/lib/api';
 import { resolveImageUrl } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ParallaxCaseStudiesSection } from '../../ui/parallax-case-studies-section';
 
 interface CaseStudy {
   _id: string;
@@ -143,6 +144,8 @@ function CaseStudyCard({ study, reverse = false }: { study: CaseStudy; reverse?:
   );
 }
 
+// In your original file, replace the CaseStudySection export with:
+
 export const CaseStudySection = () => {
   const { data: caseStudies = [], isLoading } = useQuery<CaseStudy[]>({
     queryKey: ['featured-case-study'],
@@ -153,117 +156,5 @@ export const CaseStudySection = () => {
     },
   });
 
-  const [currentPairIndex, setCurrentPairIndex] = useState(0);
-  const totalPairs = Math.ceil(caseStudies.length / 2);
-
-  useEffect(() => {
-    if (totalPairs <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentPairIndex(prev => (prev + 1) % totalPairs);
-    }, 10000);
-    return () => clearInterval(interval);
-  }, [totalPairs]);
-
-  const currentPair = caseStudies.slice(currentPairIndex * 2, currentPairIndex * 2 + 2);
-
-  if (isLoading) {
-    return (
-      <section id="case-study" className="scroll-mt-24 pt-16">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-1 rounded-full bg-orange-500" />
-          <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">Case Studies</h2>
-        </div>
-        <div className="mt-8 animate-pulse rounded-3xl border border-slate-200 bg-white overflow-hidden">
-          <div className="aspect-video bg-slate-200" />
-        </div>
-      </section>
-    );
-  }
-
-  if (!caseStudies.length) {
-    return (
-      <section id="case-study" className="scroll-mt-24 pt-16 mb-10">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-1 rounded-full bg-orange-500" />
-          <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">Case Studies</h2>
-        </div>
-        <div className="mt-8 p-5 rounded-3xl border border-dashed border-slate-300 bg-white text-center">
-          <Database className="mx-auto h-12 w-12 text-slate-300" />
-          <p className="mt-4 text-slate-500">No case studies available yet.</p>
-          <Button asChild className="mt-6" variant="outline">
-            <Link href="/case-studies">Browse All Case Studies</Link>
-          </Button>
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <motion.section
-      id="case-study"
-      className="scroll-mt-24 pt-16"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-    >
-      {/* Header */}
-      <div className="flex items-center justify-between gap-3 mb-8">
-        <div className="flex items-center gap-3">
-          <motion.div
-            initial={{ height: 0 }}
-            whileInView={{ height: 40 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="h-10 w-1 rounded-full bg-orange-500"
-          />
-          <motion.h2
-            className="text-2xl font-semibold text-slate-900 sm:text-3xl"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Case Studies
-          </motion.h2>
-        </div>
-
-        {/* Dots */}
-        {totalPairs > 1 && (
-          <div className="flex items-center gap-2">
-            {Array.from({ length: totalPairs }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentPairIndex(i)}
-                className={`rounded-full h-2 transition-all duration-300 ${
-                  i === currentPairIndex ? 'w-6 bg-orange-500' : 'w-2 bg-slate-300 hover:bg-orange-300'
-                }`}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Cards */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentPairIndex}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5 }}
-          className="space-y-8"
-        >
-          {currentPair.map((study, i) => (
-            <CaseStudyCard key={study._id} study={study} reverse={i % 2 !== 0} />
-          ))}
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Bottom Divider */}
-      <div className="my-16 flex items-center gap-4">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-      </div>
-    </motion.section>
-  );
+  return <ParallaxCaseStudiesSection caseStudies={caseStudies} isLoading={isLoading} />;
 };

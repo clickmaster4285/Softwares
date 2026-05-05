@@ -31,7 +31,7 @@ export const FAQSection = ({ faqs }: FAQSectionProps) => {
         </h2>
       </div>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-1">
+      <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {faqs.map((faq, index) => (
           <div
             key={index}
