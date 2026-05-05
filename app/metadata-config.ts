@@ -414,7 +414,7 @@ export const homepageWebPageSchema = {
   '@type': 'WebPage',
   '@id': `${siteConfig.url}/#webpage`,
   url: `${siteConfig.url}/`,
-  name: 'Custom Software Development That Scales Your Business Revenue — Not Just Code',
+  name: 'Custom Software Development That Scales Your Business Revenue ',
   description:
     'Software development company & software house: custom software solutions, web & mobile apps, SaaS, and ERP. Expert software developers.',
   inLanguage: 'en',
