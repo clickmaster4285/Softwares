@@ -129,7 +129,7 @@ function getCanonicalPath(page: ServicePageContent): string {
 export default async function ServiceByCategoryPage({ params }: Props) {
   const { slug, service } = await params;
   const page = getServicePage(service);
-  console.log("page", page);
+
   if (!page || slugify(page.category) !== slug) notFound();
 
   const sections = page.sections || [];
