@@ -88,20 +88,20 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
       >
         {/* Card Header - Enhanced Gradient */}
         <div className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700" />
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-50 to-orange-100" />
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
           
           <div className="relative px-5 pt-5 pb-4">
             <div className="flex items-start gap-3">
               <motion.span
-                className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm text-white text-sm font-bold shrink-0"
+                className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm text-orange-600 text-sm font-bold shrink-0"
                 whileHover={{ scale: 1.1, rotate: 360 }}
                 transition={{ duration: 0.3 }}
               >
                 {idx + 1}
               </motion.span>
-              <span className="font-bold text-white text-base leading-snug flex-1">
+              <span className="font-bold text-black text-base leading-snug flex-1">
                 {diff.feature}
               </span>
             </div>

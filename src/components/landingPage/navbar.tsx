@@ -31,7 +31,7 @@ import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '@/lib/api';
 import { getCategoryName } from '@/lib/utils';
 import { getServicePath, serviceMenuSections } from '@/lib/service-pages';
-
+import { getAllServicePages } from '@/lib/service-pages';
 // Types for dropdown data
 interface ProjectItem {
   id: string;
@@ -96,6 +96,7 @@ const hireUsItems: { title: string; href: string; icon: LucideIcon }[] = [
   { title: 'RAG Development Cost', href: '/rag-development-cost/', icon: Calculator },
 ];
 
+
 const LOGO_COLOR_SRC = '/images/logo.webp';
 const LOGO_WHITE_SRC = '/images/logo-white.webp';
 
@@ -115,10 +116,13 @@ export function Navbar() {
     serviceMenuSections[0]?.label ?? ''
   );
   const [activeSolutionsSection, setActiveSolutionsSection] = useState<string>('');
+  const [activeResourcesSection, setResourcesSection] = useState<string>('');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [previewItems, setPreviewItems] = useState<any[]>([]);
+
   /** Short grace period for moving from trigger to panel; keep small to avoid a “laggy” close. */
   const HOVER_MENU_CLOSE_MS = 80;
 
@@ -134,6 +138,76 @@ export function Navbar() {
       return res.json();
     },
   });
+
+// Add after the projects fetch
+const { data: caseStudies = [] } = useQuery({
+  queryKey: ['case-studies-count'],
+  queryFn: async () => {
+    const res = await apiFetch('/api/case-studies');
+    if (!res.ok) throw new Error('Failed to fetch case studies');
+    return res.json();
+  },
+});
+  
+ // Get FAQs from service pages (not from API)
+const allServicePages = getAllServicePages();
+const allFaqs = allServicePages.flatMap(service => 
+  (service.faqs || []).map(faq => ({
+    ...faq,
+    serviceTitle: service.title,
+    serviceSlug: service.slug,
+    category: service.category
+  }))
+);
+
+
+
+
+  
+
+const { data: testimonials = [] } = useQuery({
+  queryKey: ['testimonials-count'],
+  queryFn: async () => {
+    const res = await apiFetch('/api/testimonials');
+    if (!res.ok) throw new Error('Failed to fetch testimonials');
+    return res.json();
+  },
+});
+
+const { data: blogs = [] } = useQuery({
+  queryKey: ['blogs-count'],
+  queryFn: async () => {
+    const res = await apiFetch('/api/blog');
+    if (!res.ok) throw new Error('Failed to fetch blogs');
+    return res.json();
+  },
+});
+
+
+
+  const resourcesItems = [
+  {
+    title: `Case Studies (${caseStudies.length})`,
+    description: 'Real projects and success stories from our clients.',
+    href: '/case-studies',
+  },
+  {
+    title: `Blog (${blogs.length})`,
+    description: 'Insights, guides, and updates on tech & business.',
+    href: '/blog',
+  },
+  {
+    title: 'FAQs',
+    description: 'Answers to common questions about our services.',
+    href: '/faqs',
+  },
+  {
+    title: `Testimonials (${testimonials.length})`,
+    description: 'What our clients say about working with us.',
+    href: '/testimonials',
+  },
+  ];
+  
 
   // Group projects by category
   const groupedProjects = projects.reduce((acc: ProjectCategory[], project) => {
@@ -233,6 +307,11 @@ export function Navbar() {
     if (dropdown === 'solutions') {
       setActiveSolutionsSection(groupedProjects[0]?.category ?? '');
     }
+
+   if (dropdown === 'resources') {
+    // Set default to 'Case Studies' when opening resources dropdown
+    setResourcesSection('Case Studies');
+  }
     setActiveDropdown(dropdown);
   };
 
@@ -302,7 +381,7 @@ export function Navbar() {
     <header
       className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', navStyle)}
     >
-      <div className="max-w-8xl mx-auto px-5 md:px-8 lg:px-10 flex h-20 items-center justify-between">
+      <div className="max-w-8xl mx-auto px-2 md:px-4 lg:px-6 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
@@ -310,6 +389,7 @@ export function Navbar() {
           onClick={closeDropdowns}
         >
           <Image
+          
             key={logoToShow}
             src={logoToShow}
             alt="ClickMasters"
@@ -323,14 +403,8 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden xl:flex items-center gap-4 2xl:gap-8">
-          {/* Home Link */}
-          <Link
-            href="/"
-            onClick={closeDropdowns}
-            className={cn('text-sm font-medium transition-colors', linkStyle(isActivePath('/')))}
-          >
-            Home
-          </Link>
+      
+          
 
           {/* Solutions Dropdown - Hover with click navigation */}
           <div
@@ -341,7 +415,7 @@ export function Navbar() {
             <button
               onClick={handleSolutionsClick}
               className={cn(
-                'text-sm font-medium transition-colors flex items-center gap-1',
+                'text-lg font-bold transition-colors flex items-center gap-1',
                 activeDropdown === 'solutions'
                   ? 'text-primary'
                   : isPageLoading
@@ -370,7 +444,7 @@ export function Navbar() {
             <button
               onClick={handleServicesClick}
               className={cn(
-                'text-sm font-medium transition-colors flex items-center gap-1',
+                'text-lg font-bold transition-colors flex items-center gap-1',
                 activeDropdown === 'services'
                   ? 'text-primary'
                   : isPageLoading
@@ -390,6 +464,46 @@ export function Navbar() {
             </button>
           </div>
 
+           
+         {/* resources Dropdown - Hover with click navigation */}
+<div
+  className="relative"
+  onMouseEnter={() => handleMouseEnter('resources')}
+  onMouseLeave={handleMouseLeave}
+>
+  <button
+    onClick={() => {
+      closeDropdowns();
+      // or router.push('/case-studies') if you prefer
+    }}
+    className={cn(
+      'text-lg font-bold transition-colors flex items-center gap-1',
+      activeDropdown === 'resources'
+        ? 'text-primary'
+        : isPageLoading
+          ? 'text-black/70 hover:text-primary'
+          : isLightHero
+            ? 'text-white/90 hover:text-primary'
+            : 'text-black/70 hover:text-primary'
+    )}
+  >
+    Resources
+    <ChevronDown
+      className={cn(
+        'h-4 w-4 shrink-0 transition-transform duration-200 ease-out',
+        activeDropdown === 'resources' && 'rotate-180'
+      )}
+    />
+  </button>
+</div>
+
+
+
+
+
+
+
+
           {/* Hire Us Dropdown */}
           <div
             className="relative"
@@ -399,7 +513,7 @@ export function Navbar() {
             <button
               onClick={handleHireUsClick}
               className={cn(
-                'text-sm font-medium transition-colors flex items-center gap-1',
+                'text-lg font-bold transition-colors flex items-center gap-1',
                 activeDropdown === 'hire-us'
                   ? 'text-primary'
                   : isPageLoading
@@ -419,33 +533,13 @@ export function Navbar() {
             </button>
           </div>
 
-          <Link
-            href="/case-studies"
-            onClick={closeDropdowns}
-            className={cn(
-              'text-sm font-medium transition-colors',
-              linkStyle(isActivePath('/case-studies'))
-            )}
-          >
-            Case Studies
-          </Link>
-
-          <Link
-            href="/faqs"
-            onClick={closeDropdowns}
-            className={cn(
-              'text-sm font-medium transition-colors',
-              linkStyle(isActivePath('/faqs'))
-            )}
-          >
-            FAQS
-          </Link>
+        
 
           <Link
             href="/about-us"
             onClick={closeDropdowns}
             className={cn(
-              'text-sm font-medium transition-colors',
+              'text-lg font-bold transition-colors',
               linkStyle(isActivePath('/about-us'))
             )}
           >
@@ -456,31 +550,15 @@ export function Navbar() {
             href="/contact-us"
             onClick={closeDropdowns}
             className={cn(
-              'text-sm font-medium transition-colors',
+              'text-lg font-bold transition-colors',
               linkStyle(isActivePath('/contact-us'))
             )}
           >
             Contact Us
           </Link>
 
-          <Link
-            href="/testimonials"
-            onClick={closeDropdowns}
-            className={cn(
-              'text-sm font-medium transition-colors',
-              linkStyle(isActivePath('/testimonials'))
-            )}
-          >
-            Testimonials
-          </Link>
-
-          <Link
-            href="/blog"
-            onClick={closeDropdowns}
-            className={cn('text-sm font-medium transition-colors', linkStyle(isActivePath('/blog')))}
-          >
-            Blog
-          </Link>
+         
+         
         </nav>
 
         {/* Desktop CTA */}
@@ -533,18 +611,7 @@ export function Navbar() {
               <nav className="flex-1 overflow-y-auto p-6">
                 <div className="flex flex-col space-y-1">
                   {/* Home */}
-                  <Link
-                    href="/"
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      'py-3 font-medium transition-colors border-b border-black/5',
-                      isActivePath('/')
-                        ? 'text-primary font-bold'
-                        : 'text-black/70 hover:text-primary'
-                    )}
-                  >
-                    Home
-                  </Link>
+                  
 
                   {/* Solutions Mobile Dropdown */}
                   <MobileDropdown
@@ -561,6 +628,15 @@ export function Navbar() {
                     onLinkClick={() => setIsOpen(false)}
                   />
 
+       <MobileResourcesDropdown
+      title="Resources"
+      caseStudies={caseStudies}
+      blogs={blogs}
+      testimonials={testimonials}
+      allFaqs={allFaqs}
+      allServicePages={allServicePages}
+      onLinkClick={() => setIsOpen(false)}
+    />
                   {/* Hire Us Mobile Dropdown */}
                   <MobileHireUsDropdown
                     title="Hire Us"
@@ -568,45 +644,7 @@ export function Navbar() {
                     onLinkClick={() => setIsOpen(false)}
                   />
 
-                  <Link
-                    href="/case-studies"
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      'py-3 font-medium transition-colors border-b border-black/5',
-                      isActivePath('/case-studies')
-                        ? 'text-primary font-bold'
-                        : 'text-black/70 hover:text-primary'
-                    )}
-                  >
-                    Case Studies
-                  </Link>
-
-                  <Link
-                    href="/faqs"
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      'py-3 font-medium transition-colors border-b border-black/5',
-                      isActivePath('/faqs')
-                        ? 'text-primary font-bold'
-                        : 'text-black/70 hover:text-primary'
-                    )}
-                  >
-                    FAQS
-                  </Link>
-
-                  <Link
-                    href="/blog"
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      'py-3 font-medium transition-colors border-b border-black/5',
-                      isActivePath('/blog')
-                        ? 'text-primary font-bold'
-                        : 'text-black/70 hover:text-primary'
-                    )}
-                  >
-                    Blog
-                  </Link>
-
+                 
                   <Link
                     href="/about-us"
                     onClick={() => setIsOpen(false)}
@@ -633,18 +671,7 @@ export function Navbar() {
                     Contact Us
                   </Link>
 
-                  <Link
-                    href="/testimonials"
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      'py-3 font-medium transition-colors border-b border-black/5',
-                      isActivePath('/testimonials')
-                        ? 'text-primary font-bold'
-                        : 'text-black/70 hover:text-primary'
-                    )}
-                  >
-                    Testimonials
-                  </Link>
+                 
                 </div>
               </nav>
 
@@ -877,6 +904,364 @@ export function Navbar() {
           </div>
         </div>
       )}
+
+      
+{/* Full-width Dropdown Menu for Resources */}
+{/* Full-width Dropdown Menu for Resources */}
+{activeDropdown === 'resources' && !isPageLoading && (
+  <div
+    onMouseEnter={() => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+        hoverTimeoutRef.current = null;
+      }
+    }}
+    onMouseLeave={closeDropdowns}
+    className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
+  >
+    <div className="max-w-8xl mx-auto px-5 md:px-8 lg:px-10 py-0">
+      <div
+        ref={dropdownRef}
+        onMouseLeave={closeDropdowns}
+        className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
+      >
+        <div className="grid grid-cols-12">
+          {/* Left rail - Categories */}
+          <div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
+            <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+              Resources
+            </p>
+            <ul className="space-y-1">
+              {[
+                { 
+                  title: 'Case Studies', 
+                  count: caseStudies.length,
+                },
+                { 
+                  title: 'Blog', 
+                  count: blogs.length,
+                },
+                { 
+                  title: 'FAQs', 
+                  count: allFaqs.length,
+                },
+                { 
+                  title: 'Testimonials', 
+                  count: testimonials.length,
+                },
+              ].map((section) => {
+                const active = activeResourcesSection === section.title;
+                return (
+                  <li key={section.title}>
+                    <button
+                      type="button"
+                      onMouseEnter={() => {
+                        setResourcesSection(section.title);
+                      }}
+                      onClick={() => {
+                        setResourcesSection(section.title);
+                      }}
+                      className={cn(
+                        'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between',
+                        active
+                          ? 'bg-white text-slate-900 shadow-sm'
+                          : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
+                      )}
+                    >
+                      <span>
+                        {section.title}
+                        {section.count > 0 && (
+                          <span className="ml-1 text-xs font-normal text-slate-400">
+                            ({section.count})
+                          </span>
+                        )}
+                      </span>
+                      <ChevronDown
+                        className={cn(
+                          'h-4 w-4 -rotate-90 transition-opacity',
+                          active ? 'opacity-70' : 'opacity-0'
+                        )}
+                        aria-hidden
+                      />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Right content - Preview items - Increased height with better spacing */}
+          <div className="col-span-9 p-6 max-h-[600px] overflow-y-auto">
+            
+            {/* Case Studies Section */}
+            {activeResourcesSection === 'Case Studies' && (
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-slate-900">Latest Case Studies</h3>
+                  <Link 
+                    href="/case-studies" 
+                    onClick={closeDropdowns}
+                    className="text-sm text-primary hover:text-primary/80 font-medium"
+                  >
+                    View all ({caseStudies.length}) →
+                  </Link>
+                </div>
+                <div className={cn(
+                  "grid gap-5",
+                  caseStudies.length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
+                )}>
+                  {caseStudies.slice(0, 4).map((study: any) => (
+                    <Link
+                      key={study._id}
+                      href={`/case-studies/${study.slug || study._id}`}
+                      onClick={closeDropdowns}
+                      className="group block transition-all duration-200 hover:-translate-y-1"
+                    >
+                      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-md">
+                        {study.thumbnail && (
+                          <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                            <Image
+                              src={study.thumbnail}
+                              alt={study.title}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                          </div>
+                        )}
+                        <div className="p-4">
+                          <h4 className="font-semibold text-slate-900 group-hover:text-primary line-clamp-2 text-base">
+                            {study.title}
+                          </h4>
+                          {study.description && (
+                            <p className="mt-2 text-sm text-slate-500 line-clamp-2">
+                              {study.description}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                  {caseStudies.length === 0 && (
+                    <div className="text-slate-400 text-center py-12 bg-slate-50 rounded-xl col-span-full">
+                      <p>No case studies available</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Blog Section */}
+            {activeResourcesSection === 'Blog' && (
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-slate-900">Latest Blog Posts</h3>
+                  <Link 
+                    href="/blog" 
+                    onClick={closeDropdowns}
+                    className="text-sm text-primary hover:text-primary/80 font-medium"
+                  >
+                    View all ({blogs.length}) →
+                  </Link>
+                </div>
+                <div className={cn(
+                  "grid gap-5",
+                  blogs.length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
+                )}>
+                  {blogs.slice(0, 4).map((blog: any) => (
+                    <Link
+                      key={blog._id}
+                      href={`/blog/${blog.slug || blog._id}`}
+                      onClick={closeDropdowns}
+                      className="group block transition-all duration-200 hover:-translate-y-1"
+                    >
+                      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-md">
+                        {blog.thumbnail && (
+                          <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                            <Image
+                              src={blog.thumbnail}
+                              alt={blog.title}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                          </div>
+                        )}
+                        <div className="p-4">
+                          <h4 className="font-semibold text-slate-900 group-hover:text-primary line-clamp-2 text-base">
+                            {blog.title}
+                          </h4>
+                          {blog.excerpt && (
+                            <p className="mt-2 text-sm text-slate-500 line-clamp-2">
+                              {blog.excerpt}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                  {blogs.length === 0 && (
+                    <div className="text-slate-400 text-center py-12 bg-slate-50 rounded-xl col-span-full">
+                      <p>No blog posts available</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* FAQs Section - Enhanced V-Card Layout */}
+            {activeResourcesSection === 'FAQs' && (
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-slate-900">Frequently Asked Questions</h3>
+                  <Link 
+                    href="/faqs" 
+                    onClick={closeDropdowns}
+                    className="text-sm text-primary hover:text-primary/80 font-medium"
+                  >
+                    View all FAQs →
+                  </Link>
+                </div>
+                <div className={cn(
+                  "grid gap-4",
+                  allFaqs.slice(0, 3).length === 1 ? "grid-cols-1" : "md:grid-cols-2"
+                )}>
+                  {allFaqs.slice(0, 4).map((faq: any, idx: number) => (
+                    <div key={idx} className="group">
+                      <div className="p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+                        <Link href={`/faqs/${faq.serviceSlug}`} onClick={closeDropdowns}>
+                          <span className="inline-block text-xs font-semibold text-primary mb-2 px-2 py-1 bg-primary/10 rounded-full">
+                            {faq.serviceTitle}
+                          </span>
+                        </Link>
+                        <details className="group">
+                          <summary className="flex cursor-pointer items-start justify-between text-sm font-semibold text-slate-900 hover:text-primary transition-colors">
+                            <span className="flex-1 pr-4">{faq.question}</span>
+                            <ChevronDown className="h-5 w-5 text-slate-400 transition-transform duration-200 shrink-0 group-open:rotate-180" />
+                          </summary>
+                          <p className="mt-3 text-sm text-slate-600 leading-relaxed pl-0 pt-2 border-t border-slate-100">
+                            {faq.answer}
+                          </p>
+                        </details>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {allFaqs.length === 0 && (
+                    <div className="p-6 bg-gradient-to-br from-primary/5 to-slate-50 rounded-xl border border-primary/10 col-span-full">
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        Browse FAQs by service category. Select a service to see related questions and answers.
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {allServicePages.slice(0, 6).map((service) => (
+                          <Link
+                            key={service.slug}
+                            href={`/faqs/${service.slug}`}
+                            onClick={closeDropdowns}
+                            className="text-xs bg-white px-3 py-1.5 rounded-full text-primary border border-primary/20 hover:bg-primary/5 transition-colors"
+                          >
+                            {service.title}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Testimonials Section - Enhanced V-Card Layout */}
+            {activeResourcesSection === 'Testimonials' && (
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-slate-900">Client Testimonials</h3>
+                  <Link 
+                    href="/testimonials" 
+                    onClick={closeDropdowns}
+                    className="text-sm text-primary hover:text-primary/80 font-medium"
+                  >
+                    View all ({testimonials.length}) →
+                  </Link>
+                </div>
+                <div className={cn(
+                  "grid gap-5",
+                  testimonials.slice(0, 3).length === 1 ? "grid-cols-1" : "md:grid-cols-2"
+                )}>
+                  {testimonials.slice(0, 4).map((testimonial: any) => (
+                    <div key={testimonial._id} className="group">
+                      <div className="p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+                        <div className="flex items-start gap-4">
+                          {/* Avatar */}
+                          {testimonial.avatar ? (
+                            <div className="relative w-14 h-14 flex-shrink-0 rounded-full overflow-hidden border-2 border-primary/20">
+                              <Image
+                                src={testimonial.avatar}
+                                alt={testimonial.name}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0 border-2 border-primary/20">
+                              <span className="text-primary font-bold text-xl">
+                                {testimonial.name?.charAt(0) || 'C'}
+                              </span>
+                            </div>
+                          )}
+                          
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
+                              <p className="font-semibold text-slate-900 text-base">{testimonial.name}</p>
+                              {testimonial.rating && (
+                                <div className="flex gap-0.5">
+                                  {[...Array(5)].map((_, i) => (
+                                    <span 
+                                      key={i} 
+                                      className={cn(
+                                        "text-sm",
+                                        i < testimonial.rating ? "text-yellow-400" : "text-slate-200"
+                                      )}
+                                    >
+                                      ★
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                            
+                            {testimonial.company && (
+                              <p className="text-xs text-slate-500 mb-2 font-medium">{testimonial.company}</p>
+                            )}
+                            
+                            <p className="text-sm text-slate-600 leading-relaxed italic">
+                              "{testimonial.content?.substring(0, 150)}
+                              {testimonial.content?.length > 150 ? '...' : ''}"
+                            </p>
+                            
+                            {testimonial.project && (
+                              <p className="text-xs text-primary mt-2 font-medium">
+                                Project: {testimonial.project}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {testimonials.length === 0 && (
+                    <div className="text-slate-400 text-center py-12 bg-slate-50 rounded-xl col-span-full">
+                      <p>No testimonials available</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+      
 
       {/* Full-width Dropdown Menu for Hire Us */}
       {activeDropdown === 'hire-us' && !isPageLoading && (
@@ -1112,6 +1497,151 @@ function MobileServicesDropdown({ title, onLinkClick }: MobileServicesDropdownPr
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+
+// Mobile Dropdown Component for Resources (using same UI as Solutions)
+// Mobile Dropdown Component for Resources (using same UI as Solutions)
+interface MobileResourcesDropdownProps {
+  title: string;
+  caseStudies: any[];
+  blogs: any[];
+  testimonials: any[];
+  allFaqs: any[];
+  allServicePages: any[];
+  onLinkClick: () => void;
+}
+
+function MobileResourcesDropdown({ 
+  title, 
+  caseStudies, 
+  blogs, 
+  testimonials, 
+  allFaqs,
+  allServicePages,
+  onLinkClick 
+}: MobileResourcesDropdownProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const renderItems = () => {
+    return (
+      <div className="pl-4 space-y-4 mt-3">
+        {/* Case Studies Section */}
+        <div>
+          <h4 className="text-sm font-semibold text-primary mb-2">Case Studies</h4>
+          <ul className="space-y-2">
+            {caseStudies.slice(0, 3).map((study: any) => (
+              <li key={study._id}>
+                <Link
+                  href={`/case-studies/${study.slug || study._id}`}
+                  onClick={onLinkClick}
+                  className="text-black/60 hover:text-primary transition-colors block py-1"
+                >
+                  {study.title}
+                </Link>
+              </li>
+            ))}
+            {caseStudies.length === 0 && (
+              <li className="text-black/40 py-1">No case studies available</li>
+            )}
+          </ul>
+        </div>
+
+        {/* Blog Section */}
+        <div>
+          <h4 className="text-sm font-semibold text-primary mb-2">Blog</h4>
+          <ul className="space-y-2">
+            {blogs.slice(0, 3).map((blog: any) => (
+              <li key={blog._id}>
+                <Link
+                  href={`/blog/${blog.slug || blog._id}`}
+                  onClick={onLinkClick}
+                  className="text-black/60 hover:text-primary transition-colors block py-1"
+                >
+                  {blog.title}
+                </Link>
+              </li>
+            ))}
+            {blogs.length === 0 && (
+              <li className="text-black/40 py-1">No blog posts available</li>
+            )}
+          </ul>
+        </div>
+
+        {/* FAQs Section */}
+        <div>
+          <h4 className="text-sm font-semibold text-primary mb-2">FAQs</h4>
+          <ul className="space-y-2">
+            {allFaqs.slice(0, 3).map((faq: any, idx: number) => (
+              <li key={idx}>
+                <Link
+                  href={`/faqs/${faq.serviceSlug}`}
+                  onClick={onLinkClick}
+                  className="text-black/60 hover:text-primary transition-colors block py-1"
+                >
+                  {faq.question}
+                </Link>
+              </li>
+            ))}
+            {allFaqs.length === 0 && (
+              <li className="text-black/40 py-1">No FAQs available</li>
+            )}
+          </ul>
+        </div>
+
+        {/* Testimonials Section - Updated based on your data structure */}
+        <div>
+          <h4 className="text-sm font-semibold text-primary mb-2">Testimonials</h4>
+          <ul className="space-y-2">
+            {testimonials.slice(0, 3).map((testimonial: any) => (
+              <li key={testimonial._id}>
+                <Link
+                  href="/testimonials"
+                  onClick={onLinkClick}
+                  className="text-black/60 hover:text-primary transition-colors block py-1"
+                >
+                  <div>
+                    <span className="font-medium">{testimonial.authorName || 'Client'}</span>
+                    {testimonial.rating && (
+                      <span className="text-xs text-yellow-500 ml-2">
+                        {'★'.repeat(testimonial.rating)}
+                      </span>
+                    )}
+                    {testimonial.content && (
+                      <p className="text-xs text-black/50 mt-0.5 line-clamp-1">
+                        {testimonial.content.substring(0, 60)}...
+                      </p>
+                    )}
+                  </div>
+                </Link>
+              </li>
+            ))}
+            {testimonials.length === 0 && (
+              <li className="text-black/40 py-1">No testimonials available</li>
+            )}
+          </ul>
+        </div>
+
+       
+      
+      </div>
+    );
+  };
+
+  return (
+    <div className="border-b border-black/5">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="flex items-center justify-between w-full py-3 font-medium text-black/70 hover:text-primary transition-colors"
+      >
+        {title}
+        <ChevronDown
+          className={cn('h-4 w-4 transition-transform duration-300', isExpanded && 'rotate-180')}
+        />
+      </button>
+      {isExpanded && renderItems()}
     </div>
   );
 }
