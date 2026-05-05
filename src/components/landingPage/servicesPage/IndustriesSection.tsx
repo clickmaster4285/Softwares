@@ -140,73 +140,69 @@ export const IndustriesSection = ({ industryUseCases }: IndustriesSectionProps) 
       </motion.p>
 
       {/* Square Card Grid - 1:1 aspect ratio */}
-      <div className="mt-10 grid gap-6 grid-cols-1 md:grid-cols-4 lg:grid-cols-5">
-        {industryUseCases.map((useCase, index) => {
-          const Icon = getIcon(useCase.name);
-          const colors = getColors(useCase.name);
-          
-          return (
-            <motion.div
-              key={useCase.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="group"
+     <div className="mt-10 grid gap-6 grid-cols-1 md:grid-cols-4 lg:grid-cols-6">
+  {industryUseCases.map((useCase, index) => {
+    const Icon = getIcon(useCase.name);
+    const colors = getColors(useCase.name);
+    
+    return (
+      <motion.div
+        key={useCase.name}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        whileHover={{ y: -8 }}
+        className="group"
+      >
+        <div className="relative rounded-2xl bg-white p-6 text-left border border-slate-200 transition-all duration-300 hover:shadow-xl overflow-hidden h-full">
+          {/* Square aspect ratio container */}
+          <div className="flex flex-col h-full items-center">
+            {/* Animated Background Gradient on Hover - Industry specific color */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-5"
+              style={{
+                background: `linear-gradient(to bottom right, ${colors.from.replace('from-', '')}, ${colors.to.replace('to-', '')})`
+              }}
+            />
+            
+            {/* Icon Container with Industry Specific Color - Centered */}
+            <motion.div 
+              className="relative mb-4"
+              whileHover={{ scale: 1.05, x: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="relative rounded-2xl bg-white p-6 text-left border border-slate-200 transition-all duration-300 hover:shadow-xl overflow-hidden h-full">
-                {/* Square aspect ratio container */}
-                <div className="flex flex-col h-full">
-                  {/* Animated Background Gradient on Hover - Industry specific color */}
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-5"
-                    style={{
-                      background: `linear-gradient(to bottom right, ${colors.from.replace('from-', '')}, ${colors.to.replace('to-', '')})`
-                    }}
-                  />
-                  
-                  {/* Icon Container with Industry Specific Color */}
-                  <motion.div 
-                    className="relative mb-4"
-                    whileHover={{ scale: 1.05, x: 5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="relative inline-block">
-                      {/* Glow Effect - Industry specific */}
-                      <motion.div 
-                        className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${colors.from} ${colors.to} blur-xl`}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileHover={{ opacity: 0.4, scale: 1.5 }}
-                        transition={{ duration: 0.4 }}
-                      />
-                      {/* Icon Background - Industry specific gradient */}
-                      <div className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${colors.iconFrom} ${colors.iconTo} shadow-lg`}>
-                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent" />
-                        <Icon className="relative h-7 w-7 text-white drop-shadow-md" />
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Industry Name */}
-                  <h3 className="text-lg font-semibold text-slate-800 transition-colors duration-300">
-                    {useCase.name}
-                  </h3>
-
-                  {/* Decorative Line - Industry specific */}
-                  <motion.div 
-                    className={`mt-3 h-0.5 w-12 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full`}
-                  />
-
-                 
-
-               
+              <div className="relative inline-block">
+                {/* Glow Effect - Industry specific */}
+                <motion.div 
+                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${colors.from} ${colors.to} blur-xl`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileHover={{ opacity: 0.4, scale: 1.5 }}
+                  transition={{ duration: 0.4 }}
+                />
+                {/* Icon Background - Industry specific gradient */}
+                <div className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${colors.iconFrom} ${colors.iconTo} shadow-lg`}>
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent" />
+                  <Icon className="relative h-7 w-7 text-white drop-shadow-md" />
                 </div>
               </div>
             </motion.div>
-          );
-        })}
-      </div>
+
+            {/* Industry Name - Centered */}
+            <h3 className="text-lg font-semibold text-slate-800 transition-colors duration-300 text-center">
+              {useCase.name}
+            </h3>
+
+            {/* Decorative Line - Centered */}
+            <motion.div 
+              className={`mt-3 h-0.5 w-12 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full mx-auto`}
+            />
+          </div>
+        </div>
+      </motion.div>
+    );
+  })}
+</div>
 
       {/* Bottom Divider with Animation */}
       <motion.div 

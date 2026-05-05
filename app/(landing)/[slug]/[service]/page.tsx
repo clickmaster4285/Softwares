@@ -347,11 +347,10 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 )}
 
              {/* Tech Stack Section */}
-{/* Tech Stack Section */}
-{techStack.length > 0 && (
-  <TechStack techStack={techStack as any} />
-)}
 
+<div style={{ maxWidth: '1450px' }} className="mx-auto px-4">
+  {techStack.length > 0 && <TechStack techStack={techStack as any} />}
+</div>
               {/* Industries Section */}
            {page.industryUseCases && (
                 <IndustriesSection industryUseCases={page.industryUseCases} />
@@ -404,12 +403,12 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                 </section>
               ))}
 
-             
+             {/*  */}
           {/* Testimonials Section */}
 <TestimonialsSection  />
 
               {/* Case Study Section */}
-              <div className='mb-10'><CaseStudySection /></div>
+              <div className='mb-10 '><CaseStudySection /></div>
 
               {/* FAQ Section */}
             {faqs.length > 0 && <FAQSection faqs={faqs} />}

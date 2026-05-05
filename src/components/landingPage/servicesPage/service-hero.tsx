@@ -1,9 +1,9 @@
-// components/service-hero.tsx
 "use client";
 
-import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useAnimation, Variants } from 'framer-motion';
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useAnimation, Variants } from "framer-motion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -13,9 +13,9 @@ import {
   Layers3,
   Users,
   Headphones,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface ServiceHeroProps {
   page: {
@@ -29,14 +29,22 @@ interface ServiceHeroProps {
 }
 
 // Counter Component with Animation
-function Counter({ targetValue, suffix = '', prefix = '' }: { targetValue: string | number; suffix?: string; prefix?: string }) {
+function Counter({
+  targetValue,
+  suffix = "",
+  prefix = "",
+}: {
+  targetValue: string | number;
+  suffix?: string;
+  prefix?: string;
+}) {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
-  
+
   const numericMatch = String(targetValue).match(/\d+/);
   const numericTarget = numericMatch ? parseInt(numericMatch[0], 10) : 0;
-  const originalSuffix = String(targetValue).replace(/\d+/, '');
+  const originalSuffix = String(targetValue).replace(/\d+/, "");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,19 +54,14 @@ function Counter({ targetValue, suffix = '', prefix = '' }: { targetValue: strin
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
+    if (elementRef.current) observer.observe(elementRef.current);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (!isVisible) return;
-
     let startTime: number;
     let animationFrame: number;
     const duration = 2000;
@@ -67,10 +70,7 @@ function Counter({ targetValue, suffix = '', prefix = '' }: { targetValue: strin
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const currentValue = Math.floor(easeOutQuart * numericTarget);
-      
-      setCount(currentValue);
-      
+      setCount(Math.floor(easeOutQuart * numericTarget));
       if (progress < 1) {
         animationFrame = requestAnimationFrame(animate);
       } else {
@@ -79,57 +79,70 @@ function Counter({ targetValue, suffix = '', prefix = '' }: { targetValue: strin
     };
 
     animationFrame = requestAnimationFrame(animate);
-
     return () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
-      }
+      if (animationFrame) cancelAnimationFrame(animationFrame);
     };
   }, [isVisible, numericTarget]);
 
   return (
-    <motion.div
-      ref={elementRef}
-      className="text-2xl font-semibold text-slate-900"
-      initial={{ scale: 0.5, opacity: 0 }}
-      animate={isVisible ? { scale: 1, opacity: 1 } : {}}
-      transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
-    >
-      {prefix}{count}{suffix || originalSuffix}
-    </motion.div>
+    <div ref={elementRef} className="text-2xl font-bold text-slate-900">
+      {prefix}
+      {count}
+      {suffix || originalSuffix}
+    </div>
   );
 }
 
 // Animation variants
 const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 }
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 const fadeInLeft: Variants = {
-  hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0 }
+  hidden: { opacity: 0, x: -40 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 50 },
-  visible: { opacity: 1, x: 0 }
+  hidden: { opacity: 0, x: 40 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
+    transition: { staggerChildren: 0.1, delayChildren: 0.15 },
+  },
 };
 
-const scaleOnHover = {
-  whileHover: { scale: 1.05 },
-  whileTap: { scale: 0.95 }
+// Line animation variants
+const lineDrawLeft: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  visible: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 1.2, ease: "easeInOut", delay: 0.3 },
+  },
+};
+
+const lineDrawRight: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  visible: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 1.2, ease: "easeInOut", delay: 0.5 },
+  },
+};
+
+const lineDrawCenter: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  visible: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 1, ease: "easeInOut", delay: 0.7 },
+  },
 };
 
 export function ServiceHero({ page }: ServiceHeroProps) {
@@ -138,293 +151,422 @@ export function ServiceHero({ page }: ServiceHeroProps) {
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
+    if (isInView) controls.start("visible");
   }, [controls, isInView]);
 
   const stats = [
-    { icon: Award, value: '8+', label: 'Years Experience' },
-    { icon: Layers3, value: '150+', label: 'Projects Delivered' },
-    { icon: Users, value: '98%', label: 'Client Satisfaction' },
-    { icon: Headphones, value: '24/7', label: 'Support Available' },
+    { icon: Award, value: "8+", label: "Years Experience" },
+    { icon: Layers3, value: "150+", label: "Projects Delivered" },
+    { icon: Users, value: "98%", label: "Client Satisfaction" },
+    { icon: Headphones, value: "24/7", label: "Support Available" },
   ];
 
   return (
-    <div className="w-full bg-gradient-to-br from-orange-50 via-white to-slate-50 relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+    <div
+      className="w-full relative overflow-hidden bg-white"
+    
+    >
+      {/* Animated Background Lines */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none z-0"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <motion.div
-          className="absolute right-0 top-0 h-96 w-96 rounded-full bg-orange-200 blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
+        <defs>
+          <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#ea580c" stopOpacity="0" />
+            <stop offset="50%" stopColor="#ea580c" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#ea580c" stopOpacity="0" />
+            <stop offset="50%" stopColor="#ea580c" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="lineGradient3" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#f97316" stopOpacity="0" />
+            <stop offset="50%" stopColor="#f97316" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        
+        {/* Horizontal Line 1 - Top */}
+        <motion.line
+          x1="0"
+          y1="120"
+          x2="1920"
+          y2="120"
+          stroke="url(#lineGradient1)"
+          strokeWidth="1.5"
+          strokeDasharray="8 8"
+          variants={lineDrawLeft}
+          initial="hidden"
+          animate={controls}
         />
-        <motion.div
-          className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-orange-100 blur-3xl"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
+        
+        {/* Horizontal Line 2 - Middle */}
+        <motion.line
+          x1="0"
+          y1="400"
+          x2="1920"
+          y2="400"
+          stroke="url(#lineGradient1)"
+          strokeWidth="1"
+          strokeDasharray="4 12"
+          variants={lineDrawLeft}
+          initial="hidden"
+          animate={controls}
         />
-        <motion.div
-          className="absolute top-1/2 left-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-50 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
+        
+        {/* Vertical Line - Left */}
+        <motion.line
+          x1="100"
+          y1="0"
+          x2="100"
+          y2="800"
+          stroke="url(#lineGradient2)"
+          strokeWidth="1"
+          strokeDasharray="6 10"
+          variants={lineDrawRight}
+          initial="hidden"
+          animate={controls}
         />
-      </motion.div>
+        
+        {/* Diagonal Line */}
+        <motion.line
+          x1="1200"
+          y1="0"
+          x2="1600"
+          y2="800"
+          stroke="url(#lineGradient3)"
+          strokeWidth="1.5"
+          strokeDasharray="10 15"
+          variants={lineDrawCenter}
+          initial="hidden"
+          animate={controls}
+        />
+        
+        {/* Additional Decorative Lines */}
+        <motion.line
+          x1="300"
+          y1="600"
+          x2="800"
+          y2="600"
+          stroke="url(#lineGradient1)"
+          strokeWidth="0.8"
+          strokeDasharray="3 8"
+          variants={lineDrawLeft}
+          initial="hidden"
+          animate={controls}
+        />
+        
+        <motion.line
+          x1="1400"
+          y1="200"
+          x2="1900"
+          y2="200"
+          stroke="url(#lineGradient1)"
+          strokeWidth="0.8"
+          strokeDasharray="5 10"
+          variants={lineDrawLeft}
+          initial="hidden"
+          animate={controls}
+        />
+      </svg>
 
-      {/* Breadcrumb Strip - Improved Styling */}
-      <motion.div 
-        className="border-b border-slate-100 w-full bg-white/50 backdrop-blur-sm"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+      {/* Animated Corner Lines */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none z-0"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <div className="mx-auto max-w-8xl px-4 md:px-8 lg:px-16 py-4">
-          <nav className="flex items-center gap-2 text-sm">
-            <motion.div whileHover={{ x: -3 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/" className="text-slate-500 hover:text-orange-600 transition-colors">
-                Home
-              </Link>
-            </motion.div>
-            <ChevronRight className="h-4 w-4 text-slate-400" />
-            <motion.div whileHover={{ x: 3 }} whileTap={{ scale: 0.95 }}>
-              <span className="text-slate-600">{page.category}</span>
-            </motion.div>
-            <ChevronRight className="h-4 w-4 text-slate-400" />
-            <motion.div
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
+        {/* Top Left Corner */}
+        <motion.path
+          d="M 0 0 L 80 0 M 0 0 L 0 80"
+          stroke="#ea580c"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          variants={lineDrawLeft}
+          initial="hidden"
+          animate={controls}
+        />
+        
+        {/* Top Right Corner */}
+        <motion.path
+          d="M 1920 0 L 1840 0 M 1920 0 L 1920 80"
+          stroke="#ea580c"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          variants={lineDrawRight}
+          initial="hidden"
+          animate={controls}
+        />
+        
+        {/* Bottom Left Corner */}
+        <motion.path
+          d="M 0 800 L 80 800 M 0 800 L 0 720"
+          stroke="#f97316"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          variants={lineDrawLeft}
+          initial="hidden"
+          animate={controls}
+        />
+        
+        {/* Bottom Right Corner */}
+        <motion.path
+          d="M 1920 800 L 1840 800 M 1920 800 L 1920 720"
+          stroke="#f97316"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          variants={lineDrawRight}
+          initial="hidden"
+          animate={controls}
+        />
+      </svg>
+
+      {/* ── Breadcrumb ── */}
+      <motion.div
+        className="relative z-10 border-b border-orange-100/60 w-full"
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="mx-auto px-4 md:px-8 lg:px-12 py-3.5 bg-white/50 backdrop-blur-sm">
+          <nav className="flex items-center gap-1.5 text-sm">
+            <Link
+              href="/"
+              className="text-slate-400 hover:text-orange-600 transition-colors font-medium"
             >
-              <span className="text-slate-900 font-medium bg-gradient-to-r from-orange-600 to-orange-800 bg-clip-text text-transparent">
-                {page.serviceName}
-              </span>
-            </motion.div>
+              Home
+            </Link>
+            <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+            <span className="text-slate-500 font-medium">{page.category}</span>
+            <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+            <span className="font-semibold text-slate-800">
+              {page.serviceName}
+            </span>
           </nav>
         </div>
       </motion.div>
 
-      {/* Hero Section - Full Width */}
-      <section id="overview" className="relative overflow-hidden w-full" ref={ref}>
-        <div className="relative mx-auto max-w-8xl px-4 md:px-8 lg:px-16 py-12 lg:py-20">
-          <div className="flex flex-col lg:flex-row lg:items-start lg:gap-12">
-            <motion.div 
-              className="flex-1"
+      {/* ── Main Hero Content ── */}
+      <section ref={ref} className="relative z-10 w-full">
+        <div className="mx-auto px-4 md:px-8 lg:px-12 pt-12 pb-0 lg:pt-16">
+          {/* Two-column layout: left text, right image */}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 xl:gap-12">
+            {/* ── LEFT COLUMN ── */}
+            <motion.div
+              className="flex-1 min-w-0 pb-12 lg:pb-16"
               variants={staggerContainer}
               initial="hidden"
               animate={controls}
             >
+              {/* Category Badge */}
               <motion.div variants={fadeInUp}>
-                <Badge className="mb-4 rounded-full border-orange-200 bg-orange-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-orange-700 hover:bg-orange-100 transition-all duration-300">
+                <Badge
+                  className="mb-5 rounded-md border-0 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white"
+                  style={{ background: "#ea580c" }}
+                >
                   {page.category}
                 </Badge>
               </motion.div>
 
-              <motion.h1 
-                className="text-balance text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
+              {/* Title */}
+              <motion.h1
+                className="text-balance text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-[1.15]"
                 variants={fadeInUp}
               >
                 {page.title}
               </motion.h1>
 
-              <motion.p 
-                className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 lg:text-xl"
+              {/* Lead */}
+              <motion.p
+                className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 lg:text-lg"
                 variants={fadeInUp}
               >
                 {page.lead}
               </motion.p>
 
-              {/* Trust Badges */}
+              {/* Highlight Pills */}
               {page.highlights && page.highlights.length > 0 && (
-                <motion.div className="mt-8 flex flex-wrap gap-3" variants={staggerContainer}>
-                  {page.highlights.map((highlight, index) => (
+                <motion.div
+                  className="mt-6 flex flex-wrap gap-2.5"
+                  variants={staggerContainer}
+                >
+                  {page.highlights.map((h) => (
                     <motion.div
-                      key={highlight}
+                      key={h}
                       variants={fadeInUp}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className="flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50/80 px-4 py-1.5 text-sm font-medium text-orange-800 backdrop-blur-sm cursor-default"
+                      className="flex items-center gap-2 rounded-full border border-orange-200 bg-white/70 px-4 py-1.5 text-sm font-medium text-slate-700 backdrop-blur-sm"
                     >
-                      <CheckCircle2 className="h-4 w-4 text-orange-600" />
-                      {highlight}
+                      <CheckCircle2 className="h-4 w-4 text-orange-500 shrink-0" />
+                      {h}
                     </motion.div>
                   ))}
                 </motion.div>
               )}
 
-              {/* Market Stats Bar */}
+              {/* Market Stats */}
               {page.marketStats && page.marketStats.length > 0 && (
-                <motion.div 
-                  className="mt-10 grid grid-cols-2 gap-4 rounded-2xl border border-slate-200 bg-white/80 p-6 backdrop-blur-sm sm:grid-cols-4 sm:gap-8"
+                <motion.div
+                  className="mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-orange-100 bg-white/70 p-5 backdrop-blur-sm sm:grid-cols-4"
                   variants={fadeInUp}
-                  whileHover={{ boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05)" }}
-                  transition={{ duration: 0.3 }}
                 >
-                  {page.marketStats.map((stat, index) => (
-                    <motion.div 
-                      key={stat.label} 
-                      className="text-center sm:text-left"
-                      variants={fadeInUp}
-                      custom={index}
-                    >
-                      <motion.p 
-                        className="text-2xl font-bold text-orange-600 sm:text-3xl"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
+                  {page.marketStats.map((stat) => (
+                    <div key={stat.label} className="text-center sm:text-left">
+                      <p className="text-2xl font-extrabold text-orange-600 sm:text-3xl">
                         {stat.value}
-                      </motion.p>
-                      <p className="mt-1 text-xs font-medium uppercase tracking-wider text-slate-500">
+                      </p>
+                      <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
                         {stat.label}
                       </p>
-                    </motion.div>
+                    </div>
                   ))}
                 </motion.div>
               )}
 
               {/* CTA Buttons */}
-              <motion.div className="mt-10 flex flex-wrap items-center gap-4" variants={staggerContainer}>
+              <motion.div
+                className="mt-8 flex flex-wrap items-center gap-3"
+                variants={staggerContainer}
+              >
                 <motion.div
                   variants={fadeInUp}
-                  {...scaleOnHover}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <Button
                     asChild
                     size="lg"
-                    className="rounded-full bg-orange-600 px-8 text-white shadow-lg shadow-orange-600/25 transition-all hover:bg-orange-700 hover:shadow-xl hover:shadow-orange-600/30"
+                    className="rounded-full px-7 text-white font-semibold shadow-lg transition-all"
+                    style={{
+                      background: "#ea580c",
+                      boxShadow: "0 8px 24px rgba(234,88,12,0.30)",
+                    }}
                   >
                     <Link href="/contact-us">
                       Get your free strategy call
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
                 </motion.div>
                 <motion.div
                   variants={fadeInUp}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <Button
                     variant="outline"
                     size="lg"
                     asChild
-                    className="group rounded-full border-slate-300 bg-white/80 backdrop-blur-sm hover:bg-white hover:border-orange-200 transition-all"
+                    className="group rounded-full border-slate-300 bg-white/80 backdrop-blur-sm hover:bg-white hover:border-orange-300 font-semibold text-slate-700 transition-all"
                   >
-                    <Link href="/services">
-                      View all services
-                      <ArrowRight className="ml-2 h-4 w-4 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1" />
-                    </Link>
+                    <Link href="/services">View all services</Link>
                   </Button>
                 </motion.div>
               </motion.div>
 
               {/* Trust Indicators */}
-              <motion.div 
-                className="mt-10 flex flex-wrap items-center gap-6 text-sm text-slate-500"
+              <motion.div
+                className="mt-8 flex flex-wrap items-center gap-5 text-sm text-slate-500"
                 variants={staggerContainer}
               >
-                <motion.div className="flex items-center gap-2" variants={fadeInUp}>
+                {/* Avatars */}
+                <motion.div
+                  className="flex items-center gap-2"
+                  variants={fadeInUp}
+                >
                   <div className="flex -space-x-2">
                     {[1, 2, 3, 4].map((i) => (
-                      <motion.div
+                      <div
                         key={i}
-                        className="h-8 w-8 rounded-full border-2 border-white bg-gradient-to-br from-slate-200 to-slate-300"
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.5 + i * 0.1 }}
+                        className="h-8 w-8 rounded-full border-2 border-white"
+                        style={{
+                          background: `hsl(${20 + i * 15}, 30%, ${70 + i * 4}%)`,
+                        }}
                       />
                     ))}
                   </div>
                   <span>
-                    <strong className="text-slate-900">150+</strong> clients worldwide
+                    <strong className="text-slate-800">150+</strong> clients
+                    worldwide
                   </span>
                 </motion.div>
-                <motion.div className="flex items-center gap-1" variants={fadeInUp}>
+
+                {/* Stars */}
+                <motion.div
+                  className="flex items-center gap-1"
+                  variants={fadeInUp}
+                >
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <motion.div
+                    <Star
                       key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.6 + i * 0.05 }}
-                    >
-                      <Star className="h-4 w-4 fill-orange-400 text-orange-400" />
-                    </motion.div>
+                      className="h-4 w-4 fill-orange-400 text-orange-400"
+                    />
                   ))}
                   <span className="ml-1">
-                    <strong className="text-slate-900">4.9/5</strong> rating
-                  </span>
-                </motion.div>
-                <motion.div className="flex items-center gap-1" variants={fadeInUp}>
-                  <motion.div 
-                    className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </motion.div>
-                  <span>
-                    <strong className="text-slate-900">100+</strong> successful launches
+                    <strong className="text-slate-800">4.9/5</strong> rating
                   </span>
                 </motion.div>
               </motion.div>
             </motion.div>
-          </div>
 
-          {/* Stats Grid with Counter Animation */}
-          <motion.div 
-            className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-200 pt-8 sm:gap-6 lg:grid-cols-4"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={controls}
-          >
+            {/* ── RIGHT COLUMN — Hero Image ── */}
+            <motion.div
+              className="relative flex-shrink-0 w-full lg:w-[52%] xl:w-[55%] flex items-end justify-center lg:justify-end"
+              variants={fadeInRight}
+              initial="hidden"
+              animate={controls}
+            >
+              <div className="relative w-full max-w-2xl lg:max-w-none">
+                <Image
+                  src="/hero-img.png"
+                  alt="Platform dashboard preview"
+                  width={860}
+                  height={620}
+                  priority
+                  className="w-full h-auto object-contain drop-shadow-2xl"
+                  style={{ maxHeight: "520px" }}
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Stats Bar ── */}
+      <motion.div
+        className="relative z-10 w-full border-t border-orange-100 bg-white/60 backdrop-blur-sm"
+        variants={staggerContainer}
+        initial="hidden"
+        animate={controls}
+      >
+        <div className="mx-auto px-4 md:px-8 lg:px-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-orange-100">
             {stats.map((stat, index) => (
-              <motion.div 
-                key={stat.label} 
-                className="flex items-center gap-4 rounded-xl p-4 transition-all hover:bg-white/50 hover:shadow-md group cursor-default"
+              <motion.div
+                key={stat.label}
+                className="flex items-center gap-4 px-6 py-6 group hover:bg-orange-50/50 transition-colors cursor-default"
                 variants={fadeInUp}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                whileHover={{ y: -2, transition: { duration: 0.15 } }}
               >
-                <motion.div 
-                  className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 group-hover:bg-orange-100 transition-colors"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 group-hover:bg-orange-100 transition-colors">
                   <stat.icon className="h-5 w-5 text-orange-600" />
-                </motion.div>
+                </div>
                 <div>
                   <Counter targetValue={stat.value} />
-                  <p className="text-sm text-slate-500 mt-0.5">{stat.label}</p>
+                  <p className="text-xs font-medium text-slate-500 mt-0.5">
+                    {stat.label}
+                  </p>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </section>
+      </motion.div>
     </div>
   );
 }
