@@ -10,14 +10,14 @@ export default function BlogCta() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate API call - replace with your actual form submission logic
     setTimeout(() => {
       console.log('Form submitted with email:', email);
       setIsSubmitting(false);
       setSubmitted(true);
       setEmail('');
-      
+
       // Reset success message after 3 seconds
       setTimeout(() => setSubmitted(false), 3000);
     }, 1000);
@@ -28,12 +28,12 @@ export default function BlogCta() {
       <div className="tag-sticky-wrap flex items-center gap-2 mb-3">
         <div className="review-img">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L15 8.5L22 9.5L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9.5L9 8.5L12 2Z" fill="#F97316" stroke="#F97316" strokeWidth="1.5"/>
+            <path d="M12 2L15 8.5L22 9.5L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9.5L9 8.5L12 2Z" fill="#F97316" stroke="#F97316" strokeWidth="1.5" />
           </svg>
         </div>
         <div className="review-img star">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 1L12.5 7L19 7.5L14 12L15.5 19L10 15L4.5 19L6 12L1 7.5L7.5 7L10 1Z" fill="#FBBF24" stroke="#FBBF24"/>
+            <path d="M10 1L12.5 7L19 7.5L14 12L15.5 19L10 15L4.5 19L6 12L1 7.5L7.5 7L10 1Z" fill="#FBBF24" stroke="#FBBF24" />
           </svg>
         </div>
         <span className="tag-sticky-text text-sm font-medium text-slate-700">| 4.9</span>
@@ -55,12 +55,12 @@ export default function BlogCta() {
             placeholder="Enter your work email"
             required
             disabled={isSubmitting}
-            className="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-orange-100 disabled:bg-slate-100 disabled:cursor-not-allowed"
+            className="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-orange-100 disabled:bg-slate-100 disabled:cursor-not-allowed"
           />
-          <button 
+          <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-lg bg-primary-500 px-4 py-3 text-sm font-medium text-white transition hover:bg-primary-600 disabled:bg-primary-300 disabled:cursor-not-allowed"
+            className="w-full rounded-lg bg-accent-500 px-4 py-3 text-sm font-medium text-white transition hover:bg-accent-600 disabled:bg-accent-300 disabled:cursor-not-allowed"
           >
             {isSubmitting ? 'Submitting...' : 'Start your Project'}
           </button>

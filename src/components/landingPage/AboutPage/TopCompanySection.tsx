@@ -11,7 +11,7 @@ export const TopCompanySection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  
+
   useEffect(() => {
     if (sectionRef.current && contentRef.current) {
       const ctx = gsap.context(() => {
@@ -60,11 +60,11 @@ export const TopCompanySection = () => {
   }, []);
 
   return (
-    <section className="max-w-6xl mb-16 mx-auto">
+    <section className="max-w-6xl bg-section mb-16 mx-auto">
       <motion.div
         ref={sectionRef}
         className="bg-gray-50 rounded-2xl border border-gray-200 p-8 md:p-12 w-full"
-        whileHover={{ 
+        whileHover={{
           scale: 1.02,
           boxShadow: "0 25px 35px -15px rgba(0,0,0,0.2)",
           transition: { duration: 0.2 }
@@ -78,9 +78,9 @@ export const TopCompanySection = () => {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
         >
-          Top Software Development Company in <span className="text-primary">Pakistan</span>
+          Top Software Development Company in <span className="text-accent">Pakistan</span>
         </motion.h2>
-        
+
         <div
           ref={contentRef}
           className="space-y-4 text-gray-700"

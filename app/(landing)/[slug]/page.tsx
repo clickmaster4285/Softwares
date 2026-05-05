@@ -52,7 +52,7 @@ export default async function HireUsDetailPage({ params }: Props) {
       <div className="min-h-screen bg-[#fafafa] text-slate-900">
         <section className="border-b border-slate-200/80 bg-white">
           <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Hire Us</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Hire Us</p>
             <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
               {page.title}
             </h1>
@@ -60,7 +60,7 @@ export default async function HireUsDetailPage({ params }: Props) {
             <div className="mt-8 flex flex-wrap gap-4">
               <Button
                 asChild
-                className="rounded-lg bg-primary px-6 text-base font-semibold text-white shadow-sm hover:bg-primary/90"
+                className="rounded-lg bg-accent px-6 text-base font-semibold text-white shadow-sm hover:bg-accent/90"
               >
                 <Link href="/contact-us">
                   Contact Sales
@@ -80,7 +80,7 @@ export default async function HireUsDetailPage({ params }: Props) {
             <ul className="mt-6 space-y-3">
               {page.highlights.map((item) => (
                 <li key={item} className="flex gap-3 text-slate-700">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden />
                   <span>{item}</span>
                 </li>
               ))}

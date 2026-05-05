@@ -2,18 +2,18 @@
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Link from "next/link";
-import { motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
 import { apiFetch } from "@/lib/api";
 import { getCategoryName, resolveImageUrl } from "@/lib/utils";
-import { 
-  ExternalLink, 
-  FolderKanban, 
-  ArrowUpRight, 
-  Code, 
-  Globe, 
-  Smartphone, 
+import {
+  ExternalLink,
+  FolderKanban,
+  ArrowUpRight,
+  Code,
+  Globe,
+  Smartphone,
 
 } from "lucide-react";
 import gsap from 'gsap';
@@ -51,13 +51,13 @@ interface GroupedProjects {
 // Helper function with proper typing
 function groupProjectsByCategory(projects: Project[]): GroupedProjects[] {
   const map = new Map<string, Project[]>();
-  
+
   for (const p of projects) {
     const name = getCategoryName(p.category);
     if (!map.has(name)) map.set(name, []);
     map.get(name)!.push(p);
   }
-  
+
   return Array.from(map.entries())
     .map(([categoryName, projects]) => ({ categoryName, projects }))
     .sort((a, b) => a.categoryName.localeCompare(b.categoryName));
@@ -75,7 +75,7 @@ const getCategoryIcon = (categoryName: string) => {
 
 // Get color for status
 const getStatusColor = (status: string) => {
-  switch(status) {
+  switch (status) {
     case 'live': return 'bg-emerald-500/90';
     case 'in-progress': return 'bg-accent-500/90';
     case 'completed': return 'bg-blue-500/90';
@@ -105,7 +105,7 @@ export default function SolutionsClient({
   const ctaRef = useRef<HTMLDivElement>(null);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
-  
+
   // Filter states
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -123,19 +123,19 @@ export default function SolutionsClient({
   // Filter projects based on search and filters
   const filteredProjects = useMemo(() => {
     return projects.filter(project => {
-      const matchesSearch = searchQuery === '' || 
+      const matchesSearch = searchQuery === '' ||
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (project.technologies && project.technologies.some(tech => 
+        (project.technologies && project.technologies.some(tech =>
           tech.toLowerCase().includes(searchQuery.toLowerCase())
         ));
-      
-      const matchesCategory = selectedCategory === 'all' || 
+
+      const matchesCategory = selectedCategory === 'all' ||
         getCategoryName(project.category) === selectedCategory;
-      
-      const matchesStatus = selectedStatus === 'all' || 
+
+      const matchesStatus = selectedStatus === 'all' ||
         project.status === selectedStatus;
-      
+
       return matchesSearch && matchesCategory && matchesStatus;
     });
   }, [projects, searchQuery, selectedCategory, selectedStatus]);
@@ -249,7 +249,7 @@ export default function SolutionsClient({
         if (ctaRef.current) {
           for (let i = 0; i < 6; i++) {
             const particle = document.createElement('div');
-            particle.className = 'absolute w-1.5 h-1.5 bg-primary/20 rounded-full pointer-events-none';
+            particle.className = 'absolute w-1.5 h-1.5 bg-accent/20 rounded-full pointer-events-none';
             particle.style.left = `${Math.random() * 100}%`;
             particle.style.top = `${Math.random() * 100}%`;
             ctaRef.current.appendChild(particle);
@@ -278,7 +278,7 @@ export default function SolutionsClient({
     const projectId = project._id;
     const isHovered = hoveredProject === projectId;
     const CategoryIcon = getCategoryIcon(getCategoryName(project.category));
-    
+
     const cardContent = (
       <div
         onMouseEnter={() => setHoveredProject(projectId)}
@@ -287,8 +287,8 @@ export default function SolutionsClient({
         style={{ transformStyle: 'preserve-3d' as const }}
       >
         {/* Premium Card Design */}
-        <div className="relative bg-white rounded-2xl border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(249,115,22,0.3)] transition-shadow duration-500">
-          
+        <div className="relative bg-white rounded-2xl border border-accent/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(249,115,22,0.3)] transition-shadow duration-500">
+
           {/* Animated Background Pattern */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
             <div className="absolute inset-0" style={{
@@ -297,7 +297,7 @@ export default function SolutionsClient({
           </div>
 
           {/* Image Container */}
-          <div className="aspect-video bg-gradient-to-br from-primary/5 to-primary/10 relative overflow-hidden">
+          <div className="aspect-video bg-gradient-to-br from-accent/5 to-accent/10 relative overflow-hidden">
             {project.thumbnail ? (
               <motion.img
                 src={resolveImageUrl(project.thumbnail)}
@@ -310,10 +310,10 @@ export default function SolutionsClient({
               />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center">
-                <CategoryIcon className="h-12 w-12 text-primary/30" />
+                <CategoryIcon className="h-12 w-12 text-accent/30" />
               </div>
             )}
-            
+
             {/* Status Badge */}
             <motion.div
               className="absolute top-3 right-3"
@@ -322,15 +322,15 @@ export default function SolutionsClient({
               transition={{ delay: index * 0.05 }}
             >
               <Badge className={`${getStatusColor(project.status)} text-white border-0 text-xs font-medium px-3 py-1 rounded-full`}>
-                {project.status === 'live' ? 'Live' : 
-                 project.status === 'in-progress' ? 'In Progress' : 'Completed'}
+                {project.status === 'live' ? 'Live' :
+                  project.status === 'in-progress' ? 'In Progress' : 'Completed'}
               </Badge>
             </motion.div>
 
             {/* Category Icon Overlay */}
             <div className="absolute top-3 left-3">
               <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
-                <CategoryIcon className="w-4 h-4 text-primary" />
+                <CategoryIcon className="w-4 h-4 text-accent" />
               </div>
             </div>
 
@@ -342,12 +342,12 @@ export default function SolutionsClient({
               transition={{ duration: 0.3 }}
             />
           </div>
-          
+
           <div className="p-6">
             <h3 className="text-lg font-bold text-black mb-2 line-clamp-1">
               {project.title}
             </h3>
-            
+
             <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
               {project.description}
             </p>
@@ -356,9 +356,9 @@ export default function SolutionsClient({
             {project.technologies && project.technologies.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.technologies.slice(0, 3).map((tech, i) => (
-                  <span 
-                    key={i} 
-                    className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full"
+                  <span
+                    key={i}
+                    className="text-xs px-2 py-1 bg-accent/10 text-accent rounded-full"
                   >
                     {tech}
                   </span>
@@ -370,11 +370,11 @@ export default function SolutionsClient({
                 )}
               </div>
             )}
-            
+
             {/* Link */}
             <motion.div
               whileHover={{ x: 4 }}
-              className="inline-flex items-center gap-1 text-sm font-medium text-primary"
+              className="inline-flex items-center gap-1 text-sm font-medium text-accent"
             >
               {isExternal ? (
                 <>
@@ -392,7 +392,7 @@ export default function SolutionsClient({
             {/* Bottom Corner Accent */}
             <div className="absolute bottom-3 right-3 w-6 h-6">
               <motion.div
-                className="w-full h-full border-b border-r border-primary"
+                className="w-full h-full border-b border-r border-accent"
                 animate={{
                   rotate: isHovered ? 180 : 0,
                   opacity: isHovered ? 0.3 : 0.1
@@ -407,23 +407,23 @@ export default function SolutionsClient({
 
     if (isExternal && project.url) {
       return (
-        <a 
-          key={project._id} 
-          href={project.url} 
-          target="_blank" 
+        <a
+          key={project._id}
+          href={project.url}
+          target="_blank"
           rel="noopener noreferrer"
-          className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
+          className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xl"
         >
           {cardContent}
         </a>
       );
     }
-    
+
     return (
-      <Link 
-        key={project._id} 
+      <Link
+        key={project._id}
         href={`/software-solutions/${project._id}`}
-        className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
+        className="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xl"
       >
         {cardContent}
       </Link>
@@ -435,26 +435,26 @@ export default function SolutionsClient({
     return (
       <section className="relative py-24 overflow-hidden bg-white  min-h-screen">
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-accent/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-accent/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
         </div>
-        
+
         <div className="container relative z-10 mx-auto max-w-7xl px-4">
           <div className="text-center mb-12">
-            <div className="h-px w-20 bg-primary/30 mx-auto mb-8" />
-            <div className="h-12 w-96 bg-primary/5 rounded mx-auto mb-4 animate-pulse" />
-            <div className="h-6 w-64 bg-primary/5 rounded mx-auto animate-pulse" />
+            <div className="h-px w-20 bg-accent/30 mx-auto mb-8" />
+            <div className="h-12 w-96 bg-accent/5 rounded mx-auto mb-4 animate-pulse" />
+            <div className="h-6 w-64 bg-accent/5 rounded mx-auto animate-pulse" />
           </div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="relative">
-                <div className="relative bg-white rounded-2xl border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] overflow-hidden">
-                  <div className="h-40 bg-gradient-to-r from-primary/5 to-primary/10 animate-pulse" />
+                <div className="relative bg-white rounded-2xl border border-accent/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] overflow-hidden">
+                  <div className="h-40 bg-gradient-to-r from-accent/5 to-accent/10 animate-pulse" />
                   <div className="p-6">
-                    <div className="h-5 w-3/4 bg-primary/5 rounded animate-pulse mb-2" />
-                    <div className="h-4 w-full bg-primary/5 rounded animate-pulse mb-2" />
-                    <div className="h-4 w-2/3 bg-primary/5 rounded animate-pulse" />
+                    <div className="h-5 w-3/4 bg-accent/5 rounded animate-pulse mb-2" />
+                    <div className="h-4 w-full bg-accent/5 rounded animate-pulse mb-2" />
+                    <div className="h-4 w-2/3 bg-accent/5 rounded animate-pulse" />
                   </div>
                 </div>
               </div>
@@ -466,31 +466,31 @@ export default function SolutionsClient({
   }
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="relative py-24 overflow-hidden bg-white min-h-screen"
     >
       {/* Premium Background Layers */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-primary/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/3 to-transparent rounded-full blur-3xl" />
-        
-        <div 
-          className="absolute inset-0 opacity-[0.02]" 
-          style={{ 
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-accent/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-accent/5 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-accent/3 to-transparent rounded-full blur-3xl" />
+
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
             backgroundImage: `linear-gradient(to right, #f97316 1px, transparent 1px),
                              linear-gradient(to bottom, #f97316 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
-          }} 
+          }}
         />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section */}
         <div ref={headerRef} className=" mt-20 text-center max-w-3xl mx-auto mb-12">
-        
-          
+
+
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-black mb-4">
             {heading}
           </h1>
@@ -498,7 +498,7 @@ export default function SolutionsClient({
           <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
         </div>
 
-    
+
 
         {/* Content */}
         {filteredProjects.length === 0 ? (
@@ -506,7 +506,7 @@ export default function SolutionsClient({
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-center py-16 rounded-3xl border border-primary/10 bg-gradient-to-br from-gray-50 to-primary/10"
+            className="text-center py-16 rounded-3xl border border-accent/10 bg-gradient-to-br from-gray-50 to-accent/10"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -514,8 +514,8 @@ export default function SolutionsClient({
               transition={{ delay: 0.2, type: "spring" }}
               className="relative inline-block"
             >
-              <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl" />
-              <FolderKanban className="relative h-14 w-14 text-primary mx-auto mb-4" />
+              <div className="absolute inset-0 bg-accent/20 rounded-full blur-xl" />
+              <FolderKanban className="relative h-14 w-14 text-accent mx-auto mb-4" />
             </motion.div>
             <h3 className="text-xl font-bold text-black mb-2">No projects found</h3>
             <p className="text-gray-600 max-w-md mx-auto mb-6">
@@ -527,7 +527,7 @@ export default function SolutionsClient({
                 setSelectedCategory('all');
                 setSelectedStatus('all');
               }}
-              className="px-6 py-2 bg-black text-white text-sm font-medium rounded-md hover:bg-primary transition-colors"
+              className="px-6 py-2 bg-black text-white text-sm font-medium rounded-md hover:bg-accent transition-colors"
             >
               Clear Filters
             </button>
@@ -541,23 +541,23 @@ export default function SolutionsClient({
                   ref={(el) => { categoriesRef.current[categoryIndex] = el; }}
                   className="space-y-8"
                 >
-                 <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4">
 
-  {/* Category Name + Badge */}
-  <div className="flex-1 flex items-center gap-3">
-    <h3 className="text-xl sm:text-2xl font-bold ">
-      {categoryName}
-    </h3>
+                    {/* Category Name + Badge */}
+                    <div className="flex-1 flex items-center gap-3">
+                      <h3 className="text-xl sm:text-2xl font-bold ">
+                        {categoryName}
+                      </h3>
 
-    {/* Gradient line */}
-    <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
+                      {/* Gradient line */}
+                      <div className="h-px flex-1 bg-gradient-to-r from-accent/30 to-transparent" />
 
-    {/* Projects Badge */}
-    <Badge className="text-xs bg-primary text-primary border-0 rounded-full px-3 py-1">
-      {categoryProjects.length} {categoryProjects.length === 1 ? 'Project' : 'Projects'}
-    </Badge>
-  </div>
-</div>
+                      {/* Projects Badge */}
+                      <Badge className="text-xs bg-accent text-accent border-0 rounded-full px-3 py-1">
+                        {categoryProjects.length} {categoryProjects.length === 1 ? 'Project' : 'Projects'}
+                      </Badge>
+                    </div>
+                  </div>
 
                   {/* Projects Grid */}
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -578,7 +578,7 @@ export default function SolutionsClient({
         >
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-accent transition-colors"
           >
             <ArrowUpRight className="h-4 w-4 rotate-90" />
             Back to Top

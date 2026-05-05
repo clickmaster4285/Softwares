@@ -78,7 +78,7 @@ export function AppsSection() {
     return (
       <section className="py-20 bg-white">
         <div className="container mx-auto max-w-7xl px-4 text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-accent border-t-transparent" />
           <p className="mt-4 text-gray-600">Loading solutions...</p>
         </div>
       </section>
@@ -101,8 +101,8 @@ export function AppsSection() {
             <div key={categoryName} className="space-y-6">
               <div className="flex items-center gap-3">
                 <h3 className="text-2xl font-bold text-black">{categoryName}</h3>
-                <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
-                <Badge className="bg-primary/10 text-primary border-0">
+                <div className="h-px flex-1 bg-gradient-to-r from-accent/30 to-transparent" />
+                <Badge className="bg-accent/10 text-accent border-0">
                   {categoryProjects.length}
                 </Badge>
               </div>
@@ -116,8 +116,8 @@ export function AppsSection() {
                     rel={project.url?.startsWith('http') ? 'noopener noreferrer' : undefined}
                     className="group block"
                   >
-                    <div className="bg-white rounded-2xl border border-primary/10 overflow-hidden transition-shadow hover:shadow-lg">
-                      <div className="aspect-video bg-gradient-to-br from-primary/5 to-primary/10 relative overflow-hidden">
+                    <div className="bg-white rounded-2xl border border-accent/10 overflow-hidden transition-shadow hover:shadow-lg">
+                      <div className="aspect-video bg-gradient-to-br from-accent/5 to-accent/10 relative overflow-hidden">
                         {project.thumbnail ? (
                           <Image
                             src={resolveImageUrl(project.thumbnail)}
@@ -128,7 +128,7 @@ export function AppsSection() {
                           />
                         ) : (
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <FolderKanban className="h-10 w-10 text-primary/30" />
+                            <FolderKanban className="h-10 w-10 text-accent/30" />
                           </div>
                         )}
                       </div>
@@ -150,7 +150,7 @@ export function AppsSection() {
         <div className="mt-16 text-center">
           <Link
             href="/case-studies"
-            className="inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-2 rounded-md bg-black px-8 py-3 text-center font-medium text-white transition-colors hover:bg-primary"
+            className="inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-2 rounded-md bg-black px-8 py-3 text-center font-medium text-white transition-colors hover:bg-accent"
           >
             View all case studies
             <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />

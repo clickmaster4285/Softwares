@@ -57,9 +57,9 @@ function buildContentWithToc(html: string) {
       if (!text) return _m;
       const level = parseInt(tag[1]) as 1 | 2 | 3;
       if (level > 2) return _m;
-      
+
       if (isLikelyParagraph(inner, text)) return _m;
-      
+
       const normalizedText = text.toLowerCase();
       if (seenHeadingTexts.has(normalizedText)) return _m;
       seenHeadingTexts.add(normalizedText);
@@ -234,11 +234,11 @@ export default async function BlogDetailPage({
   const faqItems =
     Array.isArray(post.faqs) && post.faqs.length > 0
       ? post.faqs
-          .map((item) => ({
-            question: typeof item?.question === 'string' ? item.question.trim() : '',
-            answer: typeof item?.answer === 'string' ? item.answer.trim() : '',
-          }))
-          .filter((item) => item.question && item.answer)
+        .map((item) => ({
+          question: typeof item?.question === 'string' ? item.question.trim() : '',
+          answer: typeof item?.answer === 'string' ? item.answer.trim() : '',
+        }))
+        .filter((item) => item.question && item.answer)
       : extractFaqItemsFromHtml(htmlContent);
   const faqSectionHeading = post.faqHeading?.trim() || 'Frequently Asked Questions';
   const tocItems = faqItems.length
@@ -248,9 +248,9 @@ export default async function BlogDetailPage({
     typeof post.readTimeMinutes === 'number' && Number.isFinite(post.readTimeMinutes) && post.readTimeMinutes > 0
       ? `${Math.ceil(post.readTimeMinutes)} min read`
       : calculateReadTimeText({
-          html: htmlContent,
-          fallbackParts: [post.title, post.excerpt],
-        });
+        html: htmlContent,
+        fallbackParts: [post.title, post.excerpt],
+      });
   const displayAuthor = post.author?.trim() || 'ClickMasters Team';
   const authorLinkedinUrl = post.authorLinkedin?.trim() || '';
   const authorImageUrl = post.authorImage?.trim() ? resolveImageUrl(post.authorImage) : '';
@@ -327,7 +327,7 @@ export default async function BlogDetailPage({
                       className="h-10 w-10 rounded-full border border-slate-200 object-cover"
                     />
                   ) : (
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-sm font-semibold text-accent">
                       {displayAuthor
                         .split(/\s+/)
                         .slice(0, 2)
@@ -346,7 +346,7 @@ export default async function BlogDetailPage({
                       href={authorLinkedinUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 py-1 hover:border-primary/40 hover:text-primary"
+                      className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 py-1 hover:border-accent/40 hover:text-accent"
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
                       LinkedIn
@@ -371,7 +371,7 @@ export default async function BlogDetailPage({
           {/* 2-Column Layout with proper stickiness */}
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
-              
+
               {/* Left Column - Content (8 columns) */}
               <div className="lg:col-span-8">
                 <img
@@ -380,7 +380,7 @@ export default async function BlogDetailPage({
                   className="mb-10 w-full max-h-[420px] rounded-2xl border border-slate-200/90 object-cover shadow-sm"
                 />
                 <section
-                  className="blog-content prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-headings:text-slate-900 prose-p:text-slate-700 prose-p:leading-8 prose-li:text-slate-700 prose-a:text-primary prose-blockquote:border-l-primary prose-img:rounded-xl prose-img:border prose-img:border-slate-200 prose-img:shadow-sm"
+                  className="blog-content prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-headings:text-slate-900 prose-p:text-slate-700 prose-p:leading-8 prose-li:text-slate-700 prose-a:text-accent prose-blockquote:border-l-accent prose-img:rounded-xl prose-img:border prose-img:border-slate-200 prose-img:shadow-sm"
                   dangerouslySetInnerHTML={{ __html: htmlWithIds }}
                 />
                 <BlogFaqSection title={faqSectionHeading} items={faqItems} />

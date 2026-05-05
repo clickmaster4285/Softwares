@@ -3,23 +3,23 @@ import { motion } from 'framer-motion';
 
 // Why Choose Section with Slide-up Cards
 export const WhyChooseSection = () => {
- const reasons = [
-  {
-    icon: '🤝',
-    title: 'Your Dedicated Partner',
-    description: 'At ClickMasters, we’re not just another company – we’re your dedicated partner in building solutions that grow your business.'
-  },
-  {
-    icon: '🎯',
-    title: 'Full Range of Services',
-    description: 'We provide a complete suite of software development services, from web and mobile apps to custom enterprise solutions.'
-  },
-  {
-    icon: '⭐',
-    title: 'Trusted by Brands',
-    description: 'We’re proud to be recognized as a leading software development company delivering innovative solutions worldwide.'
-  }
-];
+  const reasons = [
+    {
+      icon: '🤝',
+      title: 'Your Dedicated Partner',
+      description: 'At ClickMasters, we’re not just another company – we’re your dedicated partner in building solutions that grow your business.'
+    },
+    {
+      icon: '🎯',
+      title: 'Full Range of Services',
+      description: 'We provide a complete suite of software development services, from web and mobile apps to custom enterprise solutions.'
+    },
+    {
+      icon: '⭐',
+      title: 'Trusted by Brands',
+      description: 'We’re proud to be recognized as a leading software development company delivering innovative solutions worldwide.'
+    }
+  ];
 
   return (
     <section className="container mx-auto max-w-6xl px-4 mt-16 mb-16">
@@ -30,28 +30,28 @@ export const WhyChooseSection = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        Why Choose <span className="text-primary">Clickmasters</span>
+        Why Choose <span className="text-accent">Clickmasters</span>
       </motion.h2>
-      
+
       <div className="grid md:grid-cols-3 gap-8">
         {reasons.map((reason, index) => (
           <motion.div
             key={index}
-            className="bg-white rounded-xl border border-primary/10 p-8 relative overflow-hidden group"
+            className="bg-white rounded-xl border border-accent/10 p-8 relative overflow-hidden group"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
             whileHover={{
               scale: 1.08, // Increased from 1.05 to 1.08 for more noticeable size increase
-            boxShadow: "0 25px 35px -15px rgba(37, 99, 235, 0.3)",
-             borderColor: "rgb(249, 115, 22)",
+              boxShadow: "0 25px 35px -15px rgba(37, 99, 235, 0.3)",
+              borderColor: "rgb(249, 115, 22)",
               transition: { duration: 0.3 }
             }}
           >
             {/* Animated background that moves on hover */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-accent/10 to-transparent"
               animate={{
                 x: ['-100%', '100%'],
               }}
@@ -61,7 +61,7 @@ export const WhyChooseSection = () => {
                 ease: "linear"
               }}
             />
-            
+
             <motion.div
               className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 relative z-10"
               whileHover={{ rotate: 360 }}
@@ -74,7 +74,7 @@ export const WhyChooseSection = () => {
           </motion.div>
         ))}
       </div>
-      
+
       {/* Customized Strategies Section with BLACK background and ROCKET icon behind */}
       <motion.div
         className="mt-8 rounded-xl p-8 relative overflow-hidden group bg-black"
@@ -113,13 +113,13 @@ export const WhyChooseSection = () => {
             ease: "linear"
           }}
         />
-        
+
         <h3 className="text-xl font-semibold mb-4 relative z-10 text-white">
-  Tailored Software Solutions for Every Business
-</h3>
-<p className="relative z-10 text-gray-300">
-  At Clickmasters, we understand that each business has unique requirements. As a leading software development company, we create custom solutions that help your business thrive.
-</p>
+          Tailored Software Solutions for Every Business
+        </h3>
+        <p className="relative z-10 text-gray-300">
+          At Clickmasters, we understand that each business has unique requirements. As a leading software development company, we create custom solutions that help your business thrive.
+        </p>
       </motion.div>
     </section>
   );

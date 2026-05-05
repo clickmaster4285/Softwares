@@ -23,9 +23,9 @@ interface CoreValueCardProps {
 
 export const CoreValuesSection = () => {
   const values: ValueItem[] = [
-    { 
-      icon: '🏆', 
-      title: 'Excellence', 
+    {
+      icon: '🏆',
+      title: 'Excellence',
       description: 'We pursue excellence in everything we do, constantly raising the bar.',
       features: [
         'Continuous Improvement',
@@ -34,9 +34,9 @@ export const CoreValuesSection = () => {
         'Performance Optimization'
       ]
     },
-    { 
-      icon: '🤝', 
-      title: 'Integrity', 
+    {
+      icon: '🤝',
+      title: 'Integrity',
       description: 'We believe in honest, transparent communication and ethical business practices.',
       features: [
         'Transparent Communication',
@@ -45,9 +45,9 @@ export const CoreValuesSection = () => {
         'Honest Feedback Culture'
       ]
     },
-    { 
-      icon: '💡', 
-      title: 'Innovation', 
+    {
+      icon: '💡',
+      title: 'Innovation',
       description: 'We embrace change and continuously innovate to deliver cutting-edge solutions.',
       features: [
         'Creative Problem Solving',
@@ -56,9 +56,9 @@ export const CoreValuesSection = () => {
         'Forward Thinking'
       ]
     },
-    { 
-      icon: '📈', 
-      title: 'Results', 
+    {
+      icon: '📈',
+      title: 'Results',
       description: 'We are obsessed with delivering measurable results that drive real business growth.',
       features: [
         'Data-Driven Decisions',
@@ -70,10 +70,10 @@ export const CoreValuesSection = () => {
   ];
 
   return (
-    <section className="bg-gray-50 py-24 relative overflow-hidden">
+    <section className="bg-section py-24 relative overflow-hidden">
       {/* Background Pattern - matching Features component */}
       <div className="absolute inset-0">
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.1]"
           style={{
             backgroundSize: '32px 32px'
@@ -92,7 +92,7 @@ export const CoreValuesSection = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             <span className="text-gray-900">The Principles That </span>
-            <span className="bg-primary bg-clip-text text-transparent">
+            <span className="bg-accent bg-clip-text text-transparent">
               Drive Us Forward
             </span>
           </h2>
@@ -101,7 +101,7 @@ export const CoreValuesSection = () => {
             These core values shape our culture, guide our decisions, and define how we work with our clients and each other.
           </p>
         </motion.div>
-        
+
         {/* Values Grid - matching FeatureCard design */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {values.map((value, index) => (
@@ -127,9 +127,9 @@ const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <div className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-primary transition-all duration-300 h-full flex flex-col relative overflow-hidden shadow-sm hover:shadow-xl">
+      <div className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-accent transition-all duration-300 h-full flex flex-col relative overflow-hidden shadow-sm hover:shadow-xl">
         {/* Icon */}
-        <motion.div 
+        <motion.div
           className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 text-4xl group-hover:scale-110 transition-transform duration-300"
           animate={{
             rotate: [0, 5, -5, 0],
@@ -146,7 +146,7 @@ const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
 
         {/* Title */}
         <h3 className="text-xl font-bold text-gray-900 mb-2">{value.title}</h3>
-        
+
         {/* Description */}
         <p className="text-sm text-gray-600 mb-4">{value.description}</p>
 
@@ -158,7 +158,7 @@ const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-white p-6 rounded-2xl border-2 border-primary/50 z-10 shadow-xl"
+              className="absolute inset-0 bg-white p-6 rounded-2xl border-2 border-accent/50 z-10 shadow-xl"
             >
               <h3 className="text-xl font-bold text-gray-900 mb-4">{value.title} - Key Traits</h3>
               <div className="space-y-2">
@@ -170,12 +170,12 @@ const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
                     transition={{ duration: 0.2, delay: idx * 0.03 }}
                     className="flex items-start gap-2"
                   >
-                    <span className="text-primary text-sm">•</span>
+                    <span className="text-accent text-sm">•</span>
                     <span className="text-sm text-gray-600">{feature}</span>
                   </motion.div>
                 ))}
               </div>
-              <div className="absolute bottom-3 right-3 text-xs text-primary/50">
+              <div className="absolute bottom-3 right-3 text-xs text-accent/50">
                 {value.features.length} traits
               </div>
             </motion.div>

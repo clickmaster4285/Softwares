@@ -70,9 +70,9 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
         const headingPosition = heading.offsetTop;
         const scrollPosition = window.scrollY + scrollOffset;
         const distance = Math.abs(headingPosition - scrollPosition);
-        
+
         const isInViewport = heading.top < window.innerHeight - 100 && heading.bottom > 100;
-        
+
         if (distance < minDistance || (isInViewport && distance < minDistance + 200)) {
           minDistance = distance;
           activeHeading = heading;
@@ -84,7 +84,7 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
 
     const onScroll = () => {
       if (isScrollingRef.current) return;
-      
+
       const current = findActiveHeading();
       if (current && current !== activeId) {
         setActiveId(current);
@@ -101,7 +101,7 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
     onScroll();
     window.addEventListener('scroll', debouncedScroll, { passive: true });
     window.addEventListener('resize', debouncedScroll);
-    
+
     return () => {
       window.removeEventListener('scroll', debouncedScroll);
       window.removeEventListener('resize', debouncedScroll);
@@ -130,22 +130,22 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
   // Auto-scroll the active TOC link into view
   useEffect(() => {
     if (!activeId || !navRef.current || isScrollingRef.current) return;
-    
-    const safeId = typeof CSS !== 'undefined' && typeof CSS.escape === 'function' 
-      ? CSS.escape(activeId) 
+
+    const safeId = typeof CSS !== 'undefined' && typeof CSS.escape === 'function'
+      ? CSS.escape(activeId)
       : activeId.replace(/[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~]/g, '\\$&');
     const activeLink = navRef.current.querySelector<HTMLAnchorElement>(`a[href="#${safeId}"]`);
     if (!activeLink) return;
-    
+
     const container = navRef.current;
     const linkRect = activeLink.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
-    
+
     const isLinkVisible = (
       linkRect.top >= containerRect.top &&
       linkRect.bottom <= containerRect.bottom
     );
-    
+
     if (!isLinkVisible) {
       activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
@@ -153,25 +153,25 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
 
   const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    
+
     const decodedId = decodeURIComponent(id);
     const target = document.getElementById(decodedId);
     if (!target) return;
-    
+
     isScrollingRef.current = true;
     setActiveId(decodedId);
 
     const targetRect = target.getBoundingClientRect();
     const absoluteTargetTop = window.scrollY + targetRect.top;
     const targetTop = Math.max(0, absoluteTargetTop - scrollOffset);
-    
-    window.scrollTo({ 
-      top: targetTop, 
-      behavior: 'smooth' 
+
+    window.scrollTo({
+      top: targetTop,
+      behavior: 'smooth'
     });
-    
+
     window.history.pushState(null, '', `#${encodeURIComponent(decodedId)}`);
-    
+
     setTimeout(() => {
       isScrollingRef.current = false;
     }, 1000);
@@ -187,13 +187,13 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
   return (
     <div className={className}>
       <div className="side-title text-base font-semibold text-slate-800 mb-2">In this article</div>
-      <div className="line-wrapper-side h-px bg-primary-200 mb-3"></div>
+      <div className="line-wrapper-side h-px bg-accent-200 mb-3"></div>
       <nav ref={navRef} className="toc-nav max-h-[calc(100vh-8rem)] overflow-y-auto pr-1">
-        <ul className="space-y-1 border-l border-primary-200 pl-0">
+        <ul className="space-y-1 border-l border-accent-200 pl-0">
           {items.map((item, idx) => {
             const isActive = activeId === item.id || (!activeId && idx === 0);
             const isHovered = hoveredId === item.id;
-            
+
             return (
               <li key={item.id}>
                 <a
@@ -202,24 +202,23 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
                   onMouseEnter={() => setHoveredId(item.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   aria-current={isActive ? 'location' : undefined}
-                  className={`block rounded-r-md px-3 py-2 text-sm leading-snug transition-all duration-200 ${
-                    isActive
-                      ? 'border-l-2 border-l-orange-500 bg-primary-50 text-primary-700 shadow-sm font-medium'
+                  className={`block rounded-r-md px-3 py-2 text-sm leading-snug transition-all duration-200 ${isActive
+                      ? 'border-l-2 border-l-orange-500 bg-accent-50 text-accent-700 shadow-sm font-medium'
                       : isHovered
-                      ? 'border-l-2 border-l-orange-300 bg-primary-50/50 text-primary-600 translate-x-0.5'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800 hover:translate-x-0.5'
-                  } ${item.level === 2 ? 'ml-3' : item.level === 3 ? 'ml-6' : ''}`}
+                        ? 'border-l-2 border-l-orange-300 bg-accent-50/50 text-accent-600 translate-x-0.5'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800 hover:translate-x-0.5'
+                    } ${item.level === 2 ? 'ml-3' : item.level === 3 ? 'ml-6' : ''}`}
                 >
                   <div className="flex items-center gap-2">
                     {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500 animate-pulse"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent-500 animate-pulse"></span>
                     )}
                     <span className="flex-1">{item.text}</span>
                     {isHovered && (
-                      <svg 
-                        className="w-3.5 h-3.5 text-primary-400 transition-all duration-200 transform translate-x-0.5" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
+                      <svg
+                        className="w-3.5 h-3.5 text-accent-400 transition-all duration-200 transform translate-x-0.5"
+                        fill="none"
+                        viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

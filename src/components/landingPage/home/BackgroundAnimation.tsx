@@ -26,19 +26,17 @@ export const BackgroundAnimation: React.FC = () => {
     const dtr = (deg: number) => (deg * pi) / 180;
 
     class Line {
-      angle: number[];
-      color: string;
+      angle: number[] = [0, 0, 0, 0];
+      color: string = '';
 
-      constructor(wave: Wave, color: string) {
+      init(wave: Wave, color: string) {
         const angle = wave.angle;
         const speed = wave.speed;
 
-        this.angle = [
-          Math.sin((angle[0] += speed[0])),
-          Math.sin((angle[1] += speed[1])),
-          Math.sin((angle[2] += speed[2])),
-          Math.sin((angle[3] += speed[3])),
-        ];
+        this.angle[0] = Math.sin((angle[0] += speed[0]));
+        this.angle[1] = Math.sin((angle[1] += speed[1]));
+        this.angle[2] = Math.sin((angle[2] += speed[2]));
+        this.angle[3] = Math.sin((angle[3] += speed[3]));
 
         this.color = color;
       }
@@ -47,6 +45,7 @@ export const BackgroundAnimation: React.FC = () => {
     class Wave {
       waves: Waves;
       Lines: Line[];
+      linePool: Line[];
       angle: number[];
       speed: number[];
 
@@ -55,6 +54,7 @@ export const BackgroundAnimation: React.FC = () => {
         const speed = waves.options.speed;
 
         this.Lines = [];
+        this.linePool = [];
         this.angle = [rnd(pi2), rnd(pi2), rnd(pi2), rnd(pi2)];
         this.speed = [
           rnd(speed[0], speed[1]) * rnd_sign(),
@@ -66,14 +66,13 @@ export const BackgroundAnimation: React.FC = () => {
 
       update() {
         const color = this.waves.color;
-        this.Lines.push(new Line(this, color));
+        let line = this.linePool.pop() || new Line();
+        line.init(this, color);
+        this.Lines.push(line);
+        
         if (this.Lines.length > this.waves.options.width) {
-          // Reuse objects instead of creating new ones
           const removed = this.Lines.shift();
-          if (removed) {
-            // Clear the removed line for garbage collection
-            removed.angle = [0, 0, 0, 0];
-          }
+          if (removed) this.linePool.push(removed);
         }
       }
 
@@ -87,7 +86,12 @@ export const BackgroundAnimation: React.FC = () => {
         const rotation = dtr(waves.options.rotation);
         const amplitude = waves.options.amplitude;
 
-        this.Lines.forEach((line) => {
+        ctx.strokeStyle = this.waves.color;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        
+        for (let i = 0; i < this.Lines.length; i++) {
+          const line = this.Lines[i];
           const angle = line.angle;
 
           const x1 = x - radius * Math.cos(angle[0] * amplitude + rotation);
@@ -99,13 +103,10 @@ export const BackgroundAnimation: React.FC = () => {
           const cpx2 = x + radius3 * Math.cos(angle[2] * amplitude * 2);
           const cpy2 = y + radius3 * Math.sin(angle[2] * amplitude * 2);
 
-          ctx.strokeStyle = line.color;
-          ctx.lineWidth = 1.5;
-          ctx.beginPath();
           ctx.moveTo(x1, y1);
           ctx.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x2, y2);
-          ctx.stroke();
-        });
+        }
+        ctx.stroke();
       }
     }
 
@@ -133,7 +134,7 @@ export const BackgroundAnimation: React.FC = () => {
           rotation: 45,
           waves: 5,
           width: 100,
-          hue: [0, 1], // Toggle between 0 and 1 for blue/gold
+          hue: [0, 1],
           amplitude: 0.5,
           background: true,
           preload: true,
@@ -183,8 +184,8 @@ export const BackgroundAnimation: React.FC = () => {
 
       background() {
         const gradient = this.ctx.createLinearGradient(0, 0, 0, this.height);
-        gradient.addColorStop(0, '#020617'); // Dark background
-        gradient.addColorStop(1, this.color); // Color pulse at bottom
+        gradient.addColorStop(0, '#020617');
+        gradient.addColorStop(1, this.color);
         this.ctx.fillStyle = gradient;
         this.ctx.fillRect(0, 0, this.width, this.height);
       }
@@ -205,7 +206,7 @@ export const BackgroundAnimation: React.FC = () => {
       }
 
       updateColor() {
-        this.hue += this.hueFw ? 0.001 : -0.001; // Slower color transition
+        this.hue += this.hueFw ? 0.001 : -0.001;
         if (this.hue > 1) {
           this.hue = 1;
           this.hueFw = false;
@@ -214,30 +215,23 @@ export const BackgroundAnimation: React.FC = () => {
           this.hueFw = true;
         }
 
-        // Pre-calculate color values to avoid repeated calculations
         const r = Math.floor(63 + (255 - 63) * this.hue);
         const g = Math.floor(155 + (215 - 155) * this.hue);
         const b = Math.floor(255 + (0 - 255) * this.hue);
 
-        this.color = `rgba(${r},${g},${b}, 0.1)`; // Reduced opacity
+        this.color = `rgba(${r},${g},${b}, 0.1)`;
       }
     }
 
     const wavesInstance = new Waves(holder, {
-      waves: 3, // Reduced from 4 to 3
-      width: 100, // Reduced from 150 to 100
+      waves: 3,
+      width: 100,
     });
 
     let animationId: number;
-    let lastTime = 0;
-    const targetFPS = 30; // Reduce from 60 to 30 FPS
-    const frameInterval = 1000 / targetFPS;
 
-    const animate = (currentTime: number) => {
-      if (currentTime - lastTime >= frameInterval) {
-        wavesInstance.render();
-        lastTime = currentTime;
-      }
+    const animate = () => {
+      wavesInstance.render();
       animationId = window.requestAnimationFrame(animate);
     };
 
@@ -246,7 +240,7 @@ export const BackgroundAnimation: React.FC = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    animate(0);
+    animate();
 
     return () => {
       window.cancelAnimationFrame(animationId);

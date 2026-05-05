@@ -53,12 +53,12 @@ interface AnimatedCounterProps {
 }
 
 // Animated Counter Component with Glow Effect
-const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ 
-  value, 
-  label, 
-  suffix = '', 
-  delay = 0, 
-  gradient = 'from-primary/80 to-primary' 
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
+  value,
+  label,
+  suffix = '',
+  delay = 0,
+  gradient = 'from-accent/80 to-accent'
 }) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -131,12 +131,12 @@ interface TestimonialCardProps {
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, isActive, duplicateIndex }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const gradients = [
-    'from-primary/80 to-primary',
-    'from-accent-400 to-primary',
-    'from-primary to-primary',
-    'from-primary to-primary/80',
-    'from-primary/80 to-primary',
-    'from-accent-400 to-primary/80',
+    'from-accent/80 to-accent',
+    'from-accent-400 to-accent',
+    'from-accent to-accent',
+    'from-accent to-accent/80',
+    'from-accent/80 to-accent',
+    'from-accent-400 to-accent/80',
   ];
 
   const gradient = gradients[(duplicateIndex ?? index) % gradients.length];
@@ -194,7 +194,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
 
         {/* Company badge */}
         <div className="flex items-center justify-between mb-6">
-          <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary bg-opacity-10`}>
+          <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent bg-opacity-10`}>
             <Award className="w-3.5 h-3.5 text-white" />
             <span className="text-xs font-semibold text-white">
               Verified Client
@@ -235,9 +235,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
             <div className={`absolute inset-0 bg-foreground/30 rounded-full blur-md opacity-50`} />
             <Avatar className="relative w-16 h-16 border-2 border-white dark:border-gray-800 shadow-lg">
               <AvatarImage src={testimonial.avatarUrl} alt={testimonial.authorName} />
-             <AvatarFallback className={`bg-foreground/30 text-black font-semibold`}>
-  {(testimonial.authorName ?? 'NA').slice(0, 2).toUpperCase()}
-</AvatarFallback>
+              <AvatarFallback className={`bg-foreground/30 text-black font-semibold`}>
+                {(testimonial.authorName ?? 'NA').slice(0, 2).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
           </div>
 
@@ -248,7 +248,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
                 {testimonial.authorRole}
                 {testimonial.authorRole && testimonial.authorCompany && ' at '}
                 {testimonial.authorCompany && (
-                  <span className={`font-medium text-primary`}>
+                  <span className={`font-medium text-accent`}>
                     {testimonial.authorCompany}
                   </span>
                 )}
@@ -264,7 +264,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
               <TrendingUp className="w-3 h-3" />
               +{Math.floor(Math.random() * 30 + 20)}% growth
             </span>
-           
+
           </div>
         </div>
       </div>
@@ -291,39 +291,39 @@ const Testimonials: React.FC = () => {
   // Function to duplicate testimonials to reach desired count
   const getDuplicatedTestimonials = (originalTestimonials: Testimonial[], targetCount: number = 6) => {
     if (originalTestimonials.length === 0) return [];
-    
+
     const duplicated: Testimonial[] = [];
     const repeatCount = Math.ceil(targetCount / originalTestimonials.length);
-    
+
     for (let i = 0; i < repeatCount; i++) {
       duplicated.push(...originalTestimonials.map(t => ({
         ...t,
         _id: `${t._id}-dup-${i}` // Create unique IDs for duplicates
       })));
     }
-    
+
     return duplicated.slice(0, targetCount);
   };
 
   // Get processed testimonials with duplication if needed
   const getProcessedTestimonials = () => {
     if (testimonials.length === 0) return [];
-    
+
     // If we have 4 or more, use original
     if (testimonials.length >= 4) {
       return testimonials;
     }
-    
+
     // For 2-3 testimonials, duplicate to create 6 items
     if (testimonials.length >= 2 && testimonials.length <= 3) {
       return getDuplicatedTestimonials(testimonials, 6);
     }
-    
+
     // For 1 testimonial, duplicate to 3 items
     if (testimonials.length === 1) {
       return getDuplicatedTestimonials(testimonials, 3);
     }
-    
+
     return testimonials;
   };
 
@@ -375,9 +375,9 @@ const Testimonials: React.FC = () => {
         <section ref={sectionRef} className="py-20 relative overflow-hidden">
           {/* Animated background */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl animate-pulse delay-700" />
+            <div className="absolute top-20 left-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse delay-1000" />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-3xl animate-pulse delay-700" />
           </div>
 
           <div className="mt-20 container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
@@ -393,10 +393,10 @@ const Testimonials: React.FC = () => {
                 initial={{ width: 0 }}
                 animate={{ width: 80 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="h-px bg-primary mx-auto mb-8"
+                className="h-px bg-accent mx-auto mb-8"
               />
               <h1 className="font-display text-3xl sm:text-5xl lg:text-5xl font-bold text-foreground mb-4">
-                What our <span className="text-primary">Clients Says</span>
+                What our <span className="text-accent">Clients Says</span>
               </h1>
               <p className="text-lg text-muted-foreground">
                 Feedback from businesses who chose our software development company for custom software, web apps, and mobile apps.
@@ -420,34 +420,34 @@ const Testimonials: React.FC = () => {
                   Trust metrics at a glance
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12">
-                <AnimatedCounter
-                  value="5000"
-                  label="Happy Clients"
-                  suffix="+"
-                  delay={0.1}
-                  gradient="from-primary to-primary"
-                />
-                <AnimatedCounter
-                  value="98"
-                  label="Satisfaction Rate"
-                  suffix="%"
-                  delay={0.2}
-                  gradient="from-primary to-primary"
-                />
-                <AnimatedCounter
-                  value="50"
-                  label="Industry Awards"
-                  suffix="+"
-                  delay={0.3}
-                  gradient="from-primary to-primary"
-                />
-                <AnimatedCounter
-                  value="24"
-                  label="Support Team"
-                  suffix="/7"
-                  delay={0.4}
-                  gradient="from-primary to-primary"
-                />
+                  <AnimatedCounter
+                    value="5000"
+                    label="Happy Clients"
+                    suffix="+"
+                    delay={0.1}
+                    gradient="from-accent to-accent"
+                  />
+                  <AnimatedCounter
+                    value="98"
+                    label="Satisfaction Rate"
+                    suffix="%"
+                    delay={0.2}
+                    gradient="from-accent to-accent"
+                  />
+                  <AnimatedCounter
+                    value="50"
+                    label="Industry Awards"
+                    suffix="+"
+                    delay={0.3}
+                    gradient="from-accent to-accent"
+                  />
+                  <AnimatedCounter
+                    value="24"
+                    label="Support Team"
+                    suffix="/7"
+                    delay={0.4}
+                    gradient="from-accent to-accent"
+                  />
                 </div>
               </motion.section>
             )}
@@ -540,10 +540,10 @@ const Testimonials: React.FC = () => {
                   {displayTestimonials.map((testimonial, index) => {
                     // Determine if this is a duplicate and get original index for active state
                     const isDuplicateSlide = testimonial._id.includes('-dup-');
-                    const originalIndex = isDuplicateSlide 
-                      ? index % originalTestimonialsCount 
+                    const originalIndex = isDuplicateSlide
+                      ? index % originalTestimonialsCount
                       : index % originalTestimonialsCount;
-                    
+
                     return (
                       <SwiperSlide key={testimonial._id}>
                         <TestimonialCard
@@ -561,7 +561,7 @@ const Testimonials: React.FC = () => {
                 {displayTestimonials.length > 1 && (
                   <div className="flex items-center justify-center gap-4 mt-8">
                     <button
-                      className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-accent/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                       onClick={() => setIsAutoPlaying(false)}
                       disabled={displayTestimonials.length <= 1}
                     >
@@ -570,13 +570,13 @@ const Testimonials: React.FC = () => {
 
                     <button
                       onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                      className="w-14 h-14 rounded-full bg-gradient-to-r from-primary/80 to-primary shadow-xl hover:shadow-2xl flex items-center justify-center text-white transition-all hover:scale-110 hover:shadow-primary/25"
+                      className="w-14 h-14 rounded-full bg-gradient-to-r from-accent/80 to-accent shadow-xl hover:shadow-2xl flex items-center justify-center text-white transition-all hover:scale-110 hover:shadow-accent/25"
                     >
                       {isAutoPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
                     </button>
 
                     <button
-                      className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-accent/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                       onClick={() => setIsAutoPlaying(false)}
                       disabled={displayTestimonials.length <= 1}
                     >

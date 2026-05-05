@@ -183,7 +183,7 @@ const AdminProjects = () => {
   const statusColors = {
     live: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
     'in-progress': 'bg-accent-500/20 text-accent-400 border-accent-500/30',
-    completed: 'bg-primary/20 text-primary border-primary/30',
+    completed: 'bg-accent/20 text-accent border-accent/30',
   };
 
   // Get unique categories for filter
@@ -292,7 +292,7 @@ const AdminProjects = () => {
                           {project.description}
                         </p>
                         <div className="flex flex-wrap gap-1">
-                          <Badge className="text-xs bg-primary text-white border-primary/30">
+                          <Badge className="text-xs bg-accent text-white border-accent/30">
                             {getCategoryName(project.category)}
                           </Badge>
                           {project.tags?.map((tag: string) => (

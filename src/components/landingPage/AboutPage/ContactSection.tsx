@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'; // Import useRouter from next/navig
 // Contact Section with Floating Elements
 export const ContactSection = () => {
   const router = useRouter(); // Initialize router
-  
+
   const contactInfo = [
     { icon: '📍', title: 'Address', value: 'Main PWD Rd, PWD Housing Society Sector A PWD Society, Islamabad, Punjab 45700, Pakistan' },
     { icon: '📧', title: 'Email', value: 'marketing@clickmasters.pk' },
@@ -17,7 +17,7 @@ export const ContactSection = () => {
   };
 
   return (
-    <section className="bg-gray-50 py-16 relative overflow-hidden">
+    <section className="bg-section py-16 relative overflow-hidden">
       <motion.div
         className="absolute inset-0 "
         animate={{
@@ -30,7 +30,7 @@ export const ContactSection = () => {
           ease: "linear"
         }}
       />
-      
+
       <div className="container mx-auto max-w-6xl px-4 relative z-10">
         <motion.div
           className="text-center mb-12"
@@ -44,10 +44,10 @@ export const ContactSection = () => {
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            Feel Free to <span className="text-primary">Contact Us</span> Anytime!
+            Feel Free to <span className="text-accent">Contact Us</span> Anytime!
           </motion.h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-           Whether you need expert guidance on web, mobile, cloud, or any other custom software solutions, our team is here to help.
+            Whether you need expert guidance on web, mobile, cloud, or any other custom software solutions, our team is here to help.
           </p>
         </motion.div>
 
@@ -55,14 +55,14 @@ export const ContactSection = () => {
           {contactInfo.map((info, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-xl border-2 border-primary/10 p-6 group shadow-sm hover:shadow-xl transition-shadow"
+              className="bg-white rounded-xl border-2 border-accent/10 p-6 group shadow-sm hover:shadow-xl transition-shadow"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{
                 scale: 1.05,
-              boxShadow: "0 30px 40px -20px rgba(59,130,246,0.4)",
+                boxShadow: "0 30px 40px -20px rgba(59,130,246,0.4)",
                 backgroundColor: "#ffffff"
               }}
             >
@@ -71,7 +71,7 @@ export const ContactSection = () => {
                 whileHover={{ x: 10 }}
               >
                 <motion.span
-                  className="text-primary mr-2 text-xl"
+                  className="text-accent mr-2 text-xl"
                   animate={{
                     rotate: [0, 10, -10, 0],
                     scale: [1, 1.2, 1]
@@ -100,7 +100,7 @@ export const ContactSection = () => {
         >
           <motion.button
             onClick={handleNavigation} // Add onClick handler
-            className="bg-primary hover:bg-primary text-white font-semibold px-8 py-4 rounded-lg relative overflow-hidden group shadow-lg hover:shadow-xl transition-all cursor-pointer"
+            className="bg-accent hover:bg-accent text-white font-semibold px-8 py-4 rounded-lg relative overflow-hidden group shadow-lg hover:shadow-xl transition-all cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

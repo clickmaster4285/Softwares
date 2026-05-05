@@ -63,9 +63,9 @@ const AdminCategories = () => {
       const res = await apiFetch('/api/categories', { credentials: 'include' });
       if (!res.ok) throw new Error('Failed to fetch categories');
       const data = await res.json();
-      
+
       // Sort: newest on top
-      return data.sort((a: Category, b: Category) => 
+      return data.sort((a: Category, b: Category) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
     },
@@ -186,15 +186,15 @@ const AdminCategories = () => {
     }
 
     if (editingCategory) {
-      updateMutation.mutate({ 
-        id: editingCategory._id, 
-        name: name.trim(), 
+      updateMutation.mutate({
+        id: editingCategory._id,
+        name: name.trim(),
         description: description.trim(),
         showOnHome,
       });
     } else {
-      createMutation.mutate({ 
-        name: name.trim(), 
+      createMutation.mutate({
+        name: name.trim(),
         description: description.trim(),
         showOnHome,
       });
@@ -247,7 +247,7 @@ const AdminCategories = () => {
                     <div className="flex flex-col md:flex-row md:items-center gap-4">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <Tag className="h-4 w-4 text-primary shrink-0" />
+                          <Tag className="h-4 w-4 text-accent shrink-0" />
                           <h3 className="font-semibold text-foreground">{category.name}</h3>
                         </div>
                         {category.description && (
@@ -286,8 +286,8 @@ const AdminCategories = () => {
       </div>
 
       {/* Create/Edit Dialog */}
-      <Dialog 
-        open={isFormOpen} 
+      <Dialog
+        open={isFormOpen}
         onOpenChange={(open) => {
           setIsFormOpen(open);
           if (!open) {
@@ -361,8 +361,8 @@ const AdminCategories = () => {
                 {createMutation.isPending || updateMutation.isPending
                   ? 'Saving...'
                   : editingCategory
-                  ? 'Update Category'
-                  : 'Create Category'}
+                    ? 'Update Category'
+                    : 'Create Category'}
               </Button>
             </div>
           </form>
@@ -381,8 +381,8 @@ const AdminCategories = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction 
-              onClick={handleDelete} 
+            <AlertDialogAction
+              onClick={handleDelete}
               className="bg-destructive hover:bg-destructive/90"
             >
               Delete

@@ -180,11 +180,10 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                 setActiveTag('all');
                 setPage(1);
               }}
-              className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
-                activeTag === 'all'
-                  ? 'border-slate-900 bg-slate-900 text-white'
-                  : 'border-slate-300 bg-white text-slate-600 hover:border-slate-500'
-              }`}
+              className={`rounded-full border px-3 py-1 text-xs font-medium transition ${activeTag === 'all'
+                ? 'border-slate-900 bg-slate-900 text-white'
+                : 'border-slate-300 bg-white text-slate-600 hover:border-slate-500'
+                }`}
             >
               All topics
             </button>
@@ -196,11 +195,10 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                   setActiveTag(tag);
                   setPage(1);
                 }}
-                className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
-                  activeTag === tag
-                    ? 'border-slate-900 bg-slate-900 text-white'
-                    : 'border-slate-300 bg-white text-slate-600 hover:border-slate-500'
-                }`}
+                className={`rounded-full border px-3 py-1 text-xs font-medium transition ${activeTag === tag
+                  ? 'border-slate-900 bg-slate-900 text-white'
+                  : 'border-slate-300 bg-white text-slate-600 hover:border-slate-500'
+                  }`}
               >
                 {tag}
               </button>
@@ -223,7 +221,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
               <div className="grid gap-6 lg:grid-cols-3">
                 <Link
                   href={postHref(featured)}
-                  className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-primary/25 hover:shadow-md lg:col-span-2"
+                  className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-accent/25 hover:shadow-md lg:col-span-2"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
                     <img
@@ -236,10 +234,10 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                     />
                   </div>
                   <div className="p-6">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-primary">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-accent">
                       {featured.tags?.[0] || 'Featured'}
                     </p>
-                    <h2 className="mt-2 font-display text-2xl font-bold leading-tight text-slate-900 group-hover:text-primary">
+                    <h2 className="mt-2 font-display text-2xl font-bold leading-tight text-slate-900 group-hover:text-accent">
                       {featured.title}
                     </h2>
                     <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600">
@@ -260,7 +258,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="hover:text-primary hover:underline"
+                            className="hover:text-accent hover:underline"
                           >
                             {authorName(featured)}
                           </a>
@@ -290,7 +288,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="ml-1 inline-flex items-center gap-1 rounded border border-slate-200 bg-white px-2 py-0.5 text-[11px] hover:border-primary/40 hover:text-primary"
+                          className="ml-1 inline-flex items-center gap-1 rounded border border-slate-200 bg-white px-2 py-0.5 text-[11px] hover:border-accent/40 hover:text-accent"
                         >
                           <ExternalLink className="h-3 w-3" />
                           Profile
@@ -305,7 +303,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                     <Link
                       key={postId(post._id) || String(post._id)}
                       href={postHref(post)}
-                      className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-primary/25 hover:shadow-md"
+                      className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-accent/25 hover:shadow-md"
                     >
                       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                         <img
@@ -318,7 +316,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                         />
                       </div>
                       <div className="p-4">
-                        <h3 className="line-clamp-2 text-base font-semibold leading-snug text-slate-900 group-hover:text-primary">
+                        <h3 className="line-clamp-2 text-base font-semibold leading-snug text-slate-900 group-hover:text-accent">
                           {post.title}
                         </h3>
                         <p className="mt-2 flex flex-wrap items-center gap-1 text-xs text-slate-500">
@@ -328,7 +326,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="hover:text-primary hover:underline"
+                              className="hover:text-accent hover:underline"
                             >
                               {authorName(post)}
                             </a>
@@ -358,7 +356,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                     <li key={postId(post._id) || String(post._id)}>
                       <Link
                         href={postHref(post)}
-                        className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:border-primary/25 hover:shadow-md"
+                        className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:border-accent/25 hover:shadow-md"
                       >
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                           <img
@@ -371,10 +369,10 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                           />
                         </div>
                         <div className="flex flex-1 flex-col p-4">
-                          <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-accent">
                             {post.tags?.[0] || 'Article'}
                           </p>
-                          <h3 className="mt-1 line-clamp-2 text-lg font-semibold leading-snug text-slate-900 group-hover:text-primary">
+                          <h3 className="mt-1 line-clamp-2 text-lg font-semibold leading-snug text-slate-900 group-hover:text-accent">
                             {post.title}
                           </h3>
                           <p className="mt-2 line-clamp-3 text-sm text-slate-600">{post.excerpt}</p>
@@ -385,7 +383,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="hover:text-primary hover:underline"
+                                className="hover:text-accent hover:underline"
                               >
                                 {authorName(post)}
                               </a>
@@ -401,7 +399,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                               </>
                             ) : null}
                           </p>
-                          <span className="mt-4 inline-flex items-center text-sm font-semibold text-primary">
+                          <span className="mt-4 inline-flex items-center text-sm font-semibold text-accent">
                             Read more
                             <ArrowRight className="ml-1 h-4 w-4 transition group-hover:translate-x-0.5" />
                           </span>
@@ -429,11 +427,10 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                         key={n}
                         type="button"
                         onClick={() => setPage(n)}
-                        className={`h-8 min-w-8 rounded border px-2 text-sm ${
-                          n === safePage
-                            ? 'border-slate-900 bg-slate-900 text-white'
-                            : 'border-slate-300 bg-white text-slate-700'
-                        }`}
+                        className={`h-8 min-w-8 rounded border px-2 text-sm ${n === safePage
+                          ? 'border-slate-900 bg-slate-900 text-white'
+                          : 'border-slate-300 bg-white text-slate-700'
+                          }`}
                       >
                         {n}
                       </button>

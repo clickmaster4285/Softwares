@@ -10,7 +10,7 @@ export const TeamSection = () => {
   ];
 
   return (
-    <section className="py-16 mb-16">
+    <section className="py-20 bg-gold/80">
       <div className="container mx-auto max-w-6xl px-4">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-black text-center mb-6"
@@ -18,9 +18,9 @@ export const TeamSection = () => {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          Meet Our Expert <span className="text-primary">Team</span>
+          Meet Our Expert <span className="text-accent">Team</span>
         </motion.h2>
-        
+
         <motion.p
           className="text-center text-gray-700 max-w-3xl mx-auto mb-12"
           initial={{ opacity: 0 }}
@@ -41,7 +41,7 @@ export const TeamSection = () => {
               whileHover={{
                 rotateY: 10,
                 scale: 1.05,
-              boxShadow: "0 30px 40px -20px rgba(59,130,246,0.4)",
+                boxShadow: "0 30px 40px -20px rgba(59,130,246,0.4)",
                 transition: { duration: 0.3 }
               }}
             >

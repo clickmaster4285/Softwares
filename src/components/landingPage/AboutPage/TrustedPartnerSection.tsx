@@ -40,10 +40,10 @@ export const TrustedPartnerSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-black py-16 mb-16 overflow-hidden relative"
+      className="bg-gold/80 py-16 mb-16 overflow-hidden relative"
     >
       <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-900 opacity-10" />
-      
+
       <div className="container mx-auto max-w-6xl px-4 relative z-10">
         <div
           ref={contentRef}

@@ -115,7 +115,7 @@ export function IndustriesSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-gradient-to-b from-accent-200 via-accent-500/20 to-[gold]/80 ">
+    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-gradient-to-b from-accent-200 via-accent-500/20 to-gold/80 ">
       <div className="container relative z-10 mx-auto max-w-7xl px-4">
         {/* Header Section */}
         <div ref={headerRef} className="text-center mb-10">
@@ -124,7 +124,7 @@ export function IndustriesSection() {
             whileInView={{ width: 80 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-px bg-primary mx-auto mb-8"
+            className="h-px bg-accent mx-auto mb-8"
           />
 
           <motion.h2
@@ -134,7 +134,7 @@ export function IndustriesSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            Driving <span className="text-primary">Excellence</span>
+            Driving <span className="text-accent">Excellence</span>
           </motion.h2>
 
           <motion.p
@@ -153,9 +153,9 @@ export function IndustriesSection() {
           {industries.map((industry, index) => {
             const Icon = industry.icon;
             return (
-              <div 
+              <div
                 key={industry.title}
-              className="group relative rounded-2xl border border-white/10 bg-accent-50/15 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:bg-white/[0.06]">
+                className="group relative rounded-2xl border border-white/10 bg-accent-50/15 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-accent/40 hover:bg-white/[0.06]">
 
                 {/* Glow layer */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-[#1e3a8a]/40 to-[#c49138]/40 blur-xl" />
@@ -197,7 +197,7 @@ export function IndustriesSection() {
                         key={i}
                         className="text-xs text-white/70 flex items-center gap-2"
                       >
-                        <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        <span className="w-1.5 h-1.5 bg-accent rounded-full" />
                         {feature}
                       </li>
                     ))}
@@ -214,13 +214,13 @@ export function IndustriesSection() {
           <div className="relative bg-white rounded-3xl border border-gray-200 p-12 lg:p-16 shadow-sm">
 
             {/* Subtle gradient accent */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl mx-auto text-center">
 
               {/* Top Label */}
               <div className="mb-6">
-                <span className="text-xs tracking-[0.2em] uppercase text-primary font-semibold">
+                <span className="text-xs tracking-[0.2em] uppercase text-accent font-semibold">
                   Start Your Project
                 </span>
               </div>
@@ -255,14 +255,14 @@ export function IndustriesSection() {
 
                 <button
                   onClick={() => router.push('/contact-us')}
-                  className="px-8 py-3 bg-primary text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:bg-primary/90 hover:shadow-lg active:scale-95"
+                  className="px-8 py-3 bg-accent text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:bg-accent/90 hover:shadow-lg active:scale-95"
                 >
                   Get Free Consultation
                 </button>
 
                 <button
                   onClick={() => router.push('/case-studies')}
-                  className="px-8 py-3 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg transition-all duration-200 hover:border-primary hover:text-primary hover:bg-primary/5 active:scale-95"
+                  className="px-8 py-3 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5 active:scale-95"
                 >
                   View Case Studies
                 </button>

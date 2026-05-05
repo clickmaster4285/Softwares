@@ -44,7 +44,7 @@ export default async function ProjectPage({
             href={doc.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-block text-primary underline"
+            className="mt-8 inline-block text-accent underline"
           >
             Visit project
           </a>

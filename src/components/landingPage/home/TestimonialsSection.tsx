@@ -59,7 +59,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   label,
   suffix = '',
   delay = 0,
-  gradient = 'from-primary/80 to-primary'
+  gradient = 'from-accent/80 to-accent'
 }) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -125,12 +125,12 @@ interface TestimonialCardProps {
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, isActive, duplicateIndex }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const gradients = [
-    'from-primary/80 to-primary',
-    'from-accent-400 to-primary',
-    'from-primary to-primary',
-    'from-primary to-primary/80',
-    'from-primary/80 to-primary',
-    'from-accent-400 to-primary/80',
+    'from-accent/80 to-accent',
+    'from-accent-400 to-accent',
+    'from-accent to-accent',
+    'from-accent to-accent/80',
+    'from-accent/80 to-accent',
+    'from-accent-400 to-accent/80',
   ];
   const gradient = gradients[(duplicateIndex ?? index) % gradients.length];
 
@@ -176,7 +176,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
         <Quote className={`absolute bottom-6 right-6 w-16 h-16 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-10`} />
 
         <div className="flex items-center justify-between mb-6">
-          <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary bg-opacity-10`}>
+          <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent bg-opacity-10`}>
             <Award className="w-3.5 h-3.5 text-white" />
             <span className="text-xs font-semibold text-white">Verified Client</span>
           </div>
@@ -190,11 +190,10 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
                 transition={{ delay: i * 0.1 }}
               >
                 <Star
-                  className={`w-4 h-4 ${
-                    i < (testimonial.rating ?? 5)
-                      ? 'fill-accent-400 text-accent-400'
-                      : 'text-gray-300 dark:text-gray-600'
-                  }`}
+                  className={`w-4 h-4 ${i < (testimonial.rating ?? 5)
+                    ? 'fill-accent-400 text-accent-400'
+                    : 'text-gray-300 dark:text-gray-600'
+                    }`}
                 />
               </motion.div>
             ))}
@@ -226,7 +225,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
                 {testimonial.authorRole}
                 {testimonial.authorRole && testimonial.authorCompany && ' at '}
                 {testimonial.authorCompany && (
-                  <span className={`font-medium text-primary`}>{testimonial.authorCompany}</span>
+                  <span className={`font-medium text-accent`}>{testimonial.authorCompany}</span>
                 )}
               </p>
             )}
@@ -239,7 +238,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
               <TrendingUp className="w-3 h-3" />
               +{Math.floor(Math.random() * 30 + 20)}% growth
             </span>
-          
+
           </div>
         </div>
       </div>
@@ -266,39 +265,39 @@ export function TestimonialsSection() {
   // Function to duplicate testimonials to reach desired count
   const getDuplicatedTestimonials = (originalTestimonials: Testimonial[], targetCount: number = 6) => {
     if (originalTestimonials.length === 0) return [];
-    
+
     const duplicated: Testimonial[] = [];
     const repeatCount = Math.ceil(targetCount / originalTestimonials.length);
-    
+
     for (let i = 0; i < repeatCount; i++) {
       duplicated.push(...originalTestimonials.map(t => ({
         ...t,
         _id: `${t._id}-dup-${i}` // Create unique IDs for duplicates
       })));
     }
-    
+
     return duplicated.slice(0, targetCount);
   };
 
   // Get processed testimonials with duplication if needed
   const getProcessedTestimonials = () => {
     if (testimonials.length === 0) return [];
-    
+
     // If we have 4 or more, use original (but limit to 6 for homepage)
     if (testimonials.length >= 4) {
       return testimonials.slice(0, 6);
     }
-    
+
     // For 2-3 testimonials, duplicate to create 6 items
     if (testimonials.length >= 2 && testimonials.length <= 3) {
       return getDuplicatedTestimonials(testimonials, 6);
     }
-    
+
     // For 1 testimonial, duplicate to 3 items
     if (testimonials.length === 1) {
       return getDuplicatedTestimonials(testimonials, 3);
     }
-    
+
     return testimonials;
   };
 
@@ -345,13 +344,13 @@ export function TestimonialsSection() {
     <section ref={sectionRef} id="testimonials" className="py-20 lg:py-28 bg-white dark:bg-gray-950 relative overflow-hidden">
       {/* Background accents */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
-      
+
         {/* Header */}
         <motion.div
           className="text-center max-w-3xl mx-auto mb-14"
@@ -364,21 +363,21 @@ export function TestimonialsSection() {
             initial={{ width: 0 }}
             animate={{ width: 80 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-px bg-primary mx-auto mb-8"
+            className="h-px bg-accent mx-auto mb-8"
           />
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Hear What Our <span className="text-primary">Clients Have to Say</span>
+            Hear What Our <span className="text-accent">Clients Have to Say</span>
           </h2>
           <p className="text-gray-700 max-w-2xl mx-auto text-base mt-4">
-            Discover why businesses trust us for their custom software, web, and mobile app solutions. 
-            Read real feedback from our clients who have transformed their ideas into seamless digital 
+            Discover why businesses trust us for their custom software, web, and mobile app solutions.
+            Read real feedback from our clients who have transformed their ideas into seamless digital
             experiences with our expertise.
           </p>
         </motion.div>
 
 
 
-          {/* Stats Section with Glow Effects */}
+        {/* Stats Section with Glow Effects */}
         {!isLoading && testimonials.length > 0 && (
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-20 py-8"
@@ -392,28 +391,28 @@ export function TestimonialsSection() {
               label="Happy Clients"
               suffix="+"
               delay={0.1}
-              gradient="from-primary to-primary"
+              gradient="from-accent to-accent"
             />
             <AnimatedCounter
               value="98"
               label="Satisfaction Rate"
               suffix="%"
               delay={0.2}
-              gradient="from-primary to-primary"
+              gradient="from-accent to-accent"
             />
             <AnimatedCounter
               value="50"
               label="Industry Awards"
               suffix="+"
               delay={0.3}
-              gradient="from-primary to-primary"
+              gradient="from-accent to-accent"
             />
             <AnimatedCounter
               value="24"
               label="Support Team"
               suffix="/7"
               delay={0.4}
-              gradient="from-primary to-primary"
+              gradient="from-accent to-accent"
             />
           </motion.div>
         )}
@@ -472,10 +471,10 @@ export function TestimonialsSection() {
               {displayTestimonials.map((testimonial, index) => {
                 // Determine if this is a duplicate and get original index for active state
                 const isDuplicateSlide = testimonial._id.includes('-dup-');
-                const originalIndex = isDuplicateSlide 
-                  ? index % testimonials.length 
+                const originalIndex = isDuplicateSlide
+                  ? index % testimonials.length
                   : index % testimonials.length;
-                
+
                 return (
                   <SwiperSlide key={testimonial._id}>
                     <TestimonialCard
@@ -493,7 +492,7 @@ export function TestimonialsSection() {
             {displayTestimonials.length > 1 && (
               <div className="flex items-center justify-center gap-4 mt-8">
                 <button
-                  className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary transition-all hover:scale-110 disabled:opacity-50"
+                  className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-accent transition-all hover:scale-110 disabled:opacity-50"
                   onClick={() => setIsAutoPlaying(false)}
                 >
                   <ChevronLeft className="w-6 h-6" />
@@ -501,13 +500,13 @@ export function TestimonialsSection() {
 
                 <button
                   onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                  className="w-14 h-14 rounded-full bg-gradient-to-r from-primary/80 to-primary shadow-xl hover:shadow-2xl flex items-center justify-center text-white transition-all hover:scale-110"
+                  className="w-14 h-14 rounded-full bg-gradient-to-r from-accent/80 to-accent shadow-xl hover:shadow-2xl flex items-center justify-center text-white transition-all hover:scale-110"
                 >
                   {isAutoPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
                 </button>
 
                 <button
-                  className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary transition-all hover:scale-110"
+                  className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-accent transition-all hover:scale-110"
                   onClick={() => setIsAutoPlaying(false)}
                 >
                   <ChevronRight className="w-6 h-6" />
@@ -522,7 +521,7 @@ export function TestimonialsSection() {
           <div className="text-center mt-12">
             <Link
               href="/testimonials"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-all"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3 text-sm font-medium text-accent-foreground hover:bg-accent/90 transition-all"
             >
               View All Testimonials ({testimonials.length})
             </Link>

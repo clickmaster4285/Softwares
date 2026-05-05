@@ -58,9 +58,9 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, label, color, 
     };
   }, [isInView, animate]);
 
-  const suffix = useMemo(() => 
+  const suffix = useMemo(() =>
     value.includes('+') ? '+' : value.includes('%') ? '%' : '',
-  [value]);
+    [value]);
 
   // CSS animation for glow (better performance)
   const glowStyle = useMemo(() => ({
@@ -77,13 +77,13 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, label, color, 
     <div ref={ref} className="text-center relative group">
       <div className="relative">
         {/* Glow effect with CSS animation */}
-        <div 
+        <div
           className={`absolute inset-0 bg-gradient-to-r ${color} rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`}
           style={glowStyle}
         />
 
         {/* Counter text */}
-        <div 
+        <div
           className={`relative sm:text-3xl lg:5xl font-bold text-white mb-1`}
           style={counterStyle}
         >
@@ -99,23 +99,23 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, label, color, 
 export const HeroSection: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
   const isInView = useInView(heroRef, { once: true });
-  
+
   // Typer animation state
   const [displayText, setDisplayText] = useState<string>('');
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [loopNum, setLoopNum] = useState<number>(0);
   const [typingSpeed, setTypingSpeed] = useState<number>(150);
 
-const phrases: string[] = [
-  'Building the Future, One Line at a Time',
-  'Innovating Through Code',
-  'Your Technology Partners',
-  'Turning Ideas into Software',
-  'Where Innovation Meets Excellence',
-  'Crafting Scalable Solutions',
-  'Engineering Your Vision',
-  'Code that Powers Your Business',
-];
+  const phrases: string[] = [
+    'Building the Future, One Line at a Time',
+    'Innovating Through Code',
+    'Your Technology Partners',
+    'Turning Ideas into Software',
+    'Where Innovation Meets Excellence',
+    'Crafting Scalable Solutions',
+    'Engineering Your Vision',
+    'Code that Powers Your Business',
+  ];
 
   useEffect(() => {
     const handleTyping = () => {
@@ -153,7 +153,7 @@ const phrases: string[] = [
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: 'url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80")',
@@ -189,25 +189,25 @@ const phrases: string[] = [
               <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.5, repeat: Infinity }}
-                className="inline-block w-[3px] h-[40px] bg-primary ml-2 align-middle"
+                className="inline-block w-[3px] h-[40px] bg-accent ml-2 align-middle"
               />
             </motion.div>
           </motion.h1>
 
 
-        <motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={isInView ? { opacity: 1, y: 0 } : {}}
-  transition={{ duration: 0.6, delay: 0.8 }}
-  className="mt-8"
->
-  <Link
-    href="/admin/login"
-    className="bg-primary hover:bg-primary text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-center"
-  >
-    Get Started
-  </Link>
-</motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-8"
+          >
+            <Link
+              href="/admin/login"
+              className="bg-accent hover:bg-accent text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-center"
+            >
+              Get Started
+            </Link>
+          </motion.div>
 
 
         </motion.div>
@@ -349,7 +349,7 @@ export const StatsSection: React.FC = () => {
         {/* Animated gradient orbs */}
         <div className="absolute inset-0 opacity-30">
           <div
-            className="absolute w-48 h-48 md:w-96 md:h-96 rounded-full bg-primary blur-2xl md:blur-3xl"
+            className="absolute w-48 h-48 md:w-96 md:h-96 rounded-full bg-accent blur-2xl md:blur-3xl"
             style={{ top: '20%', left: '10%', animation: 'float 20s infinite ease-in-out' }}
           />
           <div
@@ -454,7 +454,7 @@ export const StatsSection: React.FC = () => {
                 <AnimatedCounter
                   value={stat.value}
                   label={stat.label}
-                  color="from-primary/80 to-primary"
+                  color="from-accent/80 to-accent"
                   delay={index * 0.2}
                 />
               </div>

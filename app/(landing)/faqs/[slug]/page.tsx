@@ -41,12 +41,12 @@ export default async function FaqDetailPage({ params }: Props) {
 
   return (
     <main className="mx-auto mt-24 max-w-4xl px-4 pb-20 sm:px-6 lg:px-8">
-      <Link href="/faqs" className="text-sm font-medium text-primary hover:underline">
+      <Link href="/faqs" className="text-sm font-medium text-accent hover:underline">
         ← Back to all FAQ cards
       </Link>
 
       <header className="mt-4">
-        <p className="text-xs font-semibold uppercase tracking-wide text-primary/80">
+        <p className="text-xs font-semibold uppercase tracking-wide text-accent/80">
           {service.category}
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">

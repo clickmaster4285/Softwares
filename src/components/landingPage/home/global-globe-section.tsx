@@ -19,7 +19,7 @@ export function GlobalGlobeSection(): JSX.Element {
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.55 }}
           >
-            <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               <Globe2 className="h-4 w-4" aria-hidden />
               Global reach
             </p>
@@ -28,7 +28,7 @@ export function GlobalGlobeSection(): JSX.Element {
               className="font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
             >
               Built for teams{" "}
-              <span className="text-primary">everywhere</span>
+              <span className="text-accent">everywhere</span>
             </h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">
               Pins mark every U.S. state and D.C., all Canadian provinces and territories, Australian

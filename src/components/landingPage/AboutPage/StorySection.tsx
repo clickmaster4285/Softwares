@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const StorySection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     if (sectionRef.current && contentRef.current) {
       const ctx = gsap.context(() => {
@@ -43,8 +43,8 @@ export const StorySection = () => {
     <section className="mx-auto max-w-6xl mb-16">
       <motion.div
         ref={sectionRef}
-        className="bg-gray-50 rounded-2xl border border-gray-200 p-8 md:p-12 w-full"
-        whileHover={{ 
+        className="bg-section rounded-2xl border border-gray-200 p-8 md:p-12 w-full"
+        whileHover={{
           scale: 1.02,
           boxShadow: "0 25px 35px -15px rgba(0,0,0,0.2)",
           transition: { duration: 0.2 }
@@ -58,9 +58,9 @@ export const StorySection = () => {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
         >
-          Our <span className="text-primary">Story</span>
+          Our <span className="text-accent">Story</span>
         </motion.h2>
-        
+
         <div
           ref={contentRef}
           className="space-y-4 text-gray-700"

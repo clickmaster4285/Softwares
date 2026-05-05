@@ -34,17 +34,17 @@ export default function FaqsPage() {
             <Link
               key={service.slug}
               href={`/faqs/${service.slug}`}
-              className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-primary/40 hover:shadow-md"
+              className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-accent/40 hover:shadow-md"
               aria-label={`Open FAQs for ${service.title}`}
             >
-              <p className="text-xs font-semibold uppercase tracking-wide text-primary/80">
+              <p className="text-xs font-semibold uppercase tracking-wide text-accent/80">
                 {service.category}
               </p>
-              <h2 className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-primary">
+              <h2 className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-accent">
                 {service.title}
               </h2>
               <p className="mt-2 line-clamp-3 text-sm text-slate-600">{service.metaDescription}</p>
-              <p className="mt-4 text-sm font-medium text-primary">
+              <p className="mt-4 text-sm font-medium text-accent">
                 {faqCount} FAQ{faqCount === 1 ? '' : 's'} available
               </p>
             </Link>

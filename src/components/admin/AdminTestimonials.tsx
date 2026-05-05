@@ -133,7 +133,7 @@ const AdminTestimonials = () => {
   const updateMutation = useMutation({
     mutationFn: async (data: { id: string } & Partial<Testimonial>) => {
       const { apiFetch } = await import('../../lib/api');
-     const res = await apiFetch(`/api/testimonials?id=${data.id}`, {
+      const res = await apiFetch(`/api/testimonials?id=${data.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -170,10 +170,10 @@ const AdminTestimonials = () => {
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       const { apiFetch } = await import('../../lib/api');
-   const res = await apiFetch(`/api/testimonials?id=${id}`, {
-  method: 'DELETE',
-  credentials: 'include',
-});
+      const res = await apiFetch(`/api/testimonials?id=${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
       if (!res.ok) throw new Error('Failed to delete');
       return res.json();
     },
@@ -255,7 +255,7 @@ const AdminTestimonials = () => {
                     <div className="flex flex-col md:flex-row md:items-start gap-4">
                       <Avatar className="h-12 w-12 shrink-0">
                         <AvatarImage src={t.avatarUrl} />
-                        <AvatarFallback className="bg-primary/10 text-primary">
+                        <AvatarFallback className="bg-accent/10 text-accent">
                           {t.authorName.slice(0, 2).toUpperCase()}
                         </AvatarFallback>
                       </Avatar>
@@ -272,7 +272,7 @@ const AdminTestimonials = () => {
                           {[1, 2, 3, 4, 5].map((i) => (
                             <Star
                               key={i}
-                              className={`h-4 w-4 ${i <= (t.rating ?? 5) ? 'fill-primary text-primary' : 'text-muted'}`}
+                              className={`h-4 w-4 ${i <= (t.rating ?? 5) ? 'fill-accent text-accent' : 'text-muted'}`}
                             />
                           ))}
                         </div>

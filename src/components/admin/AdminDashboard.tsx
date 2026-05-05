@@ -36,13 +36,13 @@ const AdminDashboard = () => {
   })).sort((a, b) => b.count - a.count);
 
   // Get recent projects
-  const recentProjects = projects.sort((a, b) => 
+  const recentProjects = projects.sort((a, b) =>
     new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
   ).slice(0, 5);
 
   // Calculate completion percentage
-  const completionPercentage = totalProjects > 0 
-    ? Math.round((completedCount / totalProjects) * 100) 
+  const completionPercentage = totalProjects > 0
+    ? Math.round((completedCount / totalProjects) * 100)
     : 0;
 
   // Get stats array
@@ -111,7 +111,7 @@ const AdminDashboard = () => {
         >
           <div className="flex items-start justify-between">
             <div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              <h2 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent">
                 Dashboard
               </h2>
               <p className="text-muted-foreground mt-2">Welcome back! Here's your portfolio overview.</p>
@@ -133,7 +133,7 @@ const AdminDashboard = () => {
               className="group"
             >
               <Card className="glass-card border-border/50 overflow-hidden relative hover:shadow-lg transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <CardHeader className="flex flex-row items-center justify-between pb-2 relative z-10">
                   <CardTitle className="text-sm font-medium text-muted-foreground">
                     {stat.title}
@@ -171,7 +171,7 @@ const AdminDashboard = () => {
               <CardHeader className="border-b border-border/30">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                    <Eye className="h-5 w-5 text-primary" />
+                    <Eye className="h-5 w-5 text-accent" />
                     Recent Activity
                   </CardTitle>
                   <Badge variant="outline" className="text-xs">
@@ -202,10 +202,10 @@ const AdminDashboard = () => {
                       >
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
-                            <p className="font-medium text-foreground truncate group-hover:text-primary transition-colors">
+                            <p className="font-medium text-foreground truncate group-hover:text-accent transition-colors">
                               {project.title}
                             </p>
-                            <Badge className="text-xs bg-primary/20 text-primary border-primary/30 shrink-0">
+                            <Badge className="text-xs bg-accent/20 text-accent border-accent/30 shrink-0">
                               {getCategoryName(project.category)}
                             </Badge>
                           </div>
@@ -214,13 +214,12 @@ const AdminDashboard = () => {
                           </p>
                         </div>
                         <span
-                          className={`ml-2 px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap shrink-0 ${
-                            project.status === 'live'
-                              ? 'bg-emerald-500/20 text-emerald-400'
-                              : project.status === 'in-progress'
+                          className={`ml-2 px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap shrink-0 ${project.status === 'live'
+                            ? 'bg-emerald-500/20 text-emerald-400'
+                            : project.status === 'in-progress'
                               ? 'bg-accent-500/20 text-accent-400'
-                              : 'bg-primary/20 text-primary'
-                          }`}
+                              : 'bg-accent/20 text-accent'
+                            }`}
                         >
                           {project.status === 'in-progress' ? 'In Progress' : project.status.charAt(0).toUpperCase() + project.status.slice(1)}
                         </span>
@@ -237,7 +236,7 @@ const AdminDashboard = () => {
             <Card className="glass-card border-border/50 h-full">
               <CardHeader className="border-b border-border/30">
                 <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                  <Tag className="h-5 w-5 text-primary" />
+                  <Tag className="h-5 w-5 text-accent" />
                   Categories
                 </CardTitle>
               </CardHeader>
@@ -271,7 +270,7 @@ const AdminDashboard = () => {
                           <div className="flex items-center gap-2">
                             <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                               <motion.div
-                                className="h-full bg-gradient-to-r from-primary to-primary/70"
+                                className="h-full bg-gradient-to-r from-accent to-accent/70"
                                 initial={{ width: 0 }}
                                 animate={{ width: `${(cat.count / totalProjects) * 100}%` }}
                                 transition={{ delay: 0.2, duration: 0.5 }}
@@ -302,7 +301,7 @@ const AdminDashboard = () => {
           <Card className="glass-card border-border/50 overflow-hidden">
             <CardHeader className="border-b border-border/30">
               <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-primary" />
+                <TrendingUp className="h-5 w-5 text-accent" />
                 Project Status Overview
               </CardTitle>
             </CardHeader>
@@ -312,7 +311,7 @@ const AdminDashboard = () => {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-sm font-medium text-foreground">Overall Completion</p>
-                    <span className="text-lg font-bold text-primary">{completionPercentage}%</span>
+                    <span className="text-lg font-bold text-accent">{completionPercentage}%</span>
                   </div>
                   <div className="h-3 bg-muted rounded-full overflow-hidden">
                     <motion.div
@@ -337,8 +336,8 @@ const AdminDashboard = () => {
                     <div className="text-2xl font-bold text-accent-400">{inProgressCount}</div>
                     <p className="text-xs text-muted-foreground mt-1">In Progress</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-primary/10 border border-primary/20 text-center">
-                    <div className="text-2xl font-bold text-primary">{completedCount}</div>
+                  <div className="p-4 rounded-lg bg-accent/10 border border-accent/20 text-center">
+                    <div className="text-2xl font-bold text-accent">{completedCount}</div>
                     <p className="text-xs text-muted-foreground mt-1">Completed</p>
                   </div>
                 </div>

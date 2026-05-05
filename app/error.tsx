@@ -18,7 +18,7 @@ export default function Error({
           An unexpected error occurred. Please try again.
         </p>
         <div className="space-x-4">
-          <button onClick={reset} className="btn btn-primary">
+          <button onClick={reset} className="btn btn-accent">
             Try again
           </button>
           <Link href="/" className="btn btn-secondary">

@@ -123,14 +123,14 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
 
         <div className="relative mx-auto max-w-8xl px-6 pb-14 pt-12 lg:px-16">
           {/* Eyebrow */}
-          <p className="mb-5 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-            <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+          <p className="mb-5 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+            <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
             Evidence of delivery
           </p>
 
           <h1 className="max-w-8xl font-display text-4xl font-normal leading-[1.15] tracking-tight text-slate-950 sm:text-5xl lg:text-[3.2rem]">
             Case studies showing how software{' '}
-            <em className="italic text-primary not-italic" style={{ fontStyle: 'italic' }}>moves</em>{' '}
+            <em className="italic text-accent not-italic" style={{ fontStyle: 'italic' }}>moves</em>{' '}
             revenue and operations
           </h1>
 
@@ -143,7 +143,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Button
               asChild
-              className="rounded-lg bg-primary px-6 text-sm font-semibold text-white hover:bg-primary/90"
+              className="rounded-lg bg-accent px-6 text-sm font-semibold text-white hover:bg-accent/90"
             >
               <Link href="/contact-us">
                 Discuss your initiative
@@ -182,7 +182,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
             },
           ].map((m, i) => (
             <div key={i} className="flex items-center gap-4 py-6 sm:px-8 first:sm:pl-0">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                 {m.icon}
               </div>
               <div>
@@ -233,7 +233,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
               },
             ].map((col) => (
               <div key={col.num} className="bg-white px-6 py-7">
-                <p className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-primary">
+                <p className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-accent">
                   {col.num}
                 </p>
                 <h3 className="mt-3 text-[15px] font-semibold text-slate-900">{col.title}</h3>
@@ -270,7 +270,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search title, sector, client…"
                 aria-label="Filter case studies"
-                className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 transition"
+                className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20 transition"
               />
             </div>
           </div>
@@ -361,7 +361,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
 
                     {/* Body */}
                     <div className="flex flex-1 flex-col p-6">
-                      <h3 className="font-display text-[19px] font-normal leading-snug text-slate-950 transition group-hover:text-primary">
+                      <h3 className="font-display text-[19px] font-normal leading-snug text-slate-950 transition group-hover:text-accent">
                         {cs.title}
                       </h3>
                       {cs.client && (
@@ -386,7 +386,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
                         </div>
                       )}
 
-                      <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-semibold text-primary transition-all group-hover:gap-2.5">
+                      <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent transition-all group-hover:gap-2.5">
                         Read case study
                         <ArrowRight className="h-3.5 w-3.5" aria-hidden />
                       </span>
@@ -399,7 +399,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
                     {id ? (
                       <Link
                         href={`/case-studies/${encodeURIComponent(hrefSlug || id)}`}
-                        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:border-primary/30 hover:shadow-[0_8px_32px_rgba(232,83,26,0.10)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:border-accent/30 hover:shadow-[0_8px_32px_rgba(232,83,26,0.10)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                       >
                         {cardContent}
                       </Link>
@@ -435,7 +435,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
           <div>
             <h3 className="font-display text-2xl font-normal leading-snug text-white sm:text-3xl">
               Ready to discuss your{' '}
-              <em className="italic text-primary/80">initiative?</em>
+              <em className="italic text-accent/80">initiative?</em>
             </h3>
             <p className="mt-2 max-w-lg text-[14px] leading-relaxed text-slate-400">
               We scope, build, and ship — tell us what you&apos;re working on and we&apos;ll share
@@ -444,7 +444,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
           </div>
           <Button
             asChild
-            className="shrink-0 rounded-lg bg-white px-7 py-3 text-sm font-semibold text-slate-950 hover:bg-primary-50 transition"
+            className="shrink-0 rounded-lg bg-white px-7 py-3 text-sm font-semibold text-slate-950 hover:bg-accent-50 transition"
           >
             <Link href="/contact-us">
               Start the conversation

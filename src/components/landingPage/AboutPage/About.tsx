@@ -31,7 +31,7 @@ const About = () => {
     const handleResize = () => {
       ScrollTrigger.refresh();
     };
-    
+
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -50,11 +50,11 @@ const About = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }} // Reduced from 0.8
     >
-      <main className="">
+      <main className="bg-gradient-to-b from-accent-50 via-accent-300/50  to-gold/80">
         <HeroSection />
         <StatsSection />
-        
-        <section className="mx-auto max-w-6xl mt-16 grid md:grid-cols-2 gap-6">
+
+        <section className="mx-auto  max-w-6xl mt-16 grid md:grid-cols-2 gap-6">
           <StorySection />
           <TopCompanySection />
         </section>

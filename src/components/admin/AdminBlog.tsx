@@ -224,7 +224,7 @@ export default function AdminBlog() {
                           </div>
                           <p className="line-clamp-2 text-sm text-muted-foreground">{post.excerpt}</p>
                           {post.category ? (
-                            <p className="mt-1 text-xs font-medium text-primary">Category: {post.category}</p>
+                            <p className="mt-1 text-xs font-medium text-accent">Category: {post.category}</p>
                           ) : null}
                         </div>
                         <div className="flex shrink-0 items-center gap-2">

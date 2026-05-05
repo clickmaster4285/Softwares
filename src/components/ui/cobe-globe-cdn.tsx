@@ -56,39 +56,39 @@ const ORANGE: [number, number, number] = [249 / 255, 115 / 255, 22 / 255];
 const globePalette = (theme: GlobeCdnTheme, denseMap: boolean) =>
   theme === "dark"
     ? {
-        dark: 1,
-        phi: 0,
-        theta: 0.2,
-        diffuse: 1.45,
-        mapSamples: denseMap ? 20000 : 16000,
-        mapBrightness: denseMap ? 8.2 : 7.5,
-        ...(denseMap ? { mapBaseBrightness: 0.04 } : {}),
-        baseColor: [0.07, 0.08, 0.11] as [number, number, number],
-        markerColor: ORANGE,
-        glowColor: [0.42, 0.16, 0.05] as [number, number, number],
-        arcColor: [1, 0.58, 0.26] as [number, number, number],
-        markerElevation: 0.02,
-        arcWidth: 0.55,
-        arcHeight: 0.26,
-        opacity: 0.88,
-      }
+      dark: 1,
+      phi: 0,
+      theta: 0.2,
+      diffuse: 1.45,
+      mapSamples: denseMap ? 20000 : 16000,
+      mapBrightness: denseMap ? 8.2 : 7.5,
+      ...(denseMap ? { mapBaseBrightness: 0.04 } : {}),
+      baseColor: [0.07, 0.08, 0.11] as [number, number, number],
+      markerColor: ORANGE,
+      glowColor: [0.42, 0.16, 0.05] as [number, number, number],
+      arcColor: [1, 0.58, 0.26] as [number, number, number],
+      markerElevation: 0.02,
+      arcWidth: 0.55,
+      arcHeight: 0.26,
+      opacity: 0.88,
+    }
     : {
-        dark: 0,
-        phi: 0,
-        theta: 0.2,
-        diffuse: 1.52,
-        mapSamples: denseMap ? 22000 : 16000,
-        mapBrightness: denseMap ? 11.2 : 10,
-        ...(denseMap ? { mapBaseBrightness: 0.035 } : {}),
-        baseColor: [1, 1, 1] as [number, number, number],
-        markerColor: [0, 0, 0] as [number, number, number],
-        glowColor: [0.94, 0.93, 0.91] as [number, number, number],
-        arcColor: [0.08, 0.1, 0.14] as [number, number, number],
-        markerElevation: 0.02,
-        arcWidth: 0.45,
-        arcHeight: 0.24,
-        opacity: denseMap ? 0.78 : 0.7,
-      };
+      dark: 0,
+      phi: 0,
+      theta: 0.2,
+      diffuse: 1.52,
+      mapSamples: denseMap ? 22000 : 16000,
+      mapBrightness: denseMap ? 11.2 : 10,
+      ...(denseMap ? { mapBaseBrightness: 0.035 } : {}),
+      baseColor: [1, 1, 1] as [number, number, number],
+      markerColor: [0, 0, 0] as [number, number, number],
+      glowColor: [0.94, 0.93, 0.91] as [number, number, number],
+      arcColor: [0.08, 0.1, 0.14] as [number, number, number],
+      markerElevation: 0.02,
+      arcWidth: 0.45,
+      arcHeight: 0.24,
+      opacity: denseMap ? 0.78 : 0.7,
+    };
 
 const OVERLAY_MARKER_CAP = 22;
 const OVERLAY_ARC_CAP = 12;
@@ -262,12 +262,12 @@ export function GlobeCdn({
 
   const regionChipClass =
     theme === "dark"
-      ? "border border-primary/45 bg-slate-950/90 text-white shadow-lg shadow-black/40"
+      ? "border border-accent/45 bg-slate-950/90 text-white shadow-lg shadow-black/40"
       : "bg-white text-foreground shadow-md shadow-black/20";
 
   const trafficChipClass =
     theme === "dark"
-      ? "bg-primary text-primary-foreground shadow-md shadow-primary/35"
+      ? "bg-accent text-accent-foreground shadow-md shadow-accent/35"
       : "bg-foreground text-background";
 
   return (
@@ -285,73 +285,73 @@ export function GlobeCdn({
       />
       {showMarkerOverlays &&
         markers.map((m) => (
-        <div
-          key={m.id}
-          style={{
-            position: "absolute",
-            // @ts-expect-error CSS Anchor Positioning (Chrome)
-            positionAnchor: `--cobe-${m.id}`,
-            bottom: "anchor(top)",
-            left: "anchor(center)",
-            translate: "-50% 0",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 6,
-            pointerEvents: "none",
-            opacity: `var(--cobe-visible-${m.id}, 0)`,
-            filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
-            transition: "opacity 0.3s, filter 0.3s",
-          }}
-        >
           <div
+            key={m.id}
             style={{
-              width: 12,
-              height: 12,
-              position: "relative",
-              transformStyle: "preserve-3d",
-              animation: "pyramid-spin 4s linear infinite",
+              position: "absolute",
+              // @ts-expect-error CSS Anchor Positioning (Chrome)
+              positionAnchor: `--cobe-${m.id}`,
+              bottom: "anchor(top)",
+              left: "anchor(center)",
+              translate: "-50% 0",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 6,
+              pointerEvents: "none",
+              opacity: `var(--cobe-visible-${m.id}, 0)`,
+              filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
+              transition: "opacity 0.3s, filter 0.3s",
             }}
           >
-            {[0, 1, 2, 3].map((n) => (
-              <div key={n} style={pyramidFaceStyle(n)} />
-            ))}
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                position: "relative",
+                transformStyle: "preserve-3d",
+                animation: "pyramid-spin 4s linear infinite",
+              }}
+            >
+              {[0, 1, 2, 3].map((n) => (
+                <div key={n} style={pyramidFaceStyle(n)} />
+              ))}
+            </div>
+            <span
+              title={m.name ?? m.region}
+              className={cn(
+                "max-w-[min(11rem,38vw)] truncate rounded px-1.5 py-0.5 text-center text-[0.52rem] font-medium leading-tight tracking-tight sm:text-[0.58rem]",
+                regionChipClass,
+              )}
+            >
+              {m.name ?? m.region}
+            </span>
           </div>
-          <span
-            title={m.name ?? m.region}
-            className={cn(
-              "max-w-[min(11rem,38vw)] truncate rounded px-1.5 py-0.5 text-center text-[0.52rem] font-medium leading-tight tracking-tight sm:text-[0.58rem]",
-              regionChipClass,
-            )}
-          >
-            {m.name ?? m.region}
-          </span>
-        </div>
-      ))}
+        ))}
       {showArcOverlays &&
         traffic.map((t) => (
-        <div
-          key={t.id}
-          style={{
-            position: "absolute",
-            // @ts-expect-error CSS Anchor Positioning (Chrome)
-            positionAnchor: `--cobe-arc-${t.id}`,
-            bottom: "anchor(top)",
-            left: "anchor(center)",
-            translate: "-50% 0",
-            pointerEvents: "none",
-            opacity: `var(--cobe-visible-arc-${t.id}, 0)`,
-            filter: `blur(calc((1 - var(--cobe-visible-arc-${t.id}, 0)) * 8px))`,
-            transition: "opacity 0.3s, filter 0.3s",
-          }}
-          className={cn(
-            "rounded px-2 py-0.5 font-mono text-[0.5rem] font-medium whitespace-nowrap",
-            trafficChipClass,
-          )}
-        >
-          {t.value}k req/s
-        </div>
-      ))}
+          <div
+            key={t.id}
+            style={{
+              position: "absolute",
+              // @ts-expect-error CSS Anchor Positioning (Chrome)
+              positionAnchor: `--cobe-arc-${t.id}`,
+              bottom: "anchor(top)",
+              left: "anchor(center)",
+              translate: "-50% 0",
+              pointerEvents: "none",
+              opacity: `var(--cobe-visible-arc-${t.id}, 0)`,
+              filter: `blur(calc((1 - var(--cobe-visible-arc-${t.id}, 0)) * 8px))`,
+              transition: "opacity 0.3s, filter 0.3s",
+            }}
+            className={cn(
+              "rounded px-2 py-0.5 font-mono text-[0.5rem] font-medium whitespace-nowrap",
+              trafficChipClass,
+            )}
+          >
+            {t.value}k req/s
+          </div>
+        ))}
     </div>
   );
 }

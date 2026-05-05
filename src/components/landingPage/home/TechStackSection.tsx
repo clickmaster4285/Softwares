@@ -89,22 +89,23 @@ export function TechStackSection({ visible }: TechStackSectionProps) {
    };
 
    return (
-      <div style={{ borderColor: '#f5bc53' }} className="border-b overflow-hidden bg-[gold]/50">
-         <div className=" mx-auto max-w-7xl px-6 lg:px-8 py-16 lg:py-20">
-            <div className="text-center mb-12">
-               <div className="inline-flex items-center gap-2 mb-3">
-                  <span className="w-8 h-[2px] bg-primary-400 rounded-full" />
-                  <p className="text-primary-800 text-[11px] font-bold tracking-[0.2em] uppercase">Our Technology Stack</p>
-                  <span className="w-8 h-[2px] bg-primary-400 rounded-full" />
+      <div style={{ borderColor: '#f5bc53' }} className="border-b overflow-hidden bg-gold/50">
+         <div className="px-6 lg:px-8 py-16 lg:py-20">
+            <div className="mx-auto max-w-7xl">
+               <div className="text-center mb-12">
+                  <div className="inline-flex items-center gap-2 mb-3">
+                     <span className="w-8 h-[2px] bg-accent-400 rounded-full" />
+                     <p className="text-accent-800 text-[11px] font-bold tracking-[0.2em] uppercase">Our Technology Stack</p>
+                     <span className="w-8 h-[2px] bg-accent-400 rounded-full" />
+                  </div>
+                  <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
+                     Modern Tech Stack for Future-Ready Solutions
+                  </h3>
+                  <p className="text-gray-700 max-w-2xl mx-auto text-sm">
+                     We leverage cutting-edge technologies to build scalable, secure, and high-performance applications
+                  </p>
                </div>
-               <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
-                  Modern Tech Stack for Future-Ready Solutions
-               </h3>
-               <p className="text-gray-700 max-w-2xl mx-auto text-sm">
-                  We leverage cutting-edge technologies to build scalable, secure, and high-performance applications
-               </p>
             </div>
-
             {/* Floating Tech Icons Grid */}
             <div
                className="relative min-h-[600px] w-full"
@@ -128,7 +129,7 @@ export function TechStackSection({ visible }: TechStackSectionProps) {
                      >
                         <div className="relative">
                            {/* Image Circle */}
-                           <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shadow-lg border-2 border-white ring-2 ring-primary-100 hover:ring-primary-400 transition-all duration-300 bg-gray-50">
+                           <div className="w-16 h-16 md:w-20 md:h-20 rounded-full ">
                               <img
                                  src={tech.image}
                                  alt={tech.name}
@@ -138,9 +139,9 @@ export function TechStackSection({ visible }: TechStackSectionProps) {
                            </div>
 
                            {/* Category Badge */}
-                           <div className="absolute -bottom-2 -right-2 bg-primary-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-md whitespace-nowrap">
-                              {tech.category}
-                           </div>
+                           {/* <div className="absolute -bottom-2 -right-2 bg-accent-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-md whitespace-nowrap">
+                              {tech.name}
+                           </div> */}
                         </div>
                      </div>
                   );
@@ -171,13 +172,13 @@ export function TechStackSection({ visible }: TechStackSectionProps) {
                   transform: translate(0px, 0px) rotate(0deg);
                }
                25% {
-                  transform: translate(13px, -18px) rotate(4deg);
+                  transform: translate(19px, -27px) rotate(6deg);
                }
                50% {
-                  transform: translate(-10px, 13px) rotate(-4deg);
+                  transform: translate(-15px, 19px) rotate(-6deg);
                }
                75% {
-                  transform: translate(13px, 10px) rotate(3deg);
+                  transform: translate(19px, 15px) rotate(5deg);
                }
                100% {
                   transform: translate(0px, 0px) rotate(0deg);

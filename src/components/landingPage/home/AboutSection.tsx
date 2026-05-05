@@ -1,27 +1,72 @@
 "use client";
 
-import { useInView } from "@/hooks/useInView";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { HeroSection } from "./HeroSection";
 import { MainContent } from "./MainContent";
-import { TrustedClientsSection } from "./TrustedClientsSection";
 import { TechStackSection } from "./TechStackSection";
 import { CTASection } from "./CTASection";
 
 export function AboutSection() {
-  const hero = useInView(0.1);
-  const body = useInView(0.1);
-  const cards = useInView(0.1);
-  const clients = useInView(0.2);
-  const tech = useInView(0.15);
-  const cta = useInView(0.2);
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Expensive-looking parallax effects
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [0.9, 1]);
 
   return (
-    <section className="bg-accent-50 text-gray-900 overflow-hidden">
-      <HeroSection  />
-      <MainContent />
-      <TrustedClientsSection visible={clients.visible} />
-      <TechStackSection visible={tech.visible} />
-      <CTASection />
+    <section
+      ref={sectionRef}
+      className="bg-section text-gray-900 overflow-hidden relative"
+    >
+      {/* Decorative Parallax Background Elements */}
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute top-20 -left-20 w-64 h-64 bg-accent-100/30 rounded-full blur-3xl pointer-events-none"
+      />
+      <motion.div
+        style={{ y: y2 }}
+        className="absolute bottom-40 -right-20 w-96 h-96 bg-accent-200/20 rounded-full blur-3xl pointer-events-none"
+      />
+
+      <motion.div
+        style={{ opacity, scale }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <HeroSection />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+        >
+          <MainContent />
+        </motion.div>
+
+        <TechStackSection visible={true} />
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+        >
+          <CTASection />
+        </motion.div>
+      </motion.div>
 
       {/* Keyframe for ping rings */}
       <style>{`

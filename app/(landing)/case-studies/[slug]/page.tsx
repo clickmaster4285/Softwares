@@ -206,7 +206,7 @@ export default async function CaseStudyDetailPage({
 
             <div className="relative mx-auto max-w-8xl px-16 pb-12 pt-16 md:px-8 lg:px-16">
               {/* Back link */}
-              <Button variant="ghost" className="-ml-2 mb-8 gap-1.5 text-[13px] text-slate-500 hover:text-primary-500 hover:bg-transparent pl-0" asChild>
+              <Button variant="ghost" className="-ml-2 mb-8 gap-1.5 text-[13px] text-slate-500 hover:text-accent-500 hover:bg-transparent pl-0" asChild>
                 <Link href="/case-studies">
                   <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
                   All case studies
@@ -215,7 +215,7 @@ export default async function CaseStudyDetailPage({
 
               {/* Category eyebrow */}
               {categoryName && (
-                <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                   {categoryName}
                 </p>
               )}
@@ -257,7 +257,7 @@ export default async function CaseStudyDetailPage({
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-7 inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-[13px] font-semibold text-primary shadow-sm transition hover:border-primary/30 hover:bg-primary/5"
+                  className="mt-7 inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-[13px] font-semibold text-accent shadow-sm transition hover:border-accent/30 hover:bg-accent/5"
                 >
                   View live product
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden />
@@ -286,7 +286,7 @@ export default async function CaseStudyDetailPage({
                 <a
                   key={s.id}
                   href={`#${s.id}`}
-                  className="shrink-0 border-b-2 border-transparent px-4 py-3.5 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500 transition hover:border-primary hover:text-primary"
+                  className="shrink-0 border-b-2 border-transparent px-4 py-3.5 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500 transition hover:border-accent hover:text-accent"
                 >
                   {s.label}
                 </a>
@@ -307,7 +307,7 @@ export default async function CaseStudyDetailPage({
                     className={`scroll-mt-28 ${i < sections.length - 1 ? 'mb-14 border-b border-slate-200 pb-14' : 'mb-0'}`}
                   >
                     {/* Section label */}
-                    <p className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">
+                    <p className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
                       {String(i + 1).padStart(2, '0')} — {s.label}
                     </p>
                     <h2 className="font-display text-2xl font-normal text-slate-950 sm:text-3xl">
@@ -336,7 +336,7 @@ export default async function CaseStudyDetailPage({
               <div>
                 <h3 className="font-display text-2xl font-normal leading-snug text-white sm:text-3xl">
                   Ready to discuss your{' '}
-                  <em className="italic text-primary/80">initiative?</em>
+                  <em className="italic text-accent/80">initiative?</em>
                 </h3>
                 <p className="mt-2 max-w-lg text-[14px] leading-relaxed text-slate-400">
                   We scope, build, and ship — tell us what you&apos;re working on and we&apos;ll
@@ -346,7 +346,7 @@ export default async function CaseStudyDetailPage({
               <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
                 <Button
                   asChild
-                  className="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-primary-50 transition"
+                  className="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-accent-50 transition"
                 >
                   <Link href="/contact-us">
                     Start the conversation

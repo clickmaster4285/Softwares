@@ -42,7 +42,7 @@ function MiniRelatedCard({ post, duplicate }: { post: RelatedBlogCard; duplicate
     <Link
       href={postHref(post)}
       tabIndex={duplicate ? -1 : undefined}
-      className="group flex h-[1300px] w-[280px] shrink-0 flex-col overflow-hidden rounded-xl border border-slate-200/90 p-2.5 shadow-sm transition hover:border-primary/35 hover:shadow-md sm:h-[300px] sm:w-[300px]"
+      className="group flex h-[1300px] w-[280px] shrink-0 flex-col overflow-hidden rounded-xl border border-slate-200/90 p-2.5 shadow-sm transition hover:border-accent/35 hover:shadow-md sm:h-[300px] sm:w-[300px]"
     >
       <div className="relative h-[62%] w-full shrink-0 overflow-hidden rounded-lg bg-slate-100">
         <img
@@ -55,11 +55,11 @@ function MiniRelatedCard({ post, duplicate }: { post: RelatedBlogCard; duplicate
         />
       </div>
       <div className="flex min-w-0 flex-1 flex-col justify-between pt-2">
-        <p className="line-clamp-2 text-sm font-semibold leading-snug text-slate-900 group-hover:text-primary sm:text-base">
+        <p className="line-clamp-2 text-sm font-semibold leading-snug text-slate-900 group-hover:text-accent sm:text-base">
           {post.title}
         </p>
         <p className="truncate text-xs text-slate-500 sm:text-sm">{readLabel(post)}</p>
-        <span className="inline-flex items-center text-xs font-semibold text-primary sm:text-sm">
+        <span className="inline-flex items-center text-xs font-semibold text-accent sm:text-sm">
           Read
           <ArrowRight className="ml-1 h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
         </span>
@@ -85,7 +85,7 @@ export default function BlogRelatedSlider({ posts, categoryLabel }: BlogRelatedS
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary sm:text-xs">More to read</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-xs">More to read</p>
           <h2 id="related-blogs-heading" className="mt-0.5 font-display text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             Related articles
           </h2>
@@ -96,7 +96,7 @@ export default function BlogRelatedSlider({ posts, categoryLabel }: BlogRelatedS
         </div>
         <Link
           href="/blog"
-          className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-primary hover:underline sm:text-sm"
+          className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-accent hover:underline sm:text-sm"
         >
           View all posts
           <ArrowRight className="h-3.5 w-3.5" />

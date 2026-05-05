@@ -22,7 +22,7 @@ export function HomeQuoteForm({ inquirySource, className = '' }: HomeQuoteFormPr
   const [error, setError] = useState<string | null>(null);
 
   const fieldClass =
-    'w-full rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 pl-9 text-base sm:text-sm text-white placeholder:text-gray-400 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30';
+    'w-full rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 pl-9 text-base sm:text-sm text-white placeholder:text-gray-400 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -77,8 +77,8 @@ export function HomeQuoteForm({ inquirySource, className = '' }: HomeQuoteFormPr
 
         {success ? (
           <div className="rounded-xl border border-green-400/30 bg-green-950/40 px-4 py-6 text-center">
-            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
-              <CheckCircle2 className="h-6 w-6 text-primary" aria-hidden />
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
+              <CheckCircle2 className="h-6 w-6 text-accent" aria-hidden />
             </div>
             <p className="font-semibold text-white">Message received</p>
             <p className="mt-1 text-sm text-gray-300">We&apos;ll be in touch shortly.</p>
@@ -154,14 +154,14 @@ export function HomeQuoteForm({ inquirySource, className = '' }: HomeQuoteFormPr
                 value={form.message}
                 onChange={handleChange}
                 placeholder="What would you like to build?"
-                className="min-h-[88px] w-full resize-y rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-gray-400 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="min-h-[88px] w-full resize-y rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-gray-400 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
                 required
               />
             </div>
             <button
               type="submit"
               disabled={sending}
-              className="flex min-h-[48px] w-full touch-manipulation items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-base font-semibold text-white shadow-lg shadow-primary/30 transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
+              className="flex min-h-[48px] w-full touch-manipulation items-center justify-center gap-2 rounded-xl bg-accent px-4 py-3 text-base font-semibold text-white shadow-lg shadow-accent/30 transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
             >
               {sending ? (
                 'Sending…'

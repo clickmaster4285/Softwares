@@ -41,14 +41,14 @@ const faqItems: FaqItem[] = [
 
 export function FaqSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-accent-200 via-accent-50/70 to-[gold] py-24" aria-labelledby="homepage-faq-heading">
+    <section className="relative overflow-hidden bg-gradient-to-br from-accent-200 via-accent-50/70 to-gold py-24" aria-labelledby="homepage-faq-heading">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-6xl px-4">
         <div className="mb-14 text-center">
-          <span className="inline-flex items-center rounded-full border border-primary/45 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+          <span className="inline-flex items-center rounded-full border border-accent/45 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
             FAQ
           </span>
           <h2
@@ -66,13 +66,13 @@ export function FaqSection() {
           {faqItems.map((item) => (
             <details
               key={item.question}
-              className="group rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_8px_24px_rgba(15,23,42,0.05)] transition-all duration-300 open:border-primary/30 open:shadow-[0_14px_36px_rgba(15,23,42,0.08)]"
+              className="group rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_8px_24px_rgba(15,23,42,0.05)] transition-all duration-300 open:border-accent/30 open:shadow-[0_14px_36px_rgba(15,23,42,0.08)]"
             >
               <summary className="flex cursor-pointer list-none items-start justify-between gap-4 marker:content-none">
                 <span className="text-left text-lg font-semibold leading-7 text-slate-900">
                   {item.question}
                 </span>
-                <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-500 transition group-open:rotate-45 group-open:border-primary/40 group-open:text-primary">
+                <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-500 transition group-open:rotate-45 group-open:border-accent/40 group-open:text-accent">
                   +
                 </span>
               </summary>
@@ -83,7 +83,7 @@ export function FaqSection() {
                     {' '}
                     <Link
                       href={item.more.href}
-                      className="font-medium text-primary hover:underline"
+                      className="font-medium text-accent hover:underline"
                       aria-label={`${item.more.label} — ${item.more.href}`}
                     >
                       {item.more.label}

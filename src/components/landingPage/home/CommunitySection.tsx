@@ -45,7 +45,7 @@ const communityFeatures: CommunityFeature[] = [
       'Tailored software built for your business. Web apps, desktop applications, and backend systems that scale.',
     stat: '1,860+',
     statLabel: 'Projects',
-    color: 'from-primary/60 to-primary/10',
+    color: 'from-accent/60 to-accent/10',
   },
   {
     icon: Users,
@@ -54,7 +54,7 @@ const communityFeatures: CommunityFeature[] = [
       'Modern web apps with React, Node, and cloud hosting. Responsive, fast, and secure applications.',
     stat: '3,500+',
     statLabel: 'Clients',
-    color: 'from-primary/60 to-primary/10',
+    color: 'from-accent/60 to-accent/10',
   },
   {
     icon: BookOpen,
@@ -63,7 +63,7 @@ const communityFeatures: CommunityFeature[] = [
       'Native and cross-platform mobile apps for iOS and Android. From MVP to enterprise solutions.',
     stat: '75+',
     statLabel: 'Awards',
-    color: 'from-primary/60 to-primary/10',
+    color: 'from-accent/60 to-accent/10',
   },
   {
     icon: MessageCircle,
@@ -72,7 +72,7 @@ const communityFeatures: CommunityFeature[] = [
       'ERP, CRM, inventory, and workflow automation. Integrate with your existing systems and processes.',
     stat: '5+',
     statLabel: 'Years',
-    color: 'from-primary/60 to-primary/10',
+    color: 'from-accent/60 to-accent/10',
   },
   {
     icon: Globe,
@@ -81,7 +81,7 @@ const communityFeatures: CommunityFeature[] = [
       'REST APIs, third-party integrations, and legacy system modernization. Connect your software ecosystem.',
     stat: '24/7',
     statLabel: 'Support',
-    color: 'from-primary/60 to-primary/10',
+    color: 'from-accent/60 to-accent/10',
   },
   {
     icon: Award,
@@ -90,7 +90,7 @@ const communityFeatures: CommunityFeature[] = [
       'Ongoing updates, security patches, and technical support. Keep your software running smoothly.',
     stat: '100%',
     statLabel: 'Dedicated',
-    color: 'from-primary/60 to-primary/10',
+    color: 'from-accent/60 to-accent/10',
   },
 ];
 
@@ -170,8 +170,8 @@ function CommunityFeatureCountUp({
           <CommunityCountUpSpan countStarted={countStarted} start={start} countUpRef={countUpRef} />
         )}
       </CountUp>
-      {hasPlusSign && <span className="text-primary ml-1">+</span>}
-      {isPercent && <span className="text-primary ml-1">%</span>}
+      {hasPlusSign && <span className="text-accent ml-1">+</span>}
+      {isPercent && <span className="text-accent ml-1">%</span>}
     </>
   );
 }
@@ -317,7 +317,7 @@ export function CommunitySection() {
             whileInView={{ width: 80 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-px bg-primary mx-auto mb-8"
+            className="h-px bg-accent mx-auto mb-8"
           />
 
           <motion.h2
@@ -328,7 +328,7 @@ export function CommunitySection() {
             transition={{ duration: 0.5 }}
           >
             Why Choose Our
-            <span className="text-primary block mt-2">Software Development Services</span>
+            <span className="text-accent block mt-2">Software Development Services</span>
           </motion.h2>
 
           <motion.p
@@ -364,7 +364,7 @@ export function CommunitySection() {
               >
                 <div className="relative bg-white/50 backdrop-blur-sm rounded-2xl p-6">
                   <motion.p
-                    className="relative text-2xl sm:text-3xl md:text-4xl font-bold text-primary"
+                    className="relative text-2xl sm:text-3xl md:text-4xl font-bold text-accent"
                     animate={{
                       textShadow: [
                         '0 0 0 rgba(249,115,22,0)',
@@ -378,7 +378,7 @@ export function CommunitySection() {
                       delay: idx * 0.3,
                     }}
                   >
-                    <span className="absolute inset-0 bg-primary/10 rounded-full blur-md -z-10" />
+                    <span className="absolute inset-0 bg-accent/10 rounded-full blur-md -z-10" />
                     <CountUp
                       start={0}
                       end={numericValue}
@@ -388,14 +388,14 @@ export function CommunitySection() {
                       useEasing={true}
                       useGrouping={true}
                     />
-                    {hasPlusSign && <span className="ml-1 text-primary">+</span>}
+                    {hasPlusSign && <span className="ml-1 text-accent">+</span>}
                   </motion.p>
 
                   <p className="text-xs sm:text-sm uppercase tracking-wider text-gray-500 mt-1">
                     {stat.label}
                   </p>
 
-                  <div className="absolute bottom-0 left-1/2 h-px bg-primary/30 w-10 -translate-x-1/2" />
+                  <div className="absolute bottom-0 left-1/2 h-px bg-accent/30 w-10 -translate-x-1/2" />
                 </div>
               </motion.div>
             );
@@ -428,11 +428,11 @@ export function CommunitySection() {
                 <div className="relative bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl">
 
                   {/* Animated gradient border */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-accesnt/50 via-accent/30 to-[gold] opacity-0 group-hover:opacity-80 transition-opacity duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-accesnt/50 via-accent/30 to-gold opacity-0 group-hover:opacity-80 transition-opacity duration-700" />
 
                   {/* Top accent bar - animated on hover */}
                   <motion.div
-                    className="h-1 w-full bg-gradient-to-r from-primary/40 via-primary to-primary/40"
+                    className="h-1 w-full bg-gradient-to-r from-accent/40 via-accent to-accent/40"
                     animate={{
                       backgroundPosition: ['0% 0%', '200% 0%'],
                     }}
@@ -448,7 +448,7 @@ export function CommunitySection() {
                   <div className="relative">
                     <div className="absolute top-4 left-[21rem]">
                       <motion.div
-                        className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 text-white flex items-center justify-center rounded-xl shadow-lg"
+                        className="w-12 h-12 bg-gradient-to-br from-accent to-accent/80 text-white flex items-center justify-center rounded-xl shadow-lg"
                         whileHover={{
                           rotate: 360,
                           scale: 1.1,
@@ -467,11 +467,11 @@ export function CommunitySection() {
                   <div className="p-6 pt-10">
                     {/* Title with underline effect */}
                     <div className="mb-3">
-                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">
+                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-accent transition-colors duration-300">
                         {feature.title}
                       </h3>
                       <motion.div
-                        className="h-0.5 bg-[gold] mt-2 rounded-full"
+                        className="h-0.5 bg-gold mt-2 rounded-full"
                         initial={{ width: 0 }}
                         whileInView={{ width: 40 }}
                         viewport={{ once: true }}
@@ -498,7 +498,7 @@ export function CommunitySection() {
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ delay: chipIndex * 0.05 }}
-                          className="text-xs px-2.5 py-1 rounded-full bg-gray-50 text-gray-600 border border-gray-100 group-hover:border-primary/30 group-hover:bg-primary/5 transition-all duration-300"
+                          className="text-xs px-2.5 py-1 rounded-full bg-gray-50 text-gray-600 border border-gray-100 group-hover:border-accent/30 group-hover:bg-accent/5 transition-all duration-300"
                         >
                           {chip}
                         </motion.span>
@@ -508,13 +508,13 @@ export function CommunitySection() {
 
                   {/* Bottom KPI Bar - Enhanced */}
                   <motion.div
-                    className="border-t border-gray-100 bg-gradient-to-r from-gray-50 to-white px-6 py-4 flex items-center justify-between group-hover:border-primary/20 transition-colors duration-300"
+                    className="border-t border-gray-100 bg-gradient-to-r from-gray-50 to-white px-6 py-4 flex items-center justify-between group-hover:border-accent/20 transition-colors duration-300"
                     whileHover={{ backgroundColor: 'rgba(249, 115, 22, 0.02)' }}
                   >
                     <div className="relative">
                       {/* Stat number with glow effect */}
                       <motion.div
-                        className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
+                        className="text-2xl font-bold bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent"
                         whileHover={{ scale: 1.05 }}
                         transition={{ type: "spring", stiffness: 400 }}
                       >
@@ -526,7 +526,7 @@ export function CommunitySection() {
 
                       {/* Progress indicator */}
                       <motion.div
-                        className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-[gold] to-accent rounded-full"
+                        className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-gold to-accent rounded-full"
                         initial={{ width: 0 }}
                         whileInView={{ width: '60%' }}
                         viewport={{ once: true }}
@@ -536,20 +536,20 @@ export function CommunitySection() {
 
                     {/* Animated arrow icon */}
                     <motion.div
-                      className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-primary/50 group-hover:bg-primary/5 transition-all duration-300"
+                      className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-accent/50 group-hover:bg-accent/5 transition-all duration-300"
                       whileHover={{
                         x: 5,
                         rotate: 0,
                         transition: { duration: 0.2 }
                       }}
                     >
-                      <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-primary transition-colors duration-300" />
+                      <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-accent transition-colors duration-300" />
                     </motion.div>
                   </motion.div>
 
                   {/* Hover glow effect */}
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent rounded-2xl" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-accent/5 via-transparent to-transparent rounded-2xl" />
                   </div>
                 </div>
               </motion.div>
@@ -559,7 +559,7 @@ export function CommunitySection() {
         {/* Bottom CTA Section - matching IndustriesSection styling */}
         <div ref={ctaRef} className="mt-20">
           <motion.div
-            className="relative bg-gradient-to-br from-gray-50 to-primary/20 rounded-3xl p-12 overflow-hidden border border-primary/10"
+            className="relative bg-gradient-to-br from-gray-50 to-accent/20 rounded-3xl p-12 overflow-hidden border border-accent/10"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -585,7 +585,7 @@ export function CommunitySection() {
 
             {/* Animated light sweep */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/10 to-transparent"
               animate={{
                 x: ['-100%', '100%'],
               }}
@@ -598,7 +598,7 @@ export function CommunitySection() {
 
             <div className="relative z-10 max-w-4xl mx-auto text-center">
               <motion.div
-                className="w-12 h-px bg-primary mx-auto mb-8"
+                className="w-12 h-px bg-accent mx-auto mb-8"
                 animate={{
                   width: ['48px', '96px', '48px'],
                   opacity: [0.5, 1, 0.5],
@@ -612,7 +612,7 @@ export function CommunitySection() {
 
               <h3 className="text-3xl md:text-4xl font-bold text-black mb-4">
                 Ready to Start Your Project?
-                <span className="font-bold block mt-2 text-primary">
+                <span className="font-bold block mt-2 text-accent">
                   Let's Build Something Amazing Together
                 </span>
               </h3>
@@ -623,7 +623,7 @@ export function CommunitySection() {
               </p>
 
               {/* Trust Indicators with premium hover (matching IndustriesSection stats) */}
-              <motion.div className="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-12 mt-8 pt-8 border-t border-primary/10">
+              <motion.div className="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-12 mt-8 pt-8 border-t border-accent/10">
                 <motion.div
                   whileHover={{
                     y: -5,
@@ -632,7 +632,7 @@ export function CommunitySection() {
                   className="text-center cursor-default"
                 >
                   <motion.div
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-accent"
                     animate={{
                       textShadow: [
                         '0 0 0 rgba(249,115,22,0)',
@@ -661,7 +661,7 @@ export function CommunitySection() {
                   className="text-center cursor-default"
                 >
                   <motion.div
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-accent"
                     animate={{
                       textShadow: [
                         '0 0 0 rgba(249,115,22,0)',
@@ -690,7 +690,7 @@ export function CommunitySection() {
                   className="text-center cursor-default"
                 >
                   <motion.div
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-accent"
                     animate={{
                       textShadow: [
                         '0 0 0 rgba(249,115,22,0)',
@@ -720,7 +720,7 @@ export function CommunitySection() {
                     boxShadow: '0 10px 25px -5px rgba(249,115,22,0.4)',
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-8 py-3 bg-black text-white text-sm font-medium tracking-wider rounded-md hover:bg-primary transition-all duration-300 relative overflow-hidden group"
+                  className="px-8 py-3 bg-black text-white text-sm font-medium tracking-wider rounded-md hover:bg-accent transition-all duration-300 relative overflow-hidden group"
                   onClick={() => router.push('/contact-us')}
                 >
                   <span className="relative z-10 flex items-center">
@@ -728,7 +728,7 @@ export function CommunitySection() {
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                   <motion.div
-                    className="absolute inset-0 bg-primary"
+                    className="absolute inset-0 bg-accent"
                     initial={{ x: '100%' }}
                     whileHover={{ x: 0 }}
                     transition={{ duration: 0.3 }}
@@ -741,7 +741,7 @@ export function CommunitySection() {
                     boxShadow: '0 10px 25px -5px rgba(249,115,22,0.2)',
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-8 py-3 bg-transparent text-black text-sm font-medium tracking-wider border border-primary/20 hover:border-primary/50 rounded-md transition-all duration-300 relative overflow-hidden group"
+                  className="px-8 py-3 bg-transparent text-black text-sm font-medium tracking-wider border border-accent/20 hover:border-accent/50 rounded-md transition-all duration-300 relative overflow-hidden group"
                   onClick={() => router.push('/testimonials')}
                 >
                   <span className="relative z-10 flex items-center">
@@ -749,7 +749,7 @@ export function CommunitySection() {
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                   <motion.div
-                    className="absolute inset-0 bg-primary/5"
+                    className="absolute inset-0 bg-accent/5"
                     initial={{ scale: 0 }}
                     whileHover={{ scale: 1 }}
                     transition={{ duration: 0.3 }}

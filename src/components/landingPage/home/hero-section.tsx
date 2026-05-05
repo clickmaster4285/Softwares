@@ -134,7 +134,7 @@ export function HeroSection(): JSX.Element {
   const [heroError, setHeroError] = useState<string | null>(null);
 
   const heroFieldClass =
-    'w-full rounded-xl border border-white/25 bg-white/5 px-3 py-2.5 pl-9 text-base sm:text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30';
+    'w-full rounded-xl border border-white/25 bg-white/5 px-3 py-2.5 pl-9 text-base sm:text-sm text-white placeholder:text-gray-200 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30';
 
   const handleHeroChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -190,7 +190,7 @@ export function HeroSection(): JSX.Element {
                   className="font-display text-left text-[1.55rem] font-bold leading-snug tracking-tight text-white text-pretty [overflow-wrap:anywhere] sm:text-2xl md:text-3xl lg:text-[2.35rem] xl:text-5xl"
                 >
                   Custom Software Development That Scales Your Business Revenue{' '}
-                  <span className="text-[gold]">— Not Just Code</span>
+                  <span className="text-gold">— Not Just Code</span>
                 </h1>
               </div>
 
@@ -209,7 +209,7 @@ export function HeroSection(): JSX.Element {
                 {heroBullets.map((text) => (
                   <li
                     key={text}
-                    className="relative pl-5 text-sm leading-snug text-gray-100 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary/90 sm:text-base"
+                    className="relative pl-5 text-sm leading-snug text-gray-100 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-accent/90 sm:text-base"
                   >
                     {text}
                   </li>
@@ -223,10 +223,10 @@ export function HeroSection(): JSX.Element {
                 <div className="group relative w-full transition-transform duration-200 ease-out hover:scale-[1.02] sm:w-auto">
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#1e3a8a] to-[#c49138] opacity-40 blur-sm group-hover:opacity-60 transition-opacity" />
                   <div className="relative overflow-hidden rounded-xl p-[1px]">
-                    <div className="absolute inset-[-1000%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#1e3a8a_0%,#c49138_50%,#1e3a8a_100%)] opacity-80" />
+                    <div className="absolute inset-[-50%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#1e3a8a_0%,#c49138_50%,#1e3a8a_100%)] opacity-80" />
                     <Button
                       size="lg"
-                      className="group/btn relative w-full overflow-hidden rounded-[11px] bg-gradient-to-r from-[#12224b] to-[#9b6f24] px-4 py-5 text-center text-sm leading-snug text-white shadow-primary/30 transition-all hover:opacity-95 sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base min-h-[48px] touch-manipulation"
+                      className="group/btn relative w-full overflow-hidden rounded-[11px] bg-gradient-to-r from-[#12224b] to-[#9b6f24] px-4 py-5 text-center text-sm leading-snug text-white shadow-accent/30 transition-all hover:opacity-95 sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base min-h-[48px] touch-manipulation"
                       asChild
                     >
                       <Link
@@ -248,7 +248,7 @@ export function HeroSection(): JSX.Element {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full min-h-[48px] touch-manipulation rounded-xl border-2 border-white/25 bg-black/30 px-4 py-5 text-center text-sm leading-snug text-white backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-black/40 sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base"
+                    className="w-full min-h-[48px] touch-manipulation rounded-xl border-2 border-white/25 bg-black/30 px-4 py-5 text-center text-sm leading-snug text-white backdrop-blur-sm transition-all hover:border-accent/50 hover:bg-black/40 sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base"
                     asChild
                   >
                     <Link
@@ -286,8 +286,8 @@ export function HeroSection(): JSX.Element {
 
                 {heroSuccess ? (
                   <div className="rounded-xl border border-green-400/30 bg-green-950/40 px-4 py-6 text-center">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
-                      <CheckCircle2 className="h-6 w-6 text-primary-300" aria-hidden />
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
+                      <CheckCircle2 className="h-6 w-6 text-accent-300" aria-hidden />
                     </div>
                     <p className="font-semibold text-white">Message received</p>
                     <p className="mt-1 text-sm text-gray-100">We&apos;ll be in touch shortly.</p>
@@ -363,7 +363,7 @@ export function HeroSection(): JSX.Element {
                         value={heroForm.message}
                         onChange={handleHeroChange}
                         placeholder="What would you like to build?"
-                        className="min-h-[88px] w-full resize-y rounded-xl border border-white/25 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                        className="min-h-[88px] w-full resize-y rounded-xl border border-white/25 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-gray-200 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
                         required
                       />
                     </div>
@@ -374,7 +374,7 @@ export function HeroSection(): JSX.Element {
                         <button
                           type="submit"
                           disabled={heroSending}
-                          className="relative flex min-h-[48px] w-full touch-manipulation items-center justify-center gap-2 rounded-[11px] bg-gradient-to-r from-[#12224b] to-[#9b6f24] px-4 py-3 text-base font-semibold text-white shadow-primary/30 transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
+                          className="relative flex min-h-[48px] w-full touch-manipulation items-center justify-center gap-2 rounded-[11px] bg-gradient-to-r from-[#12224b] to-[#9b6f24] px-4 py-3 text-base font-semibold text-white shadow-accent/30 transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
                         >
                           {heroSending ? (
                             'Sending…'
@@ -390,7 +390,7 @@ export function HeroSection(): JSX.Element {
                     <p className="text-center text-xs text-gray-200">
                       <Link
                         href="/contact-us"
-                        className="text-[gold] underline-offset-4 hover:text-white hover:underline"
+                        className="text-gold underline-offset-4 hover:text-white hover:underline"
                       >
                         View phone, email, and office details on our contact page
                       </Link>
@@ -416,7 +416,7 @@ export function HeroSection(): JSX.Element {
                 return (
                   <div
                     key={stat.label}
-                    className="group rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] hover:border-primary/40"
+                    className="group rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] hover:border-accent/40"
                   >
 
                     <div className="flex items-center justify-between">

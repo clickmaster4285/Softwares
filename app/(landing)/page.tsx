@@ -113,7 +113,7 @@ const HeroSection = dynamic(
         className="relative min-h-[100svh] flex items-center justify-center bg-slate-900"
         aria-hidden
       >
-        <div className="h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+        <div className="h-12 w-12 animate-spin rounded-full border-2 border-accent border-t-transparent" />
       </div>
     ),
   },
@@ -127,14 +127,19 @@ const AppsSection = dynamic(
   () => import('@/components/landingPage/home/AppsSection').then((m) => m.AppsSection),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
 );
+const TrustedClientsSection = dynamic(
+  () => import('@/components/landingPage/home/TrustedClientsSection').then((m) => m.TrustedClientsSection),
+  { loading: () => <div className="h-48 animate-pulse bg-gray-100 rounded-lg" /> }
+);
 export default function LandingPage() {
   return (
-    <main className="min-h-screen" role="main" aria-label="ClickMasters software development company homepage">
+    <main className="min-h-screen " role="main" aria-label="ClickMasters software development company homepage">
       <SchemaMarkup data={homepageOrganizationSchema} />
       <SchemaMarkup data={homepageServiceSchema} />
       <SchemaMarkup data={homepageFaqSchema} />
       <SchemaMarkup data={homepageWebPageSchema} />
       <HeroSection />
+      <TrustedClientsSection visible={true} />
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <AboutSection />
       </Suspense>
@@ -143,7 +148,7 @@ export default function LandingPage() {
       </Suspense>
 
       {/* Hub internal links (SEO + crawler-friendly) */}
-      <section className="border-y border-slate-300 bg-accent-50 py-16 sm:py-20" aria-labelledby="home-explore-heading">
+      <section className="border-y border-slate-300 bg-section py-16 sm:py-20" aria-labelledby="home-explore-heading">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 id="home-explore-heading" className="font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
@@ -164,11 +169,11 @@ export default function LandingPage() {
                   aria-label={item.ariaLabel}
                   className={
                     isHighlight
-                      ? 'group flex min-h-[48px] flex-col rounded-2xl border border-primary/30 bg-white p-6 shadow-sm transition-all hover:shadow-md'
-                      : 'group flex min-h-[48px] flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md'
+                      ? 'group flex min-h-[48px] flex-col rounded-2xl border border-accent/30 bg-white p-6 shadow-sm transition-all hover:shadow-md'
+                      : 'group flex min-h-[48px] flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-accent/30 hover:shadow-md'
                   }
                 >
-                  <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">{item.title}</h3>
+                  <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-accent">{item.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-700">{item.desc}</p>
                 </Link>
               );

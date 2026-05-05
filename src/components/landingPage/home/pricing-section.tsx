@@ -61,22 +61,22 @@ export function PricingSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
-            Simple, transparent <span className="text-primary">pricing</span>
+            Simple, transparent <span className="text-accent">pricing</span>
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            Start free and scale as you grow. No hidden fees, no surprises. 
+            Start free and scale as you grow. No hidden fees, no surprises.
             All plans include updates and new features.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan) => (
-            <Card 
-              key={plan.name} 
-              className={`relative bg-card ${plan.popular ? "border-primary shadow-lg scale-105" : ""}`}
+            <Card
+              key={plan.name}
+              className={`relative bg-card ${plan.popular ? "border-accent shadow-lg scale-105" : ""}`}
             >
               {plan.popular && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground">
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground">
                   Most Popular
                 </Badge>
               )}
@@ -92,15 +92,15 @@ export function PricingSection() {
                 <ul className="space-y-3 mb-6">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2">
-                      <div className="h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Check className="h-3 w-3 text-primary" />
+                      <div className="h-5 w-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                        <Check className="h-3 w-3 text-accent" />
                       </div>
                       <span className="text-sm text-muted-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  className={`w-full ${plan.popular ? "bg-primary text-primary-foreground hover:bg-primary/90" : ""}`}
+                <Button
+                  className={`w-full ${plan.popular ? "bg-accent text-accent-foreground hover:bg-accent/90" : ""}`}
                   variant={plan.popular ? "default" : "outline"}
                 >
                   {plan.cta}

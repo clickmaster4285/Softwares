@@ -13,7 +13,7 @@ interface TrustedClientCardProps {
 export function TrustedClientCard({ client, index, visible }: TrustedClientCardProps) {
    return (
       <div
-         className="group flex flex-col items-center justify-center p-6 bg-gray-50/50 hover:bg-white rounded-2xl border border-gray-200 hover:border-primary-200 transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-default"
+         className="group flex flex-col items-center justify-center p-6 bg-gray-50/50 hover:bg-white rounded-2xl border border-gray-200 hover:border-accent-200 transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-default"
          style={{
             transitionDelay: visible ? `${index * 60}ms` : "0ms",
             opacity: visible ? 1 : 0,

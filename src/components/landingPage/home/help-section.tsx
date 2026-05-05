@@ -34,14 +34,14 @@ const helpResources: HelpResource[] = [
     title: 'Documentation',
     description: 'Technical documentation and developer guides for our software and APIs.',
     stat: '150+',
-    color: 'from-primary to primary/80',
+    color: 'from-accent to accent/80',
   },
   {
     icon: Video,
     title: 'Video Tutorials',
     description: 'Step-by-step videos to get started with your software and features.',
     stat: '200+',
-    color: 'from-primary to primary/80',
+    color: 'from-accent to accent/80',
   },
   {
     icon: MessageCircle,
@@ -49,14 +49,14 @@ const helpResources: HelpResource[] = [
     description:
       'Chat with our support team in real-time. Get help with development and technical questions.',
     stat: '24/7',
-    color: 'from-primary to primary/80',
+    color: 'from-accent to accent/80',
   },
   {
     icon: FileQuestion,
     title: 'FAQ',
     description: 'Common questions about our software development services, pricing, and process.',
     stat: '50+',
-    color: 'from-primary to primary/80',
+    color: 'from-accent to accent/80',
   },
   {
     icon: Headphones,
@@ -64,7 +64,7 @@ const helpResources: HelpResource[] = [
     description:
       'Request a callback or submit a ticket. Our development team responds within 24 hours.',
     stat: '24h',
-    color: 'from-primary to primary/80',
+    color: 'from-accent to accent/80',
   },
 ];
 
@@ -118,11 +118,11 @@ export function HelpSection() {
             initial={{ width: 0 }}
             animate={{ width: 80 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-px bg-primary mx-auto mb-8"
+            className="h-px bg-accent mx-auto mb-8"
           />
 
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-4">
-            Resources &<span className="font-bold text-primary block mt-2">Developer Support</span>
+            Resources &<span className="font-bold text-accent block mt-2">Developer Support</span>
           </h2>
 
           <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">
@@ -146,26 +146,26 @@ export function HelpSection() {
                 className="group relative cursor-pointer"
               >
                 {/* Premium Card Design - Clean version */}
-                <div className="relative bg-white rounded-2xl p-6 border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden transition-all duration-300">
-                  
+                <div className="relative bg-white rounded-2xl p-6 border border-accent/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden transition-all duration-300">
+
                   {/* Header with Icon and Stat */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="relative">
-                      <div className="relative w-12 h-12 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-primary/5 transition-colors duration-300">
-                        <Icon className="w-6 h-6 text-black/70 group-hover:text-primary transition-colors duration-300" strokeWidth={1.5} />
+                      <div className="relative w-12 h-12 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-accent/5 transition-colors duration-300">
+                        <Icon className="w-6 h-6 text-black/70 group-hover:text-accent transition-colors duration-300" strokeWidth={1.5} />
                       </div>
                     </div>
 
                     {resource.stat && (
                       <div className="text-right">
-                        <p className="text-2xl font-bold text-black group-hover:text-primary transition-colors duration-300">{resource.stat}</p>
+                        <p className="text-2xl font-bold text-black group-hover:text-accent transition-colors duration-300">{resource.stat}</p>
                         <p className="text-xs uppercase tracking-wider text-gray-500">Articles</p>
                       </div>
                     )}
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-lg font-bold text-black mb-2 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-lg font-bold text-black mb-2 group-hover:text-accent transition-colors duration-300">
                     {resource.title}
                   </h3>
 
@@ -176,7 +176,7 @@ export function HelpSection() {
                   {/* Bottom Corner Accent */}
                   <div className="absolute bottom-3 right-3 w-6 h-6">
                     <motion.div
-                      className="w-full h-full border-b border-r border-primary/30 group-hover:border-primary/60 transition-all duration-300"
+                      className="w-full h-full border-b border-r border-accent/30 group-hover:border-accent/60 transition-all duration-300"
                       animate={{
                         rotate: hoveredIndex === index ? 90 : 0,
                       }}
@@ -191,10 +191,10 @@ export function HelpSection() {
 
         {/* Bottom CTA Section - YOUR ORIGINAL CTA with premium styling */}
         <div ref={ctaRef} className="mt-20">
-          <div className="relative bg-gradient-to-br from-gray-50 to-primary/30 rounded-3xl p-12 overflow-hidden border border-primary/10">
+          <div className="relative bg-gradient-to-br from-gray-50 to-accent/30 rounded-3xl p-12 overflow-hidden border border-accent/10">
             <div className="relative z-10 max-w-4xl mx-auto text-center">
               <motion.div
-                className="w-12 h-px bg-primary mx-auto mb-8"
+                className="w-12 h-px bg-accent mx-auto mb-8"
                 animate={{
                   width: ['48px', '96px', '48px'],
                   opacity: [0.5, 1, 0.5],
@@ -208,7 +208,7 @@ export function HelpSection() {
 
               <h3 className="text-3xl md:text-4xl font-bold text-black mb-4">
                 Have a software project in mind?
-                <span className="font-bold block mt-2 text-primary">Get a Free Consultation</span>
+                <span className="font-bold block mt-2 text-accent">Get a Free Consultation</span>
               </h3>
 
               <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
@@ -217,7 +217,7 @@ export function HelpSection() {
               </p>
 
               {/* Custom CTA Buttons - YOUR ORIGINAL BUTTONS with premium styling */}
-              <motion.div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 pt-8 border-t border-primary/10">
+              <motion.div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 pt-8 border-t border-accent/10">
                 {/* Primary Button */}
                 <Link href="/contact-us" className="inline-block">
                   <motion.button
@@ -230,7 +230,7 @@ export function HelpSection() {
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                     <motion.div
-                      className="absolute inset-0 bg-primary"
+                      className="absolute inset-0 bg-accent"
                       initial={{ x: '-100%' }}
                       whileHover={{ x: 0 }}
                       transition={{ duration: 0.3 }}
@@ -243,14 +243,14 @@ export function HelpSection() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group relative px-8 py-4 bg-transparent text-black text-sm font-medium tracking-wider border border-primary/20 hover:border-primary/50 transition-colors duration-300 overflow-hidden rounded-md"
+                    className="group relative px-8 py-4 bg-transparent text-black text-sm font-medium tracking-wider border border-accent/20 hover:border-accent/50 transition-colors duration-300 overflow-hidden rounded-md"
                   >
                     <span className="relative z-10 flex items-center">
                       About ClickMasters
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
                     <motion.div
-                      className="absolute inset-0 bg-primary/5"
+                      className="absolute inset-0 bg-accent/5"
                       initial={{ scale: 0 }}
                       whileHover={{ scale: 1 }}
                       transition={{ duration: 0.3 }}
@@ -262,15 +262,15 @@ export function HelpSection() {
               {/* Trust Indicators - YOUR ORIGINAL with premium styling */}
               <motion.div className="flex items-center justify-center gap-6 mt-8 text-xs text-gray-500">
                 <span className="flex items-center">
-                  <span className="w-1 h-1 bg-primary rounded-full mr-2" />
+                  <span className="w-1 h-1 bg-accent rounded-full mr-2" />
                   24/7 Support
                 </span>
                 <span className="flex items-center">
-                  <span className="w-1 h-1 bg-primary rounded-full mr-2" />
+                  <span className="w-1 h-1 bg-accent rounded-full mr-2" />
                   Free Documentation
                 </span>
                 <span className="flex items-center">
-                  <span className="w-1 h-1 bg-primary rounded-full mr-2" />
+                  <span className="w-1 h-1 bg-accent rounded-full mr-2" />
                   Video Tutorials
                 </span>
               </motion.div>

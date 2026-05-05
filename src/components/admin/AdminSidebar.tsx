@@ -70,11 +70,11 @@ const AdminSidebar = () => {
           <>
             <div className="flex items-center gap-2 ">
               <div className="w-8 h-8 border border-gray-600 rounded-md flex items-center justify-center shadow-md">
-                <span className="text-primary font-bold text-sm">CM</span>
+                <span className="text-accent font-bold text-sm">CM</span>
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-white leading-tight ">ClickMasters</span>
-                <span className="text-[10px] text-primaryleading-tight text-primary">
+                <span className="text-[10px] text-accentleading-tight text-accent">
                   Admin Portal
                 </span>
               </div>
@@ -83,14 +83,14 @@ const AdminSidebar = () => {
               variant="ghost"
               size="icon"
               onClick={toggleSidebar}
-              className="h-6 w-6 text-gray-400 hover:text-primary hover:bg-primary/10"
+              className="h-6 w-6 text-gray-400 hover:text-accent hover:bg-accent/10"
             >
               <ChevronLeft className="h-3 w-3" />
             </Button>
           </>
         ) : (
           <div className="relative w-8 h-8">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center shadow-md">
+            <div className="w-8 h-8 bg-gradient-to-br from-accent to-accent/80 rounded-lg flex items-center justify-center shadow-md">
               <span className="text-white font-bold text-sm">CM</span>
             </div>
           </div>
@@ -117,10 +117,10 @@ const AdminSidebar = () => {
                       href={item.url}
                       className={cn(
                         'flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200',
-                        'text-white hover:text-primary hover:bg-primary/5',
+                        'text-white hover:text-accent hover:bg-accent/5',
                         collapsed ? 'justify-center' : 'justify-start'
                       )}
-                      activeClassName="bg-primary/10 text-primary font-medium border-l-2 border-primary"
+                      activeClassName="bg-accent/10 text-accent font-medium border-l-2 border-accent"
                     >
                       <item.icon
                         className={cn('h-4 w-4 shrink-0', collapsed ? 'h-5 w-5' : 'h-4 w-4')}
@@ -154,7 +154,7 @@ const AdminSidebar = () => {
                     rel="noopener noreferrer"
                     className={cn(
                       'flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200',
-                      'text-white hover:text-primary hover:bg-primary/5',
+                      'text-white hover:text-accent hover:bg-accent/5',
                       collapsed ? 'justify-center' : 'justify-start'
                     )}
                   >
@@ -173,11 +173,11 @@ const AdminSidebar = () => {
         {!collapsed && user && (
           <div className="mb-4">
             {/* User Profile Card */}
-            <div className="flex items-center gap-3 p-2  rounded-xl border border-primary/10">
+            <div className="flex items-center gap-3 p-2  rounded-xl border border-accent/10">
               {/* User Avatar with Icon */}
               <div className="relative">
                 <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md">
-                  <span className="text-primary font-semibold text-md">
+                  <span className="text-accent font-semibold text-md">
                     {user.email?.charAt(0).toUpperCase() || 'A'}
                   </span>
                 </div>
@@ -239,7 +239,7 @@ const AdminSidebar = () => {
             variant="ghost"
             size="icon"
             onClick={toggleSidebar}
-            className="mt-3 h-7 w-7 rounded-lg text-gray-400 hover:text-primary hover:mx-auto transition-all duration-200"
+            className="mt-3 h-7 w-7 rounded-lg text-gray-400 hover:text-accent hover:mx-auto transition-all duration-200"
           >
             <ChevronRight className="h-3.5 w-3.5" />
           </Button>

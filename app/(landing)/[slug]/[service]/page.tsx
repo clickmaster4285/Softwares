@@ -165,11 +165,11 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
       <div className="min-h-screen bg-white text-slate-900">
         {/* Hero Section */}
-        <section className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-br from-primary-50 via-white to-slate-50">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-br from-accent-50 via-white to-slate-50">
           {/* Background Pattern */}
           <div className="pointer-events-none absolute inset-0 opacity-40">
-            <div className="absolute right-0 top-0 h-96 w-96 -translate-y-1/2 translate-x-1/2 rounded-full bg-primary-200 blur-3xl" />
-            <div className="absolute bottom-0 left-0 h-64 w-64 -translate-x-1/2 translate-y-1/2 rounded-full bg-primary-100 blur-3xl" />
+            <div className="absolute right-0 top-0 h-96 w-96 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent-200 blur-3xl" />
+            <div className="absolute bottom-0 left-0 h-64 w-64 -translate-x-1/2 translate-y-1/2 rounded-full bg-accent-100 blur-3xl" />
           </div>
 
           <div className="relative mx-auto max-w-8xl px-12 pb-16 pt-20 md:px-8 lg:px-16 lg:pb-3 lg:pt-28">
@@ -177,18 +177,18 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               <div className="flex-1">
                 {/* Breadcrumb */}
                 <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-                  <Link href="/" className="hover:text-primary-600">
+                  <Link href="/" className="hover:text-accent-600">
                     Home
                   </Link>
                   <ChevronRight className="h-4 w-4" />
-                  <Link href="/services" className="hover:text-primary-600">
+                  <Link href="/services" className="hover:text-accent-600">
                     Services
                   </Link>
                   <ChevronRight className="h-4 w-4" />
                   <span className="text-slate-900">{page.title}</span>
                 </nav>
 
-                <Badge className="mb-4 rounded-full border-primary-200 bg-primary-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary-700">
+                <Badge className="mb-4 rounded-full border-accent-200 bg-accent-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-700">
                   {page.category}
                 </Badge>
 
@@ -202,7 +202,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                   <Button
                     asChild
                     size="lg"
-                    className="rounded-full bg-primary-600 px-8 text-white shadow-lg shadow-primary-600/25 transition-all hover:bg-primary-700 hover:shadow-xl hover:shadow-primary-600/30"
+                    className="rounded-full bg-accent-600 px-8 text-white shadow-lg shadow-accent-600/25 transition-all hover:bg-accent-700 hover:shadow-xl hover:shadow-accent-600/30"
                   >
                     <Link href="/contact-us">
                       Get your free strategy call
@@ -236,7 +236,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                   </div>
                   <div className="flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary-400 text-primary-400" />
+                      <Star key={i} className="h-4 w-4 fill-accent-400 text-accent-400" />
                     ))}
                     <span className="ml-1">
                       <strong className="text-slate-900">4.9/5</strong> rating
@@ -255,8 +255,8 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                 { icon: Headphones, value: '24/7', label: 'Support Available' },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50">
-                    <stat.icon className="h-5 w-5 text-primary-600" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50">
+                    <stat.icon className="h-5 w-5 text-accent-600" />
                   </div>
                   <div>
                     <p className="text-2xl font-semibold text-slate-900">{stat.value}</p>
@@ -288,7 +288,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                   className="scroll-mt-24"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-1 rounded-full bg-primary-500" />
+                    <div className="h-10 w-1 rounded-full bg-accent-500" />
                     <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
                       {section.heading}
                     </h2>
@@ -317,7 +317,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               {faqs.length > 0 && (
                 <section id="faq" className="scroll-mt-24">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-1 rounded-full bg-primary-500" />
+                    <div className="h-10 w-1 rounded-full bg-accent-500" />
                     <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
                       Frequently Asked Questions
                     </h2>
@@ -327,11 +327,11 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                     {faqs.map((faq) => (
                       <div
                         key={faq.question}
-                        className="group rounded-2xl border border-slate-200 bg-white p-6 transition-all hover:border-primary-200 hover:shadow-lg"
+                        className="group rounded-2xl border border-slate-200 bg-white p-6 transition-all hover:border-accent-200 hover:shadow-lg"
                       >
                         <div className="flex gap-4">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 transition-colors group-hover:bg-primary-100">
-                            <HelpCircle className="h-5 w-5 text-primary-600" />
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-50 transition-colors group-hover:bg-accent-100">
+                            <HelpCircle className="h-5 w-5 text-accent-600" />
                           </div>
                           <div>
                             <h3 className="font-semibold text-slate-900">{faq.question}</h3>
@@ -357,11 +357,11 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               <section id="cta" className="scroll-mt-24">
                 <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 sm:p-12">
                   {/* Background decorations */}
-                  <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary-500/20 blur-3xl" />
-                  <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-primary-500/10 blur-3xl" />
+                  <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent-500/20 blur-3xl" />
+                  <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-accent-500/10 blur-3xl" />
 
                   <div className="relative">
-                    <Badge className="border-primary-500/30 bg-primary-500/20 text-primary-300">
+                    <Badge className="border-accent-500/30 bg-accent-500/20 text-accent-300">
                       Ready to move forward?
                     </Badge>
                     <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
@@ -375,7 +375,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                       <Button
                         asChild
                         size="lg"
-                        className="rounded-full bg-primary-500 px-8 text-white shadow-lg shadow-primary-500/30 hover:bg-primary-600"
+                        className="rounded-full bg-accent-500 px-8 text-white shadow-lg shadow-accent-500/30 hover:bg-accent-600"
                       >
                         <Link href="/contact-us">
                           Book strategy call
@@ -408,7 +408,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                     </div>
                     <Button
                       asChild
-                      className="shrink-0 rounded-full bg-primary-600 px-8 text-white hover:bg-primary-700"
+                      className="shrink-0 rounded-full bg-accent-600 px-8 text-white hover:bg-accent-700"
                     >
                       <Link href="/contact-us">
                         Get your proposal
@@ -436,7 +436,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               <Button
                 asChild
                 size="lg"
-                className="rounded-full bg-primary-600 px-10 text-white shadow-lg shadow-primary-600/25 hover:bg-primary-700"
+                className="rounded-full bg-accent-600 px-10 text-white shadow-lg shadow-accent-600/25 hover:bg-accent-700"
               >
                 <Link href="/services">
                   View all services
