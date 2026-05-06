@@ -150,6 +150,29 @@ export function ServiceHero({ page }: ServiceHeroProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
+  // Helper function to make service name bold in text
+  const makeBoldInText = (text: string, serviceName: string) => {
+    if (!text || !serviceName) return text;
+    
+    const parts: (string | React.ReactNode)[] = [];
+    const regex = new RegExp(`(${serviceName})`, 'gi');
+    const split = text.split(regex);
+    
+    split.forEach((part, index) => {
+      if (part.toLowerCase() === serviceName.toLowerCase()) {
+        parts.push(
+          <span key={index} className="font-black">
+            {part}
+          </span>
+        );
+      } else {
+        parts.push(part);
+      }
+    });
+    
+    return parts;
+  };
+
   useEffect(() => {
     if (isInView) controls.start("visible");
   }, [controls, isInView]);
@@ -345,7 +368,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
             <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
             <span className="text-slate-500 font-medium">{page.category}</span>
             <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
-            <span className="font-semibold text-slate-800">
+            <span className="font-black text-slate-800">
               {page.serviceName}
             </span>
           </nav>
@@ -376,7 +399,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
               {/* Title */}
               <motion.h1
-                className="text-balance text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-[1.15]"
+                className="text-balance text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-[1.15]"
                 variants={fadeInUp}
               >
                 {page.title}
@@ -387,7 +410,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                 className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 lg:text-lg"
                 variants={fadeInUp}
               >
-                {page.lead}
+                {makeBoldInText(page.lead, page.serviceName)}
               </motion.p>
 
               {/* Highlight Pills */}

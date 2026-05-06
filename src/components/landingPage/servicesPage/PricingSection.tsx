@@ -42,7 +42,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          {serviceName} Development Pricing
+          <span className="font-black">{serviceName}</span> Development Pricing
         </motion.h2>
       </div>
 

@@ -55,12 +55,12 @@ export const ServicesSection = ({ serviceName, servicesCards }: ServicesSectionP
       <div className="flex items-center gap-3">
         <div className="h-10 w-1 rounded-full bg-orange-500" />
         <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
-          {serviceName} Services We Deliver
+          <span className="font-black">{serviceName}</span> Services We Deliver
         </h2>
       </div>
 
       <p className="mt-6 text-lg text-slate-600 leading-relaxed">
-        ClickMasters operates as a full-stack {serviceName.toLowerCase()} partner. Our team handles every layer of the software delivery lifecycle — product strategy, UI/UX design, backend engineering, cloud infrastructure, QA, and ongoing support.
+        ClickMasters operates as a full-stack <span className="font-black">{serviceName.toLowerCase()}</span> partner. Our team handles every layer of the software delivery lifecycle — product strategy, UI/UX design, backend engineering, cloud infrastructure, QA, and ongoing support.
       </p>
 
       {/* Cards Container - 3 in a row */}

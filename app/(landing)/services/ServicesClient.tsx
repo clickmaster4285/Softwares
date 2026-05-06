@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { motion, useInView } from 'framer-motion';
 import {
   ArrowRight,
@@ -251,6 +252,7 @@ const technologyGroups = [
 ];
 
 export default function ServicesPage() {
+  const pathname = usePathname();
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -265,6 +267,11 @@ export default function ServicesPage() {
   const [activeProcessStep, setActiveProcessStep] = useState<number>(0);
   const [hasAnimated, setHasAnimated] = useState(false);
   const [statsInView, setStatsInView] = useState(false);
+
+  // Check if current service matches URL
+  const isCurrentService = (serviceHref: string): boolean => {
+    return pathname === serviceHref || pathname.startsWith(serviceHref + '/');
+  };
 
   // Check if stats section is in view
   const statsInViewport = useInView(statsSectionRef, {
@@ -691,7 +698,9 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg md:text-xl font-bold text-black mb-0 group-hover:text-primary transition-colors duration-300">
+                    <h3 className={`text-lg md:text-xl font-bold text-black mb-0 group-hover:text-primary transition-colors duration-300 ${
+                      isCurrentService(service.href) ? 'font-black text-primary' : ''
+                    }`}>
                       {service.title}
                     </h3>
                   </div>

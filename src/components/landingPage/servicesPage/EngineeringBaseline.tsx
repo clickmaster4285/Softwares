@@ -36,7 +36,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              {serviceName} Engineering Baseline
+              <span className="font-black">{serviceName}</span> Engineering Baseline
             </motion.h2>
             <motion.p
               className="text-slate-500 mt-1"

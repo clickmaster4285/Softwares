@@ -334,7 +334,7 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            Our {serviceName} Process
+            Our <span className="font-black">{serviceName}</span> Process
           </motion.h2>
         </div>
 

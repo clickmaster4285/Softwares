@@ -138,6 +138,13 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   const url = `${siteConfig.url}${canonicalPath}`;
   const techStack = getServiceTechnologies(service);
 
+  // Helper function to make service name bold in text
+  const makeBoldServiceName = (text: string, serviceName: string): string => {
+    if (!text || !serviceName) return text;
+    const regex = new RegExp(`(${serviceName})`, 'gi');
+    return text.replace(regex, '<strong>$1</strong>');
+  };
+
   // Standardized TOC items built dynamically
   const tocItems = [
     { id: 'overview', title: 'Overview', level: 2 as const },
@@ -286,13 +293,17 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                 >
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-1 rounded-full bg-orange-500" />
-                    <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
-                      {section.heading}
-                    </h2>
+                    <h2 
+                      className="text-2xl font-semibold text-slate-900 sm:text-3xl"
+                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.heading, page.serviceName) }}
+                    />
                   </div>
 
                   <div className="mt-6 space-y-4 text-slate-600 leading-relaxed">
-                    <p className="text-lg whitespace-pre-line">{section.body}</p>
+                    <p 
+                      className="text-lg whitespace-pre-line"
+                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.body, page.serviceName) }}
+                    />
                     
                     {/* Render items if present in section */}
                     {section.items && (
@@ -302,7 +313,10 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                             <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
                               <Star className="h-3 w-3 fill-current" />
                             </div>
-                            <span className="italic">{item}</span>
+                            <span 
+                              className="italic"
+                              dangerouslySetInnerHTML={{ __html: makeBoldServiceName(item, page.serviceName) }}
+                            />
                           </li>
                         ))}
                       </ul>
