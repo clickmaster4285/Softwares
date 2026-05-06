@@ -52,17 +52,11 @@ export function MainContent() {
                {/* Orange top accent line */}
                <motion.div
                   className="h-[3px] bg-gold rounded-full mb-8"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "56px" }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  animate={{ opacity: [0.7, 1, 0.7] }} // Continuous pulse
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                />
 
                <p className="text-lg leading-relaxed text-gray-600 mb-6">
                   ClickMasters is a{" "}
-                  <strong className="text-gray-900 font-semibold">professional software development company</strong>{" "}
+                  <strong className="text-accent-700 font-semibold">professional software development company</strong>{" "}
                   with a proven track record delivering custom software solutions across manufacturing, healthcare,
                   retail, real estate, and education sectors.
                </p>
@@ -104,7 +98,7 @@ export function MainContent() {
                <div className="flex flex-wrap gap-4 mb-12">
                   <Link
                      href="/contact-us"
-                     className="group relative inline-flex items-center bg-accent-900 hover:bg-accent-900 active:scale-95 transition-all duration-200 text-white text-sm font-bold px-7 py-3.5 shadow-sm hover:shadow-accent-200 hover:shadow-lg overflow-hidden"
+                     className="group relative inline-flex items-center bg-gradient-to-r from-btn-blue to-btn-yellow hover:bg-accent-900 active:scale-95 transition-all duration-200 text-white text-sm font-bold px-7 py-3.5 shadow-sm hover:shadow-accent-200 hover:shadow-lg overflow-hidden"
                   >
                      <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                      <span className="relative z-10">Start Your Project</span>
@@ -148,7 +142,7 @@ export function MainContent() {
                      >
                         {/* Icon */}
                         <motion.div
-                           className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-accent-100 text-accent-500 group-hover:bg-accent-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 rounded-xl shadow-sm"
+                           className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-accent-50 text-accent-500 group-hover:bg-accent-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 rounded-xl shadow-sm"
                            animate={{ y: [0, -4, 0] }}
                            transition={{ ...floatTransition, delay: idx * 0.2 }}
                         >

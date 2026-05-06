@@ -221,12 +221,12 @@ export function HeroSection(): JSX.Element {
                 style={{ ['--hero-enter-delay' as string]: '200ms' }}
               >
                 <div className="group relative w-full transition-transform duration-200 ease-out hover:scale-[1.02] sm:w-auto">
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#1e3a8a] to-[#c49138] opacity-40 blur-sm group-hover:opacity-60 transition-opacity" />
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-btn-blue to-btn-yellow opacity-40 blur-sm group-hover:opacity-60 transition-opacity" />
                   <div className="relative overflow-hidden rounded-xl p-[1px]">
                     <div className="absolute inset-[-50%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#1e3a8a_0%,#c49138_50%,#1e3a8a_100%)] opacity-80" />
                     <Button
                       size="lg"
-                      className="group/btn relative w-full overflow-hidden rounded-[11px] bg-gradient-to-r from-[#12224b] to-[#9b6f24] px-4 py-5 text-center text-sm leading-snug text-white shadow-accent/30 transition-all hover:opacity-95 sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base min-h-[48px] touch-manipulation"
+                      className="group/btn relative w-full overflow-hidden rounded-[11px] bg-gradient-to-r from-btn-blue to-btn-yellow px-4 py-5 text-center text-sm leading-snug text-white shadow-accent/30 transition-all hover:opacity-95 sm:w-auto sm:px-6 sm:py-6 md:px-8 md:text-base min-h-[48px] touch-manipulation"
                       asChild
                     >
                       <Link
@@ -368,13 +368,13 @@ export function HeroSection(): JSX.Element {
                       />
                     </div>
                     <div className="group relative w-full transition-transform duration-200 ease-out hover:scale-[1.01]">
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#1e3a8a] to-[#c49138] opacity-40 blur-sm group-hover:opacity-60 transition-opacity" />
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-btn-blue to-btn-yellow opacity-40 blur-sm group-hover:opacity-60 transition-opacity" />
                       <div className="relative overflow-hidden rounded-xl p-[1px]">
                         <div className="absolute inset-[-1000%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#1e3a8a_0%,#c49138_50%,#1e3a8a_100%)] opacity-80" />
                         <button
                           type="submit"
                           disabled={heroSending}
-                          className="relative flex min-h-[48px] w-full touch-manipulation items-center justify-center gap-2 rounded-[11px] bg-gradient-to-r from-[#12224b] to-[#9b6f24] px-4 py-3 text-base font-semibold text-white shadow-accent/30 transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
+                          className="relative flex min-h-[48px] w-full touch-manipulation items-center justify-center gap-2 rounded-[11px] bg-gradient-to-r from-btn-blue to-btn-yellow px-4 py-3 text-base font-semibold text-white shadow-accent/30 transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
                         >
                           {heroSending ? (
                             'Sending…'
@@ -428,7 +428,7 @@ export function HeroSection(): JSX.Element {
                         />
                         {stat.suffix}
                       </p>
-                      <Icon className="mb-2 h-9 w-9 text-accent" />
+                      <Icon className="mb-2 h-9 w-9 text-accent-600" />
                     </div>
 
                     <p className="mt-1 text-xs text-gray-300 sm:text-sm">

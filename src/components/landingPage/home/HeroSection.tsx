@@ -27,21 +27,15 @@ export function HeroSection() {
                >
                   <div className="inline-flex items-center gap-2.5 mb-6">
                      <motion.span
-                        className="h-[2px] bg-gold rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "36px" }}
-                        viewport={{ once: false }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        animate={{ opacity: [0.6, 1, 0.6] }}
-                        transition={{ duration: 2, repeat: Infinity }}
+                        className="h-[2px] bg-gold rounded-full w-20"
                      />
-                     <span className="text-accent text-sm font-bold tracking-[0.2em] uppercase">
+                     <span className="text-accent-800 text-sm font-bold tracking-[0.175em] uppercase">
                         About ClickMasters
                      </span>
                   </div>
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.12] tracking-tight text-gray-900">
                      We Don&apos;t Just Build Software —{" "}
-                     <span className="text-accent-900 relative inline-block">
+                     <span className="text-accent-800 relative inline-block">
                         We Build Revenue Systems
                         <svg className="absolute -bottom-1.5 left-0 w-full" viewBox="0 0 300 6" preserveAspectRatio="none" fill="none">
                            <motion.path

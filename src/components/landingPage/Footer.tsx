@@ -99,7 +99,7 @@ export function Footer() {
         {/* NEWSLETTER */}
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
           <div className="flex items-center gap-2 mb-3">
-            <Mail className="h-5 w-5 text-[#c49138]" />
+            <Mail className="h-5 w-5 text-btn-yellow" />
             <h3 className="text-lg font-semibold">Stay Updated</h3>
           </div>
 
@@ -112,7 +112,7 @@ export function Footer() {
               placeholder="Enter email"
               className="bg-white/5 border-white/10 text-white"
             />
-            <Button className="bg-gradient-to-r from-[#1e3a8a] to-[#c49138]">
+            <Button className="bg-gradient-to-r from-btn-blue to-btn-yellow">
               Subscribe
             </Button>
           </div>

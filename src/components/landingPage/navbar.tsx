@@ -264,7 +264,7 @@ export function Navbar() {
           <Link href="/admin/login" onClick={closeDropdowns}>
             <button className={cn('relative group p-[1px] overflow-hidden rounded-md transition-all duration-300', isPageLoading || !isLightHero ? 'bg-gold/15' : 'bg-transparent')}>
               <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_0deg,#9b6f24_0deg,#1e3a8a_180deg,#9b6f24_360deg)]" />
-              <div className="relative px-5 py-2 text-sm font-medium rounded-md text-white bg-gradient-to-r from-[#12224b] to-[#9b6f24] hover:bg-accent/90 transition-colors duration-300 w-full h-full flex items-center justify-center">
+              <div className="relative px-5 py-2 text-sm font-medium rounded-md text-white bg-gradient-to-r from-btn-blue to-btn-yellow hover:bg-accent/90 transition-colors duration-300 w-full h-full flex items-center justify-center">
                 Sign In
               </div>
             </button>

@@ -223,7 +223,7 @@ export function HelpSection() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group relative px-8 py-4 bg-black text-white text-sm font-medium tracking-wider overflow-hidden rounded-md"
+                    className="group relative px-8 py-4 bg-gradient-to-r from-btn-blue to-btn-yellow text-white text-sm font-medium tracking-wider overflow-hidden rounded-md"
                   >
                     <span className="relative z-10 flex items-center">
                       Contact Us

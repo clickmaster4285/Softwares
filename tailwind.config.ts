@@ -72,6 +72,8 @@ const config: Config = {
         },
         section: "hsl(var(--section))",
         gold: "hsl(var(--gold))",
+        "btn-blue": "hsl(var(--btn-blue))",
+        "btn-yellow": "hsl(var(--btn-yellow))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

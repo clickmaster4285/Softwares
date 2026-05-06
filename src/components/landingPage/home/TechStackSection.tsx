@@ -94,11 +94,11 @@ export function TechStackSection({ visible }: TechStackSectionProps) {
             <div className="mx-auto max-w-7xl">
                <div className="text-center mb-12">
                   <div className="inline-flex items-center gap-2 mb-3">
-                     <span className="w-8 h-[2px] bg-accent-400 rounded-full" />
-                     <p className="text-accent-800 text-[11px] font-bold tracking-[0.2em] uppercase">Our Technology Stack</p>
-                     <span className="w-8 h-[2px] bg-accent-400 rounded-full" />
+                     <span className="w-8 h-[2px] bg-gold rounded-full" />
+                     <p className="text-gold text-base font-bold tracking-[0.175em] uppercase">Our Technology Stack</p>
+                     <span className="w-8 h-[2px] bg-gold rounded-full" />
                   </div>
-                  <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
+                  <h3 className="text-2xl lg:text-3xl font-bold text-accent-800 mb-3">
                      Modern Tech Stack for Future-Ready Solutions
                   </h3>
                   <p className="text-gray-700 max-w-2xl mx-auto text-sm">

@@ -226,7 +226,7 @@ export function MobileNav({
         {/* Mobile Footer */}
         <div className="p-6 border-t border-black/5">
           <Link href="/admin/login" onClick={closeMenu}>
-            <button className="w-full px-5 py-3 text-sm font-medium text-white bg-gradient-to-r from-[#12224b] to-[#9b6f24] hover:bg-accent/90 transition-colors duration-300 rounded-md">
+            <button className="w-full px-5 py-3 text-sm font-medium text-white bg-gradient-to-r from-accent-900 to-gold hover:bg-accent/90 transition-colors duration-300 rounded-md">
               Sign In
             </button>
           </Link>
