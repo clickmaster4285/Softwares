@@ -479,7 +479,6 @@ const customSoftwareDevelopmentOverride: ServicePageContent = {
 };
 
 const enterpriseSoftwareDevelopmentOverride: ServicePageContent = {
-<<<<<<< HEAD
   slug: 'enterprise-software-development',
   categorySlug: 'software-development',
   sectionId: 'enterprise-software-development',
@@ -496,7 +495,6 @@ const enterpriseSoftwareDevelopmentOverride: ServicePageContent = {
     '✓ Enterprise Integrations',
     '✓ Compliance Grade Security',
   ],
-=======
  slug: 'enterprise-software-development',
  categorySlug: 'software-development',
  sectionId: 'enterprise-software-development',
@@ -513,7 +511,6 @@ const enterpriseSoftwareDevelopmentOverride: ServicePageContent = {
  'Enterprise Integrations',
  'Compliance Grade Security',
  ],
->>>>>>> 0fd9b5fa552a6cb2e3b7e3b5fe2a5c4709d0c7f8
   // marketStats: [
   //   { label: 'Enterprises moving from legacy to cloud', value: '70%' },
   //   { label: 'Reduction in operational cost with custom ERP', value: '25%' },
