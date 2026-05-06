@@ -29,7 +29,7 @@ export const FAQSection = ({ faqs }: FAQSectionProps) => {
     const parts: (string | React.ReactNode)[] = [];
     const keywords = ['custom software development', 'ai development', 'mobile development', 'web development', 'data engineering', 'ui/ux design'];
     
-    let lastIndex = 0;
+    const  lastIndex = 0;
     const lowerText = text.toLowerCase();
     
     keywords.forEach(keyword => {

@@ -85,7 +85,7 @@ function Counter({
   }, [isVisible, numericTarget]);
 
   return (
-    <div ref={elementRef} className="text-xl sm:text-2xl font-bold text-slate-900">
+    <div ref={elementRef} className="text-2xl sm:text-2xl lg:text-4xl xl:text-4xl  font-bold text-slate-900">
       {prefix}
       {count}
       {suffix || originalSuffix}
@@ -186,12 +186,12 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
   return (
     <div
-      className="w-full relative overflow-hidden bg-white p-2 mb-4"
+      className="w-full relative overflow-hidden bg-white p-2 mb-2"
     
     >
-      {/* Animated Background Lines - Hide on mobile for better performance */}
+      {/* Animated Background Lines */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none z-0 hidden sm:block"
+        className="absolute inset-0 w-full h-full pointer-events-none z-0"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
@@ -296,9 +296,9 @@ export function ServiceHero({ page }: ServiceHeroProps) {
         />
       </svg>
 
-      {/* Animated Corner Lines - Hide on mobile */}
+      {/* Animated Corner Lines */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none z-0 hidden sm:block"
+        className="absolute inset-0 w-full h-full pointer-events-none z-0"
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* Top Left Corner */}
@@ -352,22 +352,22 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
       {/* ── Breadcrumb ── */}
       <motion.div
-        className="relative z-10 border-b border-orange-100/60 w-full overflow-x-auto"
+        className="relative z-10 border-b border-orange-100/60 w-full"
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <div className="mx-auto px-3 sm:px-4 md:px-8 lg:px-12 py-3 sm:py-3.5 bg-white/50 backdrop-blur-sm">
-          <nav className="flex items-center gap-1.5 text-xs sm:text-sm whitespace-nowrap">
+        <div className="mx-auto px-4 md:px-8 lg:px-12 py-3.5 bg-white/50 backdrop-blur-sm">
+          <nav className="flex items-center gap-1.5 text-sm">
             <Link
               href="/"
               className="text-slate-400 hover:text-orange-600 transition-colors font-medium"
             >
               Home
             </Link>
-            <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-slate-300 flex-shrink-0" />
+            <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
             <span className="text-slate-500 font-medium">{page.category}</span>
-            <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-slate-300 flex-shrink-0" />
+            <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
             <span className="font-black text-slate-800">
               {page.serviceName}
             </span>
@@ -377,12 +377,12 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
       {/* ── Main Hero Content ── */}
       <section ref={ref} className="relative z-10 w-full">
-        <div className="mx-auto px-3 sm:px-4 md:px-8 lg:px-12 pt-8 sm:pt-12 pb-0 lg:pt-16">
+        <div className="mx-auto px-4 md:px-8 lg:px-12 pt-12 pb-0 lg:pt-16">
           {/* Two-column layout: left text, right image */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 xl:gap-12">
             {/* ── LEFT COLUMN ── */}
             <motion.div
-              className="flex-1 min-w-0 pb-8 sm:pb-12 lg:pb-16"
+              className="flex-1 min-w-0 pb-12 lg:pb-16"
               variants={staggerContainer}
               initial="hidden"
               animate={controls}
@@ -390,7 +390,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               {/* Category Badge */}
               <motion.div variants={fadeInUp}>
                 <Badge
-                  className="mb-4 sm:mb-5 rounded-md border-0 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white"
+                  className="mb-5 rounded-md border-0 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white"
                   style={{ background: "#ea580c" }}
                 >
                   {page.category}
@@ -399,7 +399,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
               {/* Title */}
               <motion.h1
-                className="text-balance text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-[1.2] sm:leading-[1.15]"
+                className="text-balance text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-[1.15]"
                 variants={fadeInUp}
               >
                 {page.title}
@@ -407,7 +407,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
               {/* Lead */}
               <motion.p
-                className="mt-3 sm:mt-5 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-slate-600"
+                className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 lg:text-lg"
                 variants={fadeInUp}
               >
                 {makeBoldInText(page.lead, page.serviceName)}
@@ -416,16 +416,16 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               {/* Highlight Pills */}
               {page.highlights && page.highlights.length > 0 && (
                 <motion.div
-                  className="mt-4 sm:mt-6 flex flex-wrap gap-2 sm:gap-2.5"
+                  className="mt-6 flex flex-wrap gap-2.5"
                   variants={staggerContainer}
                 >
                   {page.highlights.map((h) => (
                     <motion.div
                       key={h}
                       variants={fadeInUp}
-                      className="flex items-center gap-1.5 sm:gap-2 rounded-full border border-orange-200 bg-white/70 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium text-slate-700 backdrop-blur-sm"
+                      className="flex items-center gap-2 rounded-full border border-orange-200 bg-white/70 px-4 py-1.5 text-sm font-medium text-slate-700 backdrop-blur-sm"
                     >
-                      <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-orange-500 shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-orange-500 shrink-0" />
                       {h}
                     </motion.div>
                   ))}
@@ -435,15 +435,15 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               {/* Market Stats */}
               {page.marketStats && page.marketStats.length > 0 && (
                 <motion.div
-                  className="mt-6 sm:mt-8 grid grid-cols-2 gap-3 sm:gap-4 rounded-2xl border border-orange-100 bg-white/70 p-4 sm:p-5 backdrop-blur-sm"
+                  className="mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-orange-100 bg-white/70 p-5 backdrop-blur-sm sm:grid-cols-4"
                   variants={fadeInUp}
                 >
                   {page.marketStats.map((stat) => (
                     <div key={stat.label} className="text-center sm:text-left">
-                      <p className="text-xl sm:text-2xl md:text-3xl font-extrabold text-orange-600">
+                      <p className="text-2xl font-extrabold text-orange-600 sm:text-3xl">
                         {stat.value}
                       </p>
-                      <p className="mt-0.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">
+                      <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
                         {stat.label}
                       </p>
                     </div>
@@ -453,19 +453,18 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
               {/* CTA Buttons */}
               <motion.div
-                className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3"
+                className="mt-8 flex flex-wrap items-center gap-3"
                 variants={staggerContainer}
               >
                 <motion.div
                   variants={fadeInUp}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto"
                 >
                   <Button
                     asChild
                     size="lg"
-                    className="rounded-full px-5 sm:px-7 text-white font-semibold shadow-lg transition-all w-full sm:w-auto text-sm sm:text-base"
+                    className="rounded-full px-7 text-white font-semibold shadow-lg transition-all"
                     style={{
                       background: "#ea580c",
                       boxShadow: "0 8px 24px rgba(234,88,12,0.30)",
@@ -473,7 +472,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                   >
                     <Link href="/contact-us">
                       Get your free strategy call
-                      <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
                 </motion.div>
@@ -481,13 +480,12 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                   variants={fadeInUp}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto"
                 >
                   <Button
                     variant="outline"
                     size="lg"
                     asChild
-                    className="group rounded-full border-slate-300 bg-white/80 backdrop-blur-sm hover:bg-white hover:border-orange-300 font-semibold text-slate-700 transition-all w-full sm:w-auto text-sm sm:text-base"
+                    className="group rounded-full border-slate-300 bg-white/80 backdrop-blur-sm hover:bg-white hover:border-orange-300 font-semibold text-slate-700 transition-all"
                   >
                     <Link href="/services">View all services</Link>
                   </Button>
@@ -496,7 +494,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
               {/* Trust Indicators */}
               <motion.div
-                className="mt-6 sm:mt-8 flex flex-wrap items-center gap-4 sm:gap-5 text-xs sm:text-sm text-slate-500"
+                className="mt-8 flex flex-wrap items-center gap-5 text-sm text-slate-500"
                 variants={staggerContainer}
               >
                 {/* Avatars */}
@@ -508,7 +506,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                     {[1, 2, 3, 4].map((i) => (
                       <div
                         key={i}
-                        className="h-6 w-6 sm:h-8 sm:w-8 rounded-full border-2 border-white"
+                        className="h-8 w-8 rounded-full border-2 border-white"
                         style={{
                           background: `hsl(${20 + i * 15}, 30%, ${70 + i * 4}%)`,
                         }}
@@ -523,13 +521,13 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
                 {/* Stars */}
                 <motion.div
-                  className="flex items-center gap-0.5 sm:gap-1"
+                  className="flex items-center gap-1"
                   variants={fadeInUp}
                 >
                   {[1, 2, 3, 4, 5].map((i) => (
                     <Star
                       key={i}
-                      className="h-3 w-3 sm:h-4 sm:w-4 fill-orange-400 text-orange-400"
+                      className="h-4 w-4 fill-orange-400 text-orange-400"
                     />
                   ))}
                   <span className="ml-1">
@@ -541,12 +539,12 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
             {/* ── RIGHT COLUMN — Hero Image ── */}
             <motion.div
-              className="relative flex-shrink-0 w-full lg:w-[52%] xl:w-[55%] flex items-end justify-center lg:justify-end mt-6 lg:mt-0"
+              className="relative flex-shrink-0 w-full lg:w-[52%] xl:w-[55%] flex items-end justify-center lg:justify-end"
               variants={fadeInRight}
               initial="hidden"
               animate={controls}
             >
-              <div className="relative w-full max-w-md sm:max-w-2xl lg:max-w-none">
+              <div className="relative w-full max-w-2xl lg:max-w-none">
                 <Image
                   src="/hero-img.png"
                   alt="Platform dashboard preview"
@@ -554,8 +552,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                   height={620}
                   priority
                   className="w-full h-auto object-contain drop-shadow-2xl"
-                  style={{ maxHeight: "280px", height: "auto" }}
-                  sizes="(max-width: 640px) 90vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 860px"
+                  style={{ maxHeight: "520px" }}
                 />
               </div>
             </motion.div>
@@ -564,35 +561,35 @@ export function ServiceHero({ page }: ServiceHeroProps) {
       </section>
 
       {/* ── Stats Bar ── */}
-      <motion.div
-        className="relative z-10 w-full border-t border-orange-100 bg-white/60 backdrop-blur-sm overflow-x-auto"
-        variants={staggerContainer}
-        initial="hidden"
-        animate={controls}
-      >
-        <div className="mx-auto px-3 sm:px-4 md:px-8 lg:px-12">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-orange-100">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="flex items-center gap-2 sm:gap-4 px-3 sm:px-4 md:px-6 py-4 sm:py-6 group hover:bg-orange-50/50 transition-colors cursor-default"
-                variants={fadeInUp}
-                whileHover={{ y: -2, transition: { duration: 0.15 } }}
-              >
-                <div className="flex h-8 w-8 sm:h-10 sm:w-10 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 group-hover:bg-orange-100 transition-colors">
-                  <stat.icon className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />
-                </div>
-                <div>
-                  <Counter targetValue={stat.value} />
-                  <p className="text-[10px] sm:text-xs font-medium text-slate-500 mt-0.5">
-                    {stat.label}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+     <motion.div
+  className="relative z-10 w-full border-t border-orange-100 bg-white/60 backdrop-blur-sm"
+  variants={staggerContainer}
+  initial="hidden"
+  animate={controls}
+>
+  <div className="mx-auto px-3 sm:px-4 md:px-8 lg:px-12">
+    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-orange-100">
+      {stats.map((stat, index) => (
+        <motion.div
+          key={stat.label}
+          className="flex items-center gap-2 sm:gap-3 md:gap-4 px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-6 group hover:bg-orange-50/50 transition-colors cursor-default"
+          variants={fadeInUp}
+          whileHover={{ y: -2, transition: { duration: 0.15 } }}
+        >
+          <div className="flex h-8 w-8 sm:h-9 sm:w-9 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-orange-50 group-hover:bg-orange-100 transition-colors">
+            <stat.icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 text-orange-600" />
           </div>
-        </div>
-      </motion.div>
+          <div>
+            <Counter targetValue={stat.value} />
+            <p className="text-[10px] sm:text-xs font-medium text-slate-500 mt-0.5">
+              {stat.label}
+            </p>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</motion.div>
     </div>
   );
 }

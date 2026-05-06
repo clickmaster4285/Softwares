@@ -90,11 +90,11 @@ export function TestimonialsSection({
 
   if (isLoading) {
     return (
-      <section id="testimonials" className="scroll-mt-24 pt-20 pb-16 bg-slate-50">
-        <div className=" mx-auto">
-          <div className="flex items-center gap-3 mb-10">
-            <div className="h-10 w-1 rounded-full bg-gradient-to-b from-orange-500 to-orange-600" />
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
+      <section id="testimonials" className="scroll-mt-24 py-12 sm:py-16 md:py-20 bg-slate-50">
+        <div className=" mx-auto  ">
+          <div className="flex items-center gap-3 mb-8 sm:mb-10">
+            <div className="h-8 sm:h-10 w-1 " />
+            <h2 className="text-2xl sm:text-3xl md:text-3xl font-semibold tracking-tight text-slate-900">
               What Our Clients Say
             </h2>
           </div>
@@ -108,10 +108,10 @@ export function TestimonialsSection({
 
   if (testimonials.length === 0) {
     return (
-      <section id="testimonials" className="scroll-mt-24 pt-20 pb-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-semibold text-slate-900 mb-4">What Our Clients Say</h2>
-          <p className="text-slate-500">No testimonials available yet.</p>
+      <section id="testimonials" className="scroll-mt-24 py-12 sm:py-16 md:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-3 sm:mb-4">What Our Clients Say</h2>
+          <p className="text-sm sm:text-base text-slate-500">No testimonials available yet.</p>
         </div>
       </section>
     );
@@ -120,42 +120,20 @@ export function TestimonialsSection({
   const currentTestimonials = groupedTestimonials[currentGroup] || [];
 
   return (
-    <section id="testimonials" className="scroll-mt-24 pt-20 pb-20 bg-slate-50 relative overflow-hidden">
-      {/* Background Accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(#f97316_0.5px,transparent_1px)] bg-[length:20px_20px] opacity-30" />
-
-      <div className=" mx-auto px-2 relative">
+    <section id="testimonials" className="scroll-mt-24 py-12 sm:py-16 md:py-20  relative overflow-hidden">
+      <div className=" mx-auto px-4  relative">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-12">
-          <div className="h-10 w-1 rounded-full bg-gradient-to-b from-orange-500 to-orange-600" />
+        <div className="flex items-center gap-3 mb-8 sm:mb-10 md:mb-12">
+          <div className="h-8 sm:h-10 w-1 rounded-full bg-gradient-to-b from-orange-500 to-orange-600" />
           <div>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
+            <h2 className="text-2xl sm:text-3xl md:text-3xl font-semibold tracking-tight text-slate-900">
               What Our Clients Say
             </h2>
-            <p className="text-slate-600 mt-2">Real stories from founders and teams we’ve helped</p>
+            <p className="text-sm sm:text-base text-slate-600 mt-1 sm:mt-2">Real stories from founders and teams we’ve helped</p>
           </div>
         </div>
 
         <div className="relative">
-          {/* Navigation Arrows */}
-          {groupedTestimonials.length > 1 && (
-            <>
-              <button
-                onClick={handlePrevious}
-                className="absolute -left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white border border-slate-200 shadow-xl hover:shadow-2xl hover:border-orange-200 transition-all duration-300"
-              >
-                <ChevronLeft className="h-6 w-6 text-slate-700" />
-              </button>
-
-              <button
-                onClick={handleNext}
-                className="absolute -right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white border border-slate-200 shadow-xl hover:shadow-2xl hover:border-orange-200 transition-all duration-300"
-              >
-                <ChevronRight className="h-6 w-6 text-slate-700" />
-              </button>
-            </>
-          )}
-
           {/* Testimonials Grid */}
           <div className="overflow-hidden">
             <AnimatePresence mode="wait">
@@ -165,7 +143,7 @@ export function TestimonialsSection({
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -80 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8"
               >
                 {currentTestimonials.map((testimonial, idx) => (
                   <motion.div
@@ -173,24 +151,24 @@ export function TestimonialsSection({
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    whileHover={{ y: -12 }}
+                    whileHover={{ y: -8 }}
                     className="group"
                   >
-                    <div className="h-full bg-white rounded-3xl p-8 shadow-md hover:shadow-2xl border border-slate-100 hover:border-orange-100 transition-all duration-500 flex flex-col">
+                    <div className="h-full bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 shadow-md hover:shadow-2xl border border-slate-100 hover:border-orange-100 transition-all duration-500 flex flex-col">
                       {/* Large Quote Icon */}
-                      <Quote className="h-10 w-10 text-orange-200 mb-6" />
+                      <Quote className="h-8 w-8 sm:h-10 sm:w-10 text-orange-200 mb-4 sm:mb-6" />
 
-                      <p className="text-lg leading-relaxed text-slate-700 flex-1">
+                      <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-700 flex-1">
                         “{testimonial.content}”
                       </p>
 
                       {/* Rating */}
                       {testimonial.rating && (
-                        <div className="flex gap-1 mt-6 mb-6">
+                        <div className="flex gap-0.5 sm:gap-1 mt-4 sm:mt-6 mb-4 sm:mb-6">
                           {[1, 2, 3, 4, 5].map((i) => (
                             <Star
                               key={i}
-                              className={`h-5 w-5 transition-colors ${
+                              className={`h-4 w-4 sm:h-5 sm:w-5 transition-colors ${
                                 i <= testimonial.rating!
                                   ? 'fill-orange-400 text-orange-400'
                                   : 'text-slate-200'
@@ -201,16 +179,16 @@ export function TestimonialsSection({
                       )}
 
                       {/* Author */}
-                      <div className="flex items-center gap-4 pt-6 border-t border-slate-100 mt-auto">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 via-orange-500 to-orange-600 flex items-center justify-center text-white font-semibold text-xl shadow-inner">
+                      <div className="flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-slate-100 mt-auto">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-500 via-orange-500 to-orange-600 flex items-center justify-center text-white font-semibold text-base sm:text-xl shadow-inner">
                           {testimonial.authorName?.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                          <p className="font-semibold text-slate-900 text-lg group-hover:text-orange-600 transition-colors">
+                          <p className="font-semibold text-slate-900 text-sm sm:text-base md:text-lg group-hover:text-orange-600 transition-colors">
                             {testimonial.authorName}
                           </p>
                           {(testimonial.authorRole || testimonial.authorCompany) && (
-                            <p className="text-sm text-slate-500">
+                            <p className="text-xs sm:text-sm text-slate-500">
                               {[testimonial.authorRole, testimonial.authorCompany]
                                 .filter(Boolean)
                                 .join(' • ')}
@@ -225,24 +203,49 @@ export function TestimonialsSection({
             </AnimatePresence>
           </div>
 
-          {/* Dots */}
+          {/* Navigation Controls at Bottom */}
           {groupedTestimonials.length > 1 && (
-            <div className="flex justify-center gap-3 mt-12">
-              {groupedTestimonials.map((_, idx) => (
+            <div className="flex flex-col items-center gap-4 sm:gap-6 mt-8 sm:mt-10 md:mt-12">
+              {/* Arrows Row */}
+              <div className="flex items-center gap-3 sm:gap-4">
                 <button
-                  key={idx}
-                  onClick={() => {
-                    setIsAutoPlaying(false);
-                    setCurrentGroup(idx);
-                    setTimeout(() => setIsAutoPlaying(true), 10000);
-                  }}
-                  className={`h-3 rounded-full transition-all duration-300 ${
-                    idx === currentGroup 
-                      ? 'bg-orange-600 w-10' 
-                      : 'bg-slate-300 hover:bg-slate-400 w-3'
-                  }`}
-                />
-              ))}
+                  onClick={handlePrevious}
+                  className="p-2 sm:p-3 rounded-full bg-white border border-slate-200 shadow-md hover:shadow-xl hover:border-orange-200 transition-all duration-300"
+                >
+                  <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
+                </button>
+                
+                {/* Dots */}
+                <div className="flex gap-2 sm:gap-3">
+                  {groupedTestimonials.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setIsAutoPlaying(false);
+                        setCurrentGroup(idx);
+                        setTimeout(() => setIsAutoPlaying(true), 10000);
+                      }}
+                      className={`h-2 sm:h-3 rounded-full transition-all duration-300 ${
+                        idx === currentGroup 
+                          ? 'bg-orange-600 w-6 sm:w-10' 
+                          : 'bg-slate-300 hover:bg-slate-400 w-2 sm:w-3'
+                      }`}
+                    />
+                  ))}
+                </div>
+                
+                <button
+                  onClick={handleNext}
+                  className="p-2 sm:p-3 rounded-full bg-white border border-slate-200 shadow-md hover:shadow-xl hover:border-orange-200 transition-all duration-300"
+                >
+                  <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
+                </button>
+              </div>
+              
+              {/* Optional: Progress indicator */}
+              <p className="text-xs sm:text-sm text-slate-400">
+                {currentGroup + 1} of {groupedTestimonials.length}
+              </p>
             </div>
           )}
         </div>
