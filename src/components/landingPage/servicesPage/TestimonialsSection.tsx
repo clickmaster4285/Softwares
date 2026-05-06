@@ -120,7 +120,7 @@ export function TestimonialsSection({
   const currentTestimonials = groupedTestimonials[currentGroup] || [];
 
   return (
-    <section id="testimonials" className="scroll-mt-24 py-12 sm:py-16 md:py-20  relative overflow-hidden">
+    <section id="testimonials" className="scroll-mt-24  relative overflow-hidden">
       <div className=" mx-auto px-4  relative">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8 sm:mb-10 md:mb-12">
