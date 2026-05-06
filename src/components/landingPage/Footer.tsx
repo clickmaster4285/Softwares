@@ -4,23 +4,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-// import { TimerIcon, Linkedin, Github, Youtube, Mail, Send } from 'lucide-react';
-
-import {  Mail } from 'lucide-react';
-
-import { motion, Variants, HTMLMotionProps } from 'framer-motion';
+import { Mail, ChevronRight, Phone } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
 
 // Type definitions
 interface FooterLink {
   label: string;
   href: string;
-}
-
-interface SocialLink {
-  icon: React.ElementType;
-  href: string;
-  label: string;
-  color: string;
 }
 
 interface FooterLinks {
@@ -50,23 +40,15 @@ const footerLinks: FooterLinks = {
     { label: 'Why Choose Us', href: '/#community' },
     { label: 'Case Studies', href: '/case-studies' },
     { label: 'Blog', href: '/blog' },
-   
   ],
   legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Policy', href: '#' },
+    { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms of Service', href: '/terms-of-service' },
+    { label: 'Cookie Policy', href: '/cookie-policy' },
   ],
 };
 
-// const socialLinks: SocialLink[] = [
-//   { icon: TimerIcon , href: '#', label: 'TimerIcon ', color: 'hover:bg-[#1DA1F2]' },
-//   { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:bg-[#0A66C2]' },
-//   { icon: Github, href: '#', label: 'GitHub', color: 'hover:bg-[#333]' },
-//   { icon: Youtube, href: '#', label: 'YouTube', color: 'hover:bg-[#FF0000]' },
-// ];
-
-// Animation variants with proper typing
+// Animation variants
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -103,37 +85,21 @@ const linkVariants: Variants = {
   },
 };
 
-const backgroundVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 0.1,
-    transition: { duration: 1.5 },
-  },
-};
-
-const footerVariants: Variants = {
-  hidden: { backgroundColor: '#000000' },
-  visible: {
-    backgroundColor: '#0a0a0a',
-    transition: { duration: 0.8 },
-  },
-};
-
 export function Footer(): JSX.Element {
   const currentYear: number = new Date().getFullYear();
 
   return (
     <motion.footer
-      variants={footerVariants}
-      initial="hidden"
-      animate="visible"
+      initial={{ backgroundColor: '#000000' }}
+      animate={{ backgroundColor: '#0a0a0a' }}
+      transition={{ duration: 0.8 }}
       className="bg-foreground text-background relative overflow-hidden"
     >
       {/* Animated background pattern */}
       <motion.div
-        variants={backgroundVariants}
-        initial="hidden"
-        animate="visible"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.1 }}
+        transition={{ duration: 1.5 }}
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
@@ -142,90 +108,90 @@ export function Footer(): JSX.Element {
         }}
       />
 
-      <div className="max-w-8xl mx-auto px-16 md:px-8 lg:px-16 py-2 relative z-10">
-        {/* Top Section */}
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 md:py-12 relative z-10">
+        {/* Top Section - Stack on mobile */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid lg:grid-cols-2 gap-12 mb-2 pb-2 border-b border-background/20 items-center"
+          className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 mb-8 pb-8 border-b border-background/20"
         >
-          <motion.div variants={itemVariants}>
+          {/* Logo and Description */}
+          <motion.div variants={itemVariants} className="text-center lg:text-left">
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+              className="inline-block lg:inline-block"
             >
-              <Link href="/" className="flex items-center gap-2">
+              <Link href="/" className="flex items-center justify-center lg:justify-start gap-2">
                 <Image
                   src="/images/logo-white.webp"
                   alt="ClickMasters"
                   width={600}
                   height={400}
-                  className="h-auto w-30 sm:w-48 xl:w-64"
+                  className="h-auto w-32 sm:w-40 md:w-48 lg:w-56"
                   loading="lazy"
                 />
               </Link>
             </motion.div>
-            <motion.p variants={itemVariants} className="text-background/70 max-w-md mb-6">
+            <motion.p variants={itemVariants} className="text-background/70 max-w-md mx-auto lg:mx-0 mt-4 text-sm sm:text-base">
               ClickMasters is a software development company. We build custom software, web
               applications, mobile apps, and ERP solutions for businesses worldwide.
             </motion.p>
-            {/* <motion.div variants={itemVariants} className="flex gap-4">
-              {socialLinks.map((social: SocialLink, index: number) => {
-                const Icon = social.icon;
-                return (
-                  <motion.div
-                    key={social.label}
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
+            
+            {/* Contact Numbers */}
+            <motion.div variants={itemVariants} className="mt-6 space-y-2">
+              <div className="flex items-center justify-center lg:justify-start gap-3">
+                <Phone className="h-4 w-4 text-primary" />
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                  <a 
+                    href="tel:+447988576086" 
+                    className="text-background/70 hover:text-background transition-colors text-sm"
                   >
-                    <Link
-                      href={social.href}
-                      className={`h-10 w-10 rounded-full bg-background/10 flex items-center justify-center transition-colors duration-300 ${social.color}`}
-                      aria-label={social.label}
-                    >
-                      <Icon className="h-5 w-5 text-background" />
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </motion.div> */}
+                    🇬🇧 UK: +44 7988 576086
+                  </a>
+                  <span className="hidden sm:inline text-background/30">|</span>
+                  <a 
+                    href="tel:+13252024074" 
+                    className="text-background/70 hover:text-background transition-colors text-sm"
+                  >
+                    🇺🇸 US: +1 325 202 4074
+                  </a>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
+          {/* Newsletter Section */}
+          <motion.div variants={itemVariants} className="text-center lg:text-left">
             <motion.h3
               variants={itemVariants}
-              className="text-lg font-semibold text-background mb-4 flex items-center gap-2"
+              className="text-base sm:text-lg font-semibold text-background mb-3 flex items-center justify-center lg:justify-start gap-2"
             >
               <Mail className="h-5 w-5" />
               Subscribe to our newsletter
             </motion.h3>
-            <motion.p variants={itemVariants} className="text-background/70 mb-4">
-              Get product updates, tech insights, and company news from your software development
-              partner.
+            <motion.p variants={itemVariants} className="text-background/70 mb-4 text-sm sm:text-base">
+              Get product updates, tech insights, and company news.
             </motion.p>
             <motion.div
               variants={itemVariants}
-              className="flex gap-2"
+              className="flex flex-col sm:flex-row gap-3"
               whileHover={{ scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
               <div className="relative flex-1">
                 <Input
                   placeholder="Enter your email"
-                  className="bg-background/10 border-background/20 text-background placeholder:text-background/50 focus:border-primary pr-10 transition-all duration-300 focus:ring-2 focus:ring-primary/20"
+                  className="bg-background/10 border-background/20 text-background placeholder:text-background/50 focus:border-primary transition-all duration-300 focus:ring-2 focus:ring-primary/20 h-11"
                   type="email"
                   aria-label="Email for newsletter"
                 />
-              
               </div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 whitespace-nowrap relative overflow-hidden group"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 whitespace-nowrap relative overflow-hidden group h-11 px-6 w-full sm:w-auto"
                   aria-label="Subscribe to newsletter"
                 >
                   <span className="relative z-10">Subscribe</span>
@@ -241,40 +207,42 @@ export function Footer(): JSX.Element {
           </motion.div>
         </motion.div>
 
-        {/* Links Grid */}
+        {/* Links Grid - Responsive columns */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-2"
+          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8"
         >
           {(Object.entries(footerLinks) as [keyof FooterLinks, FooterLink[]][]).map(
             ([category, links]) => (
               <motion.div key={category} variants={itemVariants}>
                 <motion.h4
-                  className="font-semibold text-background mb-4 capitalize relative inline-block"
+                  className="font-semibold text-background mb-4 capitalize relative inline-block text-sm sm:text-base"
                   whileHover={{ scale: 1.05 }}
                 >
                   {category}
                   <motion.div
-                    className="absolute bottom-0 left-0 h-0.5 bg-primary"
+                    className="absolute -bottom-1 left-0 h-0.5 bg-primary"
                     initial={{ width: 0 }}
                     whileHover={{ width: '100%' }}
                     transition={{ duration: 0.3 }}
                   />
                 </motion.h4>
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   {links.map((link: FooterLink) => (
                     <motion.li
                       key={link.label}
                       variants={linkVariants}
                       whileHover="hover"
-                      className="origin-left"
+                      className="origin-left flex items-center gap-2 group"
                     >
+                      {/* Bullet point */}
+                      <ChevronRight className="h-3 w-3 text-primary/60 group-hover:text-primary transition-colors flex-shrink-0" />
                       <Link
                         href={link.href}
-                        className="text-background/70 hover:text-background transition-colors inline-block"
+                        className="text-background/70 hover:text-background transition-colors text-sm sm:text-base"
                       >
                         {link.label}
                       </Link>
@@ -286,18 +254,30 @@ export function Footer(): JSX.Element {
           )}
         </motion.div>
 
-        {/* Bottom */}
+        {/* Bottom Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-background/20"
+          className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20"
         >
-          <motion.p className="text-sm text-background/60" whileHover={{ color: '#ffffff' }}>
+          <motion.p className="text-xs sm:text-sm text-background/60 text-center sm:text-left" whileHover={{ color: '#ffffff' }}>
             © {currentYear} ClickMasters. All rights reserved.
           </motion.p>
-       
+          
+          {/* Optional: Add additional footer links here if needed */}
+          <div className="flex gap-4 text-xs sm:text-sm text-background/60">
+            <Link href="/privacy-policy" className="hover:text-background transition-colors">
+              Privacy
+            </Link>
+            <Link href="/terms-of-service" className="hover:text-background transition-colors">
+              Terms
+            </Link>
+            <Link href="/sitemap" className="hover:text-background transition-colors">
+              Sitemap
+            </Link>
+          </div>
         </motion.div>
       </div>
     </motion.footer>

@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Briefcase, Calendar, Tag, Target, Award } from "lucide-react"
+import { ArrowDown, Briefcase, Calendar, Tag, Target } from "lucide-react"
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -97,47 +97,50 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
   };
 
   return (
-    <div className="relative ">
-      {/* Minimal Hero Section - Reduced height */}
-      <div className='w-full flex flex-col  px-4 py-8'>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <div className="inline-flex  gap-2 bg-orange-50 rounded-full px-3 py-1 mb-4">
-            <Briefcase className="h-3.5 w-3.5 text-orange-600" />
-            <span className="text-xs font-medium text-orange-600">Case Studies</span>
-          </div>
-          <h1 className='text-3xl md:text-5xl font-bold max-w-3xl mx-auto'>
+    <div className="relative overflow-hidden">
+      {/* Minimal Hero Section */}
+      <div className='w-full flex flex-col mt-4 sm:mt-6 py-6 sm:py-8'>
+        <div className="flex items-center gap-3 px-4 sm:px-6 md:px-8">
+          <motion.div
+            initial={{ height: 0 }}
+            whileInView={{ height: 40 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="h-8 sm:h-10 w-1 rounded-full bg-orange-500"
+          />
+          <motion.h2 
+            className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900"
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             Success Stories
-          </h1>
-        </motion.div>
-       
+          </motion.h2>
+        </div>
       </div>
 
-      {/* Parallax Sections - Reduced spacing */}
-      <div className="flex flex-col px-4 md:px-8 pb-8">
+      {/* Parallax Sections */}
+      <div className="flex flex-col pb-6 sm:pb-8">
         {sections.map((section, index) => (
           <div 
             key={section.id}
             ref={sectionRefs[index]} 
             className={cn(
-              "flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-12 py-12 md:py-16",
+              "flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12 py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8",
               section.reverse ? 'lg:flex-row-reverse' : ''
             )}
           >
-            {/* Content */}
+            {/* Content - Always on top for mobile */}
             <motion.div 
               style={{ y: translateContents[index] }}
-              className="w-full lg:w-1/2 max-w-xl px-4 lg:px-0"
+              className="w-full lg:w-1/2 order-1 lg:order-none"
             >
               {/* Client Badge */}
               {section.client && (
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-6 h-px bg-orange-400" />
-                  <span className="text-xs font-medium uppercase tracking-wider text-orange-600">
+                <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                  <div className="w-4 sm:w-6 h-px bg-orange-400" />
+                  <span className="text-[11px] sm:text-xs font-medium uppercase tracking-wider text-orange-600">
                     {section.client}
                   </span>
                 </div>
@@ -146,7 +149,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
               {/* Title */}
               <motion.h2 
                 style={{ y: translateContents[index] }} 
-                className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-3"
+                className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 sm:mb-3 leading-tight mt-4"
               >
                 {section.title}
               </motion.h2>
@@ -154,59 +157,59 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
               {/* Description */}
               <motion.p 
                 style={{ y: translateContents[index] }} 
-                className="text-slate-600 text-sm md:text-base leading-relaxed mb-4 line-clamp-3"
+                className="text-slate-600 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4"
               >
                 {section.description}
               </motion.p>
 
-              {/* Metadata Grid - Compact */}
+              {/* Metadata Grid - Responsive wrapping */}
               <motion.div 
                 style={{ y: translateContents[index] }}
-                className="flex flex-wrap gap-3 mb-4"
+                className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4"
               >
                 {section.industry && (
-                  <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                    <Target className="h-3 w-3 text-orange-500" />
-                    <span>{section.industry}</span>
+                  <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
+                    <Target className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <span className="truncate">{section.industry}</span>
                   </div>
                 )}
                 {section.timeline && (
-                  <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                    <Calendar className="h-3 w-3 text-orange-500" />
-                    <span>{section.timeline}</span>
+                  <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
+                    <Calendar className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <span className="truncate">{section.timeline}</span>
                   </div>
                 )}
                 {formattedDate(section.createdAt) && (
-                  <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                    <Calendar className="h-3 w-3 text-orange-500" />
-                    <span>{formattedDate(section.createdAt)}</span>
+                  <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
+                    <Calendar className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <span className="truncate">{formattedDate(section.createdAt)}</span>
                   </div>
                 )}
               </motion.div>
 
-              {/* Technologies - Compact */}
+              {/* Technologies */}
               {section.technologies && section.technologies.length > 0 && (
                 <motion.div 
                   style={{ y: translateContents[index] }}
-                  className="mb-4"
+                  className="mb-3 sm:mb-4"
                 >
-                  <div className="flex items-center gap-1.5 mb-1.5">
-                    <Tag className="h-3 w-3 text-orange-500" />
-                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+                  <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2">
+                    <Tag className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <span className="text-[11px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider">
                       Tech Stack
                     </span>
                   </div>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {section.technologies.slice(0, 3).map((tech, i) => (
                       <span
                         key={i}
-                        className="text-xs px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-100"
+                        className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-100"
                       >
                         {tech}
                       </span>
                     ))}
                     {section.technologies.length > 3 && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                      <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
                         +{section.technologies.length - 3}
                       </span>
                     )}
@@ -214,12 +217,12 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
                 </motion.div>
               )}
 
-              {/* CTA Button - Smaller */}
+              {/* CTA Button - Larger touch target on mobile */}
               <motion.div style={{ y: translateContents[index] }}>
                 <Button
                   asChild
-                  size="sm"
-                  className="group bg-orange-600 hover:bg-orange-700 text-white rounded-full px-5 shadow-md"
+                  size="default"
+                  className="group bg-orange-600 hover:bg-orange-700 text-white rounded-full px-4 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base shadow-md w-full sm:w-auto"
                 >
                   <Link href={`/case-studies/${encodeURIComponent(section.slug)}`}>
                     Read more
@@ -229,14 +232,14 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
               </motion.div>
             </motion.div>
 
-            {/* Image - Smaller size */}
+            {/* Image - Below content on mobile, then side by side on desktop */}
             <motion.div 
               style={{ 
                 opacity: opacityContents[index],
                 clipPath: clipProgresses[index],
                 y: translateImages[index]
               }}
-              className="relative w-full lg:w-1/2 max-w-sm md:max-w-md"
+              className="w-full lg:w-1/2 order-2 lg:order-none mt-4 sm:mt-6 lg:mt-0"
             >
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
                 {section.imageUrl ? (
@@ -245,11 +248,12 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
                     alt={section.title}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={index === 0}
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-orange-100 to-amber-100 flex items-center justify-center">
-                    <Briefcase className="h-16 w-16 text-orange-300" />
+                    <Briefcase className="h-12 w-12 sm:h-16 sm:w-16 text-orange-300" />
                   </div>
                 )}
               </div>
@@ -259,18 +263,22 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
       </div>
 
       {/* Minimal End Section */}
-      <div className='w-full flex flex-col items-center justify-center px-4 py-8'>
+      <div className='w-full flex flex-col items-center justify-center px-4 py-8 sm:py-12'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center"
+          className="text-center max-w-sm sm:max-w-md mx-auto"
         >
-          <h3 className='text-xl md:text-2xl font-bold text-slate-900 mb-2'>
+          <h3 className='text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-2 px-4'>
             Ready for Your Success Story?
           </h3>
-          <Button asChild size="sm" className="bg-orange-600 hover:bg-orange-700 text-white rounded-full px-6 mt-3">
+          <Button 
+            asChild 
+            size="default" 
+            className="bg-orange-600 hover:bg-orange-700 text-white rounded-full px-6 sm:px-8 mt-3 w-full sm:w-auto"
+          >
             <Link href="/contact">
               Start Project
               <ArrowDown className="ml-1.5 h-3.5 w-3.5 rotate-[-90deg]" />
@@ -282,22 +290,27 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
   );
 };
 
-// Compact Skeleton Loader
+// Mobile-friendly Skeleton Loader
 const ParallaxSkeleton = () => (
-  <div className="min-h-[60vh] flex flex-col items-center justify-center px-4">
-    <div className="text-center">
+  <div className="min-h-[50vh] sm:min-h-[60vh] flex flex-col items-center justify-center px-4">
+    <div className="text-center w-full max-w-md mx-auto">
       <div className="h-8 w-32 bg-slate-200 rounded-full mx-auto mb-4 animate-pulse" />
       <div className="h-10 w-48 bg-slate-200 rounded-lg mx-auto animate-pulse" />
+      <div className="mt-8 space-y-4">
+        <div className="h-32 w-full bg-slate-100 rounded-xl animate-pulse" />
+        <div className="h-20 w-full bg-slate-100 rounded-xl animate-pulse" />
+      </div>
     </div>
   </div>
 );
 
-// Compact Empty State
+// Mobile-friendly Empty State
 const EmptyState = () => (
-  <div className="min-h-[50vh] flex flex-col items-center justify-center px-4">
-    <div className="text-center">
-      <Briefcase className="h-12 w-12 text-slate-300 mx-auto mb-3" />
-      <p className="text-slate-500 text-sm">No case studies available yet.</p>
+  <div className="min-h-[40vh] sm:min-h-[50vh] flex flex-col items-center justify-center px-4">
+    <div className="text-center max-w-sm mx-auto">
+      <Briefcase className="h-10 w-10 sm:h-12 sm:w-12 text-slate-300 mx-auto mb-3" />
+      <p className="text-slate-500 text-sm sm:text-base">No case studies available yet.</p>
+      <p className="text-slate-400 text-xs sm:text-sm mt-2">Check back soon for success stories!</p>
     </div>
   </div>
 );

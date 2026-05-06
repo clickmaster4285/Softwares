@@ -381,7 +381,7 @@ const { data: blogs = [] } = useQuery({
     <header
       className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', navStyle)}
     >
-      <div className="max-w-8xl mx-auto px-2 md:px-4 lg:px-6 flex h-20 items-center justify-between">
+      <div className="px-2 md:px-4 lg:px-26 mx-20 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
@@ -634,7 +634,7 @@ const { data: blogs = [] } = useQuery({
       blogs={blogs}
       testimonials={testimonials}
       allFaqs={allFaqs}
-      allServicePages={allServicePages}
+  
       onLinkClick={() => setIsOpen(false)}
     />
                   {/* Hire Us Mobile Dropdown */}
@@ -906,8 +906,6 @@ const { data: blogs = [] } = useQuery({
       )}
 
       
-{/* Full-width Dropdown Menu for Resources */}
-{/* Full-width Dropdown Menu for Resources */}
 {activeDropdown === 'resources' && !isPageLoading && (
   <div
     onMouseEnter={() => {
@@ -926,91 +924,83 @@ const { data: blogs = [] } = useQuery({
         className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
       >
         <div className="grid grid-cols-12">
-          {/* Left rail - Categories */}
-          <div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
-            <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
-              Resources
-            </p>
-            <ul className="space-y-1">
-              {[
-                { 
-                  title: 'Case Studies', 
-                  count: caseStudies.length,
-                },
-                { 
-                  title: 'Blog', 
-                  count: blogs.length,
-                },
-                { 
-                  title: 'FAQs', 
-                  count: allFaqs.length,
-                },
-                { 
-                  title: 'Testimonials', 
-                  count: testimonials.length,
-                },
-              ].map((section) => {
-                const active = activeResourcesSection === section.title;
-                return (
-                  <li key={section.title}>
-                    <button
-                      type="button"
-                      onMouseEnter={() => {
-                        setResourcesSection(section.title);
-                      }}
-                      onClick={() => {
-                        setResourcesSection(section.title);
-                      }}
-                      className={cn(
-                        'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between',
-                        active
-                          ? 'bg-white text-slate-900 shadow-sm'
-                          : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
-                      )}
-                    >
-                      <span>
-                        {section.title}
-                        {section.count > 0 && (
-                          <span className="ml-1 text-xs font-normal text-slate-400">
-                            ({section.count})
-                          </span>
-                        )}
-                      </span>
-                      <ChevronDown
-                        className={cn(
-                          'h-4 w-4 -rotate-90 transition-opacity',
-                          active ? 'opacity-70' : 'opacity-0'
-                        )}
-                        aria-hidden
-                      />
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+                {/* Left rail - Categories */}
+                
+        {/* Left rail - Categories */}
+<div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
+  <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+    Resources
+  </p>
+  <ul className="space-y-1">
+    {[
+      { 
+        title: 'Case Studies', 
+        count: caseStudies.length,
+        href: '/case-studies'
+      },
+      { 
+        title: 'Blog', 
+        count: blogs.length,
+        href: '/blog'
+      },
+      { 
+        title: 'FAQs', 
+        count: allFaqs.length,
+        href: '/faqs'
+      },
+      { 
+        title: 'Testimonials', 
+        count: testimonials.length,
+        href: '/testimonials'
+      },
+    ].map((section) => {
+      const active = activeResourcesSection === section.title;
+      return (
+        <li key={section.title}>
+          <Link
+            href={section.href}
+            onClick={closeDropdowns}
+            onMouseEnter={() => setResourcesSection(section.title)}
+            className={cn(
+              'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between hover:bg-white/70',
+              active
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
+            )}
+          >
+            <span>
+              {section.title}
+              {section.count > 0 && (
+                <span className="ml-1 text-xs font-normal text-slate-400">
+                  ({section.count})
+                </span>
+              )}
+            </span>
+            <ChevronDown
+              className={cn(
+                'h-4 w-4 -rotate-90 transition-opacity',
+                active ? 'opacity-70' : 'opacity-0'
+              )}
+              aria-hidden
+            />
+          </Link>
+        </li>
+      );
+    })}
+  </ul>
+</div>
 
-          {/* Right content - Preview items - Increased height with better spacing */}
+          {/* Right content - Preview items */}
           <div className="col-span-9 p-6 max-h-[600px] overflow-y-auto">
             
             {/* Case Studies Section */}
             {activeResourcesSection === 'Case Studies' && (
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-slate-900">Latest Case Studies</h3>
-                  <Link 
-                    href="/case-studies" 
-                    onClick={closeDropdowns}
-                    className="text-sm text-primary hover:text-primary/80 font-medium"
-                  >
-                    View all ({caseStudies.length}) →
-                  </Link>
-                </div>
                 <div className={cn(
                   "grid gap-5",
-                  caseStudies.length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
+                  caseStudies.slice(0, 2).length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
                 )}>
-                  {caseStudies.slice(0, 4).map((study: any) => (
+                  {caseStudies.slice(0, 2).map((study: any) => (
                     <Link
                       key={study._id}
                       href={`/case-studies/${study.slug || study._id}`}
@@ -1041,11 +1031,17 @@ const { data: blogs = [] } = useQuery({
                       </div>
                     </Link>
                   ))}
-                  {caseStudies.length === 0 && (
-                    <div className="text-slate-400 text-center py-12 bg-slate-50 rounded-xl col-span-full">
-                      <p>No case studies available</p>
-                    </div>
-                  )}
+                </div>
+
+                {/* All case studies link at bottom */}
+                <div className="mt-6 border-t border-slate-200 pt-4">
+                  <Link
+                    href="/case-studies"
+                    onClick={closeDropdowns}
+                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                  >
+                    View all case studies ({caseStudies.length}) →
+                  </Link>
                 </div>
               </div>
             )}
@@ -1053,21 +1049,11 @@ const { data: blogs = [] } = useQuery({
             {/* Blog Section */}
             {activeResourcesSection === 'Blog' && (
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-slate-900">Latest Blog Posts</h3>
-                  <Link 
-                    href="/blog" 
-                    onClick={closeDropdowns}
-                    className="text-sm text-primary hover:text-primary/80 font-medium"
-                  >
-                    View all ({blogs.length}) →
-                  </Link>
-                </div>
                 <div className={cn(
                   "grid gap-5",
-                  blogs.length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
+                  blogs.slice(0, 2).length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
                 )}>
-                  {blogs.slice(0, 4).map((blog: any) => (
+                  {blogs.slice(0, 2).map((blog: any) => (
                     <Link
                       key={blog._id}
                       href={`/blog/${blog.slug || blog._id}`}
@@ -1098,159 +1084,113 @@ const { data: blogs = [] } = useQuery({
                       </div>
                     </Link>
                   ))}
-                  {blogs.length === 0 && (
-                    <div className="text-slate-400 text-center py-12 bg-slate-50 rounded-xl col-span-full">
-                      <p>No blog posts available</p>
-                    </div>
-                  )}
+                </div>
+
+                {/* All blogs link at bottom */}
+                <div className="mt-6 border-t border-slate-200 pt-4">
+                  <Link
+                    href="/blog"
+                    onClick={closeDropdowns}
+                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                  >
+                    View all blogs ({blogs.length}) →
+                  </Link>
                 </div>
               </div>
             )}
 
-            {/* FAQs Section - Enhanced V-Card Layout */}
+            {/* FAQs Section - Simple list layout with responsive grid */}
             {activeResourcesSection === 'FAQs' && (
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-slate-900">Frequently Asked Questions</h3>
-                  <Link 
-                    href="/faqs" 
+                <div className={cn(
+                  "grid gap-4",
+                  allFaqs.slice(0, 4).length === 1 ? "grid-cols-1" : "md:grid-cols-2"
+                )}>
+                  {allFaqs.slice(0, 4).map((faq: any, idx: number) => (
+                    <Link
+                      key={idx}
+                      href={`/faqs/${faq.serviceSlug}`}
+                      onClick={closeDropdowns}
+                      className="group block"
+                    >
+                      <div className="p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition-all duration-200 hover:border-primary/30 h-full">
+                        <p className="text-sm font-medium text-slate-800 group-hover:text-primary transition-colors line-clamp-2">
+                          {faq.question}
+                        </p>
+                        <p className="text-xs text-slate-500 mt-2 line-clamp-2">
+                          {faq.answer.substring(0, 120)}...
+                        </p>
+                        <span className="inline-block text-xs font-semibold text-primary mt-3">
+                          {faq.serviceTitle}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* All FAQs link at bottom */}
+                <div className="mt-6 border-t border-slate-200 pt-4">
+                  <Link
+                    href="/faqs"
                     onClick={closeDropdowns}
-                    className="text-sm text-primary hover:text-primary/80 font-medium"
+                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
                   >
                     View all FAQs →
                   </Link>
                 </div>
-                <div className={cn(
-                  "grid gap-4",
-                  allFaqs.slice(0, 3).length === 1 ? "grid-cols-1" : "md:grid-cols-2"
-                )}>
-                  {allFaqs.slice(0, 4).map((faq: any, idx: number) => (
-                    <div key={idx} className="group">
-                      <div className="p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
-                        <Link href={`/faqs/${faq.serviceSlug}`} onClick={closeDropdowns}>
-                          <span className="inline-block text-xs font-semibold text-primary mb-2 px-2 py-1 bg-primary/10 rounded-full">
-                            {faq.serviceTitle}
-                          </span>
-                        </Link>
-                        <details className="group">
-                          <summary className="flex cursor-pointer items-start justify-between text-sm font-semibold text-slate-900 hover:text-primary transition-colors">
-                            <span className="flex-1 pr-4">{faq.question}</span>
-                            <ChevronDown className="h-5 w-5 text-slate-400 transition-transform duration-200 shrink-0 group-open:rotate-180" />
-                          </summary>
-                          <p className="mt-3 text-sm text-slate-600 leading-relaxed pl-0 pt-2 border-t border-slate-100">
-                            {faq.answer}
-                          </p>
-                        </details>
-                      </div>
-                    </div>
-                  ))}
-                  
-                  {allFaqs.length === 0 && (
-                    <div className="p-6 bg-gradient-to-br from-primary/5 to-slate-50 rounded-xl border border-primary/10 col-span-full">
-                      <p className="text-slate-600 text-sm leading-relaxed">
-                        Browse FAQs by service category. Select a service to see related questions and answers.
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {allServicePages.slice(0, 6).map((service) => (
-                          <Link
-                            key={service.slug}
-                            href={`/faqs/${service.slug}`}
-                            onClick={closeDropdowns}
-                            className="text-xs bg-white px-3 py-1.5 rounded-full text-primary border border-primary/20 hover:bg-primary/5 transition-colors"
-                          >
-                            {service.title}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
               </div>
             )}
 
-            {/* Testimonials Section - Enhanced V-Card Layout */}
+            {/* Testimonials Section - Simple card layout with responsive grid */}
             {activeResourcesSection === 'Testimonials' && (
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-slate-900">Client Testimonials</h3>
-                  <Link 
-                    href="/testimonials" 
-                    onClick={closeDropdowns}
-                    className="text-sm text-primary hover:text-primary/80 font-medium"
-                  >
-                    View all ({testimonials.length}) →
-                  </Link>
-                </div>
                 <div className={cn(
-                  "grid gap-5",
+                  "grid gap-4",
                   testimonials.slice(0, 3).length === 1 ? "grid-cols-1" : "md:grid-cols-2"
                 )}>
-                  {testimonials.slice(0, 4).map((testimonial: any) => (
-                    <div key={testimonial._id} className="group">
-                      <div className="p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
-                        <div className="flex items-start gap-4">
-                          {/* Avatar */}
-                          {testimonial.avatar ? (
-                            <div className="relative w-14 h-14 flex-shrink-0 rounded-full overflow-hidden border-2 border-primary/20">
-                              <Image
-                                src={testimonial.avatar}
-                                alt={testimonial.name}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          ) : (
-                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0 border-2 border-primary/20">
-                              <span className="text-primary font-bold text-xl">
-                                {testimonial.name?.charAt(0) || 'C'}
-                              </span>
-                            </div>
-                          )}
-                          
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
-                              <p className="font-semibold text-slate-900 text-base">{testimonial.name}</p>
-                              {testimonial.rating && (
-                                <div className="flex gap-0.5">
-                                  {[...Array(5)].map((_, i) => (
-                                    <span 
-                                      key={i} 
-                                      className={cn(
-                                        "text-sm",
-                                        i < testimonial.rating ? "text-yellow-400" : "text-slate-200"
-                                      )}
-                                    >
-                                      ★
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
-                            
-                            {testimonial.company && (
-                              <p className="text-xs text-slate-500 mb-2 font-medium">{testimonial.company}</p>
-                            )}
-                            
-                            <p className="text-sm text-slate-600 leading-relaxed italic">
-                              "{testimonial.content?.substring(0, 150)}
-                              {testimonial.content?.length > 150 ? '...' : ''}"
-                            </p>
-                            
-                            {testimonial.project && (
-                              <p className="text-xs text-primary mt-2 font-medium">
-                                Project: {testimonial.project}
-                              </p>
-                            )}
+                  {testimonials.slice(0, 3).map((testimonial: any) => (
+                    <div key={testimonial._id} className="p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition-all duration-200 h-full">
+                      <div className="flex items-start gap-3">
+                        {testimonial.avatar ? (
+                          <div className="relative w-10 h-10 flex-shrink-0 rounded-full overflow-hidden">
+                            <Image
+                              src={testimonial.avatar}
+                              alt={testimonial.name}
+                              fill
+                              className="object-cover"
+                            />
                           </div>
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <span className="text-primary font-semibold text-sm">
+                              {testimonial.name?.charAt(0) || 'C'}
+                            </span>
+                          </div>
+                        )}
+                        
+                        <div className="flex-1">
+                          <p className="font-semibold text-slate-900 text-sm">{testimonial.name}</p>
+                          {testimonial.company && (
+                            <p className="text-xs text-slate-500">{testimonial.company}</p>
+                          )}
+                          <p className="text-sm text-slate-600 mt-2 italic line-clamp-3">
+                            "{testimonial.content?.substring(0, 150)}..."
+                          </p>
                         </div>
                       </div>
                     </div>
                   ))}
-                  {testimonials.length === 0 && (
-                    <div className="text-slate-400 text-center py-12 bg-slate-50 rounded-xl col-span-full">
-                      <p>No testimonials available</p>
-                    </div>
-                  )}
+                </div>
+
+                {/* All testimonials link at bottom */}
+                <div className="mt-6 border-t border-slate-200 pt-4">
+                  <Link
+                    href="/testimonials"
+                    onClick={closeDropdowns}
+                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                  >
+                    View all testimonials ({testimonials.length}) →
+                  </Link>
                 </div>
               </div>
             )}
@@ -1260,7 +1200,6 @@ const { data: blogs = [] } = useQuery({
     </div>
   </div>
 )}
-
       
 
       {/* Full-width Dropdown Menu for Hire Us */}
@@ -1503,14 +1442,12 @@ function MobileServicesDropdown({ title, onLinkClick }: MobileServicesDropdownPr
 
 
 // Mobile Dropdown Component for Resources (using same UI as Solutions)
-// Mobile Dropdown Component for Resources (using same UI as Solutions)
 interface MobileResourcesDropdownProps {
   title: string;
   caseStudies: any[];
   blogs: any[];
   testimonials: any[];
   allFaqs: any[];
-  allServicePages: any[];
   onLinkClick: () => void;
 }
 
@@ -1520,115 +1457,9 @@ function MobileResourcesDropdown({
   blogs, 
   testimonials, 
   allFaqs,
-  allServicePages,
   onLinkClick 
 }: MobileResourcesDropdownProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const renderItems = () => {
-    return (
-      <div className="pl-4 space-y-4 mt-3">
-        {/* Case Studies Section */}
-        <div>
-          <h4 className="text-sm font-semibold text-primary mb-2">Case Studies</h4>
-          <ul className="space-y-2">
-            {caseStudies.slice(0, 3).map((study: any) => (
-              <li key={study._id}>
-                <Link
-                  href={`/case-studies/${study.slug || study._id}`}
-                  onClick={onLinkClick}
-                  className="text-black/60 hover:text-primary transition-colors block py-1"
-                >
-                  {study.title}
-                </Link>
-              </li>
-            ))}
-            {caseStudies.length === 0 && (
-              <li className="text-black/40 py-1">No case studies available</li>
-            )}
-          </ul>
-        </div>
-
-        {/* Blog Section */}
-        <div>
-          <h4 className="text-sm font-semibold text-primary mb-2">Blog</h4>
-          <ul className="space-y-2">
-            {blogs.slice(0, 3).map((blog: any) => (
-              <li key={blog._id}>
-                <Link
-                  href={`/blog/${blog.slug || blog._id}`}
-                  onClick={onLinkClick}
-                  className="text-black/60 hover:text-primary transition-colors block py-1"
-                >
-                  {blog.title}
-                </Link>
-              </li>
-            ))}
-            {blogs.length === 0 && (
-              <li className="text-black/40 py-1">No blog posts available</li>
-            )}
-          </ul>
-        </div>
-
-        {/* FAQs Section */}
-        <div>
-          <h4 className="text-sm font-semibold text-primary mb-2">FAQs</h4>
-          <ul className="space-y-2">
-            {allFaqs.slice(0, 3).map((faq: any, idx: number) => (
-              <li key={idx}>
-                <Link
-                  href={`/faqs/${faq.serviceSlug}`}
-                  onClick={onLinkClick}
-                  className="text-black/60 hover:text-primary transition-colors block py-1"
-                >
-                  {faq.question}
-                </Link>
-              </li>
-            ))}
-            {allFaqs.length === 0 && (
-              <li className="text-black/40 py-1">No FAQs available</li>
-            )}
-          </ul>
-        </div>
-
-        {/* Testimonials Section - Updated based on your data structure */}
-        <div>
-          <h4 className="text-sm font-semibold text-primary mb-2">Testimonials</h4>
-          <ul className="space-y-2">
-            {testimonials.slice(0, 3).map((testimonial: any) => (
-              <li key={testimonial._id}>
-                <Link
-                  href="/testimonials"
-                  onClick={onLinkClick}
-                  className="text-black/60 hover:text-primary transition-colors block py-1"
-                >
-                  <div>
-                    <span className="font-medium">{testimonial.authorName || 'Client'}</span>
-                    {testimonial.rating && (
-                      <span className="text-xs text-yellow-500 ml-2">
-                        {'★'.repeat(testimonial.rating)}
-                      </span>
-                    )}
-                    {testimonial.content && (
-                      <p className="text-xs text-black/50 mt-0.5 line-clamp-1">
-                        {testimonial.content.substring(0, 60)}...
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              </li>
-            ))}
-            {testimonials.length === 0 && (
-              <li className="text-black/40 py-1">No testimonials available</li>
-            )}
-          </ul>
-        </div>
-
-       
-      
-      </div>
-    );
-  };
 
   return (
     <div className="border-b border-black/5">
@@ -1641,7 +1472,64 @@ function MobileResourcesDropdown({
           className={cn('h-4 w-4 transition-transform duration-300', isExpanded && 'rotate-180')}
         />
       </button>
-      {isExpanded && renderItems()}
+
+      {isExpanded && (
+        <div className="pl-4 space-y-4 mt-3 pb-6">
+          
+          {/* Case Studies */}
+          <div>
+            <Link
+              href="/case-studies"
+              onClick={onLinkClick}
+              className="flex items-center justify-between  text-sm font-medium text-black/70 hover:text-primary transition-colors"
+            >
+              Case Studies
+             
+            </Link>
+         
+          </div>
+
+          {/* Blog */}
+          <div>
+            <Link
+              href="/blog"
+              onClick={onLinkClick}
+              className="flex items-center justify-between  text-sm font-medium text-black/70 hover:text-primary transition-colors"
+            >
+              Blog
+            
+            </Link>
+          
+          </div>
+
+          {/* FAQs */}
+          <div>
+            <Link
+              href="/faqs"
+              onClick={onLinkClick}
+              className="flex items-center justify-between  text-sm font-medium text-black/70 hover:text-primary transition-colors"
+            >
+              FAQs
+          
+            </Link>
+            
+          </div>
+
+          {/* Testimonials */}
+          <div>
+            <Link
+              href="/testimonials"
+              onClick={onLinkClick}
+              className="flex items-center justify-between  text-sm font-medium text-black/70 hover:text-primary transition-colors"
+            >
+              Testimonials
+            
+            </Link>
+           
+          </div>
+
+        </div>
+      )}
     </div>
   );
 }

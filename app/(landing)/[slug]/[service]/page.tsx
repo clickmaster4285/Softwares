@@ -53,6 +53,8 @@ import { WhyChooseUs } from '@/src/components/landingPage/servicesPage/WhyChoose
 import { TechStack } from '@/src/components/landingPage/servicesPage/TechStack';
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
+import { CTAComponents } from '@/src/components/landingPage/servicesPage/FooterCTA';
+import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -138,6 +140,13 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   const url = `${siteConfig.url}${canonicalPath}`;
   const techStack = getServiceTechnologies(service);
 
+  // Helper function to make service name bold in text
+  const makeBoldServiceName = (text: string, serviceName: string): string => {
+    if (!text || !serviceName) return text;
+    const regex = new RegExp(`(${serviceName})`, 'gi');
+    return text.replace(regex, '<strong>$1</strong>');
+  };
+
   // Standardized TOC items built dynamically
   const tocItems = [
     { id: 'overview', title: 'Overview', level: 2 as const },
@@ -158,6 +167,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     return `section-${index}-${slugify(heading)}`;
   };
 
+  
   // Add generic sections to TOC
   sections.forEach((section, index) => {
     const id = getSectionId(section.heading, index);
@@ -285,13 +295,17 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                 >
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-1 rounded-full bg-orange-500" />
-                    <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
-                      {section.heading}
-                    </h2>
+                    <h2 
+                      className="text-2xl font-semibold text-slate-900 sm:text-3xl"
+                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.heading, page.serviceName) }}
+                    />
                   </div>
 
                   <div className="mt-6 space-y-4 text-slate-600 leading-relaxed">
-                    <p className="text-lg whitespace-pre-line">{section.body}</p>
+                    <p 
+                      className="text-lg whitespace-pre-line"
+                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.body, page.serviceName) }}
+                    />
                     
                     {/* Render items if present in section */}
                     {section.items && (
@@ -301,7 +315,10 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                             <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
                               <Star className="h-3 w-3 fill-current" />
                             </div>
-                            <span className="italic">{item}</span>
+                            <span 
+                              className="italic"
+                              dangerouslySetInnerHTML={{ __html: makeBoldServiceName(item, page.serviceName) }}
+                            />
                           </li>
                         ))}
                       </ul>
@@ -348,7 +365,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
              {/* Tech Stack Section */}
 
-<div style={{ maxWidth: '1450px' }} className="mx-auto px-4">
+<div style={{ maxWidth: '1460px' }} className="mx-auto">
   {techStack.length > 0 && <TechStack techStack={techStack as any} />}
 </div>
               {/* Industries Section */}
@@ -361,7 +378,10 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     serviceName={page.serviceName} 
     pricingTiers={page.pricingTiers} 
   />
-)}
+              )}
+              
+
+              <CeoVision />
               {/* Generic Tables Section */}
               {page.tables && page.tables.map((table) => (
                 <section key={table.title} id={slugify(table.title)} className="scroll-mt-24 pt-16">
@@ -414,71 +434,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
             {faqs.length > 0 && <FAQSection faqs={faqs} />}
 
               
-              {/* CTA Section */}
-<section id="cta" className="=scroll-mt-24 mt-10">
-  <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-50 via-white to-orange-50 p-8 sm:p-12 border border-orange-100">
-    {/* Background decorations */}
-    <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-orange-500/10 blur-3xl" />
-    <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-orange-500/5 blur-3xl" />
-
-    <div className="relative">
-      <Badge className="border-orange-200 bg-orange-100 text-orange-700">
-        Ready to move forward?
-      </Badge>
-      <h2 className="mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
-        Get your free strategy call
-      </h2>
-      <p className="mt-4 max-w-2xl text-lg text-slate-600">
-        Share your requirements and our team will help you define scope, architecture
-        direction, timeline, and delivery approach.
-      </p>
-      <div className="mt-8 flex flex-wrap gap-4">
-        <Button
-          asChild
-          size="lg"
-          className="rounded-full bg-orange-600 px-8 text-white shadow-lg shadow-orange-500/30 hover:bg-orange-700"
-        >
-          <Link href="/contact-us">
-            Book strategy call
-            <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-          </Link>
-        </Button>
-        <Button
-          variant="outline"
-          size="lg"
-          asChild
-          className="rounded-full border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
-        >
-          <Link href="/case-studies">View case studies</Link>
-        </Button>
-      </div>
-    </div>
-  </div>
-
-  {/* Secondary CTA */}
-  <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow">
-    <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <h3 className="text-xl font-semibold text-slate-900">
-          Want a fixed-price scope in 48 hours?
-        </h3>
-        <p className="mt-2 text-slate-600">
-          We can review your requirements and return a scoped proposal with delivery
-          phases and realistic timelines.
-        </p>
-      </div>
-      <Button
-        asChild
-        className="shrink-0 rounded-full bg-orange-600 px-8 text-white hover:bg-orange-700 shadow-md hover:shadow-lg transition-all"
-      >
-        <Link href="/contact-us">
-          Get your proposal
-          <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-        </Link>
-      </Button>
-    </div>
-  </div>
-</section>
+           
               
             </main>
 
@@ -491,30 +447,12 @@ export default async function ServiceByCategoryPage({ params }: Props) {
           </div>
         </div>
 
+      
+      
+      
         {/* Footer CTA */}
-        <section className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white py-20">
-          <div className="mx-auto max-w-5xl px-5 text-center md:px-8">
-            <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
-              Explore Related Capabilities
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-              Discover how we can help transform your business through our comprehensive services,
-              real-world case studies, or our full solutions portfolio.
-            </p>
-            <div className="mt-8">
-              <Button
-                asChild
-                size="lg"
-                className="rounded-full bg-orange-600 px-10 text-white shadow-lg shadow-orange-600/25 hover:bg-orange-700"
-              >
-                <Link href="/services">
-                  View all services
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
+  <CTAComponents />
+        
       </div>
     </>
   );
