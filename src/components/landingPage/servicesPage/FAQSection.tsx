@@ -1,5 +1,5 @@
 "use client";
-// components/landingPage/servicesPage/FAQSection.tsx
+// components/landingPagePage/FAQSection.tsx
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
