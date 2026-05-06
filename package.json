@@ -6,12 +6,13 @@
     "dev": "next dev",
     "dev:webpack": "next dev",
     "build": "next build",
-    "postbuild": "next-sitemap",
+    "postbuild": "next-sitemap && node scripts/generate-sitemaps-simple.js",
     "start": "next start",
     "lint": "eslint .",
     "analyze": "ANALYZE=true next build",
     "format": "prettier --write \"src/**/*.{ts,tsx,md}\" \"app/**/*.{ts,tsx}\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "sitemap": "next-sitemap && node scripts/generate-sitemaps-simple.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

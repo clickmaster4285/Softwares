@@ -22,10 +22,10 @@ interface FooterLinks {
 
 const footerLinks: FooterLinks = {
   services: [
-    { label: 'Custom Software', href: '/services' },
-    { label: 'Web Development', href: '/services' },
-    { label: 'Mobile App Development', href: '/services' },
-    { label: 'ERP & Business Apps', href: '/services' },
+    { label: 'Custom Software', href: '/#' },
+    { label: 'Web Development', href: '/#' },
+    { label: 'Mobile App Development', href: '/#' },
+    { label: 'ERP & Business Apps', href: '/#' },
     { label: 'Our Solutions', href: '/software-solutions' },
   ],
   company: [

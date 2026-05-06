@@ -68,7 +68,7 @@ export default async function HireUsDetailPage({ params }: Props) {
                 </Link>
               </Button>
               <Button variant="outline" asChild className="rounded-lg border-slate-300 bg-white">
-                <Link href="/services">View all services</Link>
+                <Link href="#">View all services</Link>
               </Button>
             </div>
           </div>

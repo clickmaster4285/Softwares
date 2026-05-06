@@ -28,7 +28,7 @@ export const ContainerScroll = ({
 
   return (
     <div className=" flex items-center justify-center relative p-2" ref={containerRef}>
-      <div className="py-10 md:py-40 w-full relative" style={{ perspective: "1000px" }}>
+      <div className="w-full relative" style={{ perspective: "1000px" }}>
         
         {/* Title */}
         <motion.div style={{ translateY: translate }} className="max-w-5xl mx-auto text-center">
