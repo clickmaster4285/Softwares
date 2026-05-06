@@ -100,21 +100,30 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
     <div className="relative ">
       {/* Minimal Hero Section - Reduced height */}
       <div className='w-full flex flex-col  px-4 py-8'>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <div className="inline-flex  gap-2 bg-orange-50 rounded-full px-3 py-1 mb-4">
-            <Briefcase className="h-3.5 w-3.5 text-orange-600" />
-            <span className="text-xs font-medium text-orange-600">Case Studies</span>
-          </div>
-          <h1 className='text-3xl md:text-5xl font-bold max-w-3xl mx-auto'>
-            Success Stories
-          </h1>
-        </motion.div>
        
+       
+        
+         <div className="flex items-center gap-3">
+                <motion.div
+                  initial={{ height: 0 }}
+                  whileInView={{ height: 40 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="h-10 w-1 rounded-full bg-orange-500"
+                />
+                <motion.h2 
+                  className="text-2xl font-semibold text-slate-900 sm:text-3xl"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Success Stories
+                </motion.h2>
+              </div>
+        
+
+
       </div>
 
       {/* Parallax Sections - Reduced spacing */}
@@ -124,7 +133,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
             key={section.id}
             ref={sectionRefs[index]} 
             className={cn(
-              "flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-12 py-12 md:py-16",
+              "flex flex-col lg:flex-row  gap-6 md:gap-12 py-12 md:py-16",
               section.reverse ? 'lg:flex-row-reverse' : ''
             )}
           >

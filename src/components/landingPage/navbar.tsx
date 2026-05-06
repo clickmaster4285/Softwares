@@ -906,8 +906,6 @@ const { data: blogs = [] } = useQuery({
       )}
 
       
-{/* Full-width Dropdown Menu for Resources */}
-{/* Full-width Dropdown Menu for Resources */}
 {activeDropdown === 'resources' && !isPageLoading && (
   <div
     onMouseEnter={() => {
@@ -990,27 +988,17 @@ const { data: blogs = [] } = useQuery({
             </ul>
           </div>
 
-          {/* Right content - Preview items - Increased height with better spacing */}
+          {/* Right content - Preview items */}
           <div className="col-span-9 p-6 max-h-[600px] overflow-y-auto">
             
             {/* Case Studies Section */}
             {activeResourcesSection === 'Case Studies' && (
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-slate-900">Latest Case Studies</h3>
-                  <Link 
-                    href="/case-studies" 
-                    onClick={closeDropdowns}
-                    className="text-sm text-primary hover:text-primary/80 font-medium"
-                  >
-                    View all ({caseStudies.length}) →
-                  </Link>
-                </div>
                 <div className={cn(
                   "grid gap-5",
-                  caseStudies.length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
+                  caseStudies.slice(0, 2).length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
                 )}>
-                  {caseStudies.slice(0, 4).map((study: any) => (
+                  {caseStudies.slice(0, 2).map((study: any) => (
                     <Link
                       key={study._id}
                       href={`/case-studies/${study.slug || study._id}`}
@@ -1041,11 +1029,17 @@ const { data: blogs = [] } = useQuery({
                       </div>
                     </Link>
                   ))}
-                  {caseStudies.length === 0 && (
-                    <div className="text-slate-400 text-center py-12 bg-slate-50 rounded-xl col-span-full">
-                      <p>No case studies available</p>
-                    </div>
-                  )}
+                </div>
+
+                {/* All case studies link at bottom */}
+                <div className="mt-6 border-t border-slate-200 pt-4">
+                  <Link
+                    href="/case-studies"
+                    onClick={closeDropdowns}
+                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                  >
+                    View all case studies ({caseStudies.length}) →
+                  </Link>
                 </div>
               </div>
             )}
@@ -1053,21 +1047,11 @@ const { data: blogs = [] } = useQuery({
             {/* Blog Section */}
             {activeResourcesSection === 'Blog' && (
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-slate-900">Latest Blog Posts</h3>
-                  <Link 
-                    href="/blog" 
-                    onClick={closeDropdowns}
-                    className="text-sm text-primary hover:text-primary/80 font-medium"
-                  >
-                    View all ({blogs.length}) →
-                  </Link>
-                </div>
                 <div className={cn(
                   "grid gap-5",
-                  blogs.length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
+                  blogs.slice(0, 2).length === 1 ? "grid-cols-1" : "sm:grid-cols-2"
                 )}>
-                  {blogs.slice(0, 4).map((blog: any) => (
+                  {blogs.slice(0, 2).map((blog: any) => (
                     <Link
                       key={blog._id}
                       href={`/blog/${blog.slug || blog._id}`}
@@ -1098,159 +1082,113 @@ const { data: blogs = [] } = useQuery({
                       </div>
                     </Link>
                   ))}
-                  {blogs.length === 0 && (
-                    <div className="text-slate-400 text-center py-12 bg-slate-50 rounded-xl col-span-full">
-                      <p>No blog posts available</p>
-                    </div>
-                  )}
+                </div>
+
+                {/* All blogs link at bottom */}
+                <div className="mt-6 border-t border-slate-200 pt-4">
+                  <Link
+                    href="/blog"
+                    onClick={closeDropdowns}
+                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                  >
+                    View all blogs ({blogs.length}) →
+                  </Link>
                 </div>
               </div>
             )}
 
-            {/* FAQs Section - Enhanced V-Card Layout */}
+            {/* FAQs Section - Simple list layout with responsive grid */}
             {activeResourcesSection === 'FAQs' && (
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-slate-900">Frequently Asked Questions</h3>
-                  <Link 
-                    href="/faqs" 
+                <div className={cn(
+                  "grid gap-4",
+                  allFaqs.slice(0, 4).length === 1 ? "grid-cols-1" : "md:grid-cols-2"
+                )}>
+                  {allFaqs.slice(0, 4).map((faq: any, idx: number) => (
+                    <Link
+                      key={idx}
+                      href={`/faqs/${faq.serviceSlug}`}
+                      onClick={closeDropdowns}
+                      className="group block"
+                    >
+                      <div className="p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition-all duration-200 hover:border-primary/30 h-full">
+                        <p className="text-sm font-medium text-slate-800 group-hover:text-primary transition-colors line-clamp-2">
+                          {faq.question}
+                        </p>
+                        <p className="text-xs text-slate-500 mt-2 line-clamp-2">
+                          {faq.answer.substring(0, 120)}...
+                        </p>
+                        <span className="inline-block text-xs font-semibold text-primary mt-3">
+                          {faq.serviceTitle}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* All FAQs link at bottom */}
+                <div className="mt-6 border-t border-slate-200 pt-4">
+                  <Link
+                    href="/faqs"
                     onClick={closeDropdowns}
-                    className="text-sm text-primary hover:text-primary/80 font-medium"
+                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
                   >
                     View all FAQs →
                   </Link>
                 </div>
-                <div className={cn(
-                  "grid gap-4",
-                  allFaqs.slice(0, 3).length === 1 ? "grid-cols-1" : "md:grid-cols-2"
-                )}>
-                  {allFaqs.slice(0, 4).map((faq: any, idx: number) => (
-                    <div key={idx} className="group">
-                      <div className="p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
-                        <Link href={`/faqs/${faq.serviceSlug}`} onClick={closeDropdowns}>
-                          <span className="inline-block text-xs font-semibold text-primary mb-2 px-2 py-1 bg-primary/10 rounded-full">
-                            {faq.serviceTitle}
-                          </span>
-                        </Link>
-                        <details className="group">
-                          <summary className="flex cursor-pointer items-start justify-between text-sm font-semibold text-slate-900 hover:text-primary transition-colors">
-                            <span className="flex-1 pr-4">{faq.question}</span>
-                            <ChevronDown className="h-5 w-5 text-slate-400 transition-transform duration-200 shrink-0 group-open:rotate-180" />
-                          </summary>
-                          <p className="mt-3 text-sm text-slate-600 leading-relaxed pl-0 pt-2 border-t border-slate-100">
-                            {faq.answer}
-                          </p>
-                        </details>
-                      </div>
-                    </div>
-                  ))}
-                  
-                  {allFaqs.length === 0 && (
-                    <div className="p-6 bg-gradient-to-br from-primary/5 to-slate-50 rounded-xl border border-primary/10 col-span-full">
-                      <p className="text-slate-600 text-sm leading-relaxed">
-                        Browse FAQs by service category. Select a service to see related questions and answers.
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {allServicePages.slice(0, 6).map((service) => (
-                          <Link
-                            key={service.slug}
-                            href={`/faqs/${service.slug}`}
-                            onClick={closeDropdowns}
-                            className="text-xs bg-white px-3 py-1.5 rounded-full text-primary border border-primary/20 hover:bg-primary/5 transition-colors"
-                          >
-                            {service.title}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
               </div>
             )}
 
-            {/* Testimonials Section - Enhanced V-Card Layout */}
+            {/* Testimonials Section - Simple card layout with responsive grid */}
             {activeResourcesSection === 'Testimonials' && (
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-slate-900">Client Testimonials</h3>
-                  <Link 
-                    href="/testimonials" 
-                    onClick={closeDropdowns}
-                    className="text-sm text-primary hover:text-primary/80 font-medium"
-                  >
-                    View all ({testimonials.length}) →
-                  </Link>
-                </div>
                 <div className={cn(
-                  "grid gap-5",
+                  "grid gap-4",
                   testimonials.slice(0, 3).length === 1 ? "grid-cols-1" : "md:grid-cols-2"
                 )}>
-                  {testimonials.slice(0, 4).map((testimonial: any) => (
-                    <div key={testimonial._id} className="group">
-                      <div className="p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
-                        <div className="flex items-start gap-4">
-                          {/* Avatar */}
-                          {testimonial.avatar ? (
-                            <div className="relative w-14 h-14 flex-shrink-0 rounded-full overflow-hidden border-2 border-primary/20">
-                              <Image
-                                src={testimonial.avatar}
-                                alt={testimonial.name}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          ) : (
-                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0 border-2 border-primary/20">
-                              <span className="text-primary font-bold text-xl">
-                                {testimonial.name?.charAt(0) || 'C'}
-                              </span>
-                            </div>
-                          )}
-                          
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
-                              <p className="font-semibold text-slate-900 text-base">{testimonial.name}</p>
-                              {testimonial.rating && (
-                                <div className="flex gap-0.5">
-                                  {[...Array(5)].map((_, i) => (
-                                    <span 
-                                      key={i} 
-                                      className={cn(
-                                        "text-sm",
-                                        i < testimonial.rating ? "text-yellow-400" : "text-slate-200"
-                                      )}
-                                    >
-                                      ★
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
-                            
-                            {testimonial.company && (
-                              <p className="text-xs text-slate-500 mb-2 font-medium">{testimonial.company}</p>
-                            )}
-                            
-                            <p className="text-sm text-slate-600 leading-relaxed italic">
-                              "{testimonial.content?.substring(0, 150)}
-                              {testimonial.content?.length > 150 ? '...' : ''}"
-                            </p>
-                            
-                            {testimonial.project && (
-                              <p className="text-xs text-primary mt-2 font-medium">
-                                Project: {testimonial.project}
-                              </p>
-                            )}
+                  {testimonials.slice(0, 3).map((testimonial: any) => (
+                    <div key={testimonial._id} className="p-4 rounded-lg border border-slate-200 bg-white hover:shadow-md transition-all duration-200 h-full">
+                      <div className="flex items-start gap-3">
+                        {testimonial.avatar ? (
+                          <div className="relative w-10 h-10 flex-shrink-0 rounded-full overflow-hidden">
+                            <Image
+                              src={testimonial.avatar}
+                              alt={testimonial.name}
+                              fill
+                              className="object-cover"
+                            />
                           </div>
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <span className="text-primary font-semibold text-sm">
+                              {testimonial.name?.charAt(0) || 'C'}
+                            </span>
+                          </div>
+                        )}
+                        
+                        <div className="flex-1">
+                          <p className="font-semibold text-slate-900 text-sm">{testimonial.name}</p>
+                          {testimonial.company && (
+                            <p className="text-xs text-slate-500">{testimonial.company}</p>
+                          )}
+                          <p className="text-sm text-slate-600 mt-2 italic line-clamp-3">
+                            "{testimonial.content?.substring(0, 150)}..."
+                          </p>
                         </div>
                       </div>
                     </div>
                   ))}
-                  {testimonials.length === 0 && (
-                    <div className="text-slate-400 text-center py-12 bg-slate-50 rounded-xl col-span-full">
-                      <p>No testimonials available</p>
-                    </div>
-                  )}
+                </div>
+
+                {/* All testimonials link at bottom */}
+                <div className="mt-6 border-t border-slate-200 pt-4">
+                  <Link
+                    href="/testimonials"
+                    onClick={closeDropdowns}
+                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                  >
+                    View all testimonials ({testimonials.length}) →
+                  </Link>
                 </div>
               </div>
             )}
@@ -1260,7 +1198,6 @@ const { data: blogs = [] } = useQuery({
     </div>
   </div>
 )}
-
       
 
       {/* Full-width Dropdown Menu for Hire Us */}

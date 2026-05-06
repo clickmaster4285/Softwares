@@ -158,6 +158,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     return `section-${index}-${slugify(heading)}`;
   };
 
+  
   // Add generic sections to TOC
   sections.forEach((section, index) => {
     const id = getSectionId(section.heading, index);
@@ -415,30 +416,34 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
               
               {/* CTA Section */}
-<section id="cta" className="=scroll-mt-24 mt-10">
-  <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-50 via-white to-orange-50 p-8 sm:p-12 border border-orange-100">
-    {/* Background decorations */}
-    <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-orange-500/10 blur-3xl" />
-    <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-orange-500/5 blur-3xl" />
+<section id="cta" className="scroll-mt-24 mt-8 sm:mt-10 px-4 sm:px-0">
+  <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-orange-50 via-white to-orange-50 p-6 sm:p-8 md:p-12 border border-orange-100">
+    {/* Background decorations - hidden on mobile for performance */}
+    <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 sm:h-64 sm:w-64 rounded-full bg-orange-500/10 blur-3xl" />
+    <div className="pointer-events-none absolute -bottom-20 -left-20 h-48 w-48 sm:h-64 sm:w-64 rounded-full bg-orange-500/5 blur-3xl" />
 
-    <div className="relative">
-      <Badge className="border-orange-200 bg-orange-100 text-orange-700">
-        Ready to move forward?
-      </Badge>
-      <h2 className="mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
+    <div className="relative text-center sm:text-left">
+      <div className="flex justify-center sm:justify-start">
+        <Badge className="border-orange-200 bg-orange-100 text-orange-700 text-xs sm:text-sm">
+          Ready to move forward?
+        </Badge>
+      </div>
+      <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900">
         Get your free strategy call
       </h2>
-      <p className="mt-4 max-w-2xl text-lg text-slate-600">
+      <p className="mt-3 sm:mt-4 max-w-2xl text-base sm:text-lg text-slate-600 mx-auto sm:mx-0">
         Share your requirements and our team will help you define scope, architecture
         direction, timeline, and delivery approach.
       </p>
-      <div className="mt-8 flex flex-wrap gap-4">
+      
+      {/* Buttons - Stack on mobile, row on larger screens */}
+      <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center sm:justify-start gap-3 sm:gap-4">
         <Button
           asChild
           size="lg"
-          className="rounded-full bg-orange-600 px-8 text-white shadow-lg shadow-orange-500/30 hover:bg-orange-700"
+          className="rounded-full bg-orange-600 px-6 sm:px-8 py-3 sm:py-6 text-white shadow-lg shadow-orange-500/30 hover:bg-orange-700 w-full sm:w-auto"
         >
-          <Link href="/contact-us">
+          <Link href="/contact-us" className="flex items-center justify-center">
             Book strategy call
             <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
           </Link>
@@ -447,31 +452,33 @@ export default async function ServiceByCategoryPage({ params }: Props) {
           variant="outline"
           size="lg"
           asChild
-          className="rounded-full border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
+          className="rounded-full border-slate-300 bg-white text-slate-700 hover:bg-slate-50 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-6"
         >
-          <Link href="/case-studies">View case studies</Link>
+          <Link href="/case-studies" className="flex items-center justify-center">
+            View case studies
+          </Link>
         </Button>
       </div>
     </div>
   </div>
 
   {/* Secondary CTA */}
-  <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow">
-    <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <h3 className="text-xl font-semibold text-slate-900">
+  <div className="mt-5 sm:mt-6 rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 md:p-8 shadow-sm hover:shadow-md transition-all">
+    <div className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-center lg:justify-between">
+      <div className="text-center lg:text-left">
+        <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-slate-900">
           Want a fixed-price scope in 48 hours?
         </h3>
-        <p className="mt-2 text-slate-600">
+        <p className="mt-1.5 sm:mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
           We can review your requirements and return a scoped proposal with delivery
           phases and realistic timelines.
         </p>
       </div>
       <Button
         asChild
-        className="shrink-0 rounded-full bg-orange-600 px-8 text-white hover:bg-orange-700 shadow-md hover:shadow-lg transition-all"
+        className="shrink-0 rounded-full bg-orange-600 px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 text-white hover:bg-orange-700 shadow-md hover:shadow-lg transition-all w-full lg:w-auto"
       >
-        <Link href="/contact-us">
+        <Link href="/contact-us" className="flex items-center justify-center">
           Get your proposal
           <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
         </Link>
@@ -492,29 +499,29 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         </div>
 
         {/* Footer CTA */}
-        <section className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white py-20">
-          <div className="mx-auto max-w-5xl px-5 text-center md:px-8">
-            <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
-              Explore Related Capabilities
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-              Discover how we can help transform your business through our comprehensive services,
-              real-world case studies, or our full solutions portfolio.
-            </p>
-            <div className="mt-8">
-              <Button
-                asChild
-                size="lg"
-                className="rounded-full bg-orange-600 px-10 text-white shadow-lg shadow-orange-600/25 hover:bg-orange-700"
-              >
-                <Link href="/services">
-                  View all services
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
+  <section className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white py-12 sm:py-16 md:py-20">
+  <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 text-center">
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900">
+      Explore Related Capabilities
+    </h2>
+    <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-base sm:text-lg text-slate-600 px-2 sm:px-0">
+      Discover how we can help transform your business through our comprehensive services,
+      real-world case studies, or our full solutions portfolio.
+    </p>
+    <div className="mt-6 sm:mt-8 md:mt-10">
+      <Button
+        asChild
+        size="lg"
+        className="rounded-full bg-orange-600 px-6 sm:px-8 md:px-10 py-3 sm:py-6 text-white shadow-lg shadow-orange-600/25 hover:bg-orange-700 w-full sm:w-auto"
+      >
+        <Link href="/services" className="flex items-center justify-center">
+          View all services
+          <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+        </Link>
+      </Button>
+    </div>
+  </div>
+</section>
       </div>
     </>
   );
