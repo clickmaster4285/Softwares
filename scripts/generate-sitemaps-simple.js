@@ -92,7 +92,7 @@ function getUrlPriorityAndFreq(urlPath) {
   
   // Hire pages - high priority
   if (url.includes('/hire-') || url.includes('/hire/')) {
-    return { priority: '0.9', changefreq: 'daily' };
+    return { priority: '0.6', changefreq: 'monthly' };
   }
   
   // Service pages - medium priority, weekly updates
@@ -102,10 +102,9 @@ function getUrlPriorityAndFreq(urlPath) {
   
   // FAQ pages
   if (url.includes('/faqs/')) {
-    return { priority: '0.9', changefreq: 'daily' };
+    return { priority: '0.7', changefreq: 'daily' };
   }
   
-  // Default for other pages
   return { priority: '0.7', changefreq: 'weekly' };
 }
 
@@ -147,8 +146,6 @@ function isSubService(urlPath) {
     '/web-development'
   ];
   
-  // Check if URL follows pattern /main-service/subservice
-  // Must have exactly one slash after main service (not including trailing slash)
   return mainServices.some(service => {
     const serviceWithSlash = service + '/';
     if (!urlPath.startsWith(serviceWithSlash)) {
@@ -167,13 +164,13 @@ async function generateSeparateSitemaps() {
   console.log('🚀 Starting separate sitemap generation...');
   
   let categorizedUrls = {
-    faqs: [],
-    blogs: [],
-    caseStudies: [],
+    pages: [],
     mainServices: [],
     subServices: [],
+    caseStudies: [],
+    blogs: [],
+    faqs: [],
     hire: [],
-    pages: []
   };
 
   // Generate URLs based on service structure
@@ -293,11 +290,7 @@ async function generateSeparateSitemaps() {
       categorizedUrls.mainServices.push(url);
     } else if (isSubService(urlPath)) {
       categorizedUrls.subServices.push(url);
-    } else if (urlPath.includes('/category/') || urlPath.includes('/categories/') || 
-               urlPath.includes('/subcategory/') || urlPath.includes('/sub-category/')) {
-      // Skip category and subcategory URLs
-      return;
-    } else {
+    }  else {
       categorizedUrls.pages.push(url);
     }
   });
@@ -314,13 +307,13 @@ async function generateSeparateSitemaps() {
   });
     
   // Generate individual sitemaps
-  await createSitemapFile('faq-sitemap.xml', categorizedUrls.faqs);
-  await createSitemapFile('blog-sitemap.xml', categorizedUrls.blogs);
-  await createSitemapFile('case-study-sitemap.xml', categorizedUrls.caseStudies);
+  await createSitemapFile('page-sitemap.xml', categorizedUrls.pages);
   await createSitemapFile('main-services-sitemap.xml', categorizedUrls.mainServices);
   await createSitemapFile('sub-services-sitemap.xml', categorizedUrls.subServices);
+  await createSitemapFile('case-study-sitemap.xml', categorizedUrls.caseStudies);
+  await createSitemapFile('blog-sitemap.xml', categorizedUrls.blogs);
+  await createSitemapFile('faq-sitemap.xml', categorizedUrls.faqs);
   await createSitemapFile('hire-sitemap.xml', categorizedUrls.hire);
-  await createSitemapFile('page-sitemap.xml', categorizedUrls.pages);
   
   // Create main sitemap index
   await createSitemapIndex();
@@ -369,17 +362,14 @@ async function createSitemapFile(filename, urls, defaultPriority = '0.7') {
 async function createSitemapIndex() {
   const indexPath = path.join(PUBLIC_DIR, 'sitemap.xml');
   const sitemapFiles = [
-    'faq-sitemap.xml',
-    'blog-sitemap.xml',
-    'case-study-sitemap.xml',
+    'page-sitemap.xml',
     'main-services-sitemap.xml',
     'sub-services-sitemap.xml',
+    'case-study-sitemap.xml',
+    'blog-sitemap.xml',
+    'faq-sitemap.xml',
     'hire-sitemap.xml',
-    'page-sitemap.xml'
-  ].filter(file => {
-    const filePath = path.join(PUBLIC_DIR, file);
-    return fs.existsSync(filePath);
-  });
+  ];
   
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
