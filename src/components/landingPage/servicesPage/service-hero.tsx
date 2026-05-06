@@ -464,7 +464,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                     asChild
                     className="group rounded-full border-slate-300 bg-white/80 backdrop-blur-sm hover:bg-white hover:border-orange-300 font-semibold text-slate-700 transition-all"
                   >
-                    <Link href="/services">View all services</Link>
+                    <Link href="#">View all services</Link>
                   </Button>
                 </motion.div>
               </motion.div>

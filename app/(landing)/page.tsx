@@ -24,7 +24,7 @@ type HomeExploreLink = {
 
 const homeExploreLinks: HomeExploreLink[] = [
   {
-    href: '/services',
+    href: '#',
     title: 'Services overview',
     desc: 'Full list of development capabilities.',
     ariaLabel: 'Open the services overview page listing all development capabilities.',

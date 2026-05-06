@@ -263,7 +263,7 @@ const { data: blogs = [] } = useQuery({
 
   const handleServicesClick = () => {
     closeDropdowns();
-    router.push('/services');
+    router.push('/#');
   };
 
   const serviceSections: ServiceMenuSection[] = serviceMenuSections.map((section) => ({
@@ -889,7 +889,7 @@ const { data: blogs = [] } = useQuery({
 
                         <div className="mt-6 border-t border-slate-200 pt-4">
                           <Link
-                            href="/services"
+                            href="#"
                             onClick={closeDropdowns}
                             className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
                           >

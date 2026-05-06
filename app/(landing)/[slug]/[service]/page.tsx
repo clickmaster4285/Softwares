@@ -99,31 +99,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 function getCanonicalPath(page: ServicePageContent): string {
-  const slug = page.slug;
-  if (slug === 'custom-software-development') return '/services/custom-software-development';
-  if (slug === 'generative-ai-solutions') return '/services/generative-ai-solutions';
-  if (slug === 'ai-chatbot-development') return '/services/ai-chatbot-development';
-  if (slug === 'ai-agents-development') return '/services/ai-agents-development';
-  if (slug === 'ai-automation-systems') return '/services/ai-automation-systems';
-  if (slug === 'ai-model-development') return '/services/ai-model-development';
-  if (slug === 'data-engineering') return '/services/data-engineering';
-  if (slug === 'ui-ux-design') return '/services/ui-ux-design';
-  if (slug === 'mobile-app-development') return '/services/mobile-app-development';
-  if (slug === 'ios-app-development') return '/services/ios-app-development';
-  if (slug === 'android-app-development') return '/services/android-app-development';
-  if (slug === 'cross-platform-app-development') return '/services/cross-platform-app-development';
-  if (slug === 'flutter-app-development') return '/services/flutter-app-development';
-  if (slug === 'react-native-development') return '/services/react-native-development';
-  if (slug === 'saas-product-development') return '/services/saas-product-development';
-  if (slug === 'web-application-development') return '/services/web-application-development';
-  if (slug === 'website-development') return '/services/website-development';
-  if (slug === 'headless-cms-development') return '/services/headless-cms-development';
-  if (slug === 'jamstack-development') return '/services/jamstack-development';
-  if (slug === 'e-commerce-development') return '/services/e-commerce-development';
-  if (slug === 'headless-e-commerce') return '/services/headless-e-commerce';
-  if (slug === 'shopify-development') return '/services/shopify-development';
-  if (slug === 'woocommerce-development') return '/services/woocommerce-development';
-  return `/${page.categorySlug}/${slug}`;
+  return `/${page.categorySlug}/${page.slug}`;
 }
 
 export default async function ServiceByCategoryPage({ params }: Props) {
@@ -246,7 +222,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
             breadcrumbSchema([
               { name: 'Home', url: '/' },
               { name: 'Services', url: '/services' },
-              { name: page.category, url: '/services' },
+              { name: page.category, url: `/${page.categorySlug}` },
               { name: page.serviceName, url: canonicalPath },
             ])
           ),
@@ -507,7 +483,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                 size="lg"
                 className="rounded-full bg-orange-600 px-10 text-white shadow-lg shadow-orange-600/25 hover:bg-orange-700"
               >
-                <Link href="/services">
+                <Link href="/#">
                   View all services
                   <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
                 </Link>
