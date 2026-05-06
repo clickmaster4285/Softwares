@@ -48,7 +48,7 @@ const homeExploreLinks: HomeExploreLink[] = [
     ariaLabel: 'Read about native and cross-platform mobile app development.',
   },
   {
-    href: '/database-services/database-design',
+    href: '/database-data-management/database-design',
     title: 'Database Design & Management',
     desc: 'Modeling, migrations, tuning.',
     ariaLabel: 'See database design and management services including modeling and tuning.',
@@ -60,7 +60,7 @@ const homeExploreLinks: HomeExploreLink[] = [
     ariaLabel: 'Discover cloud solutions and DevOps services including CI/CD and observability.',
   },
   {
-    href: '/cybersecurity/compliance-risk-management',
+    href: '/cybersecurity-compliance/compliance-risk-management',
     title: 'Cybersecurity & Compliance',
     desc: 'Secure SDLC + audit readiness.',
     ariaLabel: 'Review cybersecurity and compliance offerings and secure SDLC practices.',

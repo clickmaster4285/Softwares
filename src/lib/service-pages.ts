@@ -651,12 +651,12 @@ const aiAgentsDevelopmentOverride: ServicePageContent = {
     'Full Audit Trail',
     'Production Reliability Standards',
   ],
-  marketStats: [
-    { label: 'Of enterprise tasks will be agent-automatable by 2027 (Gartner)', value: '45%' },
-    { label: 'Autonomous AI agents market size by 2030', value: '$47B' },
-    { label: 'Throughput increase for knowledge work using agent pipelines', value: '10x' },
-    { label: 'Average annual savings per knowledge worker with AI agent augmentation', value: '$28K' },
-  ],
+  // marketStats: [
+  //   { label: 'Of enterprise tasks will be agent-automatable by 2027 (Gartner)', value: '45%' },
+  //   { label: 'Autonomous AI agents market size by 2030', value: '$47B' },
+  //   { label: 'Throughput increase for knowledge work using agent pipelines', value: '10x' },
+  //   { label: 'Average annual savings per knowledge worker with AI agent augmentation', value: '$28K' },
+  // ],
   servicesCards: [
     { title: 'Research & Intelligence Agents', description: 'Autonomous agents that conduct structured research across web sources, internal documents, databases, and APIs synthesizing findings into structured reports, competitive analyses, market intelligence briefings, or prospect summaries. Processing time: tasks taking a human analyst 4-8 hours are completed in 15-40 minutes.' },
     { title: 'Data Processing & Extraction Agents', description: 'Agents that process high volumes of unstructured documents and extract structured data: contract clause extraction, invoice processing, financial report parsing, email categorization and data extraction, form digitization from scanned documents. Built with confidence scoring and human review queues.' },
@@ -857,12 +857,12 @@ const aiAutomationSystemsOverride: ServicePageContent = {
     'Human-in-the-Loop Design',
     'RAG Knowledge Systems',
   ],
-  marketStats: [
-    { label: 'Of work activities across all industries could be automated with current AI technology (McKinsey)', value: '45%' },
-    { label: 'Cost per GPT-4o API call AI processes a document for less than the cost of 1 second of human attention', value: '$0.002' },
-    { label: 'Extraction accuracy achievable on structured document types (invoices, purchase orders, standard forms)', value: '95%+' },
-    { label: 'Typical time to deliver an intelligent document processing system from kickoff to production', value: '3-6 wks' },
-  ],
+  // marketStats: [
+  //   { label: 'Of work activities across all industries could be automated with current AI technology (McKinsey)', value: '45%' },
+  //   { label: 'Cost per GPT-4o API call AI processes a document for less than the cost of 1 second of human attention', value: '$0.002' },
+  //   { label: 'Extraction accuracy achievable on structured document types (invoices, purchase orders, standard forms)', value: '95%+' },
+  //   { label: 'Typical time to deliver an intelligent document processing system from kickoff to production', value: '3-6 wks' },
+  // ],
   servicesCards: [
     { title: 'Intelligent Document Processing (IDP)', description: 'Extraction of structured data from unstructured documents invoices, purchase orders, contracts, insurance claims, medical records, legal documents, financial statements. Architecture: document ingestion, OCR layer (AWS Textract/Azure Document Intelligence), LLM extraction layer (GPT-4o/Claude 3.5), validation layer, confidence scoring, and downstream delivery to ERP/CRM.' },
     { title: 'LLM-Powered Workflow Automation', description: 'AI automation of text-based workflows: email triage and routing, content categorisation, automated summarisation, and response generation. Built with LangChain, n8n or Make.com, and OpenAI/Anthropic APIs. Every automated action is logged with the LLM\'s input, output, and confidence.' },
@@ -1046,12 +1046,12 @@ const aiChatbotDevelopmentOverride: ServicePageContent = {
     'CSAT & Analytics Dashboard',
     'CRM & Helpdesk Integration',
   ],
-  marketStats: [
-    { label: 'Of customers prefer AI chatbot over waiting for a human agent (Salesforce)', value: '62%' },
-    { label: 'Tier 1 ticket deflection rate achievable with a well-built support AI', value: '50-70%' },
-    { label: 'Enterprise AI chatbot market size by 2027', value: '$11B' },
-    { label: 'Average response time with AI vs. 6 hours with human-only support', value: '3 min' },
-  ],
+  // marketStats: [
+  //   { label: 'Of customers prefer AI chatbot over waiting for a human agent (Salesforce)', value: '62%' },
+  //   { label: 'Tier 1 ticket deflection rate achievable with a well-built support AI', value: '50-70%' },
+  //   { label: 'Enterprise AI chatbot market size by 2027', value: '$11B' },
+  //   { label: 'Average response time with AI vs. 6 hours with human-only support', value: '3 min' },
+  // ],
   servicesCards: [
     { title: 'Customer Support AI Chatbot', description: 'Production-grade support AI handling Tier 1 queries with RAG-powered accuracy on product documentation, FAQs, and resolved ticket history. Features: multi-turn conversation, intent classification, confidence scoring, escalation to human agents with full context, helpdesk integration (Zendesk, Freshdesk, Intercom), CSAT collection, and analytics dashboard.' },
     { title: 'Internal Knowledge Assistant', description: 'AI assistant embedded in Slack or Microsoft Teams answering employee questions from internal knowledge base: HR policies, IT runbooks, product documentation, onboarding materials, legal FAQs. Permission-aware retrieval only surfaces documents the user is authorized to access. Knowledge gap detection for unanswered questions.' },
@@ -1267,12 +1267,12 @@ const aiModelDevelopmentOverride: ServicePageContent = {
     'MLOps Pipelines',
     'Model Evaluation Frameworks',
   ],
-  marketStats: [
-    { label: 'VRAM reduction with LoRA/QLoRA vs full fine-tuning', value: '75-90%' },
-    { label: 'Throughput improvement with vLLM vs naive HuggingFace inference', value: '20-40x' },
-    { label: 'Quality threshold: excellent examples outperform mediocre ones', value: '100 vs 10,000' },
-    { label: 'Cost reduction for classification tasks vs LLM API calls', value: '100-1000x' },
-  ],
+  // marketStats: [
+  //   { label: 'VRAM reduction with LoRA/QLoRA vs full fine-tuning', value: '75-90%' },
+  //   { label: 'Throughput improvement with vLLM vs naive HuggingFace inference', value: '20-40x' },
+  //   { label: 'Quality threshold: excellent examples outperform mediocre ones', value: '100 vs 10,000' },
+  //   { label: 'Cost reduction for classification tasks vs LLM API calls', value: '100-1000x' },
+  // ],
   servicesCards: [
     { title: 'LLM Fine-Tuning', description: 'Custom LLM fine-tuning on proprietary datasets: dataset preparation (prompt-completion pairs or chat format), base model selection (GPT-4o via OpenAI API; Llama 3.1/Mistral via HuggingFace), LoRA/QLoRA training, evaluation (ROUGE, F1, human evaluation), and deployment.' },
     { title: 'Custom Classification & Extraction Models', description: 'Lightweight models for specific tasks: text classification (BERT/RoBERTa fine-tuned), named entity recognition (NER for custom domain entities), binary/multi-class classification. 100-1000x cheaper than LLMs, runs on CPU.' },
@@ -1515,12 +1515,12 @@ const generativeAiSolutionsOverride: ServicePageContent = {
     'Vector Databases',
     'Enterprise AI Integration',
   ],
-  marketStats: [
-    { label: 'Generative AI market size projected by 2032', value: '$1.3T' },
-    { label: 'Enterprise AI projects fail to reach production', value: '78%' },
-    { label: 'Avg productivity gain in knowledge-worker tasks with GenAI', value: '40%' },
-    { label: 'Average cost of an AI project failure (IBM, 2024)', value: '$4.4M' },
-  ],
+  // marketStats: [
+  //   { label: 'Generative AI market size projected by 2032', value: '$1.3T' },
+  //   { label: 'Enterprise AI projects fail to reach production', value: '78%' },
+  //   { label: 'Avg productivity gain in knowledge-worker tasks with GenAI', value: '40%' },
+  //   { label: 'Average cost of an AI project failure (IBM, 2024)', value: '$4.4M' },
+  // ],
   servicesCards: [
     { title: 'Custom LLM Application Development', description: 'End-to-end LLM-powered applications: system prompt engineering, context window optimization, streaming response implementation, conversation state management, token cost management, multi-model routing. Foundation models: GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, Llama 3, Mistral.' },
     { title: 'RAG System Development', description: 'Complete RAG pipelines: document ingestion and chunking, embedding model selection, vector database setup, semantic and hybrid retrieval, reranking, and LLM response generation with citation grounding. For knowledge Q&A, support AI, contract analysis, and compliance lookup.' },
@@ -5251,12 +5251,12 @@ const uiUxDesignOverride: ServicePageContent = {
     'Prototyping & User Testing',
     'Developer Handoff Ready',
   ],
-  marketStats: [
-    { label: 'Return for every $1 invested in UX (Forrester)', value: '$100' },
-    { label: 'Conversion rate increase achievable through UX redesign', value: '200%' },
-    { label: 'Of users won\'t return after a poor user experience', value: '83%' },
-    { label: 'Reduction in development time with a proper design system', value: '50%' },
-  ],
+  // marketStats: [
+  //   { label: 'Return for every $1 invested in UX (Forrester)', value: '$100' },
+  //   { label: 'Conversion rate increase achievable through UX redesign', value: '200%' },
+  //   { label: 'Of users won\'t return after a poor user experience', value: '83%' },
+  //   { label: 'Reduction in development time with a proper design system', value: '50%' },
+  // ],
   servicesCards: [
     { title: 'UX Research & Discovery', description: 'Stakeholder interviews, user interviews, contextual inquiry, survey design, competitive UX audit, and analytics review. Deliverables: research synthesis report, user personas, JTBD framework, pain point priority matrix.' },
     { title: 'Information Architecture & User Flows', description: 'Product structure definition, navigation hierarchy, feature grouping. User flow mapping including error states, empty states, loading states, and decision branch points.' },
@@ -5578,12 +5578,12 @@ const productDesignOverride: ServicePageContent = {
     'Usability Testing',
     'Design-to-Dev Handoff',
   ],
-  marketStats: [
-    { label: 'Of users say they won\'t return after a bad UX experience (Sweor 2023)', value: '88%' },
-    { label: 'Cost to fix a design error in production vs $1 to fix it in the design phase', value: '$100' },
-    { label: 'Average ROI on UX investment every $1 spent on UX returns $5', value: '5:1' },
-    { label: 'Figma\'s collaborative design platform the universal language between product, design, and engineering', value: 'Design' },
-  ],
+  // marketStats: [
+  //   { label: 'Of users say they won\'t return after a bad UX experience (Sweor 2023)', value: '88%' },
+  //   { label: 'Cost to fix a design error in production vs $1 to fix it in the design phase', value: '$100' },
+  //   { label: 'Average ROI on UX investment every $1 spent on UX returns $5', value: '5:1' },
+  //   { label: 'Figma\'s collaborative design platform the universal language between product, design, and engineering', value: 'Design' },
+  // ],
   servicesCards: [
     { title: 'UX Strategy & Product Discovery', description: 'Jobs-to-be-done analysis, competitive UX audit (3-5 competitors), design principles definition, and success metrics for design (task completion rate, time-on-task, error rate, CSAT targets).' },
     { title: 'User Research', description: 'Moderated interviews (1:1, 60 minutes), contextual inquiry (observing users in actual work environment), usability testing (5 participants reveal 85% of usability issues), and survey design for quantitative validation.' },
@@ -5718,12 +5718,12 @@ const webDesignOverride: ServicePageContent = {
     'Core Web Vitals 90+',
     'Design + Build Available',
   ],
-  marketStats: [
-    { label: 'Average time a B2B visitor decides whether to stay or leave your hero must communicate value', value: '5 sec' },
-    { label: 'Of first impressions are design-related poor design signals poor product (ResearchGate)', value: '94%' },
-    { label: 'Of B2B buyers judge a company\'s credibility by its website design (Stanford credibility study)', value: '75%' },
-    { label: 'Average conversion rate improvement from a conversion-focused redesign vs aesthetics-first redesign', value: '2.3x' },
-  ],
+  // marketStats: [
+  //   { label: 'Average time a B2B visitor decides whether to stay or leave your hero must communicate value', value: '5 sec' },
+  //   { label: 'Of first impressions are design-related poor design signals poor product (ResearchGate)', value: '94%' },
+  //   { label: 'Of B2B buyers judge a company\'s credibility by its website design (Stanford credibility study)', value: '75%' },
+  //   { label: 'Average conversion rate improvement from a conversion-focused redesign vs aesthetics-first redesign', value: '2.3x' },
+  // ],
   servicesCards: [
     { title: 'B2B Website Design (Full)', description: 'Complete website design: messaging workshop (ICP definition, value proposition), sitemap and page hierarchy, wireframes (desktop/mobile), high-fidelity Figma designs (all pages, all states, all breakpoints), and design system. WCAG 2.1 AA compliant.' },
     { title: 'Landing Page Design', description: 'High-conversion landing page design: above-fold optimisation, A/B test variant design (2-3 hero variants), form optimisation (minimum fields, inline validation), and page speed optimisation (LCP <2s).' },
@@ -5855,12 +5855,12 @@ const mobileAppDesignOverride: ServicePageContent = {
     'Figma Dev-Ready Handoff',
     'Dark Mode Included',
   ],
-  marketStats: [
-    { label: 'Of users judge app quality by design consistency with platform conventions', value: '90%+' },
-    { label: 'Apps rejected from App Store for HIG non-compliance annually', value: '40%' },
-    { label: 'Users who notice when an app uses wrong platform patterns (e.g., Android UI on iOS)', value: '85%' },
-    { label: 'Conversion lift from optimised App Store screenshots vs default', value: '35%' },
-  ],
+  // marketStats: [
+  //   { label: 'Of users judge app quality by design consistency with platform conventions', value: '90%+' },
+  //   { label: 'Apps rejected from App Store for HIG non-compliance annually', value: '40%' },
+  //   { label: 'Users who notice when an app uses wrong platform patterns (e.g., Android UI on iOS)', value: '85%' },
+  //   { label: 'Conversion lift from optimised App Store screenshots vs default', value: '35%' },
+  // ],
   servicesCards: [
     { title: 'iOS App Design (HIG-Compliant)', description: 'High-fidelity iOS app design in Figma: SF Symbols library (5,000+ system icons), Dynamic Type support, Safe Area handling (Dynamic Island, Home Indicator), Dark Mode and Light Mode variants, and iPad adaptive layouts where required.' },
     { title: 'Android App Design (Material 3)', description: 'High-fidelity Android app design: Material Theme Builder configuration, M3 component library (NavigationBar, TopAppBar, FAB, Cards, Dialogs), dynamic colour support, 48dp minimum touch targets, and Adaptive UI for phone vs tablet.' },
@@ -5994,12 +5994,12 @@ const uxResearchOverride: ServicePageContent = {
     'Competitive UX Analysis',
     'Research Synthesis Reports',
   ],
-  marketStats: [
-    { label: 'Of usability issues discovered with just 5 participants (Nielsen Norman Group) research ROI peaks early', value: '85%' },
-    { label: 'ROI on usability investment $1 to find a problem in research vs $100 to fix it post-launch (IBM)', value: '100:1' },
-    { label: 'Time before users decide if a product is worth learning first-impression research reveals this moment', value: '5 sec' },
-    { label: 'Internal stakeholders who should substitute for real users in product decisions opinions are not data', value: '0' },
-  ],
+  // marketStats: [
+  //   { label: 'Of usability issues discovered with just 5 participants (Nielsen Norman Group) research ROI peaks early', value: '85%' },
+  //   { label: 'ROI on usability investment $1 to find a problem in research vs $100 to fix it post-launch (IBM)', value: '100:1' },
+  //   { label: 'Time before users decide if a product is worth learning first-impression research reveals this moment', value: '5 sec' },
+  //   { label: 'Internal stakeholders who should substitute for real users in product decisions opinions are not data', value: '0' },
+  // ],
   servicesCards: [
     { title: 'User Interview Programme', description: 'Moderated user interviews: participant screening, discussion guide design, moderated sessions (60-minute video call), verbatim transcription, affinity mapping, and insight synthesis (jobs-to-be-done, design implications). 5-8 participants recommended per segment.' },
     { title: 'Usability Testing', description: 'Task-based usability testing on prototypes or live products: task scenario design, think-aloud protocol, quantitative metrics (completion rate, time-on-task, error rate), qualitative observations, severity-ranked findings, and design recommendations.' },
@@ -6132,12 +6132,12 @@ const wireframingPrototypingOverride: ServicePageContent = {
     'Usability Test Ready',
     'Investor Demo Prototypes',
   ],
-  marketStats: [
-    { label: 'Of usability issues discovered before code with low-fidelity prototypes', value: '85%' },
-    { label: 'Cost of wireframe change vs high-fidelity change', value: '10x less' },
-    { label: 'Time saved in development when flows are prototyped first', value: '30-40%' },
-    { label: 'Stakeholder alignment achieved with clickable prototype vs static mockups', value: '3x faster' },
-  ],
+  // marketStats: [
+  //   { label: 'Of usability issues discovered before code with low-fidelity prototypes', value: '85%' },
+  //   { label: 'Cost of wireframe change vs high-fidelity change', value: '10x less' },
+  //   { label: 'Time saved in development when flows are prototyped first', value: '30-40%' },
+  //   { label: 'Stakeholder alignment achieved with clickable prototype vs static mockups', value: '3x faster' },
+  // ],
   servicesCards: [
     { title: 'User Flow Mapping', description: 'Task analysis (5-10 most important tasks), happy path definition, edge case identification (empty states, error states, permission states, loading states), and decision tree documentation. Delivered as Figma flow diagram.' },
     { title: 'Low-Fidelity Wireframes', description: 'Greyscale wireframes for all screens in all states: layout and content hierarchy, navigation and wayfinding, empty/loading/error/success states. Reviewed and approved before visual design.' },
@@ -6262,12 +6262,12 @@ const designSystemsOverride: ServicePageContent = {
     'Accessibility Compliant',
     'Figma → Code Token Pipeline',
   ],
-  marketStats: [
-    { label: 'Developer time saved building new features when a mature component library exists (Nielsen Norman Group)', value: '40%' },
-    { label: 'Faster design iteration when designers work from a shared component library vs recreating components per file', value: '3x' },
-    { label: 'Cost per additional screen designed once components are built, screens are assembled, not designed from scratch', value: '$0' },
-    { label: 'The universal component documentation platform used by Airbnb, Dropbox, GitHub, IBM, and 30,000+ teams', value: 'Storybook' },
-  ],
+  // marketStats: [
+  //   { label: 'Developer time saved building new features when a mature component library exists (Nielsen Norman Group)', value: '40%' },
+  //   { label: 'Faster design iteration when designers work from a shared component library vs recreating components per file', value: '3x' },
+  //   { label: 'Cost per additional screen designed once components are built, screens are assembled, not designed from scratch', value: '$0' },
+  //   { label: 'The universal component documentation platform used by Airbnb, Dropbox, GitHub, IBM, and 30,000+ teams', value: 'Storybook' },
+  // ],
   servicesCards: [
     { title: 'Figma Design System (Design Side)', description: 'Complete Figma component library: design tokens as Figma variables, primitive components with component/variant model, compound components composed from primitives, page templates, and component documentation (usage guidelines, accessibility notes). Published to Figma team library.' },
     { title: 'Storybook Component Library (Engineering Side)', description: 'React component library (TypeScript) published to private npm package. Each component with TypeScript props matching Figma variants, all states reproduced in code, Storybook stories for every component, a11y addon for accessibility audit, and Chromatic integration for visual regression testing.' },
@@ -6393,12 +6393,12 @@ const aiIntegrationServicesOverride: ServicePageContent = {
     'Model Cost Management',
     'Production Observability',
   ],
-  marketStats: [
-    { label: 'OpenAI\'s most capable multimodal model text, vision, and structured output in one API', value: 'GPT-4o' },
-    { label: 'Cost per 1M input tokens (GPT-4o mini) production AI features for fractions of a cent per user request', value: '$0.15' },
-    { label: 'Median time-to-first-token for GPT-4o streaming user sees response start within 1 second', value: '72ms' },
-    { label: 'Retrieval-Augmented Generation the architecture that gives LLMs access to your proprietary data', value: 'RAG' },
-  ],
+  // marketStats: [
+  //   { label: 'OpenAI\'s most capable multimodal model text, vision, and structured output in one API', value: 'GPT-4o' },
+  //   { label: 'Cost per 1M input tokens (GPT-4o mini) production AI features for fractions of a cent per user request', value: '$0.15' },
+  //   { label: 'Median time-to-first-token for GPT-4o streaming user sees response start within 1 second', value: '72ms' },
+  //   { label: 'Retrieval-Augmented Generation the architecture that gives LLMs access to your proprietary data', value: 'RAG' },
+  // ],
   servicesCards: [
     { title: 'LLM Feature Integration', description: 'Adding LLM-powered features to existing product: API client setup (OpenAI/Anthropic SDK with retry logic, timeout configuration), streaming response implementation (Server-Sent Events from backend to frontend), prompt engineering (system prompts, few-shot examples, chain-of-thought), structured output (JSON mode with Pydantic/Zod schema validation), and model fallback.' },
     { title: 'RAG Implementation', description: 'Adding proprietary knowledge to LLM responses: document chunking strategy (semantic chunking, not fixed-size), embedding generation (OpenAI text-embedding-3-small), vector database setup (pgvector or Pinecone), retrieval pipeline (query embedding + similarity search + top-k retrieval + reranking), and augmented generation with source attribution.' },
@@ -6548,12 +6548,12 @@ const llmApplicationsDevelopmentOverride: ServicePageContent = {
     'Streaming + Cost Monitoring',
     'LangSmith Observability',
   ],
-  marketStats: [
-    { label: 'The most widely used LLM orchestration framework 90M+ downloads, production-proven', value: 'LangChain' },
-    { label: 'The evaluation framework for RAG systems automated faithfulness, relevance, and completeness scoring', value: 'RAGAS' },
-    { label: 'PostgreSQL vector extension production RAG without a separate vector database for most B2B use cases', value: 'pgvector' },
-    { label: 'The unit of LLM cost 1 token ≈ 0.75 words. Cost management is architecture, not an afterthought', value: 'Token' },
-  ],
+  // marketStats: [
+  //   { label: 'The most widely used LLM orchestration framework 90M+ downloads, production-proven', value: 'LangChain' },
+  //   { label: 'The evaluation framework for RAG systems automated faithfulness, relevance, and completeness scoring', value: 'RAGAS' },
+  //   { label: 'PostgreSQL vector extension production RAG without a separate vector database for most B2B use cases', value: 'pgvector' },
+  //   { label: 'The unit of LLM cost 1 token ≈ 0.75 words. Cost management is architecture, not an afterthought', value: 'Token' },
+  // ],
   servicesCards: [
     { title: 'Document Q&A / Knowledge Base Application', description: 'LLM application answering questions from document corpus: ingestion pipeline (PDFs, Word docs, web pages via Unstructured.io, semantic chunking, embeddings in pgvector), query pipeline (question embedded → top-k retrieval → Cohere reranking → GPT-4o answer with citations), streaming response, source attribution UI, and admin interface for knowledge base management.' },
     { title: 'AI Writing Assistant', description: 'LLM-powered content generation for B2B: brand-voice writing assistant (system prompt encodes voice, few-shot examples demonstrate style), email and proposal generator (first-draft from template + CRM context), content repurposing tool (blog → social posts, summaries, newsletters), and multilingual content generation.' },
@@ -6699,12 +6699,12 @@ const machineLearningSolutionsOverride: ServicePageContent = {
     'MLOps & Model Deployment',
     'Model Monitoring & Retraining',
   ],
-  marketStats: [
-    { label: 'Global machine learning market by 2029 (MarketsandMarkets)', value: '$209B' },
-    { label: 'ROI from ML model deployment vs. analytical reporting alone', value: '3.5x' },
-    { label: 'Of ML projects fail to reach production the \'lab to production\' gap', value: '85%' },
-    { label: 'Annual value of a well-deployed churn prediction model per $10M ARR', value: '$1.6M' },
-  ],
+  // marketStats: [
+  //   { label: 'Global machine learning market by 2029 (MarketsandMarkets)', value: '$209B' },
+  //   { label: 'ROI from ML model deployment vs. analytical reporting alone', value: '3.5x' },
+  //   { label: 'Of ML projects fail to reach production the \'lab to production\' gap', value: '85%' },
+  //   { label: 'Annual value of a well-deployed churn prediction model per $10M ARR', value: '$1.6M' },
+  // ],
   servicesCards: [
     { title: 'Predictive Analytics Models', description: 'Supervised learning models predicting continuous outcomes (regression) or classifying inputs (classification). Business applications: churn prediction, revenue forecasting, demand forecasting, CLV prediction, sales pipeline forecasting. Feature engineering drives most predictive value.' },
     { title: 'Anomaly Detection & Fraud Detection', description: 'Unsupervised and semi-supervised models identifying unusual patterns in high-volume transaction streams. Isolation Forest, DBSCAN, autoencoders, and XGBoost with real-time scoring API (<100ms latency).' },
@@ -6898,12 +6898,12 @@ const predictiveAnalyticsOverride: ServicePageContent = {
     'Feature Engineering',
     'Deployed ML APIs',
   ],
-  marketStats: [
-    { label: 'Advance warning achievable with a well-trained churn model enough time to intervene and retain', value: '30-90 days' },
-    { label: 'Gradient boosting framework top performer on structured tabular data in Kaggle competitions and B2B production systems', value: 'XGBoost' },
-    { label: 'SHapley Additive exPlanations the model interpretability standard. Each prediction explained by contributing features', value: 'SHAP' },
-    { label: 'The primary evaluation metric for classification models measures discrimination ability across all thresholds', value: 'AUC-ROC' },
-  ],
+  // marketStats: [
+  //   { label: 'Advance warning achievable with a well-trained churn model enough time to intervene and retain', value: '30-90 days' },
+  //   { label: 'Gradient boosting framework top performer on structured tabular data in Kaggle competitions and B2B production systems', value: 'XGBoost' },
+  //   { label: 'SHapley Additive exPlanations the model interpretability standard. Each prediction explained by contributing features', value: 'SHAP' },
+  //   { label: 'The primary evaluation metric for classification models measures discrimination ability across all thresholds', value: 'AUC-ROC' },
+  // ],
   servicesCards: [
     { title: 'Churn Prediction', description: 'Per-customer churn probability score enabling proactive retention outreach. Feature engineering from event data (product usage frequency, feature adoption, support tickets, billing history, contract proximity). Gradient boosting (LightGBM/XGBoost) on labeled examples. SHAP explanations for each at-risk account. Daily scoring pipeline with CRM/Slack alerts.' },
     { title: 'Demand Forecasting', description: 'Time series forecasting for inventory management, workforce planning, capacity optimization. Lag features, rolling statistics, calendar effects. LightGBM with time-series CV or Prophet/N-BEATS/TFT. Confidence intervals via quantile regression or conformal prediction. Day-ahead to 12-week-ahead horizons.' },
@@ -7036,12 +7036,12 @@ const recommendationSystemsOverride: ServicePageContent = {
     'Real-Time Recommendation API',
     'A/B Testing Framework',
   ],
-  marketStats: [
-    { label: 'Of Amazon\'s revenue attributed to its recommendation engine', value: '35%' },
-    { label: 'Of Netflix viewing driven by its recommendation system', value: '75%' },
-    { label: 'Real-time recommendation API response target below perception threshold', value: '<50ms' },
-    { label: 'Click-through rate the primary online evaluation metric for recommendation quality', value: 'CTR' },
-  ],
+  // marketStats: [
+  //   { label: 'Of Amazon\'s revenue attributed to its recommendation engine', value: '35%' },
+  //   { label: 'Of Netflix viewing driven by its recommendation system', value: '75%' },
+  //   { label: 'Real-time recommendation API response target below perception threshold', value: '<50ms' },
+  //   { label: 'Click-through rate the primary online evaluation metric for recommendation quality', value: 'CTR' },
+  // ],
   servicesCards: [
     { title: 'E-commerce Product Recommendations', description: '\'Customers also bought\' (collaborative on co-purchase patterns), \'Similar products\' (content-based on category/attributes/price), \'Frequently bought together\' (association rules + ML ranking), cart page upsell. Real-time API connected to Shopify/WooCommerce/custom backend. A/B testing for CTR and revenue-per-session lift.' },
     { title: 'SaaS Feature Recommendations', description: 'In-product recommendations: onboarding feature suggestions (next feature based on role and similar users), relevant documentation (help articles based on current screen), report/dashboard templates (based on industry and usage), integration recommendations (suggest integrations used by similar customers). Reduces time-to-value and support tickets.' },
@@ -7184,12 +7184,12 @@ const modelTrainingOptimisationOverride: ServicePageContent = {
     'AutoML',
     'MLOps Retraining Pipelines',
   ],
-  marketStats: [
-    { label: 'Training accuracy vs validation accuracy gap indicating overfitting', value: '95% vs 72%' },
-    { label: 'Compute cost reduction vs grid search using Optuna pruning', value: '50-80%' },
-    { label: 'Inference speed improvement with ONNX Runtime vs native PyTorch', value: '2-5x' },
-    { label: 'Model size reduction with distillation + quantisation', value: '5-10x' },
-  ],
+  // marketStats: [
+  //   { label: 'Training accuracy vs validation accuracy gap indicating overfitting', value: '95% vs 72%' },
+  //   { label: 'Compute cost reduction vs grid search using Optuna pruning', value: '50-80%' },
+  //   { label: 'Inference speed improvement with ONNX Runtime vs native PyTorch', value: '2-5x' },
+  //   { label: 'Model size reduction with distillation + quantisation', value: '5-10x' },
+  // ],
   servicesCards: [
     { title: 'Hyperparameter Optimisation', description: 'Systematic hyperparameter search using Optuna (Bayesian optimisation). Search space definition, sampler selection (TPE, CMA-ES), pruning (MedianPruner reduces compute cost 50-80% vs grid search), hyperparameter importance analysis. Consistently finds better configurations in fewer trials than grid or random search.' },
     { title: 'Cross-Validation & Evaluation', description: 'Proper evaluation methodology for reliable performance estimates: k-fold CV (5/10-fold), stratified k-fold (preserve class balance for imbalanced data), time series CV (TimeSeriesSplit no leakage), nested CV (model selection + tuning), and calibration assessment (reliability diagrams).' },
@@ -7312,12 +7312,12 @@ const deepLearningSolutionsOverride: ServicePageContent = {
     'Transfer Learning',
     'TorchServe / ONNX Runtime Deployment',
   ],
-  marketStats: [
-    { label: 'PyTorch research paper dominance the framework standard for deep learning R&D', value: '85%+' },
-    { label: 'Pre-trained models available via Hugging Face and timm', value: '500,000+' },
-    { label: 'Inference speedup with ONNX Runtime vs native PyTorch', value: '2-5x' },
-    { label: 'Transfer learning reduces labelled image requirement vs training from scratch', value: '1,000-10,000 vs millions' },
-  ],
+  // marketStats: [
+  //   { label: 'PyTorch research paper dominance the framework standard for deep learning R&D', value: '85%+' },
+  //   { label: 'Pre-trained models available via Hugging Face and timm', value: '500,000+' },
+  //   { label: 'Inference speedup with ONNX Runtime vs native PyTorch', value: '2-5x' },
+  //   { label: 'Transfer learning reduces labelled image requirement vs training from scratch', value: '1,000-10,000 vs millions' },
+  // ],
   servicesCards: [
     { title: 'Computer Vision Image Classification & Object Detection', description: 'CNN-based vision: image classification (ResNet, EfficientNet, ViT with transfer learning), object detection (YOLO v8 or DETR for real-time, Faster R-CNN for high accuracy), instance segmentation, OCR + layout analysis (Tesseract + LayoutLM). Transfer learning from ImageNet-pretrained weights requires only 1,000-10,000 domain-specific labelled examples.' },
     { title: 'NLP Text Classification & Sequence Modelling', description: 'Transformer-based NLP: text classification (fine-tune BERT, RoBERTa, DeBERTa on labelled examples), named entity recognition (domain-specific entity types), sequence-to-sequence (T5/BART for summarisation, translation), multi-label classification. Hugging Face Transformers with 500,000+ pre-trained checkpoints.' },
@@ -7451,12 +7451,12 @@ const naturalLanguageProcessingOverride: ServicePageContent = {
     'Information Extraction',
     'NLP APIs',
   ],
-  marketStats: [
-    { label: 'Google\'s Bidirectional Encoder Representations from Transformers the pre-trained model that transformed NLP accuracy', value: 'BERT' },
-    { label: 'Pre-trained models available on Hugging Face Hub the universal source for NLP model starting points', value: '500K+' },
-    { label: 'Industrial-strength NLP library 100x faster than NLTK for production text pipelines', value: 'spaCy' },
-    { label: 'Text classification accuracy achievable on domain-specific tasks with BERT fine-tuning on 1,000+ labelled examples', value: '~95%' },
-  ],
+  // marketStats: [
+  //   { label: 'Google\'s Bidirectional Encoder Representations from Transformers the pre-trained model that transformed NLP accuracy', value: 'BERT' },
+  //   { label: 'Pre-trained models available on Hugging Face Hub the universal source for NLP model starting points', value: '500K+' },
+  //   { label: 'Industrial-strength NLP library 100x faster than NLTK for production text pipelines', value: 'spaCy' },
+  //   { label: 'Text classification accuracy achievable on domain-specific tasks with BERT fine-tuning on 1,000+ labelled examples', value: '~95%' },
+  // ],
   servicesCards: [
     { title: 'Text Classification', description: 'Fine-tune BERT, RoBERTa, or DeBERTa on labelled examples. Single-label and multi-label classification. Use cases: document type classification, intent detection, topic categorisation, spam detection, content moderation. Evaluation: F1, precision, recall at threshold. Deployment: FastAPI endpoint returning class probabilities.' },
     { title: 'Named Entity Recognition (NER)', description: 'Fine-tune transformer NER models on domain-specific entity types not covered by spaCy\'s general models product names, contract parties, medical terms, financial instruments. Token-level classification with BIO or BIOES tagging. Evaluation: entity-level F1. Integration: REST API returning entity spans with type and confidence.' },
@@ -7581,12 +7581,12 @@ const speechRecognitionOverride: ServicePageContent = {
     'Voice Command Interface',
     '100+ Language Support',
   ],
-  marketStats: [
-    { label: 'Word Error Rate of Whisper large-v3 on standard English benchmarks near-human accuracy', value: '4.4%' },
-    { label: 'Languages supported by Whisper multilingual transcription without separate per-language models', value: '100+' },
-    { label: 'Latency of Deepgram streaming ASR real-time transcription for live voice interfaces', value: '<300ms' },
-    { label: 'Speaker diarisation identifying who spoke when transforms transcript into structured conversation', value: 'Diarisation' },
-  ],
+  // marketStats: [
+  //   { label: 'Word Error Rate of Whisper large-v3 on standard English benchmarks near-human accuracy', value: '4.4%' },
+  //   { label: 'Languages supported by Whisper multilingual transcription without separate per-language models', value: '100+' },
+  //   { label: 'Latency of Deepgram streaming ASR real-time transcription for live voice interfaces', value: '<300ms' },
+  //   { label: 'Speaker diarisation identifying who spoke when transforms transcript into structured conversation', value: 'Diarisation' },
+  // ],
   servicesCards: [
     { title: 'Meeting Transcription', description: 'Batch transcription of recorded meetings (Zoom, Teams, Google Meet exports). Whisper large-v3 for high accuracy. Speaker diarisation via pyannote-audio (identifies each speaker\'s segments). Structured output: timestamped transcript with speaker labels. Post-processing: punctuation restoration, custom vocabulary.' },
     { title: 'Real-Time Streaming ASR', description: 'Live transcription for video conferencing plugins, contact centre dashboards, or real-time captioning. Deepgram Nova-2 (primary for streaming <300ms latency) or AWS Transcribe Streaming. WebSocket-based streaming with partial/final transcripts.' },
@@ -7715,12 +7715,12 @@ const textAnalyticsOverride: ServicePageContent = {
     'Theme Extraction',
     'Text Mining Pipelines',
   ],
-  marketStats: [
-    { label: 'Transformer-based topic modelling clusters by semantic meaning, far superior to LDA on short texts', value: 'BERTopic' },
-    { label: 'Standard evaluation metric for topic modelling quality', value: 'Topic Coherence' },
-    { label: 'Review time reduction for routine commercial contracts with automated clause extraction', value: '60-80%' },
-    { label: 'Latent Dirichlet Allocation classical topic modelling (BERTopic now standard)', value: 'LDA' },
-  ],
+  // marketStats: [
+  //   { label: 'Transformer-based topic modelling clusters by semantic meaning, far superior to LDA on short texts', value: 'BERTopic' },
+  //   { label: 'Standard evaluation metric for topic modelling quality', value: 'Topic Coherence' },
+  //   { label: 'Review time reduction for routine commercial contracts with automated clause extraction', value: '60-80%' },
+  //   { label: 'Latent Dirichlet Allocation classical topic modelling (BERTopic now standard)', value: 'LDA' },
+  // ],
   servicesCards: [
     { title: 'Topic Modelling (BERTopic)', description: 'Transformer-based topic modelling clusters semantically similar documents into topics using sentence embeddings + UMAP + HDBSCAN far superior to LDA on short texts like support tickets, reviews, and social posts. Output: named topics with representative keywords and example documents. Interactive dashboard: topic hierarchy visualisation, trend over time, drill-down to representative documents.' },
     { title: 'Sentiment Monitoring Dashboard', description: 'Multi-source sentiment tracking: product reviews (G2, Trustpilot, Capterra, App Store), support tickets, NPS survey verbatim, social mentions. Sentiment classification (positive/negative/neutral + intensity). Aspect-based sentiment (sentiment per product feature). Trend dashboards with Slack/email alert when sentiment drops significantly.' },
@@ -7847,12 +7847,12 @@ const computerVisionOverride: ServicePageContent = {
     'Document Layout Analysis',
     'Transfer Learning',
   ],
-  marketStats: [
-    { label: 'State-of-the-art real-time object detection 50+ FPS on GPU, production-deployed in thousands of B2B systems', value: 'YOLO v8' },
-    { label: '1.2M labelled images across 1,000 classes the pre-training corpus that gives transfer learning its power', value: 'ImageNet' },
-    { label: 'Mean Average Precision the standard object detection evaluation metric across all IoU thresholds', value: 'mAP' },
-    { label: 'Microsoft\'s document understanding model combines text, visual, and positional features', value: 'LayoutLM' },
-  ],
+  // marketStats: [
+  //   { label: 'State-of-the-art real-time object detection 50+ FPS on GPU, production-deployed in thousands of B2B systems', value: 'YOLO v8' },
+  //   { label: '1.2M labelled images across 1,000 classes the pre-training corpus that gives transfer learning its power', value: 'ImageNet' },
+  //   { label: 'Mean Average Precision the standard object detection evaluation metric across all IoU thresholds', value: 'mAP' },
+  //   { label: 'Microsoft\'s document understanding model combines text, visual, and positional features', value: 'LayoutLM' },
+  // ],
   servicesCards: [
     { title: 'Image Classification', description: 'Classify images into predefined categories using fine-tuned CNN or ViT models. Transfer learning from ImageNet pre-trained weights (EfficientNet, ResNet, ViT) requires 1,000-10,000 labelled images. Multi-label classification (an image can belong to multiple categories). Use cases: product category classification, document type classification, manufacturing defect category, medical image classification. Real-time REST API (<100ms per image) or batch processing pipeline.' },
     { title: 'Object Detection (YOLO v8)', description: 'Locate and classify multiple objects within an image with bounding boxes. YOLO v8 (Ultralytics state-of-the-art real-time detection) for real-time applications. DETR (DEtection TRansformer) for high-accuracy offline applications. Custom class training on annotated images. Evaluation: mAP@50, mAP@50-95. Use cases: product detection, safety equipment detection, vehicle detection, document region detection.' },
@@ -7979,12 +7979,12 @@ const imageProcessingOverride: ServicePageContent = {
     'Super-Resolution',
     'Medical / DICOM Pipelines',
   ],
-  marketStats: [
-    { label: 'State-of-the-art super-resolution 4x upscaling with realistic detail hallucination', value: 'Real-ESRGAN' },
-    { label: 'Open-source background removal production-ready, high accuracy for product images', value: 'rembg (U2-Net)' },
-    { label: 'No-reference image quality metric fast, no ground truth required', value: 'BRISQUE' },
-    { label: 'DICOM medical image processing framework PyTorch-based torchvision equivalent for medical imaging', value: 'MONAI' },
-  ],
+  // marketStats: [
+  //   { label: 'State-of-the-art super-resolution 4x upscaling with realistic detail hallucination', value: 'Real-ESRGAN' },
+  //   { label: 'Open-source background removal production-ready, high accuracy for product images', value: 'rembg (U2-Net)' },
+  //   { label: 'No-reference image quality metric fast, no ground truth required', value: 'BRISQUE' },
+  //   { label: 'DICOM medical image processing framework PyTorch-based torchvision equivalent for medical imaging', value: 'MONAI' },
+  // ],
   servicesCards: [
     { title: 'Batch Image Enhancement', description: 'Automated image quality improvement at scale: brightness/contrast normalisation (CLAHE), noise reduction (Gaussian blur, bilateral filter, deep learning denoising), sharpening, colour correction, format standardisation (resize, crop, WebP/AVIF conversion). Libraries: OpenCV, Pillow. Throughput: 1,000-10,000 images/minute on CPU, 100,000+ on GPU.' },
     { title: 'Background Removal & Product Images', description: 'AI-powered background removal for e-commerce product images: semantic segmentation to isolate product from background (U2-Net or SAM), clean white or transparent background, shadow addition/removal, consistent aspect ratio padding. rembg (U2-Net) production-ready. Batch S3 pipeline with e-commerce platform integration (Shopify, WooCommerce via webhook).' },
@@ -8111,12 +8111,12 @@ const videoAnalyticsOverride: ServicePageContent = {
     'Real-Time RTSP Streams',
     'Privacy-Preserving Analytics',
   ],
-  marketStats: [
-    { label: 'Real-time multi-class object detection at 50+ FPS production standard for video analytics', value: 'YOLO v8' },
-    { label: 'Deep Simple Online and Realtime Tracking maintains object identity across video frames', value: 'DeepSORT' },
-    { label: 'Facebook\'s dual-path action recognition network slow pathway for spatial, fast for temporal features', value: 'SlowFast' },
-    { label: 'Real-Time Streaming Protocol standard for IP camera live video feeds consumed by analytics systems', value: 'RTSP' },
-  ],
+  // marketStats: [
+  //   { label: 'Real-time multi-class object detection at 50+ FPS production standard for video analytics', value: 'YOLO v8' },
+  //   { label: 'Deep Simple Online and Realtime Tracking maintains object identity across video frames', value: 'DeepSORT' },
+  //   { label: 'Facebook\'s dual-path action recognition network slow pathway for spatial, fast for temporal features', value: 'SlowFast' },
+  //   { label: 'Real-Time Streaming Protocol standard for IP camera live video feeds consumed by analytics systems', value: 'RTSP' },
+  // ],
   servicesCards: [
     { title: 'Object Detection & Tracking', description: 'YOLO v8 (detection) + DeepSORT or ByteTrack (tracking) detect objects each frame, assign persistent IDs, track trajectory across frames. Output: per-object trajectory (entry time, path, exit time, dwell zone), object count, object classification. Use cases: retail customer tracking (anonymous), vehicle tracking on logistics sites, equipment tracking. Real-time or batch processing. Privacy-preserving: trajectories without storing identifiable images.' },
     { title: 'Action Recognition', description: 'Detect specific human or machine behaviours from video sequences. Approaches: two-stream networks (spatial + optical flow), SlowFast networks (Facebook dual temporal pathway), Video Swin Transformer. Use cases: safety compliance (PPE detection hard hat/high-vis worn?), workplace safety event detection (slip/fall), retail customer behaviour (picking up product, comparing items), manufacturing process monitoring (correct assembly sequence).' },
@@ -8243,12 +8243,12 @@ const dataScienceAnalyticsOverride: ServicePageContent = {
     'dbt, Snowflake, BigQuery',
     'Self-Service Analytics',
   ],
-  marketStats: [
-    { label: 'Global data analytics market size by 2026', value: '$274B' },
-    { label: 'ROI from data-driven decision making vs. intuition-driven', value: '5x' },
-    { label: 'Data generated globally every day most organizations use <1%', value: '2.5EB' },
-    { label: 'Of enterprise data goes unused for analytics (Forrester)', value: '73%' },
-  ],
+  // marketStats: [
+  //   { label: 'Global data analytics market size by 2026', value: '$274B' },
+  //   { label: 'ROI from data-driven decision making vs. intuition-driven', value: '5x' },
+  //   { label: 'Data generated globally every day most organizations use <1%', value: '2.5EB' },
+  //   { label: 'Of enterprise data goes unused for analytics (Forrester)', value: '73%' },
+  // ],
   servicesCards: [
     { title: 'Data Engineering & Pipeline Development', description: 'ELT/ETL pipelines moving data from source systems to centralized data warehouse. Modern data stack: Airbyte/Fivetran for ingestion, dbt for transformation, Snowflake/BigQuery/Redshift as warehouse, Airflow/Prefect for orchestration. Data quality with Great Expectations/dbt tests.' },
     { title: 'Business Intelligence & Dashboard Development', description: 'Interactive BI dashboards and self-service analytics platforms. Executive dashboards (KPIs, revenue trends), operational dashboards (real-time monitoring), self-service analytics portals. Tool selection: Metabase (open-source), Superset, Looker, Tableau, or custom React dashboards.' },
@@ -8452,12 +8452,12 @@ const businessIntelligenceOverride: ServicePageContent = {
     'Embedded Analytics',
     'Automated KPI Alerts',
   ],
-  marketStats: [
-    { label: 'Data Build Tool SQL-based transformation framework. Version-controlled, tested data models. The standard for modern analytics engineering.', value: 'dbt' },
-    { label: 'Open-source BI tool self-service analytics for non-technical business users. Free tier, rapid deployment, embedded analytics support.', value: 'Metabase' },
-    { label: 'Google\'s enterprise BI platform LookML semantic layer, governed metrics, embedded analytics for B2B SaaS products.', value: 'Looker' },
-    { label: 'A consistent definition of business metrics (revenue, churn rate, CAC) shared across all dashboards eliminates the "different people get different numbers" problem.', value: 'Semantic Layer' },
-  ],
+  // marketStats: [
+  //   { label: 'Data Build Tool SQL-based transformation framework. Version-controlled, tested data models. The standard for modern analytics engineering.', value: 'dbt' },
+  //   { label: 'Open-source BI tool self-service analytics for non-technical business users. Free tier, rapid deployment, embedded analytics support.', value: 'Metabase' },
+  //   { label: 'Google\'s enterprise BI platform LookML semantic layer, governed metrics, embedded analytics for B2B SaaS products.', value: 'Looker' },
+  //   { label: 'A consistent definition of business metrics (revenue, churn rate, CAC) shared across all dashboards eliminates the "different people get different numbers" problem.', value: 'Semantic Layer' },
+  // ],
   servicesCards: [
     { title: 'Data Warehouse Design', description: 'Centralized analytics data store: star schema or medallion architecture (Bronze raw → Silver cleaned → Gold business-ready), source system identification, refresh strategy, technology selection. Snowflake (primary), BigQuery, Redshift, or DuckDB for smaller volumes.' },
     { title: 'dbt Data Modelling', description: 'Transform raw source data into business-ready analytics models: staging models (clean column names, type casts), intermediate models (business logic transformations), mart models (customer 360, product metrics, financial summary), tests (not_null, unique, accepted_values, relationships), and documentation.' },
@@ -8713,11 +8713,11 @@ const dataVisualizationOverride: ServicePageContent = {
     'Real-Time Charts (WebSocket)',
     'SVG + Canvas Rendering',
   ],
-  marketStats: [
-    { label: 'Recharts composable React chart library via components. Primary for standard business charts.', value: 'Recharts' },
-    { label: 'D3.js low-level data visualisation library. Custom chart types for any visualisation.', value: 'D3.js' },
-    { label: 'WebWorker for heavy data transformations off main thread 60fps smooth scrolling', value: 'WebWorker' },
-  ],
+  // marketStats: [
+  //   { label: 'Recharts composable React chart library via components. Primary for standard business charts.', value: 'Recharts' },
+  //   { label: 'D3.js low-level data visualisation library. Custom chart types for any visualisation.', value: 'D3.js' },
+  //   { label: 'WebWorker for heavy data transformations off main thread 60fps smooth scrolling', value: 'WebWorker' },
+  // ],
   servicesCards: [
     { title: 'React Dashboard Development', description: 'Production React dashboards with TypeScript: Recharts (AreaChart, BarChart, ScatterChart, RadarChart primary), Nivo (heatmaps, treemaps, Voronoi for data-dense B2B dashboards), Victory (animation-native good for mobile), Chart.js with react-chartjs-2 (legacy). Dashboard patterns: KPI card row + trend chart + breakdown table, date range picker, dimension filter, drill-down interactions as standard.' },
     { title: 'D3.js Custom Visualisation', description: 'When no charting library has the right chart type: D3.js provides SVG element binding, scales (linear, log, ordinal, time), axes, transitions (smooth data updates), layouts (force simulation for network graphs, treemap, chord diagram, Sankey). ClickMasters uses D3.js for: network/graph visualisations, geospatial visualisations (custom map projections, choropleth), financial charts (candlestick, waterfall, tornado), any chart type not in standard libraries.' },
@@ -8843,12 +8843,12 @@ const bigDataSolutionsOverride: ServicePageContent = {
     'AWS Glue + S3 Lakehouse',
     'Real-Time Stream Processing',
   ],
-  marketStats: [
-    { label: 'Apache Spark distributed processing for petabyte-scale datasets. Catalyst optimiser + Tungsten engine.', value: 'Spark' },
-    { label: 'Apache Kafka event streaming backbone. Processes 1 trillion+ messages/day at LinkedIn, Netflix, Uber.', value: 'Kafka' },
-    { label: 'Delta Lake ACID transactions on Parquet for data lakehouses. Time travel, schema enforcement, upserts.', value: 'Delta Lake' },
-    { label: 'Databricks Photon engine 2-5x faster than open-source Spark', value: 'Photon' },
-  ],
+  // marketStats: [
+  //   { label: 'Apache Spark distributed processing for petabyte-scale datasets. Catalyst optimiser + Tungsten engine.', value: 'Spark' },
+  //   { label: 'Apache Kafka event streaming backbone. Processes 1 trillion+ messages/day at LinkedIn, Netflix, Uber.', value: 'Kafka' },
+  //   { label: 'Delta Lake ACID transactions on Parquet for data lakehouses. Time travel, schema enforcement, upserts.', value: 'Delta Lake' },
+  //   { label: 'Databricks Photon engine 2-5x faster than open-source Spark', value: 'Photon' },
+  // ],
   servicesCards: [
     { title: 'Apache Spark (Databricks / AWS EMR)', description: 'Distributed data processing for large-scale workloads: PySpark DataFrame API (typed transformations, Catalyst optimiser), Spark SQL (SQL over DataFrames), Spark Streaming/Structured Streaming (micro-batch streaming, exactly-once semantics), Spark MLlib (distributed ML for datasets too large for scikit-learn). Deployment: Databricks (managed auto-scaling, Delta Lake native, Unity Catalog) or AWS EMR (managed Hadoop/Spark lower cost for steady workloads).' },
     { title: 'Data Lakehouse (Delta Lake / Iceberg)', description: 'Unified data platform combining data lake scale with data warehouse ACID guarantees: Delta Lake (ACID on Parquet, time travel, schema enforcement, MERGE INTO, Z-ORDER clustering), Apache Iceberg (Netflix/Apple multi-engine, same table queryable from Spark, Flink, Trino, Athena), Apache Hudi (Uber optimised for incremental ingestion).' },
@@ -8998,12 +8998,12 @@ const webScrapingDataExtractionOverride: ServicePageContent = {
     'Lead Data Extraction',
     'Scheduled Cloud Crawlers',
   ],
-  marketStats: [
-    { label: 'Residential proxies (Oxylabs, Bright Data) IP addresses from real ISPs, significantly harder to block than datacenter proxies', value: 'Residential Proxies' },
-    { label: 'Playwright stealth plugin masks headless browser indicators, patches navigator.plugins, WebGL, canvas fingerprint', value: 'Stealth Plugin' },
-    { label: 'Poisson-distributed random delays human-realistic timing, not fixed intervals that are statistically detectable', value: '2-8 sec' },
-    { label: 'CAPTCHA solving services used only where legally appropriate', value: '2captcha / Anti-Captcha' },
-  ],
+  // marketStats: [
+  //   { label: 'Residential proxies (Oxylabs, Bright Data) IP addresses from real ISPs, significantly harder to block than datacenter proxies', value: 'Residential Proxies' },
+  //   { label: 'Playwright stealth plugin masks headless browser indicators, patches navigator.plugins, WebGL, canvas fingerprint', value: 'Stealth Plugin' },
+  //   { label: 'Poisson-distributed random delays human-realistic timing, not fixed intervals that are statistically detectable', value: '2-8 sec' },
+  //   { label: 'CAPTCHA solving services used only where legally appropriate', value: '2captcha / Anti-Captcha' },
+  // ],
   servicesCards: [
     { title: 'Python Web Crawlers (Playwright / Scrapy)', description: 'Production web crawlers using Playwright (browser automation for JavaScript-rendered content, SPAs, dynamic loading) and Scrapy (async spider framework for high-throughput HTML scraping). Spider design: URL discovery (sitemap parsing, pagination detection, category traversal), data extraction (CSS selectors/XPath), data validation, and incremental crawling (only re-crawl changed pages).' },
     { title: 'Anti-Detection & Proxy Rotation', description: 'User agent rotation (realistic browser agents), request rate limiting (Poisson-distributed random delays), proxy rotation (residential proxies via Oxylabs/Bright Data/Smartproxy), browser fingerprint masking (Playwright stealth plugin), CAPTCHA handling (2captcha/Anti-Captcha).' },
@@ -9132,12 +9132,12 @@ const businessProcessAutomationOverride: ServicePageContent = {
     'CRM / ERP / Billing Sync',
     'AI-Augmented Automation',
   ],
-  marketStats: [
-    { label: 'Potential value unlocked by automation globally by 2030 (McKinsey)', value: '$15.9T' },
-    { label: 'Cost reduction achievable through intelligent process automation', value: '40-75%' },
-    { label: 'Of current work activities are automatable with existing technology', value: '45%' },
-    { label: 'Average payback period for a well-scoped automation investment', value: '6 months' },
-  ],
+  // marketStats: [
+  //   { label: 'Potential value unlocked by automation globally by 2030 (McKinsey)', value: '$15.9T' },
+  //   { label: 'Cost reduction achievable through intelligent process automation', value: '40-75%' },
+  //   { label: 'Of current work activities are automatable with existing technology', value: '45%' },
+  //   { label: 'Average payback period for a well-scoped automation investment', value: '6 months' },
+  // ],
   servicesCards: [
     { title: 'Approval Workflow Automation', description: 'Replace email-based approval chains with structured, routable, time-limited workflow systems. Purchase order approvals, contract approvals, expense approvals, hiring approvals all with conditional routing based on amount/category, automatic escalation when idle beyond SLAs, full audit trail, Slack/Teams integration, operations dashboard.' },
     { title: 'Document Processing Automation', description: 'Eliminate manual extraction, entry, and filing of document-based data. Invoice processing (extract vendor, amount, GL codes match PO route for approval), contract data extraction (key dates, obligations, payment terms), onboarding document collection, expense receipt processing. Built with AI document intelligence where documents vary.' },
@@ -9298,12 +9298,12 @@ const workflowAutomationOverride: ServicePageContent = {
     'CRM + Billing Automation',
     'Slack & Email Workflows',
   ],
-  marketStats: [
-    { label: 'Open-source workflow automation self-hosted, no per-execution fees, 400+ integrations, fair-code licence', value: 'n8n' },
-    { label: 'Make.com (formerly Integromat) powerful visual workflow builder, complex multi-path logic, 1,500+ app integrations', value: 'Make' },
-    { label: 'Average hours per week saved per employee by eliminating manual data entry between connected tools', value: '4 hrs' },
-    { label: 'Manual steps in a well-designed workflow automation humans only involved in exception handling', value: '0' },
-  ],
+  // marketStats: [
+  //   { label: 'Open-source workflow automation self-hosted, no per-execution fees, 400+ integrations, fair-code licence', value: 'n8n' },
+  //   { label: 'Make.com (formerly Integromat) powerful visual workflow builder, complex multi-path logic, 1,500+ app integrations', value: 'Make' },
+  //   { label: 'Average hours per week saved per employee by eliminating manual data entry between connected tools', value: '4 hrs' },
+  //   { label: 'Manual steps in a well-designed workflow automation humans only involved in exception handling', value: '0' },
+  // ],
   servicesCards: [
     { title: 'Lead-to-Customer Automation', description: 'Automate journey from new lead to onboarded customer: new CRM lead → enrich with Clearbit/Apollo → score against ICP → route to correct sales rep in Slack → deal closes → trigger billing setup in Stripe → Slack notification to onboarding team → create onboarding task in PM tool → send welcome email. Each step triggered automatically zero manual handoffs between systems.' },
     { title: 'Customer Onboarding Workflows', description: 'Automate post-sale onboarding: deal closed in CRM → create project in ClickUp/Asana → invite customer to Slack channel → send onboarding checklist → trigger provisioning API call → schedule kickoff calendar invite → after N days, check product activation → if not activated, trigger intervention workflow → escalate to CSM if no activation by day 14.' },
@@ -9434,12 +9434,12 @@ const systemIntegrationOverride: ServicePageContent = {
     'Event-Driven Webhook Integration',
     'Legacy System Connectivity',
   ],
-  marketStats: [
-    { label: 'Integration Pattern direct REST API calls between systems', value: 'Point-to-Point REST API' },
-    { label: 'Integration Pattern publish webhook events, consumer responds in real time', value: 'Webhook / Event-Driven' },
-    { label: 'Integration Pattern publish to queue, consumer processes at own pace', value: 'Message Queue (Kafka/SQS)' },
-    { label: 'Integration Pattern managed middleware with pre-built connectors', value: 'iPaaS (Boomi, MuleSoft)' },
-  ],
+  // marketStats: [
+  //   { label: 'Integration Pattern direct REST API calls between systems', value: 'Point-to-Point REST API' },
+  //   { label: 'Integration Pattern publish webhook events, consumer responds in real time', value: 'Webhook / Event-Driven' },
+  //   { label: 'Integration Pattern publish to queue, consumer processes at own pace', value: 'Message Queue (Kafka/SQS)' },
+  //   { label: 'Integration Pattern managed middleware with pre-built connectors', value: 'iPaaS (Boomi, MuleSoft)' },
+  // ],
   servicesCards: [
     { title: 'ERP Integration', description: 'Connect ERP systems (NetSuite, SAP Business One, Microsoft Dynamics 365, Sage, Epicor) to e-commerce (Shopify, WooCommerce), WMS (ShipBob, ShipStation), CRM (Salesforce, HubSpot), and accounting. Bidirectional sync: inventory ERP → e-commerce (prevent oversells), orders e-commerce → ERP (fulfillment), shipments WMS → ERP/e-commerce (customer notification). Error handling: failed order syncs queued, duplicate detection, retry logic.' },
     { title: 'CRM Integration', description: 'Salesforce, HubSpot, Pipedrive connected to billing (Stripe deal Closed Won → create Stripe customer/subscription → sync invoice status), customer success (Gainsight, ChurnZero product usage → health score → risk alerts), marketing automation (Klaviyo, Marketo CRM changes → email lists, deal stage changes → campaign enrollment), support (Zendesk, Intercom ticket volume → CRM account health). Bi-directional with conflict resolution.' },
@@ -9571,12 +9571,12 @@ const apiIntegrationOverride: ServicePageContent = {
     'Salesforce / HubSpot CRM',
     'Webhook Consumer APIs',
   ],
-  marketStats: [
-    { label: 'Stripe API payments, subscriptions, marketplace payouts. PCI scope reduction via Stripe.js.', value: 'Stripe' },
-    { label: 'Twilio API SMS, voice, WhatsApp. A2P 10DLC registration for US SMS campaigns.', value: 'Twilio' },
-    { label: 'SendGrid transactional email. DKIM/SPF/DMARC setup for deliverability.', value: 'SendGrid' },
-    { label: 'Salesforce API 10M+ API calls/day. Governor limits (API call limits per 24h).', value: 'Salesforce' },
-  ],
+  // marketStats: [
+  //   { label: 'Stripe API payments, subscriptions, marketplace payouts. PCI scope reduction via Stripe.js.', value: 'Stripe' },
+  //   { label: 'Twilio API SMS, voice, WhatsApp. A2P 10DLC registration for US SMS campaigns.', value: 'Twilio' },
+  //   { label: 'SendGrid transactional email. DKIM/SPF/DMARC setup for deliverability.', value: 'SendGrid' },
+  //   { label: 'Salesforce API 10M+ API calls/day. Governor limits (API call limits per 24h).', value: 'Salesforce' },
+  // ],
   servicesCards: [
     { title: 'Payment API (Stripe)', description: 'Stripe integration: Charges (PaymentIntents), Subscriptions (recurring billing, customer portal, prorations), Stripe Connect (marketplace payouts), webhook consumer (payment events succeeded, failed, refunded, dispute), SCA/3DS compliance, Idempotency keys on all charge requests, PCI scope reduction via Stripe.js (card data never touches your server).' },
     { title: 'Communications API (Twilio)', description: 'Twilio integration: SMS (Programmable Messaging), Voice (Programmable Voice IVR, call routing, recording), WhatsApp Business API, Verify (OTP verification), Conversations (multi-channel messaging). Rate limits per phone number, A2P 10DLC registration for US SMS campaigns, webhook for delivery status.' },
@@ -9734,17 +9734,17 @@ const cloudSolutionsOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Amazon Web Services 33% global cloud market share. ClickMasters\' primary cloud platform.', value: 'AWS' },
+  //   { label: 'Amazon Web Services 33% global cloud market share. ClickMasters\' primary cloud platform.', value: 'AWS' },
 
-    { label: 'Average cloud cost reduction achievable through FinOps optimisation on an unoptimised AWS account', value: '40%' },
+  //   { label: 'Average cloud cost reduction achievable through FinOps optimisation on an unoptimised AWS account', value: '40%' },
 
-    { label: 'Uptime achievable with multi-AZ AWS architecture + health-check routing + automated failover', value: '99.99%' },
+  //   { label: 'Uptime achievable with multi-AZ AWS architecture + health-check routing + automated failover', value: '99.99%' },
 
-    { label: 'Cloud infrastructure markup AWS, GCP, and Azure costs billed directly at provider rates', value: '$0' },
+  //   { label: 'Cloud infrastructure markup AWS, GCP, and Azure costs billed directly at provider rates', value: '$0' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -10018,17 +10018,17 @@ const cloudNativeDevelopmentOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'AWS ECS Fargate container platform with no EC2 fleet management. Pay per task-second of CPU/memory.', value: 'ECS Fargate' },
+  //   { label: 'AWS ECS Fargate container platform with no EC2 fleet management. Pay per task-second of CPU/memory.', value: 'ECS Fargate' },
 
-    { label: 'Amazon EKS managed Kubernetes for advanced traffic management and multi-cloud workloads.', value: 'EKS' },
+  //   { label: 'Amazon EKS managed Kubernetes for advanced traffic management and multi-cloud workloads.', value: 'EKS' },
 
-    { label: 'Karpenter AWS-native node provisioning. Faster than Cluster Autoscaler, bin-packing optimisation.', value: 'Karpenter' },
+  //   { label: 'Karpenter AWS-native node provisioning. Faster than Cluster Autoscaler, bin-packing optimisation.', value: 'Karpenter' },
 
-    { label: 'Step Functions serverless state machine orchestration. Visual workflow editor, retry logic, execution history.', value: 'Step Functions' },
+  //   { label: 'Step Functions serverless state machine orchestration. Visual workflow editor, retry logic, execution history.', value: 'Step Functions' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -10294,17 +10294,17 @@ const devopsServicesOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'DORA metrics: Deployment Frequency, Lead Time for Changes, Change Failure Rate, Time to Restore Service elite performers deploy multiple times per day', value: 'DORA' },
+  //   { label: 'DORA metrics: Deployment Frequency, Lead Time for Changes, Change Failure Rate, Time to Restore Service elite performers deploy multiple times per day', value: 'DORA' },
 
-    { label: 'Trivy container image vulnerability scanning. Blocks deployment of images with critical CVEs.', value: 'Trivy' },
+  //   { label: 'Trivy container image vulnerability scanning. Blocks deployment of images with critical CVEs.', value: 'Trivy' },
 
-    { label: 'Conventional Commits + semantic-release automated versioning and CHANGELOG generation from commit messages.', value: 'Semantic Release' },
+  //   { label: 'Conventional Commits + semantic-release automated versioning and CHANGELOG generation from commit messages.', value: 'Semantic Release' },
 
-    { label: '99.9% availability = 44 minutes of downtime/month error budget for teams to balance speed vs stability', value: 'Error Budget' },
+  //   { label: '99.9% availability = 44 minutes of downtime/month error budget for teams to balance speed vs stability', value: 'Error Budget' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -10552,17 +10552,17 @@ const devsecopsOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Semgrep rule-based SAST with 1,000+ security rules. Fast enough for every PR.', value: 'Semgrep' },
+  //   { label: 'Semgrep rule-based SAST with 1,000+ security rules. Fast enough for every PR.', value: 'Semgrep' },
 
-    { label: 'Trivy scans OS packages, app dependencies, Dockerfile misconfigs, and generates SBOM.', value: 'Trivy' },
+  //   { label: 'Trivy scans OS packages, app dependencies, Dockerfile misconfigs, and generates SBOM.', value: 'Trivy' },
 
-    { label: 'US Executive Order 14028 (May 2021) software sold to US federal government must include SBOM.', value: 'EO 14028' },
+  //   { label: 'US Executive Order 14028 (May 2021) software sold to US federal government must include SBOM.', value: 'EO 14028' },
 
-    { label: 'Falco CNCF runtime security. Kernel-level syscall monitoring for Kubernetes.', value: 'Falco' },
+  //   { label: 'Falco CNCF runtime security. Kernel-level syscall monitoring for Kubernetes.', value: 'Falco' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -10856,17 +10856,17 @@ const serverlessArchitectureOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'AWS Lambda serverless compute. Scales from zero to thousands automatically. Pay per invocation + ms.', value: 'Lambda' },
+  //   { label: 'AWS Lambda serverless compute. Scales from zero to thousands automatically. Pay per invocation + ms.', value: 'Lambda' },
 
-    { label: 'API Gateway HTTP API 71% cheaper than REST API for same workload. JWT authoriser support.', value: 'HTTP API' },
+  //   { label: 'API Gateway HTTP API 71% cheaper than REST API for same workload. JWT authoriser support.', value: 'HTTP API' },
 
-    { label: 'Lambda SnapStart for Java 90% cold start reduction. Snapshots initialised environment.', value: 'SnapStart' },
+  //   { label: 'Lambda SnapStart for Java 90% cold start reduction. Snapshots initialised environment.', value: 'SnapStart' },
 
-    { label: 'Graviton2/ARM64 Lambda 20% cheaper than x86, 19% better price-performance.', value: 'Graviton2' },
+  //   { label: 'Graviton2/ARM64 Lambda 20% cheaper than x86, 19% better price-performance.', value: 'Graviton2' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -11142,17 +11142,17 @@ const databaseDesignOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'The world\'s most advanced open-source relational database ACID, RLS, JSONB, full-text search, PostGIS.', value: 'PostgreSQL' },
+  //   { label: 'The world\'s most advanced open-source relational database ACID, RLS, JSONB, full-text search, PostGIS.', value: 'PostgreSQL' },
 
-    { label: 'Boyce-Codd Normal Form eliminates all non-trivial functional dependencies, prevents update anomalies.', value: 'BCNF' },
+  //   { label: 'Boyce-Codd Normal Form eliminates all non-trivial functional dependencies, prevents update anomalies.', value: 'BCNF' },
 
-    { label: 'Row-Level Security PostgreSQL\'s built-in multi-tenant isolation mechanism. Enforces tenant boundaries at database level.', value: 'RLS' },
+  //   { label: 'Row-Level Security PostgreSQL\'s built-in multi-tenant isolation mechanism. Enforces tenant boundaries at database level.', value: 'RLS' },
 
-    { label: 'EXPLAIN ANALYZE PostgreSQL query planning tool that reveals index usage, seq scans, join strategies, and actual cost.', value: 'EXPLAIN' },
+  //   { label: 'EXPLAIN ANALYZE PostgreSQL query planning tool that reveals index usage, seq scans, join strategies, and actual cost.', value: 'EXPLAIN' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -11410,17 +11410,17 @@ const databaseManagementOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'PgBouncer lightweight connection pooler. Transaction pooling mode enables thousands of app connections to share a small database connection pool.', value: 'PgBouncer' },
+  //   { label: 'PgBouncer lightweight connection pooler. Transaction pooling mode enables thousands of app connections to share a small database connection pool.', value: 'PgBouncer' },
 
-    { label: 'RDS Multi-AZ automatic failover in 60-120 seconds, zero data loss for committed transactions.', value: 'Multi-AZ' },
+  //   { label: 'RDS Multi-AZ automatic failover in 60-120 seconds, zero data loss for committed transactions.', value: 'Multi-AZ' },
 
-    { label: 'RDS Proxy managed connection proxy for Lambda, handles pooling, failover, IAM auth.', value: 'RDS Proxy' },
+  //   { label: 'RDS Proxy managed connection proxy for Lambda, handles pooling, failover, IAM auth.', value: 'RDS Proxy' },
 
-    { label: 'pg_stat_statements top slow queries by total execution time, calls, mean time source for optimisation prioritisation.', value: 'pg_stat_statements' },
+  //   { label: 'pg_stat_statements top slow queries by total execution time, calls, mean time source for optimisation prioritisation.', value: 'pg_stat_statements' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -11678,17 +11678,17 @@ const dataMigrationOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'AWS DMS Database Migration Service. CDC-based replication, zero-downtime cutover, supports 20+ source/target engines.', value: 'AWS DMS' },
+  //   { label: 'AWS DMS Database Migration Service. CDC-based replication, zero-downtime cutover, supports 20+ source/target engines.', value: 'AWS DMS' },
 
-    { label: 'Debezium open-source CDC. Streams database changes (insert/update/delete) from PostgreSQL WAL, MySQL binlog to Kafka.', value: 'Debezium' },
+  //   { label: 'Debezium open-source CDC. Streams database changes (insert/update/delete) from PostgreSQL WAL, MySQL binlog to Kafka.', value: 'Debezium' },
 
-    { label: 'Expand/Contract Pattern add new column, dual-write, migrate reads, drop old each phase independently safe.', value: 'Expand/Contract' },
+  //   { label: 'Expand/Contract Pattern add new column, dual-write, migrate reads, drop old each phase independently safe.', value: 'Expand/Contract' },
 
-    { label: 'Row count + checksum validation confirms zero data loss. Automated comparison after every migration stage.', value: 'Validation' },
+  //   { label: 'Row count + checksum validation confirms zero data loss. Automated comparison after every migration stage.', value: 'Validation' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -11938,17 +11938,17 @@ const sqlNosqlSolutionsOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'PostgreSQL ACID transactions, row-level security, JSONB, full-text search, PostGIS, 35+ years production stability.', value: 'PostgreSQL' },
+  //   { label: 'PostgreSQL ACID transactions, row-level security, JSONB, full-text search, PostGIS, 35+ years production stability.', value: 'PostgreSQL' },
 
-    { label: 'Redis sub-millisecond latency, Lua scripting, sorted sets, pub/sub, Streams (append-only log), Redis Cluster.', value: 'Redis' },
+  //   { label: 'Redis sub-millisecond latency, Lua scripting, sorted sets, pub/sub, Streams (append-only log), Redis Cluster.', value: 'Redis' },
 
-    { label: 'MongoDB flexible document model, horizontal sharding, aggregation pipeline, Atlas full-text/vector search, change streams.', value: 'MongoDB' },
+  //   { label: 'MongoDB flexible document model, horizontal sharding, aggregation pipeline, Atlas full-text/vector search, change streams.', value: 'MongoDB' },
 
-    { label: 'DynamoDB single-digit millisecond at any scale, serverless, global tables, DynamoDB Streams, single-table design.', value: 'DynamoDB' },
+  //   { label: 'DynamoDB single-digit millisecond at any scale, serverless, global tables, DynamoDB Streams, single-table design.', value: 'DynamoDB' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -12234,17 +12234,17 @@ const cybersecurityServicesOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Average cost of a data breach in 2024 (IBM)', value: '$4.88M' },
+  //   { label: 'Average cost of a data breach in 2024 (IBM)', value: '$4.88M' },
 
-    { label: 'Average days to identify and contain a breach', value: '277' },
+  //   { label: 'Average days to identify and contain a breach', value: '277' },
 
-    { label: 'Organizations experienced more than one data breach in 2023', value: '83%' },
+  //   { label: 'Organizations experienced more than one data breach in 2023', value: '83%' },
 
-    { label: 'Projected annual cybercrime cost by 2025', value: '$10.5T' },
+  //   { label: 'Projected annual cybercrime cost by 2025', value: '$10.5T' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -12588,17 +12588,17 @@ const securityAuditsOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Open Web Application Security Project authoritative reference for web application security risks, updated every 3-4 years', value: 'OWASP' },
+  //   { label: 'Open Web Application Security Project authoritative reference for web application security risks, updated every 3-4 years', value: 'OWASP' },
 
-    { label: 'Average cost of a data breach (IBM Security 2023) the business case for proactive security audits', value: '$4.45M' },
+  //   { label: 'Average cost of a data breach (IBM Security 2023) the business case for proactive security audits', value: '$4.45M' },
 
-    { label: 'Of breaches involve a human element misconfigurations, credential theft, social engineering (Verizon DBIR 2023)', value: '82%' },
+  //   { label: 'Of breaches involve a human element misconfigurations, credential theft, social engineering (Verizon DBIR 2023)', value: '82%' },
 
-    { label: 'ClickMasters does not perform offensive security testing audit and remediation only', value: '$0' },
+  //   { label: 'ClickMasters does not perform offensive security testing audit and remediation only', value: '$0' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -12852,17 +12852,17 @@ const penetrationTestingOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'SQLMap automated SQL injection detection and exploitation in controlled scope', value: 'SQLMap' },
+  //   { label: 'SQLMap automated SQL injection detection and exploitation in controlled scope', value: 'SQLMap' },
 
-    { label: 'Burp Suite Professional primary web application pen testing tool', value: 'Burp Suite' },
+  //   { label: 'Burp Suite Professional primary web application pen testing tool', value: 'Burp Suite' },
 
-    { label: 'Pacu AWS penetration testing framework (IAM privilege escalation, metadata API), from Rhino Security', value: 'Pacu' },
+  //   { label: 'Pacu AWS penetration testing framework (IAM privilege escalation, metadata API), from Rhino Security', value: 'Pacu' },
 
-    { label: 'CVSS 3.1 score range: Critical (9.0-10.0), High (7.0-8.9), Medium (4.0-6.9), Low (0.1-3.9)', value: 'CVSS' },
+  //   { label: 'CVSS 3.1 score range: Critical (9.0-10.0), High (7.0-8.9), Medium (4.0-6.9), Low (0.1-3.9)', value: 'CVSS' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -13110,17 +13110,17 @@ const vulnerabilityAssessmentOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Nessus Professional infrastructure vulnerability scanner, credentialed scanning for patch levels/configuration', value: 'Nessus' },
+  //   { label: 'Nessus Professional infrastructure vulnerability scanner, credentialed scanning for patch levels/configuration', value: 'Nessus' },
 
-    { label: 'Trivy scans OS packages + app dependencies + Dockerfile misconfigs + SBOM', value: 'Trivy' },
+  //   { label: 'Trivy scans OS packages + app dependencies + Dockerfile misconfigs + SBOM', value: 'Trivy' },
 
-    { label: 'Prowler 200+ AWS security checks, maps to CIS AWS Foundations Benchmark', value: 'Prowler' },
+  //   { label: 'Prowler 200+ AWS security checks, maps to CIS AWS Foundations Benchmark', value: 'Prowler' },
 
-    { label: 'CISA KEV Known Exploited Vulnerabilities catalogue, highest priority regardless of CVSS', value: 'CISA KEV' },
+  //   { label: 'CISA KEV Known Exploited Vulnerabilities catalogue, highest priority regardless of CVSS', value: 'CISA KEV' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -13388,17 +13388,17 @@ const complianceRiskManagementOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'SOC 2 Type II 64 control points across 5 Trust Service Criteria', value: 'SOC 2' },
+  //   { label: 'SOC 2 Type II 64 control points across 5 Trust Service Criteria', value: 'SOC 2' },
 
-    { label: 'GDPR Article 30 Record of Processing Activities (RoPA) required', value: 'GDPR' },
+  //   { label: 'GDPR Article 30 Record of Processing Activities (RoPA) required', value: 'GDPR' },
 
-    { label: 'ISO 27001:2022 114 controls across 4 themes (Organisational, People, Physical, Technological)', value: 'ISO 27001' },
+  //   { label: 'ISO 27001:2022 114 controls across 4 themes (Organisational, People, Physical, Technological)', value: 'ISO 27001' },
 
-    { label: 'PCI DSS 12 requirements across 6 goals, annual pen test + quarterly ASV scan', value: 'PCI DSS' },
+  //   { label: 'PCI DSS 12 requirements across 6 goals, annual pen test + quarterly ASV scan', value: 'PCI DSS' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -13662,17 +13662,17 @@ const applicationSecurityOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'STRIDE Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege', value: 'STRIDE' },
+  //   { label: 'STRIDE Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege', value: 'STRIDE' },
 
-    { label: 'Microsoft research: Fixing security issue in design costs 1x, in code costs 6x, post-deployment costs 100x', value: '100x' },
+  //   { label: 'Microsoft research: Fixing security issue in design costs 1x, in code costs 6x, post-deployment costs 100x', value: '100x' },
 
-    { label: 'bcrypt work factor 12+ or Argon2id never MD5/SHA-1/SHA-256 without salt for password storage', value: 'bcrypt' },
+  //   { label: 'bcrypt work factor 12+ or Argon2id never MD5/SHA-1/SHA-256 without salt for password storage', value: 'bcrypt' },
 
-    { label: 'strict-dynamic + nonce-based CSP most effective XSS mitigation, eliminates unsafe-inline', value: 'CSP' },
+  //   { label: 'strict-dynamic + nonce-based CSP most effective XSS mitigation, eliminates unsafe-inline', value: 'CSP' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -13936,17 +13936,17 @@ const qaSoftwareTestingOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Annual cost of poor software quality worldwide (CISQ 2022)', value: '$1.52T' },
+  //   { label: 'Annual cost of poor software quality worldwide (CISQ 2022)', value: '$1.52T' },
 
-    { label: 'Cost multiplier of fixing a bug in production vs. design phase', value: '100x' },
+  //   { label: 'Cost multiplier of fixing a bug in production vs. design phase', value: '100x' },
 
-    { label: 'Of defects are caused by 20% of the codebase testing finds them', value: '80%' },
+  //   { label: 'Of defects are caused by 20% of the codebase testing finds them', value: '80%' },
 
-    { label: 'Production bugs that escape QA cause a 4-15% customer churn event', value: '4-15%' },
+  //   { label: 'Production bugs that escape QA cause a 4-15% customer churn event', value: '4-15%' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -14338,17 +14338,17 @@ const automatedTestingOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'React Testing Library test user behaviour, not implementation details. The dominant React component testing approach.', value: 'RTL' },
+  //   { label: 'React Testing Library test user behaviour, not implementation details. The dominant React component testing approach.', value: 'RTL' },
 
-    { label: 'Microsoft\'s cross-browser E2E testing framework Chromium, Firefox, WebKit. Faster, more reliable than Selenium/Cypress for large suites.', value: 'Playwright' },
+  //   { label: 'Microsoft\'s cross-browser E2E testing framework Chromium, Firefox, WebKit. Faster, more reliable than Selenium/Cypress for large suites.', value: 'Playwright' },
 
-    { label: 'Minimum code coverage threshold ClickMasters recommends as a CI gate not a target, a floor', value: '80%' },
+  //   { label: 'Minimum code coverage threshold ClickMasters recommends as a CI gate not a target, a floor', value: '80%' },
 
-    { label: 'Spin up real PostgreSQL and Redis in tests no mocking the database, no false positives from mocked behaviour', value: 'Testcontainers' },
+  //   { label: 'Spin up real PostgreSQL and Redis in tests no mocking the database, no false positives from mocked behaviour', value: 'Testcontainers' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -14638,17 +14638,17 @@ const manualTestingOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Session-based exploratory testing (SBET) define charter, time box, test with curiosity, document findings', value: 'SBET' },
+  //   { label: 'Session-based exploratory testing (SBET) define charter, time box, test with curiosity, document findings', value: 'SBET' },
 
-    { label: 'SFDPOT heuristic Structure, Function, Data, Platform, Operations, Time for exploratory testing', value: 'SFDPOT' },
+  //   { label: 'SFDPOT heuristic Structure, Function, Data, Platform, Operations, Time for exploratory testing', value: 'SFDPOT' },
 
-    { label: 'BrowserStack / Sauce Labs cloud-based cross-browser testing on real browsers and devices', value: 'BrowserStack' },
+  //   { label: 'BrowserStack / Sauce Labs cloud-based cross-browser testing on real browsers and devices', value: 'BrowserStack' },
 
-    { label: 'Given-When-Then standard format for test case documentation: Given a user is logged in / When they submit form / Then they see confirmation', value: 'GWT' },
+  //   { label: 'Given-When-Then standard format for test case documentation: Given a user is logged in / When they submit form / Then they see confirmation', value: 'GWT' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -14908,17 +14908,17 @@ const performanceTestingOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'k6 Grafana\'s load testing tool. JavaScript scripting, distributed load, InfluxDB/Grafana metrics.', value: 'k6' },
+  //   { label: 'k6 Grafana\'s load testing tool. JavaScript scripting, distributed load, InfluxDB/Grafana metrics.', value: 'k6' },
 
-    { label: 'Lighthouse CI run in CI/CD on every deployment, block if performance score drops >10 points', value: 'Lighthouse CI' },
+  //   { label: 'Lighthouse CI run in CI/CD on every deployment, block if performance score drops >10 points', value: 'Lighthouse CI' },
 
-    { label: 'pg_stat_statements identify queries with highest cumulative execution time in the API path', value: 'pg_stat_statements' },
+  //   { label: 'pg_stat_statements identify queries with highest cumulative execution time in the API path', value: 'pg_stat_statements' },
 
-    { label: 'web-vitals Google\'s RUM library collects LCP, CLS, INP from real user browsers', value: 'web-vitals' },
+  //   { label: 'web-vitals Google\'s RUM library collects LCP, CLS, INP from real user browsers', value: 'web-vitals' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -15180,17 +15180,17 @@ const loadTestingOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'k6 Cloud distributed load generation from multiple regions, InfluxDB + Grafana dashboards', value: 'k6 Cloud' },
+  //   { label: 'k6 Cloud distributed load generation from multiple regions, InfluxDB + Grafana dashboards', value: 'k6 Cloud' },
 
-    { label: 'Gatling Scala-based, designed for very high-throughput load simulation (50,000+ VUs per instance)', value: 'Gatling' },
+  //   { label: 'Gatling Scala-based, designed for very high-throughput load simulation (50,000+ VUs per instance)', value: 'Gatling' },
 
-    { label: 'clinic.js Node.js CPU profiling under load, identify CPU-bound operations saturating the event loop', value: 'clinic.js' },
+  //   { label: 'clinic.js Node.js CPU profiling under load, identify CPU-bound operations saturating the event loop', value: 'clinic.js' },
 
-    { label: 'PgBouncer pool wait time most common web application bottleneck under load', value: 'PgBouncer' },
+  //   { label: 'PgBouncer pool wait time most common web application bottleneck under load', value: 'PgBouncer' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -15464,17 +15464,17 @@ const bugFixingOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Sentry error tracking with breadcrumbs, stack traces, source map resolution, user context', value: 'Sentry' },
+  //   { label: 'Sentry error tracking with breadcrumbs, stack traces, source map resolution, user context', value: 'Sentry' },
 
-    { label: 'TOCTOU Time-of-Check-Time-of-Use: check if resource exists, then use between check and use another process modifies', value: 'TOCTOU' },
+  //   { label: 'TOCTOU Time-of-Check-Time-of-Use: check if resource exists, then use between check and use another process modifies', value: 'TOCTOU' },
 
-    { label: 'git bisect binary search through commit history to identify the specific commit that introduced regression', value: 'git bisect' },
+  //   { label: 'git bisect binary search through commit history to identify the specific commit that introduced regression', value: 'git bisect' },
 
-    { label: 'pg_hint_plan force a specific query plan while the underlying cause is addressed', value: 'pg_hint_plan' },
+  //   { label: 'pg_hint_plan force a specific query plan while the underlying cause is addressed', value: 'pg_hint_plan' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -15722,17 +15722,17 @@ const maintenanceSupportOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Service Level Agreement ClickMasters defines response time commitments per severity: Critical 2hr, High 8hr, Medium 24hr, Low 5 days', value: 'SLA' },
+  //   { label: 'Service Level Agreement ClickMasters defines response time commitments per severity: Critical 2hr, High 8hr, Medium 24hr, Low 5 days', value: 'SLA' },
 
-    { label: 'Predictable monthly retainer budget for engineering support without the unpredictability of ad-hoc billing', value: 'Monthly' },
+  //   { label: 'Predictable monthly retainer budget for engineering support without the unpredictability of ad-hoc billing', value: 'Monthly' },
 
-    { label: 'Typical knowledge transfer time for ClickMasters to onboard onto an existing codebase and begin productive work', value: '1 week' },
+  //   { label: 'Typical knowledge transfer time for ClickMasters to onboard onto an existing codebase and begin productive work', value: '1 week' },
 
-    { label: 'Recruitment cost compared to hiring a full-time engineer for the equivalent of part-time maintenance support', value: '$0' },
+  //   { label: 'Recruitment cost compared to hiring a full-time engineer for the equivalent of part-time maintenance support', value: '$0' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -15978,17 +15978,17 @@ const dedicatedDevelopmentTeamsOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Time from engagement agreement to a dedicated team working on your product vs 3-6 months to hire engineers directly', value: '2 wks' },
+  //   { label: 'Time from engagement agreement to a dedicated team working on your product vs 3-6 months to hire engineers directly', value: '2 wks' },
 
-    { label: 'Typical cost saving vs equivalent full-time employee hires in the USA or UK, including recruiter fees, benefits, and overhead', value: '40-60%' },
+  //   { label: 'Typical cost saving vs equivalent full-time employee hires in the USA or UK, including recruiter fees, benefits, and overhead', value: '40-60%' },
 
-    { label: 'Dedicated account manager and technical lead for every ClickMasters dedicated team your single point of contact', value: '1' },
+  //   { label: 'Dedicated account manager and technical lead for every ClickMasters dedicated team your single point of contact', value: '1' },
 
-    { label: 'Notice period to scale the team up or down no long-term lock-in, flexible to your product\'s changing needs', value: '30 days' },
+  //   { label: 'Notice period to scale the team up or down no long-term lock-in, flexible to your product\'s changing needs', value: '30 days' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -16254,17 +16254,17 @@ const itOutsourcingOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Time from engagement agreement to active development vs 3-6 months to build internal team', value: '2 wks' },
+  //   { label: 'Time from engagement agreement to active development vs 3-6 months to build internal team', value: '2 wks' },
 
-    { label: 'Cost saving vs building equivalent internal team in USA/UK including recruitment, salaries, benefits, overhead', value: '40-60%' },
+  //   { label: 'Cost saving vs building equivalent internal team in USA/UK including recruitment, salaries, benefits, overhead', value: '40-60%' },
 
-    { label: 'Quarterly Business Reviews strategic governance, not just operational reporting', value: 'QBR' },
+  //   { label: 'Quarterly Business Reviews strategic governance, not just operational reporting', value: 'QBR' },
 
-    { label: 'Open-book cost reporting cloud and third-party tool costs billed at provider rates with no markup', value: '$0' },
+  //   { label: 'Open-book cost reporting cloud and third-party tool costs billed at provider rates with no markup', value: '$0' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -16504,17 +16504,17 @@ const staffAugmentationOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'Time from engagement agreement to engineer integrated into client\'s team vs 3-6 months to hire directly', value: '2 wks' },
+  //   { label: 'Time from engagement agreement to engineer integrated into client\'s team vs 3-6 months to hire directly', value: '2 wks' },
 
-    { label: 'Typical cost saving vs equivalent full-time employee hires in the USA or UK, including recruiter fees, benefits, and overhead', value: '40-60%' },
+  //   { label: 'Typical cost saving vs equivalent full-time employee hires in the USA or UK, including recruiter fees, benefits, and overhead', value: '40-60%' },
 
-    { label: 'Dedicated account manager for every ClickMasters staff augmentation engagement', value: '1' },
+  //   { label: 'Dedicated account manager for every ClickMasters staff augmentation engagement', value: '1' },
 
-    { label: 'Notice period to scale up or down flexible to client\'s changing needs', value: '30 days' },
+  //   { label: 'Notice period to scale up or down flexible to client\'s changing needs', value: '30 days' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -16774,17 +16774,17 @@ const technicalSupportOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'L1/L2 resolve 80-90% of tickets without engineering involvement freeing developers for feature work', value: '80-90%' },
+  //   { label: 'L1/L2 resolve 80-90% of tickets without engineering involvement freeing developers for feature work', value: '80-90%' },
 
-    { label: 'First-contact resolution rate percentage resolved by L1 without escalation', value: 'FCR' },
+  //   { label: 'First-contact resolution rate percentage resolved by L1 without escalation', value: 'FCR' },
 
-    { label: 'CSAT customer satisfaction score from post-resolution surveys, tracked and reported monthly', value: 'CSAT' },
+  //   { label: 'CSAT customer satisfaction score from post-resolution surveys, tracked and reported monthly', value: 'CSAT' },
 
-    { label: 'Mean Time to First Response measured from ticket creation to L1 acknowledgement', value: 'MTTR' },
+  //   { label: 'Mean Time to First Response measured from ticket creation to L1 acknowledgement', value: 'MTTR' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -17044,17 +17044,17 @@ const augmentedRealityDevelopmentOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'iPhone Pro LiDAR scene reconstruction mesh for precise object occlusion and surface detection', value: 'LiDAR' },
+  //   { label: 'iPhone Pro LiDAR scene reconstruction mesh for precise object occlusion and surface detection', value: 'LiDAR' },
 
-    { label: 'USDZ Apple\'s Universal Scene Description. Standard 3D format for ARKit, PBR materials, animations', value: 'USDZ' },
+  //   { label: 'USDZ Apple\'s Universal Scene Description. Standard 3D format for ARKit, PBR materials, animations', value: 'USDZ' },
 
-    { label: '8th Wall leading WebAR platform. World Tracking, Image Targets, Surface Tracking on iOS Safari and Android Chrome', value: '8th Wall' },
+  //   { label: '8th Wall leading WebAR platform. World Tracking, Image Targets, Surface Tracking on iOS Safari and Android Chrome', value: '8th Wall' },
 
-    { label: 'QuickLook AR share a USDZ file, any iPhone user views it in AR without an app', value: 'QuickLook' },
+  //   { label: 'QuickLook AR share a USDZ file, any iPhone user views it in AR without an app', value: 'QuickLook' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -17306,17 +17306,17 @@ const virtualRealityDevelopmentOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'OpenXR industry standard VR API, one codebase targets Meta Quest, HTC Vive, Valve Index, Pico, Windows Mixed Reality', value: 'OpenXR' },
+  //   { label: 'OpenXR industry standard VR API, one codebase targets Meta Quest, HTC Vive, Valve Index, Pico, Windows Mixed Reality', value: 'OpenXR' },
 
-    { label: 'UE5 Nanite virtualised geometry, high-polygon detail without manual LOD for architectural visualisation', value: 'Nanite' },
+  //   { label: 'UE5 Nanite virtualised geometry, high-polygon detail without manual LOD for architectural visualisation', value: 'Nanite' },
 
-    { label: 'MetaHumans photo-realistic human characters, virtual instructors for VR training simulations', value: 'MetaHumans' },
+  //   { label: 'MetaHumans photo-realistic human characters, virtual instructors for VR training simulations', value: 'MetaHumans' },
 
-    { label: 'PwC study: VR learners trained 4x faster and retained information with 275% more confidence', value: '4x / 275%' },
+  //   { label: 'PwC study: VR learners trained 4x faster and retained information with 275% more confidence', value: '4x / 275%' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -17570,17 +17570,17 @@ const mixedRealitySolutionsOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'MRTK 3 Mixed Reality Toolkit Microsoft\'s open-source Unity framework for HoloLens 2 development', value: 'MRTK 3' },
+  //   { label: 'MRTK 3 Mixed Reality Toolkit Microsoft\'s open-source Unity framework for HoloLens 2 development', value: 'MRTK 3' },
 
-    { label: 'Azure Spatial Anchors persist hologram positions across sessions and share across multiple devices', value: 'Spatial Anchors' },
+  //   { label: 'Azure Spatial Anchors persist hologram positions across sessions and share across multiple devices', value: 'Spatial Anchors' },
 
-    { label: '26-DOF hand tracking articulated hand tracking for pinch, grab, push, ray interactions without controllers', value: '26-DOF' },
+  //   { label: '26-DOF hand tracking articulated hand tracking for pinch, grab, push, ray interactions without controllers', value: '26-DOF' },
 
-    { label: 'visionOS Apple\'s spatial computing OS, Shared Space (real environment) or Full Space (immersive)', value: 'visionOS' },
+  //   { label: 'visionOS Apple\'s spatial computing OS, Shared Space (real environment) or Full Space (immersive)', value: 'visionOS' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -17832,17 +17832,17 @@ const iotDevelopmentOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'AWS IoT Core managed MQTT broker scaling to billions of device messages. ClickMasters\' primary IoT cloud platform.', value: 'AWS IoT' },
+  //   { label: 'AWS IoT Core managed MQTT broker scaling to billions of device messages. ClickMasters\' primary IoT cloud platform.', value: 'AWS IoT' },
 
-    { label: 'MQTT Message Queuing Telemetry Transport lightweight pub-sub protocol for constrained devices and low-bandwidth networks. 2-byte header.', value: 'MQTT' },
+  //   { label: 'MQTT Message Queuing Telemetry Transport lightweight pub-sub protocol for constrained devices and low-bandwidth networks. 2-byte header.', value: 'MQTT' },
 
-    { label: 'ESP32 Espressif ESP32 the most widely deployed Wi-Fi + Bluetooth microcontroller in commercial IoT products worldwide.', value: 'ESP32' },
+  //   { label: 'ESP32 Espressif ESP32 the most widely deployed Wi-Fi + Bluetooth microcontroller in commercial IoT products worldwide.', value: 'ESP32' },
 
-    { label: 'OTA Over-the-Air Update push firmware to deployed devices without physical access. Mandatory for production IoT fleets.', value: 'OTA' },
+  //   { label: 'OTA Over-the-Air Update push firmware to deployed devices without physical access. Mandatory for production IoT fleets.', value: 'OTA' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -18110,17 +18110,17 @@ const smartSystemsDevelopmentOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'BACnet ASHRAE Standard 135, open protocol for building automation across Siemens/JCI/Honeywell/Carrier', value: 'BACnet' },
+  //   { label: 'BACnet ASHRAE Standard 135, open protocol for building automation across Siemens/JCI/Honeywell/Carrier', value: 'BACnet' },
 
-    { label: 'Predictive maintenance reduces maintenance costs by 25-30% and prevents unplanned downtime', value: '25-30%' },
+  //   { label: 'Predictive maintenance reduces maintenance costs by 25-30% and prevents unplanned downtime', value: '25-30%' },
 
-    { label: 'Azure Digital Twins managed platform for large-scale digital twin deployment with 3D visualisation', value: 'Azure Digital Twins' },
+  //   { label: 'Azure Digital Twins managed platform for large-scale digital twin deployment with 3D visualisation', value: 'Azure Digital Twins' },
 
-    { label: 'ENERGY STAR + ISO 50001 + GRESB automated energy performance reports for ESG reporting', value: 'ESG Reporting' },
+  //   { label: 'ENERGY STAR + ISO 50001 + GRESB automated energy performance reports for ESG reporting', value: 'ESG Reporting' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -18372,17 +18372,17 @@ const industrialIoTOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'OPC-UA IEC 62541, vendor-neutral secure protocol for Siemens S7, Allen-Bradley, Beckhoff, Fanuc, Mitsubishi', value: 'OPC-UA' },
+  //   { label: 'OPC-UA IEC 62541, vendor-neutral secure protocol for Siemens S7, Allen-Bradley, Beckhoff, Fanuc, Mitsubishi', value: 'OPC-UA' },
 
-    { label: 'OEE = Availability x Performance x Quality world-class 85%+, global average 65%', value: 'OEE' },
+  //   { label: 'OEE = Availability x Performance x Quality world-class 85%+, global average 65%', value: 'OEE' },
 
-    { label: 'Ignition SCADA MQTT Sparkplug B to AWS IoT Core, Kepware OPC-UA server for legacy protocols', value: 'Ignition' },
+  //   { label: 'Ignition SCADA MQTT Sparkplug B to AWS IoT Core, Kepware OPC-UA server for legacy protocols', value: 'Ignition' },
 
-    { label: 'ISA/IEC 62443 Purdue Model for OT network segmentation, data diodes, unidirectional flow', value: 'ISA 62443' },
+  //   { label: 'ISA/IEC 62443 Purdue Model for OT network segmentation, data diodes, unidirectional flow', value: 'ISA 62443' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -18634,17 +18634,17 @@ const embeddedSystemsDevelopmentOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'FreeRTOS most widely deployed RTOS, adds 5-10KB flash, 500 bytes RAM overhead', value: 'FreeRTOS' },
+  //   { label: 'FreeRTOS most widely deployed RTOS, adds 5-10KB flash, 500 bytes RAM overhead', value: 'FreeRTOS' },
 
-    { label: 'Zephyr RTOS Linux Foundation, strong hardware support, native BLE, LoRaWAN, default for Nordic nRF52/nRF53', value: 'Zephyr' },
+  //   { label: 'Zephyr RTOS Linux Foundation, strong hardware support, native BLE, LoRaWAN, default for Nordic nRF52/nRF53', value: 'Zephyr' },
 
-    { label: 'Nordic Power Profiler Kit II measure current vs time, identify unexpected active periods', value: 'PPK2' },
+  //   { label: 'Nordic Power Profiler Kit II measure current vs time, identify unexpected active periods', value: 'PPK2' },
 
-    { label: 'CR2032 coin cell requires <10µA average current for 1-year battery life', value: '<10µA' },
+  //   { label: 'CR2032 coin cell requires <10µA average current for 1-year battery life', value: '<10µA' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -19808,17 +19808,17 @@ const web3DevelopmentOverride: ServicePageContent = {
 
   ],
 
-  marketStats: [
+  // marketStats: [
 
-    { label: 'EIP-4361 SIWE Sign In With Ethereum standard, server-side signature verification', value: 'SIWE' },
+  //   { label: 'EIP-4361 SIWE Sign In With Ethereum standard, server-side signature verification', value: 'SIWE' },
 
-    { label: 'ENS Ethereum Name Service, resolves `vitalik.eth` to `0xd8dA...6045`', value: 'ENS' },
+  //   { label: 'ENS Ethereum Name Service, resolves `vitalik.eth` to `0xd8dA...6045`', value: 'ENS' },
 
-    { label: 'Lens Protocol decentralised social graph, 100K+ daily active users', value: 'Lens Protocol' },
+  //   { label: 'Lens Protocol decentralised social graph, 100K+ daily active users', value: 'Lens Protocol' },
 
-    { label: 'Snapshot off-chain voting for DAOs, gas-free, used by 1,000+ DAOs', value: 'Snapshot' },
+  //   { label: 'Snapshot off-chain voting for DAOs, gas-free, used by 1,000+ DAOs', value: 'Snapshot' },
 
-  ],
+  // ],
 
   servicesCards: [
 
@@ -20989,7 +20989,12 @@ export function getAllServicePages(): ServicePageContent[] {
 }
 
 export function getServicePath(category: string, title: string): string {
-  return `/${slugify(category)}/${slugify(title)}`;
+  const serviceSlug = slugify(title);
+  const page = getServicePage(serviceSlug);
+  if (page) {
+    return `/${page.categorySlug}/${page.slug}`;
+  }
+  return `/${slugify(category)}/${serviceSlug}`;
 }
 
 

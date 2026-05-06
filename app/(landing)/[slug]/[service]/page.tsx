@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Script from 'next/script';
 import {
   ArrowRight,
@@ -66,7 +66,7 @@ export function generateStaticParams(): { slug: string; service: string }[] {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, service } = await params;
   const page = getServicePage(service);
-  if (!page || slugify(page.category) !== slug) return { title: 'Service' };
+  if (!page || page.categorySlug !== slug) return { title: 'Service' };
 
   const description = page.metaDescription;
   const canonicalPath = getCanonicalPath(page);
@@ -106,7 +106,12 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   const { slug, service } = await params;
   const page = getServicePage(service);
 
-  if (!page || slugify(page.category) !== slug) notFound();
+  if (!page) notFound();
+
+  // If the category slug doesn't match, redirect to the correct one (canonical URL)
+  if (page.categorySlug !== slug) {
+    redirect(`/${page.categorySlug}/${page.slug}`);
+  }
 
   const sections = page.sections || [];
   const faqs = page.faqs || [];
