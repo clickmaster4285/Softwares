@@ -54,6 +54,7 @@ import { TechStack } from '@/src/components/landingPage/servicesPage/TechStack';
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
 import { CTAComponents } from '@/src/components/landingPage/servicesPage/FooterCTA';
+import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -377,7 +378,10 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     serviceName={page.serviceName} 
     pricingTiers={page.pricingTiers} 
   />
-)}
+              )}
+              
+
+              <CeoVision />
               {/* Generic Tables Section */}
               {page.tables && page.tables.map((table) => (
                 <section key={table.title} id={slugify(table.title)} className="scroll-mt-24 pt-16">
