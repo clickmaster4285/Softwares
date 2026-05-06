@@ -71,29 +71,29 @@ type ServiceMenuSection = {
 
 // Hire Us dropdown items
 const hireUsItems: { title: string; href: string; icon: LucideIcon }[] = [
-  { title: 'Hire AI Developers', href: '/hire-ai-developers/', icon: Brain },
-  { title: 'AI Agent Development Services', href: '/ai-agent-development-services/', icon: Bot },
-  { title: 'RAG Development Services', href: '/rag-development-services/', icon: Database },
-  { title: 'Custom Software Development', href: '/custom-software-development/', icon: Code2 },
-  { title: 'SaaS Development Services', href: '/saas-development-services/', icon: Cloud },
-  { title: 'AI Development Healthcare', href: '/ai-development-healthcare/', icon: HeartPulse },
-  { title: 'AI Development Finance', href: '/ai-development-finance/', icon: Landmark },
-  { title: 'AI Development Logistics', href: '/ai-development-logistics/', icon: Truck },
+  { title: 'Hire AI Developers', href: '/hire/hire-ai-developers/', icon: Brain },
+  { title: 'AI Agent Development Services', href: '/hire/ai-agent-development-services/', icon: Bot },
+  { title: 'RAG Development Services', href: '/hire/rag-development-services/', icon: Database },
+  { title: 'Custom Software Development', href: '/hire/custom-software-development/', icon: Code2 },
+  { title: 'SaaS Development Services', href: '/hire/saas-development-services/', icon: Cloud },
+  { title: 'AI Development Healthcare', href: '/hire/ai-development-healthcare/', icon: HeartPulse },
+  { title: 'AI Development Finance', href: '/hire/ai-development-finance/', icon: Landmark },
+  { title: 'AI Development Logistics', href: '/hire/ai-development-logistics/', icon: Truck },
   {
     title: 'AI Agents for Customer Support',
-    href: '/ai-agents-for-customer-support/',
+    href: '/hire/ai-agents-for-customer-support/',
     icon: Headset,
   },
-  { title: 'AI Agents for Sales', href: '/ai-agents-for-sales/', icon: ShoppingCart },
+  { title: 'AI Agents for Sales', href: '/hire/ai-agents-for-sales/', icon: ShoppingCart },
   {
     title: 'AI Agents for Lead Qualification',
-    href: '/ai-agents-for-lead-qualification/',
+    href: '/hire/ai-agents-for-lead-qualification/',
     icon: UserCheck,
   },
-  { title: 'AI Development Company USA', href: '/ai-development-company-usa/', icon: Building2 },
-  { title: 'AI Development Company UK', href: '/ai-development-company-uk/', icon: Building },
-  { title: 'AI Development Cost', href: '/ai-development-cost/', icon: DollarSign },
-  { title: 'RAG Development Cost', href: '/rag-development-cost/', icon: Calculator },
+  { title: 'AI Development Company USA', href: '/hire/ai-development-company-usa/', icon: Building2 },
+  { title: 'AI Development Company UK', href: '/hire/ai-development-company-uk/', icon: Building },
+  { title: 'AI Development Cost', href: '/hire/ai-development-cost/', icon: DollarSign },
+  { title: 'RAG Development Cost', href: '/hire/rag-development-cost/', icon: Calculator },
 ];
 
 
