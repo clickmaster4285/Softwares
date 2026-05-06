@@ -363,7 +363,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
              {/* Tech Stack Section */}
 
-<div style={{ maxWidth: '1450px' }} className="mx-auto px-4">
+<div style={{ maxWidth: '1460px' }} className="mx-auto">
   {techStack.length > 0 && <TechStack techStack={techStack as any} />}
 </div>
               {/* Industries Section */}
@@ -430,43 +430,43 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
               
               {/* CTA Section */}
-<section id="cta" className="scroll-mt-24 mt-8 sm:mt-10 px-4 sm:px-0">
-  <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-orange-50 via-white to-orange-50 p-6 sm:p-8 md:p-12 border border-orange-100">
-    {/* Background decorations - hidden on mobile for performance */}
-    <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 sm:h-64 sm:w-64 rounded-full bg-orange-500/10 blur-3xl" />
-    <div className="pointer-events-none absolute -bottom-20 -left-20 h-48 w-48 sm:h-64 sm:w-64 rounded-full bg-orange-500/5 blur-3xl" />
+<section id="cta" className="scroll-mt-16 sm:scroll-mt-24 mt-6 sm:mt-8 px-4 sm:px-0">
+  <div className="relative overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl bg-gradient-to-br from-orange-50 via-white to-orange-50 p-5 sm:p-6 md:p-8 lg:p-12 border border-orange-100">
+    {/* Background decorations */}
+    <div className="pointer-events-none absolute -right-16 sm:-right-20 -top-16 sm:-top-20 h-40 sm:h-48 md:h-64 w-40 sm:w-48 md:w-64 rounded-full bg-orange-500/10 blur-2xl sm:blur-3xl" />
+    <div className="pointer-events-none absolute -bottom-16 sm:-bottom-20 -left-16 sm:-left-20 h-40 sm:h-48 md:h-64 w-40 sm:w-48 md:w-64 rounded-full bg-orange-500/5 blur-2xl sm:blur-3xl" />
 
-    <div className="relative text-center sm:text-left">
-      <div className="flex justify-center sm:justify-start">
-        <Badge className="border-orange-200 bg-orange-100 text-orange-700 text-xs sm:text-sm">
+    <div className="relative text-center md:text-left">
+      <div className="flex justify-center md:justify-start">
+        <Badge className="border-orange-200 bg-orange-100 text-orange-700 text-xs sm:text-sm px-3 py-1">
           Ready to move forward?
         </Badge>
       </div>
-      <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900">
+      <h2 className="mt-3 sm:mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-900">
         Get your free strategy call
       </h2>
-      <p className="mt-3 sm:mt-4 max-w-2xl text-base sm:text-lg text-slate-600 mx-auto sm:mx-0">
+      <p className="mt-2 sm:mt-3 md:mt-4 max-w-2xl text-sm sm:text-base md:text-lg text-slate-600 mx-auto md:mx-0">
         Share your requirements and our team will help you define scope, architecture
         direction, timeline, and delivery approach.
       </p>
       
-      {/* Buttons - Stack on mobile, row on larger screens */}
-      <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center sm:justify-start gap-3 sm:gap-4">
+      {/* Buttons */}
+      <div className="mt-5 sm:mt-6 md:mt-8 flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4">
         <Button
           asChild
           size="lg"
-          className="rounded-full bg-orange-600 px-6 sm:px-8 py-3 sm:py-6 text-white shadow-lg shadow-orange-500/30 hover:bg-orange-700 w-full sm:w-auto"
+          className="rounded-full bg-orange-600 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-white shadow-lg shadow-orange-500/30 hover:bg-orange-700 w-full sm:w-auto text-sm sm:text-base"
         >
           <Link href="/contact-us" className="flex items-center justify-center">
             Book strategy call
-            <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+            
           </Link>
         </Button>
         <Button
           variant="outline"
           size="lg"
           asChild
-          className="rounded-full border-slate-300 bg-white text-slate-700 hover:bg-slate-50 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-6"
+          className="rounded-full border-slate-300 bg-white text-slate-700 hover:bg-slate-50 w-full sm:w-auto px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base"
         >
           <Link href="/case-studies" className="flex items-center justify-center">
             View case studies
@@ -477,24 +477,24 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   </div>
 
   {/* Secondary CTA */}
-  <div className="mt-5 sm:mt-6 rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 md:p-8 shadow-sm hover:shadow-md transition-all">
-    <div className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-center lg:justify-between">
+  <div className="mt-4 sm:mt-5 md:mt-6 rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-6 lg:p-8 shadow-sm hover:shadow-md transition-all">
+    <div className="flex flex-col gap-4 sm:gap-5 md:gap-6 lg:flex-row lg:items-center lg:justify-between">
       <div className="text-center lg:text-left">
         <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-slate-900">
           Want a fixed-price scope in 48 hours?
         </h3>
-        <p className="mt-1.5 sm:mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
+        <p className="mt-1 sm:mt-1.5 md:mt-2 text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">
           We can review your requirements and return a scoped proposal with delivery
           phases and realistic timelines.
         </p>
       </div>
       <Button
         asChild
-        className="shrink-0 rounded-full bg-orange-600 px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 text-white hover:bg-orange-700 shadow-md hover:shadow-lg transition-all w-full lg:w-auto"
+        className="shrink-0 rounded-full bg-orange-600 px-4 sm:px-5 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 text-white hover:bg-orange-700 shadow-md hover:shadow-lg transition-all w-full lg:w-auto text-sm sm:text-base"
       >
         <Link href="/contact-us" className="flex items-center justify-center">
           Get your proposal
-          <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+         
         </Link>
       </Button>
     </div>

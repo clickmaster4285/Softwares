@@ -91,7 +91,7 @@ export function TestimonialsSection({
   if (isLoading) {
     return (
       <section id="testimonials" className="scroll-mt-24 pt-20 pb-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className=" mx-auto">
           <div className="flex items-center gap-3 mb-10">
             <div className="h-10 w-1 rounded-full bg-gradient-to-b from-orange-500 to-orange-600" />
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">

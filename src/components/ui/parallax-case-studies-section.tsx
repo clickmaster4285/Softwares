@@ -100,7 +100,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
     <div className="relative overflow-hidden">
       {/* Minimal Hero Section */}
       <div className='w-full flex flex-col mt-4 sm:mt-6 py-6 sm:py-8'>
-        <div className="flex items-center gap-3 ">
+        <div className="flex items-center gap-3 px-4 sm:px-6 md:px-8">
           <motion.div
             initial={{ height: 0 }}
             whileInView={{ height: 40 }}
@@ -127,7 +127,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
             key={section.id}
             ref={sectionRefs[index]} 
             className={cn(
-              "flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12 py-8 sm:py-12 md:py-16 ",
+              "flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12 py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8",
               section.reverse ? 'lg:flex-row-reverse' : ''
             )}
           >
@@ -136,102 +136,100 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
               style={{ y: translateContents[index] }}
               className="w-full lg:w-1/2 order-1 lg:order-none"
             >
-              <div className="max-w-lg mx-auto lg:mx-0">
-                {/* Client Badge */}
-                {section.client && (
-                  <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                    <div className="w-4 sm:w-6 h-px bg-orange-400" />
-                    <span className="text-[11px] sm:text-xs font-medium uppercase tracking-wider text-orange-600">
-                      {section.client}
-                    </span>
+              {/* Client Badge */}
+              {section.client && (
+                <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                  <div className="w-4 sm:w-6 h-px bg-orange-400" />
+                  <span className="text-[11px] sm:text-xs font-medium uppercase tracking-wider text-orange-600">
+                    {section.client}
+                  </span>
+                </div>
+              )}
+
+              {/* Title */}
+              <motion.h2 
+                style={{ y: translateContents[index] }} 
+                className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 sm:mb-3 leading-tight mt-4"
+              >
+                {section.title}
+              </motion.h2>
+
+              {/* Description */}
+              <motion.p 
+                style={{ y: translateContents[index] }} 
+                className="text-slate-600 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4"
+              >
+                {section.description}
+              </motion.p>
+
+              {/* Metadata Grid - Responsive wrapping */}
+              <motion.div 
+                style={{ y: translateContents[index] }}
+                className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4"
+              >
+                {section.industry && (
+                  <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
+                    <Target className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <span className="truncate">{section.industry}</span>
                   </div>
                 )}
+                {section.timeline && (
+                  <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
+                    <Calendar className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <span className="truncate">{section.timeline}</span>
+                  </div>
+                )}
+                {formattedDate(section.createdAt) && (
+                  <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
+                    <Calendar className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <span className="truncate">{formattedDate(section.createdAt)}</span>
+                  </div>
+                )}
+              </motion.div>
 
-                {/* Title */}
-                <motion.h2 
-                  style={{ y: translateContents[index] }} 
-                  className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 sm:mb-3 leading-tight"
-                >
-                  {section.title}
-                </motion.h2>
-
-                {/* Description */}
-                <motion.p 
-                  style={{ y: translateContents[index] }} 
-                  className="text-slate-600 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4"
-                >
-                  {section.description}
-                </motion.p>
-
-                {/* Metadata Grid - Responsive wrapping */}
+              {/* Technologies */}
+              {section.technologies && section.technologies.length > 0 && (
                 <motion.div 
                   style={{ y: translateContents[index] }}
-                  className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4"
+                  className="mb-3 sm:mb-4"
                 >
-                  {section.industry && (
-                    <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
-                      <Target className="h-3 w-3 text-orange-500 flex-shrink-0" />
-                      <span className="truncate">{section.industry}</span>
-                    </div>
-                  )}
-                  {section.timeline && (
-                    <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
-                      <Calendar className="h-3 w-3 text-orange-500 flex-shrink-0" />
-                      <span className="truncate">{section.timeline}</span>
-                    </div>
-                  )}
-                  {formattedDate(section.createdAt) && (
-                    <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
-                      <Calendar className="h-3 w-3 text-orange-500 flex-shrink-0" />
-                      <span className="truncate">{formattedDate(section.createdAt)}</span>
-                    </div>
-                  )}
-                </motion.div>
-
-                {/* Technologies */}
-                {section.technologies && section.technologies.length > 0 && (
-                  <motion.div 
-                    style={{ y: translateContents[index] }}
-                    className="mb-3 sm:mb-4"
-                  >
-                    <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2">
-                      <Tag className="h-3 w-3 text-orange-500 flex-shrink-0" />
-                      <span className="text-[11px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider">
-                        Tech Stack
+                  <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2">
+                    <Tag className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <span className="text-[11px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider">
+                      Tech Stack
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    {section.technologies.slice(0, 3).map((tech, i) => (
+                      <span
+                        key={i}
+                        className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-100"
+                      >
+                        {tech}
                       </span>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                      {section.technologies.slice(0, 3).map((tech, i) => (
-                        <span
-                          key={i}
-                          className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-100"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {section.technologies.length > 3 && (
-                        <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
-                          +{section.technologies.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* CTA Button - Larger touch target on mobile */}
-                <motion.div style={{ y: translateContents[index] }}>
-                  <Button
-                    asChild
-                    size="default"
-                    className="group bg-orange-600 hover:bg-orange-700 text-white rounded-full px-4 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base shadow-md w-full sm:w-auto"
-                  >
-                    <Link href={`/case-studies/${encodeURIComponent(section.slug)}`}>
-                      Read more
-                      <ArrowDown className="ml-1.5 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 rotate-[-90deg]" />
-                    </Link>
-                  </Button>
+                    ))}
+                    {section.technologies.length > 3 && (
+                      <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                        +{section.technologies.length - 3}
+                      </span>
+                    )}
+                  </div>
                 </motion.div>
-              </div>
+              )}
+
+              {/* CTA Button - Larger touch target on mobile */}
+              <motion.div style={{ y: translateContents[index] }}>
+                <Button
+                  asChild
+                  size="default"
+                  className="group bg-orange-600 hover:bg-orange-700 text-white rounded-full px-4 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base shadow-md w-full sm:w-auto"
+                >
+                  <Link href={`/case-studies/${encodeURIComponent(section.slug)}`}>
+                    Read more
+                    <ArrowDown className="ml-1.5 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 rotate-[-90deg]" />
+                  </Link>
+                </Button>
+              </motion.div>
             </motion.div>
 
             {/* Image - Below content on mobile, then side by side on desktop */}
@@ -243,23 +241,21 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
               }}
               className="w-full lg:w-1/2 order-2 lg:order-none mt-4 sm:mt-6 lg:mt-0"
             >
-              <div className="max-w-md mx-auto lg:mx-0 lg:max-w-lg">
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-                  {section.imageUrl ? (
-                    <Image
-                      src={section.imageUrl}
-                      alt={section.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 33vw"
-                      priority={index === 0}
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-orange-100 to-amber-100 flex items-center justify-center">
-                      <Briefcase className="h-12 w-12 sm:h-16 sm:w-16 text-orange-300" />
-                    </div>
-                  )}
-                </div>
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
+                {section.imageUrl ? (
+                  <Image
+                    src={section.imageUrl}
+                    alt={section.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={index === 0}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-orange-100 to-amber-100 flex items-center justify-center">
+                    <Briefcase className="h-12 w-12 sm:h-16 sm:w-16 text-orange-300" />
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>
