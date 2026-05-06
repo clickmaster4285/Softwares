@@ -72,7 +72,7 @@ export const TechStack = ({ techStack }: TechStackProps) => {
         body { overflow-x: hidden; }
       `}</style>
 
-      <section id="tech-stack" className="scroll-mt-24 px-4 sm:px-6 md:px-8">
+      <section id="tech-stack" className="scroll-mt-24 ">
         <div className="flex items-center gap-3 mb-3 sm:mb-4">
           <div className="h-8 sm:h-10 w-1 rounded-full bg-orange-500" />
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900">

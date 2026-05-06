@@ -109,7 +109,7 @@ export function TestimonialsSection({
   if (testimonials.length === 0) {
     return (
       <section id="testimonials" className="scroll-mt-24 pt-20 pb-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+        <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-semibold text-slate-900 mb-4">What Our Clients Say</h2>
           <p className="text-slate-500">No testimonials available yet.</p>
         </div>
@@ -124,7 +124,7 @@ export function TestimonialsSection({
       {/* Background Accent */}
       <div className="absolute inset-0 bg-[radial-gradient(#f97316_0.5px,transparent_1px)] bg-[length:20px_20px] opacity-30" />
 
-      <div className=" mx-auto px-6 relative">
+      <div className=" mx-auto px-2 relative">
         {/* Header */}
         <div className="flex items-center gap-3 mb-12">
           <div className="h-10 w-1 rounded-full bg-gradient-to-b from-orange-500 to-orange-600" />

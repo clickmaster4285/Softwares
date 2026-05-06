@@ -186,7 +186,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
   return (
     <div
-      className="w-full relative overflow-hidden bg-white"
+      className="w-full relative overflow-hidden bg-white p-2 mb-4"
     
     >
       {/* Animated Background Lines */}
