@@ -381,7 +381,7 @@ const { data: blogs = [] } = useQuery({
     <header
       className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', navStyle)}
     >
-      <div className="max-w-8xl mx-auto px-2 md:px-4 lg:px-6 flex h-20 items-center justify-between">
+      <div className="px-2 md:px-4 lg:px-26 mx-20 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
@@ -634,7 +634,7 @@ const { data: blogs = [] } = useQuery({
       blogs={blogs}
       testimonials={testimonials}
       allFaqs={allFaqs}
-      allServicePages={allServicePages}
+  
       onLinkClick={() => setIsOpen(false)}
     />
                   {/* Hire Us Mobile Dropdown */}
@@ -924,69 +924,71 @@ const { data: blogs = [] } = useQuery({
         className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
       >
         <div className="grid grid-cols-12">
-          {/* Left rail - Categories */}
-          <div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
-            <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
-              Resources
-            </p>
-            <ul className="space-y-1">
-              {[
-                { 
-                  title: 'Case Studies', 
-                  count: caseStudies.length,
-                },
-                { 
-                  title: 'Blog', 
-                  count: blogs.length,
-                },
-                { 
-                  title: 'FAQs', 
-                  count: allFaqs.length,
-                },
-                { 
-                  title: 'Testimonials', 
-                  count: testimonials.length,
-                },
-              ].map((section) => {
-                const active = activeResourcesSection === section.title;
-                return (
-                  <li key={section.title}>
-                    <button
-                      type="button"
-                      onMouseEnter={() => {
-                        setResourcesSection(section.title);
-                      }}
-                      onClick={() => {
-                        setResourcesSection(section.title);
-                      }}
-                      className={cn(
-                        'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between',
-                        active
-                          ? 'bg-white text-slate-900 shadow-sm'
-                          : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
-                      )}
-                    >
-                      <span>
-                        {section.title}
-                        {section.count > 0 && (
-                          <span className="ml-1 text-xs font-normal text-slate-400">
-                            ({section.count})
-                          </span>
-                        )}
-                      </span>
-                      <ChevronDown
-                        className={cn(
-                          'h-4 w-4 -rotate-90 transition-opacity',
-                          active ? 'opacity-70' : 'opacity-0'
-                        )}
-                        aria-hidden
-                      />
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+                {/* Left rail - Categories */}
+                
+        {/* Left rail - Categories */}
+<div className="col-span-3 bg-slate-50 p-4 border-r border-slate-200">
+  <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+    Resources
+  </p>
+  <ul className="space-y-1">
+    {[
+      { 
+        title: 'Case Studies', 
+        count: caseStudies.length,
+        href: '/case-studies'
+      },
+      { 
+        title: 'Blog', 
+        count: blogs.length,
+        href: '/blog'
+      },
+      { 
+        title: 'FAQs', 
+        count: allFaqs.length,
+        href: '/faqs'
+      },
+      { 
+        title: 'Testimonials', 
+        count: testimonials.length,
+        href: '/testimonials'
+      },
+    ].map((section) => {
+      const active = activeResourcesSection === section.title;
+      return (
+        <li key={section.title}>
+          <Link
+            href={section.href}
+            onClick={closeDropdowns}
+            onMouseEnter={() => setResourcesSection(section.title)}
+            className={cn(
+              'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between hover:bg-white/70',
+              active
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
+            )}
+          >
+            <span>
+              {section.title}
+              {section.count > 0 && (
+                <span className="ml-1 text-xs font-normal text-slate-400">
+                  ({section.count})
+                </span>
+              )}
+            </span>
+            <ChevronDown
+              className={cn(
+                'h-4 w-4 -rotate-90 transition-opacity',
+                active ? 'opacity-70' : 'opacity-0'
+              )}
+              aria-hidden
+            />
+          </Link>
+        </li>
+      );
+    })}
+  </ul>
+</div>
 
           {/* Right content - Preview items */}
           <div className="col-span-9 p-6 max-h-[600px] overflow-y-auto">
@@ -1440,14 +1442,12 @@ function MobileServicesDropdown({ title, onLinkClick }: MobileServicesDropdownPr
 
 
 // Mobile Dropdown Component for Resources (using same UI as Solutions)
-// Mobile Dropdown Component for Resources (using same UI as Solutions)
 interface MobileResourcesDropdownProps {
   title: string;
   caseStudies: any[];
   blogs: any[];
   testimonials: any[];
   allFaqs: any[];
-  allServicePages: any[];
   onLinkClick: () => void;
 }
 
@@ -1457,115 +1457,9 @@ function MobileResourcesDropdown({
   blogs, 
   testimonials, 
   allFaqs,
-  allServicePages,
   onLinkClick 
 }: MobileResourcesDropdownProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const renderItems = () => {
-    return (
-      <div className="pl-4 space-y-4 mt-3">
-        {/* Case Studies Section */}
-        <div>
-          <h4 className="text-sm font-semibold text-primary mb-2">Case Studies</h4>
-          <ul className="space-y-2">
-            {caseStudies.slice(0, 3).map((study: any) => (
-              <li key={study._id}>
-                <Link
-                  href={`/case-studies/${study.slug || study._id}`}
-                  onClick={onLinkClick}
-                  className="text-black/60 hover:text-primary transition-colors block py-1"
-                >
-                  {study.title}
-                </Link>
-              </li>
-            ))}
-            {caseStudies.length === 0 && (
-              <li className="text-black/40 py-1">No case studies available</li>
-            )}
-          </ul>
-        </div>
-
-        {/* Blog Section */}
-        <div>
-          <h4 className="text-sm font-semibold text-primary mb-2">Blog</h4>
-          <ul className="space-y-2">
-            {blogs.slice(0, 3).map((blog: any) => (
-              <li key={blog._id}>
-                <Link
-                  href={`/blog/${blog.slug || blog._id}`}
-                  onClick={onLinkClick}
-                  className="text-black/60 hover:text-primary transition-colors block py-1"
-                >
-                  {blog.title}
-                </Link>
-              </li>
-            ))}
-            {blogs.length === 0 && (
-              <li className="text-black/40 py-1">No blog posts available</li>
-            )}
-          </ul>
-        </div>
-
-        {/* FAQs Section */}
-        <div>
-          <h4 className="text-sm font-semibold text-primary mb-2">FAQs</h4>
-          <ul className="space-y-2">
-            {allFaqs.slice(0, 3).map((faq: any, idx: number) => (
-              <li key={idx}>
-                <Link
-                  href={`/faqs/${faq.serviceSlug}`}
-                  onClick={onLinkClick}
-                  className="text-black/60 hover:text-primary transition-colors block py-1"
-                >
-                  {faq.question}
-                </Link>
-              </li>
-            ))}
-            {allFaqs.length === 0 && (
-              <li className="text-black/40 py-1">No FAQs available</li>
-            )}
-          </ul>
-        </div>
-
-        {/* Testimonials Section - Updated based on your data structure */}
-        <div>
-          <h4 className="text-sm font-semibold text-primary mb-2">Testimonials</h4>
-          <ul className="space-y-2">
-            {testimonials.slice(0, 3).map((testimonial: any) => (
-              <li key={testimonial._id}>
-                <Link
-                  href="/testimonials"
-                  onClick={onLinkClick}
-                  className="text-black/60 hover:text-primary transition-colors block py-1"
-                >
-                  <div>
-                    <span className="font-medium">{testimonial.authorName || 'Client'}</span>
-                    {testimonial.rating && (
-                      <span className="text-xs text-yellow-500 ml-2">
-                        {'★'.repeat(testimonial.rating)}
-                      </span>
-                    )}
-                    {testimonial.content && (
-                      <p className="text-xs text-black/50 mt-0.5 line-clamp-1">
-                        {testimonial.content.substring(0, 60)}...
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              </li>
-            ))}
-            {testimonials.length === 0 && (
-              <li className="text-black/40 py-1">No testimonials available</li>
-            )}
-          </ul>
-        </div>
-
-       
-      
-      </div>
-    );
-  };
 
   return (
     <div className="border-b border-black/5">
@@ -1578,7 +1472,64 @@ function MobileResourcesDropdown({
           className={cn('h-4 w-4 transition-transform duration-300', isExpanded && 'rotate-180')}
         />
       </button>
-      {isExpanded && renderItems()}
+
+      {isExpanded && (
+        <div className="pl-4 space-y-4 mt-3 pb-6">
+          
+          {/* Case Studies */}
+          <div>
+            <Link
+              href="/case-studies"
+              onClick={onLinkClick}
+              className="flex items-center justify-between  text-sm font-medium text-black/70 hover:text-primary transition-colors"
+            >
+              Case Studies
+             
+            </Link>
+         
+          </div>
+
+          {/* Blog */}
+          <div>
+            <Link
+              href="/blog"
+              onClick={onLinkClick}
+              className="flex items-center justify-between  text-sm font-medium text-black/70 hover:text-primary transition-colors"
+            >
+              Blog
+            
+            </Link>
+          
+          </div>
+
+          {/* FAQs */}
+          <div>
+            <Link
+              href="/faqs"
+              onClick={onLinkClick}
+              className="flex items-center justify-between  text-sm font-medium text-black/70 hover:text-primary transition-colors"
+            >
+              FAQs
+          
+            </Link>
+            
+          </div>
+
+          {/* Testimonials */}
+          <div>
+            <Link
+              href="/testimonials"
+              onClick={onLinkClick}
+              className="flex items-center justify-between  text-sm font-medium text-black/70 hover:text-primary transition-colors"
+            >
+              Testimonials
+            
+            </Link>
+           
+          </div>
+
+        </div>
+      )}
     </div>
   );
 }
