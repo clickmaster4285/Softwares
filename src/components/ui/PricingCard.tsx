@@ -49,7 +49,7 @@ export function PricingCard({
       animate={hasAnimated ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.5, staggerChildren: 0.1, delayChildren: 0.3 }}
     >
-      <Card className="relative mx-auto w-full  overflow-hidden">
+      <Card className="relative mx-auto w-full  overflow-hidden h-full">
         <div className="flex flex-col lg:flex-row">
           <motion.div
             className="flex flex-col justify-between p-6 lg:w-2/5 lg:p-10"

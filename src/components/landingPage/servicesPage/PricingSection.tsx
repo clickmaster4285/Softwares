@@ -20,7 +20,6 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
   if (!pricingTiers || pricingTiers.length === 0) return null;
 
   // Transform your pricing tiers to match PricingCard props
-  // Note: You'll need to add features to your data structure
   const pricingCardsData = pricingTiers.map((tier, index) => {
     // Parse investment string to extract numeric value
     const priceMatch = tier.investment.match(/\d+/);
@@ -33,7 +32,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
       title: tier.type,
       description: `Perfect for businesses that need ${tier.type.toLowerCase()} solutions`,
       price: isCustom ? 0 : price,
-      originalPrice: isCustom ? undefined : price * 1.5, // Optional: original price
+      originalPrice: isCustom ? undefined : price * 1.5,
       features: [
         {
           title: "Package Includes",
@@ -43,15 +42,6 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
             "Dedicated Project Manager",
             "Quality Assurance Testing",
             "Documentation & Training",
-          ],
-        },
-        {
-          title: "Support",
-          items: [
-            "30-Day Post-Launch Support",
-            "Technical Consultation",
-            "Performance Optimization",
-            "Security Updates",
           ],
         },
       ],
@@ -101,14 +91,14 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
         Transparent pricing tailored to your business needs
       </motion.p>
 
-      {/* Using the new PricingCard components */}
-      <div className="mt-8 space-y-8">
+      {/* Grid layout for cards */}
+  <div className="mt-8 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 auto-rows-fr">
         {pricingCardsData.map((cardData, index) => (
           <PricingCard key={index} {...cardData} />
         ))}
       </div>
 
-      {/* Bottom Section */}
+      {/* Bottom Section - Trust Indicators and Note */}
       <motion.div 
         className="mt-12 sm:mt-16 flex flex-col items-center gap-5 sm:gap-6"
         initial={{ opacity: 0, y: 30 }}
