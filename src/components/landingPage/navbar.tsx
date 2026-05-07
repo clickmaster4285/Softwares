@@ -381,7 +381,7 @@ const { data: blogs = [] } = useQuery({
     <header
       className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', navStyle)}
     >
-      <div className="px-2 md:px-4 lg:px-26 mx-20 flex h-20 items-center justify-between">
+      <div className="px-2 md:px-4 lg:px-26 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
@@ -804,106 +804,146 @@ const { data: blogs = [] } = useQuery({
       )}
 
       {/* Full-width Dropdown Menu for Services */}
-      {activeDropdown === 'services' && !isPageLoading && (
-        <div
-          onMouseEnter={() => {
-            if (hoverTimeoutRef.current) {
-              clearTimeout(hoverTimeoutRef.current);
-              hoverTimeoutRef.current = null;
-            }
-          }}
-          onMouseLeave={closeDropdowns}
-          className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
-        >
-          <div className="max-w-8xl mx-auto px-5 md:px-8 lg:px-10 py-0">
-            <div
-              ref={dropdownRef}
-              onMouseLeave={closeDropdowns}
-              className="mx-auto max-w-6xl h-[520px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
-            >
-              <div className="grid h-full grid-cols-12">
-                {/* Left rail */}
-                <div className="col-span-3 h-full overflow-y-auto bg-slate-50 p-4 border-r border-slate-200">
-                  <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
-                    Services
-                  </p>
-                  <ul className="space-y-1">
-                    {serviceSections.map((section) => {
-                      const active = section.label === activeServiceSection;
-                      return (
-                        <li key={section.label}>
-                          <button
-                            type="button"
-                            onMouseEnter={() => setActiveServiceSection(section.label)}
-                            onClick={() => setActiveServiceSection(section.label)}
-                            className={cn(
-                              'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between',
-                              active
-                                ? 'bg-white text-slate-900 shadow-sm'
-                                : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
-                            )}
-                          >
-                            <span>{section.label}</span>
-                            <ChevronDown
-                              className={cn(
-                                'h-4 w-4 -rotate-90 transition-opacity',
-                                active ? 'opacity-70' : 'opacity-0 group-hover:opacity-60'
-                              )}
-                              aria-hidden
-                            />
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-
-                {/* Right content */}
-                <div className="col-span-9 h-full p-8">
-                  {serviceSections
-                    .filter((s) => s.label === activeServiceSection)
-                    .map((section) => (
-                      <div key={section.label} className="flex h-full flex-col">
-                        <div className="grid flex-1 content-start gap-6 overflow-y-auto pr-2 sm:grid-cols-2">
-                          {section.items.map((item) => (
-                            <Link
-                              key={item.href}
-                              href={item.href}
-                              onClick={closeDropdowns}
-                              className="group rounded-md p-2 transition-colors hover:bg-slate-50"
-                            >
-                              <div className="flex items-start justify-between gap-4">
-                                <div>
-                                  <p className="text-sm font-semibold text-slate-900 group-hover:text-primary">
-                                    {item.title}
-                                  </p>
-                                  <p className="mt-1 text-xs leading-relaxed text-slate-500">
-                                    {item.description}
-                                  </p>
-                                </div>
-                                <ChevronDown className="mt-0.5 h-4 w-4 -rotate-90 text-slate-300 transition-colors group-hover:text-primary" />
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-
-                        <div className="mt-6 border-t border-slate-200 pt-4">
-                          <Link
-                            href="#"
-                            onClick={closeDropdowns}
-                            className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
-                          >
-                            All services →
-                          </Link>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </div>
+    {/* Full-width Dropdown Menu for Services */}
+{activeDropdown === 'services' && !isPageLoading && (
+  <div
+    onMouseEnter={() => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+        hoverTimeoutRef.current = null;
+      }
+    }}
+    onMouseLeave={closeDropdowns}
+    className="absolute left-0 right-0 top-full border-t border-black/5 bg-transparent animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out"
+  >
+    <div className="max-w-8xl mx-auto px-5 md:px-8 lg:px-10 py-0">
+      <div
+        ref={dropdownRef}
+        onMouseLeave={closeDropdowns}
+        className="mx-auto max-w-6xl h-[520px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_-18px_rgba(0,0,0,0.35)]"
+      >
+        <div className="grid h-full grid-cols-12">
+          {/* Left rail - Now with clickable links */}
+    
+<div className="col-span-3 h-full overflow-y-auto bg-slate-50 p-4 border-r border-slate-200">
+  <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+    Services
+  </p>
+  <ul className="space-y-1">
+    {serviceSections.map((section) => {
+      const active = section.label === activeServiceSection;
+      // Create URL-friendly slug for the category
+      const categorySlug = section.label
+        .toLowerCase()
+        .replace(/&/g, 'and')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+      
+      return (
+        <li key={section.label}>
+          <Link
+            href={`/${categorySlug}`}
+            onClick={(e) => {
+              // Close dropdown when clicking the link
+              closeDropdowns();
+              // Don't prevent default - let the navigation happen
+            }}
+            onMouseEnter={(e) => {
+              // On hover, change the right panel content without navigating
+              // This provides the preview functionality
+              setActiveServiceSection(section.label);
+            }}
+            className={cn(
+              'block w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors',
+              active
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
+            )}
+          >
+            <div className="flex items-center justify-between">
+              <span>{section.label}</span>
+              <ChevronDown
+                className={cn(
+                  'h-4 w-4 -rotate-90 transition-opacity',
+                  active ? 'opacity-70' : 'opacity-0 group-hover:opacity-60'
+                )}
+                aria-hidden
+              />
             </div>
+          </Link>
+        </li>
+      );
+    })}
+  </ul>
+</div>
+
+          {/* Right content */}
+          <div className="col-span-9 h-full p-8 overflow-y-auto">
+            {serviceSections
+              .filter((s) => s.label === activeServiceSection)
+              .map((section) => {
+                const categorySlug = section.label
+                  .toLowerCase()
+                  .replace(/&/g, 'and')
+                  .replace(/[^a-z0-9]+/g, '-')
+                  .replace(/^-|-$/g, '');
+                
+                return (
+                  <div key={section.label} className="flex h-full flex-col">
+                    {/* Category header with View All link */}
+                    <div className="mb-4 flex items-center justify-between border-b border-slate-200 pb-3">
+                      <h3 className="text-base font-bold text-slate-900">{section.label}</h3>
+                      <Link
+                        href={`/services/${categorySlug}`}
+                        onClick={closeDropdowns}
+                        className="text-xs font-semibold uppercase tracking-widest text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
+                      >
+                        View All
+                        <ChevronDown className="h-3 w-3 -rotate-90" />
+                      </Link>
+                    </div>
+                    
+                    <div className="grid flex-1 content-start gap-6 overflow-y-auto pr-2 sm:grid-cols-2">
+                      {section.items.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          onClick={closeDropdowns}
+                          className="group rounded-md p-2 transition-colors hover:bg-slate-50"
+                        >
+                          <div className="flex items-start justify-between gap-4">
+                            <div>
+                              <p className="text-sm font-semibold text-slate-900 group-hover:text-primary">
+                                {item.title}
+                              </p>
+                              <p className="mt-1 text-xs leading-relaxed text-slate-500">
+                                {item.description}
+                              </p>
+                            </div>
+                            <ChevronDown className="mt-0.5 h-4 w-4 -rotate-90 text-slate-300 transition-colors group-hover:text-primary flex-shrink-0" />
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+
+                    <div className="mt-6 border-t border-slate-200 pt-4">
+                      <Link
+                        href="/services"
+                        onClick={closeDropdowns}
+                        className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                      >
+                        Browse all services →
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
 
       
 {activeDropdown === 'resources' && !isPageLoading && (
