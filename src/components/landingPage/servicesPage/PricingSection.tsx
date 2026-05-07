@@ -1,7 +1,8 @@
-// components/landingPage/servicesPage/PricingSection.tsx
+// /src/components/landingPage/servicesPage/PricingSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
+import { PricingCard } from "@/components/ui/PricingCard";
 
 interface PricingTier {
   type: string;
@@ -18,10 +19,44 @@ interface PricingSectionProps {
 export function PricingSection({ serviceName, pricingTiers }: PricingSectionProps) {
   if (!pricingTiers || pricingTiers.length === 0) return null;
 
+  // Transform your pricing tiers to match PricingCard props
+  const pricingCardsData = pricingTiers.map((tier, index) => {
+    // Parse investment string to extract numeric value
+    const priceMatch = tier.investment.match(/\d+/);
+    const price = priceMatch ? parseInt(priceMatch[0]) : 0;
+    
+    // Check if investment contains a range or "Custom"
+    const isCustom = tier.investment.toLowerCase().includes('custom');
+    
+    return {
+      title: tier.type,
+      description: `Perfect for businesses that need ${tier.type.toLowerCase()} solutions`,
+      price: isCustom ? 0 : price,
+      originalPrice: isCustom ? undefined : price * 1.5,
+      features: [
+        {
+          title: "Package Includes",
+          items: [
+            `Timeline: ${tier.timeline}`,
+            `Best For: ${tier.bestFor}`,
+            "Dedicated Project Manager",
+            "Quality Assurance Testing",
+            "Documentation & Training",
+          ],
+        },
+      ],
+      buttonText: isCustom ? "Contact Us" : "Get Started",
+      onButtonClick: () => {
+        console.log(`Selected ${tier.type} plan`);
+        // Add your booking/contact logic here
+      },
+    };
+  });
+
   return (
     <motion.section 
       id="pricing" 
-      className="scroll-mt-24 py-6 sm:py-8 md:py-12 "
+      className="scroll-mt-24 py-6 sm:py-8 md:py-12"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -56,79 +91,14 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
         Transparent pricing tailored to your business needs
       </motion.p>
 
-      {/* Cards Grid - Mobile-first responsive grid */}
-      <div className="mt-8 sm:mt-10 grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {pricingTiers.map((tier, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -4 }}
-            className="group"
-          >
-            <div className="relative rounded-xl border border-slate-200 bg-white p-5 sm:p-6 transition-all duration-300 hover:border-orange-200 hover:shadow-lg h-full">
-              
-              {/* Plan Type Header */}
-              <div className="mb-3 sm:mb-4">
-                <h3 className="text-base sm:text-lg font-semibold text-slate-900">
-                  {tier.type}
-                </h3>
-                <div className="mt-2 h-0.5 w-10 sm:w-12 bg-orange-500 rounded-full" />
-              </div>
-
-              {/* Investment Amount */}
-              <div className="mb-3 sm:mb-4">
-                <div className="flex items-baseline gap-1 flex-wrap">
-                  <span className="text-2xl sm:text-3xl font-bold text-slate-900">
-                    {tier.investment}
-                  </span>
-                  {tier.investment !== 'Custom' && (
-                    <span className="text-xs sm:text-sm text-slate-500">USD</span>
-                  )}
-                </div>
-                {tier.investment !== 'Custom' && (
-                  <p className="text-xs text-slate-400 mt-1">one-time investment</p>
-                )}
-              </div>
-
-              {/* Timeline */}
-              <div className="mb-3 sm:mb-4 flex items-center gap-3 rounded-lg bg-slate-50 p-2.5 sm:p-3">
-                <svg className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs text-slate-500">Timeline</p>
-                  <p className="text-sm font-medium text-slate-700 break-words">{tier.timeline}</p>
-                </div>
-              </div>
-
-              {/* Best For */}
-              <div className="mb-5 sm:mb-6 flex items-start gap-3 rounded-lg bg-orange-50 p-2.5 sm:p-3">
-                <svg className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs text-orange-600">Best For</p>
-                  <p className="text-sm font-medium text-slate-700 break-words">{tier.bestFor}</p>
-                </div>
-              </div>
-
-              {/* CTA Button */}
-              <motion.button
-                className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-300 hover:border-orange-500 hover:bg-orange-500 hover:text-white"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Get Started
-              </motion.button>
-            </div>
-          </motion.div>
+      {/* Grid layout for cards */}
+  <div className="mt-8 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 auto-rows-fr">
+        {pricingCardsData.map((cardData, index) => (
+          <PricingCard key={index} {...cardData} />
         ))}
       </div>
 
-      {/* Bottom Section */}
+      {/* Bottom Section - Trust Indicators and Note */}
       <motion.div 
         className="mt-12 sm:mt-16 flex flex-col items-center gap-5 sm:gap-6"
         initial={{ opacity: 0, y: 30 }}
@@ -136,7 +106,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
-        {/* Trust Indicators - Stack on mobile, wrap on larger screens */}
+        {/* Trust Indicators */}
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm text-slate-500 px-2">
           {[
             'Transparent Pricing',
@@ -160,7 +130,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
           ))}
         </div>
 
-        {/* Note - Mobile friendly with better word wrapping */}
+        {/* Note */}
         <motion.p 
           className="text-center text-xs text-slate-400 max-w-md mx-auto px-4 leading-relaxed"
           initial={{ opacity: 0 }}
@@ -175,3 +145,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
     </motion.section>
   );
 }
+
+
+
+
