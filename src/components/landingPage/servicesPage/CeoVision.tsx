@@ -1,3 +1,4 @@
+
 "use client";
 import React from "react";
 import Image from "next/image";
@@ -8,7 +9,7 @@ export function CeoVision() {
     <section className="w-full overflow-hidden">
       <ContainerScroll
         titleComponent={
-          <div className="space-y-6 px-4">
+          <div className="space-y-6 px-4 mt-40">
            
 
             {/* Title */}
@@ -89,3 +90,34 @@ export function CeoVision() {
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

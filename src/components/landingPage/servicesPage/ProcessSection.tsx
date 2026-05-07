@@ -56,9 +56,9 @@ const getPhaseColor = (phaseNumber: number) => {
   return colors[phaseNumber] || { from: 'from-orange-500', to: 'to-amber-500' };
 };
 
-// Timing constants for animations
-const CARD_DURATION = 0.8;
-const PIPE_DURATION = 1.0;
+
+const CARD_DURATION = 0.45; // was 0.8
+const PIPE_DURATION = 0.45; // was 1.0
 const STEP_GAP = CARD_DURATION + PIPE_DURATION;
 const HOLD_DURATION = 5; // 5 second hold before restarting
 
