@@ -5,9 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Mail, ChevronRight, Phone } from 'lucide-react';
+import { Mail, ChevronRight, Phone, MessageCircle } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
-
+import { FaWhatsapp } from "react-icons/fa";
 // Type definitions
 interface FooterLink {
   label: string;
@@ -142,11 +142,51 @@ export function Footer(): JSX.Element {
             </motion.p>
             
            
-           {/* Contact Numbers */}
-{/* Contact Numbers */}
-<motion.div variants={itemVariants} className="mt-6 space-y-2">
+            {/* Contact Numbers */}
+            <motion.div variants={itemVariants} className="mt-6 space-y-2">
   <div className="flex items-center justify-center lg:justify-start gap-3">
     <Phone className="h-4 w-4 text-primary" />
+
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+      <a
+       
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-background/70 hover:text-background transition-colors text-sm"
+      >
+        🇬🇧 UK: +44 7988 576086
+      </a>
+
+      <span className="hidden sm:inline text-background/30">|</span>
+
+      <a
+        
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-background/70 hover:text-background transition-colors text-sm"
+      >
+        🇺🇸 US: +1 325 202 4074
+      </a>
+
+      <span className="hidden sm:inline text-background/30">|</span>
+
+      <a
+       
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-background/70 hover:text-background transition-colors text-sm"
+      >
+        🇵🇰 PK: +92 332 5394285
+      </a>
+    </div>
+  </div>
+</motion.div>
+
+            
+{/* whatsapp Numbers */}
+<motion.div variants={itemVariants} className="mt-6 space-y-2">
+  <div className="flex items-center justify-center lg:justify-start gap-3">
+  <FaWhatsapp className="h-4 w-4 text-green-500" />
 
     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
       <a
