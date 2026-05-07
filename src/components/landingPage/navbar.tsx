@@ -381,7 +381,7 @@ const { data: blogs = [] } = useQuery({
     <header
       className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', navStyle)}
     >
-      <div className="px-2 md:px-4 lg:px-26 mx-20 flex h-20 items-center justify-between">
+      <div className="px-2 md:px-4 lg:px-26 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
@@ -824,51 +824,58 @@ const { data: blogs = [] } = useQuery({
       >
         <div className="grid h-full grid-cols-12">
           {/* Left rail - Now with clickable links */}
-          <div className="col-span-3 h-full overflow-y-auto bg-slate-50 p-4 border-r border-slate-200">
-            <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
-              Services
-            </p>
-            <ul className="space-y-1">
-              {serviceSections.map((section) => {
-                const active = section.label === activeServiceSection;
-                // Create URL-friendly slug
-                const categorySlug = section.label
-                  .toLowerCase()
-                  .replace(/&/g, 'and')
-                  .replace(/[^a-z0-9]+/g, '-')
-                  .replace(/^-|-$/g, '');
-                
-                return (
-                  <li key={section.label}>
-                    <Link
-                       href={`/${categorySlug}`} 
-                      onClick={closeDropdowns}
-                      onMouseEnter={(e) => {
-                        // On hover, change content without navigating
-                        e.preventDefault();
-                        setActiveServiceSection(section.label);
-                      }}
-                      className={cn(
-                        'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between',
-                        active
-                          ? 'bg-white text-slate-900 shadow-sm'
-                          : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
-                      )}
-                    >
-                      <span>{section.label}</span>
-                      <ChevronDown
-                        className={cn(
-                          'h-4 w-4 -rotate-90 transition-opacity',
-                          active ? 'opacity-70' : 'opacity-0 group-hover:opacity-60'
-                        )}
-                        aria-hidden
-                      />
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+    
+<div className="col-span-3 h-full overflow-y-auto bg-slate-50 p-4 border-r border-slate-200">
+  <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+    Services
+  </p>
+  <ul className="space-y-1">
+    {serviceSections.map((section) => {
+      const active = section.label === activeServiceSection;
+      // Create URL-friendly slug for the category
+      const categorySlug = section.label
+        .toLowerCase()
+        .replace(/&/g, 'and')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+      
+      return (
+        <li key={section.label}>
+          <Link
+            href={`/${categorySlug}`}
+            onClick={(e) => {
+              // Close dropdown when clicking the link
+              closeDropdowns();
+              // Don't prevent default - let the navigation happen
+            }}
+            onMouseEnter={(e) => {
+              // On hover, change the right panel content without navigating
+              // This provides the preview functionality
+              setActiveServiceSection(section.label);
+            }}
+            className={cn(
+              'block w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors',
+              active
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
+            )}
+          >
+            <div className="flex items-center justify-between">
+              <span>{section.label}</span>
+              <ChevronDown
+                className={cn(
+                  'h-4 w-4 -rotate-90 transition-opacity',
+                  active ? 'opacity-70' : 'opacity-0 group-hover:opacity-60'
+                )}
+                aria-hidden
+              />
+            </div>
+          </Link>
+        </li>
+      );
+    })}
+  </ul>
+</div>
 
           {/* Right content */}
           <div className="col-span-9 h-full p-8 overflow-y-auto">
