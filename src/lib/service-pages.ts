@@ -479,22 +479,6 @@ const customSoftwareDevelopmentOverride: ServicePageContent = {
 };
 
 const enterpriseSoftwareDevelopmentOverride: ServicePageContent = {
-  slug: 'enterprise-software-development',
-  categorySlug: 'software-development',
-  sectionId: 'enterprise-software-development',
-  category: 'Software Development',
-  title: 'Enterprise Software Development Company for B2B Organizations in USA, Europe and Canada',
-  serviceName: 'Enterprise Software Development',
-  metaTitle: 'Enterprise Software Development Company | Custom ERP & B2B Systems | ClickMasters',
-  metaDescription:
-    'ClickMasters builds enterprise software for complex B2B operations - custom ERP, workflow automation, SaaS platforms, and system integrations. Serving USA, Europe, Canada & Australia.',
-  lead: 'ClickMasters engineers enterprise software development for B2B organizations whose operational complexity has outgrown off the shelf tools. Custom ERP systems, enterprise workflow automation, multi system integrations, and scalable SaaS platforms built to your exact business logic, compliance requirements, and scale targets.',
-  highlights: [
-    '✓ ERP & CRM Systems',
-    '✓ Legacy Modernization',
-    '✓ Enterprise Integrations',
-    '✓ Compliance Grade Security',
-  ],
  slug: 'enterprise-software-development',
  categorySlug: 'software-development',
  sectionId: 'enterprise-software-development',
