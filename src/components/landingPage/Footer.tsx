@@ -140,27 +140,49 @@ export function Footer(): JSX.Element {
               applications, mobile apps, and ERP solutions for businesses worldwide.
             </motion.p>
             
-            {/* Contact Numbers */}
-            <motion.div variants={itemVariants} className="mt-6 space-y-2">
-              <div className="flex items-center justify-center lg:justify-start gap-3">
-                <Phone className="h-4 w-4 text-primary" />
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-                  <a 
-                    href="tel:+447988576086" 
-                    className="text-background/70 hover:text-background transition-colors text-sm"
-                  >
-                    🇬🇧 UK: +44 7988 576086
-                  </a>
-                  <span className="hidden sm:inline text-background/30">|</span>
-                  <a 
-                    href="tel:+13252024074" 
-                    className="text-background/70 hover:text-background transition-colors text-sm"
-                  >
-                    🇺🇸 US: +1 325 202 4074
-                  </a>
-                </div>
-              </div>
-            </motion.div>
+           
+           {/* Contact Numbers */}
+{/* Contact Numbers */}
+<motion.div variants={itemVariants} className="mt-6 space-y-2">
+  <div className="flex items-center justify-center lg:justify-start gap-3">
+    <Phone className="h-4 w-4 text-primary" />
+
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+      <a
+        href="https://wa.me/447988576086"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-background/70 hover:text-background transition-colors text-sm"
+      >
+        🇬🇧 UK: +44 7988 576086
+      </a>
+
+      <span className="hidden sm:inline text-background/30">|</span>
+
+      <a
+        href="https://wa.me/13252024074"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-background/70 hover:text-background transition-colors text-sm"
+      >
+        🇺🇸 US: +1 325 202 4074
+      </a>
+
+      <span className="hidden sm:inline text-background/30">|</span>
+
+      <a
+        href="https://wa.me/923325394285"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-background/70 hover:text-background transition-colors text-sm"
+      >
+        🇵🇰 PK: +92 332 5394285
+      </a>
+    </div>
+  </div>
+</motion.div>
+
+            
           </motion.div>
 
           {/* Newsletter Section */}
