@@ -46,7 +46,7 @@ export function FaqSection() {
         <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-6xl px-4">
+      <div className=" relative z-10 mx-auto  px-4 lg:px-12">
         <div className="mb-14 text-center">
           <span className="inline-flex items-center rounded-full border border-primary/45 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
             FAQ

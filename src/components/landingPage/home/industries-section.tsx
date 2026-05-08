@@ -116,7 +116,7 @@ export function IndustriesSection() {
 
   return (
     <section ref={sectionRef} className="relative py-24 overflow-hidden bg-white font-sans">
-      <div className="container relative z-10 mx-auto max-w-7xl px-4">
+      <div className=" relative z-10 mx-auto  px-4 lg:px:12">
         {/* Header Section */}
         <div ref={headerRef} className="text-center mb-10">
           <motion.div

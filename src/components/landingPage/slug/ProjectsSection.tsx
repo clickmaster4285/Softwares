@@ -328,7 +328,7 @@ export const ParallaxProjectsContent = ({ projects }: ParallaxProjectsContentPro
             Have a Project in Mind?
           </h3>
           <Button asChild size="default" className="bg-orange-600 hover:bg-orange-700 text-white rounded-full px-6 sm:px-8 mt-3 w-full sm:w-auto">
-            <Link href="/contact">
+            <Link href="/contact-us">
               Start a Project
               <ArrowDown className="ml-1.5 h-3.5 w-3.5 rotate-[-90deg]" />
             </Link>

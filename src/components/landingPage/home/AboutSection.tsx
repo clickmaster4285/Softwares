@@ -85,25 +85,38 @@ function useInView(threshold = 0.15) {
 }
 
 /* ── TRUSTED CLIENT CARD ──────────────────────────────────── */
-function TrustedClientCard({ client, index, visible }: { client: typeof trustedClients[0]; index: number; visible: boolean }) {
+function TrustedClientCard({
+  client,
+  index,
+  visible,
+}: {
+  client: typeof trustedClients[0];
+  index: number;
+  visible: boolean;
+}) {
   return (
     <div
-      className="group flex flex-col items-center justify-center p-6 bg-gray-50/50 hover:bg-white rounded-2xl border border-gray-200 hover:border-orange-200 transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-default"
+      className="group flex flex-col items-center justify-center p-8   transition-all duration-300 hover:scale-105 cursor-default"
       style={{
         transitionDelay: visible ? `${index * 60}ms` : "0ms",
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(20px)",
       }}
     >
-      <div className="text-5xl mb-3 group-hover:scale-110 transition-transform duration-300">
+      <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
         {client.logo}
       </div>
-      <p className="text-lg font-bold text-gray-800 mb-1">{client.name}</p>
-      <p className="text-xs text-gray-600 uppercase tracking-wide">{client.industry}</p>
+
+      <p className="text-xl font-bold text-gray-800 mb-1">
+        {client.name}
+      </p>
+
+      <p className="text-xs text-gray-600 uppercase tracking-wide">
+        {client.industry}
+      </p>
     </div>
   );
 }
-
 /* ── TECHNOLOGY SECTION ──────────────────────────────────── */
 function TechCategory({ title, items, visible, delay }: { title: string; items: string[]; visible: boolean; delay: number }) {
   return (
@@ -158,7 +171,7 @@ export function AboutSection() {
           }}
         />
 
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 py-20 lg:py-24 relative">
+        <div className=" mx-auto px-6 lg:px-12 py-20 lg:py-24 relative">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
 
             {/* Headline */}
@@ -213,7 +226,7 @@ export function AboutSection() {
       </div>
 
       {/* ────────────────── MAIN CONTENT ─────────────────── */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 py-20 lg:py-24">
+      <div className=" mx-auto px-6 lg:px-12 py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
           {/* LEFT: Body copy */}
@@ -335,33 +348,73 @@ export function AboutSection() {
       </div>
 
       {/* ────────────────── TRUSTED CLIENTS SECTION ────────────────────── */}
-      <div className="bg-gradient-to-b from-gray-50 to-white border-y border-gray-200" ref={clients.ref}>
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
-              <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">Trusted By Industry Leaders</p>
-              <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
-            </div>
-            <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
-              Our Trusted Partners & Clients
-            </h3>
-            <p className="text-gray-700 max-w-2xl mx-auto text-sm">
-              Join 3,500+ businesses that trust ClickMasters to deliver exceptional software solutions
-            </p>
-          </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {trustedClients.map((client, idx) => (
-              <TrustedClientCard key={client.name} client={client} index={idx} visible={clients.visible} />
-            ))}
-          </div>
-        </div>
+<div className="bg-gradient-to-b from-gray-50 to-white " ref={clients.ref}>
+  <div className="mx-auto px-6 lg:px-12 py-16 lg:py-20">
+
+    {/* HEADER */}
+    <div className="text-center mb-12">
+      <div className="inline-flex items-center gap-2 mb-3">
+        <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+        <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">
+          Trusted By Industry Leaders
+        </p>
+        <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
       </div>
 
+      <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
+        Our Trusted Partners & Clients
+      </h3>
+
+      <p className="text-gray-700 max-w-2xl mx-auto text-sm">
+        Join 3,500+ businesses that trust ClickMasters to deliver exceptional software solutions
+      </p>
+    </div>
+
+    {/* MARQUEE WRAPPER */}
+    <div className="relative overflow-hidden">
+
+      {/* LEFT FADE */}
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10" />
+      {/* RIGHT FADE */}
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10" />
+
+      {/* TRACK */}
+      <div className="flex w-max gap-4 animate-marquee-left hover:[animation-play-state:paused]">
+
+        {[...trustedClients, ...trustedClients].map((client, idx) => (
+          <TrustedClientCard
+            key={`${client.name}-${idx}`}
+            client={client}
+            index={idx}
+            visible={true}
+          />
+        ))}
+
+      </div>
+    </div>
+  </div>
+
+  {/* ANIMATION */}
+  <style>{`
+    @keyframes marquee-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-marquee-left {
+      animation: marquee-left 25s linear infinite;
+    }
+  `}</style>
+</div>
+
       {/* ────────────────── COMPREHENSIVE TECH STACK ────────────────────── */}
-      <div className="bg-white border-b border-gray-200" ref={tech.ref}>
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
+      <div className="bg-white " ref={tech.ref}>
+        <div className=" mx-auto px-6 lg:px-12 py-16 lg:py-20">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
@@ -399,7 +452,7 @@ export function AboutSection() {
           style={{ transform: cta.visible ? "scale(1)" : "scale(0.4)" }}
         />
 
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 py-14 lg:py-16 relative z-10">
+        <div className=" mx-auto px-6 lg:px-12 py-14 lg:py-16 relative z-10">
           <div
             className="flex flex-col md:flex-row items-center justify-between gap-8 transition-all duration-700"
             style={{ opacity: cta.visible ? 1 : 0, transform: cta.visible ? "translateY(0)" : "translateY(24px)" }}

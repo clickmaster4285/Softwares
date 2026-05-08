@@ -350,7 +350,7 @@ export function TestimonialsSection() {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 lg:px-12  relative z-10">
       
         {/* Header */}
         <motion.div
@@ -366,10 +366,10 @@ export function TestimonialsSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="h-px bg-primary mx-auto mb-8"
           />
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Hear What Our <span className="text-primary">Clients Have to Say</span>
           </h2>
-          <p className="text-gray-700 max-w-2xl mx-auto text-base mt-4">
+          <p className="text-gray-300 max-w-2xl mx-auto text-base mt-4">
             Discover why businesses trust us for their custom software, web, and mobile app solutions. 
             Read real feedback from our clients who have transformed their ideas into seamless digital 
             experiences with our expertise.
