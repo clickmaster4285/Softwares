@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 interface ServiceHeroProps {
   page: {
     category: string;
+    categorySlug: string;
     serviceName: string;
     title: string;
     lead: string;
@@ -366,7 +367,12 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               Home
             </Link>
             <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
-            <span className="text-slate-500 font-medium">{page.category}</span>
+            <Link
+              href={`/${page.categorySlug}`}
+              className="text-slate-500 hover:text-orange-600 transition-colors font-medium"
+            >
+              {page.category}
+            </Link>
             <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
             <span className="font-black text-slate-800">
               {page.serviceName}
@@ -389,12 +395,14 @@ export function ServiceHero({ page }: ServiceHeroProps) {
             >
               {/* Category Badge */}
               <motion.div variants={fadeInUp}>
-                <Badge
-                  className="mb-5 rounded-md border-0 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white"
-                  style={{ background: "#ea580c" }}
-                >
-                  {page.category}
-                </Badge>
+                <Link href={`/${page.categorySlug}`}>
+                  <Badge
+                    className="mb-5 rounded-md border-0 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white hover:bg-orange-700 transition-colors cursor-pointer"
+                    style={{ background: "#ea580c" }}
+                  >
+                    {page.category}
+                  </Badge>
+                </Link>
               </motion.div>
 
               {/* Title */}
