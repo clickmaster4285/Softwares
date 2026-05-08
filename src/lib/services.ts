@@ -109,7 +109,7 @@ export const servicesData: Record<string, ServiceData> = {
   },
 
   // Design
-  "design": {
+  "design-ui-ux": {
     slug: "design",
     title: "Design",
     tagline: "Beautiful, User-Centered Design Solutions",

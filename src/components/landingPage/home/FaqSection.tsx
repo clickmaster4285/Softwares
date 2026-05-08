@@ -1,4 +1,9 @@
+"use client";
+
 import Link from 'next/link';
+import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type FaqItem = {
   question: string;
@@ -40,61 +45,101 @@ const faqItems: FaqItem[] = [
 ];
 
 export function FaqSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white py-24" aria-labelledby="homepage-faq-heading">
+    <section 
+      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white py-16 sm:py-20" 
+      aria-labelledby="homepage-faq-heading"
+    >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>
 
-      <div className=" relative z-10 mx-auto  px-4 lg:px-12">
-        <div className="mb-14 text-center">
-          <span className="inline-flex items-center rounded-full border border-primary/45 bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-            FAQ
-          </span>
-          <h2
+      <div className="relative z-10 mx-auto px-4 lg:px-12">
+        {/* Header */}
+        <div className="mx-auto max-w-3xl text-center mb-12">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
+              Frequently Asked Questions
+            </p>
+            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+          </div>
+
+          <h2 
             id="homepage-faq-heading"
-            className="mt-5 text-3xl font-bold tracking-tight text-slate-900 md:text-5xl"
+            className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl"
           >
             Answers before you start
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
+
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             Everything you need to know about our process, timelines, technology stack, and post-launch support.
           </p>
         </div>
 
-        <div className="grid gap-4 md:gap-5">
-          {faqItems.map((item) => (
-            <details
+        {/* FAQ Grid - 2 columns */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {faqItems.map((item, index) => (
+            <div
               key={item.question}
-              className="group rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_8px_24px_rgba(15,23,42,0.05)] transition-all duration-300 open:border-primary/30 open:shadow-[0_14px_36px_rgba(15,23,42,0.08)]"
+              className="rounded-2xl border border-slate-200 bg-white transition-all "
+              style={{ height: 'fit-content' }}
             >
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 marker:content-none">
-                <span className="text-left text-lg font-semibold leading-7 text-slate-900">
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-slate-50"
+              >
+                <h3 className="pr-8 text-lg font-semibold leading-7 text-slate-900">
                   {item.question}
-                </span>
-                <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-500 transition group-open:rotate-45 group-open:border-primary/40 group-open:text-primary">
-                  +
-                </span>
-              </summary>
-              <p className="mt-4 border-t border-slate-100 pt-4 text-base leading-7 text-slate-600">
-                {item.answer}
-                {item.more ? (
-                  <>
-                    {' '}
-                    <Link
-                      href={item.more.href}
-                      className="font-medium text-primary hover:underline"
-                      aria-label={`${item.more.label} — ${item.more.href}`}
-                    >
-                      {item.more.label}
-                    </Link>
-                  </>
-                ) : null}
-              </p>
-            </details>
+                </h3>
+                <ChevronDown
+                  className={`h-5 w-5 shrink-0 text-slate-400 transition-transform duration-300 ${
+                    openIndex === index ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              
+              <AnimatePresence mode="wait">
+                {openIndex === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="border-t border-slate-100 px-6 pb-6 pt-4">
+                      <p className="text-base leading-7 text-slate-600">
+                        {item.answer}
+                        {item.more ? (
+                          <>
+                            {' '}
+                            <Link
+                              href={item.more.href}
+                              className="font-medium text-orange-500 hover:underline"
+                              aria-label={`${item.more.label} — ${item.more.href}`}
+                            >
+                              {item.more.label}
+                            </Link>
+                          </>
+                        ) : null}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
+export default FaqSection;

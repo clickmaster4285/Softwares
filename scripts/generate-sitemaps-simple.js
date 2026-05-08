@@ -43,7 +43,7 @@ function isMainService(urlPath) {
     '/software-development',
     '/web-development', 
     '/mobile-development',
-    '/design',
+    '/design-UI-UX',
     '/artificial-intelligence-ai',
     '/machine-learning-ml',
     '/nlp-computer-vision',

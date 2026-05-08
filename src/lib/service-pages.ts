@@ -117,7 +117,7 @@ export const serviceMenuSections: ServiceMenuSection[] = [
  ],
   },
   {
- label: 'Design',
+ label: 'Design UI/UX',
  items: [
       { title: 'UI/UX Design', description: 'User-first interfaces with measurable outcomes.' },
       { title: 'Product Design', description: 'End-to-end product thinking and execution.' },

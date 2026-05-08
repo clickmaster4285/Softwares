@@ -21,6 +21,19 @@ import {
   Users,
   ArrowRight,
   LucideIcon,
+  DatabaseZap,
+  TestTube,
+  Headphones,
+  Link2,
+  Glasses,
+  Workflow,
+  Bot,
+  BarChart3,
+  Cpu,
+  Palette,
+  Brain,
+  Eye,
+  CpuIcon,
 } from 'lucide-react';
 
 import {
@@ -33,6 +46,10 @@ import {
 import TrustedBySection from '@/src/components/landingPage/home/TrustedBySection';
 import TrustedClientsSection from '@/src/components/landingPage/home/TrustedClientsSection';
 import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
+import { CaseStudySection } from '@/src/components/landingPage/servicesPage/CaseStudySection';
+import ProcessPage from '@/src/components/landingPage/home/ProcessPage';
+import PainPointsSolutions from '@/src/components/landingPage/home/PainPointsSolutions';
+import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 
 export const metadata = metadataConfig.home();
 
@@ -45,15 +62,9 @@ type HomeExploreLink = {
   color: string;
   highlight?: boolean;
 };
+
 const homeExploreLinks: HomeExploreLink[] = [
-  {
-    href: '#',
-    title: 'Services overview',
-    desc: 'Full list of development capabilities.',
-    ariaLabel: 'Open the services overview page listing all development capabilities.',
-    icon: Layers3,
-    color: 'text-violet-500',
-  },
+ 
   {
     href: '/software-development/custom-software-development',
     title: 'Custom Software Development',
@@ -78,80 +89,153 @@ const homeExploreLinks: HomeExploreLink[] = [
     icon: Smartphone,
     color: 'text-pink-500',
   },
+
+ 
   {
-    href: '/database-data-management/database-design',
-    title: 'Database Design & Management',
-    desc: 'Modeling, migrations, tuning.',
-    ariaLabel: 'See database design and management services including modeling and tuning.',
+    href: '/design-ui-ux',
+    title: 'UI/UX Design',
+    desc: 'User-centered product design.',
+    ariaLabel: 'Explore UI/UX design services focused on user experience and interfaces.',
+    icon: Palette,
+    color: 'text-purple-500',
+  },
+
+  
+  {
+    href: '/artificial-intelligence',
+    title: 'Artificial Intelligence (AI)',
+    desc: 'AI-powered solutions & automation.',
+    ariaLabel: 'Explore artificial intelligence solutions and automation systems.',
+    icon: Brain,
+    color: 'text-indigo-500',
+  },
+  {
+    href: '/machine-learning',
+    title: 'Machine Learning (ML)',
+    desc: 'Predictive models & training systems.',
+    ariaLabel: 'Learn about machine learning models and predictive systems.',
+    icon: Cpu,
+    color: 'text-sky-500',
+  },
+  {
+    href: '/nlp-computer-vision',
+    title: 'NLP & Computer Vision',
+    desc: 'Text + image intelligence systems.',
+    ariaLabel: 'Explore NLP and computer vision solutions.',
+    icon: Eye,
+    color: 'text-emerald-500',
+  },
+  {
+    href: '/data-services',
+    title: 'Data Services',
+    desc: 'Data engineering & pipelines.',
+    ariaLabel: 'Explore data engineering and data pipeline services.',
     icon: Database,
     color: 'text-amber-500',
   },
   {
+    href: '/data-intelligence',
+    title: 'Data & Intelligence',
+    desc: 'Analytics & business insights.',
+    ariaLabel: 'Discover data analytics and business intelligence services.',
+    icon: BarChart3,
+    color: 'text-yellow-500',
+  },
+
+
+  {
+    href: '/automation-chatbot',
+    title: 'Automation & Chatbots',
+    desc: 'AI chatbots & workflows.',
+    ariaLabel: 'Explore automation and chatbot development services.',
+    icon: Bot,
+    color: 'text-teal-500',
+  },
+  {
+    href: '/automation-integration',
+    title: 'Automation & Integration',
+    desc: 'System integrations & workflows.',
+    ariaLabel: 'Learn about automation and system integration services.',
+    icon: Workflow,
+    color: 'text-cyan-600',
+  },
+
+  {
     href: '/cloud-devops/cloud-solutions',
-    title: 'Cloud Solutions & DevOps',
+    title: 'Cloud & DevOps',
     desc: 'CI/CD, containers, observability.',
-    ariaLabel: 'Discover cloud solutions and DevOps services including CI/CD and observability.',
+    ariaLabel: 'Discover cloud and DevOps services.',
     icon: Cloud,
     color: 'text-sky-500',
   },
   {
-    href: '/cybersecurity-compliance/compliance-risk-management',
-    title: 'Cybersecurity & Compliance',
-    desc: 'Secure SDLC + audit readiness.',
-    ariaLabel: 'Review cybersecurity and compliance offerings and secure SDLC practices.',
+    href: '/database-services',
+    title: 'Database Services',
+    desc: 'Database design, scaling & optimization.',
+    ariaLabel: 'Explore database services including scaling and optimization.',
+    icon: DatabaseZap,
+    color: 'text-amber-500',
+  },
+
+
+  {
+    href: '/cybersecurity-compliance',
+    title: 'Cybersecurity',
+    desc: 'Secure systems & compliance.',
+    ariaLabel: 'Learn about cybersecurity and compliance services.',
     icon: ShieldCheck,
     color: 'text-emerald-500',
   },
   {
-    href: '/case-studies',
-    title: 'Case studies',
-    desc: 'Proof of delivery & outcomes.',
-    ariaLabel: 'Browse case studies with proof of delivery and client outcomes.',
-    icon: Briefcase,
+    href: '/testing-qa',
+    title: 'Testing & QA',
+    desc: 'Automated + manual testing.',
+    ariaLabel: 'Explore software testing and QA services.',
+    icon: TestTube,
     color: 'text-orange-500',
   },
+
   {
-    href: '/software-solutions',
-    title: 'Software solutions',
-    desc: 'Portfolio by industry.',
-    ariaLabel: 'View software solutions portfolio organized by industry.',
-    icon: LayoutDashboard,
-    color: 'text-indigo-500',
-  },
-  {
-    href: '/testimonials',
-    title: 'Client testimonials',
-    desc: 'What businesses say after launch.',
-    ariaLabel: 'Read client testimonials from businesses after product launch.',
-    icon: MessageSquareQuote,
+    href: '/support-outsourcing',
+    title: 'Support & Outsourcing',
+    desc: 'Dedicated engineering teams.',
+    ariaLabel: 'Learn about support and outsourcing services.',
+    icon: Headphones,
     color: 'text-rose-500',
   },
+
+  // ─────────────────────────────────────
+  // Emerging Tech
+  // ─────────────────────────────────────
   {
-    href: '/blog',
-    title: 'Blog insights',
-    desc: 'Engineering best practices.',
-    ariaLabel: 'Open the engineering blog for best practices and technical insights.',
-    icon: Newspaper,
+    href: '/blockchain-web3',
+    title: 'Blockchain & Web3',
+    desc: 'Decentralized applications.',
+    ariaLabel: 'Explore blockchain and Web3 development services.',
+    icon: Link2,
+    color: 'text-purple-600',
+  },
+  {
+    href: '/iot-emerging-tech',
+    title: 'IoT & Emerging Tech',
+    desc: 'Smart devices & systems.',
+    ariaLabel: 'Learn about IoT and emerging technologies.',
+    icon: CpuIcon,
     color: 'text-lime-500',
   },
   {
-    href: '/about-us',
-    title: 'About ClickMasters',
-    desc: 'Team, values, and approach.',
-    ariaLabel: 'Learn about the ClickMasters team, values, and delivery approach.',
-    icon: Users,
+    href: '/immersive-tech',
+    title: 'Immersive Tech',
+    desc: 'AR / VR / XR experiences.',
+    ariaLabel: 'Explore immersive technologies like AR, VR, and XR.',
+    icon: Glasses,
     color: 'text-fuchsia-500',
   },
-  {
-    href: '/contact-us',
-    title: 'Contact us',
-    desc: 'Get a free consultation.',
-    ariaLabel: 'Go to the contact page to request a free consultation.',
-    icon: ArrowRight,
-    color: 'text-primary',
-    highlight: true,
-  },
+
+  
 ];
+
+
 
 const HeroSection = dynamic(
   () =>
@@ -204,32 +288,7 @@ export default function LandingPage() {
       <HeroSection />
 
      
-      
-       <Suspense
-        fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
-        }
-      >
-        <AboutSection />
-      </Suspense>
-
- <Suspense
-        fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
-        }
-      >
-      <TrustedClientsSection />
-      </Suspense>
-
-       <Suspense
-        fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
-        }
-      >
-      <TechStackSection />
-      </Suspense>
-      
-      
+       
        <Suspense
         fallback={
           <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
@@ -240,16 +299,20 @@ export default function LandingPage() {
 
       
 
-
-      <Suspense
+     <Suspense
         fallback={
           <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
         }
       >
-        <AppsSection />
+        <AboutSection />
       </Suspense>
 
-      {/* Explore Section */}
+
+
+
+      <PainPointsSolutions />
+
+
       <section
         className="border-y border-slate-200/80 bg-gradient-to-b from-white to-slate-50 py-16 sm:py-20"
         aria-labelledby="home-explore-heading"
@@ -257,11 +320,6 @@ export default function LandingPage() {
         <div className="mx-auto  px-4 sm:px-6 lg:px-12">
 
           {/* Header */}
-
-
-        
-          
-
           <div className="mx-auto max-w-3xl text-center">
              <div className="inline-flex items-center gap-2 mb-3">
               <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
@@ -339,6 +397,95 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+
+
+      
+       <Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-white" />
+        }
+      >
+      <TrustedClientsSection />
+      </Suspense>
+
+
+
+
+      
+     
+      
+
+
+
+         <Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-gradient-to-b from-white to-gray-50" />
+        }
+      >
+
+
+       <>{/* HEADER */}
+<div className="text-center py-24">
+  <div className="inline-flex items-center gap-2 mb-3">
+    <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+    <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">
+      Real Success Stories
+    </p>
+    <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+  </div>
+
+  <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
+    Featured Case Studies & Results
+  </h3>
+
+  <p className="text-gray-700 max-w-2xl mx-auto text-sm leading-6">
+    Explore how ClickMasters helps startups, enterprises, and growing
+    brands transform ideas into scalable digital products and measurable
+    business growth.
+  </p>
+          </div>
+          
+          <CaseStudySection /></>
+      </Suspense>
+
+
+         <Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+        }
+      >
+        <ProcessPage />
+      </Suspense>
+
+
+      <SolutionsPage />
+      
+
+
+
+       <Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+        }
+      >
+      <TechStackSection />
+      </Suspense>
+      
+     
+
+      
+
+
+      <Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+        }
+      >
+        <AppsSection />
+      </Suspense>
+
+
 
       <LandingHomeDeferredHeavy>
         <Suspense

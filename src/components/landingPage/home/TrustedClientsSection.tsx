@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-// Trusted clients with logos (using SVG placeholders)
+// Trusted clients with logos
 const trustedClients = [
   { name: "TechCorp", logo: "🏢", industry: "Manufacturing" },
   { name: "HealthPlus", logo: "🏥", industry: "Healthcare" },
@@ -12,21 +12,38 @@ const trustedClients = [
   { name: "FinTrust", logo: "💰", industry: "Finance" },
   { name: "LogiFlow", logo: "🚚", industry: "Logistics" },
   { name: "MediaWave", logo: "📺", industry: "Media" },
+  { name: "NovaBank", logo: "🏦", industry: "Banking" },
+  { name: "GreenField", logo: "🌱", industry: "Agriculture" },
+  { name: "Skyline Hotels", logo: "🏨", industry: "Hospitality" },
+  { name: "Pulse Fitness", logo: "💪", industry: "Health & Fitness" },
+  { name: "Quantum Dynamics", logo: "⚡", industry: "Technology" },
+  { name: "Lumina Insurance", logo: "🛡️", industry: "Insurance" },
+  { name: "Vertex Solutions", logo: "📊", industry: "Consulting" },
+
 ];
 
 function useInView(threshold = 0.2) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
       { threshold }
     );
+
     obs.observe(el);
     return () => obs.disconnect();
   }, [threshold]);
+
   return { ref, visible };
 }
 
@@ -41,22 +58,22 @@ function TrustedClientCard({
 }) {
   return (
     <div
-      className="group flex flex-col items-center justify-center p-8 transition-all duration-300 hover:scale-105 cursor-default"
+      className="group flex flex-col items-center justify-center p-8 rounded-2xl bg-white border border-gray-100 hover:border-orange-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
       style={{
-        transitionDelay: visible ? `${index * 60}ms` : "0ms",
+        transitionDelay: visible ? `${index * 50}ms` : "0ms",
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transform: visible ? "translateY(0)" : "translateY(30px)",
       }}
     >
-      <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+      <div className="text-6xl mb-5 group-hover:scale-110 transition-transform duration-300">
         {client.logo}
       </div>
 
-      <p className="text-xl font-bold text-gray-800 mb-1">
+      <p className="text-xl font-bold text-gray-800 mb-1 text-center">
         {client.name}
       </p>
 
-      <p className="text-xs text-gray-600 uppercase tracking-wide">
+      <p className="text-xs text-gray-600 uppercase tracking-widest text-center">
         {client.industry}
       </p>
     </div>
@@ -64,12 +81,11 @@ function TrustedClientCard({
 }
 
 export function TrustedClientsSection() {
-  const clients = useInView(0.2);
+  const clients = useInView(0.15);
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white" ref={clients.ref}>
-      <div className="mx-auto px-6 lg:px-12 py-16 lg:py-20">
-
+    <div ref={clients.ref}>
+      <div className="mx-auto px-6 lg:px-12 py-16 lg:py-20 bg-white">
         {/* HEADER */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
@@ -89,45 +105,22 @@ export function TrustedClientsSection() {
           </p>
         </div>
 
-        {/* MARQUEE WRAPPER */}
-        <div className="relative overflow-hidden">
-
-          {/* LEFT FADE */}
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10" />
-          {/* RIGHT FADE */}
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10" />
-
-          {/* TRACK */}
-          <div className="flex w-max gap-4 animate-marquee-left hover:[animation-play-state:paused]">
-
-            {[...trustedClients, ...trustedClients].map((client, idx) => (
-              <TrustedClientCard
-                key={`${client.name}-${idx}`}
-                client={client}
-                index={idx}
-                visible={clients.visible}
-              />
-            ))}
-
-          </div>
+        {/* GRID - Showing All 8 Clients */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-6">
+          {trustedClients.map((client, idx) => (
+            <TrustedClientCard
+              key={client.name}
+              client={client}
+              index={idx}
+              visible={clients.visible}
+            />
+          ))}
         </div>
+
+        <p className="text-center text-sm text-gray-500 mt-10">
+          + Many more happy clients worldwide
+        </p>
       </div>
-
-      {/* ANIMATION */}
-      <style>{`
-        @keyframes marquee-left {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        .animate-marquee-left {
-          animation: marquee-left 25s linear infinite;
-        }
-      `}</style>
     </div>
   );
 }
