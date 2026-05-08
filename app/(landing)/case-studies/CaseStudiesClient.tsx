@@ -407,7 +407,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
                       <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white opacity-70 shadow-sm">
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                           {thumb ? (
-                            <img src={thumb} alt={cs.title} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                            <img src={thumb} alt={cs.title} width={640} height={400} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
                           ) : (
                             <div className="flex h-full items-center justify-center">
                               <FileSearch className="h-12 w-12 text-slate-300" aria-hidden />

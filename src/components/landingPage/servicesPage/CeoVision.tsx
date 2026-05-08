@@ -8,7 +8,9 @@ export function CeoVision() {
     <section className="w-full overflow-hidden">
       <ContainerScroll
         titleComponent={
-          <div className="space-y-6 px-4 mt-12 md:mt-20">
+          <div className="space-y-6 px-4 sm:px-6 md:px-10 mt-40">
+           
+
             {/* Title */}
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold">
               CEO{" "}

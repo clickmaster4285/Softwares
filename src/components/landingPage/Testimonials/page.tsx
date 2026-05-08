@@ -23,6 +23,7 @@ import {
   Pause
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
+import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -371,6 +372,29 @@ const Testimonials: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* ── Breadcrumb ── */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 z-20 border-b border-gray-100 w-full"
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="mx-auto px-4 md:px-8 lg:px-12 py-3.5 bg-white/50 backdrop-blur-sm">
+          <nav className="flex items-center gap-1.5 text-sm">
+            <Link
+              href="/"
+              className="text-slate-400 hover:text-orange-600 transition-colors font-medium"
+            >
+              Home
+            </Link>
+            <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+            <span className="font-black text-slate-800">
+              Testimonials
+            </span>
+          </nav>
+        </div>
+      </motion.div>
+
       <main className="pt-4 pb-20">
         <section ref={sectionRef} className="py-20 relative overflow-hidden">
           {/* Animated background */}
