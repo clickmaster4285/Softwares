@@ -468,7 +468,7 @@ export const metadataConfig = {
       'Leading software development company in Pakistan. We build web apps, mobile apps, SaaS, AI systems & ERP. Hire expert developers for scalable digital products.',
 
     alternates: {
-      canonical: siteConfig.url,
+      canonical: `${siteConfig.url}/`,
     },
 
     openGraph: {
@@ -564,17 +564,19 @@ export const metadataConfig = {
   }),
 
   // ── /services/[slug] ────────────────────────────────────────────────────────
-  serviceDetail: (title: string, description: string, slug: string): Metadata => ({
-    title: `${title} Services | ClickMasters`,
+  serviceDetail: (title: string, description: string, slug: string, parentSlug?: string): Metadata => ({
+    title: `${title} | ClickMasters Software Services`,
 
     description: description.slice(0, 155),
 
-    alternates: { canonical: `${siteConfig.url}/services/${slug}` },
+    alternates: {
+      canonical: parentSlug ? `${siteConfig.url}/services/${parentSlug}/${slug}` : `${siteConfig.url}/services/${slug}`,
+    },
 
     openGraph: {
-      title: `${title} Services | ClickMasters`,
+      title: `${title} | ClickMasters Software Services`,
       description: description.slice(0, 155),
-      url: `${siteConfig.url}/services/${slug}`,
+      url: parentSlug ? `${siteConfig.url}/services/${parentSlug}/${slug}` : `${siteConfig.url}/services/${slug}`,
       images: [
         {
           url: `${siteConfig.url}/og/og-services.jpg`,
