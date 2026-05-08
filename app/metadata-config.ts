@@ -734,7 +734,7 @@ home: (): Metadata => ({
 
   // ── /about ──────────────────────────────────────────────────────────────────
 about: (): Metadata => ({
-  title: 'ClickMasters Software Dev Company | The Team Behind 100+ Products',
+  title: 'ClickMasters Software House|The Team Behind 100+ Products',
   description: '50+ engineers. 100+ products shipped. 10+ years building web apps, mobile apps, SaaS & AI solutions for startups and global enterprises.',
   alternates: { canonical: `${siteConfig.url}/about-us` },
   openGraph: {
@@ -960,11 +960,11 @@ testimonials: (): Metadata => ({
 
   // ── /contact ────────────────────────────────────────────────────────────────
 contact: (): Metadata => ({
-  title: 'Turn Your Idea Into Software | Get a Free Expert Consultation',
+  title: 'Turn Your Idea Into Software|Get a Free Expert Consultation',
   description: 'Have a software idea or project in mind? Talk directly to ClickMasters engineers and get a free, no-obligation consultation. Fast response within 24 hours.',
   alternates: { canonical: `${siteConfig.url}/contact-us` },
   openGraph: {
-    title: 'Let’s Build Your Software Idea | Free Consultation with Experts',
+    title: 'Let’s Build Your Software Idea|Free Experts Consultation',
     description: 'Speak with experienced software engineers and turn your idea into a scalable product. Get a fast, free consultation within 24 hours.',
     url: `${siteConfig.url}/contact-us`,
     images: [
