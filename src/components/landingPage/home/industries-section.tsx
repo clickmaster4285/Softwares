@@ -108,48 +108,36 @@ export function IndustriesSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  // Premium hover animation for cards (matching WhyChooseSection style)
+  // Premium hover animation for cards
   const handleCardHover = (index: number, isHovering: boolean) => {
     setHoveredIndex(isHovering ? index : null);
-    // No GSAP animations needed - handled by Framer Motion
   };
 
   return (
-    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-white font-sans">
-      <div className="container relative z-10 mx-auto max-w-7xl px-4">
-        {/* Header Section */}
-        <div ref={headerRef} className="text-center mb-10">
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: 80 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-px bg-primary mx-auto mb-8"
-          />
+    <section ref={sectionRef} className="relative pb-24 overflow-hidden bg-white font-sans">
+      <div className="relative z-10 mx-auto px-4 lg:px-12">
+        
+        {/* Header Section - Matching FAQ Style */}
+        <div ref={headerRef} className="mx-auto max-w-3xl text-center mb-12">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
+              Industries We Serve
+            </p>
+            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+          </div>
 
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold text-black mt-2"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Driving <span className="text-primary">Excellence</span>
-          </motion.h2>
+          <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
+            Driving Excellence
+          </h2>
 
-          <motion.p
-            className="text-gray-700 max-w-2xl mx-auto text-base mt-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             Deep expertise meets technical excellence across every sector
-          </motion.p>
+          </p>
         </div>
 
-        {/* Industries Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Industries Grid - Width matched to FAQ */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3  mx-auto">
           {industries.map((industry, index) => {
             const Icon = industry.icon;
             return (
@@ -174,10 +162,10 @@ export function IndustriesSection() {
                 style={{ transformStyle: 'preserve-3d' }}
               >
                 {/* Premium Card Design */}
-                <div className="relative bg-white rounded-2xl p-6 border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden group">
-                  {/* Animated background that moves on hover (matching WhyChooseSection) */}
+                <div className="relative bg-white rounded-2xl p-6 border border-orange-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden group">
+                  {/* Animated background that moves on hover */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-r from-orange-50 to-transparent"
                     animate={{
                       x: ['-100%', '100%'],
                     }}
@@ -195,20 +183,20 @@ export function IndustriesSection() {
                     transition={{ duration: 0.6 }}
                   >
                     <div className="relative inline-block">
-                      <div className="absolute inset-0 bg-primary/20 rounded-full blur-md scale-0 group-hover:scale-150 transition-transform duration-500" />
+                      <div className="absolute inset-0 bg-orange-200 rounded-full blur-md scale-0 group-hover:scale-150 transition-transform duration-500" />
                       <div className="relative w-12 h-12 flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-black/80" strokeWidth={1.5} />
+                        <Icon className="w-6 h-6 text-black/80 group-hover:text-orange-500 transition-colors duration-300" strokeWidth={1.5} />
                       </div>
                     </div>
                   </motion.div>
 
                   {/* Title */}
-                  <h3 className="card-title text-xl font-bold text-black mb-2 relative z-10">
+                  <h3 className="card-title text-xl font-bold text-black mb-2 relative z-10 group-hover:text-orange-500 transition-colors duration-300">
                     {industry.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="card-desc text-gray-700 text-sm leading-relaxed mb-4 relative z-10">
+                  <p className="card-desc text-gray-600 text-sm leading-relaxed mb-4 relative z-10">
                     {industry.description}
                   </p>
 
@@ -217,7 +205,7 @@ export function IndustriesSection() {
                     {industry.features.map((feature: string, i: number) => (
                       <motion.span
                         key={feature}
-                        className="text-xs px-2 py-1 bg-gray-50 text-gray-600 rounded-full"
+                        className="text-xs px-2 py-1 bg-gray-50 text-gray-600 rounded-full group-hover:bg-orange-50 group-hover:text-orange-600 transition-colors duration-300"
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
@@ -229,10 +217,10 @@ export function IndustriesSection() {
                   </div>
 
                   {/* Stats with premium animation */}
-                  <div className="card-stats pt-3 border-t border-primary/20 flex items-baseline justify-between relative z-10">
+                  <div className="card-stats pt-3 border-t border-orange-100 flex items-baseline justify-between relative z-10">
                     <div>
                       <motion.span
-                        className="text-2xl font-bold text-primary block leading-none"
+                        className="text-2xl font-bold text-orange-500 block leading-none"
                         whileHover={{ scale: 1.05 }}
                       >
                         {industry.stats}
@@ -241,14 +229,12 @@ export function IndustriesSection() {
                         {industry.statLabel}
                       </span>
                     </div>
-
-                 
                   </div>
 
                   {/* Corner Accent with rotation */}
                   <div className="absolute bottom-3 right-3 w-6 h-6">
                     <motion.div
-                      className="w-full h-full border-b border-r border-primary"
+                      className="w-full h-full border-b border-r border-orange-200 group-hover:border-orange-400 transition-colors duration-300"
                       animate={{
                         rotate: hoveredIndex === index ? 180 : 0,
                         opacity: hoveredIndex === index ? 0.3 : 0.1,
@@ -262,129 +248,10 @@ export function IndustriesSection() {
           })}
         </div>
 
-        {/* Bottom CTA Section */}
-        <div ref={ctaRef} className="mt-20">
-          <motion.div
-            className="relative bg-gradient-to-br from-gray-50 to-primary/20 rounded-3xl p-12 overflow-hidden border border-primary/10"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            whileHover={{ scale: 1.02 }}
-          >
-            {/* Animated Pattern */}
-            <motion.div
-              className="absolute inset-0 opacity-5"
-              animate={{
-                backgroundPosition: ['0% 0%', '100% 100%'],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-              style={{
-                backgroundImage: `radial-gradient(circle at 2px 2px, #f97316 1px, transparent 0)`,
-                backgroundSize: '30px 30px',
-              }}
-            />
-
-            {/* Animated light sweep (matching WhyChooseSection) */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
-              animate={{
-                x: ['-100%', '100%'],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            />
-
-            <div className="relative z-10 max-w-4xl mx-auto text-center">
-              <motion.div
-                className="w-12 h-px bg-primary mx-auto mb-8"
-                animate={{
-                  width: ['48px', '96px', '48px'],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-
-              <h3 className="text-3xl md:text-4xl font-bold text-black mb-4">
-                Ready to Transform Your Industry?
-                <span className="font-bold block mt-2 text-primary">
-                  Let's Build Something Extraordinary
-                </span>
-              </h3>
-
-              <p className="text-gray-700 text-base leading-relaxed max-w-2xl mx-auto">
-                Whether you're in manufacturing, healthcare, or retail, we have the expertise to
-                build software that drives your business forward.
-              </p>
-
-              {/* Stats Row with premium hover */}
-              <motion.div className="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-12 mt-8 pt-8 border-t border-primary/10">
-                {stats.map((stat, idx) => (
-                  <motion.div
-                    key={idx}
-                    whileHover={{
-                      y: -5,
-                      scale: 1.05,
-                    }}
-                    className="text-center cursor-default"
-                  >
-                    <motion.div
-                      className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary"
-                      animate={{
-                        textShadow: [
-                          '0 0 0 rgba(249,115,22,0)',
-                          '0 0 10px rgba(249,115,22,0.3)',
-                          '0 0 0 rgba(249,115,22,0)',
-                        ],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: idx * 0.3,
-                      }}
-                    >
-                      {stat.number}
-                    </motion.div>
-                    <div className="text-xs sm:text-sm uppercase tracking-wider text-gray-500 mt-1">
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              {/* Premium CTA Button */}
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 10px 25px -5px rgba(249,115,22,0.4)',
-                }}
-                whileTap={{ scale: 0.98 }}
-                className="mt-8 px-8 py-3 bg-black text-white text-sm font-medium tracking-wider rounded-md hover:bg-primary transition-all duration-300 relative overflow-hidden group"
-                onClick={() => router.push('/contact-us')}
-              >
-                <span className="relative z-10">Discuss Your Project</span>
-                <motion.div
-                  className="absolute inset-0 bg-primary"
-                  initial={{ x: '100%' }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
+    
       </div>
     </section>
   );
 }
+
+export default IndustriesSection;

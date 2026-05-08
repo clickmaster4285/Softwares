@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://software.clickmasters.pk</loc>
-    <lastmod>2026-05-06T12:44:01.467Z</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <loc>https://software.clickmasters.pk/case-studies</loc>
+    <lastmod>2026-05-08T11:46:46.451Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://software.clickmasters.pk/about-us</loc>
-    <lastmod>2026-05-06T12:44:01.468Z</lastmod>
+    <lastmod>2026-05-08T11:46:46.453Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://software.clickmasters.pk/contact-us</loc>
-    <lastmod>2026-05-06T12:44:01.468Z</lastmod>
+    <lastmod>2026-05-08T11:46:46.453Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://software.clickmasters.pk/testimonials</loc>
-    <lastmod>2026-05-06T12:44:01.468Z</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://software.clickmasters.pk/faqs</loc>
-    <lastmod>2026-05-06T12:44:01.468Z</lastmod>
+    <lastmod>2026-05-08T11:46:46.453Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://software.clickmasters.pk/software-solutions</loc>
-    <lastmod>2026-05-06T12:44:01.468Z</lastmod>
+    <lastmod>2026-05-08T11:46:46.453Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://software.clickmasters.pk/case-studies</loc>
-    <lastmod>2026-05-06T12:44:01.468Z</lastmod>
+    <loc>https://software.clickmasters.pk/testimonials</loc>
+    <lastmod>2026-05-08T11:46:46.453Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://software.clickmasters.pk/design-ui-ux</loc>
+    <lastmod>2026-05-08T11:46:46.453Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://software.clickmasters.pk</loc>
+    <lastmod>2026-05-08T11:46:46.453Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
   </url>
 </urlset>

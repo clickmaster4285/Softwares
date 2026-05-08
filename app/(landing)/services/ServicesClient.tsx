@@ -69,7 +69,7 @@ const categoryIcons: Record<string, string> = {
   'Software Development': '💻',
   'Web Development': '🌐',
   'Mobile Development': '📱',
-  Design: '🎨',
+  "Design UI/UX": '🎨',
   'Artificial Intelligence (AI)': '🤖',
   'Machine Learning (ML)': '🧠',
   'NLP & Computer Vision': '🗣️',

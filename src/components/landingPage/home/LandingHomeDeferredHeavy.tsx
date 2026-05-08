@@ -92,22 +92,33 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
           <IndustriesSection />
         </Suspense>
       </LoadOnVisible>
-      <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
-        <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
-          <CommunitySection />
-        </Suspense>
-      </LoadOnVisible>
+
+
+     
+
+
       <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
           <TestimonialsSection />
         </Suspense>
       </LoadOnVisible>
+
+       <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
+        <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
+          <CommunitySection />
+        </Suspense>
+      </LoadOnVisible>
+
+
       {children}
       <LoadOnVisible skeleton={sk64} minHeightClass="min-h-64">
         <Suspense fallback={<div className="h-64 animate-pulse rounded-lg bg-gray-100" />}>
           <HelpSection />
         </Suspense>
       </LoadOnVisible>
+
+
+      
     </>
   );
 }

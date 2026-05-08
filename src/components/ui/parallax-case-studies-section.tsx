@@ -98,28 +98,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
 
   return (
     <div className="relative overflow-hidden">
-      {/* Minimal Hero Section */}
-      <div className='w-full flex flex-col mt-4 sm:mt-6 py-6 sm:py-8'>
-        <div className="flex items-center gap-3 px-4 sm:px-6 md:px-8">
-          <motion.div
-            initial={{ height: 0 }}
-            whileInView={{ height: 40 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="h-8 sm:h-10 w-1 rounded-full bg-orange-500"
-          />
-          <motion.h2 
-            className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Success Stories
-          </motion.h2>
-        </div>
-      </div>
-
+    
       {/* Parallax Sections */}
       <div className="flex flex-col pb-6 sm:pb-8">
         {sections.map((section, index) => (

@@ -77,7 +77,7 @@ export function AppsSection() {
   if (isLoading) {
     return (
       <section className="py-20 bg-white">
-        <div className="container mx-auto max-w-7xl px-4 text-center">
+        <div className="container mx-auto  px-4 text-center">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
           <p className="mt-4 text-gray-600">Loading solutions...</p>
         </div>
@@ -87,7 +87,7 @@ export function AppsSection() {
 
   return (
     <section className="py-20 bg-white">
-      <div className="container mx-auto max-w-7xl px-4">
+      <div className="container mx-auto  px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Our Solutions</h2>
           <p className="text-gray-700 text-lg">

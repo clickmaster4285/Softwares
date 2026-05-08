@@ -409,7 +409,20 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 <TestimonialsSection  />
 
               {/* Case Study Section */}
-              <div className='mb-10 '><CaseStudySection /></div>
+              <div className='mb-10 '>
+                
+                  {/* Minimal Hero Section */}
+  <div className="w-full flex flex-col mt-4 sm:mt-6 py-6 sm:py-8">
+  <div className="flex items-center gap-3 px-4 sm:px-6 md:px-8">
+    <div className="h-8 sm:h-10 w-1 rounded-full bg-orange-500" />
+
+    <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900">
+      Success Stories
+    </h2>
+  </div>
+</div>
+
+                <CaseStudySection /></div>
 
               {/* FAQ Section */}
             {faqs.length > 0 && <FAQSection faqs={faqs} />}
