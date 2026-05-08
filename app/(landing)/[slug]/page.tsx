@@ -1,6 +1,7 @@
 // app/services/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import { getServiceData, getAllServiceSlugs } from '@/src/lib/services';
+import { metadataConfig } from '@/app/metadata-config';
 import ServiceClient from './ServiceClient';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -9,6 +10,21 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateStaticParams() {
   const slugs = getAllServiceSlugs();
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const serviceData = getServiceData(slug);
+  
+  if (!serviceData) {
+    return { title: 'Service Not Found' };
+  }
+
+  return metadataConfig.serviceDetail(
+    serviceData.title,
+    serviceData.description,
+    slug
+  );
 }
 
 export default async function ServicePage({ params }: Props) {
