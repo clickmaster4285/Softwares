@@ -570,13 +570,13 @@ export const metadataConfig = {
     description: description.slice(0, 155),
 
     alternates: {
-      canonical: parentSlug ? `${siteConfig.url}/services/${parentSlug}/${slug}` : `${siteConfig.url}/services/${slug}`,
+      canonical: parentSlug ? `${siteConfig.url}/${parentSlug}/${slug}` : `${siteConfig.url}/${slug}`,
     },
 
     openGraph: {
       title: `${title} | ClickMasters Software Services`,
       description: description.slice(0, 155),
-      url: parentSlug ? `${siteConfig.url}/services/${parentSlug}/${slug}` : `${siteConfig.url}/services/${slug}`,
+      url: parentSlug ? `${siteConfig.url}/${parentSlug}/${slug}` : `${siteConfig.url}/${slug}`,
       images: [
         {
           url: `${siteConfig.url}/og/og-services.jpg`,
