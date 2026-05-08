@@ -38,9 +38,9 @@ import {
 
 import {
   homepageFaqSchema,
-  homepageOrganizationSchema,
+  organizationSchema,
   homepageServiceSchema,
-  homepageWebPageSchema,
+  webSiteSchema,
   metadataConfig,
 } from '@/app/metadata-config';
 import TrustedBySection from '@/src/components/landingPage/home/TrustedBySection';

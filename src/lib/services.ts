@@ -137,6 +137,35 @@ export const servicesData: Record<string, ServiceData> = {
     ]
   },
 
+  "artificial-intelligence-ai": {
+    slug: "artificial-intelligence-ai",
+    title: "Artificial Intelligence",
+    tagline: "Intelligent Solutions for Modern Businesses",
+    description: "Leverage the power of AI to automate processes, gain insights, and create innovative solutions that drive growth and efficiency.",
+    heroBadge: "Leading AI Innovators",
+
+    stats: [
+      { value: "300+", label: "Design Projects" },
+      { value: "15+", label: "Design Awards" },
+      { value: "95%", label: "User Satisfaction" },
+      { value: "40+", label: "Designers" }
+    ],
+    features: [
+      { title: "UX Research", description: "Data-driven design decisions", icon: "🔬" },
+      { title: "UI Design", description: "Beautiful, modern interfaces", icon: "🎨" },
+      { title: "Brand Identity", description: "Coherent brand experiences", icon: "🏷️" }
+    ],
+    benefits: ["Improved user engagement", "Higher conversion rates", "Brand consistency", "Reduced bounce rates"],
+    ctaText: "Start Designing",
+    lifecycle: [
+      { step: 1, title: "Research & Discovery", description: "User research, competitor analysis, and requirements gathering.", duration: "1-2 weeks", icon: "🔍" },
+      { step: 2, title: "Information Architecture", description: "Structure content and create user flow diagrams.", duration: "1 week", icon: "🏗️" },
+      { step: 3, title: "Wireframing", description: "Create low-fidelity wireframes for layout and functionality.", duration: "1-2 weeks", icon: "📐" },
+      { step: 4, title: "Visual Design", description: "Design high-fidelity mockups with brand elements.", duration: "2-3 weeks", icon: "🎨" },
+      { step: 5, title: "Prototyping & Testing", description: "Create interactive prototypes and user testing.", duration: "1-2 weeks", icon: "🧪" }
+    ]
+  },
+
   // Add lifecycle for other services similarly...
   // For brevity, I'll show a template you can copy for remaining services
 };

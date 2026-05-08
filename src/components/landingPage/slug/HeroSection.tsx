@@ -3,6 +3,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ChevronRight } from 'lucide-react';
 import { ServiceData } from '@/src/lib/services';
 
 // Counter component with animation
@@ -120,7 +123,7 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         <Image
@@ -144,7 +147,30 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
         />
       </div>
 
-      <div className="container mx-auto px-4 py-20 z-10">
+      {/* ── Breadcrumb ── */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 z-20 border-b border-white/10 w-full"
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="mx-auto px-4 md:px-8 lg:px-12 py-3.5 bg-black/20 backdrop-blur-md">
+          <nav className="flex items-center gap-1.5 text-sm">
+            <Link
+              href="/"
+              className="text-gray-400 hover:text-orange-400 transition-colors font-medium"
+            >
+              Home
+            </Link>
+            <ChevronRight className="h-3.5 w-3.5 text-gray-500" />
+            <span className="font-bold text-white">
+              {serviceData.title}
+            </span>
+          </nav>
+        </div>
+      </motion.div>
+
+      <div className="container mx-auto px-4 py-20 z-10 flex-grow flex flex-col justify-center">
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-orange-500/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 border border-orange-500/30 animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0">

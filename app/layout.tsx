@@ -4,7 +4,6 @@ import "./globals.css";
 import {
   defaultMetadata,
   organizationSchema,
-  webSiteBlogSearchSchema,
   webSiteSchema,
 } from './metadata-config';
 import Script from 'next/script';
@@ -67,14 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
 
-        {/* Additional WebSite schema for blog search action */}
-        <Script
-          id="website-blog-search-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(webSiteBlogSearchSchema),
-          }}
-        />
       </body>
     </html>
   );
