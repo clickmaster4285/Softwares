@@ -6,9 +6,9 @@ import { FaqSection } from '@/components/landingPage/home/FaqSection';
 import { LandingHomeDeferredHeavy } from '@/components/landingPage/home/LandingHomeDeferredHeavy';
 import {
   homepageFaqSchema,
-  homepageOrganizationSchema,
+  organizationSchema,
   homepageServiceSchema,
-  homepageWebPageSchema,
+  webSiteSchema,
   metadataConfig,
 } from '@/app/metadata-config';
 
@@ -123,21 +123,26 @@ const AboutSection = dynamic(
   () => import('@/components/landingPage/home/AboutSection'),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
 );
+
 const AppsSection = dynamic(
   () => import('@/components/landingPage/home/AppsSection').then((m) => m.AppsSection),
   { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
 );
+
 export default function LandingPage() {
   return (
     <main className="min-h-screen" role="main" aria-label="ClickMasters software development company homepage">
-      <SchemaMarkup data={homepageOrganizationSchema} />
+      <SchemaMarkup data={organizationSchema} />
       <SchemaMarkup data={homepageServiceSchema} />
       <SchemaMarkup data={homepageFaqSchema} />
-      <SchemaMarkup data={homepageWebPageSchema} />
+      <SchemaMarkup data={webSiteSchema} />
+      
       <HeroSection />
+      
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <AboutSection />
       </Suspense>
+      
       <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
         <AppsSection />
       </Suspense>
