@@ -2,6 +2,8 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 import { ServiceData } from '@/src/lib/services';
 import HeroSection from '@/components/landingPage/slug/HeroSection';
 import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
@@ -16,6 +18,29 @@ interface ServiceClientProps {
 export default function ServiceClient({ serviceData }: ServiceClientProps) {
   return (
     <div className="min-h-screen">
+      {/* Breadcrumb Navigation */}
+      <div className="mx-auto px-4 md:px-8 lg:px-12 py-3.5 mt-8 bg-white backdrop-blur-sm">
+        <nav className="flex items-center gap-1.5 text-sm">
+          <Link
+            href="/"
+            className="text-slate-400 hover:text-orange-600 transition-colors font-medium"
+          >
+            Home
+          </Link>
+          <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+          <Link
+            href="/services"
+            className="text-slate-500 hover:text-orange-600 transition-colors font-medium"
+          >
+            Services
+          </Link>
+          <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+          <span className="font-black text-slate-800">
+            {serviceData.title}
+          </span>
+        </nav>
+      </div>
+
       {/* Hero Section */}
           <HeroSection serviceData={serviceData} />
           
