@@ -280,10 +280,10 @@ export default function LandingPage() {
       role="main"
       aria-label="ClickMasters software development company homepage"
     >
-      <SchemaMarkup data={homepageOrganizationSchema} />
+      <SchemaMarkup data={organizationSchema} />
       <SchemaMarkup data={homepageServiceSchema} />
       <SchemaMarkup data={homepageFaqSchema} />
-      <SchemaMarkup data={homepageWebPageSchema} />
+      <SchemaMarkup data={webSiteSchema} />
 
       <HeroSection />
 
