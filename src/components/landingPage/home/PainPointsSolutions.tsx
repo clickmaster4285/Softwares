@@ -116,8 +116,7 @@ export default function PainPointsSolutions() {
                   animate={{ scale: isActive ? 1.03 : 1 }}
                   transition={{ duration: 0.4 }}
                 >
-                  {/* Top Gradient Accent */}
-                  <div className={`absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r ${pain.gradient}`} />
+                
 
                   {/* Icon */}
                   <motion.div 
@@ -165,15 +164,17 @@ export default function PainPointsSolutions() {
                     )}
                   </motion.div>
 
-                  {/* CTA Button - Perfectly Aligned at Bottom */}
-                  <motion.button 
-                    className="mt-auto w-full flex items-center justify-center gap-2 rounded-2xl bg-orange-600 py-3.5 text-sm font-semibold text-white hover:bg-orange-700 active:scale-95 transition-all"
+                  
+                   <motion.div 
+                    className="mt-auto w-full  flex items-center justify-center gap-2 rounded-2xl  py-3.5 text-xs font-semibold text-orange-600  active:scale-95 transition-all"
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.97 }}
                   >
-                    See the Fix
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </motion.button>
+
+
+                    Hover to see the fix
+                  </motion.div>
+                  
                 </motion.div>
               </motion.div>
             );
