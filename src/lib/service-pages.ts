@@ -5234,7 +5234,7 @@ const ecommerceDevelopmentOverride: ServicePageContent = {
 
 const uiUxDesignOverride: ServicePageContent = {
  slug: 'ui-ux-design',
- categorySlug: 'design',
+ categorySlug: 'design-ui-ux',
  sectionId: 'ui-ux-design',
  category: 'Design',
  title: 'UI/UX Design Services for B2B Software',
@@ -5561,7 +5561,7 @@ const jamstackDevelopmentOverride: ServicePageContent = {
 
 const productDesignOverride: ServicePageContent = {
  slug: 'product-design',
- categorySlug: 'design',
+ categorySlug: 'design-ui-ux',
  sectionId: 'product-design',
  category: 'Design',
  title: 'Product Design Services',
@@ -5701,7 +5701,7 @@ const productDesignOverride: ServicePageContent = {
 
 const webDesignOverride: ServicePageContent = {
  slug: 'web-design',
- categorySlug: 'design',
+ categorySlug: 'design-ui-ux',
  sectionId: 'web-design',
  category: 'Design',
  title: 'Web Design Services',
@@ -5838,7 +5838,7 @@ const webDesignOverride: ServicePageContent = {
 
 const mobileAppDesignOverride: ServicePageContent = {
  slug: 'mobile-app-design',
- categorySlug: 'design',
+ categorySlug: 'design-ui-ux',
  sectionId: 'mobile-app-design',
  category: 'Design',
  title: 'Mobile App Design Services',
@@ -5977,7 +5977,7 @@ const mobileAppDesignOverride: ServicePageContent = {
 
 const uxResearchOverride: ServicePageContent = {
  slug: 'ux-research',
- categorySlug: 'design',
+ categorySlug: 'design-ui-ux',
  sectionId: 'ux-research',
  category: 'Design',
  title: 'UX Research Services',
@@ -6115,7 +6115,7 @@ const uxResearchOverride: ServicePageContent = {
 
 const wireframingPrototypingOverride: ServicePageContent = {
  slug: 'wireframing-prototyping',
- categorySlug: 'design',
+ categorySlug: 'design-ui-ux',
  sectionId: 'wireframing-prototyping',
  category: 'Design',
  title: 'Wireframing & Prototyping Services',
@@ -6245,7 +6245,7 @@ const wireframingPrototypingOverride: ServicePageContent = {
 
 const designSystemsOverride: ServicePageContent = {
  slug: 'design-systems',
- categorySlug: 'design',
+ categorySlug: 'design-ui-ux',
  sectionId: 'design-systems',
  category: 'Design',
  title: 'Design Systems Services',
@@ -6682,7 +6682,7 @@ const llmApplicationsDevelopmentOverride: ServicePageContent = {
 
 const machineLearningSolutionsOverride: ServicePageContent = {
  slug: 'machine-learning-solutions',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'machine-learning-ml',
  sectionId: 'machine-learning-solutions',
  category: 'Artificial Intelligence (AI)',
  title: 'Machine Learning Solutions Company',
@@ -6881,7 +6881,7 @@ const machineLearningSolutionsOverride: ServicePageContent = {
 
 const predictiveAnalyticsOverride: ServicePageContent = {
  slug: 'predictive-analytics',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'machine-learning-ml',
  sectionId: 'predictive-analytics',
  category: 'Artificial Intelligence (AI)',
  title: 'Predictive Analytics Services',
@@ -7019,7 +7019,7 @@ const predictiveAnalyticsOverride: ServicePageContent = {
 
 const recommendationSystemsOverride: ServicePageContent = {
  slug: 'recommendation-systems',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'machine-learning-ml',
  sectionId: 'recommendation-systems',
  category: 'Artificial Intelligence (AI)',
  title: 'Recommendation Systems',
@@ -7167,7 +7167,7 @@ const recommendationSystemsOverride: ServicePageContent = {
 
 const modelTrainingOptimisationOverride: ServicePageContent = {
  slug: 'model-training-optimisation',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'machine-learning-ml',
  sectionId: 'model-training-optimisation',
  category: 'Artificial Intelligence (AI)',
  title: 'Model Training & Optimisation',
@@ -7295,7 +7295,7 @@ const modelTrainingOptimisationOverride: ServicePageContent = {
 
 const deepLearningSolutionsOverride: ServicePageContent = {
  slug: 'deep-learning-solutions',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'machine-learning-ml',
  sectionId: 'deep-learning-solutions',
  category: 'Artificial Intelligence (AI)',
  title: 'Deep Learning Solutions',
@@ -12200,7 +12200,7 @@ const cybersecurityServicesOverride: ServicePageContent = {
 
  slug: 'cybersecurity-compliance',
 
- categorySlug: 'cybersecurity-compliance',
+ categorySlug: 'cybersecurity',
 
  sectionId: 'cybersecurity-compliance',
 
@@ -12554,7 +12554,7 @@ const securityAuditsOverride: ServicePageContent = {
 
  slug: 'security-audits',
 
- categorySlug: 'cybersecurity-compliance',
+ categorySlug: 'cybersecurity',
 
  sectionId: 'security-audits',
 
@@ -12818,7 +12818,7 @@ const penetrationTestingOverride: ServicePageContent = {
 
  slug: 'penetration-testing',
 
- categorySlug: 'cybersecurity-compliance',
+ categorySlug: 'cybersecurity',
 
  sectionId: 'penetration-testing',
 
@@ -13076,7 +13076,7 @@ const vulnerabilityAssessmentOverride: ServicePageContent = {
 
  slug: 'vulnerability-assessment',
 
- categorySlug: 'cybersecurity-compliance',
+ categorySlug: 'cybersecurity',
 
  sectionId: 'vulnerability-assessment',
 
@@ -13354,7 +13354,7 @@ const complianceRiskManagementOverride: ServicePageContent = {
 
  slug: 'compliance-risk-management',
 
- categorySlug: 'cybersecurity-compliance',
+ categorySlug: 'cybersecurity',
 
  sectionId: 'compliance-risk-management',
 
@@ -13628,7 +13628,7 @@ const applicationSecurityOverride: ServicePageContent = {
 
  slug: 'application-security',
 
- categorySlug: 'cybersecurity-compliance',
+ categorySlug: 'cybersecurity',
 
  sectionId: 'application-security',
 
