@@ -48,17 +48,7 @@ const nextConfig: NextConfig = {
         destination: "/images/logo-white.webp",
         permanent: true,
       },
-      {
-        source: "/solutions",
-        destination: "/software-solutions",
-        permanent: true,
-      },
-      {
-        source: "/solutions/:path*",
-        destination: "/software-solutions/:path*",
-        permanent: true,
-      },
-    ];
+          ];
   },
 
   async rewrites() {

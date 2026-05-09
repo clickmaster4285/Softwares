@@ -65,177 +65,177 @@ type HomeExploreLink = {
   highlight?: boolean;
 };
 
-const homeExploreLinks: HomeExploreLink[] = [
+// const homeExploreLinks: HomeExploreLink[] = [
  
-  {
-    href: '/software-development/custom-software-development',
-    title: 'Custom Software Development',
-    desc: 'End-to-end product delivery.',
-    ariaLabel: 'Learn about custom software development and end-to-end product delivery.',
-    icon: Code2,
-    color: 'text-blue-500',
-  },
-  {
-    href: '/web-development/web-application-development',
-    title: 'Web Application Development',
-    desc: 'SPAs, dashboards, portals.',
-    ariaLabel: 'Explore web application development for SPAs, dashboards, and portals.',
-    icon: Globe,
-    color: 'text-cyan-500',
-  },
-  {
-    href: '/mobile-development/mobile-app-development',
-    title: 'Mobile App Development',
-    desc: 'Native + cross-platform builds.',
-    ariaLabel: 'Read about native and cross-platform mobile app development.',
-    icon: Smartphone,
-    color: 'text-pink-500',
-  },
+//   {
+//     href: '/software-development/custom-software-development',
+//     title: 'Custom Software Development',
+//     desc: 'End-to-end product delivery.',
+//     ariaLabel: 'Learn about custom software development and end-to-end product delivery.',
+//     icon: Code2,
+//     color: 'text-blue-500',
+//   },
+//   {
+//     href: '/web-development/web-application-development',
+//     title: 'Web Application Development',
+//     desc: 'SPAs, dashboards, portals.',
+//     ariaLabel: 'Explore web application development for SPAs, dashboards, and portals.',
+//     icon: Globe,
+//     color: 'text-cyan-500',
+//   },
+//   {
+//     href: '/mobile-development/mobile-app-development',
+//     title: 'Mobile App Development',
+//     desc: 'Native + cross-platform builds.',
+//     ariaLabel: 'Read about native and cross-platform mobile app development.',
+//     icon: Smartphone,
+//     color: 'text-pink-500',
+//   },
 
  
-  {
-    href: '/design-ui-ux',
-    title: 'UI/UX Design',
-    desc: 'User-centered product design.',
-    ariaLabel: 'Explore UI/UX design services focused on user experience and interfaces.',
-    icon: Palette,
-    color: 'text-purple-500',
-  },
+//   {
+//     href: '/design-ui-ux',
+//     title: 'UI/UX Design',
+//     desc: 'User-centered product design.',
+//     ariaLabel: 'Explore UI/UX design services focused on user experience and interfaces.',
+//     icon: Palette,
+//     color: 'text-purple-500',
+//   },
 
   
-  {
-    href: '/artificial-intelligence',
-    title: 'Artificial Intelligence (AI)',
-    desc: 'AI-powered solutions & automation.',
-    ariaLabel: 'Explore artificial intelligence solutions and automation systems.',
-    icon: Brain,
-    color: 'text-indigo-500',
-  },
-  {
-    href: '/machine-learning',
-    title: 'Machine Learning (ML)',
-    desc: 'Predictive models & training systems.',
-    ariaLabel: 'Learn about machine learning models and predictive systems.',
-    icon: Cpu,
-    color: 'text-sky-500',
-  },
-  {
-    href: '/nlp-computer-vision',
-    title: 'NLP & Computer Vision',
-    desc: 'Text + image intelligence systems.',
-    ariaLabel: 'Explore NLP and computer vision solutions.',
-    icon: Eye,
-    color: 'text-emerald-500',
-  },
-  {
-    href: '/data-services',
-    title: 'Data Services',
-    desc: 'Data engineering & pipelines.',
-    ariaLabel: 'Explore data engineering and data pipeline services.',
-    icon: Database,
-    color: 'text-amber-500',
-  },
-  {
-    href: '/data-intelligence',
-    title: 'Data & Intelligence',
-    desc: 'Analytics & business insights.',
-    ariaLabel: 'Discover data analytics and business intelligence services.',
-    icon: BarChart3,
-    color: 'text-yellow-500',
-  },
+//   {
+//     href: '/artificial-intelligence',
+//     title: 'Artificial Intelligence (AI)',
+//     desc: 'AI-powered solutions & automation.',
+//     ariaLabel: 'Explore artificial intelligence solutions and automation systems.',
+//     icon: Brain,
+//     color: 'text-indigo-500',
+//   },
+//   {
+//     href: '/machine-learning',
+//     title: 'Machine Learning (ML)',
+//     desc: 'Predictive models & training systems.',
+//     ariaLabel: 'Learn about machine learning models and predictive systems.',
+//     icon: Cpu,
+//     color: 'text-sky-500',
+//   },
+//   {
+//     href: '/nlp-computer-vision',
+//     title: 'NLP & Computer Vision',
+//     desc: 'Text + image intelligence systems.',
+//     ariaLabel: 'Explore NLP and computer vision solutions.',
+//     icon: Eye,
+//     color: 'text-emerald-500',
+//   },
+//   {
+//     href: '/data-services',
+//     title: 'Data Services',
+//     desc: 'Data engineering & pipelines.',
+//     ariaLabel: 'Explore data engineering and data pipeline services.',
+//     icon: Database,
+//     color: 'text-amber-500',
+//   },
+//   {
+//     href: '/data-intelligence',
+//     title: 'Data & Intelligence',
+//     desc: 'Analytics & business insights.',
+//     ariaLabel: 'Discover data analytics and business intelligence services.',
+//     icon: BarChart3,
+//     color: 'text-yellow-500',
+//   },
 
 
-  {
-    href: '/automation-chatbot',
-    title: 'Automation & Chatbots',
-    desc: 'AI chatbots & workflows.',
-    ariaLabel: 'Explore automation and chatbot development services.',
-    icon: Bot,
-    color: 'text-teal-500',
-  },
-  {
-    href: '/automation-integration',
-    title: 'Automation & Integration',
-    desc: 'System integrations & workflows.',
-    ariaLabel: 'Learn about automation and system integration services.',
-    icon: Workflow,
-    color: 'text-cyan-600',
-  },
+//   {
+//     href: '/automation-chatbot',
+//     title: 'Automation & Chatbots',
+//     desc: 'AI chatbots & workflows.',
+//     ariaLabel: 'Explore automation and chatbot development services.',
+//     icon: Bot,
+//     color: 'text-teal-500',
+//   },
+//   {
+//     href: '/automation-integration',
+//     title: 'Automation & Integration',
+//     desc: 'System integrations & workflows.',
+//     ariaLabel: 'Learn about automation and system integration services.',
+//     icon: Workflow,
+//     color: 'text-cyan-600',
+//   },
 
-  {
-    href: '/cloud-devops/cloud-solutions',
-    title: 'Cloud & DevOps',
-    desc: 'CI/CD, containers, observability.',
-    ariaLabel: 'Discover cloud and DevOps services.',
-    icon: Cloud,
-    color: 'text-sky-500',
-  },
-  {
-    href: '/database-services',
-    title: 'Database Services',
-    desc: 'Database design, scaling & optimization.',
-    ariaLabel: 'Explore database services including scaling and optimization.',
-    icon: DatabaseZap,
-    color: 'text-amber-500',
-  },
+//   {
+//     href: '/cloud-devops/cloud-solutions',
+//     title: 'Cloud & DevOps',
+//     desc: 'CI/CD, containers, observability.',
+//     ariaLabel: 'Discover cloud and DevOps services.',
+//     icon: Cloud,
+//     color: 'text-sky-500',
+//   },
+//   {
+//     href: '/database-services',
+//     title: 'Database Services',
+//     desc: 'Database design, scaling & optimization.',
+//     ariaLabel: 'Explore database services including scaling and optimization.',
+//     icon: DatabaseZap,
+//     color: 'text-amber-500',
+//   },
 
 
-  {
-    href: '/cybersecurity-compliance',
-    title: 'Cybersecurity',
-    desc: 'Secure systems & compliance.',
-    ariaLabel: 'Learn about cybersecurity and compliance services.',
-    icon: ShieldCheck,
-    color: 'text-emerald-500',
-  },
-  {
-    href: '/testing-qa',
-    title: 'Testing & QA',
-    desc: 'Automated + manual testing.',
-    ariaLabel: 'Explore software testing and QA services.',
-    icon: TestTube,
-    color: 'text-orange-500',
-  },
+//   {
+//     href: '/cybersecurity-compliance',
+//     title: 'Cybersecurity',
+//     desc: 'Secure systems & compliance.',
+//     ariaLabel: 'Learn about cybersecurity and compliance services.',
+//     icon: ShieldCheck,
+//     color: 'text-emerald-500',
+//   },
+//   {
+//     href: '/testing-qa',
+//     title: 'Testing & QA',
+//     desc: 'Automated + manual testing.',
+//     ariaLabel: 'Explore software testing and QA services.',
+//     icon: TestTube,
+//     color: 'text-orange-500',
+//   },
 
-  {
-    href: '/support-outsourcing',
-    title: 'Support & Outsourcing',
-    desc: 'Dedicated engineering teams.',
-    ariaLabel: 'Learn about support and outsourcing services.',
-    icon: Headphones,
-    color: 'text-rose-500',
-  },
+//   {
+//     href: '/support-outsourcing',
+//     title: 'Support & Outsourcing',
+//     desc: 'Dedicated engineering teams.',
+//     ariaLabel: 'Learn about support and outsourcing services.',
+//     icon: Headphones,
+//     color: 'text-rose-500',
+//   },
 
-  // ─────────────────────────────────────
-  // Emerging Tech
-  // ─────────────────────────────────────
-  {
-    href: '/blockchain-web3',
-    title: 'Blockchain & Web3',
-    desc: 'Decentralized applications.',
-    ariaLabel: 'Explore blockchain and Web3 development services.',
-    icon: Link2,
-    color: 'text-purple-600',
-  },
-  {
-    href: '/iot-emerging-tech',
-    title: 'IoT & Emerging Tech',
-    desc: 'Smart devices & systems.',
-    ariaLabel: 'Learn about IoT and emerging technologies.',
-    icon: CpuIcon,
-    color: 'text-lime-500',
-  },
-  {
-    href: '/immersive-tech',
-    title: 'Immersive Tech',
-    desc: 'AR / VR / XR experiences.',
-    ariaLabel: 'Explore immersive technologies like AR, VR, and XR.',
-    icon: Glasses,
-    color: 'text-fuchsia-500',
-  },
+//   // ─────────────────────────────────────
+//   // Emerging Tech
+//   // ─────────────────────────────────────
+//   {
+//     href: '/blockchain-web3',
+//     title: 'Blockchain & Web3',
+//     desc: 'Decentralized applications.',
+//     ariaLabel: 'Explore blockchain and Web3 development services.',
+//     icon: Link2,
+//     color: 'text-purple-600',
+//   },
+//   {
+//     href: '/iot-emerging-tech',
+//     title: 'IoT & Emerging Tech',
+//     desc: 'Smart devices & systems.',
+//     ariaLabel: 'Learn about IoT and emerging technologies.',
+//     icon: CpuIcon,
+//     color: 'text-lime-500',
+//   },
+//   {
+//     href: '/immersive-tech',
+//     title: 'Immersive Tech',
+//     desc: 'AR / VR / XR experiences.',
+//     ariaLabel: 'Explore immersive technologies like AR, VR, and XR.',
+//     icon: Glasses,
+//     color: 'text-fuchsia-500',
+//   },
 
   
-];
+// ];
 
 
 
