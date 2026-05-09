@@ -90,9 +90,9 @@ type SolutionsClientProps = {
   subheading?: string;
 };
 
-const DEFAULT_HEADING = 'Our Solutions';
+const DEFAULT_HEADING = "What We've Built | 100+ Scalable Software Systems";
 const DEFAULT_SUBHEADING =
-  'Explore our complete collection of custom software, web applications, and digital solutions built for clients across various industries.';
+  'Explore how ClickMasters builds software for real businesses — web platforms, enterprise SaaS, and ERP systems. Browse 100+ production-grade solutions we delivered.';
 
 export default function SolutionsClient({
   heading = DEFAULT_HEADING,
