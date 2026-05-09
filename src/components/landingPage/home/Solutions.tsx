@@ -48,7 +48,7 @@ export default function SolutionsPage() {
   ];
 
   // Map projects to CardStack format
-  const cardStackItems = projects.slice(0,8).map((project, index) => ({
+  const cardStackItems = projects.slice(0,6).map((project, index) => ({
     id: project._id,
     title: project.title || "Untitled Project",
     description: project.description && project.description.length > 100 
@@ -171,7 +171,7 @@ export default function SolutionsPage() {
   // Show loading state
   if (isLoading) {
     return (
-      <main className="bg-white overflow-x-hidden">
+      <main className="bg-white overflow-y-hidden">
         <div className="py-24 px-6 lg:px-8">
           <div className="mx-auto max-w-7xl text-center">
             <div className="animate-pulse">
@@ -354,7 +354,7 @@ export default function SolutionsPage() {
       `}</style>
 
       {/* Card Stack Animation Section */}
-      <section className="py-24 px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white  overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center mb-16">
   <div className="inline-flex items-center gap-2 mb-3">

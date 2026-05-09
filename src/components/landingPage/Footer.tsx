@@ -184,16 +184,18 @@ export function Footer(): JSX.Element {
             </motion.div>
             
 
-            <motion.div variants={itemVariants} className="mt-6 space-y-2">
+          <motion.div variants={itemVariants} className="mt-6 space-y-2">
   <div className="flex items-center justify-center lg:justify-start gap-3">
-    <FaWhatsapp  className="h-4 w-4 text-green-600" />
+    
+    <FaWhatsapp className="h-4 w-4 text-green-600" />
 
     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+      
       <a
-        href="https://wa.me/447988576086"
+        href="https://wa.me/447988576086?text=Hi%20I%20want%20to%20connect%20with%20you"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-background/70 hover:text-background transition-colors text-sm"
+        className="text-background/70 hover:text-green-400 transition-colors text-sm"
       >
         🇬🇧 UK: +44 7988 576086
       </a>
@@ -201,10 +203,10 @@ export function Footer(): JSX.Element {
       <span className="hidden sm:inline text-background/30">|</span>
 
       <a
-        href="https://wa.me/13252024074"
+        href="https://wa.me/13252024074?text=Hi%20I%20want%20to%20connect%20with%20you"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-background/70 hover:text-background transition-colors text-sm"
+        className="text-background/70 hover:text-green-400 transition-colors text-sm"
       >
         🇺🇸 US: +1 325 202 4074
       </a>
@@ -212,16 +214,17 @@ export function Footer(): JSX.Element {
       <span className="hidden sm:inline text-background/30">|</span>
 
       <a
-        href="https://wa.me/923325394285"
+        href="https://wa.me/923325394285?text=Hi%20I%20want%20to%20discuss%20a%20project"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-background/70 hover:text-background transition-colors text-sm"
+        className="text-background/70 hover:text-green-400 transition-colors text-sm"
       >
         🇵🇰 PK: +92 332 5394285
       </a>
+
     </div>
   </div>
-            </motion.div>
+</motion.div>
             
 
 
