@@ -707,7 +707,7 @@ export const metadataConfig = {
     },
   }),
 
-  // ── /blog ───────────────────────────────────────────────────────────────────
+  // ── /blog ───────────────────────────────────────────────────────────────────      
   blog: (): Metadata => ({
     title: 'The Hidden Formula Behind Fast-Growing Software Products',
 
