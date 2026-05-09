@@ -24,7 +24,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
     if (isEnterprise) return "Enterprise Organizations";
     if (isSaaS) return "SaaS Founders";
     if (isMVP) return "Founders";
-    return "B2B Companies";
+    return "Companies";
   };
 
   const getColumnHeaders = () => {
