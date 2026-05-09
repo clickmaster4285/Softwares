@@ -41,7 +41,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
   }
 
   // Transform case studies into sections with proper formatting
-  const sections = caseStudies.map((study, index) => ({
+  const sections = caseStudies.slice(0,4).map((study, index) => ({
     id: study._id,
     title: study.title,
     description: study.excerpt,
