@@ -171,8 +171,8 @@ export default function SolutionsPage() {
   // Show loading state
   if (isLoading) {
     return (
-      <main className="bg-white overflow-x-hidden">
-        <div className="py-24 px-6 lg:px-8">
+     <main className="bg-white overflow-y-hidden">
+  <div className="w-full max-w-[100vw] overflow-x-hidden">
           <div className="mx-auto max-w-7xl text-center">
             <div className="animate-pulse">
               <div className="h-8 w-48 bg-gray-200 rounded mx-auto mb-4"></div>
@@ -354,7 +354,7 @@ export default function SolutionsPage() {
       `}</style>
 
       {/* Card Stack Animation Section */}
-      <section className="py-24 px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center mb-16">
   <div className="inline-flex items-center gap-2 mb-3">
