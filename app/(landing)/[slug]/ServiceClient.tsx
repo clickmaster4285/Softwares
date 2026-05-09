@@ -20,6 +20,7 @@ import { AppsSection } from '@/src/components/landingPage/home/AppsSection';
 import TrustedClientsSection from '@/src/components/landingPage/home/TrustedClientsSection';
 import ExploreSection from '@/src/components/landingPage/home/ExploreSection';
 import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
+import { Suspense } from 'react';
 
 interface ServiceClientProps {
   serviceData: ServiceData;
@@ -162,7 +163,15 @@ const pricingTiers = pricingPlans.map((plan) => ({
       <HeroSection serviceData={serviceData} />
 
 
-    <ExploreSection/>
+    <ExploreSection serviceData={serviceData}/>
+
+   <Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-white" />
+        }
+      >
+      <TrustedClientsSection />
+      </Suspense>
 
    
 
@@ -204,7 +213,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
 
       <FaqSection/>
 
-      {/* Final CTA Section */}
+      {/* Final CTA Section
       <section className="relative py-8 overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <Image
@@ -229,7 +238,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
 
     
     </div>

@@ -1,7 +1,6 @@
 // ExploreSection.tsx
 import Link from 'next/link';
-
-
+import { servicesData } from '@/src/lib/services';
 import {
   Layers3,
   Code2,
@@ -30,6 +29,50 @@ import {
   Brain,
   Eye,
   CpuIcon,
+  Target,
+  Building,
+  Rocket,
+  Monitor,
+  Plug,
+  Puzzle,
+  Server,
+  Settings,
+  Zap,
+  Wrench,
+  FileText,
+  ShoppingCart,
+  Package,
+  Store,
+  ShoppingBag,
+  MessageCircle,
+  Edit3,
+  Cog,
+  BotMessageSquare,
+  Sparkles,
+  Lightbulb,
+  Microscope,
+  FileSpreadsheet,
+  FileText as FileTextIcon,
+  BarChart as BarChartIcon,
+  Database as DatabaseIcon,
+  HardDrive,
+  Search,
+  Globe2,
+  Webhook,
+  Bug,
+  Wrench as WrenchIcon,
+  Users2,
+  UserCheck,
+  Headset,
+  Link as LinkIcon,
+  Coins,
+  CreditCard,
+  Palette as PaletteIcon,
+  Glasses as VrIcon,
+  Gamepad2,
+  Box,
+  Factory,
+  Cpu as CpuIcon2,
 } from 'lucide-react';
 import { metadataConfig } from '@/app/metadata-config';
 
@@ -45,180 +88,250 @@ type HomeExploreLink = {
   highlight?: boolean;
 };
 
-const homeExploreLinks: HomeExploreLink[] = [
- 
-  {
-    href: '/software-development/custom-software-development',
-    title: 'Software Development',
-    desc: 'End-to-end product delivery.',
-    ariaLabel: 'Learn about custom software development and end-to-end product delivery.',
-    icon: Code2,
-    color: 'text-blue-500',
-  },
-  {
-    href: '/web-development/web-application-development',
-    title: 'Web Application Development',
-    desc: 'SPAs, dashboards, portals.',
-    ariaLabel: 'Explore web application development for SPAs, dashboards, and portals.',
-    icon: Globe,
-    color: 'text-cyan-500',
-  },
-  {
-    href: '/mobile-development/mobile-app-development',
-    title: 'Mobile App Development',
-    desc: 'Native + cross-platform builds.',
-    ariaLabel: 'Read about native and cross-platform mobile app development.',
-    icon: Smartphone,
-    color: 'text-pink-500',
-  },
+interface ExploreSectionProps {
+  serviceData?: any;
+}
 
- 
-  {
-    href: '/design-ui-ux',
-    title: 'UI/UX Design',
-    desc: 'User-centered product design.',
-    ariaLabel: 'Explore UI/UX design services focused on user experience and interfaces.',
-    icon: Palette,
-    color: 'text-purple-500',
-  },
+// Icon mapping for services
+const serviceIcons: Record<string, LucideIcon> = {
+  'software-development': Code2,
+  'web-development': Globe,
+  'mobile-development': Smartphone,
+  'design-ui-ux': Palette,
+  'artificial-intelligence-ai': Brain,
+  'machine-learning-ml': Cpu,
+  'nlp-computer-vision': Eye,
+  'data-services': Database,
+  'data-and-intelligence': BarChart3,
+  'automation-and-chatbot': Bot,
+  'automation-and-integration': Workflow,
+  'cloud-and-devops': Cloud,
+  'database-services': DatabaseZap,
+  'cybersecurity': ShieldCheck,
+  'testing-and-qa': TestTube,
+  'support-and-outsourcing': Headphones,
+  'blockchain-and-web3': Link2,
+  'iot-and-emerging-tech': CpuIcon,
+  'immersive-tech': Glasses,
+};
 
+// Color mapping for services
+const serviceColors: Record<string, string> = {
+  'software-development': 'text-blue-500',
+  'web-development': 'text-cyan-500',
+  'mobile-development': 'text-pink-500',
+  'design-ui-ux': 'text-purple-500',
+  'artificial-intelligence-ai': 'text-indigo-500',
+  'machine-learning-ml': 'text-sky-500',
+  'nlp-computer-vision': 'text-emerald-500',
+  'data-services': 'text-amber-500',
+  'data-and-intelligence': 'text-yellow-500',
+  'automation-and-chatbot': 'text-teal-500',
+  'automation-and-integration': 'text-cyan-600',
+  'cloud-and-devops': 'text-sky-500',
+  'database-services': 'text-amber-500',
+  'cybersecurity': 'text-emerald-500',
+  'testing-and-qa': 'text-orange-500',
+  'support-and-outsourcing': 'text-rose-500',
+  'blockchain-and-web3': 'text-purple-600',
+  'iot-and-emerging-tech': 'text-lime-500',
+  'immersive-tech': 'text-fuchsia-500',
+};
+
+// Sub-service icon mappings
+const subServiceIcons: Record<string, LucideIcon> = {
+  // Software Development
+  'Custom Software Development': Target,
+  'Enterprise Software Development': Building,
+  'SaaS Product Development': Cloud,
+  'MVP Development': Rocket,
+  'Desktop Application Development': Monitor,
+  'API Development & Integration': Plug,
+  'Microservices Architecture': Puzzle,
+  'Backend Development': Server,
+  'Frontend Development': Code2,
+  'Full Stack Development': Layers3,
   
-  {
-    href: '/artificial-intelligence',
-    title: 'Artificial Intelligence (AI)',
-    desc: 'AI-powered solutions & automation.',
-    ariaLabel: 'Explore artificial intelligence solutions and automation systems.',
-    icon: Brain,
-    color: 'text-indigo-500',
-  },
-  {
-    href: '/machine-learning',
-    title: 'Machine Learning (ML)',
-    desc: 'Predictive models & training systems.',
-    ariaLabel: 'Learn about machine learning models and predictive systems.',
-    icon: Cpu,
-    color: 'text-sky-500',
-  },
-  {
-    href: '/nlp-computer-vision',
-    title: 'NLP & Computer Vision',
-    desc: 'Text + image intelligence systems.',
-    ariaLabel: 'Explore NLP and computer vision solutions.',
-    icon: Eye,
-    color: 'text-emerald-500',
-  },
-  {
-    href: '/data-services',
-    title: 'Data Services',
-    desc: 'Data engineering & pipelines.',
-    ariaLabel: 'Explore data engineering and data pipeline services.',
-    icon: Database,
-    color: 'text-amber-500',
-  },
-  {
-    href: '/data-intelligence',
-    title: 'Data & Intelligence',
-    desc: 'Analytics & business insights.',
-    ariaLabel: 'Discover data analytics and business intelligence services.',
-    icon: BarChart3,
-    color: 'text-yellow-500',
-  },
-
-
-  {
-    href: '/automation-chatbot',
-    title: 'Automation & Chatbots',
-    desc: 'AI chatbots & workflows.',
-    ariaLabel: 'Explore automation and chatbot development services.',
-    icon: Bot,
-    color: 'text-teal-500',
-  },
-  {
-    href: '/automation-integration',
-    title: 'Automation & Integration',
-    desc: 'System integrations & workflows.',
-    ariaLabel: 'Learn about automation and system integration services.',
-    icon: Workflow,
-    color: 'text-cyan-600',
-  },
-
-  {
-    href: '/cloud-devops/cloud-solutions',
-    title: 'Cloud & DevOps',
-    desc: 'CI/CD, containers, observability.',
-    ariaLabel: 'Discover cloud and DevOps services.',
-    icon: Cloud,
-    color: 'text-sky-500',
-  },
-  {
-    href: '/database-services',
-    title: 'Database Services',
-    desc: 'Database design, scaling & optimization.',
-    ariaLabel: 'Explore database services including scaling and optimization.',
-    icon: DatabaseZap,
-    color: 'text-amber-500',
-  },
-
-
-  {
-    href: '/cybersecurity-compliance',
-    title: 'Cybersecurity',
-    desc: 'Secure systems & compliance.',
-    ariaLabel: 'Learn about cybersecurity and compliance services.',
-    icon: ShieldCheck,
-    color: 'text-emerald-500',
-  },
-  {
-    href: '/testing-qa',
-    title: 'Testing & QA',
-    desc: 'Automated + manual testing.',
-    ariaLabel: 'Explore software testing and QA services.',
-    icon: TestTube,
-    color: 'text-orange-500',
-  },
-
-  {
-    href: '/support-outsourcing',
-    title: 'Support & Outsourcing',
-    desc: 'Dedicated engineering teams.',
-    ariaLabel: 'Learn about support and outsourcing services.',
-    icon: Headphones,
-    color: 'text-rose-500',
-  },
-
-  // ─────────────────────────────────────
-  // Emerging Tech
-  // ─────────────────────────────────────
-  {
-    href: '/blockchain-web3',
-    title: 'Blockchain & Web3',
-    desc: 'Decentralized applications.',
-    ariaLabel: 'Explore blockchain and Web3 development services.',
-    icon: Link2,
-    color: 'text-purple-600',
-  },
-  {
-    href: '/iot-emerging-tech',
-    title: 'IoT & Emerging Tech',
-    desc: 'Smart devices & systems.',
-    ariaLabel: 'Learn about IoT and emerging technologies.',
-    icon: CpuIcon,
-    color: 'text-lime-500',
-  },
-  {
-    href: '/immersive-tech',
-    title: 'Immersive Tech',
-    desc: 'AR / VR / XR experiences.',
-    ariaLabel: 'Explore immersive technologies like AR, VR, and XR.',
-    icon: Glasses,
-    color: 'text-fuchsia-500',
-  },
-
+  // Web Development
+  'Web Application Development': Globe,
+  'Website Development': Globe2,
+  'Progressive Web App Development': Smartphone,
+  'Headless CMS Development': Database,
+  'JAMstack Development': Zap,
+  'E-commerce Development': ShoppingCart,
+  'Headless E-commerce': Package,
+  'Shopify Development': Store,
+  'WooCommerce Development': ShoppingBag,
   
-];
+  // Mobile Development
+  'Mobile App Development': Smartphone,
+  'Android App Development': Bot,
+  'iOS App Development': Target,
+  'Cross-Platform App Development': Layers3,
+  'Flutter App Development': Sparkles,
+  'React Native Development': Code2,
+  
+  // Design UI/UX
+  'UI/UX Design': Palette,
+  'Product Design': Package,
+  'Web Design': Globe,
+  'Mobile App Design': Smartphone,
+  'UX Research': Search,
+  'Wireframing & Prototyping': Edit3,
+  'Design Systems': LayoutDashboard,
+  
+  // AI
+  'Generative AI Solutions': Brain,
+  'AI Experts': Users,
+  'AI Developers': Code2,
+  'AI Prompt Engineers': Edit3,
+  'AI Chatbot Development': BotMessageSquare,
+  'AI Agents Development': Bot,
+  'AI Automation Systems': Workflow,
+  'AI Integration Services': Plug,
+  'AI Model Development': Cpu,
+  'LLM Applications Development': FileText,
+  
+  // Machine Learning
+  'Machine Learning Solutions': Brain,
+  'Machine Learning Experts': Users,
+  'Predictive Analytics': BarChart3,
+  'Recommendation Systems': Target,
+  'Model Training & Optimization': Settings,
+  'Deep Learning Solutions': Cpu,
+  'Deep Learning Experts': UserCheck,
+  
+  // NLP & Computer Vision
+  'Natural Language Processing (NLP)': MessageCircle,
+  'Speech Recognition Systems': Microscope,
+  'Text Analytics': FileText,
+  'Computer Vision Solutions': Eye,
+  'Image Processing': Monitor,
+  'Video Analytics': Monitor,
+  
+  // Data Services
+  'Data Science & Analytics': BarChart3,
+  'Business Intelligence (BI)': BarChartIcon,
+  'Data Engineering': Database,
+  'Data Warehousing': HardDrive,
+  'Data Visualization': BarChart3,
+  'Big Data Solutions': DatabaseIcon,
+  
+  // Data & Intelligence
+  'Data Scraping Specialists': Search,
+  'Web Scraping Specialists': Globe2,
+  'Excel Experts': FileSpreadsheet,
+  'Google Sheets Experts': FileTextIcon,
+  'Power BI Developers': BarChartIcon,
+  'Data Scientists': Brain,
+  'Data Engineers': Database,
+  'Tableau Developers': BarChart3,
+  'SQL Database Developers': DatabaseIcon,
+  
+  // Automation & Chatbot
+  'Chatbot Developers': BotMessageSquare,
+  'Chatbot Marketing Experts': Target,
+  'Chatbot UX Writers': Edit3,
+  'Process Automation Experts': Workflow,
+  'Python Automation Experts': Code2,
+  'Software Automation Experts': Cog,
+  'Web Automation Experts': Webhook,
+  'Marketing Automation Experts': MessageCircle,
+  
+  // Automation & Integration
+  'Business Process Automation': Workflow,
+  'Workflow Automation': Cog,
+  'Robotic Process Automation (RPA)': Bot,
+  'System Integration': Link2,
+  'API Integration': Plug,
+  'Web Scraping & Data Extraction': Search,
+  
+  // Cloud & DevOps
+  'Cloud Solutions': Cloud,
+  'Cloud-Native Development': Rocket,
+  'DevOps Services': Workflow,
+  'DevSecOps': ShieldCheck,
+  'CI/CD Pipeline Setup': Settings,
+  'Serverless Architecture': Zap,
+  'Containerization (Docker & Kubernetes)': Box,
+  'Infrastructure as Code (IaC)': FileText,
+  
+  // Database Services
+  'Database Design': Database,
+  'Database Management': Settings,
+  'Data Migration': ArrowRight,
+  'Database Optimization': Zap,
+  'SQL & NoSQL Solutions': DatabaseIcon,
+  
+  // Cybersecurity
+  'Cybersecurity Services': ShieldCheck,
+  'Security Audits': Search,
+  'Penetration Testing': Target,
+  'Vulnerability Assessment': Bug,
+  'Compliance & Risk Management': FileText,
+  'Application Security': ShieldCheck,
+  
+  // Testing & QA
+  'QA & Software Testing': TestTube,
+  'Automated Testing': Bot,
+  'Manual Testing': Users2,
+  'Performance Testing': Zap,
+  'Load Testing': BarChart3,
+  'Bug Fixing': WrenchIcon,
+  
+  // Support & Outsourcing
+  'Maintenance & Support': Wrench,
+  'Dedicated Development Teams': Users2,
+  'IT Outsourcing': Globe,
+  'Staff Augmentation': UserCheck,
+  'Technical Support': Headset,
+  
+  // Blockchain & Web3
+  'Blockchain Development': Link2,
+  'Smart Contract Development': FileText,
+  'Decentralized App (DApp) Development': Globe2,
+  'Web3 Development': Brain,
+  'Crypto Wallet Development': CreditCard,
+  'NFT Marketplace Development': Package,
+  'Token Development': Coins,
+  
+  // IoT & Emerging Tech
+  'IoT Development': Cpu,
+  'Smart Systems Development': Brain,
+  'Industrial IoT': Factory,
+  'Embedded Systems Development': Server,
+  
+  // Immersive Tech
+  'AR Development': Smartphone,
+  'VR Development': VrIcon,
+  'Mixed Reality (MR) Solutions': Glasses,
+  '3D Application Development': Gamepad2,
+};
 
 
-export default function ExploreSection() {
+export default function ExploreSection({ serviceData }: ExploreSectionProps) {
+  // Determine what to show based on context
+  const isServicePage = !!serviceData;
+  
+  // Generate links based on context
+  const exploreLinks = isServicePage && serviceData.subServices 
+    ? serviceData.subServices.map((subService: any, index: number) => ({
+        href: `/${serviceData.slug}/${subService.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`,
+        title: subService.title,
+        desc: subService.description,
+        ariaLabel: `Learn about ${subService.title}: ${subService.description}`,
+        icon: subServiceIcons[subService.title] || Code2,
+        color: 'text-orange-500',
+      }))
+    : Object.values(servicesData).map((service) => ({
+        href: `/${service.slug}`,
+        title: service.title,
+        desc: service.tagline,
+        ariaLabel: `Learn about ${service.title}: ${service.description}`,
+        icon: serviceIcons[service.slug] || Code2,
+        color: serviceColors[service.slug] || 'text-blue-500',
+      }));
+
   return (
     <section
       className="border-y border-slate-200/80 bg-gradient-to-b from-white to-slate-50 py-16 sm:py-20"
@@ -230,7 +343,7 @@ export default function ExploreSection() {
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
             <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">
-              Explore Our Ecosystem
+              {isServicePage ? 'Specialized Services' : 'Explore Our Ecosystem'}
             </p>
             <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
           </div>
@@ -239,20 +352,21 @@ export default function ExploreSection() {
             id="home-explore-heading"
             className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl"
           >
-            Explore ClickMasters
+            {isServicePage ? `${serviceData.title} Sub-Services` : 'Explore ClickMasters'}
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-            Discover our engineering capabilities, delivery expertise,
-            case studies, and strategic technology solutions built
-            for modern businesses.
+            {isServicePage 
+              ? `Explore our specialized ${serviceData.title.toLowerCase()} services designed to meet your specific business needs.`
+              : 'Discover our engineering capabilities, delivery expertise, case studies, and strategic technology solutions built for modern businesses.'
+            }
           </p>
         </div>
 
         {/* Grid */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
-          {homeExploreLinks.map((item) => {
-            const Icon = item.icon;
+          {exploreLinks.map((item, index) => {
+            const Icon = typeof item.icon === 'function' ? item.icon() : item.icon;
             const isHighlight = Boolean(item.highlight);
 
             return (
@@ -269,24 +383,28 @@ export default function ExploreSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div className="relative flex justify-center">
-                  <Icon
-                    className={`h-12 w-12 transition-all duration-300 group-hover:scale-110 ${item.color}`}
-                    strokeWidth={2}
-                  />
+                  {typeof item.icon === 'function' ? (
+                    <div className="text-4xl">{Icon}</div>
+                  ) : (
+                    <Icon
+                      className={`h-12 w-12 transition-all duration-300 group-hover:scale-110 ${item.color}`}
+                      strokeWidth={2}
+                    />
+                  )}
                 </div>
 
                 <div className="relative mt-7 text-center">
                   <h3 className="font-display text-lg font-bold text-slate-900 transition-colors group-hover:text-primary">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                  <p className="mt-3 text-sm leading-7 text-slate-600 line-clamp-3">
                     {item.desc}
                   </p>
                 </div>
 
                 <div className="relative mt-8 flex items-center justify-center gap-2">
                   <span className="text-sm font-medium text-primary">
-                    Explore now
+                    {isServicePage ? 'Learn more' : 'Explore now'}
                   </span>
                   <ArrowRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" />
                 </div>

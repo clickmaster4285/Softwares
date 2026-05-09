@@ -44,11 +44,11 @@ const trustedClients: Client[] = [
   { name: "Vertex Solutions", industry: "Consulting", icon: BarChart3 },
 ];
 
-const stats = [
-  { value: "3,500+", label: "Clients worldwide" },
-  { value: "12", label: "Industries served" },
-  { value: "98%", label: "Satisfaction rate" },
-];
+// const stats = [
+//   { value: "3,500+", label: "Clients worldwide" },
+//   { value: "12", label: "Industries served" },
+//   { value: "98%", label: "Satisfaction rate" },
+// ];
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -126,7 +126,7 @@ export function TrustedClientsSection() {
   const { ref, visible } = useInView();
 
   return (
-    <section ref={ref} className="bg-white py-20 px-6 lg:px-16 ">
+    <section ref={ref} className="bg-white py-6 px-6 lg:px-16 ">
       {/* Header — original design */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
@@ -159,7 +159,7 @@ export function TrustedClientsSection() {
       </div>
 
       {/* Stats Bar */}
-      <div className="mt-10 flex items-center justify-center gap-10 flex-wrap">
+      {/* <div className="mt-10 flex items-center justify-center gap-10 flex-wrap">
         {stats.map((stat, i) => (
           <React.Fragment key={stat.label}>
             {i > 0 && (
@@ -178,7 +178,7 @@ export function TrustedClientsSection() {
             </div>
           </React.Fragment>
         ))}
-      </div>
+      </div> */}
     </section>
   );
 }

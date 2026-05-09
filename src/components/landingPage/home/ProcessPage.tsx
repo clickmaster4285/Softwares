@@ -136,7 +136,7 @@ export default function ProcessPage() {
 
   return (
     <main className="bg-white overflow-x-hidden">
-      <section ref={expandSectionRef} className="py-24 px-6 lg:px-8">
+      <section ref={expandSectionRef} className="py-6 px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           {/* Header Section */}
           <div className="mx-auto max-w-3xl text-center mb-16">
@@ -201,7 +201,7 @@ export default function ProcessPage() {
       </section>
 
       {/* CTA Section */}
-      <section ref={ctaRef} className="py-24 px-6 lg:px-8 bg-slate-900 text-white">
+      {/* <section ref={ctaRef} className="py-24 px-6 lg:px-8 bg-slate-900 text-white">
         <div className="mx-auto max-w-4xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -231,7 +231,7 @@ export default function ProcessPage() {
             </button>
           </motion.div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }
