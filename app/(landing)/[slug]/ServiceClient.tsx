@@ -162,7 +162,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
       <HeroSection serviceData={serviceData} />
 
 
-    <ExploreSection/>
+    <ExploreSection serviceData={serviceData}/>
 
    
 
