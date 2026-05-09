@@ -155,30 +155,11 @@ export default function TrustedBySection() {
         }
       `}</style>
 
-      <section className="relative overflow-hidden bg-white py-20">
+      <section className="relative overflow-hidden bg-white">
         <div className="mx-auto px-4 sm:px-6 lg:px-12">
-          {/* Header */}
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                Trusted By Global Brands
-              </p>
-              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
-            </div>
-
-            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
-              Our Partners & Platforms
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-              Trusted technologies, platforms, and ecosystems we work with
-              to build scalable digital products and enterprise solutions.
-            </p>
-          </div>
-
+        
           {/* Slider Wrapper */}
-          <div className="mt-16 space-y-8">
+          <div className="mt-4 space-y-4">
             {/* Row 1 */}
             <div className="relative overflow-hidden">
               <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-white to-transparent" />

@@ -48,7 +48,7 @@ export default function SolutionsPage() {
   ];
 
   // Map projects to CardStack format
-  const cardStackItems = projects.map((project, index) => ({
+  const cardStackItems = projects.slice(0,8).map((project, index) => ({
     id: project._id,
     title: project.title || "Untitled Project",
     description: project.description && project.description.length > 100 
