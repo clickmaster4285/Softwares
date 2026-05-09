@@ -8981,7 +8981,7 @@ const bigDataSolutionsOverride: ServicePageContent = {
 
 const webScrapingDataExtractionOverride: ServicePageContent = {
  slug: 'web-scraping-data-extraction',
- categorySlug: 'automation-integration',
+ categorySlug: 'automation-and-integration',
  sectionId: 'web-scraping-data-extraction',
  category: 'Automation & Integration',
  title: 'Web Scraping & Data Extraction Services',
@@ -9115,7 +9115,7 @@ const webScrapingDataExtractionOverride: ServicePageContent = {
 
 const businessProcessAutomationOverride: ServicePageContent = {
  slug: 'business-process-automation',
- categorySlug: 'automation-integration',
+ categorySlug: 'automation-and-integration',
  sectionId: 'business-process-automation',
  category: 'Automation & Integration',
  title: 'Business Process Automation Services',
@@ -9281,7 +9281,7 @@ const businessProcessAutomationOverride: ServicePageContent = {
 
 const workflowAutomationOverride: ServicePageContent = {
  slug: 'workflow-automation',
- categorySlug: 'automation-integration',
+ categorySlug: 'automation-and-integration',
  sectionId: 'workflow-automation',
  category: 'Automation & Integration',
  title: 'Workflow Automation Services',
@@ -9417,7 +9417,7 @@ const workflowAutomationOverride: ServicePageContent = {
 
 const systemIntegrationOverride: ServicePageContent = {
  slug: 'system-integration',
- categorySlug: 'automation-integration',
+ categorySlug: 'automation-and-integration',
  sectionId: 'system-integration',
  category: 'Automation & Integration',
  title: 'System Integration Services',
@@ -9554,7 +9554,7 @@ const systemIntegrationOverride: ServicePageContent = {
 
 const apiIntegrationOverride: ServicePageContent = {
  slug: 'api-integration',
- categorySlug: 'automation-integration',
+ categorySlug: 'automation-and-integration',
  sectionId: 'api-integration',
  category: 'Automation & Integration',
  title: 'API Integration Services',
@@ -15688,7 +15688,7 @@ const maintenanceSupportOverride: ServicePageContent = {
 
  slug: 'maintenance-support',
 
- categorySlug: 'managed-services',
+ categorySlug: 'support-and-outsourcing',
 
  sectionId: 'maintenance-support',
 
@@ -15944,7 +15944,7 @@ const dedicatedDevelopmentTeamsOverride: ServicePageContent = {
 
  slug: 'dedicated-development-teams',
 
- categorySlug: 'managed-services',
+ categorySlug: 'support-and-outsourcing',
 
  sectionId: 'dedicated-development-teams',
 
@@ -16220,7 +16220,7 @@ const itOutsourcingOverride: ServicePageContent = {
 
  slug: 'it-outsourcing',
 
- categorySlug: 'managed-services',
+ categorySlug: 'support-and-outsourcing',
 
  sectionId: 'it-outsourcing',
 
@@ -16470,7 +16470,7 @@ const staffAugmentationOverride: ServicePageContent = {
 
  slug: 'staff-augmentation',
 
- categorySlug: 'managed-services',
+ categorySlug: 'support-and-outsourcing',
 
  sectionId: 'staff-augmentation',
 
@@ -16740,7 +16740,7 @@ const technicalSupportOverride: ServicePageContent = {
 
  slug: 'technical-support',
 
- categorySlug: 'managed-services',
+ categorySlug: 'support-and-outsourcing',
 
  sectionId: 'technical-support',
 
