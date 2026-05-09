@@ -149,10 +149,10 @@ export function AppsSection() {
 
         <div className="mt-16 text-center">
           <Link
-            href="/case-studies"
+            href="/software-solutions"
             className="inline-flex min-h-[48px] min-w-[48px] items-center justify-center gap-2 rounded-md bg-black px-8 py-3 text-center font-medium text-white transition-colors hover:bg-primary"
           >
-            View all case studies
+            View all solutions
             <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
           </Link>
         </div>
