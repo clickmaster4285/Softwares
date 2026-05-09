@@ -9700,7 +9700,7 @@ const cloudSolutionsOverride: ServicePageContent = {
 
  slug: 'cloud-solutions',
 
- categorySlug: 'cloud-devops',
+ categorySlug: 'cloud-and-devops',
 
  sectionId: 'cloud-solutions',
 
@@ -9984,7 +9984,7 @@ const cloudNativeDevelopmentOverride: ServicePageContent = {
 
  slug: 'cloud-native-development',
 
- categorySlug: 'cloud-devops',
+ categorySlug: 'cloud-and-devops',
 
  sectionId: 'cloud-native-development',
 
@@ -10260,7 +10260,7 @@ const devopsServicesOverride: ServicePageContent = {
 
  slug: 'devops-services',
 
- categorySlug: 'cloud-devops',
+ categorySlug: 'cloud-and-devops',
 
  sectionId: 'devops-services',
 
@@ -10518,7 +10518,7 @@ const devsecopsOverride: ServicePageContent = {
 
  slug: 'devsecops',
 
- categorySlug: 'cloud-devops',
+ categorySlug: 'cloud-and-devops',
 
  sectionId: 'devsecops',
 
@@ -10822,7 +10822,7 @@ const serverlessArchitectureOverride: ServicePageContent = {
 
  slug: 'serverless-architecture',
 
- categorySlug: 'cloud-devops',
+ categorySlug: 'cloud-and-devops',
 
  sectionId: 'serverless-architecture',
 
@@ -13902,7 +13902,7 @@ const qaSoftwareTestingOverride: ServicePageContent = {
 
  slug: 'qa-software-testing',
 
- categorySlug: 'qa-software-testing',
+ categorySlug: 'testing-and-qa',
 
  sectionId: 'qa-software-testing',
 
@@ -14304,7 +14304,7 @@ const automatedTestingOverride: ServicePageContent = {
 
  slug: 'automated-testing',
 
- categorySlug: 'qa-software-testing',
+ categorySlug: 'testing-and-qa',
 
  sectionId: 'automated-testing',
 
@@ -14604,7 +14604,7 @@ const manualTestingOverride: ServicePageContent = {
 
  slug: 'manual-testing',
 
- categorySlug: 'qa-software-testing',
+ categorySlug: 'testing-and-qa',
 
  sectionId: 'manual-testing',
 
@@ -14874,7 +14874,7 @@ const performanceTestingOverride: ServicePageContent = {
 
  slug: 'performance-testing',
 
- categorySlug: 'qa-software-testing',
+ categorySlug: 'testing-and-qa',
 
  sectionId: 'performance-testing',
 
@@ -15146,7 +15146,7 @@ const loadTestingOverride: ServicePageContent = {
 
  slug: 'load-testing',
 
- categorySlug: 'qa-software-testing',
+ categorySlug: 'testing-and-qa',
 
  sectionId: 'load-testing',
 
@@ -15430,7 +15430,7 @@ const bugFixingOverride: ServicePageContent = {
 
  slug: 'bug-fixing',
 
- categorySlug: 'qa-software-testing',
+ categorySlug: 'testing-and-qa',
 
  sectionId: 'bug-fixing',
 
@@ -17798,7 +17798,7 @@ const iotDevelopmentOverride: ServicePageContent = {
 
  slug: 'iot-development',
 
- categorySlug: 'iot-embedded',
+ categorySlug: 'iot-and-embedded',
 
  sectionId: 'iot-development',
 
@@ -18076,7 +18076,7 @@ const smartSystemsDevelopmentOverride: ServicePageContent = {
 
  slug: 'smart-systems-development',
 
- categorySlug: 'iot-embedded',
+ categorySlug: 'iot-and-embedded',
 
  sectionId: 'smart-systems-development',
 
@@ -18338,7 +18338,7 @@ const industrialIoTOverride: ServicePageContent = {
 
  slug: 'industrial-iot',
 
- categorySlug: 'iot-embedded',
+ categorySlug: 'iot-and-embedded',
 
  sectionId: 'industrial-iot',
 
@@ -18600,7 +18600,7 @@ const embeddedSystemsDevelopmentOverride: ServicePageContent = {
 
  slug: 'embedded-systems-development',
 
- categorySlug: 'iot-embedded',
+ categorySlug: 'iot-and-embedded',
 
  sectionId: 'embedded-systems-development',
 
@@ -18872,7 +18872,7 @@ const blockchainDevelopmentOverride: ServicePageContent = {
 
  slug: 'blockchain-development',
 
- categorySlug: 'blockchain-web3',
+ categorySlug: 'blockchain-and-web3',
 
  sectionId: 'blockchain-development',
 
@@ -19242,7 +19242,7 @@ const smartContractDevelopmentOverride: ServicePageContent = {
 
  slug: 'smart-contract-development',
 
- categorySlug: 'blockchain-web3',
+ categorySlug: 'blockchain-and-web3',
 
  sectionId: 'smart-contract-development',
 
@@ -19508,7 +19508,7 @@ const dappDevelopmentOverride: ServicePageContent = {
 
  slug: 'decentralized-app-dapp-development',
 
- categorySlug: 'blockchain-web3',
+ categorySlug: 'blockchain-and-web3',
 
  sectionId: 'decentralized-app-dapp-development',
 
@@ -19774,7 +19774,7 @@ const web3DevelopmentOverride: ServicePageContent = {
 
  slug: 'web3-development',
 
- categorySlug: 'blockchain-web3',
+ categorySlug: 'blockchain-and-web3',
 
  sectionId: 'web3-development',
 
@@ -20040,7 +20040,7 @@ const cryptoWalletDevelopmentOverride: ServicePageContent = {
 
  slug: 'crypto-wallet-development',
 
- categorySlug: 'blockchain-web3',
+ categorySlug: 'blockchain-and-web3',
 
  sectionId: 'crypto-wallet-development',
 
@@ -20314,7 +20314,7 @@ const nftMarketplaceDevelopmentOverride: ServicePageContent = {
 
  slug: 'nft-marketplace-development',
 
- categorySlug: 'blockchain-web3',
+ categorySlug: 'blockchain-and-web3',
 
  sectionId: 'nft-marketplace-development',
 
@@ -20586,7 +20586,7 @@ const tokenDevelopmentOverride: ServicePageContent = {
 
  slug: 'token-development',
 
- categorySlug: 'blockchain-web3',
+ categorySlug: 'blockchain-and-web3',
 
  sectionId: 'token-development',
 
