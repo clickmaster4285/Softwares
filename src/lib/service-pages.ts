@@ -1391,7 +1391,7 @@ const aiModelDevelopmentOverride: ServicePageContent = {
 
 const dataEngineeringOverride: ServicePageContent = {
  slug: 'data-engineering',
- categorySlug: 'data-science-analytics',
+ categorySlug: 'data-services',
  sectionId: 'data-engineering',
  category: 'Data Services',
  title: 'Data Engineering Company Building Robust Data Foundations',
@@ -8226,7 +8226,7 @@ const videoAnalyticsOverride: ServicePageContent = {
 
 const dataScienceAnalyticsOverride: ServicePageContent = {
  slug: 'data-science-analytics',
- categorySlug: 'data-science-analytics',
+ categorySlug: 'data-services',
  sectionId: 'data-science-analytics',
  category: 'Data Science & Analytics',
  title: 'Data Science & Analytics Services',
@@ -8435,7 +8435,7 @@ const dataScienceAnalyticsOverride: ServicePageContent = {
 
 const businessIntelligenceOverride: ServicePageContent = {
  slug: 'business-intelligence',
- categorySlug: 'data-science-analytics',
+ categorySlug: 'data-services',
  sectionId: 'business-intelligence',
  category: 'Data Science & Analytics',
  title: 'Business Intelligence Services',
@@ -8567,7 +8567,7 @@ const businessIntelligenceOverride: ServicePageContent = {
 
 const dataWarehousingOverride: ServicePageContent = {
  slug: 'data-warehousing',
- categorySlug: 'data-science-analytics',
+ categorySlug: 'data-services',
  sectionId: 'data-warehousing',
  category: 'Data Science & Analytics',
  title: 'Data Warehousing Services',
@@ -8696,7 +8696,7 @@ const dataWarehousingOverride: ServicePageContent = {
 
 const dataVisualizationOverride: ServicePageContent = {
  slug: 'data-visualization',
- categorySlug: 'data-science-analytics',
+ categorySlug: 'data-services',
  sectionId: 'data-visualization',
  category: 'Data Science & Analytics',
  title: 'Data Visualization Services',
@@ -8826,7 +8826,7 @@ const dataVisualizationOverride: ServicePageContent = {
 
 const bigDataSolutionsOverride: ServicePageContent = {
  slug: 'big-data-solutions',
- categorySlug: 'data-science-analytics',
+ categorySlug: 'data-services',
  sectionId: 'big-data-solutions',
  category: 'Data Science & Analytics',
  title: 'Big Data Solutions',
