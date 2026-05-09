@@ -106,7 +106,7 @@ function caseStudyHref(cs: CaseStudy): string {
   return `/case-studies/${encodeURIComponent(slug)}`;
 }
 
-// ─── Animated card ─────────────────────────────────────────────────────────────
+// ─── Animated card with scroll animation ─────────────────────────────────────────────
 
 interface InsightCardItemProps {
   card: InsightCard;
@@ -117,6 +117,7 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
   const ref = useRef<HTMLAnchorElement>(null);
   const [visible, setVisible] = useState(false);
   const [imgSrc, setImgSrc] = useState<string>("");
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     // Set image source after mount to avoid hydration issues
@@ -125,19 +126,29 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || hasAnimated) return;
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setVisible(true), card.index * 80);
+        if (entry.isIntersecting && !hasAnimated) {
+          // Staggered delay based on card index for smooth wave effect
+          const delay = (card.index % 3) * 100 + (Math.floor(card.index / 3) * 50);
+          setTimeout(() => {
+            setVisible(true);
+            setHasAnimated(true);
+          }, delay);
           observer.disconnect();
         }
       },
-      { threshold: 0.12 }
+      { 
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px" // Triggers slightly before card enters viewport
+      }
     );
+    
     observer.observe(el);
     return () => observer.disconnect();
-  }, [card.index]);
+  }, [card.index, hasAnimated]);
 
   return (
     <Link
@@ -145,9 +156,13 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
       href={card.href}
       className={[
         "relative rounded-2xl overflow-hidden cursor-pointer group block",
-        "transition-all duration-500 ease-out",
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
+        "transition-all duration-700 ease-out",
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
       ].join(" ")}
+      style={{
+        transitionProperty: "all",
+        transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+      }}
     >
       <div
         className={[
@@ -165,20 +180,24 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
         )}
       </div>
 
-    <div className="absolute bottom-0 left-0 right-0 p-3">
-  <div className="absolute inset-0 bg-black/40 backdrop-blur-md" />
-  
-  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 p-3">
+        {/* stronger dark gradient base (fixes readability instantly) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
 
-  <div className="relative">
-    <p className="text-[11px] font-medium mb-1 text-orange-300">
-      {card.type}
-    </p>
-    <p className="text-white text-[13px] font-medium leading-snug line-clamp-2">
-      {card.title}
-    </p>
-  </div>
-</div>
+        {/* subtle glass blur ONLY at bottom */}
+        <div className="absolute inset-0 backdrop-blur-[3px]" />
+
+        {/* content always above */}
+        <div className="relative z-10">
+          <p className="text-[11px] font-medium mb-1 text-orange-300">
+            {card.type}
+          </p>
+
+          <p className="text-white text-[13px] font-medium leading-snug line-clamp-2">
+            {card.title}
+          </p>
+        </div>
+      </div>
 
       <div className="absolute inset-0 rounded-2xl transition-shadow duration-300 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.35)] pointer-events-none" />
     </Link>
@@ -199,8 +218,36 @@ const SkeletonCard = ({ tall = false }: { tall?: boolean }) => (
 // ─── Text Section Component ────────────────────────────────────────────────────
 
 const InsightsHeader = () => {
+  // Header animation on scroll
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [headerVisible, setHeaderVisible] = useState(false);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="flex flex-col gap-5 lg:sticky lg:top-24">
+    <div 
+      ref={headerRef}
+      className={[
+        "flex flex-col gap-5 lg:sticky lg:top-24 transition-all duration-700 ease-out",
+        headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      ].join(" ")}
+    >
       <p
         className="text-xs tracking-widest uppercase font-medium"
         style={{ color: "#ea580c" }}
@@ -252,7 +299,7 @@ const InsightsCards = ({ cards, isLoading }: InsightsCardsProps) => {
   return (
     <>
       {/* Column 1 - 2 cards */}
-      <div className="flex flex-col gap-4 w-[220px] xl:w-[260px]  justify-center  ">
+      <div className="flex flex-col gap-4 w-[260px] xl:w-[320px] justify-center">
         {isLoading ? (
           <>
             <SkeletonCard />
@@ -266,7 +313,7 @@ const InsightsCards = ({ cards, isLoading }: InsightsCardsProps) => {
       </div>
 
       {/* Column 2 - 3 cards */}
-      <div className="flex flex-col gap-4 w-[220px] xl:w-[260px]">
+      <div className="flex flex-col gap-4 w-[260px] xl:w-[320px]">
         {isLoading ? (
           <>
             <SkeletonCard />
@@ -281,7 +328,7 @@ const InsightsCards = ({ cards, isLoading }: InsightsCardsProps) => {
       </div>
 
       {/* Column 3 - 3 cards */}
-      <div className="flex flex-col gap-4 w-[220px] xl:w-[260px]">
+      <div className="flex flex-col gap-4 w-[260px] xl:w-[320px]">
         {isLoading ? (
           <>
             <SkeletonCard />
@@ -359,52 +406,50 @@ export default function FeaturedInsights() {
     }
   }
 
-return (
-  <section
-    className="w-full  px-4 sm:px-6 lg:px-8 xl:px-12 py-16 overflow-hidden"
-    style={{
-     background: "linear-gradient(135deg, #ffffff 0%, #fff7ed 45%, #ffedd5 100%)"
-    }}
-  >
-    {/* Mobile layout: 2 columns grid */}
-    <div className="lg:hidden">
-      <div className="mb-10">
-        <InsightsHeader />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        {isLoading ? (
-          <>
-            <SkeletonCard tall />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </>
-        ) : (
-          cards.map((card) => (
-            <InsightCardItem key={card.id} card={card} tall={card.index === 0} />
-          ))
-        )}
-      </div>
-    </div>
-
-    {/* Desktop layout: 3 columns with exact distribution (2, 3, 3) */}
-    <div className="hidden lg:flex justify-between gap-6 xl:gap-8">
-      {/* Header - left side */}
-      <div className="sticky top-24 flex-shrink-0 w-[280px] xl:w-[520px]">
-        <InsightsHeader />
+  return (
+    <section
+      className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-16 overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, #ffffff 0%, #fff7ed 45%, #ffedd5 100%)"
+      }}
+    >
+      {/* Mobile layout: 2 columns grid */}
+      <div className="lg:hidden">
+        <div className="mb-10">
+          <InsightsHeader />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          {isLoading ? (
+            <>
+              <SkeletonCard tall />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+            </>
+          ) : (
+            cards.map((card) => (
+              <InsightCardItem key={card.id} card={card} tall={card.index === 0} />
+            ))
+          )}
+        </div>
       </div>
 
-      {/* Cards wrapper - 3 columns with exact distribution */}
-      <div className="flex gap-6 xl:gap-8 flex-1 justify-end">
-        <InsightsCards cards={cards} isLoading={isLoading} />
+      {/* Desktop layout: 3 columns with exact distribution (2, 3, 3) */}
+      <div className="hidden lg:flex justify-between gap-6 xl:gap-8">
+        {/* Header - left side */}
+        <div className="sticky top-24 flex-shrink-0 w-[280px] xl:w-[520px]">
+          <InsightsHeader />
+        </div>
+
+        {/* Cards wrapper - 3 columns with exact distribution */}
+        <div className="flex gap-6 xl:gap-8 flex-1 justify-end">
+          <InsightsCards cards={cards} isLoading={isLoading} />
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 }
-
-
