@@ -352,7 +352,7 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
             id="home-explore-heading"
             className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl"
           >
-            {isServicePage ? `${serviceData.title} Sub-Services` : 'Explore ClickMasters'}
+            {isServicePage ? `${serviceData.title} Services` : 'Explore ClickMasters'}
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
