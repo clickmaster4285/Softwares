@@ -926,16 +926,7 @@ const { data: blogs = [] } = useQuery({
                       ))}
                     </div>
 
-                    <div className="mt-6 border-t border-slate-200 pt-4">
-                      <Link
-                        href="/services"
-                        onClick={closeDropdowns}
-                        className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
-                      >
-                        Browse all services →
-                      </Link>
-                    </div>
-                  </div>
+                                      </div>
                 );
               })}
           </div>
