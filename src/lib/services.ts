@@ -18,6 +18,7 @@ export type ServiceData = {
   benefits: string[];
   ctaText: string;
   lifecycle: LifecycleStep[];
+  subServices?: Array<{ title: string; description: string; icon: string }>;
 };
 
 export const servicesData: Record<string, ServiceData> = {
@@ -41,6 +42,18 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Reduced operational costs", "Increased efficiency", "Scalable infrastructure", "Future-proof technology"],
     ctaText: "Start Your Software Project",
+    subServices: [
+      { title: "Custom Software Development", description: "Tailored software for specific business goals", icon: "🎯" },
+      { title: "Enterprise Software Development", description: "Scalable enterprise platforms and workflows", icon: "🏢" },
+      { title: "SaaS Product Development", description: "Cloud-based SaaS products with recurring value", icon: "☁️" },
+      { title: "MVP Development", description: "Fast MVP releases to validate ideas", icon: "🚀" },
+      { title: "Desktop Application Development", description: "Reliable desktop apps for business operations", icon: "💻" },
+      { title: "API Development & Integration", description: "Robust APIs and third-party integrations", icon: "🔌" },
+      { title: "Microservices Architecture", description: "Distributed systems built for scale", icon: "🏗️" },
+      { title: "Backend Development", description: "Secure, high-performance backend services", icon: "⚙️" },
+      { title: "Frontend Development", description: "Responsive, accessible frontend experiences", icon: "🎨" },
+      { title: "Full Stack Development", description: "End-to-end product development support", icon: "🔄" }
+    ],
     lifecycle: [
       { step: 1, title: "Discovery & Planning", description: "We analyze your requirements, define project scope, and create a detailed roadmap.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Design & Prototyping", description: "Create wireframes, UI/UX designs, and interactive prototypes for validation.", duration: "2-3 weeks", icon: "🎨" },
@@ -55,7 +68,7 @@ export const servicesData: Record<string, ServiceData> = {
     slug: "web-development",
     title: "Web Development",
     tagline: "Create Stunning, High-Performance Websites",
-    description: "We build modern, responsive websites and web applications that captivate audiences and drive conversions. Using the latest frameworks and technologies, we deliver lightning-fast, SEO-optimized web experiences.",
+    description: "We build modern, responsive websites and web applications that captivate audiences and drive conversions. Using latest frameworks and technologies, we deliver lightning-fast, SEO-optimized web experiences.",
     heroBadge: "500+ Websites Launched",
     stats: [
       { value: "500+", label: "Websites Built" },
@@ -70,6 +83,17 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Increased online visibility", "Higher conversion rates", "Better user engagement", "Mobile-first approach"],
     ctaText: "Launch Your Website",
+    subServices: [
+      { title: "Web Application Development", description: "Modern web apps and business portals", icon: "🌐" },
+      { title: "Website Development", description: "SEO-friendly websites that convert", icon: "🌍" },
+      { title: "Progressive Web App Development", description: "Installable web apps with offline support", icon: "⚡" },
+      { title: "Headless CMS Development", description: "Flexible content systems with API delivery", icon: "🔧" },
+      { title: "JAMstack Development", description: "Fast static-first web architectures", icon: "⚡" },
+      { title: "E-commerce Development", description: "Scalable online stores and checkout flows", icon: "🛒" },
+      { title: "Headless E-commerce", description: "Composable commerce for modern storefronts", icon: "🛍️" },
+      { title: "Shopify Development", description: "Custom Shopify storefront and app work", icon: "🛒" },
+      { title: "WooCommerce Development", description: "WordPress commerce customization and support", icon: "📦" }
+    ],
     lifecycle: [
       { step: 1, title: "Requirements Gathering", description: "Understand your business goals, target audience, and technical needs.", duration: "1 week", icon: "📋" },
       { step: 2, title: "Wireframing & Design", description: "Create site structure, wireframes, and visual designs.", duration: "2 weeks", icon: "✏️" },
@@ -99,6 +123,14 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Reach mobile users", "Offline functionality", "Push notifications", "App store presence"],
     ctaText: "Build Your App",
+    subServices: [
+      { title: "Mobile App Development", description: "Mobile products for iOS and Android users", icon: "📱" },
+      { title: "Android App Development", description: "Native Android apps with strong performance", icon: "🤖" },
+      { title: "iOS App Development", description: "Native iOS apps built for Apple ecosystem", icon: "🍎" },
+      { title: "Cross-Platform App Development", description: "Shared-code apps for faster delivery", icon: "🔄" },
+      { title: "Flutter App Development", description: "Flutter apps with consistent UI", icon: "🦋" },
+      { title: "React Native Development", description: "React Native apps with reusable components", icon: "⚛️" }
+    ],
     lifecycle: [
       { step: 1, title: "Ideation & Strategy", description: "Define app concept, features, and target platforms.", duration: "1-2 weeks", icon: "💡" },
       { step: 2, title: "UI/UX Design", description: "Create intuitive mobile interfaces and user flows.", duration: "2-3 weeks", icon: "🎨" },
@@ -108,10 +140,10 @@ export const servicesData: Record<string, ServiceData> = {
     ]
   },
 
-  // Design
+  // Design UI/UX
   "design-ui-ux": {
-    slug: "design",
-    title: "Design",
+    slug: "design-ui-ux",
+    title: "Design UI/UX",
     tagline: "Beautiful, User-Centered Design Solutions",
     description: "Our design team creates intuitive, engaging experiences that users love. From UI/UX design to branding and visual identity, we craft designs that communicate your brand story effectively.",
     heroBadge: "Award-Winning Design Team",
@@ -128,6 +160,15 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Improved user engagement", "Higher conversion rates", "Brand consistency", "Reduced bounce rates"],
     ctaText: "Start Designing",
+    subServices: [
+      { title: "UI/UX Design", description: "User-first interfaces with measurable outcomes", icon: "🎨" },
+      { title: "Product Design", description: "End-to-end product thinking and execution", icon: "📦" },
+      { title: "Web Design", description: "Modern web layouts with clear hierarchy", icon: "🌐" },
+      { title: "Mobile App Design", description: "Mobile-first design systems and flows", icon: "📱" },
+      { title: "UX Research", description: "Research-backed decisions for better usability", icon: "🔬" },
+      { title: "Wireframing & Prototyping", description: "Rapid wireframes and interactive prototypes", icon: "📐" },
+      { title: "Design Systems", description: "Reusable design language and component patterns", icon: "📚" }
+    ],
     lifecycle: [
       { step: 1, title: "Research & Discovery", description: "User research, competitor analysis, and requirements gathering.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Information Architecture", description: "Structure content and create user flow diagrams.", duration: "1 week", icon: "🏗️" },
@@ -137,39 +178,51 @@ export const servicesData: Record<string, ServiceData> = {
     ]
   },
 
+  // Artificial Intelligence (AI)
   "artificial-intelligence-ai": {
     slug: "artificial-intelligence-ai",
-    title: "Artificial Intelligence",
+    title: "Artificial Intelligence (AI)",
     tagline: "Intelligent Solutions for Modern Businesses",
     description: "Leverage the power of AI to automate processes, gain insights, and create innovative solutions that drive growth and efficiency.",
     heroBadge: "Leading AI Innovators",
-
     stats: [
-      { value: "300+", label: "Design Projects" },
-      { value: "15+", label: "Design Awards" },
-      { value: "95%", label: "User Satisfaction" },
-      { value: "40+", label: "Designers" }
+      { value: "50+", label: "AI Projects" },
+      { value: "97%", label: "Model Accuracy" },
+      { value: "10TB+", label: "Data Processed" },
+      { value: "25+", label: "AI Specialists" }
     ],
     features: [
-      { title: "UX Research", description: "Data-driven design decisions", icon: "🔬" },
-      { title: "UI Design", description: "Beautiful, modern interfaces", icon: "🎨" },
-      { title: "Brand Identity", description: "Coherent brand experiences", icon: "🏷️" }
+      { title: "Machine Learning", description: "Advanced ML algorithms and models", icon: "🤖" },
+      { title: "Natural Language Processing", description: "Text analysis and understanding", icon: "📝" },
+      { title: "Computer Vision", description: "Image and video analysis", icon: "👁️" }
     ],
-    benefits: ["Improved user engagement", "Higher conversion rates", "Brand consistency", "Reduced bounce rates"],
-    ctaText: "Start Designing",
+    benefits: ["Automated workflows", "Enhanced decision making", "Predictive analytics", "Cost reduction"],
+    ctaText: "Implement AI Solutions",
+    subServices: [
+      { title: "Generative AI Solutions", description: "LLM-powered generation and automation workflows", icon: "🤖" },
+      { title: "AI Experts", description: "Expert advisors for AI strategy and implementation", icon: "👨‍💼" },
+      { title: "AI Developers", description: "Custom AI applications built by expert developers", icon: "💻" },
+      { title: "AI Prompt Engineers", description: "Prompt engineering for high-quality model outputs", icon: "✍️" },
+      { title: "AI Chatbot Development", description: "Conversational assistants for support and sales", icon: "💬" },
+      { title: "AI Agents Development", description: "Autonomous agents for business operations", icon: "🤖" },
+      { title: "AI Automation Systems", description: "Intelligent automation across repetitive tasks", icon: "⚙️" },
+      { title: "AI Integration Services", description: "Integrate AI capabilities into existing systems", icon: "🔌" },
+      { title: "AI Model Development", description: "Custom model development and deployment", icon: "🧠" },
+      { title: "LLM Applications Development", description: "Production-grade LLM applications and tooling", icon: "📚" }
+    ],
     lifecycle: [
-      { step: 1, title: "Research & Discovery", description: "User research, competitor analysis, and requirements gathering.", duration: "1-2 weeks", icon: "🔍" },
-      { step: 2, title: "Information Architecture", description: "Structure content and create user flow diagrams.", duration: "1 week", icon: "🏗️" },
-      { step: 3, title: "Wireframing", description: "Create low-fidelity wireframes for layout and functionality.", duration: "1-2 weeks", icon: "📐" },
-      { step: 4, title: "Visual Design", description: "Design high-fidelity mockups with brand elements.", duration: "2-3 weeks", icon: "🎨" },
-      { step: 5, title: "Prototyping & Testing", description: "Create interactive prototypes and user testing.", duration: "1-2 weeks", icon: "🧪" }
+      { step: 1, title: "Assessment", description: "Analyze AI requirements and data sources.", duration: "1-2 weeks", icon: "🔍" },
+      { step: 2, title: "Model Design", description: "Design AI architecture and algorithms.", duration: "2-4 weeks", icon: "🏗️" },
+      { step: 3, title: "Development", description: "Build and train AI models.", duration: "6-12 weeks", icon: "🤖" },
+      { step: 4, title: "Testing", description: "Validate model accuracy and performance.", duration: "2-4 weeks", icon: "🧪" },
+      { step: 5, title: "Deployment", description: "Deploy AI solutions to production.", duration: "2-4 weeks", icon: "🚀" }
     ]
   },
 
   // Machine Learning (ML)
   "machine-learning-ml": {
     slug: "machine-learning-ml",
-    title: "Machine Learning",
+    title: "Machine Learning (ML)",
     tagline: "Intelligent Data-Driven Solutions",
     description: "Harness the power of machine learning to transform your data into actionable insights. We build custom ML models that automate decisions, predict outcomes, and drive business intelligence.",
     heroBadge: "50+ ML Models Deployed",
@@ -186,6 +239,15 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Data-driven decisions", "Automated insights", "Competitive advantage", "Scalable intelligence"],
     ctaText: "Build Your ML Solution",
+    subServices: [
+      { title: "Machine Learning Solutions", description: "ML systems tailored to your domain data", icon: "🤖" },
+      { title: "Machine Learning Experts", description: "Expert ML practitioners for model-driven products", icon: "👨‍🔬" },
+      { title: "Predictive Analytics", description: "Forecasting models to guide decisions", icon: "📊" },
+      { title: "Recommendation Systems", description: "Personalized recommendations for engagement", icon: "🎯" },
+      { title: "Model Training & Optimization", description: "Training pipelines and model performance tuning", icon: "⚙️" },
+      { title: "Deep Learning Solutions", description: "Advanced neural models for complex problems", icon: "🧠" },
+      { title: "Deep Learning Experts", description: "Specialists in deep learning architecture and deployment", icon: "👨‍💻" }
+    ],
     lifecycle: [
       { step: 1, title: "Data Analysis", description: "Analyze data sources and requirements.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Model Design", description: "Design ML architecture and algorithms.", duration: "2-4 weeks", icon: "🏗️" },
@@ -196,31 +258,39 @@ export const servicesData: Record<string, ServiceData> = {
   },
 
   // NLP & Computer Vision
-  "nlp-and-computer-vision": {
-    slug: "nlp-and-computer-vision",
+  "nlp-computer-vision": {
+    slug: "nlp-computer-vision",
     title: "NLP & Computer Vision",
-    tagline: "Advanced AI Perception Solutions",
-    description: "Transform how your business understands and interacts with the world. We develop cutting-edge natural language processing and computer vision systems that automate workflows and enhance user experiences.",
-    heroBadge: "30+ AI Perception Projects",
+    tagline: "Advanced Language and Vision Technologies",
+    description: "Transform how you process text, speech, and visual data with cutting-edge NLP and computer vision solutions that understand and interpret human language and images.",
+    heroBadge: "Advanced AI Technologies",
     stats: [
-      { value: "30+", label: "AI Projects" },
-      { value: "97%", label: "Recognition Accuracy" },
-      { value: "100M+", label: "Images Processed" },
+      { value: "30+", label: "NLP/CV Projects" },
+      { value: "98%", label: "Recognition Accuracy" },
+      { value: "1M+", label: "Images Processed" },
       { value: "20+", label: "AI Specialists" }
     ],
     features: [
-      { title: "Text Analysis", description: "Extract insights from unstructured text", icon: "📝" },
-      { title: "Image Recognition", description: "Identify objects and patterns in images", icon: "👁️" },
-      { title: "Voice Processing", description: "Convert speech to text and commands", icon: "🎤" }
+      { title: "Text Understanding", description: "Advanced natural language processing", icon: "📝" },
+      { title: "Image Recognition", description: "State-of-the-art computer vision", icon: "👁️" },
+      { title: "Speech Processing", description: "Voice recognition and synthesis", icon: "🎤" }
     ],
-    benefits: ["Automated workflows", "Enhanced user experience", "Data extraction", "Cost reduction"],
-    ctaText: "Implement AI Solutions",
+    benefits: ["Automated content analysis", "Enhanced user experience", "Data extraction insights", "Multilingual support"],
+    ctaText: "Implement NLP/CV Solutions",
+    subServices: [
+      { title: "Natural Language Processing (NLP)", description: "Text understanding and language workflows", icon: "📝" },
+      { title: "Speech Recognition Systems", description: "Voice-to-text and speech processing solutions", icon: "🎤" },
+      { title: "Text Analytics", description: "Insights from unstructured text data", icon: "📊" },
+      { title: "Computer Vision Solutions", description: "Image and video understanding pipelines", icon: "👁️" },
+      { title: "Image Processing", description: "Image enhancement, detection, and classification", icon: "🖼️" },
+      { title: "Video Analytics", description: "Real-time and batch video intelligence", icon: "🎬" }
+    ],
     lifecycle: [
-      { step: 1, title: "Requirements", description: "Define NLP/CV use cases and data.", duration: "1 week", icon: "📋" },
-      { step: 2, title: "Data Preparation", description: "Clean and prepare training datasets.", duration: "2-3 weeks", icon: "🧹" },
-      { step: 3, title: "Model Development", description: "Train NLP/CV models.", duration: "6-10 weeks", icon: "🤖" },
-      { step: 4, title: "Integration", description: "Integrate with existing systems.", duration: "2-4 weeks", icon: "🔗" },
-      { step: 5, title: "Testing", description: "Test accuracy and performance.", duration: "2 weeks", icon: "🧪" }
+      { step: 1, title: "Requirements Analysis", description: "Define NLP/CV requirements and use cases.", duration: "1-2 weeks", icon: "📋" },
+      { step: 2, title: "Model Selection", description: "Choose appropriate models and architectures.", duration: "2-3 weeks", icon: "🤖" },
+      { step: 3, title: "Development", description: "Build and train NLP/CV models.", duration: "6-10 weeks", icon: "💻" },
+      { step: 4, title: "Testing", description: "Validate accuracy and performance.", duration: "2-3 weeks", icon: "🧪" },
+      { step: 5, title: "Deployment", description: "Deploy models to production.", duration: "1-2 weeks", icon: "🚀" }
     ]
   },
 
@@ -244,6 +314,14 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Better decisions", "Data-driven insights", "Operational efficiency", "Competitive advantage"],
     ctaText: "Transform Your Data",
+    subServices: [
+      { title: "Data Science & Analytics", description: "Data-driven strategy and advanced analytics", icon: "📊" },
+      { title: "Business Intelligence (BI)", description: "BI dashboards and business reporting systems", icon: "📈" },
+      { title: "Data Engineering", description: "Reliable pipelines and data platform architecture", icon: "⚙️" },
+      { title: "Data Warehousing", description: "Warehouse design for analytics at scale", icon: "🗄️" },
+      { title: "Data Visualization", description: "Clear visual storytelling with data", icon: "📊" },
+      { title: "Big Data Solutions", description: "Large-scale data processing infrastructure", icon: "🔥" }
+    ],
     lifecycle: [
       { step: 1, title: "Assessment", description: "Analyze data sources and requirements.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Pipeline Design", description: "Design data processing workflows.", duration: "2-3 weeks", icon: "🏗️" },
@@ -273,6 +351,17 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Strategic insights", "Better decisions", "Competitive edge", "Operational efficiency"],
     ctaText: "Build Your BI Solution",
+    subServices: [
+      { title: "Data Scraping Specialists", description: "Extract the data you need from the open web and internal sources", icon: "🕷️" },
+      { title: "Web Scraping Specialists", description: "Reliable web scraping services for structured data collection", icon: "🌐" },
+      { title: "Excel Experts", description: "Advanced spreadsheet automation and analytics in Excel", icon: "📊" },
+      { title: "Google Sheets Experts", description: "Automated Google Sheets workflows and data solutions", icon: "📝" },
+      { title: "Power BI Developers", description: "Interactive dashboards and reporting with Power BI", icon: "📈" },
+      { title: "Data Scientists", description: "Expert data science to turn your data into business insights", icon: "👨‍🔬" },
+      { title: "Data Engineers", description: "Data pipeline and infrastructure engineering for analytics-ready systems", icon: "⚙️" },
+      { title: "Tableau Developers", description: "Visual analytics and dashboard development in Tableau", icon: "📊" },
+      { title: "SQL Database Developers", description: "SQL database development for fast, reliable data storage and queries", icon: "🗄️" }
+    ],
     lifecycle: [
       { step: 1, title: "Discovery", description: "Identify business questions and data.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Architecture", description: "Design BI system architecture.", duration: "2-3 weeks", icon: "🏗️" },
@@ -302,6 +391,16 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["24/7 support", "Cost reduction", "Better customer experience", "Increased efficiency"],
     ctaText: "Automate Your Business",
+    subServices: [
+      { title: "Chatbot Developers", description: "Custom chatbot development for support and engagement", icon: "💬" },
+      { title: "Chatbot Marketing Experts", description: "Drive conversions and lead capture with chatbot marketing", icon: "📈" },
+      { title: "Chatbot UX Writers", description: "Conversational UX writing for effective chatbot experiences", icon: "✍️" },
+      { title: "Process Automation Experts", description: "Automate repetitive business processes with intelligent workflows", icon: "⚙️" },
+      { title: "Python Automation Experts", description: "Python automation solutions for repetitive and data-driven tasks", icon: "🐍" },
+      { title: "Software Automation Experts", description: "Software automation to remove manual effort and improve quality", icon: "💻" },
+      { title: "Web Automation Experts", description: "Web automation for testing, scraping, and workflow automation", icon: "🌐" },
+      { title: "Marketing Automation Experts", description: "Marketing automation systems for campaigns and lead nurture", icon: "📧" }
+    ],
     lifecycle: [
       { step: 1, title: "Analysis", description: "Map automation opportunities.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Design", description: "Design conversation flows.", duration: "2-3 weeks", icon: "🎨" },
@@ -331,6 +430,14 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Eliminated silos", "Improved efficiency", "Data consistency", "Cost savings"],
     ctaText: "Integrate Your Systems",
+    subServices: [
+      { title: "Business Process Automation", description: "Automate repetitive business workflows", icon: "⚙️" },
+      { title: "Workflow Automation", description: "Orchestrated process automation across teams", icon: "🔄" },
+      { title: "Robotic Process Automation (RPA)", description: "RPA bots for operational efficiency", icon: "🤖" },
+      { title: "System Integration", description: "Connect platforms and eliminate silos", icon: "🔗" },
+      { title: "API Integration", description: "Reliable integration between tools and services", icon: "🔌" },
+      { title: "Web Scraping & Data Extraction", description: "Structured data extraction for operations", icon: "🕷️" }
+    ],
     lifecycle: [
       { step: 1, title: "Assessment", description: "Analyze existing systems.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Planning", description: "Design integration strategy.", duration: "2-3 weeks", icon: "📋" },
@@ -360,6 +467,16 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Scalability", "Reliability", "Cost efficiency", "Faster deployment"],
     ctaText: "Modernize Your Infrastructure",
+    subServices: [
+      { title: "Cloud Solutions", description: "Cloud architecture and migration services", icon: "☁️" },
+      { title: "Cloud-Native Development", description: "Cloud-native apps built for resilience", icon: "🚀" },
+      { title: "DevOps Services", description: "Delivery pipelines and release automation", icon: "🔄" },
+      { title: "DevSecOps", description: "Security integrated into DevOps practices", icon: "🔒" },
+      { title: "CI/CD Pipeline Setup", description: "Automated build, test, and deployment workflows", icon: "⚙️" },
+      { title: "Serverless Architecture", description: "Event-driven serverless application design", icon: "⚡" },
+      { title: "Containerization (Docker & Kubernetes)", description: "Containerized deployments at scale", icon: "🐳" },
+      { title: "Infrastructure as Code (IaC)", description: "Versioned, repeatable infrastructure setup", icon: "🏗️" }
+    ],
     lifecycle: [
       { step: 1, title: "Assessment", description: "Evaluate current infrastructure.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Planning", description: "Design cloud strategy.", duration: "2-3 weeks", icon: "📋" },
@@ -389,6 +506,13 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Data reliability", "Better performance", "Enhanced security", "Scalable storage"],
     ctaText: "Optimize Your Database",
+    subServices: [
+      { title: "Database Design", description: "Data models optimized for real workloads", icon: "🗄️" },
+      { title: "Database Management", description: "Database operations, reliability, and health", icon: "⚙️" },
+      { title: "Data Migration", description: "Safe migration with minimal downtime", icon: "🔄" },
+      { title: "Database Optimization", description: "Performance tuning for faster queries", icon: "⚡" },
+      { title: "SQL & NoSQL Solutions", description: "Right-fit SQL and NoSQL implementations", icon: "🔧" }
+    ],
     lifecycle: [
       { step: 1, title: "Analysis", description: "Analyze data requirements.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Design", description: "Design database schema.", duration: "2-3 weeks", icon: "🏗️" },
@@ -418,6 +542,14 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Enhanced protection", "Compliance assurance", "Risk mitigation", "Business continuity"],
     ctaText: "Secure Your Business",
+    subServices: [
+      { title: "Cybersecurity Services", description: "Security posture improvements and hardening", icon: "🛡️" },
+      { title: "Security Audits", description: "Comprehensive infrastructure and app audits", icon: "🔍" },
+      { title: "Penetration Testing", description: "Controlled security testing by experts", icon: "🎯" },
+      { title: "Vulnerability Assessment", description: "Find and prioritize security weaknesses", icon: "🔍" },
+      { title: "Compliance & Risk Management", description: "Controls and governance for compliance", icon: "📋" },
+      { title: "Application Security", description: "Secure SDLC and application hardening", icon: "🔒" }
+    ],
     lifecycle: [
       { step: 1, title: "Assessment", description: "Security audit and risk analysis.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Planning", description: "Security strategy design.", duration: "2-3 weeks", icon: "📋" },
@@ -447,6 +579,14 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Quality assurance", "Reduced bugs", "Better performance", "User satisfaction"],
     ctaText: "Ensure Your Quality",
+    subServices: [
+      { title: "QA & Software Testing", description: "Comprehensive QA strategies and execution", icon: "🧪" },
+      { title: "Automated Testing", description: "Reliable test automation for faster releases", icon: "🤖" },
+      { title: "Manual Testing", description: "Thorough exploratory and scenario-based testing", icon: "👤" },
+      { title: "Performance Testing", description: "Measure and optimize system performance", icon: "⚡" },
+      { title: "Load Testing", description: "Validate reliability under peak traffic", icon: "📊" },
+      { title: "Bug Fixing", description: "Rapid issue resolution and stabilization", icon: "🐛" }
+    ],
     lifecycle: [
       { step: 1, title: "Planning", description: "Test strategy design.", duration: "1-2 weeks", icon: "📋" },
       { step: 2, title: "Setup", description: "Test environment setup.", duration: "1 week", icon: "⚙️" },
@@ -476,6 +616,13 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Expert access", "Cost efficiency", "Focus on core business", "Scalable support"],
     ctaText: "Get Expert Support",
+    subServices: [
+      { title: "Maintenance & Support", description: "Ongoing maintenance and product support", icon: "🛠️" },
+      { title: "Dedicated Development Teams", description: "Skilled dedicated teams for long-term work", icon: "👥" },
+      { title: "IT Outsourcing", description: "Flexible outsourcing for technical delivery", icon: "🌐" },
+      { title: "Staff Augmentation", description: "On-demand engineers to scale your team", icon: "🔧" },
+      { title: "Technical Support", description: "Reliable support for systems and users", icon: "🎧" }
+    ],
     lifecycle: [
       { step: 1, title: "Assessment", description: "Support needs analysis.", duration: "1 week", icon: "🔍" },
       { step: 2, title: "Planning", description: "Support strategy design.", duration: "1-2 weeks", icon: "📋" },
@@ -505,6 +652,15 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Decentralization", "Transparency", "Security", "New revenue models"],
     ctaText: "Build Web3 Solution",
+    subServices: [
+      { title: "Blockchain Development", description: "Blockchain platforms and custom protocols", icon: "⛓️" },
+      { title: "Smart Contract Development", description: "Secure smart contract implementation", icon: "📜" },
+      { title: "Decentralized App (DApp) Development", description: "DApp architecture and frontend integration", icon: "🌐" },
+      { title: "Web3 Development", description: "Web3 product development and integrations", icon: "🌍" },
+      { title: "Crypto Wallet Development", description: "Wallet apps with secure asset handling", icon: "💼" },
+      { title: "NFT Marketplace Development", description: "NFT marketplace platforms and tooling", icon: "🎨" },
+      { title: "Token Development", description: "Token standards and launch support", icon: "🪙" }
+    ],
     lifecycle: [
       { step: 1, title: "Concept", description: "Define blockchain use case.", duration: "1-2 weeks", icon: "💡" },
       { step: 2, title: "Architecture", description: "Design blockchain solution.", duration: "2-4 weeks", icon: "🏗️" },
@@ -534,6 +690,12 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Real-time insights", "Automation", "Efficiency gains", "New revenue streams"],
     ctaText: "Connect Your Future",
+    subServices: [
+      { title: "IoT Development", description: "Connected device ecosystems and dashboards", icon: "🌐" },
+      { title: "Smart Systems Development", description: "Intelligent systems with real-time control", icon: "🧠" },
+      { title: "Industrial IoT", description: "Industrial monitoring and automation solutions", icon: "🏭" },
+      { title: "Embedded Systems Development", description: "Embedded firmware and hardware integration", icon: "💻" }
+    ],
     lifecycle: [
       { step: 1, title: "Assessment", description: "IoT opportunity analysis.", duration: "1-2 weeks", icon: "🔍" },
       { step: 2, title: "Planning", description: "IoT architecture design.", duration: "2-3 weeks", icon: "📋" },
@@ -563,6 +725,12 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     benefits: ["Enhanced engagement", "Innovative experiences", "Competitive edge", "Future-proof technology"],
     ctaText: "Build Immersive Experience",
+    subServices: [
+      { title: "AR Development", description: "Augmented reality experiences and apps", icon: "📱" },
+      { title: "VR Development", description: "Virtual reality applications for training and products", icon: "🥽" },
+      { title: "Mixed Reality (MR) Solutions", description: "Mixed reality for collaborative experiences", icon: "🌐" },
+      { title: "3D Application Development", description: "Interactive 3D applications and simulations", icon: "🎮" }
+    ],
     lifecycle: [
       { step: 1, title: "Concept", description: "Define immersive experience.", duration: "1-2 weeks", icon: "💡" },
       { step: 2, title: "Design", description: "Create 3D/AR/VR content.", duration: "2-4 weeks", icon: "🎨" },
