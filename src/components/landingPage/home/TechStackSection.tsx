@@ -154,7 +154,7 @@ export function TechStackSection() {
       `}</style>
 
       <div className="bg-white" ref={tech.ref}>
-        <div className="mx-auto px-6 lg:px-12 py-16 lg:py-20">
+        <div className="mx-auto px-6 lg:px-12 py-6 lg:py-20">
         <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
   <div className="inline-flex items-center gap-2 mb-3">
     <span className="h-[2px] w-8 rounded-full bg-orange-400" />
