@@ -100,7 +100,7 @@ function ClientCard({
       />
 
       {/* Icon */}
-      <div className="w-16 h-16 flex items-center justify-center rounded-xl border border-gray-200 group-hover:border-amber-300 group-hover:bg-amber-50 transition-all duration-200">
+      <div className="w-16 h-16 flex items-center justify-center rounded-xl  group-hover:border-amber-300 group-hover:bg-amber-50 transition-all duration-200">
         <Icon
           size={28}
           className="text-amber-600"
@@ -126,7 +126,7 @@ export function TrustedClientsSection() {
   const { ref, visible } = useInView();
 
   return (
-    <section ref={ref} className="bg-white py-20 px-6 lg:px-16">
+    <section ref={ref} className="bg-white py-20 px-6 lg:px-16 ">
       {/* Header — original design */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
@@ -184,3 +184,4 @@ export function TrustedClientsSection() {
 }
 
 export default TrustedClientsSection;
+
