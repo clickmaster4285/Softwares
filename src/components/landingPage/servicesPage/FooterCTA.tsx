@@ -25,17 +25,7 @@ export function CTAComponents() {
             real-world case studies, or our full solutions portfolio.
           </p>
 
-          <Button
-            asChild
-            size="lg"
-            className="mt-8 rounded-full bg-orange-700 px-8 py-6 text-white shadow-xl shadow-orange-600/30 hover:shadow-2xl hover:brightness-105 transition-all duration-300 text-base"
-          >
-            <Link href="/services" className="flex items-center justify-center gap-2">
-              View all services
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </Button>
-        </div>
+                  </div>
       </section>
 
       {/* Main CTA Section */}

@@ -454,19 +454,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               Discover how we can help transform your business through our comprehensive services,
               real-world case studies, or our full solutions portfolio.
             </p>
-            <div className="mt-8">
-              <Button
-                asChild
-                size="lg"
-                className="rounded-full bg-orange-600 px-10 text-white shadow-lg shadow-orange-600/25 hover:bg-orange-700"
-              >
-                <Link href="/services">
-                  View all services
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-                </Link>
-              </Button>
-            </div>
-          </div>
+                      </div>
         </section>
       </div>
     </>

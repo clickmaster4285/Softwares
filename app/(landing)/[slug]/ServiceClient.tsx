@@ -28,13 +28,7 @@ export default function ServiceClient({ serviceData }: ServiceClientProps) {
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
-          <Link
-            href="/services"
-            className="text-slate-500 hover:text-orange-600 transition-colors font-medium"
-          >
-            Services
-          </Link>
-          <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+                    <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
           <span className="font-black text-slate-800">
             {serviceData.title}
           </span>
