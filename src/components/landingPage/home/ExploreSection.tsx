@@ -365,7 +365,7 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
 
         {/* Grid */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
-          {exploreLinks.map((item, index) => {
+          {exploreLinks.map((item: any, index: number) => {
             const Icon = typeof item.icon === 'function' ? item.icon() : item.icon;
             const isHighlight = Boolean(item.highlight);
 
