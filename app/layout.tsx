@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 import {
@@ -8,9 +8,11 @@ import {
 } from './metadata-config';
 import Script from 'next/script';
 
-export const metadata: Metadata = {
-  ...defaultMetadata,
-  viewport: 'width=device-width, initial-scale=1',
+export const metadata: Metadata = defaultMetadata;
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
