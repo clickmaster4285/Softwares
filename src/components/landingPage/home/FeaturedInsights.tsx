@@ -165,20 +165,20 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
         )}
       </div>
 
-      <div
-        className="absolute bottom-0 left-0 right-0 p-3"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)",
-        }}
-      >
-        <p className="text-[11px] font-medium mb-1" style={{ color: "#4ee8c0" }}>
-          {card.type}
-        </p>
-        <p className="text-white text-[13px] font-medium leading-snug line-clamp-2">
-          {card.title}
-        </p>
-      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-3">
+  <div className="absolute inset-0 bg-black/40 backdrop-blur-md" />
+  
+  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+  <div className="relative">
+    <p className="text-[11px] font-medium mb-1 text-orange-300">
+      {card.type}
+    </p>
+    <p className="text-white text-[13px] font-medium leading-snug line-clamp-2">
+      {card.title}
+    </p>
+  </div>
+</div>
 
       <div className="absolute inset-0 rounded-2xl transition-shadow duration-300 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.35)] pointer-events-none" />
     </Link>
@@ -203,37 +203,32 @@ const InsightsHeader = () => {
     <div className="flex flex-col gap-5 lg:sticky lg:top-24">
       <p
         className="text-xs tracking-widest uppercase font-medium"
-        style={{ color: "#0f9e7e" }}
+        style={{ color: "#ea580c" }}
       >
-        Featured Insights
+        Sucess Stories
       </p>
       <h2
         className="text-3xl xl:text-4xl font-medium leading-tight"
         style={{ color: "#0c2a2a" }}
       >
         Stories of our transformations{" "}
-        <span style={{ color: "#0f9e7e" }}>
+        <span style={{ color: "#ea580c" }}>
           across Services and Industries
         </span>
       </h2>
     
-      <p className="text-base" style={{ color: "#3a5a5a" }}>
-        From Concept to Completion. We deliver enterprise-grade solutions for modern  
+      <p className="text-base text-gray-800" >
+       From Concept to Completion. We deliver enterprise-grade solutions for modern
+  businesses, combining innovative technology with strategic execution. With a
+  proven track record of successful deliveries across industries worldwide, we
+  transform ideas into impactful digital experiences that drive real growth.
       </p>
-      <p className="text-base" style={{ color: "#3a5a5a" }}>
-        businesses, combining innovative technology with strategic execution. With a 
-      </p>
-      <p className="text-base" style={{ color: "#3a5a5a" }}>
-        proven track record of successful deliveries across industries worldwide, 
-      </p>
-      <p className="text-base" style={{ color: "#3a5a5a" }}>
-        we transform ideas into impactful digital experiences that drive real growth.
-      </p>
+     
 
       <Link
         href="/blog"
         className="w-fit px-6 py-2.5 rounded-full text-white text-sm font-medium transition-opacity hover:opacity-90"
-        style={{ background: "#0f9e7e" }}
+        style={{ background: "#ea580c" }}
       >
         Explore More
       </Link>
@@ -257,7 +252,7 @@ const InsightsCards = ({ cards, isLoading }: InsightsCardsProps) => {
   return (
     <>
       {/* Column 1 - 2 cards */}
-      <div className="flex flex-col gap-4 w-[220px] xl:w-[260px]">
+      <div className="flex flex-col gap-4 w-[220px] xl:w-[260px]  justify-center  ">
         {isLoading ? (
           <>
             <SkeletonCard />
@@ -366,10 +361,9 @@ export default function FeaturedInsights() {
 
 return (
   <section
-    className="w-full min-h-screen px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 overflow-hidden"
+    className="w-full  px-4 sm:px-6 lg:px-8 xl:px-12 py-16 overflow-hidden"
     style={{
-      background:
-        "linear-gradient(135deg, #f0fdfb 0%, #e0f7f4 40%, #ccf2ff 100%)",
+     background: "linear-gradient(135deg, #ffffff 0%, #fff7ed 45%, #ffedd5 100%)"
     }}
   >
     {/* Mobile layout: 2 columns grid */}

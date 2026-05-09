@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -100,7 +101,7 @@ function ClientCard({
       />
 
       {/* Icon */}
-      <div className="w-16 h-16 flex items-center justify-center rounded-xl border border-gray-200 group-hover:border-amber-300 group-hover:bg-amber-50 transition-all duration-200">
+      <div className="w-16 h-16 flex items-center justify-center rounded-xl  group-hover:border-amber-300 group-hover:bg-amber-50 transition-all duration-200">
         <Icon
           size={28}
           className="text-amber-600"
