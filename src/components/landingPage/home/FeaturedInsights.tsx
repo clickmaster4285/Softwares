@@ -366,7 +366,7 @@ export default function FeaturedInsights() {
 
 return (
   <section
-    className="w-full min-h-screen px-4 sm:px-6 lg:px-8 xl:px-12 py-16 overflow-hidden"
+    className="w-full min-h-screen px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 overflow-hidden"
     style={{
       background:
         "linear-gradient(135deg, #f0fdfb 0%, #e0f7f4 40%, #ccf2ff 100%)",
