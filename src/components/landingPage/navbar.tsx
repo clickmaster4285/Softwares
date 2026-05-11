@@ -96,6 +96,16 @@ const hireUsItems: { title: string; href: string; icon: LucideIcon }[] = [
   { title: 'RAG Development Cost', href: '/hire/rag-development-cost/', icon: Calculator },
 ];
 
+// Locations dropdown items
+const locationsItems: { title: string; href: string; files: number }[] = [
+  { title: 'Canada', href: '/locations/canada', files: 107 },
+  { title: 'USA', href: '/locations/usa', files: 107 },
+  { title: 'UK', href: '/locations/uk', files: 107 },
+  { title: 'Germany', href: '/locations/germany', files: 107 },
+  { title: 'UAE', href: '/locations/uae', files: 107 },
+  { title: 'Australia', href: '/locations/australia', files: 107 },
+];
+
 
 const LOGO_COLOR_SRC = '/images/logo.webp';
 const LOGO_WHITE_SRC = '/images/logo-white.webp';
@@ -557,6 +567,76 @@ const { data: blogs = [] } = useQuery({
             Contact Us
           </Link>
 
+          {/* Locations Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter('locations')}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              className={cn(
+                'text-lg font-bold transition-colors flex items-center gap-1',
+                activeDropdown === 'locations'
+                  ? 'text-primary'
+                  : isPageLoading
+                    ? 'text-black/70 hover:text-primary'
+                    : isLightHero
+                      ? 'text-white/90 hover:text-primary'
+                      : 'text-black/70 hover:text-primary'
+              )}
+            >
+              Locations
+              <ChevronDown
+                className={cn(
+                  'h-4 w-4 shrink-0 transition-transform duration-200 ease-out',
+                  activeDropdown === 'locations' && 'rotate-180'
+                )}
+              />
+            </button>
+            
+            {/* Locations Dropdown Menu */}
+            {activeDropdown === 'locations' && !isPageLoading && (
+              <div
+                onMouseEnter={() => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current);
+                    hoverTimeoutRef.current = null;
+                  }
+                }}
+                onMouseLeave={closeDropdowns}
+                className="absolute left-0 top-full mt-2 animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out z-50"
+              >
+                <div
+                  ref={dropdownRef}
+                  onMouseLeave={closeDropdowns}
+                  className="w-48 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg"
+                >
+                  <div className="bg-slate-50 p-3">
+                    <p className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+                      Locations
+                    </p>
+                    <ul className="space-y-1">
+                      {locationsItems.map((item) => (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            onClick={closeDropdowns}
+                            className="block w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors hover:bg-white/70 hover:text-slate-900 text-slate-600"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span>{item.title}</span>
+                              <ChevronDown className="h-4 w-4 -rotate-90 opacity-0 group-hover:opacity-60 transition-opacity" />
+                            </div>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
          
          
         </nav>
@@ -671,6 +751,11 @@ const { data: blogs = [] } = useQuery({
                     Contact Us
                   </Link>
 
+     <MobileLocationsDropdown
+                    title="Locations"
+                    items={locationsItems}
+                    onLinkClick={() => setIsOpen(false)}
+                  />
                  
                 </div>
               </nav>
@@ -984,6 +1069,7 @@ const { data: blogs = [] } = useQuery({
         count: testimonials.length,
         href: '/testimonials'
       },
+  
     ].map((section) => {
       const active = activeResourcesSection === section.title;
       return (
@@ -1308,7 +1394,8 @@ const { data: blogs = [] } = useQuery({
           </div>
         </div>
       )}
-    </header>
+
+          </header>
   );
 }
 
@@ -1471,6 +1558,57 @@ function MobileServicesDropdown({ title, onLinkClick }: MobileServicesDropdownPr
   );
 }
 
+
+// Mobile Dropdown Component for Locations
+interface MobileLocationsDropdownProps {
+  title: string;
+  items: { title: string; href: string; files: number }[];
+  onLinkClick: () => void;
+}
+
+function MobileLocationsDropdown({ title, items, onLinkClick }: MobileLocationsDropdownProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="border-b border-black/5">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="flex items-center justify-between w-full py-3 font-medium text-black/70 hover:text-primary transition-colors"
+      >
+        {title}
+        <ChevronDown
+          className={cn('h-4 w-4 transition-transform duration-300', isExpanded && 'rotate-180')}
+        />
+      </button>
+
+      {isExpanded && (
+        <div className="pl-4 space-y-3 mt-3 pb-6">
+          {items.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onLinkClick}
+              className="block py-2 text-sm font-medium text-black/70 hover:text-primary transition-colors group"
+            >
+              {item.title}
+            </Link>
+          ))}
+          
+          <div className="pt-2 border-t border-black/5">
+            <Link
+              href="/locations"
+              onClick={onLinkClick}
+              className="text-primary hover:text-primary/80 text-sm font-medium inline-flex items-center gap-1"
+            >
+              View All Locations
+              <ChevronDown className="h-3 w-3 -rotate-90" />
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 // Mobile Dropdown Component for Resources (using same UI as Solutions)
 interface MobileResourcesDropdownProps {
