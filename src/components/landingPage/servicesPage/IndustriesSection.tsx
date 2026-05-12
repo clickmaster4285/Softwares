@@ -52,7 +52,7 @@ const colorMap: Record<string, { from: string; to: string; iconFrom: string; ico
     iconTo: 'to-teal-600'
   },
   'Logistics & Supply Chain': {
-    from: 'from-orange-500',
+    from: 'from-primary',
     to: 'to-red-500',
     iconFrom: 'from-orange-600',
     iconTo: 'to-red-600'
@@ -64,7 +64,7 @@ const colorMap: Record<string, { from: string; to: string; iconFrom: string; ico
     iconTo: 'to-pink-600'
   },
   'Real Estate & PropTech': {
-    from: 'from-amber-500',
+    from: 'from-primary',
     to: 'to-yellow-500',
     iconFrom: 'from-amber-600',
     iconTo: 'to-yellow-600'
@@ -116,7 +116,7 @@ export const IndustriesSection = ({ industryUseCases }: IndustriesSectionProps) 
           whileInView={{ height: 40 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="h-10 w-1 rounded-full bg-gradient-to-b from-orange-500 to-amber-500"
+          className="h-10 w-1 rounded-full bg-gradient-to-b from-primaryto-primary"
         />
         <motion.h2 
           className="text-2xl font-semibold text-slate-900 sm:text-3xl"

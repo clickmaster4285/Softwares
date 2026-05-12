@@ -120,25 +120,25 @@ const serviceIcons: Record<string, LucideIcon> = {
 
 // Color mapping for services
 const serviceColors: Record<string, string> = {
-  'software-development': 'text-orange-500',
-  'web-development': 'text-orange-500',
-  'mobile-development': 'text-orange-500',
-  'design-ui-ux': 'text-orange-500',
-  'artificial-intelligence-ai': 'text-orange-500',
-  'machine-learning-ml': 'text-orange-500',
-  'nlp-computer-vision': 'text-orange-500',
-  'data-services': 'text-orange-500',
-  'data-and-intelligence': 'text-orange-500',
-  'automation-and-chatbot': 'text-orange-500',
-  'automation-and-integration': 'text-orange-500',
-  'cloud-and-devops': 'text-orange-500',
-  'database-services': 'text-orange-500',
-  'cybersecurity': 'text-orange-500',
-  'testing-and-qa': 'text-orange-500',
-  'support-and-outsourcing': 'text-orange-500',
-  'blockchain-and-web3': 'text-orange-500',
-  'iot-and-emerging-tech': 'text-orange-500',
-  'immersive-tech': 'text-orange-500',
+  'software-development': 'text-primary',
+  'web-development': 'text-primary',
+  'mobile-development': 'text-primary',
+  'design-ui-ux': 'text-primary',
+  'artificial-intelligence-ai': 'text-primary',
+  'machine-learning-ml': 'text-primary',
+  'nlp-computer-vision': 'text-primary',
+  'data-services': 'text-primary',
+  'data-and-intelligence': 'text-primary',
+  'automation-and-chatbot': 'text-primary',
+  'automation-and-integration': 'text-primary',
+  'cloud-and-devops': 'text-primary',
+  'database-services': 'text-primary',
+  'cybersecurity': 'text-primary',
+  'testing-and-qa': 'text-primary',
+  'support-and-outsourcing': 'text-primary',
+  'blockchain-and-web3': 'text-primary',
+  'iot-and-emerging-tech': 'text-primary',
+  'immersive-tech': 'text-primary',
 };
 
 // Sub-service icon mappings
@@ -325,7 +325,7 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
         desc: subService.description,
         ariaLabel: `Learn about ${subService.title}: ${subService.description}`,
         icon: subServiceIcons[subService.title] || Code2,
-        color: 'text-orange-500',
+        color: 'text-primary',
       }))
     : Object.values(servicesData).map((service) => ({
         href: `/${service.slug}`,
@@ -350,7 +350,7 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
-            <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">
+            <p className="text-secondarytext-[11px] font-bold tracking-[0.2em] uppercase">
               {isServicePage ? 'Specialized Services' : 'Explore Our Ecosystem'}
             </p>
             <span className="w-8 h-[2px] bg-orange-400 rounded-full" />

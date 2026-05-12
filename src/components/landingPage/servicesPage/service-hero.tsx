@@ -362,14 +362,14 @@ export function ServiceHero({ page }: ServiceHeroProps) {
           <nav className="flex items-center gap-1.5 text-sm">
             <Link
               href="/"
-              className="text-slate-400 hover:text-orange-600 transition-colors font-medium"
+              className="text-slate-400 hover:text-primarytransition-colors font-medium"
             >
               Home
             </Link>
             <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
             <Link
               href={`/${page.categorySlug}`}
-              className="text-slate-500 hover:text-orange-600 transition-colors font-medium"
+              className="text-slate-500 hover:text-primarytransition-colors font-medium"
             >
               {page.category}
             </Link>
@@ -397,7 +397,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               <motion.div variants={fadeInUp}>
                 <Link href={`/${page.categorySlug}`}>
                   <Badge
-                    className="mb-5 rounded-md border-0 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white hover:bg-orange-700 transition-colors cursor-pointer"
+                    className="mb-5 rounded-md border-0 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white hover:bg-secondarytransition-colors cursor-pointer"
                     style={{ background: "#ea580c" }}
                   >
                     {page.category}
@@ -433,7 +433,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                       variants={fadeInUp}
                       className="flex items-center gap-2 rounded-full border border-orange-200 bg-white/70 px-4 py-1.5 text-sm font-medium text-slate-700 backdrop-blur-sm"
                     >
-                      <CheckCircle2 className="h-4 w-4 text-orange-500 shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-primaryshrink-0" />
                       {h}
                     </motion.div>
                   ))}
@@ -448,7 +448,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                 >
                   {page.marketStats.map((stat) => (
                     <div key={stat.label} className="text-center sm:text-left">
-                      <p className="text-2xl font-extrabold text-orange-600 sm:text-3xl">
+                      <p className="text-2xl font-extrabold text-primarysm:text-3xl">
                         {stat.value}
                       </p>
                       <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-slate-400">

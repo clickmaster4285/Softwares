@@ -46,14 +46,14 @@ const getPhaseGradient = (phaseNumber: number): string => {
 
 const getPhaseColor = (phaseNumber: number) => {
   const colors: Record<number, { from: string; to: string }> = {
-    1: { from: 'from-orange-500', to: 'to-amber-500' },
+    1: { from: 'from-primary', to: 'to-primary' },
     2: { from: 'from-cyan-500', to: 'to-blue-500' },
     3: { from: 'from-purple-500', to: 'to-pink-500' },
     4: { from: 'from-emerald-500', to: 'to-teal-500' },
     5: { from: 'from-indigo-500', to: 'to-violet-500' },
-    6: { from: 'from-red-500', to: 'to-orange-500' },
+    6: { from: 'from-red-500', to: 'to-primary' },
   };
-  return colors[phaseNumber] || { from: 'from-orange-500', to: 'to-amber-500' };
+  return colors[phaseNumber] || { from: 'from-primary', to: 'to-primary' };
 };
 
 
@@ -82,7 +82,7 @@ const HPipe = ({ delay, reverse = false, startAnimation }: { delay: number; reve
         animate={startAnimation ? { scaleX: 1 } : { scaleX: 0 }}
         transition={{ delay, duration: PIPE_DURATION, ease: "easeInOut" }}
         style={{ transformOrigin: reverse ? "right" : "left" }}
-        className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-700 rounded-full"
+        className="absolute inset-0 bg-gradient-to-r from-primaryto-secondaryrounded-full"
       />
     </div>
     
@@ -93,7 +93,7 @@ const HPipe = ({ delay, reverse = false, startAnimation }: { delay: number; reve
         transition={{ delay: delay + PIPE_DURATION, duration: 0.3, type: "spring", stiffness: 200 }}
         className="hidden lg:block order-first -mr-4"
       >
-        <div className="w-0 h-0 border-y-[14px] border-y-transparent border-r-[24px] border-r-orange-500" />
+        <div className="w-0 h-0 border-y-[14px] border-y-transparent border-r-[24px] border-r-primary" />
       </motion.div>
     )}
   </div>
@@ -108,7 +108,7 @@ const VPipe = ({ delay, startAnimation }: { delay: number; startAnimation: boole
         animate={startAnimation ? { scaleY: 1 } : { scaleY: 0 }}
         transition={{ delay, duration: PIPE_DURATION, ease: "easeInOut" }}
         style={{ transformOrigin: "top" }}
-        className="absolute inset-0 bg-gradient-to-b from-orange-500 to-orange-700 rounded-full"
+        className="absolute inset-0 bg-gradient-to-b from-primaryto-secondaryrounded-full"
       />
     </div>
     <motion.div
@@ -130,14 +130,14 @@ const DesktopProcessCard = ({ phase, delay, side, startAnimation }: { phase: any
 
   const getIconColor = (index: number) => {
     const colors: Record<number, string> = {
-      1: "text-orange-500",
+      1: "text-primary",
       2: "text-cyan-500",
       3: "text-purple-500",
       4: "text-emerald-500",
       5: "text-indigo-500",
       6: "text-red-500",
     };
-    return colors[index] || "text-orange-500";
+    return colors[index] || "text-primary";
   };
 
   return (
@@ -155,11 +155,11 @@ const DesktopProcessCard = ({ phase, delay, side, startAnimation }: { phase: any
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-orange-500">
+          <span className="text-xs font-semibold uppercase tracking-wider text-primary">
             {phase.phase}
           </span>
           <div className="flex items-center gap-2 mt-1 md:mt-2">
-            <Badge variant="outline" className="border-orange-200 bg-orange-50 text-orange-700 text-xs px-2 py-0.5 md:py-1 font-medium">
+            <Badge variant="outline" className="border-orange-200 bg-orange-50 text-secondarytext-xs px-2 py-0.5 md:py-1 font-medium">
               <Clock className="h-3 w-3 mr-1" />
               {phase.timeline}
             </Badge>
@@ -211,14 +211,14 @@ const MobileProcessCard = ({ phase, index, startAnimation }: { phase: any; index
 
   const getIconColor = (index: number) => {
     const colors: Record<number, string> = {
-      1: "text-orange-500",
+      1: "text-primary",
       2: "text-cyan-500",
       3: "text-purple-500",
       4: "text-emerald-500",
       5: "text-indigo-500",
       6: "text-red-500",
     };
-    return colors[index] || "text-orange-500";
+    return colors[index] || "text-primary";
   };
 
   return (
@@ -234,11 +234,11 @@ const MobileProcessCard = ({ phase, index, startAnimation }: { phase: any; index
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-orange-500">
+          <span className="text-xs font-semibold uppercase tracking-wider text-primary">
             {phase.phase}
           </span>
           <div className="flex items-center gap-2 mt-1">
-            <Badge variant="outline" className="border-orange-200 bg-orange-50 text-orange-700 text-xs px-2 py-0.5 font-medium">
+            <Badge variant="outline" className="border-orange-200 bg-orange-50 text-secondarytext-xs px-2 py-0.5 font-medium">
               <Clock className="h-3 w-3 mr-1" />
               {phase.timeline}
             </Badge>
@@ -451,7 +451,7 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
               initial={{ scaleY: 0 }}
               animate={startAnimation ? { scaleY: 1 } : { scaleY: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="h-8 md:h-10 w-1 rounded-full bg-gradient-to-b from-orange-500 to-amber-500"
+              className="h-8 md:h-10 w-1 rounded-full bg-gradient-to-b from-primaryto-primary"
             />
             <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900">
               Our <span className="font-black">{serviceName}</span> Process
@@ -496,7 +496,7 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
           transition={{ delay: TOTAL_DURATION - 1, duration: 0.5 }}
         >
           <motion.button 
-            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-md bg-orange-700 text-white font-semibold shadow-md hover:bg-orange-600 transition-all duration-300 text-sm md:text-base"
+            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-md bg-secondarytext-white font-semibold shadow-md hover:bg-primarytransition-all duration-300 text-sm md:text-base"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

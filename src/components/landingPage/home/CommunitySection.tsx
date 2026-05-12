@@ -170,8 +170,8 @@ function CommunityFeatureCountUp({
           <CommunityCountUpSpan countStarted={countStarted} start={start} countUpRef={countUpRef} />
         )}
       </CountUp>
-      {hasPlusSign && <span className="text-orange-500 ml-1">+</span>}
-      {isPercent && <span className="text-orange-500 ml-1">%</span>}
+      {hasPlusSign && <span className="text-primaryml-1">+</span>}
+      {isPercent && <span className="text-primaryml-1">%</span>}
     </>
   );
 }
@@ -311,15 +311,14 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
 
         {/* Animated 3D Cards Grid */}
         <div className="mb-20">
-          <Card3DList
-            cards={cardsData}
-            columns={3}
-            gap="lg"
-            size="md"
-            variant="premium"
-            animated={true}
-            staggerDelay={0.08}
-          />
+<Card3DList
+  cards={cardsData}
+  columns={3}
+  gap="lg"
+  size="md"
+  variant="premium"
+  animated={true}
+/>
         </div>
 
 
@@ -346,7 +345,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
               >
                 <div className="relative bg-white/50 backdrop-blur-sm rounded-2xl p-6">
                   <motion.p
-                    className="relative text-2xl sm:text-3xl md:text-4xl font-bold text-orange-500"
+                    className="relative text-2xl sm:text-3xl md:text-4xl font-bold text-primary"
                     animate={{
                       textShadow: [
                         '0 0 0 rgba(249,115,22,0)',
@@ -370,7 +369,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
                       useEasing={true}
                       useGrouping={true}
                     />
-                    {hasPlusSign && <span className="ml-1 text-orange-500">+</span>}
+                    {hasPlusSign && <span className="ml-1 text-primary">+</span>}
                   </motion.p>
 
                   <p className="text-xs sm:text-sm uppercase tracking-wider text-gray-500 mt-1">
@@ -392,7 +391,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
               boxShadow: '0 10px 25px -5px rgba(249,115,22,0.4)',
             }}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-3 bg-black text-white text-sm font-medium tracking-wider rounded-md hover:bg-orange-500 transition-all duration-300 relative overflow-hidden group"
+            className="px-8 py-3 bg-primary text-white text-sm font-medium tracking-wider rounded-md hover:bg-primarytransition-all duration-300 relative overflow-hidden group"
             onClick={() => router.push('/contact-us')}
           >
             <span className="relative z-10 flex items-center">
@@ -400,7 +399,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
             <motion.div
-              className="absolute inset-0 bg-orange-500"
+              className="absolute inset-0 bg-primary"
               initial={{ x: '100%' }}
               whileHover={{ x: 0 }}
               transition={{ duration: 0.3 }}

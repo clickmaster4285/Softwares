@@ -54,6 +54,7 @@ import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights
 import ExploreSection from '@/src/components/landingPage/home/ExploreSection';
 import {ProjectCTAHero} from '@/src/components/landingPage/home/info-cts';
 import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
+import IndustriesSection from '@/src/components/landingPage/home/industries-section';
 
 export const metadata = metadataConfig.home();
 
@@ -135,7 +136,7 @@ type HomeExploreLink = {
 //     desc: 'Data engineering & pipelines.',
 //     ariaLabel: 'Explore data engineering and data pipeline services.',
 //     icon: Database,
-//     color: 'text-amber-500',
+//     color: 'text-primary',
 //   },
 //   {
 //     href: '/data-intelligence',
@@ -178,7 +179,7 @@ type HomeExploreLink = {
 //     desc: 'Database design, scaling & optimization.',
 //     ariaLabel: 'Explore database services including scaling and optimization.',
 //     icon: DatabaseZap,
-//     color: 'text-amber-500',
+//     color: 'text-primary',
 //   },
 
 
@@ -196,7 +197,7 @@ type HomeExploreLink = {
 //     desc: 'Automated + manual testing.',
 //     ariaLabel: 'Explore software testing and QA services.',
 //     icon: TestTube,
-//     color: 'text-orange-500',
+//     color: 'text-primary',
 //   },
 
 //   {
@@ -309,6 +310,7 @@ export default function LandingPage() {
         }
       >
         <AboutSection />
+         <CTASectionImage/>
       </Suspense>
 
 
@@ -368,14 +370,14 @@ export default function LandingPage() {
 
 
 
-       {/* <Suspense
+        <Suspense
         fallback={
           <div className="h-96 animate-pulse rounded-lg bg-white" />
         }
       >
-        <div className=" bg-white">  <SolutionsPage /></div>
+         <SolutionsPage />
       </Suspense>
- */}
+ 
 
 
 
@@ -399,7 +401,7 @@ export default function LandingPage() {
         }
       >
         <TechStackSection />
-        <CTASectionImage/>
+       
       </Suspense>
       
      
@@ -417,7 +419,7 @@ export default function LandingPage() {
         <AppsSection />
       </Suspense>
 
-
+<IndustriesSection/>
 
       <LandingHomeDeferredHeavy>
         <Suspense

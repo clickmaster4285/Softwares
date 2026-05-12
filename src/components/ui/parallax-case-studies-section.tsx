@@ -148,19 +148,19 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
               >
                 {section.industry && (
                   <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
-                    <Target className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <Target className="h-3 w-3 text-primaryflex-shrink-0" />
                     <span className="truncate">{section.industry}</span>
                   </div>
                 )}
                 {section.timeline && (
                   <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
-                    <Calendar className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <Calendar className="h-3 w-3 text-primaryflex-shrink-0" />
                     <span className="truncate">{section.timeline}</span>
                   </div>
                 )}
                 {formattedDate(section.createdAt) && (
                   <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
-                    <Calendar className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <Calendar className="h-3 w-3 text-primaryflex-shrink-0" />
                     <span className="truncate">{formattedDate(section.createdAt)}</span>
                   </div>
                 )}
@@ -173,7 +173,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
                   className="mb-3 sm:mb-4"
                 >
                   <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2">
-                    <Tag className="h-3 w-3 text-orange-500 flex-shrink-0" />
+                    <Tag className="h-3 w-3 text-primaryflex-shrink-0" />
                     <span className="text-[11px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider">
                       Tech Stack
                     </span>
@@ -182,7 +182,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
                     {section.technologies.slice(0, 3).map((tech, i) => (
                       <span
                         key={i}
-                        className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-100"
+                        className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-orange-50 text-secondaryborder border-orange-100"
                       >
                         {tech}
                       </span>
@@ -201,7 +201,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
                 <Button
                   asChild
                   size="default"
-                  className="group bg-orange-600 hover:bg-orange-700 text-white rounded-full px-4 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base shadow-md w-full sm:w-auto"
+                  className="group bg-primaryhover:bg-secondarytext-white rounded-full px-4 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base shadow-md w-full sm:w-auto"
                 >
                   <Link href={`/case-studies/${encodeURIComponent(section.slug)}`}>
                     Read more
@@ -256,7 +256,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
           <Button 
             asChild 
             size="default" 
-            className="bg-orange-600 hover:bg-orange-700 text-white rounded-full px-6 sm:px-8 mt-3 w-full sm:w-auto"
+            className="bg-primaryhover:bg-secondarytext-white rounded-full px-6 sm:px-8 mt-3 w-full sm:w-auto"
           >
             <Link href="/contact">
               Start Project

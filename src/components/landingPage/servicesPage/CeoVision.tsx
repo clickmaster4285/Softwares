@@ -14,7 +14,7 @@ export function CeoVision() {
             {/* Title */}
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold">
               CEO{" "}
-              <span className="bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-400 to-primarybg-clip-text text-transparent">
                 Vision
               </span>
             </h2>
@@ -49,7 +49,7 @@ export function CeoVision() {
                          md:px-10 md:py-10 bg-white">
             
             {/* Quote mark */}
-            <span className="text-6xl leading-none text-orange-500 font-serif select-none">
+            <span className="text-6xl leading-none text-primaryfont-serif select-none">
               &ldquo;
             </span>
 
@@ -61,7 +61,7 @@ export function CeoVision() {
             </blockquote>
 
             <div className="flex items-center gap-4 mt-2">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
+              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primaryto-amber-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
                 AK
               </div>
               <div>

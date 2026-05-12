@@ -26,7 +26,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="h-8 sm:h-10 md:h-12 w-1 rounded-full bg-orange-500 shrink-0"
+            className="h-8 sm:h-10 md:h-12 w-1 rounded-full bg-primaryshrink-0"
           />
           <div>
             <motion.h2 
@@ -52,7 +52,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
         </div>
         
         <motion.div
-          className="flex items-center gap-2 text-xs sm:text-sm text-orange-600 ml-4 sm:ml-0"
+          className="flex items-center gap-2 text-xs sm:text-sm text-primaryml-4 sm:ml-0"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -76,14 +76,14 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
           >
             <div className="bg-white rounded-xl overflow-hidden border border-slate-200 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
               {/* Top accent bar */}
-              <div className="h-1 bg-gradient-to-r from-orange-400 to-orange-600 w-0 group-hover:w-full transition-all duration-500" />
+              <div className="h-1 bg-gradient-to-r from-orange-400 to-primaryw-0 group-hover:w-full transition-all duration-500" />
               
               <div className="p-4 sm:p-5">
                 <div className="flex items-center justify-between mb-3 sm:mb-4">
                   <div className="text-2xl sm:text-3xl font-bold text-slate-200 group-hover:text-orange-200 transition-colors duration-300">
                     {(i + 1).toString().padStart(2, '0')}
                   </div>
-                  <Badge className="bg-transparent border border-slate-200 text-slate-500 group-hover:bg-orange-50 group-hover:border-orange-200 group-hover:text-orange-600 transition-all duration-300 text-xs sm:text-xs">
+                  <Badge className="bg-transparent border border-slate-200 text-slate-500 group-hover:bg-orange-50 group-hover:border-orange-200 group-hover:text-primarytransition-all duration-300 text-xs sm:text-xs">
                     {item.standard}
                   </Badge>
                 </div>
@@ -102,7 +102,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
                     initial={{ y: 20, opacity: 0 }}
                     whileHover={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="text-orange-500 hidden sm:block"
+                    className="text-primaryhidden sm:block"
                   >
                     <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                   </motion.div>

@@ -27,21 +27,21 @@ const painPoints: PainPoint[] = [
     title: 'The Costly Cycle',
     description: 'You spend more maintaining legacy code than building new features. Technical debt is silently killing your margins.',
     icon: XCircle,
-    gradient: 'from-orange-500 to-rose-600',
+    gradient: 'from-primaryto-rose-600',
   },
   {
     id: 'timeline',
     title: 'The Infinite Timeline',
     description: '"It’ll be ready next quarter..." Agency black-box development with zero visibility.',
     icon: Clock,
-    gradient: 'from-amber-500 to-orange-600',
+    gradient: 'from-primary to-orange-600',
   },
   {
     id: 'security',
     title: 'The Security Gamble',
     description: 'Vulnerable plugins and shortcuts put your customer data and reputation at constant risk.',
     icon: ShieldAlert,
-    gradient: 'from-orange-600 to-red-600',
+    gradient: 'from-primaryto-red-600',
   },
   {
     id: 'scalability',
@@ -166,7 +166,7 @@ export default function PainPointsSolutions() {
 
                   
                    <motion.div 
-                    className="mt-auto w-full  flex items-center justify-center gap-2 rounded-2xl  py-3.5 text-xs font-semibold text-orange-600  active:scale-95 transition-all"
+                    className="mt-auto w-full  flex items-center justify-center gap-2 rounded-2xl  py-3.5 text-xs font-semibold text-primary active:scale-95 transition-all"
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.97 }}
                   >

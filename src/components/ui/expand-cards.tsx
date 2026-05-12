@@ -66,7 +66,7 @@ const ExpandOnHover = ({
   };
 
   return (
-    <div className="w-full overflow-hidden rounded-[32px] bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="w-full overflow-hidden ">
       <div className="w-full p-4 md:p-8">
         {/* IMAGE ROW */}
         <div className="flex w-full gap-3">
@@ -150,7 +150,7 @@ const ExpandOnHover = ({
 
         {/* CONTENT PANEL */}
         {hasPhases && hoveredPhase && (
-          <div className="mt-10 animate-fadeInUp rounded-[28px] bg-white p-6 md:p-8 shadow-xl">
+          <div className="mt-10 animate-fadeInUp rounded-[28px]  p-6 md:p-8 ">
             {/* TOP */}
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-4">

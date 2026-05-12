@@ -94,7 +94,7 @@ export function Footer(): JSX.Element {
       initial={{ backgroundColor: '#000000' }}
       animate={{ backgroundColor: '#0a0a0a' }}
       transition={{ duration: 0.8 }}
-      className="relative overflow-hidden text-background lg:pt-10 font-[Manrope]"
+      className="relative overflow-hidden text-background lg:pt-20 lg:px-10"
     >
       {/* ================= NEW CLICKMASTERS BACKGROUND ================= */}
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -114,15 +114,11 @@ export function Footer(): JSX.Element {
 
 
 
-
 {/* Watermark */}
-<div
-  className="absolute font-[Manrope] bottom-0 left-0 w-full flex justify-center pointer-events-none z-[1] pb-32"
+<div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-[1]"
   style={{
-    WebkitMaskImage:
-      'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
-    maskImage:
-      'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+    WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+    maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
   }}
 >
   <div
@@ -364,45 +360,31 @@ export function Footer(): JSX.Element {
           )}
         </motion.div>
 
-       
-      {/* Bottom Section */}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ delay: 0.5 }}
-  className="relative z-10 mt-6 flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20"
->
-  <motion.p
-    className="text-xs sm:text-sm text-background/60 text-center sm:text-left"
-    whileHover={{ color: '#ffffff' }}
-  >
-    © {currentYear} ClickMasters. All rights reserved.
-  </motion.p>
-
-  <div className="flex gap-4 text-xs sm:text-sm text-background/60">
-    <Link
-      href="/privacy-policy"
-      className="hover:text-background transition-colors"
-    >
-      Privacy
-    </Link>
-
-    <Link
-      href="/terms-of-service"
-      className="hover:text-background transition-colors"
-    >
-      Terms
-    </Link>
-
-    <Link
-      href="/sitemap"
-      className="hover:text-background transition-colors"
-    >
-      Sitemap
-    </Link>
-  </div>
-</motion.div>
+        {/* Bottom Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20"
+        >
+          <motion.p className="text-xs sm:text-sm text-background/60 text-center sm:text-left" whileHover={{ color: '#ffffff' }}>
+            © {currentYear} ClickMasters. All rights reserved.
+          </motion.p>
+          
+          {/* Optional: Add additional footer links here if needed */}
+          <div className="flex gap-4 text-xs sm:text-sm text-background/60">
+            <Link href="/privacy-policy" className="hover:text-background transition-colors">
+              Privacy
+            </Link>
+            <Link href="/terms-of-service" className="hover:text-background transition-colors">
+              Terms
+            </Link>
+            <Link href="/sitemap" className="hover:text-background transition-colors">
+              Sitemap
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </motion.footer>
   );

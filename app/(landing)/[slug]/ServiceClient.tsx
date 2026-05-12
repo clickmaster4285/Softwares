@@ -141,14 +141,14 @@ const pricingTiers = pricingPlans.map((plan) => ({
         <nav className="flex items-center gap-1.5 text-sm max-w-7xl mx-auto">
           <Link
             href="/"
-            className="text-gray-500 hover:text-orange-600 transition-colors font-medium"
+            className="text-gray-500 hover:text-primarytransition-colors font-medium"
           >
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5 text-gray-400" />
           <Link
             href="/services"
-            className="text-gray-500 hover:text-orange-600 transition-colors font-medium"
+            className="text-gray-500 hover:text-primarytransition-colors font-medium"
           >
             Services
           </Link>
@@ -222,7 +222,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
             fill
             className="object-cover opacity-10"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primaryto-orange-700" />
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
@@ -230,10 +230,10 @@ const pricingTiers = pricingPlans.map((plan) => ({
             Let's discuss how our {serviceData.title} expertise can help you achieve your goals and drive growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="px-8 py-4 bg-white text-orange-600 rounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100">
+            <button className="px-8 py-4 bg-white text-primaryrounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100">
               Get Free Consultation
             </button>
-            <button className="px-8 py-4 border-2 border-white text-white rounded-xl font-semibold text-lg hover:bg-white hover:text-orange-600 transition-all duration-300">
+            <button className="px-8 py-4 border-2 border-white text-white rounded-xl font-semibold text-lg hover:bg-white hover:text-primarytransition-all duration-300">
               View Portfolio
             </button>
           </div>

@@ -164,7 +164,7 @@ export function TechStackSection() {
             <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight tracking-tight">
               Modern Tech Stack
               <br />
-              <span className="text-orange-500">for Future Ready</span>
+              <span className="text-primary">for Future Ready</span>
               <br />
               <span className="text-slate-900">Solutions</span>
             </h2>

@@ -125,7 +125,7 @@ export function HelpSection() {
           </div>
 
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
-            Resources & <span className="text-orange-500">Developer Support</span>
+            Resources & <span className="text-primary">Developer Support</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
@@ -155,20 +155,20 @@ export function HelpSection() {
                   <div className="flex items-start justify-between mb-4">
                     <div className="relative">
                       <div className="relative w-12 h-12 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-orange-50 transition-colors duration-300">
-                        <Icon className="w-6 h-6 text-black/70 group-hover:text-orange-500 transition-colors duration-300" strokeWidth={1.5} />
+                        <Icon className="w-6 h-6 text-black/70 group-hover:text-primarytransition-colors duration-300" strokeWidth={1.5} />
                       </div>
                     </div>
 
                     {resource.stat && (
                       <div className="text-right">
-                        <p className="text-2xl font-bold text-black group-hover:text-orange-500 transition-colors duration-300">{resource.stat}</p>
+                        <p className="text-2xl font-bold text-black group-hover:text-primarytransition-colors duration-300">{resource.stat}</p>
                         <p className="text-xs uppercase tracking-wider text-gray-500">Resourcessss</p>
                       </div>
                     )}
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-lg font-bold text-black mb-2 group-hover:text-orange-500 transition-colors duration-300">
+                  <h3 className="text-lg font-bold text-black mb-2 group-hover:text-primarytransition-colors duration-300">
                     {resource.title}
                   </h3>
 

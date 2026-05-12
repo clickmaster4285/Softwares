@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CTASectionImage() {
   return (
     <div className="w-full  font-[Manrope]">
@@ -82,15 +84,19 @@ export default function CTASectionImage() {
           </h2>
 
           {/* Buttons */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <button className="rounded-xl bg-[#E07B39] px-7 py-3 text-sm font-bold text-white shadow-[0_5px_16px_rgba(224,123,57,0.28)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#c96828]">
-              Get Free Consultation
-            </button>
+       <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+  <Link href="/contact-us">
+    <button className="rounded-xl bg-[#E07B39] px-7 py-3 text-sm font-bold text-white shadow-[0_5px_16px_rgba(224,123,57,0.28)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#c96828]">
+      Get Free Consultation
+    </button>
+  </Link>
 
-            <button className="rounded-xl border border-[#ddd] px-7 py-3 text-sm font-semibold text-[#444] transition-all duration-300 hover:-translate-y-1 hover:border-[#E07B39] hover:text-[#E07B39]">
-              About our company &amp; team
-            </button>
-          </div>
+  <Link href="/about-us">
+    <button className="rounded-xl border border-[#ddd] px-7 py-3 text-sm font-semibold text-[#444] transition-all duration-300 hover:-translate-y-1 hover:border-[#E07B39] hover:text-[#E07B39]">
+      About our company &amp; team
+    </button>
+  </Link>
+</div>
         </div>
       </section>
     </div>

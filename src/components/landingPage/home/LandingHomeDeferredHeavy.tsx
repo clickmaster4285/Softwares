@@ -88,11 +88,7 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
 
   return (
     <>
-      <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
-        <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-white" />}>
-         <div className='mx-10 bg-white'> <IndustriesSection /></div>
-        </Suspense>
-      </LoadOnVisible>
+   
 
 
      
@@ -104,11 +100,19 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
         </Suspense>
       </LoadOnVisible>
 
-       <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
+
+         <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
+        <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-white" />}>
+         <div className=' bg-white'> <IndustriesSection /></div>
+        </Suspense>
+      </LoadOnVisible>
+      
+
+       {/* <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
           <div className='mx-10 bg-white'>   <CommunitySection /></div>
         </Suspense>
-      </LoadOnVisible>
+      </LoadOnVisible> */}
 
 
       {children}

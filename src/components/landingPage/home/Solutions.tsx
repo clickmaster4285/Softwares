@@ -1,76 +1,44 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { apiFetch } from "@/lib/api";
 import { CardStack } from "@/components/ui/card-stack";
+import { apiFetch } from "@/lib/api";
 import { resolveImageUrl } from "@/lib/utils";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface Project {
   _id: string;
   title: string;
   description: string;
   url?: string;
-  category?: {
-    _id: string;
-    name: string;
-  };
-  tags?: string[];
-  status?: string;
   thumbnail?: string;
-  createdAt?: string;
 }
 
-// Custom hook for responsive card configuration
 function useResponsiveCardConfig() {
   const [config, setConfig] = useState({
-    spreadDeg: 38,
-    cardWidth: 520,
-    cardHeight: 320,
-    overlap: 0.52,
+    spreadDeg: 32,
+    cardWidth: 440,
+    cardHeight: 270,
+    overlap: 0.48,
   });
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 640) {
-        setConfig({
-          spreadDeg: 8,
-          cardWidth: 280,
-          cardHeight: 260,
-          overlap: 0.45,
-        });
+        setConfig({ spreadDeg: 10, cardWidth: 260, cardHeight: 210, overlap: 0.42 });
       } else if (width < 768) {
-        setConfig({
-          spreadDeg: 15,
-          cardWidth: 360,
-          cardHeight: 280,
-          overlap: 0.48,
-        });
+        setConfig({ spreadDeg: 16, cardWidth: 310, cardHeight: 230, overlap: 0.45 });
       } else if (width < 1024) {
-        setConfig({
-          spreadDeg: 25,
-          cardWidth: 440,
-          cardHeight: 300,
-          overlap: 0.5,
-        });
+        setConfig({ spreadDeg: 24, cardWidth: 380, cardHeight: 250, overlap: 0.47 });
       } else {
-        setConfig({
-          spreadDeg: 38,
-          cardWidth: 520,
-          cardHeight: 320,
-          overlap: 0.52,
-        });
+        setConfig({ spreadDeg: 32, cardWidth: 440, cardHeight: 270, overlap: 0.48 });
       }
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return config;
@@ -86,379 +54,63 @@ export default function SolutionsPage() {
     },
   });
 
-  const heroRef = useRef<HTMLElement>(null);
-  const ctaRef = useRef<HTMLElement>(null);
-  const phasesRef = useRef<(HTMLDivElement | null)[]>([]);
-  const counterRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const responsiveConfig = useResponsiveCardConfig();
 
-  const metrics = [
-    { value: 98, suffix: "%", label: "Projects delivered on time" },
-    { value: 3.5, suffix: "x", label: "Avg. client revenue growth", isFloat: true },
-    { value: 40, suffix: "%", label: "Faster time-to-market*" },
-    { value: 100, suffix: "%", label: "IP ownership & transparency" },
-  ];
-
-  // Map projects to CardStack format
-  const cardStackItems = projects.slice(0, 7).map((project, index) => ({
+  const cardStackItems = projects.slice(0, 7).map((project) => ({
     id: project._id,
     title: project.title || "Untitled Project",
-    description: project.description && project.description.length > 100 
-      ? `${project.description.substring(0, 100)}...` 
+    description: project.description?.length > 85
+      ? `${project.description.substring(0, 85)}...`
       : project.description || "No description available",
-    imageSrc: project.thumbnail ? resolveImageUrl(project.thumbnail) : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    imageSrc: project.thumbnail
+      ? resolveImageUrl(project.thumbnail)
+      : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
     href: project.url || "#",
   }));
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (heroRef.current) {
-        const heroContent = heroRef.current.querySelectorAll('.hero-animate');
-        gsap.fromTo(heroContent,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: "top 80%",
-            }
-          }
-        );
-      }
-
-      phasesRef.current.forEach((phase, index) => {
-        if (phase) {
-          gsap.fromTo(phase,
-            { opacity: 0, x: index % 2 === 0 ? -50 : 50, scale: 0.95 },
-            {
-              opacity: 1,
-              x: 0,
-              scale: 1,
-              duration: 0.8,
-              delay: index * 0.15,
-              scrollTrigger: {
-                trigger: phase,
-                start: "top 85%",
-                toggleActions: "play none none reverse",
-              },
-              ease: "back.out(0.4)",
-            }
-          );
-        }
-      });
-
-      counterRefs.current.forEach((counter, idx) => {
-        if (counter) {
-          const target = metrics[idx].value;
-          gsap.fromTo(counter,
-            { innerText: 0 },
-            {
-              innerText: target,
-              duration: 2,
-              ease: "power2.out",
-              snap: { innerText: 1 },
-              scrollTrigger: {
-                trigger: counter,
-                start: "top 85%",
-                toggleActions: "play none none reverse",
-              },
-              onUpdate: function() {
-                const current = Math.floor(Number(counter.innerText));
-                if (metrics[idx].isFloat) {
-                  counter.textContent = current.toFixed(1);
-                } else {
-                  counter.textContent = current.toString();
-                }
-              }
-            }
-          );
-        }
-      });
-
-      if (ctaRef.current) {
-        gsap.fromTo(ctaRef.current.querySelectorAll('.cta-animate'),
-          { opacity: 0, y: 30, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.15,
-            scrollTrigger: {
-              trigger: ctaRef.current,
-              start: "top 80%",
-            },
-            ease: "back.out(0.5)",
-          }
-        );
-      }
-
-      if (heroRef.current) {
-        const heroBg = heroRef.current.querySelector('.hero-bg');
-        if (heroBg) {
-          gsap.to(heroBg, {
-            y: 100,
-            ease: "none",
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          });
-        }
-      }
-    });
-
-    return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, [metrics]);
-
-  // Show loading state
   if (isLoading) {
-    return (
-      <main className="bg-gray-50">
-        <div className="py-24 px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl text-center">
-            <div className="animate-pulse">
-              <div className="h-8 w-48 bg-gray-200 rounded mx-auto mb-4"></div>
-              <div className="h-12 w-96 bg-gray-200 rounded mx-auto mb-4"></div>
-              <div className="h-6 w-64 bg-gray-200 rounded mx-auto"></div>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
+    return <div className="py-24 text-center">Loading...</div>;
   }
 
   return (
     <main className="bg-white overflow-x-hidden">
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slideInRight {
-          from { opacity: 0; transform: translateX(-30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes growLine {
-          from { transform: scaleY(0); }
-          to { transform: scaleY(1); }
-        }
-        
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.7; transform: scale(1.05); }
-        }
-        
-        @keyframes borderPulse {
-          0%, 100% { border-color: rgba(249, 115, 22, 0.2); }
-          50% { border-color: rgba(249, 115, 22, 0.8); }
-        }
-        
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        
-        @keyframes bounce-subtle {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-3px); }
-        }
-        
-        @keyframes growWidth {
-          from { width: 0; }
-          to { width: 100%; }
-        }
-        
-        .animate-fade-in {
-          animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        .animate-slide-up {
-          animation: slideUp 0.8s ease-out forwards;
-        }
-        
-        .animate-slide-in-right {
-          animation: slideInRight 0.6s ease-out forwards;
-        }
-        
-        .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        
-        .animate-grow-line {
-          animation: growLine 1.5s ease-out forwards;
-        }
-        
-        .animate-pulse-slow {
-          animation: pulse 2s ease-in-out infinite;
-        }
-        
-        .animate-bounce-subtle {
-          animation: bounce-subtle 1.5s ease-in-out infinite;
-        }
-        
-        .animate-spin-slow {
-          animation: spin-slow 10s linear infinite;
-        }
-        
-        .border-pulse {
-          animation: borderPulse 2s ease-in-out infinite;
-        }
-        
-        .bg-gradient-animate {
-          background-size: 300% 300%;
-          animation: gradientShift 3s ease infinite;
-        }
-        
-        .grow-line {
-          animation: growWidth 1s ease-out forwards;
-        }
-        
-        .animation-delay-200 {
-          animation-delay: 0.2s;
-        }
-        
-        .animation-delay-300 {
-          animation-delay: 0.3s;
-        }
-        
-        .animation-delay-400 {
-          animation-delay: 0.4s;
-        }
-        
-        .animation-delay-500 {
-          animation-delay: 0.5s;
-        }
-        
-        .hover-scale {
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .hover-scale:hover {
-          transform: scale(1.05);
-          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .hover-rotate:hover {
-          transform: rotate(3deg) scale(1.02);
-        }
-        
-        .glass-effect {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .shimmer {
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-          background-size: 200% 100%;
-          animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-        
-        .hover-lift {
-          transition: transform 0.3s ease;
-        }
-        
-        .hover-lift:hover {
-          transform: translateY(-5px);
-        }
-
-        /* Prevent horizontal scroll on all screen sizes */
-        html, body {
-          overflow-x: hidden !important;
-          width: 100%;
-          position: relative;
-        }
-        
-        * {
-          max-width: 100%;
-          box-sizing: border-box;
-        }
-      `}</style>
-
-      {/* Card Stack Animation Section */}
-      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 overflow-x-hidden">
+      <section className="py-12 sm:py-16 md:py-24 px-5 sm:px-6 lg:px-8 bg-gray-50 overflow-hidden">
         <div className="mx-auto max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center mb-8 sm:mb-12 md:mb-16">
+          <div className="mx-auto max-w-3xl text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="h-[2px] w-8 rounded-full bg-orange-400" />
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                Our Solutions
+                OUR SOLUTIONS
               </p>
               <span className="h-[2px] w-8 rounded-full bg-orange-400" />
             </div>
 
-            <h2 className="mt-5 font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900">
               Our Work in Action
             </h2>
 
-            <p className="mx-auto mt-4 sm:mt-5 max-w-2xl text-sm sm:text-base leading-7 text-slate-600">
-              See how we've helped businesses transform their ideas into
-              successful digital products and scalable solutions.
+            <p className="mt-5 text-slate-600 text-lg">
+              See how we&apos;ve helped businesses transform their ideas into successful digital products.
             </p>
           </div>
 
-          <div className="relative w-full overflow-x-visible">
-            {cardStackItems.length > 0 ? (
-              <div className="flex justify-center items-center w-full">
-                <div className="w-full max-w-full">
-                  <CardStack
-                    items={cardStackItems}
-                    initialIndex={Math.min(2, cardStackItems.length - 1)}
-                    autoAdvance
-                    intervalMs={3000}
-                    pauseOnHover
-                    showDots
-                    {...responsiveConfig}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500">No projects available yet.</p>
-              </div>
-            )}
+          {/* CONTAINER CARD WRAPPER */}
+          <div className="mx-auto max-w-[520px] lg:max-w-[1500px]">
+            <div className=" p-6 md:p-8 pb-10">
+              {cardStackItems.length > 0 ? (
+                <CardStack
+                  items={cardStackItems}
+                  initialIndex={Math.min(2, cardStackItems.length - 1)}
+                  autoAdvance
+                  intervalMs={3000}
+                  pauseOnHover
+                  showDots
+                  {...responsiveConfig}
+                />
+              ) : (
+                <p className="text-center py-20 text-gray-500">No projects available yet.</p>
+              )}
+            </div>
           </div>
         </div>
       </section>

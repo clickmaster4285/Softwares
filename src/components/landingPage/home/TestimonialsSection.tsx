@@ -169,7 +169,7 @@ export function TestimonialsSection() {
   if (testimonials.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-secondary/40 py-24">
+    <section ref={sectionRef} className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 py-24">
       <div className="mx-auto px-6 ">
         
            {/* Header — original design */}
@@ -183,7 +183,7 @@ export function TestimonialsSection() {
         </div>
 
         <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
-          Hear What <span className="text-primary">Our Clients</span>Say about Us
+            Hear What <span className="text-primary">Our Clients</span>{ " "}Say about Us
              
             
           </h3>

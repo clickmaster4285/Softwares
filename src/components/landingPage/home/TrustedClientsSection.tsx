@@ -95,15 +95,15 @@ function ClientCard({
     >
       {/* Gold bottom accent bar on hover */}
       <span
-        className="absolute bottom-0 left-0 w-full h-[3px] bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        className="absolute bottom-0 left-0 w-full h-[3px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200"
         aria-hidden="true"
       />
 
       {/* Icon */}
-      <div className="w-16 h-16 flex items-center justify-center rounded-xl  group-hover:border-amber-300 group-hover:bg-amber-50 transition-all duration-200">
+      <div className="w-16 h-16 flex items-center justify-center rounded-xl  group-hover:border-primary group-hover:bg-primary/10 transition-all duration-200">
         <Icon
           size={28}
-          className="text-amber-600"
+          className="text-primary"
           strokeWidth={1.5}
           aria-hidden
         />
@@ -130,11 +130,11 @@ export function TrustedClientsSection() {
       {/* Header — original design */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
-          <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
-          <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">
+          <span className="w-8 h-[2px] bg-primary rounded-full" />
+          <p className="text-secondarytext-[11px] font-bold tracking-[0.2em] uppercase">
             Trusted By Industry Leaders
           </p>
-          <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+          <span className="w-8 h-[2px] bg-primary rounded-full" />
         </div>
 
         <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">

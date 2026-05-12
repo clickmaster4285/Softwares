@@ -40,7 +40,7 @@ export const FAQSection = ({ faqs }: FAQSectionProps) => {
         split.forEach((part, idx) => {
           if (part.toLowerCase() === keyword) {
             parts.push(
-              <span key={idx} className="font-black text-orange-500">
+              <span key={idx} className="font-black text-primary">
                 {part}
               </span>
             );
@@ -59,7 +59,7 @@ export const FAQSection = ({ faqs }: FAQSectionProps) => {
   return (
     <section id="faq" className="scroll-mt-24 mb-10 mt-10">
       <div className="flex items-center gap-3">
-        <div className="h-10 w-1 rounded-full bg-orange-500" />
+        <div className="h-10 w-1 rounded-full bg-primary" />
         <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
           Frequently Asked Questions
         </h2>
