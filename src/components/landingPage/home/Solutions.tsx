@@ -58,7 +58,7 @@ export default function SolutionsPage() {
 
   const responsiveConfig = useResponsiveCardConfig();
 
-  const cardStackItems = projects.slice(0, 7).map((project) => ({
+  const cardStackItems = projects.slice(0, 9).map((project) => ({
     id: project._id,
     title: project.title || "Untitled Project",
     description:
