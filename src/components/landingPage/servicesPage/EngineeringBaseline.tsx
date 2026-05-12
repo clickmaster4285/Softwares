@@ -83,7 +83,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
                   <div className="text-2xl sm:text-3xl font-bold text-slate-200 group-hover:text-orange-200 transition-colors duration-300">
                     {(i + 1).toString().padStart(2, '0')}
                   </div>
-                  <Badge className="bg-transparent border border-slate-200 text-slate-500 group-hover:bg-orange-50 group-hover:border-orange-200 group-hover:text-primarytransition-all duration-300 text-xs sm:text-xs">
+                  <Badge className="bg-transparent border border-slate-200 text-slate-500 group-hover:bg-orange-50 group-hover:border-orange-200 group-hover:text-primary transition-all duration-300 text-xs sm:text-xs">
                     {item.standard}
                   </Badge>
                 </div>

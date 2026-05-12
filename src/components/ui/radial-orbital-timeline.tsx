@@ -607,7 +607,7 @@ function DetailContent({ step, sortedData, onSelectStep }: {
                   key={relatedId}
                   variant="outline"
                   size="sm"
-                  className="flex items-center h-6 px-2 py-0 text-xs rounded-md border-orange-200 bg-white hover:bg-orange-50 text-gray-600 hover:text-primarytransition-all"
+                  className="flex items-center h-6 px-2 py-0 text-xs rounded-md border-orange-200 bg-white hover:bg-orange-50 text-gray-600 hover:text-primary transition-all"
                   onClick={(e) => {
                     e.stopPropagation();
                     onSelectStep(relatedId);

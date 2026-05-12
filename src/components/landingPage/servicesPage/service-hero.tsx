@@ -362,14 +362,14 @@ export function ServiceHero({ page }: ServiceHeroProps) {
           <nav className="flex items-center gap-1.5 text-sm">
             <Link
               href="/"
-              className="text-slate-400 hover:text-primarytransition-colors font-medium"
+              className="text-slate-400 hover:text-primary transition-colors font-medium"
             >
               Home
             </Link>
             <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
             <Link
               href={`/${page.categorySlug}`}
-              className="text-slate-500 hover:text-primarytransition-colors font-medium"
+              className="text-slate-500 hover:text-primary transition-colors font-medium"
             >
               {page.category}
             </Link>

@@ -391,7 +391,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
               boxShadow: '0 10px 25px -5px rgba(249,115,22,0.4)',
             }}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-3 bg-primary text-white text-sm font-medium tracking-wider rounded-md hover:bg-primarytransition-all duration-300 relative overflow-hidden group"
+            className="px-8 py-3 bg-primary text-white text-sm font-medium tracking-wider rounded-md hover:bg-primary transition-all duration-300 relative overflow-hidden group"
             onClick={() => router.push('/contact-us')}
           >
             <span className="relative z-10 flex items-center">

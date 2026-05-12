@@ -184,7 +184,7 @@ export function TestimonialsSection({
                           {testimonial.authorName?.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                          <p className="font-semibold text-slate-900 text-sm sm:text-base md:text-lg group-hover:text-primarytransition-colors">
+                          <p className="font-semibold text-slate-900 text-sm sm:text-base md:text-lg group-hover:text-primary transition-colors">
                             {testimonial.authorName}
                           </p>
                           {(testimonial.authorRole || testimonial.authorCompany) && (

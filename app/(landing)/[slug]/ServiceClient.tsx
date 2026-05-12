@@ -141,14 +141,14 @@ const pricingTiers = pricingPlans.map((plan) => ({
         <nav className="flex items-center gap-1.5 text-sm max-w-7xl mx-auto">
           <Link
             href="/"
-            className="text-gray-500 hover:text-primarytransition-colors font-medium"
+            className="text-gray-500 hover:text-primary transition-colors font-medium"
           >
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5 text-gray-400" />
           <Link
             href="/services"
-            className="text-gray-500 hover:text-primarytransition-colors font-medium"
+            className="text-gray-500 hover:text-primary transition-colors font-medium"
           >
             Services
           </Link>
@@ -233,7 +233,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
             <button className="px-8 py-4 bg-white text-primaryrounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100">
               Get Free Consultation
             </button>
-            <button className="px-8 py-4 border-2 border-white text-white rounded-xl font-semibold text-lg hover:bg-white hover:text-primarytransition-all duration-300">
+            <button className="px-8 py-4 border-2 border-white text-white rounded-xl font-semibold text-lg hover:bg-white hover:text-primary transition-all duration-300">
               View Portfolio
             </button>
           </div>

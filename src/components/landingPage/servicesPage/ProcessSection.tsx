@@ -496,7 +496,7 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
           transition={{ delay: TOTAL_DURATION - 1, duration: 0.5 }}
         >
           <motion.button 
-            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-md bg-secondarytext-white font-semibold shadow-md hover:bg-primarytransition-all duration-300 text-sm md:text-base"
+            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-md bg-secondarytext-white font-semibold shadow-md hover:bg-primary transition-all duration-300 text-sm md:text-base"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
