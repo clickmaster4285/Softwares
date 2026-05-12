@@ -124,7 +124,7 @@ export function Footer(): JSX.Element {
   <div
     className="font-black tracking-[0.15em] select-none whitespace-nowrap leading-none"
     style={{
-      fontSize: 'clamp(80px, 14vw, 180px)',
+      fontSize: 'clamp(72px, 13vw, 165px)',
       color: 'transparent',
       WebkitTextStroke: '1.5px rgba(180, 80, 20, 0.8)',
     }}

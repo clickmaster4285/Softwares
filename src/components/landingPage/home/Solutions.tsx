@@ -16,23 +16,25 @@ interface Project {
 
 function useResponsiveCardConfig() {
   const [config, setConfig] = useState({
-    spreadDeg: 32,
-    cardWidth: 440,
-    cardHeight: 270,
-    overlap: 0.48,
+    spreadDeg: 24,
+    cardWidth: 380,
+    cardHeight: 260,
+    overlap: 0.52,
   });
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 640) {
-        setConfig({ spreadDeg: 10, cardWidth: 260, cardHeight: 210, overlap: 0.42 });
+        setConfig({ spreadDeg: 10, cardWidth: 200, cardHeight: 180, overlap: 0.38 });
       } else if (width < 768) {
-        setConfig({ spreadDeg: 16, cardWidth: 310, cardHeight: 230, overlap: 0.45 });
+        setConfig({ spreadDeg: 14, cardWidth: 240, cardHeight: 200, overlap: 0.42 });
       } else if (width < 1024) {
-        setConfig({ spreadDeg: 24, cardWidth: 380, cardHeight: 250, overlap: 0.47 });
+        setConfig({ spreadDeg: 18, cardWidth: 300, cardHeight: 220, overlap: 0.46 });
+      } else if (width < 1280) {
+        setConfig({ spreadDeg: 22, cardWidth: 340, cardHeight: 240, overlap: 0.50 });
       } else {
-        setConfig({ spreadDeg: 32, cardWidth: 440, cardHeight: 270, overlap: 0.48 });
+        setConfig({ spreadDeg: 24, cardWidth: 380, cardHeight: 260, overlap: 0.52 });
       }
     };
 
@@ -59,9 +61,10 @@ export default function SolutionsPage() {
   const cardStackItems = projects.slice(0, 7).map((project) => ({
     id: project._id,
     title: project.title || "Untitled Project",
-    description: project.description?.length > 85
-      ? `${project.description.substring(0, 85)}...`
-      : project.description || "No description available",
+    description:
+      project.description?.length > 85
+        ? `${project.description.substring(0, 85)}...`
+        : project.description || "No description available",
     imageSrc: project.thumbnail
       ? resolveImageUrl(project.thumbnail)
       : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
@@ -73,9 +76,14 @@ export default function SolutionsPage() {
   }
 
   return (
-    <main className="bg-white overflow-x-hidden">
-      <section className="py-12 sm:py-16 md:py-24 px-5 sm:px-6 lg:px-8 bg-gray-50 overflow-hidden">
-        <div className="mx-auto max-w-7xl">
+    <main className="bg-gradient-to-b from-white to-slate-50">
+      {/* overflow-x-clip prevents scrollbar without clipping bottom */}
+      <section className="py-12 sm:py-16 md:py-24 bg-gray-50 overflow-x-clip">
+
+        {/* max-w-7xl + px matches your navbar container exactly */}
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+          {/* Heading */}
           <div className="mx-auto max-w-3xl text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="h-[2px] w-8 rounded-full bg-orange-400" />
@@ -90,27 +98,28 @@ export default function SolutionsPage() {
             </h2>
 
             <p className="mt-5 text-slate-600 text-lg">
-              See how we&apos;ve helped businesses transform their ideas into successful digital products.
+              See how we&apos;ve helped businesses transform their ideas into
+              successful digital products.
             </p>
           </div>
 
-          {/* CONTAINER CARD WRAPPER */}
-          <div className="mx-auto max-w-[520px] lg:max-w-[1500px]">
-            <div className=" p-6 md:p-8 pb-10">
-              {cardStackItems.length > 0 ? (
-                <CardStack
-                  items={cardStackItems}
-                  initialIndex={Math.min(2, cardStackItems.length - 1)}
-                  autoAdvance
-                  intervalMs={3000}
-                  pauseOnHover
-                  showDots
-                  {...responsiveConfig}
-                />
-              ) : (
-                <p className="text-center py-20 text-gray-500">No projects available yet.</p>
-              )}
-            </div>
+          {/* Card stack — inner padding gives the visual left/right breathing room */}
+          <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-16">
+            {cardStackItems.length > 0 ? (
+              <CardStack
+                items={cardStackItems}
+                initialIndex={Math.min(2, cardStackItems.length - 1)}
+                autoAdvance
+                intervalMs={3000}
+                pauseOnHover
+                showDots
+                {...responsiveConfig}
+              />
+            ) : (
+              <p className="text-center py-20 text-gray-500">
+                No projects available yet.
+              </p>
+            )}
           </div>
         </div>
       </section>

@@ -44,10 +44,10 @@ function signedOffset(i: number, active: number, len: number) {
 export function CardStack<T extends CardStackItem>({
   items,
   initialIndex = 0,
-  cardWidth = 440,
-  cardHeight = 270,
-  overlap = 0.48,
-  spreadDeg = 32,
+  cardWidth = 380,
+  cardHeight = 260,
+  overlap = 0.52,
+  spreadDeg = 24,
   autoAdvance = false,
   intervalMs = 3000,
   pauseOnHover = true,
@@ -61,18 +61,21 @@ export function CardStack<T extends CardStackItem>({
 
   React.useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
+    setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const actualCardWidth = React.useMemo(() => {
-    if (windowWidth < 640) return Math.min(260, windowWidth - 48);
-    if (windowWidth < 768) return Math.min(310, windowWidth - 60);
-    if (windowWidth < 1024) return Math.min(380, windowWidth - 70);
-    return Math.min(cardWidth, 440);
+    if (windowWidth < 640) return Math.min(200, windowWidth - 80);
+    if (windowWidth < 768) return Math.min(240, windowWidth - 100);
+    if (windowWidth < 1024) return Math.min(300, windowWidth - 120);
+    if (windowWidth < 1280) return Math.min(340, windowWidth - 200);
+    return Math.min(cardWidth, 380);
   }, [windowWidth, cardWidth]);
 
   const maxOffset = 3;
+  // Tighter spacing keeps the full fan within the container
   const cardSpacing = actualCardWidth * (1 - overlap);
 
   const prev = () => setActive((a) => wrapIndex(a - 1, len));
@@ -81,7 +84,6 @@ export function CardStack<T extends CardStackItem>({
   React.useEffect(() => {
     if (!autoAdvance || reduceMotion || !len) return;
     if (pauseOnHover && hovering) return;
-
     const id = setInterval(next, intervalMs);
     return () => clearInterval(id);
   }, [autoAdvance, intervalMs, hovering, pauseOnHover, reduceMotion, len, next]);
@@ -89,15 +91,12 @@ export function CardStack<T extends CardStackItem>({
   if (!len) return null;
 
   return (
-    <div className="w-full mb-20">
-      <div
-        className="relative mx-auto"
-        style={{ height: cardHeight + 100 }}
-      >
+    <div className="w-full">
+      <div className="relative mx-auto" style={{ height: cardHeight + 80 }}>
         <div className="pointer-events-none absolute inset-x-0 top-6 mx-auto h-44 w-4/5 rounded-full bg-black/5 blur-3xl" />
 
         <div
-          className="absolute inset-0 flex items-end justify-center overflow-hidden"
+          className="absolute inset-0 flex items-end justify-center mb-16"
           style={{ perspective: "1100px" }}
         >
           <AnimatePresence initial={false}>
@@ -125,7 +124,7 @@ export function CardStack<T extends CardStackItem>({
                     y: abs * 8 + (isActive ? -20 : 0),
                     rotateZ: off * (spreadDeg / maxOffset),
                     rotateX: isActive ? 0 : 8,
-                    scale: isActive ? 1.035 : 0.90,
+                    scale: isActive ? 1.03 : 0.88,
                   }}
                   transition={{ type: "spring", stiffness: 260, damping: 26 }}
                   onClick={() => setActive(i)}
@@ -145,14 +144,16 @@ export function CardStack<T extends CardStackItem>({
       </div>
 
       {showDots && (
-        <div className="mt-8 flex justify-center gap-2">
+        <div className="mt-6 flex justify-center gap-2">
           {items.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActive(idx)}
               className={cn(
                 "h-2.5 rounded-full transition-all",
-                idx === active ? "bg-orange-500 w-8" : "bg-gray-300 w-2.5 hover:bg-gray-400"
+                idx === active
+                  ? "bg-orange-500 w-8"
+                  : "bg-gray-300 w-2.5 hover:bg-gray-400"
               )}
             />
           ))}
@@ -181,7 +182,9 @@ function DefaultFanCard({ item }: { item: CardStackItem }) {
       <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
         <div className="font-semibold text-lg leading-tight">{item.title}</div>
         {item.description && (
-          <p className="mt-1 text-sm text-white/90 line-clamp-2">{item.description}</p>
+          <p className="mt-1 text-sm text-white/90 line-clamp-2">
+            {item.description}
+          </p>
         )}
       </div>
     </div>

@@ -379,13 +379,13 @@ const { data: blogs = [] } = useQuery({
 
   return (
     <header
-      className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', navStyle)}
+      className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300 px-10', navStyle)}
     >
       <div className="px-2 md:px-4 lg:px-26 lg:mx-10 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 transition-opacity hover:opacity-90"
+          className="flex items-center gap-2 transition-opacity hover:opacity-90 h-8"
           onClick={closeDropdowns}
         >
           <Image
@@ -395,7 +395,7 @@ const { data: blogs = [] } = useQuery({
             alt="ClickMasters"
             width={600}
             height={400}
-            className="h-auto w-30 sm:w-48 xl:w-64"
+            className="h-12 w-30 sm:w-48 xl:w-64"
             priority
             fetchPriority="high"
           />
