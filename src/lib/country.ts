@@ -43,12 +43,24 @@ export interface CountryData {
     question: string;
     answer: string;
   }[];
+  processPhases?: {
+    phase: string;
+    title: string;
+    timeline: string;
+    text: string;
+  }[];
+  pricingTiers?: {
+    type: string;
+    investment: string;
+    timeline: string;
+    bestFor: string;
+  }[];
 }
 
 export const countryData: Record<string, CountryData> = {
   canada: {
     name: 'Canada',
-    title: 'ClickMasters Canada - Custom Software Development',
+    title: 'ClickMasters Canada Software Developmentn Company',
     description: 'Leading custom software development company in Canada. We build scalable web applications, mobile apps, and AI solutions for Canadian businesses.',
     content: 'ClickMasters is your premier software development partner in Canada. Our team of expert developers specializes in creating custom solutions that drive business growth and digital transformation.',
     services: [
@@ -264,13 +276,125 @@ export const countryData: Record<string, CountryData> = {
     title: 'ClickMasters USA - Software Development Services',
     description: 'Top-rated software development company in the USA. We deliver cutting-edge web, mobile, and AI solutions for American businesses.',
     content: 'ClickMasters USA provides world-class software development services to businesses across the United States. Our expert team delivers innovative solutions that transform your digital presence.',
-    services: [
-      'Custom Software Development',
-      'Web Development',
+       services: [
+      // AI & Machine Learning
+      'AI Agents Development',
+      'AI Automation Systems',
+      'AI Chatbot Development',
+      'AI Integration Services',
+      'AI Model Development',
+      'Deep Learning Solutions',
+      'Generative AI Solutions',
+      'LLM Applications Development',
+      // App Development
+      'Android App Development',
+      'Cross Platform App Development',
+      'Flutter App Development',
+      'iOS App Development',
       'Mobile App Development',
-      'SaaS Development',
-      'Enterprise Solutions',
-      'UI/UX Design'
+      'Mobile App Design',
+      'Native App Development',
+      'React Native Development',
+      // Web Development
+      'Ecommerce Development',
+      'Frontend Development',
+      'Full Stack Development',
+      'Web Application Development',
+      'Website Development',
+      'Web Design',
+      // Backend & Infrastructure
+      'Backend Development',
+      'Cloud Native Development',
+      'Cloud Solutions',
+      'Cloud Solutions DevOps',
+      'DevOps Services',
+      'Serverless Architecture',
+      'Microservices Architecture',
+      // Database & Data
+      'Data Engineering',
+      'Data Migration',
+      'Data Science Analytics',
+      'Data Visualization',
+      'Data Warehousing',
+      'Database Design',
+      'Database Management',
+      'Database Optimisation',
+      // Blockchain & Crypto
+      'Blockchain Development',
+      'Crypto Wallet Development',
+      'DApp Development',
+      'Smart Contract Development',
+      // Testing & QA
+      'Automated Testing',
+      'Manual Testing',
+      'Load Testing',
+      'Performance Testing',
+      'QA Software Testing',
+      'Penetration Testing',
+      // Security
+      'Application Security',
+      'Cybersecurity Services',
+      'Security Audits',
+      'Vulnerability Assessment',
+      'Compliance Risk Management',
+      // Business & Analytics
+      'Business Intelligence',
+      'Business Process Automation',
+      'Predictive Analytics',
+      'Recommendation Systems',
+      'RPA',
+      'Workflow Automation',
+      // Specialized Development
+      'AR Development',
+      'VR Development',
+      'Embedded Systems Development',
+      'Desktop Application Development',
+      'Enterprise Software',
+      'IoT Development',
+      'Industrial IoT',
+      'Mixed Reality Solutions',
+      'Smart Systems Development',
+      'Web3 Development',
+      // E-commerce Platforms
+      'Headless Ecommerce',
+      'Shopify Development',
+      'WooCommerce Development',
+      'Headless CMS Development',
+      // Advanced Technologies
+      'Computer Vision',
+      'Image Processing',
+      'Natural Language Processing',
+      'Speech Recognition',
+      'Text Analytics',
+      'Video Analytics',
+      'Model Training Optimisation',
+      'Token Development',
+      // Services & Support
+      'Dedicated Development Teams',
+      'IT Outsourcing',
+      'Maintenance Support',
+      'Staff Augmentation',
+      'System Integration',
+      'Technical Support',
+      'Bug Fixing',
+      'API Integration',
+      // Design & UX
+      'UI/UX Design Services',
+      'UX Research',
+      'Product Design',
+      'Design Systems',
+      'Wireframing Prototyping',
+      // Other Services
+      'API Development Integration',
+      'Big Data Solutions',
+      'Containerisation',
+      'Infrastructure as Code',
+      'Jamstack Development',
+      'MVP Development',
+      'NFT Marketplace Development',
+      'PWA Development',
+      'SQL NoSQL Solutions',
+      'Web Scraping Data Extraction'
     ],
     contactInfo: {
       email: 'usa@clickmasters.com',
@@ -1210,7 +1334,65 @@ export const countryData: Record<string, CountryData> = {
         question: 'Do you provide post-launch support?',
         answer: 'Yes, we offer comprehensive maintenance and support packages for all our solutions.'
       }
-    ]
+    ],
+    processPhases: [
+      {
+        phase: 'Phase 1',
+        title: 'Discovery & Analysis',
+        timeline: 'Week 1-2',
+        text: 'We dive deep into your business requirements, goals, and target audience to create a solid foundation for the project.',
+      },
+      {
+        phase: 'Phase 2',
+        title: 'Strategic Planning',
+        timeline: 'Week 2-3',
+        text: 'Creating a detailed project roadmap, technical architecture, and resource allocation plan.',
+      },
+      {
+        phase: 'Phase 3',
+        title: 'Design & Prototyping',
+        timeline: 'Week 3-5',
+        text: 'Crafting intuitive UI/UX designs and interactive prototypes for your review and feedback.',
+      },
+      {
+        phase: 'Phase 4',
+        title: 'Agile Development',
+        timeline: 'Week 5-12',
+        text: 'Building your solution using modern technologies with regular sprints and progress updates.',
+      },
+      {
+        phase: 'Phase 5',
+        title: 'Quality Assurance',
+        timeline: 'Week 10-13',
+        text: 'Rigorous testing across devices and scenarios to ensure a bug-free, high-performance product.',
+      },
+      {
+        phase: 'Phase 6',
+        title: 'Launch & Optimization',
+        timeline: 'Week 14+',
+        text: 'Deploying your solution and providing ongoing support and performance tuning.',
+      },
+    ],
+    pricingTiers: [
+      {
+        type: 'MVP Development',
+        investment: 'From AUD 15,000',
+        timeline: '6-8 Weeks',
+        bestFor: 'Startups testing their initial concept',
+      },
+      {
+        type: 'Custom Solution',
+        investment: 'From AUD 35,000',
+        timeline: '3-5 Months',
+        bestFor: 'Established businesses needing specialized tools',
+      },
+      {
+        type: 'Enterprise Platform',
+        investment: 'Custom Pricing',
+        timeline: '6+ Months',
+        bestFor: 'Large-scale digital transformation projects',
+      },
+    ],
   }
 };
 

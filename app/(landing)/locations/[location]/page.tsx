@@ -2,8 +2,33 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { countryData, getAllCountrySlugs, getCountryData } from '@/lib/country';
+import { getCountryServicePage, getAllCountryServicePages } from '@/lib/country-services';
+import { ProcessSection } from '@/src/components/landingPage/servicesPage/ProcessSection';
+import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 
 type Props = { params: Promise<{ location: string }> };
+
+// Helper function to create URL-friendly slugs
+function createSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+// Helper function to get the correct service slug for a country
+function getServiceSlugForCountry(service: string, country: string): string {
+  // Get all country service pages and find the matching one
+  const allPages = getAllCountryServicePages();
+  const matchingPage = allPages.find((page: any) => 
+    page.categorySlug === country && 
+    page.serviceName === service
+  );
+  
+  return matchingPage?.slug || `${createSlug(service)}-${country.toLowerCase()}`;
+}
 
 // Generate static paths for all countries at build time
 export async function generateStaticParams() {
@@ -162,10 +187,26 @@ export default async function CountryPage({ params }: Props) {
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <div className="w-6 h-6 bg-primary rounded"></div>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{service}</h3>
-                <p className="text-slate-600">
+                <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                  <a 
+                    href={`/locations/${location}/${getServiceSlugForCountry(service, location)}`}
+                    className="text-primary hover:text-primary/80 transition-colors"
+                  >
+                    {service}
+                  </a>
+                </h3>
+                <p className="text-slate-600 mb-4">
                   Professional {service.toLowerCase()} solutions designed to meet your specific business requirements and drive growth.
                 </p>
+                <a
+                  href={`/locations/${location}/${getServiceSlugForCountry(service, location)}`}
+                  className="inline-flex items-center text-primary font-medium hover:text-primary/80 transition-colors"
+                >
+                  Learn more
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
               </div>
             ))}
           </div>
@@ -287,40 +328,20 @@ export default async function CountryPage({ params }: Props) {
       </section>
 
       {/* 9. Development Process */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Our Development Process
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Professional transparency from concept to deployment
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { step: '01', title: 'Discovery', desc: 'Understanding your requirements and business goals' },
-              { step: '02', title: 'Planning', desc: 'Creating detailed project roadmap and architecture' },
-              { step: '03', title: 'UI/UX Design', desc: 'Designing intuitive and engaging user interfaces' },
-              { step: '04', title: 'Development', desc: 'Building robust and scalable solutions' },
-              { step: '05', title: 'Testing', desc: 'Ensuring quality through comprehensive testing' },
-              { step: '06', title: 'Deployment', desc: 'Smooth deployment and go-live support' },
-              { step: '07', title: 'Support', desc: 'Ongoing maintenance and continuous improvement' }
-            ].map((phase, index) => (
-              <div key={index} className="relative">
-                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="text-3xl font-bold text-primary mb-3">{phase.step}</div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">{phase.title}</h3>
-                  <p className="text-slate-600 text-sm">{phase.desc}</p>
-                </div>
-                {index < 6 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-primary transform -translate-y-1/2"></div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {country.processPhases && (
+        <ProcessSection 
+          serviceName={country.name} 
+          processPhases={country.processPhases} 
+        />
+      )}
+
+      {/* Pricing Section */}
+      {country.pricingTiers && (
+        <PricingSection 
+          serviceName={country.name} 
+          pricingTiers={country.pricingTiers} 
+        />
+      )}
 
       {/* 10. Technologies We Use */}
       <section className="py-20">

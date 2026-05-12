@@ -123,7 +123,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
   // Helper function to make service name bold in text
   const makeBoldServiceName = (text: string, serviceName: string): string => {
-    if (!text || !serviceName) return text;
+    if (!text || !serviceName) return text || "";
     const regex = new RegExp(`(${serviceName})`, 'gi');
     return text.replace(regex, '<strong>$1</strong>');
   };
