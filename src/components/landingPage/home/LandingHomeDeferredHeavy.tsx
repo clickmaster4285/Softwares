@@ -7,9 +7,9 @@ import { FinalCTA } from './finalCta';
 const pulse96 = () => <div className="h-96 animate-pulse rounded-lg bg-gray-100" />;
 const pulse64 = () => <div className="h-64 animate-pulse rounded-lg bg-gray-100" />;
 
-const IndustriesSection = dynamic(
+const WhyChooseUs = dynamic(
   () =>
-    import('@/components/landingPage/home/industries-section').then((m) => m.IndustriesSection),
+    import('@/src/components/landingPage/home/whyUs').then((m) => m.WhyChooseUs),
   { loading: pulse96, ssr: false },
 );
 const CommunitySection = dynamic(
@@ -103,7 +103,7 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
 
          <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-white" />}>
-         <div className=' bg-white'> <IndustriesSection /></div>
+         <div className=' bg-white'> <WhyChooseUs /></div>
         </Suspense>
       </LoadOnVisible>
       
