@@ -126,7 +126,7 @@ export function TrustedClientsSection() {
   const { ref, visible } = useInView();
 
   return (
-    <section ref={ref} className="bg-white py-6 px-6 lg:px-16 ">
+    <section ref={ref} className="bg-gradient-to-b from-white to-slate-50  py-6 px-6 lg:px-26 lg:py-16 ">
       {/* Header — original design */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
@@ -147,7 +147,7 @@ export function TrustedClientsSection() {
       </div>
 
       {/* Client Grid */}
-      <div className="border border-gray-200 rounded-xl overflow-hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 divide-x divide-y divide-gray-200">
+      <div className="border border-gray-200 rounded-xl overflow-hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 divide-x divide-y divide-gray-200 lg:mx-20">
         {trustedClients.map((client, idx) => (
           <ClientCard
             key={client.name}

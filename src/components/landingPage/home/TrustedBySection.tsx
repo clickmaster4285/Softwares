@@ -155,7 +155,7 @@ export default function TrustedBySection() {
         }
       `}</style>
 
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden bg-white lg:px-10">
         <div className="mx-auto px-4 sm:px-6 lg:px-12">
         
           {/* Slider Wrapper */}

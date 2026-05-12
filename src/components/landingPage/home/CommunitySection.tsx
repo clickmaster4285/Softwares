@@ -40,56 +40,56 @@ interface StatItem {
 const communityFeatures: CommunityFeature[] = [
   {
     icon: Code,
-    title: 'Custom Software Development',
+    title: 'Built for Real-World Impact',
     description:
-      'Tailored software built for your business. Web apps, desktop applications, and backend systems that scale.',
+      'We don’t just write code — we build powerful software that solves real business problems and drives measurable growth.',
     stat: '1,860+',
-    statLabel: 'Projects',
+    statLabel: 'Projects Delivered',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: Users,
-    title: 'Web Application Development',
+    title: 'Expert Development Team',
     description:
-      'Modern web apps with React, Node, and cloud hosting. Responsive, fast, and secure applications.',
+      'A skilled team of engineers, designers, and problem-solvers dedicated to turning your ideas into scalable digital products.',
     stat: '3,500+',
-    statLabel: 'Clients',
+    statLabel: 'Happy Clients',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: BookOpen,
-    title: 'Mobile App Development',
+    title: 'Fast & Agile Delivery',
     description:
-      'Native and cross-platform mobile apps for iOS and Android. From MVP to enterprise solutions.',
+      'We move fast without breaking things — delivering high-quality software through agile, iterative development.',
     stat: '75+',
-    statLabel: 'Awards',
+    statLabel: 'Successful Launches',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: MessageCircle,
-    title: 'ERP & Business Software',
+    title: 'Clear Communication',
     description:
-      'ERP, CRM, inventory, and workflow automation. Integrate with your existing systems and processes.',
+      'No confusion, no delays — just transparent updates and direct communication at every stage of your project.',
     stat: '5+',
-    statLabel: 'Years',
+    statLabel: 'Years Experience',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: Globe,
-    title: 'API & Integrations',
+    title: 'Modern Tech Stack',
     description:
-      'REST APIs, third-party integrations, and legacy system modernization. Connect your software ecosystem.',
+      'We use cutting-edge technologies to build fast, secure, and future-ready applications that scale with your business.',
     stat: '24/7',
     statLabel: 'Support',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: Award,
-    title: 'Maintenance & Support',
+    title: 'Long-Term Partnership',
     description:
-      'Ongoing updates, security patches, and technical support. Keep your software running smoothly.',
+      'We don’t just deliver projects — we stay with you for continuous improvement, updates, and long-term success.',
     stat: '100%',
-    statLabel: 'Dedicated',
+    statLabel: 'Commitment',
     color: 'from-primary/60 to-primary/10',
   },
 ];

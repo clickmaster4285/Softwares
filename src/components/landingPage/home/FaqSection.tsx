@@ -53,7 +53,7 @@ export function FaqSection() {
 
   return (
     <section 
-      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white py-16 sm:py-20" 
+      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white py-16 sm:py-20 lg:px-10" 
       aria-labelledby="homepage-faq-heading"
     >
       <div className="pointer-events-none absolute inset-0">
@@ -84,11 +84,11 @@ export function FaqSection() {
         </div>
 
         {/* FAQ Grid - 2 columns */}
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-1">
           {faqItems.map((item, index) => (
             <div
               key={item.question}
-              className="rounded-2xl border border-slate-200 bg-white transition-all "
+              className=" border-b border-slate-200 transition-all "
               style={{ height: 'fit-content' }}
             >
               <button

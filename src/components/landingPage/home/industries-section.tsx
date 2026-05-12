@@ -114,8 +114,8 @@ export function IndustriesSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative pb-24 overflow-hidden bg-white font-sans">
-      <div className="relative z-10 mx-auto px-4 lg:px-12">
+    <section ref={sectionRef} className="relative pb-24 overflow-hidden bg-white font-sans ">
+      <div className="relative z-10 mx-auto px-4 lg:px-22">
         
         {/* Header Section - Matching FAQ Style */}
         <div ref={headerRef} className="mx-auto max-w-3xl text-center mb-12">

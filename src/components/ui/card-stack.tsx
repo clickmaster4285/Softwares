@@ -84,11 +84,36 @@ export function CardStack<T extends CardStackItem>({
 }: CardStackProps<T>) {
   const reduceMotion = useReducedMotion();
   const len = items.length;
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const [active, setActive] = React.useState(() =>
     wrapIndex(initialIndex, len),
   );
   const [hovering, setHovering] = React.useState(false);
+  const [windowWidth, setWindowWidth] = React.useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  // Handle window resize
+  React.useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Calculate responsive card width
+  const getResponsiveCardWidth = () => {
+    if (windowWidth < 640) {
+      return Math.min(cardWidth, windowWidth - 32);
+    }
+    if (windowWidth < 768) {
+      return Math.min(cardWidth, windowWidth - 48);
+    }
+    return cardWidth;
+  };
+
+  const actualCardWidth = getResponsiveCardWidth();
 
   React.useEffect(() => {
     setActive((a) => wrapIndex(a, len));
@@ -97,10 +122,10 @@ export function CardStack<T extends CardStackItem>({
   React.useEffect(() => {
     if (!len) return;
     onChangeIndex?.(active, items[active]!);
-  }, [active]);
+  }, [active, onChangeIndex, items, len]);
 
   const maxOffset = Math.max(0, Math.floor(maxVisible / 2));
-  const cardSpacing = Math.max(10, Math.round(cardWidth * (1 - overlap)));
+  const cardSpacing = Math.max(10, Math.round(actualCardWidth * (1 - overlap)));
   const stepDeg = maxOffset > 0 ? spreadDeg / maxOffset : 0;
 
   const canGoPrev = loop || active > 0;
@@ -155,7 +180,8 @@ export function CardStack<T extends CardStackItem>({
 
   return (
     <div
-      className={cn("w-full", className)}
+      ref={containerRef}
+      className={cn("w-full max-w-full overflow-x-visible", className)}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
@@ -175,7 +201,7 @@ export function CardStack<T extends CardStackItem>({
         />
 
         <div
-          className="absolute inset-0 flex items-end justify-center"
+          className="absolute inset-0 flex items-end justify-center overflow-x-visible"
           style={{
             perspective: `${perspectivePx}px`,
           }}
@@ -212,7 +238,7 @@ export function CardStack<T extends CardStackItem>({
                       if (reduceMotion) return;
                       const travel = info.offset.x;
                       const v = info.velocity.x;
-                      const threshold = Math.min(160, cardWidth * 0.22);
+                      const threshold = Math.min(160, actualCardWidth * 0.22);
 
                       if (travel > threshold || v > 650) prev();
                       else if (travel < -threshold || v < -650) next();
@@ -231,7 +257,8 @@ export function CardStack<T extends CardStackItem>({
                       : "cursor-pointer",
                   )}
                   style={{
-                    width: cardWidth,
+                    width: actualCardWidth,
+                    maxWidth: `min(${actualCardWidth}px, calc(100vw - 32px))`,
                     height: cardHeight,
                     zIndex,
                     transformStyle: "preserve-3d",
@@ -284,9 +311,9 @@ export function CardStack<T extends CardStackItem>({
         </div>
       </div>
 
-      {showDots ? (
-        <div className="mt-6 flex items-center justify-center gap-3">
-          <div className="flex items-center gap-2">
+      {showDots && (
+        <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 sm:gap-3 flex-wrap px-4">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {items.map((it, idx) => {
               const on = idx === active;
               return (
@@ -294,29 +321,29 @@ export function CardStack<T extends CardStackItem>({
                   key={it.id}
                   onClick={() => setActive(idx)}
                   className={cn(
-                    "h-2 w-2 rounded-full transition",
+                    "h-1.5 sm:h-2 w-1.5 sm:w-2 rounded-full transition-all duration-200",
                     on
-                      ? "bg-foreground"
-                      : "bg-foreground/30 hover:bg-foreground/50",
+                      ? "bg-orange-500 w-4 sm:w-6"
+                      : "bg-gray-300 hover:bg-gray-400",
                   )}
                   aria-label={`Go to ${it.title}`}
                 />
               );
             })}
           </div>
-          {activeItem.href ? (
+          {activeItem.href && activeItem.href !== "#" && (
             <Link
               href={activeItem.href}
               target="_blank"
               rel="noreferrer"
-              className="text-muted-foreground hover:text-foreground transition"
+              className="text-gray-500 hover:text-orange-500 transition-colors duration-200 ml-2"
               aria-label="Open link"
             >
-              <SquareArrowOutUpRight className="h-4 w-4" />
+              <SquareArrowOutUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </Link>
-          ) : null}
+          )}
         </div>
-      ) : null}
+      )}
     </div>
   );
 }
@@ -334,20 +361,20 @@ function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
             loading="eager"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-secondary text-sm text-muted-foreground">
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 text-sm text-gray-500">
             No image
           </div>
         )}
       </div>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-      <div className="relative z-10 flex h-full flex-col justify-end p-5">
-        <div className="truncate text-lg font-semibold text-white">
+      <div className="relative z-10 flex h-full flex-col justify-end p-3 sm:p-4 md:p-5">
+        <div className="truncate text-base sm:text-lg font-semibold text-white drop-shadow-md">
           {item.title}
         </div>
         {item.description ? (
-          <div className="mt-1 line-clamp-2 text-sm text-white/80">
+          <div className="mt-1 line-clamp-2 text-xs sm:text-sm text-white/90 drop-shadow-sm">
             {item.description}
           </div>
         ) : null}

@@ -1,5 +1,8 @@
 // ExploreSection.tsx
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 import { servicesData } from '@/src/lib/services';
 import {
   Layers3,
@@ -117,25 +120,25 @@ const serviceIcons: Record<string, LucideIcon> = {
 
 // Color mapping for services
 const serviceColors: Record<string, string> = {
-  'software-development': 'text-blue-500',
-  'web-development': 'text-cyan-500',
-  'mobile-development': 'text-pink-500',
-  'design-ui-ux': 'text-purple-500',
-  'artificial-intelligence-ai': 'text-indigo-500',
-  'machine-learning-ml': 'text-sky-500',
-  'nlp-computer-vision': 'text-emerald-500',
-  'data-services': 'text-amber-500',
-  'data-and-intelligence': 'text-yellow-500',
-  'automation-and-chatbot': 'text-teal-500',
-  'automation-and-integration': 'text-cyan-600',
-  'cloud-and-devops': 'text-sky-500',
-  'database-services': 'text-amber-500',
-  'cybersecurity': 'text-emerald-500',
+  'software-development': 'text-orange-500',
+  'web-development': 'text-orange-500',
+  'mobile-development': 'text-orange-500',
+  'design-ui-ux': 'text-orange-500',
+  'artificial-intelligence-ai': 'text-orange-500',
+  'machine-learning-ml': 'text-orange-500',
+  'nlp-computer-vision': 'text-orange-500',
+  'data-services': 'text-orange-500',
+  'data-and-intelligence': 'text-orange-500',
+  'automation-and-chatbot': 'text-orange-500',
+  'automation-and-integration': 'text-orange-500',
+  'cloud-and-devops': 'text-orange-500',
+  'database-services': 'text-orange-500',
+  'cybersecurity': 'text-orange-500',
   'testing-and-qa': 'text-orange-500',
-  'support-and-outsourcing': 'text-rose-500',
-  'blockchain-and-web3': 'text-purple-600',
-  'iot-and-emerging-tech': 'text-lime-500',
-  'immersive-tech': 'text-fuchsia-500',
+  'support-and-outsourcing': 'text-orange-500',
+  'blockchain-and-web3': 'text-orange-500',
+  'iot-and-emerging-tech': 'text-orange-500',
+  'immersive-tech': 'text-orange-500',
 };
 
 // Sub-service icon mappings
@@ -308,13 +311,14 @@ const subServiceIcons: Record<string, LucideIcon> = {
   '3D Application Development': Gamepad2,
 };
 
-
 export default function ExploreSection({ serviceData }: ExploreSectionProps) {
+  const [showAll, setShowAll] = useState(false);
+  
   // Determine what to show based on context
   const isServicePage = !!serviceData;
   
   // Generate links based on context
-  const exploreLinks = isServicePage && serviceData.subServices 
+  const allLinks = isServicePage && serviceData.subServices 
     ? serviceData.subServices.map((subService: any, index: number) => ({
         href: `/${serviceData.slug}/${subService.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`,
         title: subService.title,
@@ -332,9 +336,13 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
         color: serviceColors[service.slug] || 'text-blue-500',
       }));
 
+  // Show first 12 items (2 rows of 6) when not showing all
+  const displayedLinks = showAll ? allLinks : allLinks.slice(0, 12);
+  const hasMoreItems = allLinks.length > 12;
+
   return (
     <section
-      className="border-y border-slate-200/80 bg-gradient-to-b from-white to-slate-50 py-16 sm:py-20"
+      className=" bg-white py-16 sm:py-20 lg:px-10"
       aria-labelledby="home-explore-heading"
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-12">
@@ -365,13 +373,13 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
 
         {/* Grid */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
-          {exploreLinks.map((item: any, index: number) => {
+          {displayedLinks.map((item: any, index: number) => {
             const Icon = typeof item.icon === 'function' ? item.icon() : item.icon;
             const isHighlight = Boolean(item.highlight);
 
             return (
               <Link
-                key={item.href}
+                key={`${item.href}-${index}`}
                 href={item.href}
                 aria-label={item.ariaLabel}
                 className={`group relative overflow-hidden rounded-3xl border bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${
@@ -414,6 +422,28 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
             );
           })}
         </div>
+
+        {/* Show More / Show Less Button */}
+        {hasMoreItems && (
+          <div className="mt-12 text-center">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-base font-semibold text-primary shadow-md transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-xl border border-primary/20"
+            >
+              {showAll ? (
+                <>
+                  Show Less
+                  <ArrowRight className="h-4 w-4 rotate-90 transition-transform duration-300" />
+                </>
+              ) : (
+                <>
+                  See More ({allLinks.length - 12} more)
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

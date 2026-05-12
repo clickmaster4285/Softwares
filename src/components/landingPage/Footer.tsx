@@ -90,12 +90,54 @@ export function Footer(): JSX.Element {
   const currentYear: number = new Date().getFullYear();
 
   return (
-    <motion.footer
+   <motion.footer
       initial={{ backgroundColor: '#000000' }}
       animate={{ backgroundColor: '#0a0a0a' }}
       transition={{ duration: 0.8 }}
-      className="bg-foreground text-background relative overflow-hidden"
+      className="relative overflow-hidden text-background lg:pt-10 font-[Manrope]"
     >
+      {/* ================= NEW CLICKMASTERS BACKGROUND ================= */}
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+
+  {/* Base gradient */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
+
+  {/* Grid pattern */}
+  <div
+    className="absolute inset-0 opacity-[0.08]"
+    style={{
+      backgroundImage:
+        "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+      backgroundSize: "60px 60px",
+    }}
+  />
+
+
+
+
+{/* Watermark */}
+<div
+  className="absolute font-[Manrope] bottom-0 left-0 w-full flex justify-center pointer-events-none z-[1] pb-32"
+  style={{
+    WebkitMaskImage:
+      'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+    maskImage:
+      'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+  }}
+>
+  <div
+    className="font-black tracking-[0.15em] select-none whitespace-nowrap leading-none"
+    style={{
+      fontSize: 'clamp(80px, 14vw, 180px)',
+      color: 'transparent',
+      WebkitTextStroke: '1.5px rgba(180, 80, 20, 0.8)',
+    }}
+  >
+    CLICKMASTERS
+  </div>
+</div>
+
+</div>
       {/* Animated background pattern */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -322,31 +364,45 @@ export function Footer(): JSX.Element {
           )}
         </motion.div>
 
-        {/* Bottom Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20"
-        >
-          <motion.p className="text-xs sm:text-sm text-background/60 text-center sm:text-left" whileHover={{ color: '#ffffff' }}>
-            © {currentYear} ClickMasters. All rights reserved.
-          </motion.p>
-          
-          {/* Optional: Add additional footer links here if needed */}
-          <div className="flex gap-4 text-xs sm:text-sm text-background/60">
-            <Link href="/privacy-policy" className="hover:text-background transition-colors">
-              Privacy
-            </Link>
-            <Link href="/terms-of-service" className="hover:text-background transition-colors">
-              Terms
-            </Link>
-            <Link href="/sitemap" className="hover:text-background transition-colors">
-              Sitemap
-            </Link>
-          </div>
-        </motion.div>
+       
+      {/* Bottom Section */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: 0.5 }}
+  className="relative z-10 mt-6 flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20"
+>
+  <motion.p
+    className="text-xs sm:text-sm text-background/60 text-center sm:text-left"
+    whileHover={{ color: '#ffffff' }}
+  >
+    © {currentYear} ClickMasters. All rights reserved.
+  </motion.p>
+
+  <div className="flex gap-4 text-xs sm:text-sm text-background/60">
+    <Link
+      href="/privacy-policy"
+      className="hover:text-background transition-colors"
+    >
+      Privacy
+    </Link>
+
+    <Link
+      href="/terms-of-service"
+      className="hover:text-background transition-colors"
+    >
+      Terms
+    </Link>
+
+    <Link
+      href="/sitemap"
+      className="hover:text-background transition-colors"
+    >
+      Sitemap
+    </Link>
+  </div>
+</motion.div>
       </div>
     </motion.footer>
   );

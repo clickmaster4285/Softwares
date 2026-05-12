@@ -15,6 +15,7 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,7 +110,7 @@ export function HelpSection() {
     <section
       ref={sectionRef}
       id="help"
-      className="relative py-24 overflow-hidden bg-white font-sans"
+      className="relative py-24 overflow-hidden bg-white font-sans lg:px-12"
     >
       <div className="relative z-10 mx-auto px-4 lg:px-12">
         
@@ -134,7 +135,7 @@ export function HelpSection() {
         </div>
 
         {/* Resources Grid - Width matched to FAQ (3 cols on lg, 4 on xl) */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  mx-auto">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3  mx-auto">
           {helpResources.map((resource, index) => {
             const Icon = resource.icon;
             return (
@@ -161,7 +162,7 @@ export function HelpSection() {
                     {resource.stat && (
                       <div className="text-right">
                         <p className="text-2xl font-bold text-black group-hover:text-orange-500 transition-colors duration-300">{resource.stat}</p>
-                        <p className="text-xs uppercase tracking-wider text-gray-500">Resources</p>
+                        <p className="text-xs uppercase tracking-wider text-gray-500">Resourcessss</p>
                       </div>
                     )}
                   </div>
@@ -191,94 +192,7 @@ export function HelpSection() {
           })}
         </div>
 
-        {/* Bottom CTA Section */}
-        <div ref={ctaRef} className="mt-20  mx-auto">
-          <div className="relative bg-gradient-to-br from-gray-50 to-orange-50 rounded-3xl p-12 overflow-hidden border border-orange-100">
-            <div className="relative z-10 max-w-4xl mx-auto text-center">
-              <motion.div
-                className="w-12 h-px bg-orange-400 mx-auto mb-8"
-                animate={{
-                  width: ['48px', '96px', '48px'],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-
-              <h3 className="text-3xl md:text-4xl font-bold text-black mb-4">
-                Have a software project in mind?
-                <span className="font-bold block mt-2 text-orange-500">Get a Free Consultation</span>
-              </h3>
-
-              <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
-                Our software development team will discuss your requirements and propose a solution
-                tailored to your needs.
-              </p>
-
-              {/* CTA Buttons */}
-              <motion.div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 pt-8 border-t border-orange-100">
-                {/* Primary Button */}
-                <Link href="/contact-us" className="inline-block">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="group relative px-8 py-4 bg-black text-white text-sm font-medium tracking-wider overflow-hidden rounded-md"
-                  >
-                    <span className="relative z-10 flex items-center">
-                      Contact Us
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                    <motion.div
-                      className="absolute inset-0 bg-orange-500"
-                      initial={{ x: '-100%' }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </motion.button>
-                </Link>
-
-                {/* Secondary Button */}
-                <Link href="/about-us" className="inline-block">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="group relative px-8 py-4 bg-transparent text-black text-sm font-medium tracking-wider border border-orange-200 hover:border-orange-400 transition-colors duration-300 overflow-hidden rounded-md"
-                  >
-                    <span className="relative z-10 flex items-center">
-                      About ClickMasters
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                    <motion.div
-                      className="absolute inset-0 bg-orange-50"
-                      initial={{ scale: 0 }}
-                      whileHover={{ scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </motion.button>
-                </Link>
-              </motion.div>
-
-              {/* Trust Indicators */}
-              <motion.div className="flex items-center justify-center gap-6 mt-8 text-xs text-gray-500">
-                <span className="flex items-center">
-                  <span className="w-1 h-1 bg-orange-400 rounded-full mr-2" />
-                  24/7 Support
-                </span>
-                <span className="flex items-center">
-                  <span className="w-1 h-1 bg-orange-400 rounded-full mr-2" />
-                  Free Documentation
-                </span>
-                <span className="flex items-center">
-                  <span className="w-1 h-1 bg-orange-400 rounded-full mr-2" />
-                  Video Tutorials
-                </span>
-              </motion.div>
-            </div>
-          </div>
-        </div>
+    
       </div>
     </section>
   );

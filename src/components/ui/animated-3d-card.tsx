@@ -5,7 +5,7 @@ import { motion, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const THEMES = {
-  primary: "from-gray-900 via-gray-800 to-black",
+  primary: "from-orange-600 via-orange-200 to-orange-600",
   secondary: "from-orange-600 via-orange-500 to-orange-700",
   accent: "from-gray-800 via-gray-700 to-gray-900",
   success: "from-emerald-600 via-emerald-700 to-emerald-800",
@@ -13,6 +13,7 @@ const THEMES = {
   danger: "from-red-600 via-red-700 to-red-800",
   info: "from-cyan-600 via-cyan-700 to-cyan-800",
   neutral: "from-gray-600 via-gray-700 to-gray-800",
+  orangeLight: "from-orange-100 via-orange-50 to-orange-100", // Orange 50 theme
 } as const;
 
 type ThemeType = keyof typeof THEMES;
@@ -69,8 +70,8 @@ const SIZES = {
 
 const VARIANTS = {
   default: "shadow-lg hover:shadow-2xl",
-  minimal: "shadow-md hover:shadow-lg border border-white/10",
-  premium: "shadow-xl hover:shadow-2xl ring-1 ring-orange-500/40",
+  minimal: "shadow-md hover:shadow-lg border border-orange-200/50",
+  premium: "shadow-xl hover:shadow-2xl ring-1 ring-orange-500/30",
 } as const;
 
 const GRIDS = {
@@ -87,7 +88,6 @@ const GAPS = {
   xl: "gap-10",
 } as const;
 
-// Fixed: Properly typed variants with correct transition type
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 40, rotateX: -15, scale: 0.95 },
   visible: {
@@ -160,12 +160,19 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
       onClick();
     }, [disabled, loading, onClick]);
 
-    const isOrangeTheme = theme === "secondary";
-    const iconColor = isOrangeTheme ? "text-orange-300" : "text-orange-400";
-    const accentColor = isOrangeTheme ? "text-orange-300" : "text-orange-400";
-    const dotColor = isOrangeTheme ? "bg-orange-400/60" : "bg-orange-400/60";
-    const pulseColor = isOrangeTheme ? "bg-orange-500" : "bg-orange-500";
-    const borderAccent = isOrangeTheme ? "border-orange-400/30" : "border-orange-400/30";
+    const isOrangeTheme = theme === "secondary" || theme === "orangeLight";
+    const isLightOrangeTheme = theme === "orangeLight";
+    
+    // Colors for orange 50 theme (black text, dark orange accents)
+    const textColor = isLightOrangeTheme ? "text-gray-900" : "text-gray-800";
+    const titleColor = isLightOrangeTheme ? "text-gray-900" : "text-white";
+    const descriptionColor = isLightOrangeTheme ? "text-gray-700" : "text-white/90";
+    const iconColor = isLightOrangeTheme ? "text-orange-600" : "text-orange-300";
+    const accentColor = isLightOrangeTheme ? "text-orange-700" : "text-orange-300";
+    const dotColor = isLightOrangeTheme ? "bg-orange-600/60" : "bg-orange-400/60";
+    const pulseColor = isLightOrangeTheme ? "bg-orange-600" : "bg-orange-500";
+    const borderAccent = isLightOrangeTheme ? "border-orange-300" : "border-orange-400/30";
+    const overlayOpacity = isLightOrangeTheme ? "bg-black/5" : "bg-black/50";
 
     return (
       <motion.div
@@ -177,6 +184,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
           onClick && !disabled && !loading && "cursor-pointer",
           disabled && "opacity-50 cursor-not-allowed",
           loading && "pointer-events-none",
+          isLightOrangeTheme && "shadow-orange-200/50",
           className
         )}
         onMouseMove={handleMove}
@@ -224,7 +232,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
 
         <div className="absolute inset-0 overflow-hidden rounded-2xl opacity-20">
           <svg
-            className="absolute -top-4 -right-4 w-32 h-32 text-white/30"
+            className="absolute -top-4 -right-4 w-32 h-32 text-orange-400/30"
             viewBox="0 0 100 100"
           >
             <defs>
@@ -253,7 +261,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
             animate={{ rotate: hovered ? 180 : 0 }}
             transition={{ duration: 0.8 }}
           >
-            <svg viewBox="0 0 100 100" className="w-full h-full text-white/40">
+            <svg viewBox="0 0 100 100" className="w-full h-full text-orange-400/40">
               <rect
                 x="20"
                 y="20"
@@ -281,10 +289,12 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
         <motion.div
           className="absolute inset-0 rounded-2xl"
           style={{
-            background: `linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%)`,
+            background: isLightOrangeTheme 
+              ? `linear-gradient(135deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.05) 100%)`
+              : `linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%)`,
             transform: "translateZ(5px)",
           }}
-          animate={{ opacity: hovered ? 0.5 : 0.7 }}
+          animate={{ opacity: hovered ? 0.3 : 0.2 }}
           transition={{ duration: 0.3 }}
         />
 
@@ -296,7 +306,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
             className="absolute -inset-full"
             animate={{
               background: hovered
-                ? `linear-gradient(${mousePos.x + 135}deg, transparent 40%, rgba(249,115,22,0.25) 50%, transparent 60%)`
+                ? `linear-gradient(${mousePos.x + 135}deg, transparent 40%, ${isLightOrangeTheme ? 'rgba(249,115,22,0.15)' : 'rgba(249,115,22,0.25)'} 50%, transparent 60%)`
                 : "transparent",
             }}
             transition={{ duration: 0.3 }}
@@ -304,7 +314,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
         </motion.div>
 
         <motion.div
-          className="relative z-20 flex h-full flex-col justify-between p-6 text-white"
+          className="relative z-20 flex h-full flex-col justify-between p-6"
           style={{ transform: "translateZ(20px)" }}
         >
           <div className="flex justify-between items-start">
@@ -315,7 +325,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <motion.div
-                  className={cn("text-3xl opacity-90 filter drop-shadow-lg", iconColor)}
+                  className={cn("text-3xl opacity-90 filter drop-shadow-sm", iconColor)}
                   animate={{
                     rotateZ: hovered ? 5 : 0,
                     y: hovered ? -2 : 0,
@@ -356,7 +366,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
             transition={{ duration: 0.3 }}
           >
             <motion.h3
-              className="text-xl font-semibold tracking-tight text-white"
+              className={cn("text-xl font-semibold tracking-tight", titleColor)}
               animate={{ scale: hovered ? 1.02 : 1 }}
               transition={{ duration: 0.3 }}
             >
@@ -364,7 +374,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
             </motion.h3>
 
             <motion.p
-              className="text-sm text-white/90 leading-relaxed line-clamp-3"
+              className={cn("text-sm leading-relaxed line-clamp-3", descriptionColor)}
               animate={{ opacity: hovered ? 1 : 0.9 }}
               transition={{ duration: 0.3 }}
             >
@@ -380,7 +390,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
                 }}
                 transition={{ duration: 0.3, delay: 0.1 }}
               >
-                <div className="h-0.5 w-4 bg-orange-400 rounded-full" />
+                <div className={cn("h-0.5 w-4 rounded-full", isLightOrangeTheme ? "bg-orange-600" : "bg-orange-400")} />
                 <div className={cn("text-xs font-medium", accentColor)}>
                   {loading ? "Loading..." : "Explore"}
                 </div>
@@ -392,7 +402,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
         <motion.div
           className="absolute inset-0 rounded-2xl pointer-events-none"
           style={{
-            background: `linear-gradient(135deg, rgba(249,115,22,0.1) 0%, transparent 30%, transparent 70%, rgba(249,115,22,0.05) 100%)`,
+            background: `linear-gradient(135deg, rgba(249,115,22,0.08) 0%, transparent 30%, transparent 70%, rgba(249,115,22,0.04) 100%)`,
             transform: "translateZ(25px)",
           }}
           animate={{ opacity: hovered ? 1 : 0.3 }}
@@ -407,7 +417,7 @@ const Card3D = React.forwardRef<HTMLDivElement, Card3DProps>(
               filter: "blur(15px)",
               transform: "translateZ(-5px)",
             }}
-            animate={{ opacity: hovered ? 0.2 : 0 }}
+            animate={{ opacity: hovered ? 0.15 : 0 }}
             transition={{ duration: 0.4 }}
           />
         )}
@@ -447,7 +457,6 @@ export const Card3DList: React.FC<Card3DListProps> = ({
   const gridClass = useMemo(() => GRIDS[columns], [columns]);
   const gapClass = useMemo(() => GAPS[gap], [gap]);
 
-  // Fixed: Properly typed container variants
   const containerVariantsLocal: Variants = {
     hidden: { opacity: 0, scale: 0.98 },
     visible: {

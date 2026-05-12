@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { Suspense, useEffect, useRef, useState, type ReactNode } from 'react';
+import { FinalCTA } from './finalCta';
 
 const pulse96 = () => <div className="h-96 animate-pulse rounded-lg bg-gray-100" />;
 const pulse64 = () => <div className="h-64 animate-pulse rounded-lg bg-gray-100" />;
@@ -88,8 +89,8 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
   return (
     <>
       <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
-        <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
-          <IndustriesSection />
+        <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-white" />}>
+         <div className='mx-10 bg-white'> <IndustriesSection /></div>
         </Suspense>
       </LoadOnVisible>
 
@@ -105,7 +106,7 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
 
        <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
-          <CommunitySection />
+          <div className='mx-10 bg-white'>   <CommunitySection /></div>
         </Suspense>
       </LoadOnVisible>
 
@@ -114,6 +115,7 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
       <LoadOnVisible skeleton={sk64} minHeightClass="min-h-64">
         <Suspense fallback={<div className="h-64 animate-pulse rounded-lg bg-gray-100" />}>
           <HelpSection />
+          <FinalCTA/>
         </Suspense>
       </LoadOnVisible>
 

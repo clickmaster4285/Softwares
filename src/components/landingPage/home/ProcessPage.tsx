@@ -136,7 +136,7 @@ export default function ProcessPage() {
 
   return (
     <main className="bg-white overflow-x-hidden">
-      <section ref={expandSectionRef} className="py-6 px-6 lg:px-8">
+      <section ref={expandSectionRef} className="py-6 lg:py-12 px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           {/* Header Section */}
           <div className="mx-auto max-w-3xl text-center mb-16">
@@ -190,8 +190,8 @@ export default function ProcessPage() {
               phases={phases}
               defaultExpandedIndex={3}
               containerHeight="28rem"
-              expandedWidth="28rem"
-              collapsedWidth="6rem"
+             
+            
               onImageChange={(index, phase) => {
                 console.log(`Viewing process stage ${index}: ${phase?.title}`);
               }}

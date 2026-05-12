@@ -381,7 +381,7 @@ const { data: blogs = [] } = useQuery({
     <header
       className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', navStyle)}
     >
-      <div className="px-2 md:px-4 lg:px-26 flex h-20 items-center justify-between">
+      <div className="px-2 md:px-4 lg:px-26 lg:mx-10 flex h-20 items-center justify-between">
         {/* Logo */}
         <Link
           href="/"

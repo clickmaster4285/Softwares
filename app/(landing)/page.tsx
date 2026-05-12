@@ -52,6 +52,8 @@ import PainPointsSolutions from '@/src/components/landingPage/home/PainPointsSol
 import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
 import ExploreSection from '@/src/components/landingPage/home/ExploreSection';
+import {ProjectCTAHero} from '@/src/components/landingPage/home/info-cts';
+import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
 
 export const metadata = metadataConfig.home();
 
@@ -278,7 +280,7 @@ const AppsSection = dynamic(
 export default function LandingPage() {
   return (
     <main
-      className="min-h-screen"
+      className="min-h-screen "
       role="main"
       aria-label="ClickMasters software development company homepage"
     >
@@ -293,7 +295,7 @@ export default function LandingPage() {
        
        <Suspense
         fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100 lg:mx-10" />
         }
       >
         <TrustedBySection />
@@ -303,26 +305,41 @@ export default function LandingPage() {
 
      <Suspense
         fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100 " />
         }
       >
         <AboutSection />
       </Suspense>
 
 
-
-
+   <Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100  " />
+        }
+      >
       <PainPointsSolutions />
+      </Suspense>
+      
+
+    
 
 
       <ExploreSection />
 
 
+<Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+        }
+      >
+       <ProjectCTAHero/>
+      </Suspense>
+
 
       
        <Suspense
         fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-white" />
+          <div className="h-96 animate-pulse rounded-lg bg-white lg:px-10" />
         }
       >
       <TrustedClientsSection />
@@ -342,7 +359,7 @@ export default function LandingPage() {
           <div className="h-96 animate-pulse rounded-lg bg-gradient-to-b from-white to-gray-50" />
         }
       >   
-          <FeaturedInsights  />
+         <div> <FeaturedInsights  /></div>
       </Suspense>
 
       
@@ -351,14 +368,14 @@ export default function LandingPage() {
 
 
 
-       <Suspense
+       {/* <Suspense
         fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+          <div className="h-96 animate-pulse rounded-lg bg-white" />
         }
       >
-          <SolutionsPage />
+        <div className=" bg-white">  <SolutionsPage /></div>
       </Suspense>
-
+ */}
 
 
 
@@ -381,21 +398,24 @@ export default function LandingPage() {
           <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
         }
       >
-      <TechStackSection />
+        <TechStackSection />
+        <CTASectionImage/>
       </Suspense>
       
      
+ 
 
-      
 
-{/* 
+    
+
+
       <Suspense
         fallback={
           <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
         }
       >
         <AppsSection />
-      </Suspense> */}
+      </Suspense>
 
 
 

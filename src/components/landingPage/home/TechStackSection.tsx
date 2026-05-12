@@ -3,22 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-interface TechItem {
-  name: string;
-  icon: string;
-}
-
-// Comprehensive technology stack with icons (using placeholder emoji icons - replace with actual image paths)
 const techStackData = {
   frontend: {
     category: "Frontend Development",
     items: [
       { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-      { name: "Vue.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" },
       { name: "Angular", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
       { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
       { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Vue.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" },
     ],
   },
   backend: {
@@ -27,9 +21,9 @@ const techStackData = {
       { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
       { name: "Python/Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
       { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" },
-      { name: "Ruby on Rails", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rails/rails-original.svg" },
       { name: "Go", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" },
       { name: "Java/Spring", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      { name: "Ruby on Rails", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rails/rails-original.svg" },
     ],
   },
   mobile: {
@@ -38,8 +32,8 @@ const techStackData = {
       { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
       { name: "Swift/iOS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" },
-      { name: "Kotlin/Android", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
       { name: "Ionic", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg" },
+      { name: "Kotlin/Android", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
     ],
   },
   database: {
@@ -48,24 +42,20 @@ const techStackData = {
       { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
       { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
       { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-      { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
       { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original.svg" },
       { name: "Elasticsearch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" },
+      { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
     ],
   },
   cloud: {
     category: "Cloud & Infrastructure",
     items: [
-  { 
-      name: "AWS", 
-     
-icon: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
-    },
+      { name: "AWS", icon: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
       { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
       { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
-      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
       { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-original.svg" },
       { name: "Terraform", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" },
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
     ],
   },
   devops: {
@@ -74,13 +64,13 @@ icon: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_L
       { name: "GitHub Actions", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
       { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
       { name: "Prometheus", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" },
-      { name: "Grafana", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" },
       { name: "New Relic", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/newrelic/newrelic-original.svg" },
+      { name: "Grafana", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" },
     ],
   },
 };
 
-function useInView(threshold = 0.15) {
+function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -96,66 +86,100 @@ function useInView(threshold = 0.15) {
   return { ref, visible };
 }
 
-function TechCard({ item }: { item: { name: string; icon: string } }) {
+function TechBadge({ item, index }: { item: { name: string; icon: string }; index: number }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 flex-shrink-0 w-20 sm:w-24 md:w-28 group cursor-default">
-      <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
+    <div
+      className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm transition-all duration-200 cursor-default"
+      style={{ animationDelay: `${index * 40}ms` }}
+    >
+      <div className="relative w-5 h-5 flex-shrink-0">
         <Image
           src={item.icon}
           alt={item.name}
           fill
-          className="object-contain transition-all duration-300 group-hover:scale-110"
+          className="object-contain"
           onError={(e) => {
-            // Fallback for broken images - you can replace with a local placeholder
-            (e.target as HTMLImageElement).style.display = 'none';
+            (e.target as HTMLImageElement).style.display = "none";
           }}
         />
       </div>
-      <span className="text-[11px] sm:text-xs text-slate-500 group-hover:text-slate-800 transition-colors duration-300 text-center leading-tight">
+      <span className="text-[13px] font-medium text-slate-700 whitespace-nowrap">
         {item.name}
       </span>
     </div>
   );
 }
 
+function CategoryBlock({
+  category,
+  items,
+  visible,
+  delay,
+}: {
+  category: string;
+  items: { name: string; icon: string }[];
+  visible: boolean;
+  delay: number;
+}) {
+  return (
+    <div
+      className="p-6"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(16px)",
+        transition: `opacity 0.5s ease ${delay}ms, transform 0.5s ease ${delay}ms`,
+      }}
+    >
+      <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-400 mb-4">
+        {category}
+      </p>
+      <div className="flex flex-wrap gap-2">
+        {items.map((item, i) => (
+          <TechBadge key={item.name} item={item} index={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function TechStackSection() {
-  const tech = useInView(0.15);
-  const categoryItems = [
-    { category: techStackData.frontend.category, items: techStackData.frontend.items },
-    { category: techStackData.backend.category, items: techStackData.backend.items },
-    { category: techStackData.mobile.category, items: techStackData.mobile.items },
-    { category: techStackData.database.category, items: techStackData.database.items },
-    { category: techStackData.cloud.category, items: techStackData.cloud.items },
-    { category: techStackData.devops.category, items: techStackData.devops.items },
-  ];
+  const { ref, visible } = useInView(0.1);
+
+  const leftCol = [techStackData.frontend, techStackData.mobile, techStackData.cloud];
+  const rightCol = [techStackData.backend, techStackData.database, techStackData.devops];
 
   return (
-    <>
-      <style>{`
-        @keyframes marquee-left {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes marquee-right {
-          0%   { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-        .marquee-left, 
-        .marquee-right { 
-          animation-duration: 60s; 
-          animation-iteration-count: infinite;
-          animation-timing-function: linear;
-        }
-        .marquee-left { animation-name: marquee-left; }
-        .marquee-right { animation-name: marquee-right; }
-        .marquee-left:hover,
-        .marquee-right:hover { animation-play-state: paused; }
-        body { overflow-x: hidden; }
-      `}</style>
+    <div className="bg-white py-16 lg:py-24 lg:px-12" ref={ref}>
+      <div className=" mx-auto px-6 lg:px-10">
+        {/* Header */}
+        {/* <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-12 gap-6">
+      
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-2 border border-slate-200 rounded-full px-3 py-1 mb-5">
+              <span className="text-base">🌐</span>
+              <span className="text-[12px] font-medium text-slate-600 tracking-wide">
+                Our Technology Stack
+              </span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight tracking-tight">
+              Modern Tech Stack
+              <br />
+              <span className="text-orange-500">for Future Ready</span>
+              <br />
+              <span className="text-slate-900">Solutions</span>
+            </h2>
+          </div>
 
-      <div className="bg-white" ref={tech.ref}>
-        <div className="mx-auto px-6 lg:px-12 py-6 lg:py-20">
-        <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
+          <div className="lg:max-w-xs lg:text-right lg:pt-2">
+            <p className="text-slate-500 text-sm leading-relaxed">
+              We leverage cutting-edge technologies to build scalable, secure,
+              and high-performance applications
+            </p>
+          </div>
+        </div> */}
+
+
+            <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
   <div className="inline-flex items-center gap-2 mb-3">
     <span className="h-[2px] w-8 rounded-full bg-orange-400" />
     <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
@@ -175,50 +199,48 @@ export function TechStackSection() {
   </p>
 </div>
 
-          <div className="space-y-8 sm:space-y-10">
-            {categoryItems.map(({ category, items }, rowIndex) => {
-              const repeated = Array.from(
-                { length: Math.ceil(20 / items.length) },
-                () => items
-              ).flat();
-
-              const goLeft = rowIndex % 2 === 0;
-
+        {/* Grid */}
+        <div className="border border-dashed border-slate-300 rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {leftCol.map((section, i) => {
+              const rightSection = rightCol[i];
+              const isLast = i === leftCol.length - 1;
               return (
-                <div key={category}>
-                  <p className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3 sm:mb-5 pl-1">
-                    {category}
-                  </p>
+                <div key={section.category} className="contents">
+                  {/* Left cell */}
+                  <div
+                    className={`${
+                      !isLast ? "border-b border-dashed border-slate-300" : ""
+                    } lg:border-r lg:border-dashed lg:border-slate-300`}
+                  >
+                    <CategoryBlock
+                      category={section.category}
+                      items={section.items}
+                      visible={visible}
+                      delay={i * 100}
+                    />
+                  </div>
 
-                  <div className="relative overflow-hidden">
-                    {/* Gradient masks - smaller on mobile */}
-                    <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-20 z-10 bg-gradient-to-r from-white to-transparent" />
-                    <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-20 z-10 bg-gradient-to-l from-white to-transparent" />
-
-                    <div 
-                      className={`flex gap-4 sm:gap-6 md:gap-8 w-max ${goLeft ? "marquee-left" : "marquee-right"}`}
-                      style={{
-                        opacity: tech.visible ? 1 : 0,
-                        transition: `all 0.7s cubic-bezier(0.4, 0, 0.2, 1) ${rowIndex * 100}ms`,
-                      }}
-                    >
-                      {[...repeated, ...repeated].map((item, i) => (
-                        <TechCard key={`${category}-${i}`} item={item} />
-                      ))}
-                    </div>
+                  {/* Right cell */}
+                  <div
+                    className={`${
+                      !isLast ? "border-b border-dashed border-slate-300" : ""
+                    }`}
+                  >
+                    <CategoryBlock
+                      category={rightSection.category}
+                      items={rightSection.items}
+                      visible={visible}
+                      delay={i * 100 + 50}
+                    />
                   </div>
                 </div>
               );
             })}
           </div>
-
-          {/* Bottom Divider - responsive spacing */}
-          <div className="my-12 sm:my-14 md:my-16 flex items-center gap-4">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

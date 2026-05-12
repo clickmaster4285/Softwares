@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useQuery } from "@tanstack/react-query";
@@ -25,6 +25,57 @@ interface Project {
   createdAt?: string;
 }
 
+// Custom hook for responsive card configuration
+function useResponsiveCardConfig() {
+  const [config, setConfig] = useState({
+    spreadDeg: 38,
+    cardWidth: 520,
+    cardHeight: 320,
+    overlap: 0.52,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setConfig({
+          spreadDeg: 8,
+          cardWidth: 280,
+          cardHeight: 260,
+          overlap: 0.45,
+        });
+      } else if (width < 768) {
+        setConfig({
+          spreadDeg: 15,
+          cardWidth: 360,
+          cardHeight: 280,
+          overlap: 0.48,
+        });
+      } else if (width < 1024) {
+        setConfig({
+          spreadDeg: 25,
+          cardWidth: 440,
+          cardHeight: 300,
+          overlap: 0.5,
+        });
+      } else {
+        setConfig({
+          spreadDeg: 38,
+          cardWidth: 520,
+          cardHeight: 320,
+          overlap: 0.52,
+        });
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return config;
+}
+
 export default function SolutionsPage() {
   const { data: projects = [], isLoading } = useQuery<Project[]>({
     queryKey: ["projects-public"],
@@ -39,6 +90,7 @@ export default function SolutionsPage() {
   const ctaRef = useRef<HTMLElement>(null);
   const phasesRef = useRef<(HTMLDivElement | null)[]>([]);
   const counterRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const responsiveConfig = useResponsiveCardConfig();
 
   const metrics = [
     { value: 98, suffix: "%", label: "Projects delivered on time" },
@@ -48,7 +100,7 @@ export default function SolutionsPage() {
   ];
 
   // Map projects to CardStack format
-  const cardStackItems = projects.slice(0,6).map((project, index) => ({
+  const cardStackItems = projects.slice(0, 7).map((project, index) => ({
     id: project._id,
     title: project.title || "Untitled Project",
     description: project.description && project.description.length > 100 
@@ -171,7 +223,7 @@ export default function SolutionsPage() {
   // Show loading state
   if (isLoading) {
     return (
-      <main className="bg-white overflow-y-hidden">
+      <main className="bg-gray-50">
         <div className="py-24 px-6 lg:px-8">
           <div className="mx-auto max-w-7xl text-center">
             <div className="animate-pulse">
@@ -351,47 +403,63 @@ export default function SolutionsPage() {
         .hover-lift:hover {
           transform: translateY(-5px);
         }
+
+        /* Prevent horizontal scroll on all screen sizes */
+        html, body {
+          overflow-x: hidden !important;
+          width: 100%;
+          position: relative;
+        }
+        
+        * {
+          max-width: 100%;
+          box-sizing: border-box;
+        }
       `}</style>
 
       {/* Card Stack Animation Section */}
-      <section className="py-24 px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white  overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 overflow-x-hidden">
         <div className="mx-auto max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center mb-16">
-  <div className="inline-flex items-center gap-2 mb-3">
-    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
-    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-     Our Solutions
-    </p>
-    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
-  </div>
-
-  <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-4xl">
-    Our Work in  Action
-   
-  </h2>
-
-  <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-    See how we've helped businesses transform their ideas into
-    successful digital products and scalable solutions.
-  </p>
-</div>
-
-          {cardStackItems.length > 0 ? (
-            <CardStack
-              items={cardStackItems}
-              initialIndex={Math.min(2, cardStackItems.length - 1)}
-              autoAdvance
-              intervalMs={3000}
-              pauseOnHover
-              showDots
-              spreadDeg={38}
-              overlap={0.52}
-            />
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-500">No projects available yet.</p>
+          <div className="mx-auto max-w-3xl text-center mb-8 sm:mb-12 md:mb-16">
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
+                Our Solutions
+              </p>
+              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
             </div>
-          )}
+
+            <h2 className="mt-5 font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+              Our Work in Action
+            </h2>
+
+            <p className="mx-auto mt-4 sm:mt-5 max-w-2xl text-sm sm:text-base leading-7 text-slate-600">
+              See how we've helped businesses transform their ideas into
+              successful digital products and scalable solutions.
+            </p>
+          </div>
+
+          <div className="relative w-full overflow-x-visible">
+            {cardStackItems.length > 0 ? (
+              <div className="flex justify-center items-center w-full">
+                <div className="w-full max-w-full">
+                  <CardStack
+                    items={cardStackItems}
+                    initialIndex={Math.min(2, cardStackItems.length - 1)}
+                    autoAdvance
+                    intervalMs={3000}
+                    pauseOnHover
+                    showDots
+                    {...responsiveConfig}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-500">No projects available yet.</p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
     </main>

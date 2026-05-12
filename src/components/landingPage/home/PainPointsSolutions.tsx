@@ -63,7 +63,7 @@ export default function PainPointsSolutions() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-24 md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-24 md:py-32 lg:px-14">
       <div className="relative mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* Header */}

@@ -408,10 +408,8 @@ export default function FeaturedInsights() {
 
   return (
     <section
-      className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-16 overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #ffffff 0%, #fff7ed 45%, #ffedd5 100%)"
-      }}
+      className="w-full px-4 sm:px-6 lg:px-8 xl:px-22 py-16 overflow-hidden bg-gradient-to-b from-white to-slate-50 "
+     
     >
       {/* Mobile layout: 2 columns grid */}
       <div className="lg:hidden">
@@ -439,7 +437,7 @@ export default function FeaturedInsights() {
       </div>
 
       {/* Desktop layout: 3 columns with exact distribution (2, 3, 3) */}
-      <div className="hidden lg:flex justify-between gap-6 xl:gap-8">
+      <div className="hidden lg:flex justify-between gap-6 xl:gap-8 lg:px-16">
         {/* Header - left side */}
         <div className="sticky top-24 flex-shrink-0 w-[280px] xl:w-[520px]">
           <InsightsHeader />
