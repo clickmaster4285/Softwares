@@ -29,7 +29,7 @@ export default function ProcessPage() {
       step: "01",
       title: "Discovery & Strategy",
       icon: Lightbulb,
-      color: "from-amber-500 to-orange-600",
+      color: "from-primary to-orange-600",
       bgLight: "bg-amber-50",
       description: "We align technology with business goals through deep discovery sessions, market analysis, and technical blueprinting.",
       deliverables: ["Requirements specification", "Technical architecture design", "Roadmap & sprint planning", "Risk assessment matrix"],
@@ -135,9 +135,9 @@ export default function ProcessPage() {
   };
 
   return (
-    <main className="bg-white overflow-x-hidden">
-      <section ref={expandSectionRef} className="py-6 px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+    <main className="bg-gradient-to-b from-white to-slate-50 overflow-x-hidden">
+      <section ref={expandSectionRef} className="py-6 lg:py-12 px-6 lg:px-8">
+        <div className="mx-auto lg:px-10">
           {/* Header Section */}
           <div className="mx-auto max-w-3xl text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-3">
@@ -159,8 +159,8 @@ export default function ProcessPage() {
 
           {/* Metrics Section */}
           <section ref={metricsRef} className="mb-16 px-6 lg:px-8">
-            <div className="mx-auto max-w-7xl">
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="mx-auto ">
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:mx-20">
                 {metrics.map((metric, idx) => (
                   <motion.div
                     key={idx}
@@ -169,7 +169,7 @@ export default function ProcessPage() {
                     transition={{ delay: idx * 0.1, duration: 0.6 }}
                     className="text-center p-6 transition-all duration-300 hover:scale-105"
                   >
-                    <div className="text-5xl font-bold text-orange-600 mb-2">
+                    <div className="text-5xl  font-bold text-primarymb-2">
                       <AnimatedCounter 
                         value={metric.value} 
                         suffix={metric.suffix} 
@@ -184,14 +184,14 @@ export default function ProcessPage() {
           </section>
 
           {/* ExpandOnHover Component */}
-          <div className="rounded-3xl overflow-hidden shadow-2xl">
+          <div className=" overflow-hidden ">
             <ExpandOnHover
               images={allProcessImages}
               phases={phases}
               defaultExpandedIndex={3}
               containerHeight="28rem"
-              expandedWidth="28rem"
-              collapsedWidth="6rem"
+             
+            
               onImageChange={(index, phase) => {
                 console.log(`Viewing process stage ${index}: ${phase?.title}`);
               }}
@@ -226,7 +226,7 @@ export default function ProcessPage() {
             transition={{ delay: 0.4 }}
             className="mt-8 flex flex-wrap items-center justify-center gap-4"
           >
-            <button className="group inline-flex items-center gap-2 rounded-lg bg-orange-600 px-8 py-3 text-base font-semibold text-white shadow-lg transition-all duration-200 hover:bg-orange-500 hover:scale-105">
+            <button className="group inline-flex items-center gap-2 rounded-lg bg-primarypx-8 py-3 text-base font-semibold text-white shadow-lg transition-all duration-200 hover:bg-primaryhover:scale-105">
               Schedule a Free Consultation <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
           </motion.div>

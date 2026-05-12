@@ -58,7 +58,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
           whileInView={{ height: 40 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="h-10 w-1 rounded-full bg-orange-500"
+          className="h-10 w-1 rounded-full bg-primary"
         />
         <motion.h2
           className="text-2xl font-semibold text-slate-900 sm:text-3xl"
@@ -95,7 +95,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
           <div className="relative px-5 pt-5 pb-4">
             <div className="flex items-start gap-3">
               <motion.span
-                className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm text-orange-600 text-sm font-bold shrink-0"
+                className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm text-primarytext-sm font-bold shrink-0"
                 whileHover={{ scale: 1.1, rotate: 360 }}
                 transition={{ duration: 0.3 }}
               >
@@ -148,7 +148,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                     {/* Header with icon and label */}
                     <div className="flex items-center gap-2 mb-2">
                       {isHighlighted ? (
-                        <div className="w-5 h-5 rounded-full bg-orange-500 flex items-center justify-center">
+                        <div className="w-5 h-5 rounded-full bg-primaryflex items-center justify-center">
                           <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
@@ -169,7 +169,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                       
                       {/* Performance badge */}
                       {isHighlighted && (
-                        <span className="ml-auto text-[9px] bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full font-semibold">
+                        <span className="ml-auto text-[9px] bg-orange-100 text-secondarypx-2 py-0.5 rounded-full font-semibold">
                           Best Choice
                         </span>
                       )}
@@ -186,8 +186,8 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                     {/* Feature tags for enterprise version */}
                     {isEnterprise && i === 0 && (
                       <div className="flex flex-wrap gap-1.5 mt-2">
-                        <span className="text-[9px] bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded">Enterprise-ready</span>
-                        <span className="text-[9px] bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded">24/7 Support</span>
+                        <span className="text-[9px] bg-orange-100 text-primarypx-1.5 py-0.5 rounded">Enterprise-ready</span>
+                        <span className="text-[9px] bg-orange-100 text-primarypx-1.5 py-0.5 rounded">24/7 Support</span>
                       </div>
                     )}
                   </motion.div>
@@ -197,7 +197,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
           ) : (
             <div className="p-5 flex-1">
               <div className="flex items-start gap-2">
-                <div className="w-1 h-8 bg-orange-500 rounded-full shrink-0" />
+                <div className="w-1 h-8 bg-primaryrounded-full shrink-0" />
                 <p className="text-sm text-slate-600 leading-relaxed">
                   {diff.description}
                 </p>
@@ -228,7 +228,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                 key={i}
                 className={cn(
                   "w-2 h-2 rounded-full",
-                  i === 0 ? "bg-orange-400" : i === 1 ? "bg-orange-500" : "bg-orange-600"
+                  i === 0 ? "bg-orange-400" : i === 1 ? "bg-primary" : "bg-orange-600"
                 )}
                 animate={{ scale: [1, 1.5, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity, delay }}
@@ -253,7 +253,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
               transition={{ duration: 0.4, delay: 0.5 + item.delay }}
             >
               <svg
-                className="w-4 h-4 text-orange-500"
+                className="w-4 h-4 text-primary"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >

@@ -39,7 +39,7 @@ export function CTAComponents() {
   <div className="absolute -left-10 -bottom-10 h-80 w-80 rounded-full bg-amber-200/20 blur-3xl" />
 
   <div className="relative text-center max-w-3xl mx-auto">
-    <Badge className="bg-orange-100 border-orange-200 text-orange-700 hover:bg-orange-200 mb-4 text-sm px-4 py-1.5 font-medium">
+    <Badge className="bg-orange-100 border-orange-200 text-secondaryhover:bg-orange-200 mb-4 text-sm px-4 py-1.5 font-medium">
       Limited Time Opportunity
     </Badge>
 
@@ -56,7 +56,7 @@ export function CTAComponents() {
       <Button
         asChild
         size="lg"
-        className="rounded-full bg-orange-700 text-white font-semibold text-base py-6 px-10 shadow-md hover:shadow-lg transition-all duration-300"
+        className="rounded-full bg-secondarytext-white font-semibold text-base py-6 px-10 shadow-md hover:shadow-lg transition-all duration-300"
       >
         <Link href="/contact-us" className="flex items-center gap-2">
           Book Strategy Call Now
@@ -68,7 +68,7 @@ export function CTAComponents() {
         asChild
         variant="outline"
         size="lg"
-        className="rounded-full border-orange-300 text-orange-700 hover:bg-orange-50 hover:border-orange-400 py-6 px-10 text-base font-medium transition-all duration-300"
+        className="rounded-full border-orange-300 text-secondaryhover:bg-orange-50 hover:border-orange-400 py-6 px-10 text-base font-medium transition-all duration-300"
       >
         <Link href="/case-studies">View Case Studies</Link>
       </Button>
@@ -80,7 +80,7 @@ export function CTAComponents() {
           <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-8 md:p-10 shadow-sm hover:shadow-md transition-all max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
               <div className="flex-1">
-                <div className="inline-flex items-center gap-2 text-orange-600 mb-3">
+                <div className="inline-flex items-center gap-2 text-primarymb-3">
                   <Clock className="h-5 w-5" />
                   <span className="font-semibold text-sm uppercase tracking-widest">48 Hours</span>
                 </div>
@@ -96,7 +96,7 @@ export function CTAComponents() {
 
               <Button
                 asChild
-                className="rounded-full bg-orange-700 px-8 py-6 text-white font-semibold text-base whitespace-nowrap shadow-lg hover:shadow-xl"
+                className="rounded-full bg-secondarypx-8 py-6 text-white font-semibold text-base whitespace-nowrap shadow-lg hover:shadow-xl"
               >
                 <Link href="/contact-us" className="flex items-center gap-2">
                   Get Your Proposal

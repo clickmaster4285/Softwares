@@ -77,7 +77,7 @@ const getCategoryIcon = (categoryName: string) => {
 const getStatusColor = (status: string) => {
   switch(status) {
     case 'live': return 'bg-emerald-500/90';
-    case 'in-progress': return 'bg-amber-500/90';
+    case 'in-progress': return 'bg-primary/90';
     case 'completed': return 'bg-blue-500/90';
     default: return 'bg-gray-500/90';
   }

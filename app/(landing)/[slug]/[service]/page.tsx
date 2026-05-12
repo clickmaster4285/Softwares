@@ -275,7 +275,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                   className="scroll-mt-24"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-1 rounded-full bg-orange-500" />
+                    <div className="h-10 w-1 rounded-full bg-primary" />
                     <h2 
                       className="text-2xl font-semibold text-slate-900 sm:text-3xl"
                       dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.heading, page.serviceName) }}
@@ -367,7 +367,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               {page.tables && page.tables.map((table) => (
                 <section key={table.title} id={slugify(table.title)} className="scroll-mt-24 pt-16">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-1 rounded-full bg-orange-500" />
+                    <div className="h-10 w-1 rounded-full bg-primary" />
                     <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
                       {table.title}
                     </h2>
@@ -414,7 +414,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                   {/* Minimal Hero Section */}
   <div className="w-full flex flex-col mt-4 sm:mt-6 py-6 sm:py-8">
   <div className="flex items-center gap-3 px-4 sm:px-6 md:px-8">
-    <div className="h-8 sm:h-10 w-1 rounded-full bg-orange-500" />
+    <div className="h-8 sm:h-10 w-1 rounded-full bg-primary" />
 
     <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900">
       Success Stories

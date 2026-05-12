@@ -15,6 +15,7 @@
     "sitemap": "next-sitemap && node scripts/generate-sitemaps-simple.js"
   },
   "dependencies": {
+    "@paper-design/shaders-react": "^0.0.76",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -74,6 +75,7 @@
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.72.0",
+    "react-icons": "^5.6.0",
     "react-resizable-panels": "^4.7.6",
     "recharts": "^2.15.4",
     "sharp": "^0.34.5",

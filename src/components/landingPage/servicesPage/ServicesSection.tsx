@@ -53,7 +53,7 @@ export const ServicesSection = ({ serviceName, servicesCards }: ServicesSectionP
   return (
     <section id="our-services" className="scroll-mt-24">
       <div className="flex items-center gap-3">
-        <div className="h-10 w-1 rounded-full bg-orange-500" />
+        <div className="h-10 w-1 rounded-full bg-primary" />
         <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
           <span className="font-black">{serviceName}</span> Services We Deliver
         </h2>
@@ -74,7 +74,7 @@ export const ServicesSection = ({ serviceName, servicesCards }: ServicesSectionP
             className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-8 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-1 bg-gradient-to-br from-white to-orange-50/60 hover:to-orange-50"
           >
             {/* Top Accent */}
-            <div className="absolute top-0 left-0 h-1.5 w-0 bg-gradient-to-r from-orange-500 to-amber-500 transition-all duration-500 group-hover:w-full" />
+            <div className="absolute top-0 left-0 h-1.5 w-0 bg-gradient-to-r from-primaryto-primary transition-all duration-500 group-hover:w-full" />
 
             <div className="relative z-10 pt-2">
               <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">

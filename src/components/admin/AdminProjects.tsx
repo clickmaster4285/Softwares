@@ -182,7 +182,7 @@ const AdminProjects = () => {
 
   const statusColors = {
     live: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
-    'in-progress': 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+    'in-progress': 'bg-primary/20 text-amber-400 border-primary/30',
     completed: 'bg-primary/20 text-primary border-primary/30',
   };
 

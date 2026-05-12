@@ -83,7 +83,7 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
       {/* Progress bar */}
       <div className="mb-4 h-1 overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full bg-gradient-to-r from-orange-500 to-orange-400 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-primaryto-orange-400 transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -108,7 +108,7 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
               >
                 {/* Active indicator line (side) */}
                 {isActive && (
-                  <div className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-orange-500" />
+                  <div className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-primary" />
                 )}
 
                 <span
@@ -136,7 +136,7 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
         </p>
         <Link
           href="/contact-us"
-          className="mt-2 inline-flex items-center text-sm font-medium text-orange-600 hover:text-orange-700"
+          className="mt-2 inline-flex items-center text-sm font-medium text-primaryhover:text-orange-700"
         >
           Book a call
           <svg

@@ -60,7 +60,7 @@ export default function BlogCta() {
           <button 
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-lg bg-orange-500 px-4 py-3 text-sm font-medium text-white transition hover:bg-orange-600 disabled:bg-orange-300 disabled:cursor-not-allowed"
+            className="w-full rounded-lg bg-primarypx-4 py-3 text-sm font-medium text-white transition hover:bg-primarydisabled:bg-orange-300 disabled:cursor-not-allowed"
           >
             {isSubmitting ? 'Submitting...' : 'Start your Project'}
           </button>

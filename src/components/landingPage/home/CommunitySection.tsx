@@ -40,56 +40,56 @@ interface StatItem {
 const communityFeatures: CommunityFeature[] = [
   {
     icon: Code,
-    title: 'Custom Software Development',
+    title: 'Built for Real-World Impact',
     description:
-      'Tailored software built for your business. Web apps, desktop applications, and backend systems that scale.',
+      'We don’t just write code — we build powerful software that solves real business problems and drives measurable growth.',
     stat: '1,860+',
-    statLabel: 'Projects',
+    statLabel: 'Projects Delivered',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: Users,
-    title: 'Web Application Development',
+    title: 'Expert Development Team',
     description:
-      'Modern web apps with React, Node, and cloud hosting. Responsive, fast, and secure applications.',
+      'A skilled team of engineers, designers, and problem-solvers dedicated to turning your ideas into scalable digital products.',
     stat: '3,500+',
-    statLabel: 'Clients',
+    statLabel: 'Happy Clients',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: BookOpen,
-    title: 'Mobile App Development',
+    title: 'Fast & Agile Delivery',
     description:
-      'Native and cross-platform mobile apps for iOS and Android. From MVP to enterprise solutions.',
+      'We move fast without breaking things — delivering high-quality software through agile, iterative development.',
     stat: '75+',
-    statLabel: 'Awards',
+    statLabel: 'Successful Launches',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: MessageCircle,
-    title: 'ERP & Business Software',
+    title: 'Clear Communication',
     description:
-      'ERP, CRM, inventory, and workflow automation. Integrate with your existing systems and processes.',
+      'No confusion, no delays — just transparent updates and direct communication at every stage of your project.',
     stat: '5+',
-    statLabel: 'Years',
+    statLabel: 'Years Experience',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: Globe,
-    title: 'API & Integrations',
+    title: 'Modern Tech Stack',
     description:
-      'REST APIs, third-party integrations, and legacy system modernization. Connect your software ecosystem.',
+      'We use cutting-edge technologies to build fast, secure, and future-ready applications that scale with your business.',
     stat: '24/7',
     statLabel: 'Support',
     color: 'from-primary/60 to-primary/10',
   },
   {
     icon: Award,
-    title: 'Maintenance & Support',
+    title: 'Long-Term Partnership',
     description:
-      'Ongoing updates, security patches, and technical support. Keep your software running smoothly.',
+      'We don’t just deliver projects — we stay with you for continuous improvement, updates, and long-term success.',
     stat: '100%',
-    statLabel: 'Dedicated',
+    statLabel: 'Commitment',
     color: 'from-primary/60 to-primary/10',
   },
 ];
@@ -170,8 +170,8 @@ function CommunityFeatureCountUp({
           <CommunityCountUpSpan countStarted={countStarted} start={start} countUpRef={countUpRef} />
         )}
       </CountUp>
-      {hasPlusSign && <span className="text-orange-500 ml-1">+</span>}
-      {isPercent && <span className="text-orange-500 ml-1">%</span>}
+      {hasPlusSign && <span className="text-primaryml-1">+</span>}
+      {isPercent && <span className="text-primaryml-1">%</span>}
     </>
   );
 }
@@ -311,15 +311,14 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
 
         {/* Animated 3D Cards Grid */}
         <div className="mb-20">
-          <Card3DList
-            cards={cardsData}
-            columns={3}
-            gap="lg"
-            size="md"
-            variant="premium"
-            animated={true}
-            staggerDelay={0.08}
-          />
+<Card3DList
+  cards={cardsData}
+  columns={3}
+  gap="lg"
+  size="md"
+  variant="premium"
+  animated={true}
+/>
         </div>
 
 
@@ -346,7 +345,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
               >
                 <div className="relative bg-white/50 backdrop-blur-sm rounded-2xl p-6">
                   <motion.p
-                    className="relative text-2xl sm:text-3xl md:text-4xl font-bold text-orange-500"
+                    className="relative text-2xl sm:text-3xl md:text-4xl font-bold text-primary"
                     animate={{
                       textShadow: [
                         '0 0 0 rgba(249,115,22,0)',
@@ -370,7 +369,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
                       useEasing={true}
                       useGrouping={true}
                     />
-                    {hasPlusSign && <span className="ml-1 text-orange-500">+</span>}
+                    {hasPlusSign && <span className="ml-1 text-primary">+</span>}
                   </motion.p>
 
                   <p className="text-xs sm:text-sm uppercase tracking-wider text-gray-500 mt-1">
@@ -392,7 +391,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
               boxShadow: '0 10px 25px -5px rgba(249,115,22,0.4)',
             }}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-3 bg-black text-white text-sm font-medium tracking-wider rounded-md hover:bg-orange-500 transition-all duration-300 relative overflow-hidden group"
+            className="px-8 py-3 bg-primary text-white text-sm font-medium tracking-wider rounded-md hover:bg-primary transition-all duration-300 relative overflow-hidden group"
             onClick={() => router.push('/contact-us')}
           >
             <span className="relative z-10 flex items-center">
@@ -400,7 +399,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
             <motion.div
-              className="absolute inset-0 bg-orange-500"
+              className="absolute inset-0 bg-primary"
               initial={{ x: '100%' }}
               whileHover={{ x: 0 }}
               transition={{ duration: 0.3 }}

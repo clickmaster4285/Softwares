@@ -383,7 +383,7 @@ const Testimonials: React.FC = () => {
           <nav className="flex items-center gap-1.5 text-sm">
             <Link
               href="/"
-              className="text-slate-400 hover:text-orange-600 transition-colors font-medium"
+              className="text-slate-400 hover:text-primary transition-colors font-medium"
             >
               Home
             </Link>

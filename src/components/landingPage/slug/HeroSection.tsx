@@ -176,7 +176,7 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
           <div className="inline-flex items-center gap-2 bg-orange-500/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 border border-orange-500/30 animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
             <span className="text-sm font-medium text-orange-300">{serviceData.heroBadge}</span>
           </div>
@@ -195,9 +195,9 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20 animate-[fadeInUp_0.6s_ease-out_0.3s_forwards] opacity-0">
-            <button className="group relative px-8 py-3.5 bg-gradient-to-r from-orange-600 to-orange-500 rounded-md text-white font-semibold text-lg shadow-lg hover:shadow-orange-500/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
+            <button className="group relative px-8 py-3.5 bg-gradient-to-r from-primaryto-primaryrounded-md text-white font-semibold text-lg shadow-lg hover:shadow-orange-500/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
               <span className="relative z-10">{serviceData.ctaText}</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-700 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-secondaryto-primaryopacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
             <button className="px-8 py-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-md text-white font-semibold text-lg hover:bg-white/20 transition-all duration-300 hover:-translate-y-0.5">
               Learn More

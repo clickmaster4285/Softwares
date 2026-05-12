@@ -55,7 +55,7 @@ function statusLabel(status: CaseStudyCard['status']) {
 function statusClasses(status: CaseStudyCard['status']) {
   switch (status) {
     case 'live': return 'bg-emerald-600 text-white';
-    case 'in-progress': return 'bg-amber-500 text-white';
+    case 'in-progress': return 'bg-primary text-white';
     case 'completed': return 'bg-slate-500 text-white';
     default: return 'bg-slate-400 text-white';
   }

@@ -1,39 +1,26 @@
-'use client';
+"use client";
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-coverflow';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
 
-import React, { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
-import { useQuery } from "@tanstack/react-query";
-
+import React, { useState, useRef, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Quote,
-  Star,
-  ChevronLeft,
-  ChevronRight,
-  MessageCircle,
-  Award,
-  TrendingUp,
-  Play,
-  Pause
-} from "lucide-react";
-import { apiFetch } from "@/lib/api";
-import { motion, useInView } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Quote, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
+import { Navigation, Pagination, Autoplay, EffectCoverflow } from "swiper/modules";
+import { useQuery } from "@tanstack/react-query";
+import { apiFetch } from "@/lib/api"; // Make sure this path is correct
 
-// Import Swiper
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export interface Testimonial {
   _id: string;
@@ -45,216 +32,89 @@ export interface Testimonial {
   rating: number;
 }
 
-// Animated Counter (same as your original)
-interface AnimatedCounterProps {
-  value: string;
-  label: string;
-  suffix?: string;
-  delay?: number;
-  gradient?: string;
-}
-
-const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
-  value,
-  label,
-  suffix = '',
-  delay = 0,
-  gradient = 'from-primary/80 to-primary'
-}) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
-
-  useEffect(() => {
-    if (isInView) {
-      let start = 0;
-      const end = parseInt(value.toString().replace(/[^0-9]/g, ''));
-      const duration = 2000;
-      const increment = end / (duration / 16);
-
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(start));
-        }
-      }, 16);
-
-      return () => clearInterval(timer);
-    }
-  }, [isInView, value]);
-
-  return (
-    <motion.div
-      ref={ref}
-      className="text-center relative group"
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay, duration: 0.5 }}
-    >
-      <motion.div
-        className={`absolute -inset-4 bg-gradient-to-r ${gradient} rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
-        animate={isInView ? { scale: [1, 1.2, 1], opacity: [0, 0.2, 0] } : {}}
-        transition={{ duration: 3, repeat: Infinity, delay }}
-      />
-      <div className="relative">
-        <motion.div
-          className={`text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${gradient}`}
-          animate={isInView ? { scale: [1, 1.05, 1] } : {}}
-          transition={{ duration: 2, repeat: Infinity, delay }}
-        >
-          {count}{suffix}
-        </motion.div>
-        <div className="text-sm text-muted-foreground mt-2 font-medium tracking-wide">
-          {label}
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
 interface TestimonialCardProps {
   testimonial: Testimonial;
-  index: number;
   isActive: boolean;
-  duplicateIndex?: number;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, isActive, duplicateIndex }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const gradients = [
-    'from-primary/80 to-primary',
-    'from-amber-400 to-primary',
-    'from-primary to-primary',
-    'from-primary to-primary/80',
-    'from-primary/80 to-primary',
-    'from-amber-400 to-primary/80',
-  ];
-  const gradient = gradients[(duplicateIndex ?? index) % gradients.length];
-
-  useEffect(() => {
-    if (cardRef.current) {
-      gsap.fromTo(cardRef.current,
-        { opacity: 0, y: 50, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          delay: (duplicateIndex ?? index) * 0.1,
-          ease: "back.out(1.2)",
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: "top bottom-=100",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-    }
-  }, [index, duplicateIndex]);
+const TestimonialCard: React.FC<TestimonialCardProps> = ({
+  testimonial,
+  isActive,
+}) => {
+  const blobRadius =
+    "70% 30% 70% 30% / 40% 60% 40% 60%";
 
   return (
-    <motion.div
-      ref={cardRef}
-      className="relative group h-full"
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.3 }}
-    >
-      <motion.div
-        className={`absolute -inset-1 bg-gradient-to-r ${gradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
-        animate={{ scale: isActive ? [1, 1.1, 1] : 1 }}
-        transition={{ duration: 3, repeat: isActive ? Infinity : 0 }}
+    <div className="relative mx-auto w-full max-w-[420px] px-3 py-14">
+      {/* Background Blob */}
+      <div
+        aria-hidden
+        className={`absolute inset-x-2 inset-y-6 -z-0 bg-primary transition-all duration-500 ${
+          isActive
+            ? "rotate-[-10deg] scale-[1.03]"
+            : "rotate-[-8deg] opacity-90"
+        }`}
+        style={{ borderRadius: blobRadius }}
       />
 
-      <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 dark:border-gray-800/20 overflow-hidden h-full">
-        <div className="absolute top-0 right-0 w-32 h-32">
-          <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${gradient} opacity-10 rounded-bl-full`} />
-        </div>
+      {/* Card */}
+      <div
+        className={`relative min-h-[420px] bg-card shadow-xl transition-all duration-500 ${
+          isActive
+            ? "scale-100 shadow-2xl"
+            : "scale-95 opacity-90"
+        }`}
+        style={{ borderRadius: blobRadius }}
+      >
+        <div className="flex h-full flex-col items-center px-8 pb-14 pt-20 text-center">
+          {/* Avatar */}
+          <Avatar className="absolute -top-8 left-1/2 h-20 w-20 -translate-x-1/2 border-4 border-card shadow-md">
+            <AvatarImage
+              src={testimonial.avatarUrl}
+              alt={testimonial.authorName}
+            />
+            <AvatarFallback>
+              {testimonial.authorName.slice(0, 2).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
 
-        <Quote className={`absolute bottom-6 right-6 w-16 h-16 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-10`} />
+          {/* Name */}
+          <h3 className="text-lg font-semibold text-foreground">
+            {testimonial.authorName}
+          </h3>
 
-        <div className="flex items-center justify-between mb-6">
-          <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary bg-opacity-10`}>
-            <Award className="w-3.5 h-3.5 text-white" />
-            <span className="text-xs font-semibold text-white">Verified Client</span>
-          </div>
+          {/* Role */}
+          <p className="mb-5 text-sm text-muted-foreground">
+            {testimonial.authorRole}
+            {testimonial.authorRole &&
+              testimonial.authorCompany &&
+              ", "}
+            {testimonial.authorCompany}
+          </p>
 
-          <div className="flex items-center gap-1">
-            {[...Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <Star
-                  className={`w-4 h-4 ${
-                    i < (testimonial.rating ?? 5)
-                      ? 'fill-amber-400 text-amber-400'
-                      : 'text-gray-300 dark:text-gray-600'
-                  }`}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+          {/* Quote Icon */}
+          <Quote className="mb-3 h-6 w-6 fill-primary text-primary" />
 
-        <div className="relative mb-8">
-          <Quote className={`absolute -top-2 -left-2 w-6 h-6 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-30`} />
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed pl-6 line-clamp-4">
+          {/* Content */}
+          <p className="text-sm leading-7 text-muted-foreground">
             "{testimonial.content}"
           </p>
         </div>
-
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <div className={`absolute inset-0 bg-foreground/30 rounded-full blur-md opacity-50`} />
-            <Avatar className="relative w-16 h-16 border-2 border-white dark:border-gray-800 shadow-lg">
-              <AvatarImage src={testimonial.avatarUrl} alt={testimonial.authorName} />
-              <AvatarFallback className={`bg-foreground/30 text-black font-semibold`}>
-                {(testimonial.authorName ?? 'NA').slice(0, 2).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-gray-900 dark:text-white text-lg">{testimonial.authorName}</h4>
-            {(testimonial.authorRole || testimonial.authorCompany) && (
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {testimonial.authorRole}
-                {testimonial.authorRole && testimonial.authorCompany && ' at '}
-                {testimonial.authorCompany && (
-                  <span className={`font-medium text-primary`}>{testimonial.authorCompany}</span>
-                )}
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-800">
-          <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-            <span className="flex items-center gap-1">
-              <TrendingUp className="w-3 h-3" />
-              +{Math.floor(Math.random() * 30 + 20)}% growth
-            </span>
-          
-          </div>
-        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
+
 
 export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [swiperRef, setSwiperRef] = useState<any>(null);
-  const [hasEnoughSlides, setHasEnoughSlides] = useState(false);
+  const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const headerInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
-  const { data: testimonials = [], isLoading } = useQuery<Testimonial[]>({
+  // Fetch testimonials from API
+  const { data: testimonials = [], isLoading, error } = useQuery<Testimonial[]>({
     queryKey: ["testimonials"],
     queryFn: async () => {
       const res = await apiFetch("/api/testimonials");
@@ -263,271 +123,161 @@ export function TestimonialsSection() {
     },
   });
 
-  // Function to duplicate testimonials to reach desired count
-  const getDuplicatedTestimonials = (originalTestimonials: Testimonial[], targetCount: number = 6) => {
-    if (originalTestimonials.length === 0) return [];
-    
-    const duplicated: Testimonial[] = [];
-    const repeatCount = Math.ceil(targetCount / originalTestimonials.length);
-    
-    for (let i = 0; i < repeatCount; i++) {
-      duplicated.push(...originalTestimonials.map(t => ({
-        ...t,
-        _id: `${t._id}-dup-${i}` // Create unique IDs for duplicates
-      })));
-    }
-    
-    return duplicated.slice(0, targetCount);
-  };
-
-  // Get processed testimonials with duplication if needed
-  const getProcessedTestimonials = () => {
-    if (testimonials.length === 0) return [];
-    
-    // If we have 4 or more, use original (but limit to 6 for homepage)
-    if (testimonials.length >= 4) {
-      return testimonials.slice(0, 6);
-    }
-    
-    // For 2-3 testimonials, duplicate to create 6 items
-    if (testimonials.length >= 2 && testimonials.length <= 3) {
-      return getDuplicatedTestimonials(testimonials, 6);
-    }
-    
-    // For 1 testimonial, duplicate to 3 items
-    if (testimonials.length === 1) {
-      return getDuplicatedTestimonials(testimonials, 3);
-    }
-    
-    return testimonials;
-  };
-
-  const displayTestimonials = getProcessedTestimonials();
-  const isDuplicated = testimonials.length >= 2 && testimonials.length <= 3;
-
   useEffect(() => {
-    if (displayTestimonials.length > 0) {
-      // Enable loop if we have at least 2 slides for better carousel experience
-      setHasEnoughSlides(displayTestimonials.length >= 2);
-    }
-  }, [displayTestimonials]);
+    if (!swiperRef) return;
+    if (isAutoPlaying) swiperRef.autoplay?.start();
+    else swiperRef.autoplay?.stop();
+  }, [isAutoPlaying, swiperRef]);
 
-  // GSAP section entrance
-  useEffect(() => {
-    if (sectionRef.current) {
-      gsap.fromTo(sectionRef.current,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top center",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-    }
-  }, []);
+  // Show loading state
+  if (isLoading) {
+    return (
+     <section className="relative overflow-visible bg-secondary/40 py-24">
+        <div className="mx-auto  px-6 lg:px-22">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 mb-16">
+            <div>
+              <div className="h-8 w-32 bg-muted rounded animate-pulse mb-5" />
+              <div className="h-12 w-64 bg-muted rounded animate-pulse" />
+            </div>
+            <div className="flex items-start md:justify-end">
+              <div className="h-20 w-64 bg-muted rounded animate-pulse" />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-96 bg-muted rounded-2xl animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-  // Autoplay control
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isAutoPlaying && swiperRef && displayTestimonials.length > 0) {
-      interval = setInterval(() => swiperRef.slideNext(), 5000);
-    }
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, swiperRef, displayTestimonials.length]);
+  // Handle error state
+  if (error) {
+    console.error("Error fetching testimonials:", error);
+    return (
+      <section className="relative overflow-hidden bg-secondary/40 py-24">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <p className="text-red-500">Failed to load testimonials. Please try again later.</p>
+        </div>
+      </section>
+    );
+  }
 
+  // Don't render if no testimonials
   if (testimonials.length === 0) return null;
 
   return (
-    <section ref={sectionRef} id="testimonials" className="py-20 lg:py-28 bg-white dark:bg-gray-950 relative overflow-hidden">
-      {/* Background accents */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl animate-pulse delay-700" />
+    <section ref={sectionRef} className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 py-24">
+      <div className="mx-auto px-6 ">
+        
+           {/* Header — original design */}
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center gap-2 mb-3">
+          <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+          <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">
+          Testimonial
+          </p>
+          <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+        </div>
+
+        <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
+            Hear What <span className="text-primary">Our Clients</span>{ " "}Say about Us
+             
+            
+          </h3>
+          
+            <p className="text-gray-700 max-w-2xl mx-auto text-sm">
+           Real stories from real clients who turned their ideas into successful digital products with us.
+        </p>
+
+      
       </div>
 
-      <div className="container mx-auto px-4 lg:px-12  relative z-10">
-      
-        {/* Header */}
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-14"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: 80 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-px bg-primary mx-auto mb-8"
-          />
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            Hear What Our <span className="text-primary">Clients Have to Say</span>
-          </h2>
-          <p className="text-gray-300 max-w-2xl mx-auto text-base mt-4">
-            Discover why businesses trust us for their custom software, web, and mobile app solutions. 
-            Read real feedback from our clients who have transformed their ideas into seamless digital 
-            experiences with our expertise.
-          </p>
-        </motion.div>
 
 
 
-          {/* Stats Section with Glow Effects */}
-        {!isLoading && testimonials.length > 0 && (
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-20 py-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <AnimatedCounter
-              value="5000"
-              label="Happy Clients"
-              suffix="+"
-              delay={0.1}
-              gradient="from-primary to-primary"
-            />
-            <AnimatedCounter
-              value="98"
-              label="Satisfaction Rate"
-              suffix="%"
-              delay={0.2}
-              gradient="from-primary to-primary"
-            />
-            <AnimatedCounter
-              value="50"
-              label="Industry Awards"
-              suffix="+"
-              delay={0.3}
-              gradient="from-primary to-primary"
-            />
-            <AnimatedCounter
-              value="24"
-              label="Support Team"
-              suffix="/7"
-              delay={0.4}
-              gradient="from-primary to-primary"
-            />
-          </motion.div>
-        )}
+        
+        
+
+       
+{/* Carousel */}
+<div className="relative pt-16">
+
+  <Swiper
+    modules={[Navigation, Pagination, Autoplay]}
+    onSwiper={setSwiperRef}
+    onSlideChange={(s) => setActiveIndex(s.realIndex)}
+    centeredSlides
+    loop={testimonials.length >= 3}
+    autoplay={
+      isAutoPlaying
+        ? { delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }
+        : false
+    }
+    speed={800}
+    spaceBetween={-20}
+    slidesPerView={1.1}
+    breakpoints={{
+      640: { slidesPerView: 1.6, spaceBetween: -10 },
+      768: { slidesPerView: 2.2, spaceBetween: 0 },
+      1024: { slidesPerView: 3, spaceBetween: 10 },
+    }}
+    className="!px-4 !py-6"
+  >
+    {testimonials.map((t, i) => (
+      <SwiperSlide key={t._id} className="!h-auto">
+        <TestimonialCard testimonial={t} isActive={i === activeIndex} />
+      </SwiperSlide>
+    ))}
+  </Swiper>
+
+  {/* Controls (Prev + Play/Pause + Next) */}
+  <div className="mt-8 flex items-center justify-center gap-4">
+
+    {/* Prev */}
+    <button
+      onClick={() => {
+        swiperRef?.slidePrev();
+        setIsAutoPlaying(false);
+      }}
+      aria-label="Previous"
+      className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-primary bg-card text-primary shadow-md transition hover:bg-primary hover:text-primary-foreground"
+    >
+      <ChevronLeft className="h-5 w-5" />
+    </button>
+
+    {/* Play/Pause */}
+    <button
+      onClick={() => setIsAutoPlaying((v) => !v)}
+      className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition hover:scale-110"
+      aria-label={isAutoPlaying ? "Pause" : "Play"}
+    >
+      {isAutoPlaying ? (
+        <Pause className="h-4 w-4" />
+      ) : (
+        <Play className="h-4 w-4" />
+      )}
+    </button>
+
+    {/* Next */}
+    <button
+      onClick={() => {
+        swiperRef?.slideNext();
+        setIsAutoPlaying(false);
+      }}
+      aria-label="Next"
+      className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-primary bg-card text-primary shadow-md transition hover:bg-primary hover:text-primary-foreground"
+    >
+      <ChevronRight className="h-5 w-5" />
+    </button>
+
+  </div>
+</div>
 
 
-        {/* Swiper Testimonials */}
-        {isLoading ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <Card key={i} className="rounded-3xl border-border/60 h-96">
-                <CardContent className="p-8">
-                  <div className="h-10 w-10 bg-muted rounded animate-pulse mb-4" />
-                  <div className="space-y-3">
-                    <div className="h-4 w-full bg-muted rounded animate-pulse" />
-                    <div className="h-4 w-5/6 bg-muted rounded animate-pulse" />
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        ) : (
-          <div className="relative">
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
-              effect="coverflow"
-              coverflowEffect={{
-                rotate: 20,
-                stretch: 0,
-                depth: 200,
-                modifier: 1,
-                slideShadows: true,
-              }}
-              spaceBetween={30}
-              slidesPerView={1}
-              centeredSlides={true}
-              loop={hasEnoughSlides}
-              navigation={{
-                prevEl: '.testimonial-prev',
-                nextEl: '.testimonial-next',
-              }}
-              pagination={{ clickable: true, dynamicBullets: true }}
-              autoplay={isAutoPlaying ? { delay: 5000, disableOnInteraction: false } : false}
-              onSwiper={setSwiperRef}
-              onSlideChange={(swiper) => {
-                // Handle active index properly with duplicated slides
-                const realIndex = swiper.realIndex % testimonials.length;
-                setActiveIndex(realIndex);
-              }}
-              breakpoints={{
-                640: { slidesPerView: 1, spaceBetween: 20 },
-                768: { slidesPerView: Math.min(2, displayTestimonials.length), spaceBetween: 30 },
-                1024: { slidesPerView: Math.min(3, displayTestimonials.length), spaceBetween: 40 },
-              }}
-              className="pb-14"
-            >
-              {displayTestimonials.map((testimonial, index) => {
-                // Determine if this is a duplicate and get original index for active state
-                const isDuplicateSlide = testimonial._id.includes('-dup-');
-                const originalIndex = isDuplicateSlide 
-                  ? index % testimonials.length 
-                  : index % testimonials.length;
-                
-                return (
-                  <SwiperSlide key={testimonial._id}>
-                    <TestimonialCard
-                      testimonial={testimonial}
-                      index={index}
-                      isActive={originalIndex === activeIndex}
-                      duplicateIndex={index}
-                    />
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
 
-            {/* Custom Navigation */}
-            {displayTestimonials.length > 1 && (
-              <div className="flex items-center justify-center gap-4 mt-8">
-                <button
-                  className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary transition-all hover:scale-110 disabled:opacity-50"
-                  onClick={() => setIsAutoPlaying(false)}
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-
-                <button
-                  onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                  className="w-14 h-14 rounded-full bg-gradient-to-r from-primary/80 to-primary shadow-xl hover:shadow-2xl flex items-center justify-center text-white transition-all hover:scale-110"
-                >
-                  {isAutoPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-                </button>
-
-                <button
-                  className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary transition-all hover:scale-110"
-                  onClick={() => setIsAutoPlaying(false)}
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* View All Button */}
-        {testimonials.length > 6 && (
-          <div className="text-center mt-12">
-            <Link
-              href="/testimonials"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-all"
-            >
-              View All Testimonials ({testimonials.length})
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   );

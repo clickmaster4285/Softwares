@@ -52,6 +52,9 @@ import PainPointsSolutions from '@/src/components/landingPage/home/PainPointsSol
 import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
 import ExploreSection from '@/src/components/landingPage/home/ExploreSection';
+import {ProjectCTAHero} from '@/src/components/landingPage/home/info-cts';
+import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
+import IndustriesSection from '@/src/components/landingPage/home/industries-section';
 
 export const metadata = metadataConfig.home();
 
@@ -133,7 +136,7 @@ type HomeExploreLink = {
 //     desc: 'Data engineering & pipelines.',
 //     ariaLabel: 'Explore data engineering and data pipeline services.',
 //     icon: Database,
-//     color: 'text-amber-500',
+//     color: 'text-primary',
 //   },
 //   {
 //     href: '/data-intelligence',
@@ -176,7 +179,7 @@ type HomeExploreLink = {
 //     desc: 'Database design, scaling & optimization.',
 //     ariaLabel: 'Explore database services including scaling and optimization.',
 //     icon: DatabaseZap,
-//     color: 'text-amber-500',
+//     color: 'text-primary',
 //   },
 
 
@@ -194,7 +197,7 @@ type HomeExploreLink = {
 //     desc: 'Automated + manual testing.',
 //     ariaLabel: 'Explore software testing and QA services.',
 //     icon: TestTube,
-//     color: 'text-orange-500',
+//     color: 'text-primary',
 //   },
 
 //   {
@@ -278,7 +281,7 @@ const AppsSection = dynamic(
 export default function LandingPage() {
   return (
     <main
-      className="min-h-screen"
+      className="min-h-screen "
       role="main"
       aria-label="ClickMasters software development company homepage"
     >
@@ -293,7 +296,7 @@ export default function LandingPage() {
        
        <Suspense
         fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100 lg:mx-10" />
         }
       >
         <TrustedBySection />
@@ -303,26 +306,42 @@ export default function LandingPage() {
 
      <Suspense
         fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100 " />
         }
       >
         <AboutSection />
+         <CTASectionImage/>
       </Suspense>
 
 
-
-
+   <Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100  " />
+        }
+      >
       <PainPointsSolutions />
+      </Suspense>
+      
+
+    
 
 
       <ExploreSection />
 
 
+<Suspense
+        fallback={
+          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+        }
+      >
+       <ProjectCTAHero/>
+      </Suspense>
+
 
       
        <Suspense
         fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-white" />
+          <div className="h-96 animate-pulse rounded-lg bg-white lg:px-10" />
         }
       >
       <TrustedClientsSection />
@@ -342,7 +361,7 @@ export default function LandingPage() {
           <div className="h-96 animate-pulse rounded-lg bg-gradient-to-b from-white to-gray-50" />
         }
       >   
-          <FeaturedInsights  />
+         <div> <FeaturedInsights  /></div>
       </Suspense>
 
       
@@ -351,14 +370,14 @@ export default function LandingPage() {
 
 
 
-       <Suspense
+        <Suspense
         fallback={
-          <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+          <div className="h-96 animate-pulse rounded-lg bg-white" />
         }
       >
-          <SolutionsPage />
+         <SolutionsPage />
       </Suspense>
-
+ 
 
 
 
@@ -381,23 +400,26 @@ export default function LandingPage() {
           <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
         }
       >
-      <TechStackSection />
+        <TechStackSection />
+       
       </Suspense>
       
      
+ 
 
-      
 
-{/* 
+    
+
+
       <Suspense
         fallback={
           <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
         }
       >
         <AppsSection />
-      </Suspense> */}
+      </Suspense>
 
-
+<IndustriesSection/>
 
       <LandingHomeDeferredHeavy>
         <Suspense

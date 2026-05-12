@@ -234,7 +234,7 @@ export default function RadialOrbitalTimeline({
       {/* LEFT SIDEBAR - Step Cards (Desktop) / Modal (Mobile) */}
       {!isMobile && (
         <div className="w-64 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden flex-shrink-0">
-          <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-orange-600 to-orange-700">
+          <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-primaryto-orange-700">
             <h3 className="text-white font-semibold text-sm">Process Steps</h3>
             <p className="text-orange-100 text-xs mt-1">Click any step to explore</p>
           </div>
@@ -250,7 +250,7 @@ export default function RadialOrbitalTimeline({
                   className={`
                     p-3 rounded-lg cursor-pointer transition-all duration-200
                     ${isSelected 
-                      ? "bg-gradient-to-r from-orange-50 to-orange-100 border-l-4 border-orange-500 shadow-sm" 
+                      ? "bg-gradient-to-r from-orange-50 to-orange-100 border-l-4 border-primaryshadow-sm" 
                       : "bg-gray-50 hover:bg-gray-100 border-l-4 border-transparent"
                     }
                   `}
@@ -259,8 +259,8 @@ export default function RadialOrbitalTimeline({
                     <div className={`
                       w-8 h-8 rounded-full flex items-center justify-center
                       ${isSelected 
-                        ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white" 
-                        : "bg-white text-orange-600 border-2 border-orange-200"
+                        ? "bg-gradient-to-r from-primaryto-primarytext-white" 
+                        : "bg-white text-primaryborder-2 border-orange-200"
                       }
                     `}>
                       <Icon size={14} />
@@ -290,7 +290,7 @@ export default function RadialOrbitalTimeline({
             onClick={() => setMobileMenuOpen(false)}
           />
           <div className="fixed left-0 top-0 bottom-0 w-72 bg-white shadow-xl z-50 overflow-y-auto rounded-r-xl">
-            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-orange-600 to-orange-700 flex justify-between items-center">
+            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-primaryto-secondaryflex justify-between items-center">
               <div>
                 <h3 className="text-white font-semibold text-sm">Process Steps</h3>
                 <p className="text-orange-100 text-xs mt-1">Click any step to explore</p>
@@ -311,7 +311,7 @@ export default function RadialOrbitalTimeline({
                     className={`
                       p-3 rounded-lg cursor-pointer transition-all duration-200
                       ${isSelected 
-                        ? "bg-gradient-to-r from-orange-50 to-orange-100 border-l-4 border-orange-500 shadow-sm" 
+                        ? "bg-gradient-to-r from-orange-50 to-orange-100 border-l-4 border-primaryshadow-sm" 
                         : "bg-gray-50 hover:bg-gray-100 border-l-4 border-transparent"
                       }
                     `}
@@ -320,8 +320,8 @@ export default function RadialOrbitalTimeline({
                       <div className={`
                         w-10 h-10 rounded-full flex items-center justify-center
                         ${isSelected 
-                          ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white" 
-                          : "bg-white text-orange-600 border-2 border-orange-200"
+                          ? "bg-gradient-to-r from-primaryto-primarytext-white" 
+                          : "bg-white text-primaryborder-2 border-orange-200"
                         }
                       `}>
                         <Icon size={16} />
@@ -356,13 +356,13 @@ export default function RadialOrbitalTimeline({
           onClick={handleContainerClick}
         >
           {/* Center Node - Responsive sizing */}
-          <div className={`absolute rounded-full bg-gradient-to-br from-orange-500 via-orange-600 to-amber-500 animate-pulse flex items-center justify-center z-10 shadow-lg shadow-orange-200 ${isMobile ? 'w-12 h-12' : 'w-16 h-16'}`}>
+          <div className={`absolute rounded-full bg-gradient-to-br from-primaryvia-primaryto-primary animate-pulse flex items-center justify-center z-10 shadow-lg shadow-orange-200 ${isMobile ? 'w-12 h-12' : 'w-16 h-16'}`}>
             <div className={`absolute rounded-full border border-orange-300 animate-ping opacity-70 ${isMobile ? 'w-14 h-14' : 'w-20 h-20'}`}></div>
             <div
               className={`absolute rounded-full border border-orange-200 animate-ping opacity-50 ${isMobile ? 'w-16 h-16' : 'w-24 h-24'}`}
               style={{ animationDelay: "0.5s" }}
             ></div>
-            <div className={`rounded-full bg-white flex items-center justify-center font-bold text-orange-600 shadow-sm ${isMobile ? 'w-6 h-6 text-sm' : 'w-8 h-8'}`}>
+            <div className={`rounded-full bg-white flex items-center justify-center font-bold text-primaryshadow-sm ${isMobile ? 'w-6 h-6 text-sm' : 'w-8 h-8'}`}>
               {sortedTimelineData.length}
             </div>
           </div>
@@ -415,11 +415,11 @@ export default function RadialOrbitalTimeline({
                   ${isMobile ? 'w-10 h-10' : 'w-12 h-12'} rounded-full flex flex-col items-center justify-center
                   ${
                     isExpanded
-                      ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md"
-                      : "bg-white text-orange-600 border-2 border-orange-300 shadow-sm"
+                      ? "bg-gradient-to-r from-primaryto-primarytext-white shadow-md"
+                      : "bg-white text-primaryborder-2 border-orange-300 shadow-sm"
                   }
                   transition-all duration-300 transform
-                  ${isExpanded ? "scale-150" : "hover:scale-110 hover:border-orange-500 hover:shadow-md"}
+                  ${isExpanded ? "scale-150" : "hover:scale-110 hover:border-primaryhover:shadow-md"}
                 `}
                 >
                   <span className={`${isMobile ? 'text-base' : 'text-lg'} font-bold`}>{item.id}</span>
@@ -433,7 +433,7 @@ export default function RadialOrbitalTimeline({
                     absolute top-14 left-1/2 -translate-x-1/2 whitespace-nowrap
                     text-xs font-semibold tracking-wider
                     transition-all duration-300
-                    ${isExpanded ? "text-orange-600 scale-110 font-bold" : "text-gray-500 group-hover:text-orange-600"}
+                    ${isExpanded ? "text-primaryscale-110 font-bold" : "text-gray-500 group-hover:text-orange-600"}
                     ${isMobile && !isExpanded ? 'hidden' : ''}
                   `}
                   >
@@ -451,7 +451,7 @@ export default function RadialOrbitalTimeline({
         <div className="w-80 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden flex-shrink-0">
           {selectedStepDetails ? (
             <>
-              <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-orange-600 to-orange-700 flex justify-between items-center">
+              <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-primaryto-secondaryflex justify-between items-center">
                 <div>
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-white font-bold">
@@ -500,7 +500,7 @@ export default function RadialOrbitalTimeline({
             }}
           />
           <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl z-50 max-h-[70vh] overflow-y-auto animate-slide-up">
-            <div className="sticky top-0 p-4 border-b border-gray-200 bg-gradient-to-r from-orange-600 to-orange-700 flex justify-between items-center rounded-t-2xl">
+            <div className="sticky top-0 p-4 border-b border-gray-200 bg-gradient-to-r from-primaryto-secondaryflex justify-between items-center rounded-t-2xl">
               <div>
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-white font-bold">
@@ -578,14 +578,14 @@ function DetailContent({ step, sortedData, onSelectStep }: {
       <div className="mt-4 pt-3 border-t border-gray-100">
         <div className="flex justify-between items-center text-xs mb-1">
           <span className="flex items-center text-gray-500">
-            <Zap size={10} className="mr-1 text-orange-500" />
+            <Zap size={10} className="mr-1 text-primary" />
             Progress
           </span>
-          <span className="font-mono text-orange-600 font-semibold">{step.energy}%</span>
+          <span className="font-mono text-primaryfont-semibold">{step.energy}%</span>
         </div>
         <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"
+            className="h-full bg-gradient-to-r from-primaryto-primaryrounded-full"
             style={{ width: `${step.energy}%` }}
           ></div>
         </div>
@@ -607,7 +607,7 @@ function DetailContent({ step, sortedData, onSelectStep }: {
                   key={relatedId}
                   variant="outline"
                   size="sm"
-                  className="flex items-center h-6 px-2 py-0 text-xs rounded-md border-orange-200 bg-white hover:bg-orange-50 text-gray-600 hover:text-orange-600 transition-all"
+                  className="flex items-center h-6 px-2 py-0 text-xs rounded-md border-orange-200 bg-white hover:bg-orange-50 text-gray-600 hover:text-primary transition-all"
                   onClick={(e) => {
                     e.stopPropagation();
                     onSelectStep(relatedId);

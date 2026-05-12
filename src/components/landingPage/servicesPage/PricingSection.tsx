@@ -68,7 +68,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
           whileInView={{ height: 40 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="h-10 w-1 rounded-full bg-orange-500"
+          className="h-10 w-1 rounded-full bg-primary"
         />
         <motion.h2 
           className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900"
@@ -122,7 +122,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.5 + idx * 0.1 }}
             >
-              <svg className="h-3 w-3 sm:h-4 sm:w-4 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="h-3 w-3 sm:h-4 sm:w-4 text-primaryflex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               <span className="whitespace-nowrap">{text}</span>

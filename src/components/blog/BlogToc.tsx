@@ -204,15 +204,15 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
                   aria-current={isActive ? 'location' : undefined}
                   className={`block rounded-r-md px-3 py-2 text-sm leading-snug transition-all duration-200 ${
                     isActive
-                      ? 'border-l-2 border-l-orange-500 bg-orange-50 text-orange-700 shadow-sm font-medium'
+                      ? 'border-l-2 border-l-primarybg-orange-50 text-secondaryshadow-sm font-medium'
                       : isHovered
-                      ? 'border-l-2 border-l-orange-300 bg-orange-50/50 text-orange-600 translate-x-0.5'
+                      ? 'border-l-2 border-l-orange-300 bg-orange-50/50 text-primarytranslate-x-0.5'
                       : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800 hover:translate-x-0.5'
                   } ${item.level === 2 ? 'ml-3' : item.level === 3 ? 'ml-6' : ''}`}
                 >
                   <div className="flex items-center gap-2">
                     {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-primaryanimate-pulse"></span>
                     )}
                     <span className="flex-1">{item.text}</span>
                     {isHovered && (

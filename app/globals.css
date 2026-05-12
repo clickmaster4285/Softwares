@@ -7,7 +7,7 @@
 @layer base {
   :root {
 
-    --background: 210 20% 98%; /* soft cool gray */
+    --background:  0 0% 100%;/* soft cool gray */
     --foreground: 222 47% 11%; /* deep slate */
 
     --card: 0 0% 100%; /* pure white cards */
@@ -18,10 +18,10 @@
 
 
     /* Slightly deeper orange (same hue) for WCAG contrast with white text on buttons/links */
-    --primary: 24 90% 42%;
+    --primary: 14 68% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 16% 93%; /* very light blue-gray */
+    --secondary: 15 54% 44%; /* very light blue-gray */
     --secondary-foreground: 222 47% 11%;
 
     --muted: 210 16% 90%;
