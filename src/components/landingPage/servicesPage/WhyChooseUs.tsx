@@ -74,7 +74,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
       {/* Cards Grid - 4 columns */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
   {differentiators.map((diff, idx) => {
-    const parts = diff.description.split("|").map((s) => s.trim());
+    const parts = diff.description.split("|").map((s, index) => s.trim());
     const isMultiCol = parts.length > 1;
 
     return (

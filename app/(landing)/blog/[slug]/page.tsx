@@ -274,7 +274,7 @@ export default async function BlogDetailPage({
               { name: 'Blog', url: '/blog' },
               { name: post.title, url: `/blog/${slug}` },
             ]),
-          ),
+          ) || "",
         }}
       />
       <Script
@@ -302,7 +302,7 @@ export default async function BlogDetailPage({
             dateModified: post.updatedAt || post.createdAt || undefined,
             mainEntityOfPage: `https://software.clickmasters.pk/blog/${encodeURIComponent(slug)}`,
             image: imageSrc,
-          }),
+          }) || "",
         }}
       />
       <div className="min-h-screen bg-[#f5f6f8] pt-20 text-slate-900">

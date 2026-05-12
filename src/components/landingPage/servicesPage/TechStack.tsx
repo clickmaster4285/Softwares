@@ -44,7 +44,7 @@ export const TechStack = ({ techStack }: TechStackProps) => {
 
   const categoryItems = techStack.map((stack) => ({
     category: stack.category,
-    items: stack.subcategories.flatMap((sub) => sub.items),
+    items: stack.subcategories?.flatMap((sub) => sub.items) || [],
   }));
 
   return (
@@ -86,10 +86,10 @@ export const TechStack = ({ techStack }: TechStackProps) => {
 
         <div className="space-y-8 sm:space-y-10">
           {categoryItems.map(({ category, items }, rowIndex) => {
-            const repeated = Array.from(
+            const repeated = items.length > 0 ? Array.from(
               { length: Math.ceil(20 / items.length) },
               () => items
-            ).flat();
+            ).flat() : [];
 
             const goLeft = rowIndex % 2 === 0;
 
