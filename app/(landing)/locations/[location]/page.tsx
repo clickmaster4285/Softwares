@@ -5,6 +5,15 @@ import { countryData, getAllCountrySlugs, getCountryData } from '@/lib/country';
 import { getCountryServicePage, getAllCountryServicePages } from '@/lib/country-services';
 import { ProcessSection } from '@/src/components/landingPage/servicesPage/ProcessSection';
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
+import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
+import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
+import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
+import FaqSection from '@/src/components/landingPage/location/FaqSection';
+import ProjectCTAHero from '@/src/components/landingPage/location/ProjectCTAHero';
+import WhyChooseUs from '@/src/components/landingPage/home/whyUs';
+import TrustedClientsSection from '@/src/components/landingPage/home/TrustedClientsSection';
+import PainPointsSolutions from '@/src/components/landingPage/home/PainPointsSolutions';
+import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 
 type Props = { params: Promise<{ location: string }> };
 
@@ -214,117 +223,33 @@ export default async function CountryPage({ params }: Props) {
       </section>
 
       {/* 5. Industries We Serve in [Country] */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Industries We Serve in {country.name}
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Industry-specific solutions for your unique business challenges
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {country.industries.map((industry, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{industry.name}</h3>
-                <p className="text-slate-600">{industry.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section className="">
+    <TrustedClientsSection/>
       </section>
 
       {/* 6. Solutions for Businesses in [Country] */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Solutions for Businesses in {country.name}
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Focus on outcomes with our comprehensive business solutions
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {country.solutions.map((solution, index) => (
-              <div key={index} className="bg-gradient-to-br from-primary/5 to-white rounded-xl p-6 border border-primary/20">
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{solution.name}</h3>
-                <p className="text-slate-600">{solution.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section className="">
+    <SolutionsPage/>
       </section>
 
       {/* 7. Problems Businesses Face in [Country] */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Problems Businesses Face in {country.name}
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Common challenges that hinder business growth and efficiency
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {country.problems.map((problem, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-sm border-l-4 border-red-500">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  </div>
-                  <h3 className="font-semibold text-slate-900">Challenge</h3>
-                </div>
-                <p className="text-slate-600">{problem}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <div className="bg-primary text-white rounded-xl p-8 max-w-3xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">We solve these challenges with scalable custom software solutions.</h3>
-              <a
-                href={`/contact-us?location=${location}`}
-                className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-slate-100 transition-colors mt-4"
-              >
-                Get Your Solution
-              </a>
-            </div>
-          </div>
-        </div>
+      <section className="">
+        <PainPointsSolutions  countryName={country.name} />
       </section>
 
       {/* 8. Why Choose Us in [Country] */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Why Choose ClickMasters in {country.name}
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Competitive differentiation that sets us apart
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { title: 'Agile Development', desc: 'Flexible and iterative approach for faster delivery' },
-              { title: 'Dedicated Teams', desc: 'Focused experts committed to your project success' },
-              { title: 'Transparent Communication', desc: 'Regular updates and complete project visibility' },
-              { title: 'Timezone Flexibility', desc: 'Working hours aligned with your business needs' },
-              { title: 'Scalable Architecture', desc: 'Future-proof solutions that grow with your business' },
-              { title: 'Ongoing Support', desc: 'Comprehensive maintenance and continuous improvement' }
-            ].map((item, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-lg border border-slate-200">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <div className="w-6 h-6 bg-primary rounded"></div>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{item.title}</h3>
-                <p className="text-slate-600">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section className="">
+      <WhyChooseUs 
+  countryName={country.name}
+  items={[
+    { title: 'Agile Development', desc: 'Flexible and iterative approach for faster delivery' },
+    { title: 'Dedicated Teams', desc: 'Focused experts committed to your project success' },
+    { title: 'Transparent Communication', desc: 'Regular updates and complete project visibility' },
+    { title: 'Timezone Flexibility', desc: 'Working hours aligned with your business needs' },
+    { title: 'Scalable Architecture', desc: 'Future-proof solutions that grow with your business' },
+    { title: 'Ongoing Support', desc: 'Comprehensive maintenance and continuous improvement' }
+  ]}
+/>
       </section>
 
       {/* 9. Development Process */}
@@ -343,176 +268,69 @@ export default async function CountryPage({ params }: Props) {
         />
       )}
 
-      {/* 10. Technologies We Use */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Technologies We Use
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Modern tech stack for reliable and scalable solutions
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {country.technologies.map((tech, index) => (
-              <div key={index} className="bg-slate-50 rounded-xl p-6 text-center hover:bg-slate-100 transition-colors">
-                <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <div className="w-8 h-8 bg-primary rounded"></div>
-                </div>
-                <p className="text-sm font-medium text-slate-900">{tech}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            {/* 14. Lead Generation Section */}
+<ProjectCTAHero 
+  variant="combined"
+  badge="Build Your Project"
+  title="Ready to Transform Your Business? Let's Build Something Amazing Together"
+  description="Get started with a free consultation and discover how we can help you achieve your goals. Whether you need a custom web app, mobile solution, or enterprise software, our team is ready to bring your vision to life."
+  buttons={[
+    { text: "Book Free Consultation", href: `/contact-us?location=${location}`, variant: "primary", icon: "calendar" },
+    { text: "Call Us Now", href: "tel:+1234567890", variant: "outline", icon: "phone" }
+  ]}
+  sliderCards={[
+    { title: "100+", subtitle: "Projects Delivered" },
+    { title: "Agile", subtitle: "Development" },
+    { title: "On-time", subtitle: "Delivery" },
+    { title: "24/7", subtitle: "Support" },
+    { title: "50+", subtitle: "Happy Clients" },
+    { title: "10x", subtitle: "Faster Shipping" },
+    { title: "ISO", subtitle: "Certified Team" },
+  ]}
+  location={location}
+      />
+      
 
+
+      {/* 10. Technologies We Use */}
+      <TechStackSection/>
       {/* 11. Case Studies / Portfolio */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Case Studies & Portfolio
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Proof of expertise through real-world success stories
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {country.caseStudies.map((caseStudy, index) => (
-              <div key={index} className="bg-white rounded-xl p-8 shadow-lg">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
-                    {caseStudy.industry}
-                  </span>
-                  <span className="text-sm text-slate-500">{country.name}</span>
-                </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">{caseStudy.title}</h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2">Challenge</h4>
-                    <p className="text-slate-600">{caseStudy.challenge}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2">Solution</h4>
-                    <p className="text-slate-600">{caseStudy.solution}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2">Results</h4>
-                    <p className="text-slate-600">{caseStudy.results}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeaturedInsights/>
 
       {/* 12. Testimonials From Clients */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Client Testimonials
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Social proof from satisfied clients
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {country.testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-xl p-8 shadow-lg border border-slate-200">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className="w-5 h-5 text-yellow-400">★</div>
-                  ))}
-                </div>
-                <p className="text-slate-700 mb-6 italic">"{testimonial.feedback}"</p>
-                <div>
-                  <p className="font-semibold text-slate-900">{testimonial.name}</p>
-                  <p className="text-slate-600">{testimonial.company}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection/>
 
       {/* 13. FAQ Section */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-slate-600">
-              Answer objections and improve SEO
-            </p>
-          </div>
-          <div className="space-y-4">
-            {country.faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">{faq.question}</h3>
-                <p className="text-slate-600">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section className="">
+       {country.faqs && country.faqs.length > 0 && (
+  <FaqSection 
+    faqs={country.faqs} 
+    location={location}
+    title="Frequently Asked Questions"
+    subtitle="Answers before you start"
+  />
+)}
       </section>
 
-      {/* 14. Lead Generation Section */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-primary to-primary/80 rounded-2xl p-12 text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Transform Your Business?
-            </h2>
-            <p className="text-xl mb-8 text-white/90">
-              Get started with a free consultation and discover how we can help you achieve your goals
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href={`/contact-us?location=${location}`}
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-slate-100 transition-colors"
-              >
-                Book Free Consultation
-              </a>
-              <a
-                href="tel:+1234567890"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
-              >
-                Call Us Now
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* 15. Final CTA Section */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-            Looking for a reliable software development company in {country.name}?
-          </h2>
-          <p className="text-xl text-slate-600 mb-8">
-            Let's build something amazing together
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={`/contact-us?location=${location}`}
-              className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors"
-            >
-              Start Your Project
-            </a>
-            <a
-              href="#services"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
-            >
-              Book Free Consultation
-            </a>
-          </div>
-        </div>
-      </section>
+      <div>
+        <ProjectCTAHero 
+  variant="final"
+  title={`Looking for a reliable software development company in ${country.name}?`}
+  description="Let's build something amazing together"
+  buttons={[
+    { text: "Start Your Project", href: `/contact-us?location=${location}`, variant: "primary", icon: "arrow" },
+    { text: "Book Free Consultation", href: "#services", variant: "outline", icon: "calendar" }
+  ]}
+  location={location}
+  countryName={country.name}
+      /></div>
+      
+
+
+
     </div>
   );
 }

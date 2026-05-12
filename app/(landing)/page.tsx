@@ -54,7 +54,7 @@ import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights
 import ExploreSection from '@/src/components/landingPage/home/ExploreSection';
 import {ProjectCTAHero} from '@/src/components/landingPage/home/info-cts';
 import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
-import IndustriesSection from '@/src/components/landingPage/home/industries-section';
+
 
 export const metadata = metadataConfig.home();
 
@@ -419,7 +419,7 @@ export default function LandingPage() {
         <AppsSection />
       </Suspense>
 
-<IndustriesSection/>
+
 
       <LandingHomeDeferredHeavy>
         <Suspense

@@ -200,7 +200,8 @@ export function HeroSection(): JSX.Element {
 
   return (
     <section
-     className="relative h-screen flex items-center overflow-hidden"
+      /* ─── CHANGE 1: mobile = auto height + scroll; desktop = h-screen ─── */
+      className="relative min-h-screen flex flex-col lg:flex-row lg:items-stretch overflow-x-hidden"
       aria-labelledby="hero-heading"
     >
       <div className="absolute inset-0 -z-30">
@@ -208,169 +209,76 @@ export function HeroSection(): JSX.Element {
       </div>
       <div className="absolute inset-0 -z-20 bg-black/50" />
 
-      <div className="container relative z-10 mx-auto w-full max-w-full min-w-0 px-3 sm:px-4 lg:px-14">
-        <div className="mx-auto w-full min-w-0 px-10">
-          {/* Two Column Layout */}
-          <div className="grid gap-10 lg:grid-cols-[1fr_400px] xl:gap-16">
-            
-           
-<div className="flex flex-col justify-center text-left min-h-[500px] lg:min-h-[620px]">
-  {/* Heading */}
-  <div className="mb-6 md:mb-8">
-    <div className="overflow-hidden">
-      <div className="animate-slide-in-up font-display text-[1.65rem] font-bold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
-        Custom Software Development
-      </div>
-    </div>
-    <div className="overflow-hidden mt-2">
-      <div className="animate-slide-in-up font-display text-[1.55rem] font-bold leading-tight tracking-tight text-gray-300 sm:text-3xl md:text-4xl lg:text-5xl">
-        That Scales Your Business Revenue <span className="text-primary">— Not Just Code</span>
-      </div>
-    </div>
-  </div>
+      <div className="container relative z-10 mx-auto w-full max-w-full min-w-0 px-3 sm:px-4 lg:px-14 flex flex-col justify-center min-h-screen">
+        <div className="mx-auto w-full min-w-0 px-4 sm:px-6 lg:px-10">
+          {/* ─── CHANGE 2: single-col on mobile, two-col on lg ─── */}
+          <div className="grid gap-10 pt-24 pb-10 lg:pt-0 lg:pb-0 lg:min-h-screen lg:grid-cols-[1fr_400px] xl:gap-16 lg:items-center">
 
-  {/* Sub-description */}
-  <p className="animate-slide-in-up text-base sm:text-lg md:text-xl text-gray-100 leading-relaxed mb-8">
-    We design, build, and deploy high-performance web, mobile, SaaS, and AI-powered
-    systems for companies in the USA, Europe &amp; Middle East.
-  </p>
+            {/* ── Left column ── */}
+            <div className="flex flex-col justify-center text-left">
+              {/* Heading */}
+              <div className="mb-6 md:mb-8">
+                <div className="overflow-hidden">
+                  <div className="animate-slide-in-up font-display text-[1.65rem] font-bold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                    Custom Software Development
+                  </div>
+                </div>
+                <div className="overflow-hidden mt-2">
+                  <div className="animate-slide-in-up font-display text-[1.45rem] font-bold leading-tight tracking-tight text-gray-300 sm:text-3xl md:text-4xl lg:text-5xl">
+                    That Scales Your Business Revenue <span className="text-primary">— Not Just Code</span>
+                  </div>
+                </div>
+              </div>
 
-  {/* Typewriter */}
-  <div className="animate-slide-in-up mb-10">
-    <div className="inline-block rounded-2xl bg-white/5 px-6 py-3 backdrop-blur-sm border border-white/10">
-      <div className="text-left text-base sm:text-lg font-medium text-gray-100">
-        <Typewriter texts={heroBullets} typingSpeed={60} deletingSpeed={30} pauseTime={2000} />
-      </div>
-    </div>
-  </div>
+              {/* Sub-description */}
+              <p className="animate-slide-in-up text-base sm:text-lg md:text-xl text-gray-100 leading-relaxed mb-8">
+                We design, build, and deploy high-performance web, mobile, SaaS, and AI-powered
+                systems for companies in the USA, Europe &amp; Middle East.
+              </p>
 
-  {/* Buttons */}
-  <div className="animate-slide-in-up flex flex-col sm:flex-row gap-4">
-    <Button
-      size="lg"
-      className="group w-full sm:w-auto min-h-[52px] rounded-xl bg-primary px-8 text-base font-medium hover:bg-primary/90"
-      asChild
-    >
-      <Link href="/contact-us">
-        Get Free Software Strategy Call
-        <ArrowRight className="ml-2 h-5 w-5" />
-      </Link>
-    </Button>
+              {/* Typewriter */}
+              <div className="animate-slide-in-up mb-10">
+                <div className="inline-block rounded-2xl bg-white/5 px-4 sm:px-6 py-3 backdrop-blur-sm border border-white/10 max-w-full overflow-hidden">
+                  <div className="text-left text-sm sm:text-base lg:text-lg font-medium text-gray-100">
+                    <Typewriter texts={heroBullets} typingSpeed={60} deletingSpeed={30} pauseTime={2000} />
+                  </div>
+                </div>
+              </div>
 
-    <Button
-      size="lg"
-      variant="outline"
-      className="w-full sm:w-auto min-h-[52px] rounded-xl border-white/30 hover:bg-white/5"
-      asChild
-    >
-      <Link href="/contact-us">
-        <FileText className="mr-2 h-5 w-5" />
-        Request Proposal
-      </Link>
-    </Button>
-  </div>
-</div>
+              {/* Buttons */}
+              <div className="animate-slide-in-up flex flex-col sm:flex-row gap-4">
+                <Button
+                  size="lg"
+                  className="group w-full sm:w-auto min-h-[52px] rounded-xl bg-primary px-6 text-sm sm:text-base font-medium hover:bg-primary/90"
+                  asChild
+                >
+                  <Link href="/contact-us">
+                    Get Free Software Strategy Call
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
 
-          {/* Right Side - CTA Form (Vertically Centered) */}
-<div className="flex flex-col justify-center min-h-[520px] lg:min-h-[580px]">
-  <div className="animate-slide-in-up">
-    <div className="rounded-2xl border border-white/15 bg-black/60 p-6 sm:p-8 shadow-2xl shadow-black/50 backdrop-blur-md">
-      <h2 className="font-display text-lg font-bold text-white">Get a free quote</h2>
-      <p className="mt-1 mb-6 text-sm text-gray-300">
-        Share your details — we&apos;ll respond within one business day.
-      </p>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto min-h-[52px] rounded-xl border-white/30 hover:bg-white/5"
+                  asChild
+                >
+                  <Link href="/contact-us">
+                    <FileText className="mr-2 h-5 w-5" />
+                    Request Proposal
+                  </Link>
+                </Button>
+              </div>
 
-      {heroError && (
-        <div className="mb-4 rounded-xl border border-red-400/40 bg-red-950/50 px-4 py-3 text-sm text-red-100">
-          {heroError}
-        </div>
-      )}
 
-      {heroSuccess ? (
-        <div className="rounded-xl bg-green-950/40 border border-green-400/30 p-8 text-center">
-          <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-primary" />
-          <p className="font-semibold text-white">Message received!</p>
-          <p className="mt-1 text-sm text-gray-300">We&apos;ll get back to you shortly.</p>
-        </div>
-      ) : (
-        <form onSubmit={handleHeroSubmit} className="space-y-4">
-          <div className="relative">
-            <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <input 
-              type="text" 
-              name="name" 
-              value={heroForm.name} 
-              onChange={handleHeroChange} 
-              placeholder="Full name" 
-              className={heroFieldClass} 
-              required 
-            />
-          </div>
 
-          <div className="relative">
-            <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <input 
-              type="email" 
-              name="email" 
-              value={heroForm.email} 
-              onChange={handleHeroChange} 
-              placeholder="Work email" 
-              className={heroFieldClass} 
-              required 
-            />
-          </div>
 
-          <div className="relative">
-            <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <input 
-              type="tel" 
-              name="phone" 
-              value={heroForm.phone} 
-              onChange={handleHeroChange} 
-              placeholder="Phone (optional)" 
-              className={heroFieldClass} 
-            />
-          </div>
 
-          <div className="relative">
-            <DollarSign className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <input 
-              type="text" 
-              name="budget" 
-              value={heroForm.budget} 
-              onChange={handleHeroChange} 
-              placeholder="Estimated budget (optional)" 
-              className={heroFieldClass} 
-            />
-          </div>
 
-          <textarea
-            name="message"
-            rows={3}
-            value={heroForm.message}
-            onChange={handleHeroChange}
-            placeholder="What would you like to build?"
-            className="min-h-[88px] w-full resize-y rounded-xl border border-white/25 bg-white/5 px-3 py-3 text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30"
-            required
-          />
-
-          <button
-            type="submit"
-            disabled={heroSending}
-            className="w-full min-h-[52px] rounded-xl bg-primary text-base font-semibold text-white transition hover:bg-primary/90 disabled:opacity-60"
-          >
-            {heroSending ? 'Sending...' : 'Send Message'}
-          </button>
-        </form>
-      )}
-    </div>
-  </div>
-</div>
-          </div>
-
-          {/* Stats Section */}
+                  {/* Stats Section */}
           <div
-            className="animate-slide-in-up mt-16 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-white/25 pt-10 md:grid-cols-4 md:gap-x-12"
+            className="animate-slide-in-up mt-6 lg:mt-10 grid grid-cols-2 gap-x-8 gap-y-10  pt-10 pb-10 md:grid-cols-4 md:gap-x-12"
             role="list"
             aria-label="Company achievements"
             style={{ animationDelay: '400ms' }}
@@ -385,7 +293,110 @@ export function HeroSection(): JSX.Element {
                 </p>
               </div>
             ))}
+              </div>
+              
+              
+            </div>
+
+            {/* ── Right column — CTA Form, vertically centered ── */}
+            <div className="flex items-center justify-center lg:h-screen w-full">
+              <div className="animate-slide-in-up w-full">
+                <div className="rounded-2xl border border-white/15 bg-black/60 p-6 sm:p-8 shadow-2xl shadow-black/50 backdrop-blur-md">
+                  <h2 className="font-display text-lg font-bold text-white">Get a free quote</h2>
+                  <p className="mt-1 mb-6 text-sm text-gray-300">
+                    Share your details — we&apos;ll respond within one business day.
+                  </p>
+
+                  {heroError && (
+                    <div className="mb-4 rounded-xl border border-red-400/40 bg-red-950/50 px-4 py-3 text-sm text-red-100">
+                      {heroError}
+                    </div>
+                  )}
+
+                  {heroSuccess ? (
+                    <div className="rounded-xl bg-green-950/40 border border-green-400/30 p-8 text-center">
+                      <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-primary" />
+                      <p className="font-semibold text-white">Message received!</p>
+                      <p className="mt-1 text-sm text-gray-300">We&apos;ll get back to you shortly.</p>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleHeroSubmit} className="space-y-4">
+                      <div className="relative">
+                        <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="text"
+                          name="name"
+                          value={heroForm.name}
+                          onChange={handleHeroChange}
+                          placeholder="Full name"
+                          className={heroFieldClass}
+                          required
+                        />
+                      </div>
+
+                      <div className="relative">
+                        <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="email"
+                          name="email"
+                          value={heroForm.email}
+                          onChange={handleHeroChange}
+                          placeholder="Work email"
+                          className={heroFieldClass}
+                          required
+                        />
+                      </div>
+
+                      <div className="relative">
+                        <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={heroForm.phone}
+                          onChange={handleHeroChange}
+                          placeholder="Phone (optional)"
+                          className={heroFieldClass}
+                        />
+                      </div>
+
+                      <div className="relative">
+                        <DollarSign className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="text"
+                          name="budget"
+                          value={heroForm.budget}
+                          onChange={handleHeroChange}
+                          placeholder="Estimated budget (optional)"
+                          className={heroFieldClass}
+                        />
+                      </div>
+
+                      <textarea
+                        name="message"
+                        rows={3}
+                        value={heroForm.message}
+                        onChange={handleHeroChange}
+                        placeholder="What would you like to build?"
+                        className="min-h-[88px] w-full resize-y rounded-xl border border-white/25 bg-white/5 px-3 py-3 text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                        required
+                      />
+
+                      <button
+                        type="submit"
+                        disabled={heroSending}
+                        className="w-full min-h-[52px] rounded-xl bg-primary text-base font-semibold text-white transition hover:bg-primary/90 disabled:opacity-60"
+                      >
+                        {heroSending ? 'Sending...' : 'Send Message'}
+                      </button>
+                    </form>
+                  )}
+                </div>
+              </div>
+            </div>
+
           </div>
+
+      
         </div>
       </div>
 

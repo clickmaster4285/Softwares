@@ -59,22 +59,34 @@ const solutions = [
   { title: 'Built for 10x Growth', description: 'Auto-scaling AWS/Azure infrastructure designed for massive traffic from day one.', metric: '99.99% uptime SLA' },
 ];
 
-export default function PainPointsSolutions() {
+
+interface PainPointsSolutionsProps {
+  countryName?: string;
+}
+
+
+export default function PainPointsSolutions({ countryName }: PainPointsSolutionsProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  const hasLocation = !!countryName;
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-24 md:py-32 lg:px-14">
       <div className="relative mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* Header */}
-        <div className="mx-auto max-w-3xl text-center mb-16">
+       
+
+        
+
+
+         <div className="mx-auto max-w-3xl text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-[2px] w-8 rounded-full bg-orange-400" />
             
             <div className="inline-flex items-center gap-1.5">
               <Zap className="h-3.5 w-3.5 text-orange-700" />
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                Stop Settling For Mediocre
+                {hasLocation ? `Problems Businesses Face in ${countryName}` : 'Stop Settling For Mediocre'}
               </p>
             </div>
 
@@ -82,13 +94,17 @@ export default function PainPointsSolutions() {
           </div>
 
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-3xl leading-tight">
-            Painful Development Realities and How We Fix them
+            {hasLocation 
+              ? `Painful Development Realities in ${countryName} and How We Fix Them`
+              : 'Painful Development Realities and How We Fix them'
+            }
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-            Most agencies deliver headaches wrapped in pretty proposals.
-            Here’s the reality — and why ClickMasters approaches development
-            differently.
+            {hasLocation 
+              ? 'Common challenges that hinder business growth and efficiency'
+              : 'Most agencies deliver headaches wrapped in pretty proposals. Here\'s the reality — and why ClickMasters approaches development differently.'
+            }
           </p>
         </div>
 
