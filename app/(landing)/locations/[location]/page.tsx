@@ -95,8 +95,8 @@ export default async function CountryPage({ params }: Props) {
       {/* Hero Section */}
 
 
-      <HeroSection country={country} />
-      <StatsSection country={country} />
+      <HeroSection country={country} location={location} />
+      <StatsSection country={country} location={location} />
     
     <PainPointsSolutions countryName={country.name} />
 

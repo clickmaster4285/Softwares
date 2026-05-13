@@ -14,11 +14,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 interface HeroSectionProps {
-  country?: CountryData; 
+  country?: CountryData;
+  location?: string; 
 }
 
 // Hero Section with Background Image
-export const HeroSection: React.FC<HeroSectionProps> = ({ country }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) => {
   const heroRef = useRef<HTMLElement>(null);
   const isInView = useInView(heroRef, { once: true });
   
@@ -147,10 +148,11 @@ const phrases: string[] = [
 
 // Stats Section with GSAP
 interface StatsSectionProps {
-  country?: CountryData; 
+  country?: CountryData;
+  location?: string; 
 }
 
-export const StatsSection: React.FC<StatsSectionProps> = ({ country }) => {
+export const StatsSection: React.FC<StatsSectionProps> = ({ country, location }) => {
   const statsRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
