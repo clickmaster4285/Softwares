@@ -1,38 +1,10 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import Script from 'next/script';
-import {
-  ArrowRight,
-  CheckCircle2,
-  Layers3,
-  Target,
-  TrendingUp,
-  Handshake,
-  Code2,
-  Smartphone,
-  Database,
-  Cloud,
-  Zap,
-  Users,
-  Shield,
-  BarChart3,
-  Globe,
-  HelpCircle,
-  Star,
-  Quote,
-  Play,
-  ChevronRight,
-  Award,
-  Clock,
-  Headphones,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+
 import { TableOfContents } from '@/components/table-of-contents';
 import { breadcrumbSchema, serviceSchema, siteConfig } from '@/app/metadata-config';
+
 import {
   getAllCountryServicePages,
   getCountryServicePage,
@@ -40,21 +12,19 @@ import {
   slugify,
   type CountryServicePageContent,
 } from '@/lib/country-services';
-import { IndustryCard3D } from '@/src/components/IndustryCard3D';
+
 import { ServiceHero } from '@/components/landingPage/servicesPage/service-hero';
 import { ServicesSection } from '@/src/components/landingPage/servicesPage/ServicesSection';
 import { ProcessSection } from '@/src/components/landingPage/servicesPage/ProcessSection';
-import { IndustriesSection } from '@/src/components/landingPage/servicesPage/IndustriesSection';
-import { CaseStudySection } from '@/src/components/landingPage/servicesPage/CaseStudySection';
-import { FAQSection } from '@/src/components/landingPage/servicesPage/FAQSection';
-
-import { EngineeringBaseline } from '@/src/components/landingPage/servicesPage/EngineeringBaseline';
-import { WhyChooseUs } from '@/src/components/landingPage/servicesPage/WhyChooseUs';
-import { TechStack } from '@/src/components/landingPage/servicesPage/TechStack';
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
-import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
-import { CTAComponents } from '@/src/components/landingPage/servicesPage/FooterCTA';
+
 import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
+import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
+import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
+import FaqSection from '@/src/components/landingPage/location/FaqSection';
+import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
+import DynamicSections from '@/src/components/landingPage/servicesPage/DynamicSections';
+import { ProjectCTAHero } from '@/src/components/landingPage/home/info-cts';
 
 type Props = { params: Promise<{ location: string; service: string }> };
 
@@ -71,8 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page || page.categorySlug !== location) return { title: 'Service' };
 
   const description = page.metaDescription;
-  const canonicalPath = getCanonicalPath(page);
-  const canonical = `${siteConfig.url}${canonicalPath}`;
+  const canonical = `${siteConfig.url}/locations/${page.categorySlug}/${page.slug}`;
 
   return {
     title: page.metaTitle ?? `${page.title} Services | ClickMasters`,
@@ -82,14 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${page.title} | ClickMasters`,
       description,
       url: canonical,
-      images: [
-        {
-          url: `${siteConfig.url}/og/services.webp`,
-          width: 1200,
-          height: 630,
-          alt: `${page.title} — ClickMasters software services`,
-        },
-      ],
+      images: [{ url: `${siteConfig.url}/og/services.webp`, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -100,94 +62,53 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function getCanonicalPath(page: CountryServicePageContent): string {
-  return `/locations/${page.categorySlug}/${page.slug}`;
-}
-
 export default async function CountryServicePage({ params }: Props) {
   const { location, service } = await params;
   const page = getCountryServicePage(service, location);
 
   if (!page) notFound();
-
-  // If country slug doesn't match, redirect to correct one (canonical URL)
   if (page.categorySlug !== location) {
     redirect(`/locations/${page.categorySlug}/${page.slug}`);
   }
 
   const sections = page.sections || [];
   const faqs = page.faqs || [];
-  const canonicalPath = getCanonicalPath(page);
-  const url = `${siteConfig.url}${canonicalPath}`;
   const techStack = getCountryServiceTechnologies(service, location);
 
-  // Helper function to make service name bold in text
-  const makeBoldServiceName = (text: string, serviceName: string): string => {
-    if (!text || !serviceName) return text || "";
-    const regex = new RegExp(`(${serviceName})`, 'gi');
-    return text.replace(regex, '<strong>$1</strong>');
-  };
+  // ==================== TOC ====================
+  const tocItems = [{ id: 'overview', title: 'Overview', level: 2 as const }];
 
-  // Standardized TOC items built dynamically
-  const tocItems = [
-    { id: 'overview', title: 'Overview', level: 2 as const },
-  ];
-
-  // Helper to find and assign IDs to sections
-  const getSectionId = (heading: string, index: number) => {
+  const getSectionId = (heading: string, index: number): string => {
     const h = heading.toLowerCase();
     if (h.includes('what is')) return 'what-is';
     if (h.includes('services we deliver') || h.includes('includes')) return 'our-services';
-    if (h.includes('why b2b companies') || h.includes('why choose')) return 'why-choose-us';
+    if (h.includes('why b2b') || h.includes('why choose')) return 'why-choose-us';
     if (h.includes('process')) return 'our-process';
-    if (h.includes('technology stack') || h.includes('tech stack')) return 'tech-stack';
-    if (h.includes('industry use cases') || h.includes('industries')) return 'industries';
+    if (h.includes('technology') || h.includes('tech stack')) return 'tech-stack';
+    if (h.includes('industry')) return 'industries';
     if (h.includes('pricing')) return 'pricing';
-    if (h.includes('testimonials')) return 'testimonials';
+    if (h.includes('testimonial')) return 'testimonials';
     if (h.includes('case study')) return 'case-study';
     return `section-${index}-${slugify(heading)}`;
   };
 
-  // Add generic sections to TOC
   sections.forEach((section: any, index: number) => {
     const id = getSectionId(section.heading, index);
-    if (!tocItems.find((item: any) => item.id === id)) {
+    if (!tocItems.some((item) => item.id === id)) {
       tocItems.push({ id, title: section.heading, level: 2 as const });
     }
   });
 
-  if (page.servicesCards && !tocItems.find((item: any) => item.id === 'our-services')) {
-    tocItems.push({ id: 'our-services', title: 'Our Services', level: 2 as const });
-  }
-
-  if (page.differentiators && !tocItems.find((item: any) => item.id === 'why-choose-us')) {
-    tocItems.push({ id: 'why-choose-us', title: 'Why Choose Us', level: 2 as const });
-  }
-
-  if (page.checklist) {
-    tocItems.push({ id: 'checklist', title: 'Engineering Baseline', level: 2 as const });
-  }
-
-  if (page.processPhases && !tocItems.find((item: any) => item.id === 'our-process')) {
-    tocItems.push({ id: 'our-process', title: 'Our Process', level: 2 as const });
-  }
-
-  if (techStack.length > 0 && !tocItems.find((item: any) => item.id === 'tech-stack')) {
-    tocItems.push({ id: 'tech-stack', title: 'Technology Stack', level: 2 as const });
-  }
-
-  if (page.industryUseCases && !tocItems.find((item: any) => item.id === 'industries')) {
-    tocItems.push({ id: 'industries', title: 'Industries', level: 2 as const });
-  }
-
-  if (page.pricingTiers && !tocItems.find((item: any) => item.id === 'pricing')) {
-    tocItems.push({ id: 'pricing', title: 'Pricing', level: 2 as const });
-  }
-
+  if (page.servicesCards) tocItems.push({ id: 'our-services', title: 'Our Services', level: 2 as const });
+  if (page.differentiators) tocItems.push({ id: 'why-choose-us', title: 'Why Choose Us', level: 2 as const });
+  if (page.processPhases) tocItems.push({ id: 'our-process', title: 'Our Process', level: 2 as const });
+  if (techStack.length > 0) tocItems.push({ id: 'tech-stack', title: 'Technology Stack', level: 2 as const });
+  if (page.industryUseCases) tocItems.push({ id: 'industries', title: 'Industries', level: 2 as const });
+  if (page.pricingTiers) tocItems.push({ id: 'pricing', title: 'Pricing', level: 2 as const });
   if (page.tables) {
     page.tables.forEach((table: any) => {
       const id = slugify(table.title);
-      if (!tocItems.find((item: any) => item.id === id)) {
+      if (!tocItems.some((item) => item.id === id)) {
         tocItems.push({ id, title: table.title, level: 2 as const });
       }
     });
@@ -195,10 +116,10 @@ export default async function CountryServicePage({ params }: Props) {
 
   tocItems.push({ id: 'testimonials', title: 'Testimonials', level: 2 as const });
   tocItems.push({ id: 'case-study', title: 'Case Study', level: 2 as const });
+  if (faqs.length > 0) tocItems.push({ id: 'faq', title: 'FAQ', level: 2 as const });
 
-  if (faqs.length > 0) {
-    tocItems.push({ id: 'faq', title: 'FAQ', level: 2 as const });
-  }
+  // ==================== Schema ====================
+  const url = `${siteConfig.url}/locations/${page.categorySlug}/${page.slug}`;
 
   const jsonLd = serviceSchema(page.title, page.metaDescription, url);
   const professionalServiceSchema = {
@@ -209,6 +130,7 @@ export default async function CountryServicePage({ params }: Props) {
     url,
     areaServed: [page.countryCode],
   };
+
   const faqSchema = faqs.length
     ? {
         '@context': 'https://schema.org',
@@ -223,224 +145,79 @@ export default async function CountryServicePage({ params }: Props) {
 
   return (
     <>
-      <Script
-        id={`schema-${page.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) || "" }}
-      />
-      <Script
-        id={`breadcrumb-${page.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbSchema([
-              { name: 'Home', url: '/' },
-              { name: 'Services', url: '/services' },
-              { name: page.countryName, url: `/locations/${page.categorySlug}` },
-              { name: page.serviceName, url: canonicalPath },
-            ])
-          ) || "",
-        }}
-      />
-      <Script
-        id={`professional-${page.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) || "" }}
-      />
-      {faqSchema && (
-        <Script
-          id={`faq-${page.slug}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) || "" }}
+      <Script id={`schema-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <Script id={`breadcrumb-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: page.countryName, url: `/locations/${page.categorySlug}` }, { name: page.serviceName, url: `/locations/${page.categorySlug}/${page.slug}` }])) }} />
+      <Script id={`professional-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }} />
+      {faqSchema && <Script id={`faq-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+
+      <div className="min-h-screen  text-slate-900 ">
+        <ServiceHero
+          page={{
+            category: page.countryName,
+            categorySlug: page.categorySlug,
+            serviceName: page.serviceName,
+            title: page.title,
+            lead: page.metaDescription,
+            highlights: [],
+            marketStats: [],
+          }}
         />
-      )}
 
-      <div className="min-h-screen bg-white pt-20 text-slate-900">
+        <div className="mx-4 max-w-full px-6 md:px-8 lg:px-10 xl:px-24">
+          <div className="relative lg:grid lg:grid-cols-[1fr_280px] lg:gap-12 xl:gap-16">
+            <main className="py-12 lg:py-10 min-w-0">
+              {/* Overview - matches first TOC item */}
+              <div id="overview" />
 
-    <ServiceHero page={{
-      category: page.countryName,
-      categorySlug: page.categorySlug,
-      serviceName: page.serviceName,
-      title: page.title,
-      lead: page.metaDescription,
-      highlights: [],
-      marketStats: []
-    }} />
+              <DynamicSections 
+                sections={sections as any[]}     
+                serviceName={page.serviceName} 
+              />
 
+              {page.servicesCards && (
+                <div id="our-services">
+                  <ServicesSection serviceName={page.serviceName} servicesCards={page.servicesCards} />
+                </div>
+              )}
 
-        {/* Main Content with Table of Contents */}
-        <div className="mx-auto max-w-8xl px-16 md:px-8 lg:px-16">
-          <div className="relative lg:grid lg:grid-cols-[1fr_260px] lg:gap-16">
-            {/* Main Content */}
-            <main className="py-12 lg:py-10">
-              {/* Section Content */}
-              {sections.map((section: any, index: number) => (
-                <section
-                  key={section.heading}
-                  id={getSectionId(section.heading, index)}
-                  className="scroll-mt-24"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-1 rounded-full bg-orange-500" />
-                    <h2 
-                      className="text-2xl font-semibold text-slate-900 sm:text-3xl"
-                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.heading, page.serviceName) }}
-                    />
-                  </div>
+              {page.processPhases && (
+                <div id="our-process" className="lg:-ml-20 -pl-4">
+                  <ProcessSection serviceName={page.serviceName} processPhases={page.processPhases} />
+                </div>
+              )}
 
-                  <div className="mt-6 space-y-4 text-slate-600 leading-relaxed">
-                    <p 
-                      className="text-lg whitespace-pre-line"
-                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.body, page.serviceName) }}
-                    />
-                    
-                    {/* Render items if present in section */}
-                    {section.items && (
-                      <ul className="mt-6 space-y-4">
-                        {section.items.map((item: any, i: number) => (
-                          <li key={i} className="flex gap-3">
-                            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
-                              <Star className="h-3 w-3 fill-current" />
-                            </div>
-                            <span 
-                              className="italic"
-                              dangerouslySetInnerHTML={{ __html: makeBoldServiceName(item, page.serviceName) }}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+              {techStack.length > 0 && (
+                <div id="tech-stack" className="lg:-mx-20 -px-4">
+                  <TechStackSection />
+                </div>
+              )}
 
-                  <div className="my-6 flex items-center">
-  <div className="h-px w-full bg-gray-300" />
-</div>
-                </section>
-              ))}
+              {page.pricingTiers && (
+                <div id="pricing">
+                  <PricingSection serviceName={page.serviceName} pricingTiers={page.pricingTiers} />
+                </div>
+              )}
 
-                 {/* Our Services Section */}
-{page.servicesCards && (
-  <ServicesSection 
-    serviceName={page.serviceName} 
-    servicesCards={page.servicesCards} 
-  />
-)}
+              <div className="lg:-mx-20 -px-4">
+                <CeoVision />
+              </div>
 
-{/* Why Choose Us Section - Commented out due to type mismatch */}
-{/* {page.differentiators && (
-  <WhyChooseUs 
-    slug={page.slug} 
-    differentiators={page.differentiators} 
-  />
-)} */}
+              <div id="testimonials">
+                <TestimonialsSection />
+              </div>
 
-             
-{/* Launch Readiness Checklist - Commented out due to type mismatch */}
-{/* {page.checklist && (
-  <EngineeringBaseline 
-    serviceName={page.serviceName} 
-    checklist={page.checklist} 
-  />
-)} */}
-              {/* Our Process Section - Commented out due to type mismatch */}
-{/* {page.processPhases && (
-  <ProcessSection 
-    serviceName={page.serviceName} 
-    processPhases={page.processPhases} 
-  />
-)} */}
+              <div id="case-study" className="lg:-ml-20 -pl-4">
+                <FeaturedInsights />
+              </div>
 
-             {/* Tech Stack Section - Commented out due to React errors */}
-
-{/* <div style={{ maxWidth: '1460px' }} className="mx-auto">
-  {techStack.length > 0 && <TechStack techStack={techStack as any} />}
-</div> */}
-              {/* Industries Section - Commented out due to type mismatch */}
-{/* {page.industryUseCases && (
-                <IndustriesSection industryUseCases={page.industryUseCases} />
-              )} */}
-
-            {/* PricingSection - Commented out due to type mismatch */}
-{/* {page.pricingTiers && (
-  <PricingSection 
-    serviceName={page.serviceName} 
-    pricingTiers={page.pricingTiers} 
-  />
-              )} */}
-              
-
-              <CeoVision />
-              {/* Generic Tables Section */}
-              {page.tables && page.tables.map((table: any) => (
-                <section key={table.title} id={slugify(table.title)} className="scroll-mt-24 pt-16">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-1 rounded-full bg-orange-500" />
-                    <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
-                      {table.title}
-                    </h2>
-                  </div>
-                  <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left border-collapse">
-                        <thead>
-                          <tr className="bg-slate-50">
-                            {table.headers.map((header: any) => (
-                              <th key={header} className="px-6 py-4 font-semibold text-slate-900 border-b border-slate-200">
-                                {header}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {table.rows.map((row: any, i: number) => (
-                            <tr key={i} className="hover:bg-slate-50/50 text-sm sm:text-base">
-                              {row.map((cell: any, j: number) => (
-                                <td key={j} className="px-6 py-4 text-slate-600 border-b border-slate-100">
-                                  {cell}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div className="my-16 flex items-center gap-4">
-                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-                  </div>
-                </section>
-              ))}
-
-             {/*  */}
-          {/* Testimonials Section */}
-<TestimonialsSection  />
-
-              {/* Case Study Section */}
-              <div className='mb-10 '>
-                
-                  {/* Minimal Hero Section */}
-  <div className="w-full flex flex-col mt-4 sm:mt-6 py-6 sm:py-8">
-  <div className="flex items-center gap-3 px-4 sm:px-6 md:px-8">
-    <div className="h-8 sm:h-10 w-1 rounded-full bg-orange-500" />
-
-    <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900">
-      Success Stories
-    </h2>
-  </div>
-</div>
-
-                <CaseStudySection /></div>
-
-              {/* FAQ Section */}
-            {faqs.length > 0 && <FAQSection faqs={faqs} />}
-
-              
-           
-              
+              {faqs.length > 0 && (
+                <div id="faq" className="lg:-mx-20 -px-4">
+                  <FaqSection faqs={faqs} />
+                </div>
+              )}
             </main>
 
-            {/* Sticky Table of Contents - Desktop */}
-            <aside className="hidden lg:block sticky top-24 self-start z-10">
+            <aside className="hidden lg:block sticky top-24 self-start z-10 flex-shrink-0">
               <div className="py-12 lg:py-10">
                 <TableOfContents items={tocItems} />
               </div>
@@ -448,21 +225,9 @@ export default async function CountryServicePage({ params }: Props) {
           </div>
         </div>
 
-      
-      
-      
-        {/* Footer CTA */}
-        <section className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white py-20">
-          <div className="mx-auto max-w-5xl px-5 text-center md:px-8">
-            <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
-              Explore Related Capabilities
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-              Discover how we can help transform your business through our comprehensive services,
-              real-world case studies, or our full solutions portfolio.
-            </p>
-                      </div>
-        </section>
+        <div className={"-mb-14"}>  
+          <ProjectCTAHero />
+        </div>
       </div>
     </>
   );

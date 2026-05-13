@@ -152,31 +152,7 @@ export function TechStackSection() {
     <div className="bg-white py-16 lg:py-24 lg:px-12" ref={ref}>
       <div className=" mx-auto px-6 lg:px-10">
         {/* Header */}
-        {/* <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-12 gap-6">
-      
-          <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 border border-slate-200 rounded-full px-3 py-1 mb-5">
-              <span className="text-base">🌐</span>
-              <span className="text-[12px] font-medium text-slate-600 tracking-wide">
-                Our Technology Stack
-              </span>
-            </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight tracking-tight">
-              Modern Tech Stack
-              <br />
-              <span className="text-primary">for Future Ready</span>
-              <br />
-              <span className="text-slate-900">Solutions</span>
-            </h2>
-          </div>
-
-          <div className="lg:max-w-xs lg:text-right lg:pt-2">
-            <p className="text-slate-500 text-sm leading-relaxed">
-              We leverage cutting-edge technologies to build scalable, secure,
-              and high-performance applications
-            </p>
-          </div>
-        </div> */}
+  
 
 
             <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">

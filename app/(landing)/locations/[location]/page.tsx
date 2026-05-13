@@ -8,7 +8,7 @@ import { PricingSection } from '@/src/components/landingPage/servicesPage/Pricin
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
 import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
 import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
-import FaqSection from '@/src/components/landingPage/location/FaqSection';
+
 import ProjectCTAHero from '@/src/components/landingPage/location/ProjectCTAHero';
 import WhyChooseUs from '@/src/components/landingPage/home/whyUs';
 import TrustedClientsSection from '@/src/components/landingPage/home/TrustedClientsSection';
@@ -17,6 +17,7 @@ import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 import CountryServicesSection from '@/src/components/landingPage/location/CountryServicesSection';
 import { HeroSection, StatsSection } from '@/src/components/landingPage/location/LocationHero';
 import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
+import FaqSection from '@/src/components/landingPage/location/FaqSection';
 
 
 type Props = { params: Promise<{ location: string }> };

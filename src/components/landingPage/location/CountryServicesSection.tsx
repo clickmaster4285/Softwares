@@ -203,7 +203,7 @@ export default function CountryServicesSection({
                       return (
                         <Link
                           key={idx}
-                          href={`/${slug}`}
+                          href={`/locations/${countryName.toLowerCase()}/${slug}`}
                           style={{
                             animationDelay: `${idx * 60}ms`,   /* stagger */
                           }}

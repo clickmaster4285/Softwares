@@ -14,7 +14,7 @@ export function CeoVision() {
             {/* Title */}
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold">
               CEO{" "}
-              <span className="bg-gradient-to-r from-primary to-primarybg-clip-text text-transparent">
+              <span className="text-primary">
                 Vision
               </span>
             </h2>
@@ -27,7 +27,7 @@ export function CeoVision() {
         }
       >
         {/* Inner card layout */}
-        <div className="flex h-full w-full flex-col md:flex-row overflow-hidden rounded-2xl">
+        <div className="flex h-full w-full flex-col md:flex-row overflow-hidden  ">
           {/* Left — Image */}
           <div className="relative h-64 sm:h-80 md:h-full md:w-1/2 shrink-0">
             <Image

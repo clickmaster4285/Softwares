@@ -230,7 +230,7 @@ const MobileProcessCard = ({ phase, index, startAnimation }: { phase: any; index
         delay: index * 0.15,
         ease: "easeOut"
       }}
-      className="rounded-2xl bg-white border border-orange-200 shadow-lg p-5 flex flex-col gap-3"
+      className="rounded-2xl bg-white border border-orange-200 shadow-lg p-7 flex flex-col gap-3"
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
@@ -250,7 +250,7 @@ const MobileProcessCard = ({ phase, index, startAnimation }: { phase: any; index
       </div>
 
       <div className="flex-1">
-        <h3 className="text-lg font-bold text-slate-900 leading-tight mb-2">
+        <h3 className="text-lg lg:text-xl font-bold text-slate-900 leading-tight mb-2">
           {phase.title}
         </h3>
         
@@ -440,35 +440,43 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
       id="our-process" 
       className="scroll-mt-24 py-8 md:py-12 lg:py-16 bg-white px-4 md:px-0"
     >
-      <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-          className="mb-8 md:mb-12"
-        >
-          <div className="flex items-center gap-3">
-            <motion.div 
-              initial={{ scaleY: 0 }}
-              animate={startAnimation ? { scaleY: 1 } : { scaleY: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="h-8 md:h-10 w-1 rounded-full bg-gradient-to-b from-primary to-primary"
-            />
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900">
-              Our <span className="font-black">{serviceName}</span> Process
-            </h2>
-          </div>
+   <motion.div
+  initial={{ opacity: 0, y: 30 }}
+  animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+  transition={{ duration: 0.6 }}
+  className="mb-8 md:mb-12 mx-auto max-w-3xl text-center"
+>
+  {/* Decorative Lines + Label */}
+  <div className="inline-flex items-center gap-2 mb-3">
+    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
+      Our Process
+    </p>
+    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+  </div>
 
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={startAnimation ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed max-w-2xl"
-          >
-            A proven methodology that transforms your vision into reality
-          </motion.p>
-      </motion.div>
+  {/* Main Heading */}
+  <motion.h2 
+    className="mt-5 font-display text-3xl sm:text-3xl lg:text-3xl font-bold tracking-tight text-slate-900"
+    initial={{ scale: 0.9, opacity: 0 }}
+    animate={startAnimation ? { scale: 1, opacity: 1 } : { scale: 0.9, opacity: 0 }}
+    transition={{ duration: 0.6, delay: 0.1 }}
+  >
+    Our <span className="font-black">{serviceName}</span> Process
+  </motion.h2>
+
+  {/* Subtitle */}
+  <motion.p 
+    initial={{ opacity: 0, y: 20 }}
+    animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+    transition={{ duration: 0.5, delay: 0.3 }}
+    className="mx-auto mt-5 max-w-2xl text-base sm:text-lg leading-7 text-slate-600"
+  >
+    A proven methodology that transforms your vision into reality
+  </motion.p>
+</motion.div>
       
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-full">
         
 
         {/* Mobile Layout - Simple fade-in one by one */}
@@ -496,7 +504,7 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
           transition={{ delay: TOTAL_DURATION - 1, duration: 0.5 }}
         >
           <motion.button 
-            className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-md bg-secondarytext-white font-semibold shadow-md hover:bg-primary transition-all duration-300 text-sm md:text-base"
+            className="inline-flex w-full sm:w-auto bg-primary text-white justify-center items-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-md bg-secondarytext-white font-semibold shadow-md hover:bg-primary/80 hover:text-white transition-all duration-300 text-sm md:text-base"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -515,7 +523,7 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
           initial={{ scaleX: 0 }}
           animate={startAnimation ? { scaleX: 1 } : { scaleX: 0 }}
           transition={{ delay: TOTAL_DURATION - 0.5, duration: 0.6 }}
-          className="mt-10 md:mt-16 flex items-center gap-4 max-w-7xl mx-auto"
+          className="mt-10 md:mt-16 flex items-center gap-4  mx-auto"
         >
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
           <motion.div
