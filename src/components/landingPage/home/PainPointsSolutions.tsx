@@ -27,7 +27,7 @@ const painPoints: PainPoint[] = [
     title: 'The Costly Cycle',
     description: 'You spend more maintaining legacy code than building new features. Technical debt is silently killing your margins.',
     icon: XCircle,
-    gradient: 'from-primaryto-rose-600',
+    gradient: 'from-primary to-rose-600',
   },
   {
     id: 'timeline',
@@ -41,7 +41,7 @@ const painPoints: PainPoint[] = [
     title: 'The Security Gamble',
     description: 'Vulnerable plugins and shortcuts put your customer data and reputation at constant risk.',
     icon: ShieldAlert,
-    gradient: 'from-primaryto-red-600',
+    gradient: 'from-primary to-red-600',
   },
   {
     id: 'scalability',

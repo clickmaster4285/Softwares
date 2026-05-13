@@ -14,7 +14,7 @@ export function CeoVision() {
             {/* Title */}
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold">
               CEO{" "}
-              <span className="bg-gradient-to-r from-orange-400 to-primarybg-clip-text text-transparent">
+              <span className="text-primary">
                 Vision
               </span>
             </h2>
@@ -27,7 +27,7 @@ export function CeoVision() {
         }
       >
         {/* Inner card layout */}
-        <div className="flex h-full w-full flex-col md:flex-row overflow-hidden rounded-2xl">
+        <div className="flex h-full w-full flex-col md:flex-row overflow-hidden  ">
           {/* Left — Image */}
           <div className="relative h-64 sm:h-80 md:h-full md:w-1/2 shrink-0">
             <Image
@@ -49,7 +49,7 @@ export function CeoVision() {
                          md:px-10 md:py-10 bg-white">
             
             {/* Quote mark */}
-            <span className="text-6xl leading-none text-primaryfont-serif select-none">
+            <span className="text-6xl leading-none text-primary font-serif select-none">
               &ldquo;
             </span>
 
@@ -61,7 +61,7 @@ export function CeoVision() {
             </blockquote>
 
             <div className="flex items-center gap-4 mt-2">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primaryto-amber-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
+              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-amber-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
                 AK
               </div>
               <div>

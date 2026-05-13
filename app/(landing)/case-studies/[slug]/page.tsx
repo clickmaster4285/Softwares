@@ -206,7 +206,7 @@ export default async function CaseStudyDetailPage({
 
             <div className="relative mx-auto max-w-8xl px-16 pb-12 pt-16 md:px-8 lg:px-16">
               {/* Back link */}
-              <Button variant="ghost" className="-ml-2 mb-8 gap-1.5 text-[13px] text-slate-500 hover:text-primaryhover:bg-transparent pl-0" asChild>
+              <Button variant="ghost" className="-ml-2 mb-8 gap-1.5 text-[13px] text-slate-500 hover:text-primary hover:bg-transparent pl-0" asChild>
                 <Link href="/case-studies">
                   <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
                   All case studies

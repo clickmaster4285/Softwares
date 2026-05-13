@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Sparkles, ArrowRight, Phone, Calendar } from "lucide-react";
+import { ShieldCheck, ArrowRight, Phone, Calendar } from "lucide-react";
 
 type CTAButton = {
   text: string;
@@ -184,7 +184,7 @@ export function ProjectCTAHero({
           {/* Left Content */}
           <div className="flex flex-col justify-center">
             <span className="inline-flex w-fit items-center gap-2 rounded-full bg-background px-4 py-1.5 text-sm font-medium text-foreground shadow-sm">
-              <Sparkles className="h-4 w-4" />
+              <ShieldCheck className="h-4 w-4" />
               {badge}
             </span>
             <h2 className="mt-6 text-3xl sm:text-4xl font-bold leading-tight md:text-5xl">

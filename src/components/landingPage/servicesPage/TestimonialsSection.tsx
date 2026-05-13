@@ -124,7 +124,7 @@ export function TestimonialsSection({
       <div className=" mx-auto px-4  relative">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8 sm:mb-10 md:mb-12">
-          <div className="h-8 sm:h-10 w-1 rounded-full bg-gradient-to-b from-primaryto-orange-600" />
+          <div className="h-8 sm:h-10 w-1 rounded-full bg-gradient-to-b from-primary to-orange-600" />
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-3xl font-semibold tracking-tight text-slate-900">
               What Our Clients Say
@@ -170,7 +170,7 @@ export function TestimonialsSection({
                               key={i}
                               className={`h-4 w-4 sm:h-5 sm:w-5 transition-colors ${
                                 i <= testimonial.rating!
-                                  ? 'fill-orange-400 text-orange-400'
+                                  ? 'fill-primary text-orange-400'
                                   : 'text-slate-200'
                               }`}
                             />
@@ -180,7 +180,7 @@ export function TestimonialsSection({
 
                       {/* Author */}
                       <div className="flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-slate-100 mt-auto">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primaryvia-primaryto-primaryflex items-center justify-center text-white font-semibold text-base sm:text-xl shadow-inner">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primaryvia-primary to-primary flex items-center justify-center text-white font-semibold text-base sm:text-xl shadow-inner">
                           {testimonial.authorName?.charAt(0).toUpperCase()}
                         </div>
                         <div>

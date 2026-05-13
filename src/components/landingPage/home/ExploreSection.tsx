@@ -349,11 +349,11 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 mb-3">
-            <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+            <span className="w-8 h-[2px] bg-primary rounded-full" />
             <p className="text-secondarytext-[11px] font-bold tracking-[0.2em] uppercase">
               {isServicePage ? 'Specialized Services' : 'Explore Our Ecosystem'}
             </p>
-            <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+            <span className="w-8 h-[2px] bg-primary rounded-full" />
           </div>
 
           <h2

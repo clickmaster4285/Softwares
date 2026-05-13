@@ -76,7 +76,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
           >
             <div className="bg-white rounded-xl overflow-hidden border border-slate-200 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
               {/* Top accent bar */}
-              <div className="h-1 bg-gradient-to-r from-orange-400 to-primaryw-0 group-hover:w-full transition-all duration-500" />
+              <div className="h-1 bg-gradient-to-r from-primary to-primaryw-0 group-hover:w-full transition-all duration-500" />
               
               <div className="p-4 sm:p-5">
                 <div className="flex items-center justify-between mb-3 sm:mb-4">
@@ -102,12 +102,12 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
                     initial={{ y: 20, opacity: 0 }}
                     whileHover={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="text-primaryhidden sm:block"
+                    className="text-primary hidden sm:block"
                   >
                     <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                   </motion.div>
                   {/* Always visible arrow on mobile */}
-                  <ArrowRight className="w-3 h-3 text-orange-400 sm:hidden" />
+                  <ArrowRight className="w-3 h-3 text-primary sm:hidden" />
                 </div>
               </div>
             </div>

@@ -117,99 +117,52 @@ const ExpandOnHover = ({
                   </div>
                 )}
 
-                {/* CONTENT */}
-                {phaseContent && (
-                  <div
-                    className={`absolute bottom-0 left-0 right-0 z-10 p-5 text-white transition-all duration-500 ${
-                      isExpanded
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
-                    }`}
-                  >
-                    <div className="mb-2 text-sm font-semibold text-orange-400">
-                      {phaseContent.step}
-                    </div>
+              {/* CONTENT */}
+{phaseContent && (
+  <div
+    className={`absolute bottom-0 left-0 right-0 z-10 p-5 text-white transition-all duration-500 ${
+      isExpanded
+        ? "translate-y-0 opacity-100"
+        : "translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
+    }`}
+  >
+    <div className="mb-2 text-sm font-semibold text-orange-400">
+      {phaseContent.step}
+    </div>
 
-                    <h3 className="text-2xl font-bold leading-tight">
-                      {phaseContent.title}
-                    </h3>
+    <h3 className="text-2xl font-bold leading-tight">
+      {phaseContent.title}
+    </h3>
 
-                    <p className="mt-3 max-w-lg text-sm leading-relaxed text-gray-200 line-clamp-3">
-                      {phaseContent.description}
-                    </p>
+    <p className="mt-2 text-sm text-gray-200 line-clamp-2">
+      {phaseContent.description}
+    </p>
 
-                    <div className="mt-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm">
-                      {phaseContent.duration}
-                    </div>
-                  </div>
+    {/* 👇 ADD POINTS INSIDE CARD */}
+    <div className="mt-3 flex flex-wrap gap-2">
+      {phaseContent.deliverables.slice(0, 3).map((d, i) => (
+        <span
+          key={i}
+          className="rounded-full bg-white/10 px-2 py-1 text-[10px] text-white backdrop-blur-sm"
+        >
+          {d}
+        </span>
+      ))}
+    </div>
+
+    <div className="mt-3 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm">
+      {phaseContent.duration}
+    </div>
+  </div>
                 )}
+                
+                
               </div>
             );
           })}
         </div>
 
-        {/* CONTENT PANEL */}
-        {hasPhases && hoveredPhase && (
-          <div className="mt-10 animate-fadeInUp rounded-[28px]  p-6 md:p-8 ">
-            {/* TOP */}
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-              <div className="flex items-center gap-4">
-                <div
-                  className={`flex h-16 w-16 items-center justify-center rounded-2xl ${hoveredPhase.bgLight}`}
-                >
-                  <span className="text-2xl font-bold text-orange-600">
-                    {hoveredPhase.step}
-                  </span>
-                </div>
-
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
-                    {hoveredPhase.title}
-                  </h2>
-
-                  <p className="mt-1 text-sm font-medium text-orange-600">
-                    Duration: {hoveredPhase.duration}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* DESCRIPTION */}
-            <p className="mt-6 max-w-4xl text-base leading-relaxed text-gray-600">
-              {hoveredPhase.description}
-            </p>
-
-            {/* DELIVERABLES */}
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-              {hoveredPhase.deliverables.map((deliverable, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start gap-3 rounded-2xl border border-gray-100 p-4 transition-all duration-300 hover:border-orange-200 hover:shadow-md"
-                >
-                  <div className="mt-0.5">
-                    <svg
-                      className="h-5 w-5 text-green-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-
-                  <span className="text-sm font-medium text-gray-700">
-                    {deliverable}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+      
 
         {/* MOBILE TEXT */}
         <div className="mt-5 text-center text-sm text-gray-500 md:hidden">

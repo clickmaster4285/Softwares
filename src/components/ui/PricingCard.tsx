@@ -1,24 +1,18 @@
-// Alternative version using inline animations instead of variants
 "use client";
 
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
-interface PricingFeature {
-  title: string;
-  items: string[];
-}
-
 interface PricingCardProps {
   title: string;
   description: string;
   price: number;
   originalPrice?: number;
-  features: PricingFeature[];
+  features: any[];
   buttonText?: string;
   onButtonClick?: () => void;
 }
@@ -37,108 +31,69 @@ export function PricingCard({
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (isInView && !hasAnimated) {
-      setHasAnimated(true);
-    }
+    if (isInView && !hasAnimated) setHasAnimated(true);
   }, [isInView, hasAnimated]);
 
   return (
     <motion.div
       ref={containerRef}
-      initial={{ opacity: 0 }}
-      animate={hasAnimated ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration: 0.5, staggerChildren: 0.1, delayChildren: 0.3 }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.5 }}
     >
-      <Card className="relative mx-auto w-full  overflow-hidden h-full">
+      <Card className="overflow-hidden h-full">
         <div className="flex flex-col lg:flex-row">
-          <motion.div
-            className="flex flex-col justify-between p-6 lg:w-2/5 lg:p-10"
-            initial={{ y: 20, opacity: 0 }}
-            animate={hasAnimated ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          >
+          {/* Left Side - Price */}
+          <div className="flex flex-col justify-between p-6 lg:p-8 lg:w-5/12 bg-white">
             <div>
-              <CardHeader className="p-0">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <CardTitle className="text-3xl font-bold">{title}</CardTitle>
-                    <CardDescription className="mt-2">{description}</CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <motion.div 
-                className="mt-6 space-y-4"
-                initial={{ y: 20, opacity: 0 }}
-                animate={hasAnimated ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-                transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
-              >
-                <div className="flex items-baseline">
-                  {price > 0 ? (
-                    <>
-                      <span className="text-5xl font-extrabold">${price.toLocaleString()}</span>
+              <h3 className="text-xl font-bold text-slate-900">{title}</h3>
+              <p className="text-sm text-slate-600 mt-1.5 leading-tight">{description}</p>
+
+              <div className="mt-6">
+                {price > 0 ? (
+                  <>
+                    <div className="flex items-baseline">
+                      <span className="text-4xl font-extrabold tracking-tighter">${price}</span>
                       {originalPrice && (
-                        <span className="ml-2 text-xl text-muted-foreground line-through">
-                          ${originalPrice.toLocaleString()}
+                        <span className="ml-2 text-lg text-slate-400 line-through">
+                          ${originalPrice}
                         </span>
                       )}
-                    </>
-                  ) : (
-                    <span className="text-3xl font-extrabold">Custom Pricing</span>
-                  )}
-                </div>
-                {price > 0 && (
-                  <span className="block text-sm text-muted-foreground">
-                    one-time payment
-                  </span>
+                    </div>
+                    <p className="text-xs text-slate-500 mt-1">one-time payment</p>
+                  </>
+                ) : (
+                  <span className="text-3xl font-bold">Custom Pricing</span>
                 )}
-              </motion.div>
+              </div>
             </div>
-            <motion.div 
-              className="mt-8"
-              initial={{ y: 20, opacity: 0 }}
-              animate={hasAnimated ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
-            >
+
+            <div className="mt-8 lg:mt-6">
               <Button className="w-full" size="lg" onClick={onButtonClick}>
                 {buttonText}
               </Button>
-            </motion.div>
-          </motion.div>
-          <Separator className="lg:my-6 lg:hidden" />
-          <motion.div
-            className="bg-muted/50 p-6 lg:w-3/5 lg:p-10"
-            initial={{ y: 20, opacity: 0 }}
-            animate={hasAnimated ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.15 }}
-          >
+            </div>
+          </div>
+
+          {/* Right Side - Features */}
+          <div className="bg-slate-50 p-6 lg:p-8 lg:w-7/12">
             <div className="space-y-6">
               {features.map((feature, featureIndex) => (
                 <div key={featureIndex}>
-                  <h3 className="mb-4 text-lg font-semibold">{feature.title}:</h3>
-                  <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                    {feature.items.map((item, index) => (
-                      <motion.li
-                        key={index}
-                        className="flex items-center"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={hasAnimated ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                        transition={{ 
-                          type: "spring", 
-                          stiffness: 100, 
-                          damping: 10,
-                          delay: 0.3 + (featureIndex * 0.1) + (index * 0.05)
-                        }}
-                      >
-                        <Check className="mr-2 h-4 w-4 text-primary" />
-                        <span className="text-sm">{item}</span>
-                      </motion.li>
+                  <h4 className="font-semibold text-base mb-3">{feature.title}</h4>
+                  <ul className="space-y-2.5">
+                    {feature.items.map((item: string, index: number) => (
+                      <li key={index} className="flex items-start gap-2 text-sm">
+                        <Check className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                        <span className="leading-tight text-slate-600">{item}</span>
+                      </li>
                     ))}
                   </ul>
-                  {featureIndex < features.length - 1 && <Separator className="my-6" />}
+                  {featureIndex < features.length - 1 && <Separator className="my-5" />}
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </Card>
     </motion.div>

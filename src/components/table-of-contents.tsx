@@ -17,48 +17,40 @@ interface TableOfContentsProps {
 }
 
 export function TableOfContents({ items, title = "On this page" }: TableOfContentsProps) {
-  const [activeId, setActiveId] = useState<string>("");
-  const [progress, setProgress] = useState(0);
+  const [activeId, setActiveId] = useState<string>("overview");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
-            setActiveId(entry.target.id);
-          }
-        });
+        // Get all currently visible entries
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top); // Topmost first
+
+        if (visibleEntries.length > 0) {
+          setActiveId(visibleEntries[0].target.id);
+        }
       },
       {
-        rootMargin: "-80px 0% -40% 0%",
-        threshold: [0, 0.1, 0.2],
+        rootMargin: "-100px 0px -35% 0px",
+        threshold: [0.1, 0.3, 0.5, 0.7],
       }
     );
 
-    const elements = items.map((item) => document.getElementById(item.id)).filter(Boolean);
-    elements.forEach((el) => observer.observe(el!));
+    const elements = items
+      .map((item) => document.getElementById(item.id))
+      .filter(Boolean) as HTMLElement[];
+
+    elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, [items]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setProgress(scrollPercent);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100;
+      const offset = 110;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -66,6 +58,7 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
         top: offsetPosition,
         behavior: "smooth",
       });
+
       setActiveId(id);
     }
   };
@@ -80,14 +73,6 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
         <p className="text-sm font-semibold text-slate-900">{title}</p>
       </div>
 
-      {/* Progress bar */}
-      <div className="mb-4 h-1 overflow-hidden rounded-full bg-slate-100">
-        <div
-          className="h-full bg-gradient-to-r from-primaryto-orange-400 transition-all duration-300"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-
       {/* Navigation */}
       <nav className="relative">
         <div className="space-y-1">
@@ -99,16 +84,15 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
                 href={`#${item.id}`}
                 onClick={(e) => handleClick(e, item.id)}
                 className={cn(
-                  "group relative flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-all duration-200",
+                  "group relative flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm transition-all duration-200",
                   item.level === 2 ? "" : "pl-6",
                   isActive
                     ? "bg-orange-50 font-medium text-orange-600"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                 )}
               >
-                {/* Active indicator line (side) */}
                 {isActive && (
-                  <div className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-primary" />
+                  <div className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-orange-600" />
                 )}
 
                 <span
@@ -136,7 +120,7 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
         </p>
         <Link
           href="/contact-us"
-          className="mt-2 inline-flex items-center text-sm font-medium text-primaryhover:text-orange-700"
+          className="mt-2 inline-flex items-center text-sm font-medium text-primary hover:text-orange-700"
         >
           Book a call
           <svg

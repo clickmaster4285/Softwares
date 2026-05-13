@@ -116,7 +116,7 @@ export const IndustriesSection = ({ industryUseCases }: IndustriesSectionProps) 
           whileInView={{ height: 40 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="h-10 w-1 rounded-full bg-gradient-to-b from-primaryto-primary"
+          className="h-10 w-1 rounded-full bg-gradient-to-b from-primary to-primary"
         />
         <motion.h2 
           className="text-2xl font-semibold text-slate-900 sm:text-3xl"

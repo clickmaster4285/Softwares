@@ -55,7 +55,7 @@ export default function BlogCta() {
             placeholder="Enter your work email"
             required
             disabled={isSubmitting}
-            className="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-100 disabled:bg-slate-100 disabled:cursor-not-allowed"
+            className="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-orange-100 disabled:bg-slate-100 disabled:cursor-not-allowed"
           />
           <button 
             type="submit"

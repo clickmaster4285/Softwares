@@ -62,41 +62,47 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex items-center gap-3">
-        <motion.div
-          initial={{ height: 0 }}
-          whileInView={{ height: 40 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="h-10 w-1 rounded-full bg-primary"
-        />
-        <motion.h2 
-          className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900"
-          initial={{ scale: 0.8, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="font-black">{serviceName}</span> Development Pricing
-        </motion.h2>
-      </div>
+    {/* ==================== PRICING HEADER ==================== */}
+<div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
+  {/* Decorative Line + Label */}
+  <div className="inline-flex items-center gap-2 mb-3">
+    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
+      Pricing
+    </p>
+    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+  </div>
 
-      <motion.p 
-        className="mt-3 sm:mt-4 text-base sm:text-lg text-slate-600 leading-relaxed"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        Transparent pricing tailored to your business needs
-      </motion.p>
+  {/* Main Heading */}
+  <motion.h2 
+    className="mt-5 font-display text-3xl sm:text-3xl lg:text-3xl font-bold tracking-tight text-slate-900"
+    initial={{ scale: 0.9, opacity: 0 }}
+    whileInView={{ scale: 1, opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  >
+    <span className="font-black">{serviceName}</span> Development Pricing
+  </motion.h2>
+
+  {/* Subtitle */}
+  <motion.p 
+    className="mx-auto mt-5 max-w-2xl text-base sm:text-lg leading-7 text-slate-600"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: 0.2 }}
+  >
+    Transparent pricing tailored to your business needs
+  </motion.p>
+</div>
 
       {/* Grid layout for cards */}
-  <div className="mt-8 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 auto-rows-fr">
-        {pricingCardsData.map((cardData, index) => (
-          <PricingCard key={index} {...cardData} />
-        ))}
-      </div>
+
+<div className="mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+  {pricingCardsData.map((cardData, index) => (
+    <PricingCard key={index} {...cardData} />
+  ))}
+</div>
 
       {/* Bottom Section - Trust Indicators and Note */}
       <motion.div 
@@ -122,7 +128,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.5 + idx * 0.1 }}
             >
-              <svg className="h-3 w-3 sm:h-4 sm:w-4 text-primaryflex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="h-3 w-3 sm:h-4 sm:w-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               <span className="whitespace-nowrap">{text}</span>

@@ -68,7 +68,7 @@ export function CTAComponents() {
         asChild
         variant="outline"
         size="lg"
-        className="rounded-full border-orange-300 text-secondaryhover:bg-orange-50 hover:border-orange-400 py-6 px-10 text-base font-medium transition-all duration-300"
+        className="rounded-full border-orange-300 text-secondaryhover:bg-orange-50 hover:border-primary py-6 px-10 text-base font-medium transition-all duration-300"
       >
         <Link href="/case-studies">View Case Studies</Link>
       </Button>

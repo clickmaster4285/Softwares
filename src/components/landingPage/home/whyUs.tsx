@@ -33,11 +33,10 @@ interface SimpleWhyChooseUsItem {
 }
 
 interface WhyChooseUsProps {
-  countryName: string;
-  items?: SimpleWhyChooseUsItem[];  // Optional custom items
+  countryName?: string;
+  items?: SimpleWhyChooseUsItem[];
   subtitle?: string;
 }
-
 // Default benefits (full featured)
 const defaultBenefits: Benefit[] = [
   {
@@ -135,9 +134,13 @@ export function WhyChooseUs({ countryName, items, subtitle = "Competitive differ
             <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
 
-          <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
-            Why Choose ClickMasters in {countryName}
+        <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
+  Why Choose ClickMasters{" "}
+  {countryName && (
+    <span>in {countryName}</span>
+  )}
           </h2>
+          
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             {subtitle}

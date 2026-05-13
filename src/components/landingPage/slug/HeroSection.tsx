@@ -158,7 +158,7 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
           <nav className="flex items-center gap-1.5 text-sm">
             <Link
               href="/"
-              className="text-gray-400 hover:text-orange-400 transition-colors font-medium"
+              className="text-gray-400 hover:text-primary transition-colors font-medium"
             >
               Home
             </Link>
@@ -175,7 +175,7 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-orange-500/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 border border-orange-500/30 animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
             <span className="text-sm font-medium text-orange-300">{serviceData.heroBadge}</span>
@@ -195,7 +195,7 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20 animate-[fadeInUp_0.6s_ease-out_0.3s_forwards] opacity-0">
-            <button className="group relative px-8 py-3.5 bg-gradient-to-r from-primaryto-primaryrounded-md text-white font-semibold text-lg shadow-lg hover:shadow-orange-500/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
+            <button className="group relative px-8 py-3.5 bg-gradient-to-r from-primary to-primaryrounded-md text-white font-semibold text-lg shadow-lg hover:shadow-orange-500/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
               <span className="relative z-10">{serviceData.ctaText}</span>
               <div className="absolute inset-0 bg-gradient-to-r from-secondaryto-primaryopacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
@@ -212,7 +212,7 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
                 className="text-center group animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0"
                 style={{ animationDelay: `${400 + index * 100}ms` }}
               >
-                <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-orange-400 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)] group-hover:drop-shadow-[0_0_25px_rgba(249,115,22,0.7)] transition-all duration-300">
+                <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary drop-shadow-[0_0_15px_rgba(249,115,22,0.5)] group-hover:drop-shadow-[0_0_25px_rgba(249,115,22,0.7)] transition-all duration-300">
                   <Counter targetValue={stat.value} />
                 </div>
                 <div className="text-sm text-gray-400 mt-2 font-medium tracking-wide">
@@ -227,7 +227,7 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-orange-400/50 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-orange-400 rounded-full mt-2 animate-pulse" />
+          <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse" />
         </div>
       </div>
 

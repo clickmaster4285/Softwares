@@ -4,7 +4,10 @@ export interface CountryData {
   title: string;
   description: string;
   content: string;
-  services: string[];
+  servicesByCategory: {
+    category: string
+    services: string[]
+  }[];
   contactInfo: {
     email: string;
     phone: string;
@@ -63,126 +66,200 @@ export const countryData: Record<string, CountryData> = {
     title: 'ClickMasters Canada Software Developmentn Company',
     description: 'Leading custom software development company in Canada. We build scalable web applications, mobile apps, and AI solutions for Canadian businesses.',
     content: 'ClickMasters is your premier software development partner in Canada. Our team of expert developers specializes in creating custom solutions that drive business growth and digital transformation.',
+    servicesByCategory : [
+  {
+    category: "AI & Machine Learning",
     services: [
-      // AI & Machine Learning
-      'AI Agents Development',
-      'AI Automation Systems',
-      'AI Chatbot Development',
-      'AI Integration Services',
-      'AI Model Development',
-      'Deep Learning Solutions',
-      'Generative AI Solutions',
-      'LLM Applications Development',
-      // App Development
-      'Android App Development',
-      'Cross Platform App Development',
-      'Flutter App Development',
-      'iOS App Development',
-      'Mobile App Development',
-      'Mobile App Design',
-      'Native App Development',
-      'React Native Development',
-      // Web Development
-      'Ecommerce Development',
-      'Frontend Development',
-      'Full Stack Development',
-      'Web Application Development',
-      'Website Development',
-      'Web Design',
-      // Backend & Infrastructure
-      'Backend Development',
-      'Cloud Native Development',
-      'Cloud Solutions',
-      'Cloud Solutions DevOps',
-      'DevOps Services',
-      'Serverless Architecture',
-      'Microservices Architecture',
-      // Database & Data
-      'Data Engineering',
-      'Data Migration',
-      'Data Science Analytics',
-      'Data Visualization',
-      'Data Warehousing',
-      'Database Design',
-      'Database Management',
-      'Database Optimisation',
-      // Blockchain & Crypto
-      'Blockchain Development',
-      'Crypto Wallet Development',
-      'DApp Development',
-      'Smart Contract Development',
-      // Testing & QA
-      'Automated Testing',
-      'Manual Testing',
-      'Load Testing',
-      'Performance Testing',
-      'QA Software Testing',
-      'Penetration Testing',
-      // Security
-      'Application Security',
-      'Cybersecurity Services',
-      'Security Audits',
-      'Vulnerability Assessment',
-      'Compliance Risk Management',
-      // Business & Analytics
-      'Business Intelligence',
-      'Business Process Automation',
-      'Predictive Analytics',
-      'Recommendation Systems',
-      'RPA',
-      'Workflow Automation',
-      // Specialized Development
-      'AR Development',
-      'VR Development',
-      'Embedded Systems Development',
-      'Desktop Application Development',
-      'Enterprise Software',
-      'IoT Development',
-      'Industrial IoT',
-      'Mixed Reality Solutions',
-      'Smart Systems Development',
-      'Web3 Development',
-      // E-commerce Platforms
-      'Headless Ecommerce',
-      'Shopify Development',
-      'WooCommerce Development',
-      'Headless CMS Development',
-      // Advanced Technologies
-      'Computer Vision',
-      'Image Processing',
-      'Natural Language Processing',
-      'Speech Recognition',
-      'Text Analytics',
-      'Video Analytics',
-      'Model Training Optimisation',
-      'Token Development',
-      // Services & Support
-      'Dedicated Development Teams',
-      'IT Outsourcing',
-      'Maintenance Support',
-      'Staff Augmentation',
-      'System Integration',
-      'Technical Support',
-      'Bug Fixing',
-      'API Integration',
-      // Design & UX
-      'UI/UX Design Services',
-      'UX Research',
-      'Product Design',
-      'Design Systems',
-      'Wireframing Prototyping',
-      // Other Services
-      'API Development Integration',
-      'Big Data Solutions',
-      'Containerisation',
-      'Infrastructure as Code',
-      'Jamstack Development',
-      'MVP Development',
-      'NFT Marketplace Development',
-      'PWA Development',
-      'SQL NoSQL Solutions',
-      'Web Scraping Data Extraction'
+      "AI Agents Development",
+      "AI Automation Systems",
+      "AI Chatbot Development",
+      "AI Integration Services",
+      "AI Model Development",
+      "Deep Learning Solutions",
+      "Generative AI Solutions",
+      "LLM Applications Development",
     ],
+  },
+
+  {
+    category: "App Development",
+    services: [
+      "Android App Development",
+      "Cross Platform App Development",
+      "Flutter App Development",
+      "iOS App Development",
+      "Mobile App Development",
+      "Mobile App Design",
+      "Native App Development",
+      "React Native Development",
+    ],
+  },
+
+  {
+    category: "Web Development",
+    services: [
+      "Ecommerce Development",
+      "Frontend Development",
+      "Full Stack Development",
+      "Web Application Development",
+      "Website Development",
+      "Web Design",
+    ],
+  },
+
+  {
+    category: "Backend & Infrastructure",
+    services: [
+      "Backend Development",
+      "Cloud Native Development",
+      "Cloud Solutions",
+      "Cloud Solutions DevOps",
+      "DevOps Services",
+      "Serverless Architecture",
+      "Microservices Architecture",
+    ],
+  },
+
+  {
+    category: "Database & Data",
+    services: [
+      "Data Engineering",
+      "Data Migration",
+      "Data Science Analytics",
+      "Data Visualization",
+      "Data Warehousing",
+      "Database Design",
+      "Database Management",
+      "Database Optimisation",
+    ],
+  },
+
+  {
+    category: "Blockchain & Crypto",
+    services: [
+      "Blockchain Development",
+      "Crypto Wallet Development",
+      "DApp Development",
+      "Smart Contract Development",
+    ],
+  },
+
+  {
+    category: "Testing & QA",
+    services: [
+      "Automated Testing",
+      "Manual Testing",
+      "Load Testing",
+      "Performance Testing",
+      "QA Software Testing",
+      "Penetration Testing",
+    ],
+  },
+
+  {
+    category: "Security",
+    services: [
+      "Application Security",
+      "Cybersecurity Services",
+      "Security Audits",
+      "Vulnerability Assessment",
+      "Compliance Risk Management",
+    ],
+  },
+
+  {
+    category: "Business & Analytics",
+    services: [
+      "Business Intelligence",
+      "Business Process Automation",
+      "Predictive Analytics",
+      "Recommendation Systems",
+      "RPA",
+      "Workflow Automation",
+    ],
+  },
+
+  {
+    category: "Specialized Development",
+    services: [
+      "AR Development",
+      "VR Development",
+      "Embedded Systems Development",
+      "Desktop Application Development",
+      "Enterprise Software",
+      "IoT Development",
+      "Industrial IoT",
+      "Mixed Reality Solutions",
+      "Smart Systems Development",
+      "Web3 Development",
+    ],
+  },
+
+  {
+    category: "E-commerce Platforms",
+    services: [
+      "Headless Ecommerce",
+      "Shopify Development",
+      "WooCommerce Development",
+      "Headless CMS Development",
+    ],
+  },
+
+  {
+    category: "Advanced Technologies",
+    services: [
+      "Computer Vision",
+      "Image Processing",
+      "Natural Language Processing",
+      "Speech Recognition",
+      "Text Analytics",
+      "Video Analytics",
+      "Model Training Optimisation",
+      "Token Development",
+    ],
+  },
+
+  {
+    category: "Services & Support",
+    services: [
+      "Dedicated Development Teams",
+      "IT Outsourcing",
+      "Maintenance Support",
+      "Staff Augmentation",
+      "System Integration",
+      "Technical Support",
+      "Bug Fixing",
+      "API Integration",
+    ],
+  },
+
+  {
+    category: "Design & UX",
+    services: [
+      "UI/UX Design Services",
+      "UX Research",
+      "Product Design",
+      "Design Systems",
+      "Wireframing Prototyping",
+    ],
+  },
+
+  {
+    category: "Other Services",
+    services: [
+      "API Development Integration",
+      "Big Data Solutions",
+      "Containerisation",
+      "Infrastructure as Code",
+      "Jamstack Development",
+      "MVP Development",
+      "NFT Marketplace Development",
+      "PWA Development",
+      "SQL NoSQL Solutions",
+      "Web Scraping Data Extraction",
+    ],
+  },
+],
     contactInfo: {
       email: 'canada@clickmasters.com',
       phone: '+1 (416) 555-0123',
@@ -190,7 +267,7 @@ export const countryData: Record<string, CountryData> = {
     },
     timezone: 'EST (UTC-5)',
     languages: ['English', 'French'],
-    heroHeadline: 'Custom Software Development Services in Canada',
+    heroHeadline: 'Software Development Services in Canada',
     heroSubheadline: 'Helping startups and enterprises build scalable web, mobile, and SaaS solutions.',
     businessLandscape: 'Canada boasts a diverse and thriving business ecosystem with strong technology sectors in Toronto, Vancouver, and Montreal.',
     digitalTransformationDemand: 'Canadian businesses are rapidly embracing digital transformation to stay competitive in global markets.',
@@ -276,126 +353,200 @@ export const countryData: Record<string, CountryData> = {
     title: 'ClickMasters USA - Software Development Services',
     description: 'Top-rated software development company in the USA. We deliver cutting-edge web, mobile, and AI solutions for American businesses.',
     content: 'ClickMasters USA provides world-class software development services to businesses across the United States. Our expert team delivers innovative solutions that transform your digital presence.',
-       services: [
-      // AI & Machine Learning
-      'AI Agents Development',
-      'AI Automation Systems',
-      'AI Chatbot Development',
-      'AI Integration Services',
-      'AI Model Development',
-      'Deep Learning Solutions',
-      'Generative AI Solutions',
-      'LLM Applications Development',
-      // App Development
-      'Android App Development',
-      'Cross Platform App Development',
-      'Flutter App Development',
-      'iOS App Development',
-      'Mobile App Development',
-      'Mobile App Design',
-      'Native App Development',
-      'React Native Development',
-      // Web Development
-      'Ecommerce Development',
-      'Frontend Development',
-      'Full Stack Development',
-      'Web Application Development',
-      'Website Development',
-      'Web Design',
-      // Backend & Infrastructure
-      'Backend Development',
-      'Cloud Native Development',
-      'Cloud Solutions',
-      'Cloud Solutions DevOps',
-      'DevOps Services',
-      'Serverless Architecture',
-      'Microservices Architecture',
-      // Database & Data
-      'Data Engineering',
-      'Data Migration',
-      'Data Science Analytics',
-      'Data Visualization',
-      'Data Warehousing',
-      'Database Design',
-      'Database Management',
-      'Database Optimisation',
-      // Blockchain & Crypto
-      'Blockchain Development',
-      'Crypto Wallet Development',
-      'DApp Development',
-      'Smart Contract Development',
-      // Testing & QA
-      'Automated Testing',
-      'Manual Testing',
-      'Load Testing',
-      'Performance Testing',
-      'QA Software Testing',
-      'Penetration Testing',
-      // Security
-      'Application Security',
-      'Cybersecurity Services',
-      'Security Audits',
-      'Vulnerability Assessment',
-      'Compliance Risk Management',
-      // Business & Analytics
-      'Business Intelligence',
-      'Business Process Automation',
-      'Predictive Analytics',
-      'Recommendation Systems',
-      'RPA',
-      'Workflow Automation',
-      // Specialized Development
-      'AR Development',
-      'VR Development',
-      'Embedded Systems Development',
-      'Desktop Application Development',
-      'Enterprise Software',
-      'IoT Development',
-      'Industrial IoT',
-      'Mixed Reality Solutions',
-      'Smart Systems Development',
-      'Web3 Development',
-      // E-commerce Platforms
-      'Headless Ecommerce',
-      'Shopify Development',
-      'WooCommerce Development',
-      'Headless CMS Development',
-      // Advanced Technologies
-      'Computer Vision',
-      'Image Processing',
-      'Natural Language Processing',
-      'Speech Recognition',
-      'Text Analytics',
-      'Video Analytics',
-      'Model Training Optimisation',
-      'Token Development',
-      // Services & Support
-      'Dedicated Development Teams',
-      'IT Outsourcing',
-      'Maintenance Support',
-      'Staff Augmentation',
-      'System Integration',
-      'Technical Support',
-      'Bug Fixing',
-      'API Integration',
-      // Design & UX
-      'UI/UX Design Services',
-      'UX Research',
-      'Product Design',
-      'Design Systems',
-      'Wireframing Prototyping',
-      // Other Services
-      'API Development Integration',
-      'Big Data Solutions',
-      'Containerisation',
-      'Infrastructure as Code',
-      'Jamstack Development',
-      'MVP Development',
-      'NFT Marketplace Development',
-      'PWA Development',
-      'SQL NoSQL Solutions',
-      'Web Scraping Data Extraction'
+        servicesByCategory : [
+  {
+    category: "AI & Machine Learning",
+    services: [
+      "AI Agents Development",
+      "AI Automation Systems",
+      "AI Chatbot Development",
+      "AI Integration Services",
+      "AI Model Development",
+      "Deep Learning Solutions",
+      "Generative AI Solutions",
+      "LLM Applications Development",
     ],
+  },
+
+  {
+    category: "App Development",
+    services: [
+      "Android App Development",
+      "Cross Platform App Development",
+      "Flutter App Development",
+      "iOS App Development",
+      "Mobile App Development",
+      "Mobile App Design",
+      "Native App Development",
+      "React Native Development",
+    ],
+  },
+
+  {
+    category: "Web Development",
+    services: [
+      "Ecommerce Development",
+      "Frontend Development",
+      "Full Stack Development",
+      "Web Application Development",
+      "Website Development",
+      "Web Design",
+    ],
+  },
+
+  {
+    category: "Backend & Infrastructure",
+    services: [
+      "Backend Development",
+      "Cloud Native Development",
+      "Cloud Solutions",
+      "Cloud Solutions DevOps",
+      "DevOps Services",
+      "Serverless Architecture",
+      "Microservices Architecture",
+    ],
+  },
+
+  {
+    category: "Database & Data",
+    services: [
+      "Data Engineering",
+      "Data Migration",
+      "Data Science Analytics",
+      "Data Visualization",
+      "Data Warehousing",
+      "Database Design",
+      "Database Management",
+      "Database Optimisation",
+    ],
+  },
+
+  {
+    category: "Blockchain & Crypto",
+    services: [
+      "Blockchain Development",
+      "Crypto Wallet Development",
+      "DApp Development",
+      "Smart Contract Development",
+    ],
+  },
+
+  {
+    category: "Testing & QA",
+    services: [
+      "Automated Testing",
+      "Manual Testing",
+      "Load Testing",
+      "Performance Testing",
+      "QA Software Testing",
+      "Penetration Testing",
+    ],
+  },
+
+  {
+    category: "Security",
+    services: [
+      "Application Security",
+      "Cybersecurity Services",
+      "Security Audits",
+      "Vulnerability Assessment",
+      "Compliance Risk Management",
+    ],
+  },
+
+  {
+    category: "Business & Analytics",
+    services: [
+      "Business Intelligence",
+      "Business Process Automation",
+      "Predictive Analytics",
+      "Recommendation Systems",
+      "RPA",
+      "Workflow Automation",
+    ],
+  },
+
+  {
+    category: "Specialized Development",
+    services: [
+      "AR Development",
+      "VR Development",
+      "Embedded Systems Development",
+      "Desktop Application Development",
+      "Enterprise Software",
+      "IoT Development",
+      "Industrial IoT",
+      "Mixed Reality Solutions",
+      "Smart Systems Development",
+      "Web3 Development",
+    ],
+  },
+
+  {
+    category: "E-commerce Platforms",
+    services: [
+      "Headless Ecommerce",
+      "Shopify Development",
+      "WooCommerce Development",
+      "Headless CMS Development",
+    ],
+  },
+
+  {
+    category: "Advanced Technologies",
+    services: [
+      "Computer Vision",
+      "Image Processing",
+      "Natural Language Processing",
+      "Speech Recognition",
+      "Text Analytics",
+      "Video Analytics",
+      "Model Training Optimisation",
+      "Token Development",
+    ],
+  },
+
+  {
+    category: "Services & Support",
+    services: [
+      "Dedicated Development Teams",
+      "IT Outsourcing",
+      "Maintenance Support",
+      "Staff Augmentation",
+      "System Integration",
+      "Technical Support",
+      "Bug Fixing",
+      "API Integration",
+    ],
+  },
+
+  {
+    category: "Design & UX",
+    services: [
+      "UI/UX Design Services",
+      "UX Research",
+      "Product Design",
+      "Design Systems",
+      "Wireframing Prototyping",
+    ],
+  },
+
+  {
+    category: "Other Services",
+    services: [
+      "API Development Integration",
+      "Big Data Solutions",
+      "Containerisation",
+      "Infrastructure as Code",
+      "Jamstack Development",
+      "MVP Development",
+      "NFT Marketplace Development",
+      "PWA Development",
+      "SQL NoSQL Solutions",
+      "Web Scraping Data Extraction",
+    ],
+  },
+],
     contactInfo: {
       email: 'usa@clickmasters.com',
       phone: '+1 (212) 555-0147',
@@ -403,7 +554,7 @@ export const countryData: Record<string, CountryData> = {
     },
     timezone: 'EST (UTC-5)',
     languages: ['English'],
-    heroHeadline: 'Custom Software Development Services in USA',
+    heroHeadline: 'Software Development Services in USA',
     heroSubheadline: 'Helping startups and enterprises build scalable web, mobile, and SaaS solutions.',
     businessLandscape: 'The United States leads the global technology sector with major innovation hubs in Silicon Valley, New York, and Austin.',
     digitalTransformationDemand: 'American businesses require cutting-edge digital solutions to maintain competitive advantage in fast-paced markets.',
@@ -489,126 +640,200 @@ export const countryData: Record<string, CountryData> = {
     title: 'ClickMasters UK - Software Development Company',
     description: 'Leading software development agency in the United Kingdom. Specializing in custom web apps, mobile solutions, and AI development for UK businesses.',
     content: 'ClickMasters UK is your trusted software development partner across the United Kingdom. We deliver high-quality, scalable solutions that help businesses thrive in the digital age.',
+       servicesByCategory : [
+  {
+    category: "AI & Machine Learning",
     services: [
-         // AI & Machine Learning
-      'AI Agents Development',
-      'AI Automation Systems',
-      'AI Chatbot Development',
-      'AI Integration Services',
-      'AI Model Development',
-      'Deep Learning Solutions',
-      'Generative AI Solutions',
-      'LLM Applications Development',
-      // App Development
-      'Android App Development',
-      'Cross Platform App Development',
-      'Flutter App Development',
-      'iOS App Development',
-      'Mobile App Development',
-      'Mobile App Design',
-      'Native App Development',
-      'React Native Development',
-      // Web Development
-      'Ecommerce Development',
-      'Frontend Development',
-      'Full Stack Development',
-      'Web Application Development',
-      'Website Development',
-      'Web Design',
-      // Backend & Infrastructure
-      'Backend Development',
-      'Cloud Native Development',
-      'Cloud Solutions',
-      'Cloud Solutions DevOps',
-      'DevOps Services',
-      'Serverless Architecture',
-      'Microservices Architecture',
-      // Database & Data
-      'Data Engineering',
-      'Data Migration',
-      'Data Science Analytics',
-      'Data Visualization',
-      'Data Warehousing',
-      'Database Design',
-      'Database Management',
-      'Database Optimisation',
-      // Blockchain & Crypto
-      'Blockchain Development',
-      'Crypto Wallet Development',
-      'DApp Development',
-      'Smart Contract Development',
-      // Testing & QA
-      'Automated Testing',
-      'Manual Testing',
-      'Load Testing',
-      'Performance Testing',
-      'QA Software Testing',
-      'Penetration Testing',
-      // Security
-      'Application Security',
-      'Cybersecurity Services',
-      'Security Audits',
-      'Vulnerability Assessment',
-      'Compliance Risk Management',
-      // Business & Analytics
-      'Business Intelligence',
-      'Business Process Automation',
-      'Predictive Analytics',
-      'Recommendation Systems',
-      'RPA',
-      'Workflow Automation',
-      // Specialized Development
-      'AR Development',
-      'VR Development',
-      'Embedded Systems Development',
-      'Desktop Application Development',
-      'Enterprise Software',
-      'IoT Development',
-      'Industrial IoT',
-      'Mixed Reality Solutions',
-      'Smart Systems Development',
-      'Web3 Development',
-      // E-commerce Platforms
-      'Headless Ecommerce',
-      'Shopify Development',
-      'WooCommerce Development',
-      'Headless CMS Development',
-      // Advanced Technologies
-      'Computer Vision',
-      'Image Processing',
-      'Natural Language Processing',
-      'Speech Recognition',
-      'Text Analytics',
-      'Video Analytics',
-      'Model Training Optimisation',
-      'Token Development',
-      // Services & Support
-      'Dedicated Development Teams',
-      'IT Outsourcing',
-      'Maintenance Support',
-      'Staff Augmentation',
-      'System Integration',
-      'Technical Support',
-      'Bug Fixing',
-      'API Integration',
-      // Design & UX
-      'UI/UX Design Services',
-      'UX Research',
-      'Product Design',
-      'Design Systems',
-      'Wireframing Prototyping',
-      // Other Services
-      'API Development Integration',
-      'Big Data Solutions',
-      'Containerisation',
-      'Infrastructure as Code',
-      'Jamstack Development',
-      'MVP Development',
-      'NFT Marketplace Development',
-      'PWA Development',
-      'SQL NoSQL Solutions',
-      'Web Scraping Data Extraction'
+      "AI Agents Development",
+      "AI Automation Systems",
+      "AI Chatbot Development",
+      "AI Integration Services",
+      "AI Model Development",
+      "Deep Learning Solutions",
+      "Generative AI Solutions",
+      "LLM Applications Development",
     ],
+  },
+
+  {
+    category: "App Development",
+    services: [
+      "Android App Development",
+      "Cross Platform App Development",
+      "Flutter App Development",
+      "iOS App Development",
+      "Mobile App Development",
+      "Mobile App Design",
+      "Native App Development",
+      "React Native Development",
+    ],
+  },
+
+  {
+    category: "Web Development",
+    services: [
+      "Ecommerce Development",
+      "Frontend Development",
+      "Full Stack Development",
+      "Web Application Development",
+      "Website Development",
+      "Web Design",
+    ],
+  },
+
+  {
+    category: "Backend & Infrastructure",
+    services: [
+      "Backend Development",
+      "Cloud Native Development",
+      "Cloud Solutions",
+      "Cloud Solutions DevOps",
+      "DevOps Services",
+      "Serverless Architecture",
+      "Microservices Architecture",
+    ],
+  },
+
+  {
+    category: "Database & Data",
+    services: [
+      "Data Engineering",
+      "Data Migration",
+      "Data Science Analytics",
+      "Data Visualization",
+      "Data Warehousing",
+      "Database Design",
+      "Database Management",
+      "Database Optimisation",
+    ],
+  },
+
+  {
+    category: "Blockchain & Crypto",
+    services: [
+      "Blockchain Development",
+      "Crypto Wallet Development",
+      "DApp Development",
+      "Smart Contract Development",
+    ],
+  },
+
+  {
+    category: "Testing & QA",
+    services: [
+      "Automated Testing",
+      "Manual Testing",
+      "Load Testing",
+      "Performance Testing",
+      "QA Software Testing",
+      "Penetration Testing",
+    ],
+  },
+
+  {
+    category: "Security",
+    services: [
+      "Application Security",
+      "Cybersecurity Services",
+      "Security Audits",
+      "Vulnerability Assessment",
+      "Compliance Risk Management",
+    ],
+  },
+
+  {
+    category: "Business & Analytics",
+    services: [
+      "Business Intelligence",
+      "Business Process Automation",
+      "Predictive Analytics",
+      "Recommendation Systems",
+      "RPA",
+      "Workflow Automation",
+    ],
+  },
+
+  {
+    category: "Specialized Development",
+    services: [
+      "AR Development",
+      "VR Development",
+      "Embedded Systems Development",
+      "Desktop Application Development",
+      "Enterprise Software",
+      "IoT Development",
+      "Industrial IoT",
+      "Mixed Reality Solutions",
+      "Smart Systems Development",
+      "Web3 Development",
+    ],
+  },
+
+  {
+    category: "E-commerce Platforms",
+    services: [
+      "Headless Ecommerce",
+      "Shopify Development",
+      "WooCommerce Development",
+      "Headless CMS Development",
+    ],
+  },
+
+  {
+    category: "Advanced Technologies",
+    services: [
+      "Computer Vision",
+      "Image Processing",
+      "Natural Language Processing",
+      "Speech Recognition",
+      "Text Analytics",
+      "Video Analytics",
+      "Model Training Optimisation",
+      "Token Development",
+    ],
+  },
+
+  {
+    category: "Services & Support",
+    services: [
+      "Dedicated Development Teams",
+      "IT Outsourcing",
+      "Maintenance Support",
+      "Staff Augmentation",
+      "System Integration",
+      "Technical Support",
+      "Bug Fixing",
+      "API Integration",
+    ],
+  },
+
+  {
+    category: "Design & UX",
+    services: [
+      "UI/UX Design Services",
+      "UX Research",
+      "Product Design",
+      "Design Systems",
+      "Wireframing Prototyping",
+    ],
+  },
+
+  {
+    category: "Other Services",
+    services: [
+      "API Development Integration",
+      "Big Data Solutions",
+      "Containerisation",
+      "Infrastructure as Code",
+      "Jamstack Development",
+      "MVP Development",
+      "NFT Marketplace Development",
+      "PWA Development",
+      "SQL NoSQL Solutions",
+      "Web Scraping Data Extraction",
+    ],
+  },
+],
     contactInfo: {
       email: 'uk@clickmasters.com',
       phone: '+44 (20) 7123-4567',
@@ -616,7 +841,7 @@ export const countryData: Record<string, CountryData> = {
     },
     timezone: 'GMT (UTC+0)',
     languages: ['English'],
-    heroHeadline: 'Custom Software Development Services in UK',
+    heroHeadline: 'Software Development Services in UK',
     heroSubheadline: 'Helping startups and enterprises build scalable web, mobile, and SaaS solutions.',
     businessLandscape: 'The United Kingdom boasts a sophisticated technology ecosystem with London as a global fintech hub.',
     digitalTransformationDemand: 'British businesses are rapidly adopting digital solutions to compete in post-Brexit markets.',
@@ -702,126 +927,200 @@ export const countryData: Record<string, CountryData> = {
     title: 'ClickMasters Germany - Softwareentwicklung',
     description: 'Führendes Softwareentwicklungsunternehmen in Deutschland. Wir maßgeschneiderte Web-Anwendungen, mobile Apps und KI-Lösungen.',
     content: 'ClickMasters Germany ist Ihr bevorzugter Partner für Softwareentwicklung in Deutschland. Unser Expertenteam liefert innovative Lösungen für digitale Transformation.',
+       servicesByCategory : [
+  {
+    category: "AI & Machine Learning",
     services: [
-        // AI & Machine Learning
-      'AI Agents Development',
-      'AI Automation Systems',
-      'AI Chatbot Development',
-      'AI Integration Services',
-      'AI Model Development',
-      'Deep Learning Solutions',
-      'Generative AI Solutions',
-      'LLM Applications Development',
-      // App Development
-      'Android App Development',
-      'Cross Platform App Development',
-      'Flutter App Development',
-      'iOS App Development',
-      'Mobile App Development',
-      'Mobile App Design',
-      'Native App Development',
-      'React Native Development',
-      // Web Development
-      'Ecommerce Development',
-      'Frontend Development',
-      'Full Stack Development',
-      'Web Application Development',
-      'Website Development',
-      'Web Design',
-      // Backend & Infrastructure
-      'Backend Development',
-      'Cloud Native Development',
-      'Cloud Solutions',
-      'Cloud Solutions DevOps',
-      'DevOps Services',
-      'Serverless Architecture',
-      'Microservices Architecture',
-      // Database & Data
-      'Data Engineering',
-      'Data Migration',
-      'Data Science Analytics',
-      'Data Visualization',
-      'Data Warehousing',
-      'Database Design',
-      'Database Management',
-      'Database Optimisation',
-      // Blockchain & Crypto
-      'Blockchain Development',
-      'Crypto Wallet Development',
-      'DApp Development',
-      'Smart Contract Development',
-      // Testing & QA
-      'Automated Testing',
-      'Manual Testing',
-      'Load Testing',
-      'Performance Testing',
-      'QA Software Testing',
-      'Penetration Testing',
-      // Security
-      'Application Security',
-      'Cybersecurity Services',
-      'Security Audits',
-      'Vulnerability Assessment',
-      'Compliance Risk Management',
-      // Business & Analytics
-      'Business Intelligence',
-      'Business Process Automation',
-      'Predictive Analytics',
-      'Recommendation Systems',
-      'RPA',
-      'Workflow Automation',
-      // Specialized Development
-      'AR Development',
-      'VR Development',
-      'Embedded Systems Development',
-      'Desktop Application Development',
-      'Enterprise Software',
-      'IoT Development',
-      'Industrial IoT',
-      'Mixed Reality Solutions',
-      'Smart Systems Development',
-      'Web3 Development',
-      // E-commerce Platforms
-      'Headless Ecommerce',
-      'Shopify Development',
-      'WooCommerce Development',
-      'Headless CMS Development',
-      // Advanced Technologies
-      'Computer Vision',
-      'Image Processing',
-      'Natural Language Processing',
-      'Speech Recognition',
-      'Text Analytics',
-      'Video Analytics',
-      'Model Training Optimisation',
-      'Token Development',
-      // Services & Support
-      'Dedicated Development Teams',
-      'IT Outsourcing',
-      'Maintenance Support',
-      'Staff Augmentation',
-      'System Integration',
-      'Technical Support',
-      'Bug Fixing',
-      'API Integration',
-      // Design & UX
-      'UI/UX Design Services',
-      'UX Research',
-      'Product Design',
-      'Design Systems',
-      'Wireframing Prototyping',
-      // Other Services
-      'API Development Integration',
-      'Big Data Solutions',
-      'Containerisation',
-      'Infrastructure as Code',
-      'Jamstack Development',
-      'MVP Development',
-      'NFT Marketplace Development',
-      'PWA Development',
-      'SQL NoSQL Solutions',
-      'Web Scraping Data Extraction'
+      "AI Agents Development",
+      "AI Automation Systems",
+      "AI Chatbot Development",
+      "AI Integration Services",
+      "AI Model Development",
+      "Deep Learning Solutions",
+      "Generative AI Solutions",
+      "LLM Applications Development",
     ],
+  },
+
+  {
+    category: "App Development",
+    services: [
+      "Android App Development",
+      "Cross Platform App Development",
+      "Flutter App Development",
+      "iOS App Development",
+      "Mobile App Development",
+      "Mobile App Design",
+      "Native App Development",
+      "React Native Development",
+    ],
+  },
+
+  {
+    category: "Web Development",
+    services: [
+      "Ecommerce Development",
+      "Frontend Development",
+      "Full Stack Development",
+      "Web Application Development",
+      "Website Development",
+      "Web Design",
+    ],
+  },
+
+  {
+    category: "Backend & Infrastructure",
+    services: [
+      "Backend Development",
+      "Cloud Native Development",
+      "Cloud Solutions",
+      "Cloud Solutions DevOps",
+      "DevOps Services",
+      "Serverless Architecture",
+      "Microservices Architecture",
+    ],
+  },
+
+  {
+    category: "Database & Data",
+    services: [
+      "Data Engineering",
+      "Data Migration",
+      "Data Science Analytics",
+      "Data Visualization",
+      "Data Warehousing",
+      "Database Design",
+      "Database Management",
+      "Database Optimisation",
+    ],
+  },
+
+  {
+    category: "Blockchain & Crypto",
+    services: [
+      "Blockchain Development",
+      "Crypto Wallet Development",
+      "DApp Development",
+      "Smart Contract Development",
+    ],
+  },
+
+  {
+    category: "Testing & QA",
+    services: [
+      "Automated Testing",
+      "Manual Testing",
+      "Load Testing",
+      "Performance Testing",
+      "QA Software Testing",
+      "Penetration Testing",
+    ],
+  },
+
+  {
+    category: "Security",
+    services: [
+      "Application Security",
+      "Cybersecurity Services",
+      "Security Audits",
+      "Vulnerability Assessment",
+      "Compliance Risk Management",
+    ],
+  },
+
+  {
+    category: "Business & Analytics",
+    services: [
+      "Business Intelligence",
+      "Business Process Automation",
+      "Predictive Analytics",
+      "Recommendation Systems",
+      "RPA",
+      "Workflow Automation",
+    ],
+  },
+
+  {
+    category: "Specialized Development",
+    services: [
+      "AR Development",
+      "VR Development",
+      "Embedded Systems Development",
+      "Desktop Application Development",
+      "Enterprise Software",
+      "IoT Development",
+      "Industrial IoT",
+      "Mixed Reality Solutions",
+      "Smart Systems Development",
+      "Web3 Development",
+    ],
+  },
+
+  {
+    category: "E-commerce Platforms",
+    services: [
+      "Headless Ecommerce",
+      "Shopify Development",
+      "WooCommerce Development",
+      "Headless CMS Development",
+    ],
+  },
+
+  {
+    category: "Advanced Technologies",
+    services: [
+      "Computer Vision",
+      "Image Processing",
+      "Natural Language Processing",
+      "Speech Recognition",
+      "Text Analytics",
+      "Video Analytics",
+      "Model Training Optimisation",
+      "Token Development",
+    ],
+  },
+
+  {
+    category: "Services & Support",
+    services: [
+      "Dedicated Development Teams",
+      "IT Outsourcing",
+      "Maintenance Support",
+      "Staff Augmentation",
+      "System Integration",
+      "Technical Support",
+      "Bug Fixing",
+      "API Integration",
+    ],
+  },
+
+  {
+    category: "Design & UX",
+    services: [
+      "UI/UX Design Services",
+      "UX Research",
+      "Product Design",
+      "Design Systems",
+      "Wireframing Prototyping",
+    ],
+  },
+
+  {
+    category: "Other Services",
+    services: [
+      "API Development Integration",
+      "Big Data Solutions",
+      "Containerisation",
+      "Infrastructure as Code",
+      "Jamstack Development",
+      "MVP Development",
+      "NFT Marketplace Development",
+      "PWA Development",
+      "SQL NoSQL Solutions",
+      "Web Scraping Data Extraction",
+    ],
+  },
+],
     contactInfo: {
       email: 'deutschland@clickmasters.com',
       phone: '+49 (30) 1234-5678',
@@ -829,7 +1128,7 @@ export const countryData: Record<string, CountryData> = {
     },
     timezone: 'CET (UTC+1)',
     languages: ['German', 'English'],
-    heroHeadline: 'Custom Software Development Services in Germany',
+    heroHeadline: 'Software Development Services in Germany',
     heroSubheadline: 'Helping startups and enterprises build scalable web, mobile, and SaaS solutions.',
     businessLandscape: 'Germany leads European innovation with strong engineering culture and manufacturing excellence.',
     digitalTransformationDemand: 'German industries require robust software solutions for Industry 4.0 and digital manufacturing.',
@@ -915,126 +1214,200 @@ export const countryData: Record<string, CountryData> = {
     title: 'ClickMasters UAE - Software Development Dubai',
     description: 'Premier software development company in UAE and Dubai. We create custom web applications, mobile apps, and AI solutions for Middle Eastern businesses.',
     content: 'ClickMasters UAE is your trusted software development partner in the United Arab Emirates. We deliver cutting-edge solutions that drive digital innovation across the Middle East.',
+      servicesByCategory : [
+  {
+    category: "AI & Machine Learning",
     services: [
-        // AI & Machine Learning
-      'AI Agents Development',
-      'AI Automation Systems',
-      'AI Chatbot Development',
-      'AI Integration Services',
-      'AI Model Development',
-      'Deep Learning Solutions',
-      'Generative AI Solutions',
-      'LLM Applications Development',
-      // App Development
-      'Android App Development',
-      'Cross Platform App Development',
-      'Flutter App Development',
-      'iOS App Development',
-      'Mobile App Development',
-      'Mobile App Design',
-      'Native App Development',
-      'React Native Development',
-      // Web Development
-      'Ecommerce Development',
-      'Frontend Development',
-      'Full Stack Development',
-      'Web Application Development',
-      'Website Development',
-      'Web Design',
-      // Backend & Infrastructure
-      'Backend Development',
-      'Cloud Native Development',
-      'Cloud Solutions',
-      'Cloud Solutions DevOps',
-      'DevOps Services',
-      'Serverless Architecture',
-      'Microservices Architecture',
-      // Database & Data
-      'Data Engineering',
-      'Data Migration',
-      'Data Science Analytics',
-      'Data Visualization',
-      'Data Warehousing',
-      'Database Design',
-      'Database Management',
-      'Database Optimisation',
-      // Blockchain & Crypto
-      'Blockchain Development',
-      'Crypto Wallet Development',
-      'DApp Development',
-      'Smart Contract Development',
-      // Testing & QA
-      'Automated Testing',
-      'Manual Testing',
-      'Load Testing',
-      'Performance Testing',
-      'QA Software Testing',
-      'Penetration Testing',
-      // Security
-      'Application Security',
-      'Cybersecurity Services',
-      'Security Audits',
-      'Vulnerability Assessment',
-      'Compliance Risk Management',
-      // Business & Analytics
-      'Business Intelligence',
-      'Business Process Automation',
-      'Predictive Analytics',
-      'Recommendation Systems',
-      'RPA',
-      'Workflow Automation',
-      // Specialized Development
-      'AR Development',
-      'VR Development',
-      'Embedded Systems Development',
-      'Desktop Application Development',
-      'Enterprise Software',
-      'IoT Development',
-      'Industrial IoT',
-      'Mixed Reality Solutions',
-      'Smart Systems Development',
-      'Web3 Development',
-      // E-commerce Platforms
-      'Headless Ecommerce',
-      'Shopify Development',
-      'WooCommerce Development',
-      'Headless CMS Development',
-      // Advanced Technologies
-      'Computer Vision',
-      'Image Processing',
-      'Natural Language Processing',
-      'Speech Recognition',
-      'Text Analytics',
-      'Video Analytics',
-      'Model Training Optimisation',
-      'Token Development',
-      // Services & Support
-      'Dedicated Development Teams',
-      'IT Outsourcing',
-      'Maintenance Support',
-      'Staff Augmentation',
-      'System Integration',
-      'Technical Support',
-      'Bug Fixing',
-      'API Integration',
-      // Design & UX
-      'UI/UX Design Services',
-      'UX Research',
-      'Product Design',
-      'Design Systems',
-      'Wireframing Prototyping',
-      // Other Services
-      'API Development Integration',
-      'Big Data Solutions',
-      'Containerisation',
-      'Infrastructure as Code',
-      'Jamstack Development',
-      'MVP Development',
-      'NFT Marketplace Development',
-      'PWA Development',
-      'SQL NoSQL Solutions',
-      'Web Scraping Data Extraction'
+      "AI Agents Development",
+      "AI Automation Systems",
+      "AI Chatbot Development",
+      "AI Integration Services",
+      "AI Model Development",
+      "Deep Learning Solutions",
+      "Generative AI Solutions",
+      "LLM Applications Development",
     ],
+  },
+
+  {
+    category: "App Development",
+    services: [
+      "Android App Development",
+      "Cross Platform App Development",
+      "Flutter App Development",
+      "iOS App Development",
+      "Mobile App Development",
+      "Mobile App Design",
+      "Native App Development",
+      "React Native Development",
+    ],
+  },
+
+  {
+    category: "Web Development",
+    services: [
+      "Ecommerce Development",
+      "Frontend Development",
+      "Full Stack Development",
+      "Web Application Development",
+      "Website Development",
+      "Web Design",
+    ],
+  },
+
+  {
+    category: "Backend & Infrastructure",
+    services: [
+      "Backend Development",
+      "Cloud Native Development",
+      "Cloud Solutions",
+      "Cloud Solutions DevOps",
+      "DevOps Services",
+      "Serverless Architecture",
+      "Microservices Architecture",
+    ],
+  },
+
+  {
+    category: "Database & Data",
+    services: [
+      "Data Engineering",
+      "Data Migration",
+      "Data Science Analytics",
+      "Data Visualization",
+      "Data Warehousing",
+      "Database Design",
+      "Database Management",
+      "Database Optimisation",
+    ],
+  },
+
+  {
+    category: "Blockchain & Crypto",
+    services: [
+      "Blockchain Development",
+      "Crypto Wallet Development",
+      "DApp Development",
+      "Smart Contract Development",
+    ],
+  },
+
+  {
+    category: "Testing & QA",
+    services: [
+      "Automated Testing",
+      "Manual Testing",
+      "Load Testing",
+      "Performance Testing",
+      "QA Software Testing",
+      "Penetration Testing",
+    ],
+  },
+
+  {
+    category: "Security",
+    services: [
+      "Application Security",
+      "Cybersecurity Services",
+      "Security Audits",
+      "Vulnerability Assessment",
+      "Compliance Risk Management",
+    ],
+  },
+
+  {
+    category: "Business & Analytics",
+    services: [
+      "Business Intelligence",
+      "Business Process Automation",
+      "Predictive Analytics",
+      "Recommendation Systems",
+      "RPA",
+      "Workflow Automation",
+    ],
+  },
+
+  {
+    category: "Specialized Development",
+    services: [
+      "AR Development",
+      "VR Development",
+      "Embedded Systems Development",
+      "Desktop Application Development",
+      "Enterprise Software",
+      "IoT Development",
+      "Industrial IoT",
+      "Mixed Reality Solutions",
+      "Smart Systems Development",
+      "Web3 Development",
+    ],
+  },
+
+  {
+    category: "E-commerce Platforms",
+    services: [
+      "Headless Ecommerce",
+      "Shopify Development",
+      "WooCommerce Development",
+      "Headless CMS Development",
+    ],
+  },
+
+  {
+    category: "Advanced Technologies",
+    services: [
+      "Computer Vision",
+      "Image Processing",
+      "Natural Language Processing",
+      "Speech Recognition",
+      "Text Analytics",
+      "Video Analytics",
+      "Model Training Optimisation",
+      "Token Development",
+    ],
+  },
+
+  {
+    category: "Services & Support",
+    services: [
+      "Dedicated Development Teams",
+      "IT Outsourcing",
+      "Maintenance Support",
+      "Staff Augmentation",
+      "System Integration",
+      "Technical Support",
+      "Bug Fixing",
+      "API Integration",
+    ],
+  },
+
+  {
+    category: "Design & UX",
+    services: [
+      "UI/UX Design Services",
+      "UX Research",
+      "Product Design",
+      "Design Systems",
+      "Wireframing Prototyping",
+    ],
+  },
+
+  {
+    category: "Other Services",
+    services: [
+      "API Development Integration",
+      "Big Data Solutions",
+      "Containerisation",
+      "Infrastructure as Code",
+      "Jamstack Development",
+      "MVP Development",
+      "NFT Marketplace Development",
+      "PWA Development",
+      "SQL NoSQL Solutions",
+      "Web Scraping Data Extraction",
+    ],
+  },
+],
     contactInfo: {
       email: 'uae@clickmasters.com',
       phone: '+971 (4) 123-4567',
@@ -1042,7 +1415,7 @@ export const countryData: Record<string, CountryData> = {
     },
     timezone: 'GST (UTC+4)',
     languages: ['English', 'Arabic'],
-    heroHeadline: 'Custom Software Development Services in UAE',
+    heroHeadline: 'Software Development Services in UAE',
     heroSubheadline: 'Helping startups and enterprises build scalable web, mobile, and SaaS solutions.',
     businessLandscape: 'UAE leads Middle East digital transformation with Dubai as a global technology hub.',
     digitalTransformationDemand: 'Emirati businesses are rapidly adopting digital solutions to diversify beyond oil and gas.',
@@ -1128,126 +1501,200 @@ export const countryData: Record<string, CountryData> = {
     title: 'ClickMasters Australia - Software Development Services',
     description: 'Top software development company in Australia. We build custom web applications, mobile apps, and AI solutions for Australian businesses.',
     content: 'ClickMasters Australia is your premier software development partner Down Under. Our expert team delivers innovative solutions that help businesses succeed in the digital landscape.',
+       servicesByCategory : [
+  {
+    category: "AI & Machine Learning",
     services: [
-        // AI & Machine Learning
-      'AI Agents Development',
-      'AI Automation Systems',
-      'AI Chatbot Development',
-      'AI Integration Services',
-      'AI Model Development',
-      'Deep Learning Solutions',
-      'Generative AI Solutions',
-      'LLM Applications Development',
-      // App Development
-      'Android App Development',
-      'Cross Platform App Development',
-      'Flutter App Development',
-      'iOS App Development',
-      'Mobile App Development',
-      'Mobile App Design',
-      'Native App Development',
-      'React Native Development',
-      // Web Development
-      'Ecommerce Development',
-      'Frontend Development',
-      'Full Stack Development',
-      'Web Application Development',
-      'Website Development',
-      'Web Design',
-      // Backend & Infrastructure
-      'Backend Development',
-      'Cloud Native Development',
-      'Cloud Solutions',
-      'Cloud Solutions DevOps',
-      'DevOps Services',
-      'Serverless Architecture',
-      'Microservices Architecture',
-      // Database & Data
-      'Data Engineering',
-      'Data Migration',
-      'Data Science Analytics',
-      'Data Visualization',
-      'Data Warehousing',
-      'Database Design',
-      'Database Management',
-      'Database Optimisation',
-      // Blockchain & Crypto
-      'Blockchain Development',
-      'Crypto Wallet Development',
-      'DApp Development',
-      'Smart Contract Development',
-      // Testing & QA
-      'Automated Testing',
-      'Manual Testing',
-      'Load Testing',
-      'Performance Testing',
-      'QA Software Testing',
-      'Penetration Testing',
-      // Security
-      'Application Security',
-      'Cybersecurity Services',
-      'Security Audits',
-      'Vulnerability Assessment',
-      'Compliance Risk Management',
-      // Business & Analytics
-      'Business Intelligence',
-      'Business Process Automation',
-      'Predictive Analytics',
-      'Recommendation Systems',
-      'RPA',
-      'Workflow Automation',
-      // Specialized Development
-      'AR Development',
-      'VR Development',
-      'Embedded Systems Development',
-      'Desktop Application Development',
-      'Enterprise Software',
-      'IoT Development',
-      'Industrial IoT',
-      'Mixed Reality Solutions',
-      'Smart Systems Development',
-      'Web3 Development',
-      // E-commerce Platforms
-      'Headless Ecommerce',
-      'Shopify Development',
-      'WooCommerce Development',
-      'Headless CMS Development',
-      // Advanced Technologies
-      'Computer Vision',
-      'Image Processing',
-      'Natural Language Processing',
-      'Speech Recognition',
-      'Text Analytics',
-      'Video Analytics',
-      'Model Training Optimisation',
-      'Token Development',
-      // Services & Support
-      'Dedicated Development Teams',
-      'IT Outsourcing',
-      'Maintenance Support',
-      'Staff Augmentation',
-      'System Integration',
-      'Technical Support',
-      'Bug Fixing',
-      'API Integration',
-      // Design & UX
-      'UI/UX Design Services',
-      'UX Research',
-      'Product Design',
-      'Design Systems',
-      'Wireframing Prototyping',
-      // Other Services
-      'API Development Integration',
-      'Big Data Solutions',
-      'Containerisation',
-      'Infrastructure as Code',
-      'Jamstack Development',
-      'MVP Development',
-      'NFT Marketplace Development',
-      'PWA Development',
-      'SQL NoSQL Solutions',
-      'Web Scraping Data Extraction'
+      "AI Agents Development",
+      "AI Automation Systems",
+      "AI Chatbot Development",
+      "AI Integration Services",
+      "AI Model Development",
+      "Deep Learning Solutions",
+      "Generative AI Solutions",
+      "LLM Applications Development",
     ],
+  },
+
+  {
+    category: "App Development",
+    services: [
+      "Android App Development",
+      "Cross Platform App Development",
+      "Flutter App Development",
+      "iOS App Development",
+      "Mobile App Development",
+      "Mobile App Design",
+      "Native App Development",
+      "React Native Development",
+    ],
+  },
+
+  {
+    category: "Web Development",
+    services: [
+      "Ecommerce Development",
+      "Frontend Development",
+      "Full Stack Development",
+      "Web Application Development",
+      "Website Development",
+      "Web Design",
+    ],
+  },
+
+  {
+    category: "Backend & Infrastructure",
+    services: [
+      "Backend Development",
+      "Cloud Native Development",
+      "Cloud Solutions",
+      "Cloud Solutions DevOps",
+      "DevOps Services",
+      "Serverless Architecture",
+      "Microservices Architecture",
+    ],
+  },
+
+  {
+    category: "Database & Data",
+    services: [
+      "Data Engineering",
+      "Data Migration",
+      "Data Science Analytics",
+      "Data Visualization",
+      "Data Warehousing",
+      "Database Design",
+      "Database Management",
+      "Database Optimisation",
+    ],
+  },
+
+  {
+    category: "Blockchain & Crypto",
+    services: [
+      "Blockchain Development",
+      "Crypto Wallet Development",
+      "DApp Development",
+      "Smart Contract Development",
+    ],
+  },
+
+  {
+    category: "Testing & QA",
+    services: [
+      "Automated Testing",
+      "Manual Testing",
+      "Load Testing",
+      "Performance Testing",
+      "QA Software Testing",
+      "Penetration Testing",
+    ],
+  },
+
+  {
+    category: "Security",
+    services: [
+      "Application Security",
+      "Cybersecurity Services",
+      "Security Audits",
+      "Vulnerability Assessment",
+      "Compliance Risk Management",
+    ],
+  },
+
+  {
+    category: "Business & Analytics",
+    services: [
+      "Business Intelligence",
+      "Business Process Automation",
+      "Predictive Analytics",
+      "Recommendation Systems",
+      "RPA",
+      "Workflow Automation",
+    ],
+  },
+
+  {
+    category: "Specialized Development",
+    services: [
+      "AR Development",
+      "VR Development",
+      "Embedded Systems Development",
+      "Desktop Application Development",
+      "Enterprise Software",
+      "IoT Development",
+      "Industrial IoT",
+      "Mixed Reality Solutions",
+      "Smart Systems Development",
+      "Web3 Development",
+    ],
+  },
+
+  {
+    category: "E-commerce Platforms",
+    services: [
+      "Headless Ecommerce",
+      "Shopify Development",
+      "WooCommerce Development",
+      "Headless CMS Development",
+    ],
+  },
+
+  {
+    category: "Advanced Technologies",
+    services: [
+      "Computer Vision",
+      "Image Processing",
+      "Natural Language Processing",
+      "Speech Recognition",
+      "Text Analytics",
+      "Video Analytics",
+      "Model Training Optimisation",
+      "Token Development",
+    ],
+  },
+
+  {
+    category: "Services & Support",
+    services: [
+      "Dedicated Development Teams",
+      "IT Outsourcing",
+      "Maintenance Support",
+      "Staff Augmentation",
+      "System Integration",
+      "Technical Support",
+      "Bug Fixing",
+      "API Integration",
+    ],
+  },
+
+  {
+    category: "Design & UX",
+    services: [
+      "UI/UX Design Services",
+      "UX Research",
+      "Product Design",
+      "Design Systems",
+      "Wireframing Prototyping",
+    ],
+  },
+
+  {
+    category: "Other Services",
+    services: [
+      "API Development Integration",
+      "Big Data Solutions",
+      "Containerisation",
+      "Infrastructure as Code",
+      "Jamstack Development",
+      "MVP Development",
+      "NFT Marketplace Development",
+      "PWA Development",
+      "SQL NoSQL Solutions",
+      "Web Scraping Data Extraction",
+    ],
+  },
+],
     contactInfo: {
       email: 'australia@clickmasters.com',
       phone: '+61 (2) 9876-5432',
@@ -1255,7 +1702,7 @@ export const countryData: Record<string, CountryData> = {
     },
     timezone: 'AEST (UTC+10)',
     languages: ['English'],
-    heroHeadline: 'Custom Software Development Services in Australia',
+    heroHeadline: 'Software Development Services in Australia',
     heroSubheadline: 'Helping startups and enterprises build scalable web, mobile, and SaaS solutions.',
     businessLandscape: 'Australia boasts a thriving tech ecosystem with Sydney and Melbourne as major innovation hubs.',
     digitalTransformationDemand: 'Australian businesses are embracing digital solutions to compete in Asia-Pacific markets.',
@@ -1405,6 +1852,7 @@ export function getAllCountrySlugs(): string[] {
 export function getCountryData(slug: string): CountryData | undefined {
   return countryData[slug];
 }
+
 
 // Helper function to check if country exists
 export function countryExists(slug: string): boolean {

@@ -175,11 +175,11 @@ export function TestimonialsSection() {
            {/* Header — original design */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
-          <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+          <span className="w-8 h-[2px] bg-primary rounded-full" />
           <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">
           Testimonial
           </p>
-          <span className="w-8 h-[2px] bg-orange-400 rounded-full" />
+          <span className="w-8 h-[2px] bg-primary rounded-full" />
         </div>
 
         <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
