@@ -5,98 +5,20 @@ import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Link from "next/link";
+import type { CountryData } from "@/lib/country";
+
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-// ==================== TYPE DEFINITIONS ====================
 
-interface AnimatedCounterProps {
-  value: string;
-  label: string;
-  color: string;
-  delay?: number;
+
+
+interface HeroSectionProps {
+  country?: CountryData; 
 }
-
-interface StatItem {
-  value: string;
-  label: string;
-}
-
-// ==================== ANIMATED SECTION COMPONENTS ====================
-
-// Animated Counter Component
-const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ value, label, color, delay = 0 }) => {
-  const [count, setCount] = useState<number>(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
-  const animationRef = useRef<number>();
-  const startTimeRef = useRef<number | null>(null);
-
-  const animate = useCallback((timestamp: number) => {
-    if (!startTimeRef.current) startTimeRef.current = timestamp;
-    const progress = timestamp - startTimeRef.current;
-    const end = parseInt(value.toString().replace(/[^0-9]/g, ''));
-    const duration = 2000;
-
-    if (progress < duration) {
-      const currentCount = Math.min(Math.floor((progress / duration) * end), end);
-      setCount(currentCount);
-      animationRef.current = requestAnimationFrame(animate);
-    } else {
-      setCount(end);
-    }
-  }, [value]);
-
-  useEffect(() => {
-    if (isInView) {
-      animationRef.current = requestAnimationFrame(animate);
-    }
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [isInView, animate]);
-
-  const suffix = useMemo(() => 
-    value.includes('+') ? '+' : value.includes('%') ? '%' : '',
-  [value]);
-
-  // CSS animation for glow (better performance)
-  const glowStyle = useMemo(() => ({
-    animation: isInView ? 'glowPulse 3s infinite ease-in-out' : 'none',
-    animationDelay: `${delay}s`
-  }), [isInView, delay]);
-
-  const counterStyle = useMemo(() => ({
-    animation: isInView ? 'textGlow 2s infinite ease-in-out' : 'none',
-    animationDelay: `${delay}s`
-  }), [isInView, delay]);
-
-  return (
-    <div ref={ref} className="text-center relative group">
-      <div className="relative">
-        {/* Glow effect with CSS animation */}
-        <div 
-          className={`absolute inset-0 bg-gradient-to-r ${color} rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`}
-          style={glowStyle}
-        />
-
-        {/* Counter text */}
-        <div 
-          className={`relative sm:text-3xl lg:5xl font-bold text-white mb-1`}
-          style={counterStyle}
-        >
-          {count}{suffix}
-        </div>
-      </div>
-      <div className="text-sm text-white mt-2">{label}</div>
-    </div>
-  );
-};
 
 // Hero Section with Background Image
-export const HeroSection: React.FC = () => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ country }) => {
   const heroRef = useRef<HTMLElement>(null);
   const isInView = useInView(heroRef, { once: true });
   
@@ -152,16 +74,18 @@ const phrases: string[] = [
       transition={{ duration: 0.8 }}
     >
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80")',
-          }}
-        />
-        {/* Dark overlay for better text visibility */}
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
+   
+<div className="absolute inset-0 z-0">
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: 'url("/locationImg.webp")',
+    }}
+  />
+  
+  {/* Dark overlay for better text visibility */}
+  <div className="absolute inset-0 bg-black/50" />
+</div>
 
       {/* Content */}
       <motion.div
@@ -172,40 +96,44 @@ const phrases: string[] = [
       >
         <motion.div className="text-center">
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            className="text-4xl md:text-6xl font-bold text-white mb-6"
             initial={{ scale: 0.9 }}
             animate={isInView ? { scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <div>Clickmasters</div>
+            <div>{country?.heroHeadline}</div>
+
+
             <motion.div
-              className="text-gray-200 mt-4 text-3xl md:text-4xl"
-              animate={{
-                scale: [1, 1.02, 1],
-              }}
-              transition={{ duration: 0.3, repeat: Infinity, repeatDelay: 2 }}
+              className="text-gray-300 mt-4 text-md md:text-xl"
+             
             >
-              {displayText}
+              {country?.heroSubheadline}
               <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.5, repeat: Infinity }}
-                className="inline-block w-[3px] h-[40px] bg-primary ml-2 align-middle"
+                
               />
             </motion.div>
           </motion.h1>
 
 
-        <motion.div
+<motion.div
   initial={{ opacity: 0, y: 20 }}
   animate={isInView ? { opacity: 1, y: 0 } : {}}
   transition={{ duration: 0.6, delay: 0.8 }}
-  className="mt-8"
+  className="mt-8 flex flex-col sm:flex-row gap-4 justify-center"
 >
   <Link
-    href="/admin/login"
-    className="bg-primary hover:bg-primary text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 inline-block text-center"
+    href={`/contact-us?location=${location}`}
+    className="bg-primary hover:bg-primary text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 transform hover:scale-105 inline-block text-center"
   >
-    Get Started
+    Get Free Consultation
+  </Link>
+
+  <Link
+    href={`/contact-us?location=${location}`}
+    className="bg-primary hover:bg-primary text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 transform hover:scale-105 inline-block text-center"
+  >
+    Discuss Your Project
   </Link>
 </motion.div>
 
@@ -218,8 +146,11 @@ const phrases: string[] = [
 };
 
 // Stats Section with GSAP
+interface StatsSectionProps {
+  country?: CountryData; 
+}
 
-export const StatsSection: React.FC = () => {
+export const StatsSection: React.FC<StatsSectionProps> = ({ country }) => {
   const statsRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -321,20 +252,7 @@ export const StatsSection: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const stats: StatItem[] = [
-    { value: '1,860+', label: 'Current Projects' },
-    { value: '3,500+', label: 'Happy Clients' },
-    { value: '75+', label: 'Awards Winning' },
-    { value: '5+', label: 'Years Experience' },
-  ];
-
-  const gradients: string[] = [
-    'from-white to-white',
-    'from-white to-white',
-    'from-white to-white',
-    'from-white to-white',
-  ];
-
+ 
   return (
     <section
       ref={statsRef}
@@ -409,37 +327,73 @@ export const StatsSection: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-30">
-        <div ref={textRef} className="text-white">
-          <motion.h1
-            className="text-2xl md:text-4xl mb-4 md:mb-6 text-center font-medium leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            Leading Software Development Company
-          </motion.h1>
+ <div ref={textRef} className="text-white">
 
-          <motion.p
-            className="text-sm md:text-lg max-w-4xl mx-auto text-center px-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            Clickmasters – Crafting custom software solutions to empower businesses worldwide.
-          </motion.p>
+  <motion.h1
+    className="text-2xl md:text-4xl mb-6 text-center font-medium leading-tight"
+    initial={{ opacity: 0, y: 20 }}
+    animate={isInView ? { opacity: 1, y: 0 } : {}}
+    transition={{ duration: 0.6, delay: 0.4 }}
+  >
+    Understanding {country?.name}'s Business Landscape
+  </motion.h1>
 
-          <motion.p
-            className="text-sm md:text-lg max-w-4xl mx-auto text-center px-4 mt-2 md:mt-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            From web and mobile apps to enterprise systems, we deliver scalable, reliable, and innovative software.
-          </motion.p>
-        </div>
+  {/* 2-item row */}
+  <motion.div
+    className="max-w-5xl mx-auto px-4 flex flex-col lg:flex-row items-stretch text-white/90"
+    initial={{ opacity: 0, y: 20 }}
+    animate={isInView ? { opacity: 1, y: 0 } : {}}
+    transition={{ duration: 0.6, delay: 0.5 }}
+  >
+
+    {/* 1 */}
+    <div className="flex-1 text-left lg:pr-8">
+      <h2 className="text-sm md:text-lg font-semibold mb-2">
+        Business Environment
+      </h2>
+      <p className="text-sm md:text-base leading-relaxed">
+         {country?.businessLandscape}
+      </p>
+    </div>
+
+    {/* divider */}
+    <div className="hidden lg:block w-px bg-white/20 mx-6" />
+
+    {/* 2 */}
+    <div className="flex-1 text-left lg:pl-8 mt-6 lg:mt-0">
+      <h2 className="text-sm md:text-lg font-semibold mb-2">
+       Digital Transformation
+      </h2>
+      <p className="text-sm md:text-base leading-relaxed">
+             
+                {country?.digitalTransformationDemand}
+      </p>
+    </div>
+
+            
+ {/* divider */}
+    <div className="hidden lg:block w-px bg-white/20 mx-6" />
+
+                 <div>
+               <h2 className="text-sm md:text-lg font-semibold mb-2"> Market Challenges</h2>
+              <ul className="space-y-2">
+                {country?.marketChallenges?.map((challenge: string, index: number) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <div>-</div>
+                    <span className="text-slate-100">{challenge}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+  </motion.div>
+
+
+          
+
+</div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-8 md:mt-12">
+        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-8 md:mt-12">
           {stats.map((stat, index) => (
             <div key={index} className="stat-item text-center relative group">
               <div
@@ -460,20 +414,12 @@ export const StatsSection: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
+
+
+
+        
       </div>
     </section>
   );
 };
-
-// Main component that combines both sections
-const HomePage: React.FC = () => {
-  return (
-    <main className="bg-white">
-      <HeroSection />
-      <StatsSection />
-    </main>
-  );
-};
-
-export default HomePage;

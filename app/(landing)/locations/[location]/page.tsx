@@ -15,7 +15,9 @@ import TrustedClientsSection from '@/src/components/landingPage/home/TrustedClie
 import PainPointsSolutions from '@/src/components/landingPage/home/PainPointsSolutions';
 import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 import CountryServicesSection from '@/src/components/landingPage/location/CountryServicesSection';
-import { HeroSection } from '@/src/components/landingPage/location/LocationHero';
+import { HeroSection, StatsSection } from '@/src/components/landingPage/location/LocationHero';
+import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
+
 
 type Props = { params: Promise<{ location: string }> };
 
@@ -89,70 +91,28 @@ export default async function CountryPage({ params }: Props) {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
 
 
-      <HeroSection/>
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-white to-primary/5">
-        <div className=" mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6">
-              {country.heroHeadline}
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto">
-              {country.heroSubheadline}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href={`/contact-us?location=${location}`}
-                className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                Get Free Consultation
-              </a>
-              <a
-                href="#services"
-                className="inline-flex items-center justify-center px-8 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
-              >
-                Discuss Your Project
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection country={country} />
+      <StatsSection country={country} />
+    
+    <PainPointsSolutions countryName={country.name} />
 
-      {/* Business Landscape */}
-      <section className="py-20">
-        <div className=" mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Understanding {country.name}'s Business Landscape
-            </h2>
-          </div>
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">Business Environment</h3>
-              <p className="text-lg text-slate-600 mb-6">{country.businessLandscape}</p>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">Digital Transformation</h3>
-              <p className="text-lg text-slate-600 mb-6">{country.digitalTransformationDemand}</p>
-            </div>
-            <div>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">Market Challenges</h3>
-              <ul className="space-y-3">
-                {country.marketChallenges?.map((challenge: string, index: number) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <span className="text-slate-700">{challenge}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
-      
-      <ProjectCTAHero
+
+      {/* Services Section - FIXED */}
+      <CountryServicesSection
+        countryName={country.name}
+        location={location}
+        servicesByCategory={country.servicesByCategory}
+        serviceSlugMap={serviceSlugMap}
+      />
+
+
+     <ProjectCTAHero
         variant="combined"
         badge="Global Clients"
         title="Trusted by Global Clients"
@@ -170,22 +130,13 @@ export default async function CountryPage({ params }: Props) {
         ]}
         location={location}
       />
-
-
-
-      {/* Services Section - FIXED */}
-      <CountryServicesSection
-        countryName={country.name}
-        location={location}
-        servicesByCategory={country.servicesByCategory}
-        serviceSlugMap={serviceSlugMap}
-      />
-
       {/* Other Sections */}
       <TrustedClientsSection />
-      <SolutionsPage />
-      <PainPointsSolutions countryName={country.name} />
 
+
+      <CTASectionImage/>
+      <SolutionsPage />
+    
       <WhyChooseUs
         countryName={country.name}
         items={[
@@ -197,14 +148,17 @@ export default async function CountryPage({ params }: Props) {
           { title: 'Ongoing Support', desc: 'Comprehensive maintenance and continuous improvement' },
         ]}
       />
-
-      {country.processPhases && (
+  <div className='mx-10 lg:mx-14 px-12 bg-white'>
+        
+        {country.processPhases && (
         <ProcessSection serviceName={country.name} processPhases={country.processPhases} />
       )}
-
-      {country.pricingTiers && (
+       </div>
+     
+      <div className='mx-10 lg:mx-14 px-12'>
+        {country.pricingTiers && (
         <PricingSection serviceName={country.name} pricingTiers={country.pricingTiers} />
-      )}
+      )}</div>
 
       <ProjectCTAHero
         variant="combined"
@@ -233,17 +187,16 @@ export default async function CountryPage({ params }: Props) {
         <FaqSection faqs={country.faqs} location={location} title="Frequently Asked Questions" subtitle="Answers before you start" />
       )}
 
-      <ProjectCTAHero
-        variant="final"
+ 
+
+
+      <CTASectionImage
         title={`Looking for a reliable software development company in ${country.name}?`}
         description="Let's build something amazing together"
         buttons={[
           { text: "Start Your Project", href: `/contact-us?location=${location}`, variant: "primary" },
           { text: "Book Free Consultation", href: "#services", variant: "outline" },
-        ]}
-        location={location}
-        countryName={country.name}
-      />
+        ]}/>
     </div>
   );
 }

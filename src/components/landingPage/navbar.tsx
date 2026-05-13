@@ -138,7 +138,7 @@ export function Navbar() {
 
   const isHome = pathname === '/';
   const isAbout = pathname === '/about-us';
-
+ const isLocation = pathname.startsWith("/locations/");
   // Fetch projects from API for Solutions dropdown
   const { data: projects = [], isLoading: isLoadingProjects } = useQuery<Project[]>({
     queryKey: ['projects-public'],
@@ -298,7 +298,7 @@ const { data: blogs = [] } = useQuery({
     return () => clearTimeout(timer);
   }, [pathname]);
 
-  const isLightHero = (isHome || isAbout) && !isScrolled && !isPageLoading;
+  const isLightHero = (isHome || isAbout || isLocation) && !isScrolled && !isPageLoading;
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 24);
