@@ -15,7 +15,7 @@ export const siteConfig = {
 
   url: process.env.NEXT_PUBLIC_APP_URL || 'https://software.clickmasters.pk',
 
-  ogImage: '/og/logo-white.webp',
+  ogImage: '/og/logo-white1.webp',
 
   twitterHandle: '@clickmasters',
 
@@ -37,7 +37,7 @@ export const organizationSchema = {
   name: 'ClickMasters',
   alternateName: 'ClickMasters Software',
   url: siteConfig.url,
-  logo: `${siteConfig.url}/images/logo-white.webp`,
+  logo: `${siteConfig.url}/images/logo-white1.webp`,
   image: `${siteConfig.url}/og-image.jpg`,
 
   description:
@@ -358,8 +358,8 @@ export const localBusinessSchema = {
   name: siteConfig.name,
   url: siteConfig.url,
 
-  logo: `${siteConfig.url}/images/logo-white.webp`,
-  image: `${siteConfig.url}/og/logo-white.webp`,
+  logo: `${siteConfig.url}/images/logo-white1.webp`,
+  image: `${siteConfig.url}/og/logo-white1.webp`,
 
   description: siteConfig.description,
 
@@ -432,7 +432,7 @@ export const defaultMetadata: Metadata = {
     creator: siteConfig.twitterHandle,
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og/logo-white.webp`],
+    images: [`${siteConfig.url}/og/logo-white1.webp`],
   },
 
   robots: {

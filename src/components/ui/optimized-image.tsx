@@ -18,7 +18,7 @@ export function OptimizedImage({
   priority = false,
 }: OptimizedImageProps) {
   const isLargeLogo =
-    src.includes("logo-white") || src.includes("/logo.webp") || src.includes("/images/logo");
+    src.includes("logo-white") || src.includes("/logo1.webp") || src.includes("/images/logo");
 
   if (isLargeLogo) {
     return (
