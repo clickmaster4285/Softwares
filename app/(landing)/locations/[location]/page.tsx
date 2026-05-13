@@ -148,12 +148,12 @@ export default async function CountryPage({ params }: Props) {
           { title: 'Ongoing Support', desc: 'Comprehensive maintenance and continuous improvement' },
         ]}
       />
-  <div className='mx-10 lg:mx-14 px-12 bg-white'>
+  {/* <div className='mx-10 lg:mx-14 px-12 bg-white'>
         
         {country.processPhases && (
         <ProcessSection serviceName={country.name} processPhases={country.processPhases} />
       )}
-       </div>
+       </div> */}
      
       <div className='mx-10 lg:mx-14 px-12'>
         {country.pricingTiers && (

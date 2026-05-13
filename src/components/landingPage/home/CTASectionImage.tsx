@@ -99,17 +99,17 @@ export default function CTASectionImage({
                   { text: "About our company & team", href: "/about-us", variant: "outline" },
                 ]
             ).map((btn, i) => (
-              <Link key={i} href={btn.href}>
-                <button
-                  className={
-                    btn.variant === "outline"
-                      ? "rounded-xl border border-[#ddd] px-7 py-3 text-sm font-semibold text-[#444] transition-all duration-300 hover:-translate-y-1 hover:border-[#E07B39] hover:text-[#E07B39]"
-                      : "rounded-xl bg-[#E07B39] px-7 py-3 text-sm font-bold text-white shadow-[0_5px_16px_rgba(224,123,57,0.28)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#c96828]"
-                  }
-                >
-                  {btn.text}
-                </button>
-              </Link>
+         <Link
+  key={i}
+  href={btn.href}
+  className={
+    btn.variant === "outline"
+      ? "rounded-xl border border-[#ddd] px-7 py-3 text-sm font-semibold text-[#444] transition-all duration-300 hover:-translate-y-1 hover:border-[#E07B39] hover:text-[#E07B39]"
+      : "rounded-xl bg-[#E07B39] px-7 py-3 text-sm font-bold text-white shadow-[0_5px_16px_rgba(224,123,57,0.28)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#c96828]"
+  }
+>
+  {btn.text}
+</Link>
             ))}
           </div>
 
