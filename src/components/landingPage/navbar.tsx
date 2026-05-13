@@ -107,8 +107,8 @@ const locationsItems: { title: string; href: string; files: number }[] = [
 ];
 
 
-const LOGO_COLOR_SRC = '/images/logo.webp';
-const LOGO_WHITE_SRC = '/images/logo-white.webp';
+const LOGO_COLOR_SRC = '/images/logo1.webp';
+const LOGO_WHITE_SRC = '/images/logo-white1.webp';
 
 const mobileServicePageLinks: { title: string; href: string }[] = serviceMenuSections.flatMap((section) =>
   section.items.map((item) => ({

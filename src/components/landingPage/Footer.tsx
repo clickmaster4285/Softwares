@@ -165,7 +165,7 @@ export function Footer(): JSX.Element {
             >
               <Link href="/" className="flex items-center justify-center lg:justify-start gap-2">
                 <Image
-                  src="/images/logo-white.webp"
+                  src="/images/logo-white1.webp"
                   alt="ClickMasters"
                   width={600}
                   height={400}
