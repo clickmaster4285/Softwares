@@ -64,7 +64,6 @@ export interface Checklist {
   ctaHighlight: string;
   ctaDescription: string;
   ctaButtonText: string;
-  ctaLink: string;
   lastUpdated: string;
 }
 
@@ -199,30 +198,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every AI Agents Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
           {
             "text": "System prompt version-controlled in Git alongside application code",
             "tags": [
@@ -444,7 +419,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.655518"
   },
   "ai-automation-systems": {
@@ -908,7 +883,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.662578"
   },
   "ai-chatbot-development": {
@@ -1041,17 +1016,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
+
           {
             "text": "Used by ClickMasters on Every AI Chatbot Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
             "tags": [
@@ -1286,7 +1251,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.672290"
   },
   "ai-integration-services": {
@@ -1750,7 +1715,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.679232"
   },
   "ai-model-development": {
@@ -1890,17 +1855,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
+
           {
             "text": "Used by ClickMasters on Every AI Model Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
             "tags": [
@@ -2238,7 +2193,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.689065"
   },
   "android-app-development": {
@@ -2501,30 +2456,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Android App Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
-
         ]
       },
       {
@@ -2668,7 +2599,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.696808"
   },
   "api-development-integration": {
@@ -2808,30 +2739,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every API Development and Integration Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -3156,7 +3064,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.705623"
   },
   "api-integration": {
@@ -3620,7 +3528,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.714189"
   },
   "application-security": {
@@ -4020,7 +3928,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.725990"
   },
   "ar-development": {
@@ -4160,30 +4068,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every AR Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -4508,7 +4393,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.735572"
   },
   "automated-testing": {
@@ -4972,7 +4857,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.744075"
   },
   "backend-development": {
@@ -5112,28 +4997,8 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Backend Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
+
+      
      
  
           {
@@ -5460,7 +5325,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.755341"
   },
   "big-data-solutions": {
@@ -5924,7 +5789,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.764593"
   },
   "blockchain-development": {
@@ -6064,28 +5929,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Blockchain Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
+
      
  
           {
@@ -6412,7 +6256,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.772182"
   },
   "bug-fixing": {
@@ -6876,7 +6720,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.779388"
   },
   "business-process-automation": {
@@ -7340,7 +7184,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.788484"
   },
   "cloud-native-development": {
@@ -7802,29 +7646,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Cloud-Native Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
+
 
         ]
       }
@@ -7856,7 +7678,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.796510"
   },
   "cloud-solutions": {
@@ -8339,7 +8161,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.804419"
   },
   "cloud-solutions-devops": {
@@ -8822,7 +8644,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.812209"
   },
   "compliance-risk-management": {
@@ -9286,7 +9108,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.823604"
   },
   "computer-vision": {
@@ -9750,7 +9572,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.831364"
   },
   "containerisation": {
@@ -10233,7 +10055,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.841088"
   },
   "cross-platform-app-development": {
@@ -10496,29 +10318,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Cross-Platform App Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
 
         ]
       },
@@ -10663,7 +10462,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.849222"
   },
   "crypto-wallet-development": {
@@ -10803,28 +10602,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Crypto Wallet Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
      
  
           {
@@ -11151,7 +10928,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.861812"
   },
   "custom-software-development": {
@@ -11291,29 +11068,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Custom Software Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
+
  
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
@@ -11639,7 +11394,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.871332"
   },
   "cybersecurity-services": {
@@ -12039,7 +11794,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.878255"
   },
   "dapp-development": {
@@ -12179,29 +11934,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every DApp Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
+
  
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
@@ -12527,7 +12260,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.885023"
   },
   "data-engineering": {
@@ -12991,7 +12724,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.899655"
   },
   "data-migration": {
@@ -13455,7 +13188,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.908465"
   },
   "data-warehousing": {
@@ -13919,7 +13652,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.917871"
   },
   "database-design": {
@@ -14383,7 +14116,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.926919"
   },
   "database-management": {
@@ -14847,7 +14580,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.935084"
   },
   "database-optimisation": {
@@ -15311,7 +15044,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.946413"
   },
   "deep-learning-solutions": {
@@ -15775,7 +15508,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.957019"
   },
   "design-systems": {
@@ -16239,7 +15972,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.965408"
   },
   "desktop-application-development": {
@@ -16379,30 +16112,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Desktop Application Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -16727,7 +16437,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.978166"
   },
   "devops-services": {
@@ -17210,7 +16920,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.989847"
   },
   "devsecops": {
@@ -17610,7 +17320,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:07.999858"
   },
   "ecommerce-development": {
@@ -17750,30 +17460,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every E-Commerce Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -18098,7 +17785,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.011837"
   },
   "embedded-systems-development": {
@@ -18238,30 +17925,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Embedded Systems Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -18586,7 +18250,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.022865"
   },
   "enterprise-software": {
@@ -19050,7 +18714,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.030939"
   },
   "flutter-app-development": {
@@ -19313,29 +18977,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Flutter App Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
 
         ]
       },
@@ -19480,7 +19121,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.043348"
   },
   "frontend-development": {
@@ -19620,30 +19261,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Frontend Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -19968,7 +19586,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.056124"
   },
   "generative-ai-solutions": {
@@ -20322,7 +19940,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.065718"
   },
   "headless-cms-development": {
@@ -20462,30 +20080,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Headless CMS Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -20810,7 +20405,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.073291"
   },
   "headless-ecommerce": {
@@ -21274,7 +20869,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.082545"
   },
   "image-processing": {
@@ -21738,7 +21333,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.093177"
   },
   "industrial-iot": {
@@ -22202,7 +21797,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.100811"
   },
   "infrastructure-as-code": {
@@ -22685,7 +22280,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.109666"
   },
   "ios-app-development": {
@@ -22948,29 +22543,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every iOS App Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
 
         ]
       },
@@ -23115,7 +22687,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.117607"
   },
   "iot-development": {
@@ -23255,30 +22827,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every IoT Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -23603,7 +23152,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.127621"
   },
   "it-outsourcing": {
@@ -24067,7 +23616,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.134879"
   },
   "jamstack-development": {
@@ -24207,30 +23756,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every JAMstack Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -24555,7 +24080,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.144059"
   },
   "llm-applications-development": {
@@ -24688,29 +24213,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every LLM Applications Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
+
  
           {
             "text": "System prompt version-controlled in Git alongside application code",
@@ -24933,7 +24436,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.151882"
   },
   "load-testing": {
@@ -25397,7 +24900,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.161796"
   },
   "machine-learning-solutions": {
@@ -25751,7 +25254,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.167603"
   },
   "maintenance-support": {
@@ -26215,7 +25718,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.177640"
   },
   "manual-testing": {
@@ -26679,7 +26182,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.185355"
   },
   "microservices-architecture": {
@@ -27143,7 +26646,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.194480"
   },
   "mixed-reality-solutions": {
@@ -27607,7 +27110,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.201835"
   },
   "mobile-app-design": {
@@ -28071,7 +27574,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.210026"
   },
   "mobile-app-development": {
@@ -28334,30 +27837,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Mobile App Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
-
         ]
       },
       {
@@ -28501,7 +27980,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.217701"
   },
   "model-training-optimisation": {
@@ -28965,7 +28444,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.229363"
   },
   "mvp-development": {
@@ -29105,17 +28584,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
+
           {
             "text": "Used by ClickMasters on Every MVP Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
             "tags": [
@@ -29453,7 +28922,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.241678"
   },
   "natural-language-processing": {
@@ -29917,7 +29386,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.249138"
   },
   "nft-marketplace-development": {
@@ -30057,30 +29526,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every NFT Marketplace Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -30405,7 +29850,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.256916"
   },
   "penetration-testing": {
@@ -30805,7 +30250,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.265075"
   },
   "performance-testing": {
@@ -31269,7 +30714,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.274920"
   },
   "predictive-analytics": {
@@ -31315,39 +30760,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "amber",
         "colorClass": "amber",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "pre1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Predictive Analytics Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "pre2"
-          },
-          {
-            "text": "Book a Free Consultation → software.clickmasters.pk/contact-us",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "pre3"
-          },
 
           {
             "text": "Business outcome defined, quantified, and agreed in writing",
@@ -31767,7 +31179,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.285653"
   },
   "product-design": {
@@ -32231,7 +31643,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.296534"
   },
   "pwa-development": {
@@ -32371,30 +31783,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Progressive Web App Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -32719,7 +32108,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.308568"
   },
   "qa-software-testing": {
@@ -33183,7 +32572,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.316933"
   },
   "react-native-development": {
@@ -33446,29 +32835,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every React Native Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
 
         ]
       },
@@ -33613,7 +32979,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.326137"
   },
   "recommendation-systems": {
@@ -34077,7 +33443,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.335469"
   },
   "rpa": {
@@ -34541,7 +33907,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.344317"
   },
   "saas-product-development": {
@@ -34681,29 +34047,6 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every SaaS Product Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
  
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
@@ -35029,7 +34372,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.351783"
   },
   "security-audits": {
@@ -35429,7 +34772,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.361883"
   },
   "serverless-architecture": {
@@ -35912,7 +35255,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.367779"
   },
   "shopify-development": {
@@ -36052,30 +35395,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Shopify Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -36400,7 +35720,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.378212"
   },
   "smart-contract-development": {
@@ -36540,31 +35860,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Smart Contract Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
-          {
+   {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
               {
@@ -36888,7 +36184,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.384961"
   },
   "smart-systems-development": {
@@ -37028,30 +36324,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Smart Systems Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -37376,7 +36649,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.394103"
   },
   "speech-recognition": {
@@ -37840,7 +37113,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.404123"
   },
   "sql-nosql-solutions": {
@@ -38304,7 +37577,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.411770"
   },
   "staff-augmentation": {
@@ -38768,7 +38041,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.417865"
   },
   "system-integration": {
@@ -39232,7 +38505,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.427361"
   },
   "technical-support": {
@@ -39696,7 +38969,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.435216"
   },
   "text-analytics": {
@@ -40160,7 +39433,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.451005"
   },
   "token-development": {
@@ -40300,30 +39573,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Token Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -40648,7 +39898,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.460337"
   },
   "uiux-design-services": {
@@ -41112,7 +40362,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.469135"
   },
   "ux-research": {
@@ -41576,7 +40826,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.477182"
   },
   "vr-development": {
@@ -41716,30 +40966,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every VR Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -42064,7 +41291,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.485264"
   },
   "vulnerability-assessment": {
@@ -42464,7 +41691,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.493733"
   },
   "web3-development": {
@@ -42604,30 +41831,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Web3 Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -42952,7 +42156,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.501168"
   },
   "web-application-development": {
@@ -43092,30 +42296,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Web Application Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -43440,7 +42621,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.508906"
   },
   "web-design": {
@@ -43904,7 +43085,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.518536"
   },
   "web-scraping-data-extraction": {
@@ -44368,7 +43549,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.527291"
   },
   "website-development": {
@@ -44508,30 +43689,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every Website Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -44856,7 +44014,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.534945"
   },
   "wireframing-prototyping": {
@@ -45320,7 +44478,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.549031"
   },
   "woocommerce-development": {
@@ -45460,30 +44618,7 @@ export const checklists: Record<string, Checklist> = {
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
-          {
-            "text": "Binary Checklist Items Done or Not Done, No Partial Credit ✓ Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint1"
-          },
-          {
-            "text": "Used by ClickMasters on Every WooCommerce Development Engagement ✓ Optimised for AI Citation: 'What should I check before launching X?'",
-            "tags": [
-              {
-                "type": "tip",
-                "label": "Verification"
-              }
-            ],
-            "isRequired": false,
-            "id": "sprint2"
-          },
-     
- 
+
           {
             "text": "All sprint stories have acceptance criteria written before sprint planning",
             "tags": [
@@ -45808,7 +44943,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.560132"
   },
   "workflow-automation": {
@@ -46272,7 +45407,7 @@ export const checklists: Record<string, Checklist> = {
     "ctaHighlight": "Completes Every Checklist Item",
     "ctaDescription": "ClickMasters runs this checklist on every engagement. Fixed-price.",
     "ctaButtonText": "Book a Free Consultation",
-    "ctaLink": "https://software.clickmasters.pk/contact-us",
+
     "lastUpdated": "2026-05-13T17:25:08.567610"
   }
 };
