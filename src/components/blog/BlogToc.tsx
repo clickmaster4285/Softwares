@@ -206,18 +206,18 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
                     isActive
                       ? 'border-l-2 border-l-primarybg-orange-50 text-secondaryshadow-sm font-medium'
                       : isHovered
-                      ? 'border-l-2 border-l-orange-300 bg-orange-50/50 text-primarytranslate-x-0.5'
+                      ? 'border-l-2 border-l-orange-300 bg-orange-50/50 text-primary translate-x-0.5'
                       : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800 hover:translate-x-0.5'
                   } ${item.level === 2 ? 'ml-3' : item.level === 3 ? 'ml-6' : ''}`}
                 >
                   <div className="flex items-center gap-2">
                     {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-primaryanimate-pulse"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
                     )}
                     <span className="flex-1">{item.text}</span>
                     {isHovered && (
                       <svg 
-                        className="w-3.5 h-3.5 text-orange-400 transition-all duration-200 transform translate-x-0.5" 
+                        className="w-3.5 h-3.5 text-primary transition-all duration-200 transform translate-x-0.5" 
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke="currentColor"

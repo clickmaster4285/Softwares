@@ -82,7 +82,7 @@ const HPipe = ({ delay, reverse = false, startAnimation }: { delay: number; reve
         animate={startAnimation ? { scaleX: 1 } : { scaleX: 0 }}
         transition={{ delay, duration: PIPE_DURATION, ease: "easeInOut" }}
         style={{ transformOrigin: reverse ? "right" : "left" }}
-        className="absolute inset-0 bg-gradient-to-r from-primaryto-secondaryrounded-full"
+        className="absolute inset-0 bg-gradient-to-r from-primary to-secondaryrounded-full"
       />
     </div>
     
@@ -108,7 +108,7 @@ const VPipe = ({ delay, startAnimation }: { delay: number; startAnimation: boole
         animate={startAnimation ? { scaleY: 1 } : { scaleY: 0 }}
         transition={{ delay, duration: PIPE_DURATION, ease: "easeInOut" }}
         style={{ transformOrigin: "top" }}
-        className="absolute inset-0 bg-gradient-to-b from-primaryto-secondaryrounded-full"
+        className="absolute inset-0 bg-gradient-to-b from-primary to-secondaryrounded-full"
       />
     </div>
     <motion.div
@@ -451,7 +451,7 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
               initial={{ scaleY: 0 }}
               animate={startAnimation ? { scaleY: 1 } : { scaleY: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="h-8 md:h-10 w-1 rounded-full bg-gradient-to-b from-primaryto-primary"
+              className="h-8 md:h-10 w-1 rounded-full bg-gradient-to-b from-primary to-primary"
             />
             <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900">
               Our <span className="font-black">{serviceName}</span> Process

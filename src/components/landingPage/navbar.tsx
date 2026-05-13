@@ -642,7 +642,7 @@ const { data: blogs = [] } = useQuery({
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden xl:flex items-center gap-3">
+        {/* <div className="hidden xl:flex items-center gap-3">
           <Link href="/admin/login" onClick={closeDropdowns}>
             <button
               className={cn(
@@ -655,7 +655,7 @@ const { data: blogs = [] } = useQuery({
               Sign In
             </button>
           </Link>
-        </div>
+        </div> */}
 
         {/* Mobile Menu Trigger */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -761,13 +761,13 @@ const { data: blogs = [] } = useQuery({
               </nav>
 
               {/* Mobile Footer */}
-              <div className="p-6 border-t border-black/5">
+              {/* <div className="p-6 border-t border-black/5">
                 <Link href="/admin/login" onClick={() => setIsOpen(false)}>
                   <button className="w-full px-5 py-3 text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors duration-300 rounded-md">
                     Sign In
                   </button>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </SheetContent>
         </Sheet>

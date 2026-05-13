@@ -179,7 +179,7 @@ export function HelpSection() {
                   {/* Bottom Corner Accent */}
                   <div className="absolute bottom-3 right-3 w-6 h-6">
                     <motion.div
-                      className="w-full h-full border-b border-r border-orange-200 group-hover:border-orange-400 transition-all duration-300"
+                      className="w-full h-full border-b border-r border-orange-200 group-hover:border-primary transition-all duration-300"
                       animate={{
                         rotate: hoveredIndex === index ? 90 : 0,
                       }}

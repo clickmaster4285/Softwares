@@ -95,7 +95,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
           <div className="relative px-5 pt-5 pb-4">
             <div className="flex items-start gap-3">
               <motion.span
-                className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm text-primarytext-sm font-bold shrink-0"
+                className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm text-primary text-sm font-bold shrink-0"
                 whileHover={{ scale: 1.1, rotate: 360 }}
                 transition={{ duration: 0.3 }}
               >
@@ -148,7 +148,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                     {/* Header with icon and label */}
                     <div className="flex items-center gap-2 mb-2">
                       {isHighlighted ? (
-                        <div className="w-5 h-5 rounded-full bg-primaryflex items-center justify-center">
+                        <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
                           <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>

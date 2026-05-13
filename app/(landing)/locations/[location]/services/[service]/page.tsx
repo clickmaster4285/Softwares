@@ -275,7 +275,18 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         </Breadcrumb>
       </div>
 
-    <ServiceHero page={page} />
+    <ServiceHero
+      page={{
+        category: page.countryName,
+        categorySlug: page.categorySlug,
+        serviceName: page.serviceName,
+        title: page.title,
+        lead: page.metaDescription,
+        highlights: [],
+        // ServiceHero expects an array of {label, value}
+        marketStats: [],
+      }}
+    />
 
 
         {/* Main Content with Table of Contents */}

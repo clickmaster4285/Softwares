@@ -83,7 +83,7 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
       {/* Progress bar */}
       <div className="mb-4 h-1 overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full bg-gradient-to-r from-primaryto-orange-400 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-primary to-primary transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -136,7 +136,7 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
         </p>
         <Link
           href="/contact-us"
-          className="mt-2 inline-flex items-center text-sm font-medium text-primaryhover:text-orange-700"
+          className="mt-2 inline-flex items-center text-sm font-medium text-primary hover:text-orange-700"
         >
           Book a call
           <svg

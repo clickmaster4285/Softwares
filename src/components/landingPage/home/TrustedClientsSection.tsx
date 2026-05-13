@@ -127,14 +127,21 @@ export function TrustedClientsSection() {
 
   return (
     <section ref={ref} className="bg-gradient-to-b from-white to-slate-50  py-6 px-6 lg:px-26 lg:py-16 ">
+
+
+
+     
+  
+    
+
       {/* Header — original design */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
-          <span className="w-8 h-[2px] bg-primary rounded-full" />
-          <p className="text-secondarytext-[11px] font-bold tracking-[0.2em] uppercase">
-            Trusted By Industry Leaders
-          </p>
-          <span className="w-8 h-[2px] bg-primary rounded-full" />
+           <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
+                Trusted By Industry Leaders
+              </p>
+              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
         </div>
 
         <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">

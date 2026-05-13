@@ -142,9 +142,9 @@ const Typewriter = ({ texts, typingSpeed = 80, deletingSpeed = 40, pauseTime = 1
   }, [displayText, isDeleting, isWaiting, currentIndex, texts, typingSpeed, deletingSpeed, pauseTime]);
 
   return (
-    <span className="inline-block min-w-[280px] text-left text-orange-400 font-medium sm:min-w-[340px] md:min-w-[400px]">
+    <span className="inline-block min-w-[280px] text-left text-primary font-medium sm:min-w-[340px] md:min-w-[400px]">
       {displayText}
-      <span className="inline-block h-5 w-0.5 -mb-0.5 bg-orange-400 animate-pulse" />
+      <span className="inline-block h-5 w-0.5 -mb-0.5 bg-primary animate-pulse" />
     </span>
   );
 };
@@ -220,12 +220,12 @@ export function HeroSection(): JSX.Element {
               <div className="mb-6 md:mb-8">
                 <div className="overflow-hidden">
                   <div className="animate-slide-in-up font-display text-[1.65rem] font-bold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
-                    Custom Software Development
+                     Software Development
                   </div>
                 </div>
                 <div className="overflow-hidden mt-2">
                   <div className="animate-slide-in-up font-display text-[1.45rem] font-bold leading-tight tracking-tight text-gray-300 sm:text-3xl md:text-4xl lg:text-5xl">
-                    That Scales Your Business Revenue <span className="text-primary">— Not Just Code</span>
+                    That Scales Your Business Revenue <span className="text-primary">Not Just Code</span>
                   </div>
                 </div>
               </div>

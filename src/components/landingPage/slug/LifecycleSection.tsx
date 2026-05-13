@@ -61,26 +61,26 @@ export default function LifecycleSection({
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{title}</h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-primaryto-primarymx-auto rounded-full mb-4" />
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-primarymx-auto rounded-full mb-4" />
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">{subtitle}</p>
           </div>
 
           <div className="relative max-w-6xl mx-auto">
-            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-primaryvia-primaryto-transparent h-[calc(100%-3rem)] top-12" />
+            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-primaryvia-primary to-transparent h-[calc(100%-3rem)] top-12" />
             
             <div className="space-y-12">
               {lifecycle.map((step, index) => (
                 <div key={step.step} className="relative">
                   <div className={`lg:flex items-center gap-8 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
                     <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 z-10">
-                      <div className="w-16 h-16 bg-gradient-to-r from-primaryto-primaryrounded-full flex items-center justify-center shadow-lg shadow-orange-500/30">
+                      <div className="w-16 h-16 bg-gradient-to-r from-primary to-primaryrounded-full flex items-center justify-center shadow-lg shadow-orange-500/30">
                         <span className="text-2xl font-bold text-white">{step.step}</span>
                       </div>
                     </div>
 
                     <div className={`lg:w-5/12 ${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'}`}>
                       <div className="lg:hidden flex items-center gap-4 mb-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-primaryto-primaryrounded-full flex items-center justify-center shadow-lg shadow-orange-500/30">
+                        <div className="w-12 h-12 bg-gradient-to-r from-primary to-primaryrounded-full flex items-center justify-center shadow-lg shadow-orange-500/30">
                           <span className="text-xl font-bold text-white">{step.step}</span>
                         </div>
                         <div>
@@ -129,7 +129,7 @@ export default function LifecycleSection({
 
                   {index < lifecycle.length - 1 && (
                     <div className="lg:hidden flex justify-center my-4">
-                      <div className="w-0.5 h-8 bg-gradient-to-b from-primaryto-transparent" />
+                      <div className="w-0.5 h-8 bg-gradient-to-b from-primary to-transparent" />
                     </div>
                   )}
                 </div>
@@ -138,7 +138,7 @@ export default function LifecycleSection({
           </div>
 
           <div className="text-center mt-12">
-            <button className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primaryto-primaryhover:from-secondaryhover:to-primarytext-white font-semibold rounded-md transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-orange-500/25">
+            <button className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary hover:from-secondaryhover:to-primary text-white font-semibold rounded-md transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-orange-500/25">
               <span>Start Your Journey</span>
               <CheckCircle2 className="w-4 h-4 group-hover:rotate-12 transition-transform" />
             </button>
@@ -155,7 +155,7 @@ export default function LifecycleSection({
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{title}</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primaryto-primarymx-auto rounded-full mb-4" />
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-primarymx-auto rounded-full mb-4" />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">{subtitle}</p>
         </div>
 

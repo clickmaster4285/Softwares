@@ -93,7 +93,7 @@ export default function SolutionsPage() {
               <span className="h-[2px] w-8 rounded-full bg-orange-400" />
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900">
+            <h2 className="text-2xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">
               Our Work in Action
             </h2>
 

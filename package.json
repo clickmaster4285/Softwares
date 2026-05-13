@@ -15,6 +15,7 @@
     "sitemap": "next-sitemap && node scripts/generate-sitemaps-simple.js"
   },
   "dependencies": {
+    "@ark-ui/react": "^5.36.2",
     "@paper-design/shaders-react": "^0.0.76",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",

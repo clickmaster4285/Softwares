@@ -535,7 +535,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                   {[1, 2, 3, 4, 5].map((i) => (
                     <Star
                       key={i}
-                      className="h-4 w-4 fill-orange-400 text-orange-400"
+                      className="h-4 w-4 fill-primary text-orange-400"
                     />
                   ))}
                   <span className="ml-1">
