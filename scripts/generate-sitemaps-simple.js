@@ -37,6 +37,35 @@ try {
   console.log('Could not load service structure:', error.message);
 }
 
+// Helper function to extract all country service URLs from the country-services data file
+function extractCountryServiceUrls() {
+  const countryServicesPath = path.join(process.cwd(), 'src/lib/country-services.ts');
+  const urlsByCountry = {};
+
+  if (!fs.existsSync(countryServicesPath)) {
+    return urlsByCountry;
+  }
+
+  const content = fs.readFileSync(countryServicesPath, 'utf8');
+  const urlRegex = /slug:\s*'([^']+)'[\s\S]*?country:\s*'([^']+)'/g;
+  let match;
+
+  while ((match = urlRegex.exec(content)) !== null) {
+    const slug = match[1];
+    const countryName = match[2];
+    const countryKey = countryName.toLowerCase() === 'usa' ? 'usa' : countryName.toLowerCase();
+    const url = `${SITE_URL}/locations/${countryKey}/${slug}`;
+    urlsByCountry[countryKey] = urlsByCountry[countryKey] || [];
+    urlsByCountry[countryKey].push(url);
+  }
+
+  Object.keys(urlsByCountry).forEach(country => {
+    urlsByCountry[country] = [...new Set(urlsByCountry[country])];
+  });
+
+  return urlsByCountry;
+}
+
 // Helper function to identify main services
 function isMainService(urlPath) {
   const mainServices = [
@@ -178,7 +207,14 @@ async function generateSeparateSitemaps() {
     hire: [],
     locations: [],
   };
-  const locationServicePages = {};
+  const extraCountryServiceUrls = extractCountryServiceUrls();
+  const validCountryServiceUrlsMap = Object.fromEntries(
+    Object.entries(extraCountryServiceUrls).map(([country, urls]) => [country, new Set(urls)])
+  );
+
+  const locationServicePages = Object.fromEntries(
+    Object.entries(extraCountryServiceUrls).map(([country, urls]) => [country, [...new Set(urls)]])
+  );
 
   // Generate URLs based on service structure
   if (serviceMenuSections.length > 0) {
@@ -304,12 +340,9 @@ async function generateSeparateSitemaps() {
         categorizedUrls.locations.push(url);
       } else if (segments.length >= 3) {
         const country = segments[1];
-        const slug = segments.slice(2).join('/');
-        if (slug.endsWith(`-${country}`)) {
+        if (validCountryServiceUrlsMap[country] && validCountryServiceUrlsMap[country].has(url)) {
           locationServicePages[country] = locationServicePages[country] || [];
           locationServicePages[country].push(url);
-        } else {
-          categorizedUrls.pages.push(url);
         }
       }
     } else if (urlPath.includes('/hire-') || urlPath.includes('/hire/')) {
@@ -451,13 +484,13 @@ async function createSitemapIndex() {
     'locations-sitemap.xml',
   ];
   
-  const locationCountryFiles = getLocationServiceSitemapFiles();
-  sitemapFiles.push(...locationCountryFiles);
+  // Remove duplicates
+  const uniqueSitemapFiles = [...new Set(sitemapFiles)];
   
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   
-  sitemapFiles.forEach(sitemap => {
+  uniqueSitemapFiles.forEach(sitemap => {
     xml += '  <sitemap>\n';
     xml += `    <loc>${SITE_URL}/${sitemap}</loc>\n`;
     xml += `    <lastmod>${new Date().toISOString()}</lastmod>\n`;
@@ -467,7 +500,7 @@ async function createSitemapIndex() {
   xml += '</sitemapindex>';
   
   fs.writeFileSync(indexPath, xml);
-  console.log(`📋 Created main sitemap index with ${sitemapFiles.length} sitemaps`);
+  console.log(`📋 Created main sitemap index with ${uniqueSitemapFiles.length} sitemaps`);
 }
 
 function escapeXml(unsafe) {
