@@ -44,7 +44,7 @@ export interface GlobeCdnProps {
    * Set true only for small marker sets.
    */
   showMarkerOverlays?: boolean;
-  /** "k req/s" chips on arcs — off when false or when there are many markers. */
+  /** "k req/s" chips on arcs off when false or when there are many markers. */
   showArcOverlays?: boolean;
 }
 

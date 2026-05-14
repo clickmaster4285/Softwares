@@ -38,7 +38,7 @@ const STEPS: Step[] = [
   {
     num: 1,
     title: "Define the Business Outcome",
-    body: "Before writing a single line of code or a single user story, define the specific business outcome the crypto wallet development must produce: not 'build a web application' but 'enable users to complete the purchase workflow in under 3 minutes, measured by checkout completion rate'. The outcome definition should be specific (a measurable metric), achievable within the budget and timeline, and agreed by all stakeholders — the PM, the CEO, and the engineering team all understand what success looks like. ClickMasters conducts a business outcomes workshop as the first step of every engagement — the output is a written outcomes document signed by the client.",
+    body: "Before writing a single line of code or a single user story, define the specific business outcome the crypto wallet development must produce: not 'build a web application' but 'enable users to complete the purchase workflow in under 3 minutes, measured by checkout completion rate'. The outcome definition should be specific (a measurable metric), achievable within the budget and timeline, and agreed by all stakeholders the PM, the CEO, and the engineering team all understand what success looks like. ClickMasters conducts a business outcomes workshop as the first step of every engagement the output is a written outcomes document signed by the client.",
     duration: "1–3 days",
     output:   "Written business outcomes document with measurable success metrics",
     accent:   "#FEF3C7", iconFg: "#D97706",
@@ -46,7 +46,7 @@ const STEPS: Step[] = [
   {
     num: 2,
     title: "Scope the Minimum Viable Version",
-    body: "Having defined the outcome, scope the minimum version of the crypto wallet development that can validate the hypothesis. Map every proposed feature to the outcome it contributes to — features with no outcome contribution are Phase 2. A typical scoping exercise reduces the initial feature list by 40–60%, which reduces the timeline by the same proportion. ClickMasters' scoping output is a written feature list with each feature mapped to an outcome, reviewed and signed by the client before development begins.",
+    body: "Having defined the outcome, scope the minimum version of the crypto wallet development that can validate the hypothesis. Map every proposed feature to the outcome it contributes to features with no outcome contribution are Phase 2. A typical scoping exercise reduces the initial feature list by 40–60%, which reduces the timeline by the same proportion. ClickMasters' scoping output is a written feature list with each feature mapped to an outcome, reviewed and signed by the client before development begins.",
     duration: "2–5 days",
     output:   "Signed scope document: feature list, each feature mapped to outcome, Phase 1 vs Phase 2 designation",
     accent:   "#DBEAFE", iconFg: "#2563EB",
@@ -94,7 +94,7 @@ const STEPS: Step[] = [
   {
     num: 8,
     title: "Launch and Post-Launch Support",
-    body: "Deploy to production using a blue-green or canary deployment (canary to 5% of traffic, verify metrics, increase to 100%), monitor for 48 hours post-launch (error rate, P95 latency, database performance, and any customer-reported issues), and provide 30 days of post-launch support (included in the ClickMasters fixed price — bug fixes, questions, and assistance with any launch issues). Post-launch, instrument the analytics dashboard and review the first week's data against the business outcomes defined in step 1.",
+    body: "Deploy to production using a blue-green or canary deployment (canary to 5% of traffic, verify metrics, increase to 100%), monitor for 48 hours post-launch (error rate, P95 latency, database performance, and any customer-reported issues), and provide 30 days of post-launch support (included in the ClickMasters fixed price bug fixes, questions, and assistance with any launch issues). Post-launch, instrument the analytics dashboard and review the first week's data against the business outcomes defined in step 1.",
     duration: "30 days",
     output:   "Launched product in production, 30-day monitoring, post-launch analytics review",
     accent:   "#D1FAE5", iconFg: "#059669",
@@ -102,7 +102,7 @@ const STEPS: Step[] = [
 ];
 
 const MISTAKES = [
-  { title: "Skipping the scoping workshop", desc: "Building without a written, agreed scope produces the most common failure mode — scope creep that delays the launch by 4–8 weeks. ClickMasters requires a scoping workshop before any development begins." },
+  { title: "Skipping the scoping workshop", desc: "Building without a written, agreed scope produces the most common failure mode scope creep that delays the launch by 4–8 weeks. ClickMasters requires a scoping workshop before any development begins." },
   { title: "Technology selection based on familiarity", desc: "Choosing React Native because the team knows it, even though the project requires native hardware access that React Native cannot provide cleanly. ClickMasters selects technology based on requirements, not comfort." },
   { title: "Deferring testing to the end", desc: "A testing phase after development is complete is 3–5× more expensive than testing integrated into each sprint. ClickMasters writes tests alongside feature code in every sprint." },
   { title: "No CI/CD infrastructure", desc: "Manual deployments are slow (hours vs minutes), error-prone, and create deployment anxiety. ClickMasters sets up CI/CD in sprint 1." },
@@ -420,7 +420,7 @@ export default function CryptoWalletHowTo() {
             </div>
           </div>
 
-          {/* Right — Quick-nav card */}
+          {/* Right Quick-nav card */}
           <div style={{ background: T.bg2, border: `1px solid ${T.border}`, borderRadius: T.radiusLg, padding: 28, boxShadow: T.shadow }}>
             <div style={{ fontFamily: T.fontHead, fontSize: 15, fontWeight: 700, color: T.dark, marginBottom: 18, display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ color: T.orange }}><IcoClipboard size={16} color={T.orange} /></span> Process Overview

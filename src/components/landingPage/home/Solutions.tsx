@@ -103,7 +103,7 @@ export default function SolutionsPage() {
             </p>
           </div>
 
-          {/* Card stack — inner padding gives the visual left/right breathing room */}
+          {/* Card stack inner padding gives the visual left/right breathing room */}
           <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-16">
             {cardStackItems.length > 0 ? (
               <CardStack

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { HeroSplinePanel } from '@/components/landingPage/home/hero-spline-panel';
 
 /**
- * Spline robot only — no dark band, no copy. Inherits surrounding page background (home / about).
+ * Spline robot only no dark band, no copy. Inherits surrounding page background (home / about).
  */
 export function AboutSplineSection(): JSX.Element {
   return (

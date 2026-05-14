@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Spotlight } from '@/components/ui/spotlight';
 
 /**
- * Standalone demo card — same building blocks as the homepage hero Spline panel.
+ * Standalone demo card same building blocks as the homepage hero Spline panel.
  * Uses your orange spotlight + dark glass card to match the site palette.
  */
 export function SplineSceneBasic(): JSX.Element {

@@ -80,7 +80,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
     return (
       <motion.div
         key={diff.feature}
-        className="group rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full border border-slate-200 hover:border-orange-200"
+        className="group rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full border border-slate-200 hover:border-primary/20"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -88,7 +88,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
       >
         {/* Card Header - Enhanced Gradient */}
         <div className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-50 to-orange-100" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/20" />
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
           
@@ -119,13 +119,13 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                 // Determine column label and styling based on index
                 const getColumnStyle = () => {
                   if (isEnterprise) {
-                    if (i === 0) return { bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-700", label: "ClickMasters" };
+                    if (i === 0) return { bg: "bg-primary/10" , border: "border-primary/20", text: "text-primary", label: "ClickMasters" };
                     if (i === 1) return { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-600", label: "SAP / Oracle" };
                     return { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-600", label: "Generic SaaS" };
                   }
                   if (isSaaS) {
                     if (i === 0) return { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-600", label: "In House Team" };
-                    return { bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-700", label: "ClickMasters ✓" };
+                    return { bg: "bg-primary/10" , border: "border-primary/20", text: "text-primary", label: "ClickMasters ✓" };
                   }
                   return { bg: "bg-white", border: "border-slate-100", text: "text-slate-600", label: columnHeaders[i] };
                 };
@@ -162,14 +162,14 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                       )}
                       <span className={cn(
                         "text-xs font-bold uppercase tracking-wider",
-                        isHighlighted ? "text-orange-600" : "text-slate-500"
+                        isHighlighted ? "text-primary" : "text-slate-500"
                       )}>
                         {style.label}
                       </span>
                       
                       {/* Performance badge */}
                       {isHighlighted && (
-                        <span className="ml-auto text-[9px] bg-orange-100 text-secondarypx-2 py-0.5 rounded-full font-semibold">
+                        <span className="ml-auto text-[9px] bg-primary/10 text-secondarypx-2 py-0.5 rounded-full font-semibold">
                           Best Choice
                         </span>
                       )}
@@ -186,8 +186,8 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                     {/* Feature tags for enterprise version */}
                     {isEnterprise && i === 0 && (
                       <div className="flex flex-wrap gap-1.5 mt-2">
-                        <span className="text-[9px] bg-orange-100 text-primarypx-1.5 py-0.5 rounded">Enterprise-ready</span>
-                        <span className="text-[9px] bg-orange-100 text-primarypx-1.5 py-0.5 rounded">24/7 Support</span>
+                        <span className="text-[9px] bg-primary/10 text-primarypx-1.5 py-0.5 rounded">Enterprise-ready</span>
+                        <span className="text-[9px] bg-primary/10 text-primarypx-1.5 py-0.5 rounded">24/7 Support</span>
                       </div>
                     )}
                   </motion.div>
@@ -228,7 +228,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                 key={i}
                 className={cn(
                   "w-2 h-2 rounded-full",
-                  i === 0 ? "bg-orange-400" : i === 1 ? "bg-primary" : "bg-orange-600"
+                  i === 0 ? "bg-primary" : i === 1 ? "bg-primary" : "bg-primary"
                 )}
                 animate={{ scale: [1, 1.5, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity, delay }}

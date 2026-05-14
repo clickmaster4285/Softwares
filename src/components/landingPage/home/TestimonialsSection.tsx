@@ -172,7 +172,7 @@ export function TestimonialsSection() {
     <section ref={sectionRef} className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 py-24">
       <div className="mx-auto px-6 ">
         
-           {/* Header — original design */}
+           {/* Header original design */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
           <span className="w-8 h-[2px] bg-primary rounded-full" />

@@ -25,7 +25,7 @@ export default async function CaseStudiesPage() {
     initialCaseStudies = JSON.parse(JSON.stringify(raw)) as CaseStudyCard[];
   } catch (err) {
     console.error('CaseStudiesPage Error:', err);
-    // DB unavailable during build or at runtime — client will refetch from /api/case-studies
+    // DB unavailable during build or at runtime client will refetch from /api/case-studies
   }
 
   return (

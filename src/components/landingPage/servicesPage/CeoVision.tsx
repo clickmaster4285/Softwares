@@ -28,7 +28,7 @@ export function CeoVision() {
       >
         {/* Inner card layout */}
         <div className="flex h-full w-full flex-col md:flex-row overflow-hidden  ">
-          {/* Left — Image */}
+          {/* Left Image */}
           <div className="relative h-64 sm:h-80 md:h-full md:w-1/2 shrink-0">
             <Image
               src="/ceo.jpeg"
@@ -43,7 +43,7 @@ export function CeoVision() {
             <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 to-transparent md:hidden" />
           </div>
 
-          {/* Right — Text */}
+          {/* Right Text */}
           <div className="flex flex-1 flex-col justify-center gap-6 
                          px-5 py-8 sm:px-6 sm:py-10 
                          md:px-10 md:py-10 bg-white">
@@ -55,7 +55,7 @@ export function CeoVision() {
 
             <blockquote className="text-zinc-800 text-base sm:text-lg md:text-xl font-medium leading-relaxed -mt-4">
               We are not building software. We are architecting the infrastructure 
-              of tomorrow — systems that think, adapt, and grow alongside the 
+              of tomorrow systems that think, adapt, and grow alongside the 
               businesses they power. Our mission is to make cutting-edge technology 
               accessible to every ambitious team on the planet.
             </blockquote>

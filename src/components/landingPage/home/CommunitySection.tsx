@@ -42,7 +42,7 @@ const communityFeatures: CommunityFeature[] = [
     icon: Code,
     title: 'Built for Real-World Impact',
     description:
-      'We don’t just write code — we build powerful software that solves real business problems and drives measurable growth.',
+      'We don’t just write code we build powerful software that solves real business problems and drives measurable growth.',
     stat: '1,860+',
     statLabel: 'Projects Delivered',
     color: 'from-primary/60 to-primary/10',
@@ -60,7 +60,7 @@ const communityFeatures: CommunityFeature[] = [
     icon: BookOpen,
     title: 'Fast & Agile Delivery',
     description:
-      'We move fast without breaking things — delivering high-quality software through agile, iterative development.',
+      'We move fast without breaking things delivering high-quality software through agile, iterative development.',
     stat: '75+',
     statLabel: 'Successful Launches',
     color: 'from-primary/60 to-primary/10',
@@ -69,7 +69,7 @@ const communityFeatures: CommunityFeature[] = [
     icon: MessageCircle,
     title: 'Clear Communication',
     description:
-      'No confusion, no delays — just transparent updates and direct communication at every stage of your project.',
+      'No confusion, no delays just transparent updates and direct communication at every stage of your project.',
     stat: '5+',
     statLabel: 'Years Experience',
     color: 'from-primary/60 to-primary/10',
@@ -87,7 +87,7 @@ const communityFeatures: CommunityFeature[] = [
     icon: Award,
     title: 'Long-Term Partnership',
     description:
-      'We don’t just deliver projects — we stay with you for continuous improvement, updates, and long-term success.',
+      'We don’t just deliver projects we stay with you for continuous improvement, updates, and long-term success.',
     stat: '100%',
     statLabel: 'Commitment',
     color: 'from-primary/60 to-primary/10',

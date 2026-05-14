@@ -121,7 +121,7 @@ export async function generateMetadata({
   const title = d.title ?? 'Case study';
   const description = toMetaDescription(
     d.excerpt,
-    `Case study: ${title} — custom software delivery by ClickMasters. Web, mobile, SaaS, and enterprise outcomes.`,
+    `Case study: ${title} custom software delivery by ClickMasters. Web, mobile, SaaS, and enterprise outcomes.`,
   );
   return {
     title: `${title} | ClickMasters`,
@@ -272,7 +272,7 @@ export default async function CaseStudyDetailPage({
               <div className="relative aspect-[16/9] overflow-hidden bg-slate-100 rounded-t-2xl border border-b-0 border-slate-200">
                 <img
                   src={imageSrc || "/placeholder.svg"}
-                  alt={`${cs.title} — case study hero image`}
+                  alt={`${cs.title} case study hero image`}
                   className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
               </div>
@@ -308,7 +308,7 @@ export default async function CaseStudyDetailPage({
                   >
                     {/* Section label */}
                     <p className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">
-                      {String(i + 1).padStart(2, '0')} — {s.label}
+                      {String(i + 1).padStart(2, '0')} {s.label}
                     </p>
                     <h2 className="font-display text-2xl font-normal text-slate-950 sm:text-3xl">
                       {s.label}
@@ -320,7 +320,7 @@ export default async function CaseStudyDetailPage({
                 ))}
               </div>
 
-              {/* Sidebar — visible on lg+ */}
+              {/* Sidebar visible on lg+ */}
               <aside className="hidden lg:block">
                 <div className="sticky top-24">
                   <TableOfContents items={tocItems} title="Case Study Navigation" />
@@ -339,7 +339,7 @@ export default async function CaseStudyDetailPage({
                   <em className="italic text-primary/80">initiative?</em>
                 </h3>
                 <p className="mt-2 max-w-lg text-[14px] leading-relaxed text-slate-400">
-                  We scope, build, and ship — tell us what you&apos;re working on and we&apos;ll
+                  We scope, build, and ship tell us what you&apos;re working on and we&apos;ll
                   share relevant references.
                 </p>
               </div>

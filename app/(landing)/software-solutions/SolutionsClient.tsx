@@ -84,7 +84,7 @@ const getStatusColor = (status: string) => {
 };
 
 type SolutionsClientProps = {
-  /** Page H1 — defaults to solutions catalog title */
+  /** Page H1 defaults to solutions catalog title */
   heading?: string;
   /** Intro paragraph under the title */
   subheading?: string;
@@ -92,7 +92,7 @@ type SolutionsClientProps = {
 
 const DEFAULT_HEADING = "What We've Built | 100+ Scalable Software Systems";
 const DEFAULT_SUBHEADING =
-  'Explore how ClickMasters builds software for real businesses — web platforms, enterprise SaaS, and ERP systems. Browse 100+ production-grade solutions we delivered.';
+  'Explore how ClickMasters builds software for real businesses web platforms, enterprise SaaS, and ERP systems. Browse 100+ production-grade solutions we delivered.';
 
 export default function SolutionsClient({
   heading = DEFAULT_HEADING,
