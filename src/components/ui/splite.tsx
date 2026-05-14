@@ -26,7 +26,7 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
         </div>
       }
     >
-      {/* react-spline defaults ParentSize to overflow:hidden — override so the model isn’t clipped */}
+      {/* react-spline defaults ParentSize to overflow:hidden override so the model isn’t clipped */}
       <Spline scene={scene} className={className} style={{ overflow: "visible" }} />
     </Suspense>
   );

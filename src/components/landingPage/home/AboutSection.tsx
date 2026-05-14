@@ -187,7 +187,7 @@ export function AboutSection() {
 
 
           
-          {/* RIGHT — GLASS STACKED CARDS */}
+          {/* RIGHT GLASS STACKED CARDS */}
           <div>
             <StackedCards items={values} />
           </div>

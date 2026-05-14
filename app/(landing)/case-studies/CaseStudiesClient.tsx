@@ -210,24 +210,24 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
           </h2>
           <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-slate-500">
             Every write-up follows the same narrative so you can compare delivery patterns, stacks,
-            and outcomes across industries — from fintech and healthcare to logistics and retail.
+            and outcomes across industries from fintech and healthcare to logistics and retail.
           </p>
 
           {/* 3-panel methodology strip */}
           <div className="mt-8 grid grid-cols-1 gap-px bg-slate-200 overflow-hidden rounded-2xl sm:grid-cols-3">
             {[
               {
-                num: '01 — Challenge',
+                num: '01 Challenge',
                 title: 'Business context',
                 body: 'Goals, constraints, and the problem the product needed to solve before engineering began.',
               },
               {
-                num: '02 — Approach',
+                num: '02 Approach',
                 title: 'Architecture & delivery',
                 body: 'Stack choices, milestones, and how we collaborated with stakeholders through launch.',
               },
               {
-                num: '03 — Impact',
+                num: '03 Impact',
                 title: 'Results & outcomes',
                 body: 'Measurable outcomes, live products, and what changed for users and revenue after go-live.',
               },
@@ -255,7 +255,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
                 Selected case studies
               </h2>
               <p className="mt-1.5 text-[14px] text-slate-500">
-                Filter by keyword — title, sector, technology, or client.
+                Filter by keyword title, sector, technology, or client.
               </p>
             </div>
 
@@ -438,7 +438,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
               <em className="italic text-primary/80">initiative?</em>
             </h3>
             <p className="mt-2 max-w-lg text-[14px] leading-relaxed text-slate-400">
-              We scope, build, and ship — tell us what you&apos;re working on and we&apos;ll share
+              We scope, build, and ship tell us what you&apos;re working on and we&apos;ll share
               relevant references.
             </p>
           </div>

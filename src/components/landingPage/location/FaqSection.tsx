@@ -107,7 +107,7 @@ export function FaqSection({
                             <Link
                               href={item.more.href}
                               className="font-medium text-primary hover:underline"
-                              aria-label={`${item.more.label} — ${item.more.href}`}
+                              aria-label={`${item.more.label} ${item.more.href}`}
                             >
                               {item.more.label}
                             </Link>

@@ -509,14 +509,14 @@ export const metadataConfig = {
     openGraph: {
       title: 'ClickMasters Software House | The Team Behind 100+ Products',
       description:
-        'From a small dev team to 50+ engineers delivering 100+ software products worldwide — ClickMasters builds web, mobile, SaaS & AI solutions that scale.',
+        'From a small dev team to 50+ engineers delivering 100+ software products worldwide ClickMasters builds web, mobile, SaaS & AI solutions that scale.',
       url: `${siteConfig.url}/about-us`,
       images: [
         {
           url: `${siteConfig.url}/og/og-about.jpg`,
           width: 1200,
           height: 630,
-          alt: 'ClickMasters engineering team — software development company',
+          alt: 'ClickMasters engineering team software development company',
         },
       ],
     },
@@ -542,7 +542,7 @@ export const metadataConfig = {
     openGraph: {
       title: 'Software Development Services | Web, Mobile & ERP',
       description:
-        'Full-cycle development for web apps, mobile apps, ERP, APIs & cloud. Tailored to your business goals. Free consultation available — get started today.',
+        'Full-cycle development for web apps, mobile apps, ERP, APIs & cloud. Tailored to your business goals. Free consultation available get started today.',
       url: `${siteConfig.url}/services`,
       images: [
         {
@@ -582,7 +582,7 @@ export const metadataConfig = {
           url: `${siteConfig.url}/og/og-services.jpg`,
           width: 1200,
           height: 630,
-          alt: `${title} — ClickMasters software services`,
+          alt: `${title} ClickMasters software services`,
         },
       ],
     },
@@ -600,7 +600,7 @@ export const metadataConfig = {
     title: "What We've Built | 100+ Scalable Software Systems",
 
     description:
-      'Explore how ClickMasters builds software for real businesses — web platforms, enterprise SaaS, and ERP systems. Browse 100+ production-grade solutions we delivered.',
+      'Explore how ClickMasters builds software for real businesses web platforms, enterprise SaaS, and ERP systems. Browse 100+ production-grade solutions we delivered.',
 
     alternates: { canonical: `${siteConfig.url}/software-solutions` },
 
@@ -614,7 +614,7 @@ export const metadataConfig = {
           url: `${siteConfig.url}/og/og-solutions.jpg`,
           width: 1200,
           height: 630,
-          alt: 'ClickMasters software portfolio — 100+ scalable systems',
+          alt: 'ClickMasters software portfolio 100+ scalable systems',
         },
       ],
     },
@@ -623,7 +623,7 @@ export const metadataConfig = {
       card: 'summary_large_image',
       title: "What We've Built | 100+ Scalable Software Systems",
       description:
-        'Real production software powering fintech, healthcare, retail & logistics — built for scale and performance by ClickMasters.',
+        'Real production software powering fintech, healthcare, retail & logistics built for scale and performance by ClickMasters.',
       images: [`${siteConfig.url}/og/og-solutions.jpg`],
     },
   }),
@@ -650,7 +650,7 @@ export const metadataConfig = {
       title: `${title} | Built by ClickMasters`,
       description: (
         description ||
-        `We don't just build software — we build growth engines. See how ClickMasters delivered a high-impact ${title} solution that scales with your business.`
+        `We don't just build software we build growth engines. See how ClickMasters delivered a high-impact ${title} solution that scales with your business.`
       ).slice(0, 155),
       url: `${siteConfig.url}/software-solutions/${slug}`,
       images: [
@@ -679,7 +679,7 @@ export const metadataConfig = {
     title: 'How Businesses Turn Ideas Into High-Performance Software',
 
     description:
-      'Explore real client transformation stories from ClickMasters — startups and enterprises turning ideas into powerful web apps, mobile apps, and SaaS platforms.',
+      'Explore real client transformation stories from ClickMasters startups and enterprises turning ideas into powerful web apps, mobile apps, and SaaS platforms.',
 
     alternates: { canonical: `${siteConfig.url}/case-studies` },
 
@@ -702,7 +702,7 @@ export const metadataConfig = {
       card: 'summary_large_image',
       title: 'How Businesses Turn Ideas Into High-Performance Software',
       description:
-        'See how real businesses build scalable software with ClickMasters — AI, SaaS, and enterprise systems built for growth.',
+        'See how real businesses build scalable software with ClickMasters AI, SaaS, and enterprise systems built for growth.',
       images: [`${siteConfig.url}/og/og-case-studies.jpg`],
     },
   }),
@@ -719,7 +719,7 @@ export const metadataConfig = {
     openGraph: {
       title: 'The Hidden Formula Behind Fast-Growing Software Products',
       description:
-        'Not trends — real engineering. See how production-grade AI systems, SaaS platforms, and scalable applications are designed to survive growth and peak demand.',
+        'Not trends real engineering. See how production-grade AI systems, SaaS platforms, and scalable applications are designed to survive growth and peak demand.',
       url: `${siteConfig.url}/blog`,
       images: [
         {
@@ -745,7 +745,7 @@ export const metadataConfig = {
     title: 'Why 100+ Businesses Trust ClickMasters',
 
     description:
-      'See why startups and enterprises rate ClickMasters 4.9/5. Real success stories from fintech, healthcare, retail & logistics — scalable web, mobile & SaaS products.',
+      'See why startups and enterprises rate ClickMasters 4.9/5. Real success stories from fintech, healthcare, retail & logistics scalable web, mobile & SaaS products.',
 
     alternates: { canonical: `${siteConfig.url}/testimonials` },
 
@@ -759,7 +759,7 @@ export const metadataConfig = {
           url: `${siteConfig.url}/og/og-testimonials.jpg`,
           width: 1200,
           height: 630,
-          alt: 'Client success stories — ClickMasters software development',
+          alt: 'Client success stories ClickMasters software development',
         },
       ],
     },
@@ -785,7 +785,7 @@ export const metadataConfig = {
     openGraph: {
       title: 'Turn Your Idea Into Software | Get a Free Expert Consultation',
       description:
-        'Speak with experienced software engineers and turn your idea into a scalable product. Get a fast, free consultation — response within 24 hours.',
+        'Speak with experienced software engineers and turn your idea into a scalable product. Get a fast, free consultation response within 24 hours.',
       url: `${siteConfig.url}/contact-us`,
       images: [
         {
@@ -801,7 +801,7 @@ export const metadataConfig = {
       card: 'summary_large_image',
       title: 'Turn Your Idea Into Software | Get a Free Expert Consultation',
       description:
-        'Get a free consultation with software engineers. We build web apps, mobile apps, SaaS & AI products — fast response within 24 hours.',
+        'Get a free consultation with software engineers. We build web apps, mobile apps, SaaS & AI products fast response within 24 hours.',
       images: [`${siteConfig.url}/og/og-contact.jpg`],
     },
   }),

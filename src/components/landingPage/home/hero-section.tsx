@@ -182,7 +182,7 @@ export function HeroSection(): JSX.Element {
           message: heroForm.message,
           phone: heroForm.phone || undefined,
           budget: heroForm.budget || undefined,
-          services: 'Homepage — hero inquiry',
+          services: 'Homepage hero inquiry',
         }),
       });
       const data = await res.json();
@@ -298,13 +298,13 @@ export function HeroSection(): JSX.Element {
               
             </div>
 
-            {/* ── Right column — CTA Form, vertically centered ── */}
+            {/* ── Right column CTA Form, vertically centered ── */}
             <div className="flex items-center justify-center lg:h-screen w-full">
               <div className="animate-slide-in-up w-full">
                 <div className="rounded-2xl border border-white/15 bg-black/60 p-6 sm:p-8 shadow-2xl shadow-black/50 backdrop-blur-md">
                   <h2 className="font-display text-lg font-bold text-white">Get a free quote</h2>
                   <p className="mt-1 mb-6 text-sm text-gray-300">
-                    Share your details — we&apos;ll respond within one business day.
+                    Share your details we&apos;ll respond within one business day.
                   </p>
 
                   {heroError && (

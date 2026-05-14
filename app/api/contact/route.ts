@@ -143,7 +143,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Create transporter (skip verify() on each request — it doubles SMTP round-trips and slows submissions)
+    // Create transporter (skip verify() on each request it doubles SMTP round-trips and slows submissions)
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: Number(process.env.SMTP_PORT) || 587,
@@ -174,7 +174,7 @@ export async function POST(req: NextRequest) {
       from: `"${process.env.ALIAS_NAME || 'ClickMasters'}" <${process.env.ALIAS_EMAIL || process.env.SMTP_MAIL}>`,
       to: process.env.RECEIVER_EMAIL || process.env.SMTP_MAIL,
       replyTo: email,
-      subject: `New lead: ${lead.name} — ClickMasters`,
+      subject: `New lead: ${lead.name} ClickMasters`,
       html: adminEmailHtml(lead),
     };
 

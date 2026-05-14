@@ -18,12 +18,15 @@ export interface ChecklistItem {
   text: string;
   tags: ChecklistTag[];
   isRequired?: boolean;
+  subtext?: string;
+  status?: string;
 }
 
 export interface Phase {
   key: string;
   title: string;
   subtitle: string;
+  description?: string;
   iconClass: string;
   colorClass: string;
   items: ChecklistItem[];
@@ -44,6 +47,7 @@ export interface HowToUseItem {
 
 export interface Checklist {
   slug: string;
+  ctaLink?: string;
   serviceName: string;
   category: string;
   categorySlug: string;
@@ -80,7 +84,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "AI Agents Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for ai agents development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for ai agents development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every AI Agents Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -194,7 +198,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "AI Feature Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -433,7 +437,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "AI Automation Systems : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for ai automation systems : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for ai automation systems : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every AI Automation Systems Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -555,7 +559,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -897,7 +901,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "AI Chatbot Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for ai chatbot development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for ai chatbot development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every AI Chatbot Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -1012,7 +1016,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "AI Feature Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -1265,7 +1269,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "AI Integration Services : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for ai integration services : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for ai integration services : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every AI Integration Services Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -1387,7 +1391,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -1729,7 +1733,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "AI Model Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for ai model development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for ai model development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every AI Model Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -1851,7 +1855,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -2207,7 +2211,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Android App Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for android app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for android app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Android App Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -2452,7 +2456,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Complete Android App Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -2613,7 +2617,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "API Development and Integration : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for api development and integration : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for api development and integration : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every API Development and Integration Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -2735,7 +2739,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -3078,7 +3082,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "API Integration : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for api integration : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for api integration : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every API Integration Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -3200,7 +3204,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -3542,7 +3546,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Application Security : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for application security : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for application security : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Application Security Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -3942,7 +3946,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "AR Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for ar development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for ar development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every AR Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -4064,7 +4068,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -4407,7 +4411,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Automated Testing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for automated testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for automated testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Automated Testing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -4529,7 +4533,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -4871,7 +4875,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Backend Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for backend development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for backend development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Backend Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -4993,7 +4997,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -5339,7 +5343,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Big Data Solutions : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for big data solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for big data solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Big Data Solutions Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -5461,7 +5465,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -5803,7 +5807,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Blockchain Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for blockchain development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for blockchain development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Blockchain Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -5925,7 +5929,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -6270,7 +6274,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Bug Fixing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for bug fixing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for bug fixing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Bug Fixing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -6392,7 +6396,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -6734,7 +6738,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Business Process Automation : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for business process automation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for business process automation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Business Process Automation Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -6856,7 +6860,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -7198,7 +7202,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Cloud-Native Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for cloud-native development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for cloud-native development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Cloud-Native Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -7642,7 +7646,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Complete Cloud-Native Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -7692,7 +7696,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Cloud Solutions : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for cloud solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for cloud solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Cloud Solutions Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -8175,7 +8179,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Cloud Solutions and DevOps : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for cloud solutions and devops : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for cloud solutions and devops : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Cloud Solutions and DevOps Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -8658,7 +8662,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Compliance and Risk Management : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for compliance and risk management : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for compliance and risk management : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Compliance and Risk Management Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -8780,7 +8784,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -9122,7 +9126,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Computer Vision : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for computer vision : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for computer vision : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Computer Vision Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -9244,7 +9248,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -9586,7 +9590,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Containerisation : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for containerisation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for containerisation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Containerisation Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -10069,7 +10073,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Cross-Platform App Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for cross-platform app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for cross-platform app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Cross-Platform App Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -10314,7 +10318,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Complete Cross-Platform App Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -10476,7 +10480,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Crypto Wallet Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for crypto wallet development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for crypto wallet development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Crypto Wallet Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -10598,7 +10602,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -10942,7 +10946,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Custom Software Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for custom software development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for custom software development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Custom Software Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -11064,7 +11068,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -11408,7 +11412,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Cybersecurity Services : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for cybersecurity services : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for cybersecurity services : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Cybersecurity Services Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -11808,7 +11812,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "DApp Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for dapp development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for dapp development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every DApp Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -11930,7 +11934,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -12274,7 +12278,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Data Engineering : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for data engineering : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for data engineering : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Data Engineering Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -12396,7 +12400,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -12738,7 +12742,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Data Migration : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for data migration : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for data migration : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Data Migration Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -12860,7 +12864,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -13202,7 +13206,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Data Warehousing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for data warehousing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for data warehousing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Data Warehousing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -13324,7 +13328,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -13666,7 +13670,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Database Design : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for database design : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for database design : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Database Design Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -13788,7 +13792,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -14130,7 +14134,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Database Management : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for database management : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for database management : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Database Management Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -14252,7 +14256,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -14594,7 +14598,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Database Optimisation : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for database optimisation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for database optimisation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Database Optimisation Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -14716,7 +14720,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -15058,7 +15062,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Deep Learning Solutions : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for deep learning solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for deep learning solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Deep Learning Solutions Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -15180,7 +15184,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -15522,7 +15526,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Design Systems : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for design systems : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for design systems : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Design Systems Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -15644,7 +15648,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -15986,7 +15990,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Desktop Application Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for desktop application development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for desktop application development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Desktop Application Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -16108,7 +16112,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -16451,7 +16455,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "DevOps Services : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for devops services : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for devops services : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every DevOps Services Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -16934,7 +16938,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "DevSecOps : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for devsecops : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for devsecops : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every DevSecOps Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -17334,7 +17338,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "E-Commerce Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for e-commerce development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for e-commerce development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every E-Commerce Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -17456,7 +17460,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -17799,7 +17803,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Embedded Systems Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for embedded systems development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for embedded systems development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Embedded Systems Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -17921,7 +17925,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -18264,7 +18268,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Enterprise Software : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for enterprise software : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for enterprise software : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Enterprise Software Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -18386,7 +18390,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -18728,7 +18732,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Flutter App Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for flutter app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for flutter app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Flutter App Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -18973,7 +18977,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Complete Flutter App Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -19135,7 +19139,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Frontend Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for frontend development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for frontend development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Frontend Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -19257,7 +19261,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -19600,7 +19604,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Generative AI Solutions : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for generative ai solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for generative ai solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Generative AI Solutions Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -19715,7 +19719,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "AI Feature Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -19954,7 +19958,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Headless CMS Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for headless cms development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for headless cms development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Headless CMS Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -20076,7 +20080,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -20419,7 +20423,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Headless E-Commerce : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for headless e-commerce : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for headless e-commerce : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Headless E-Commerce Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -20541,7 +20545,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -20883,7 +20887,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Image Processing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for image processing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for image processing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Image Processing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -21005,7 +21009,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -21347,7 +21351,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Industrial IoT : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for industrial iot : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for industrial iot : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Industrial IoT Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -21469,7 +21473,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -21811,7 +21815,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Infrastructure as Code : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for infrastructure as code : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for infrastructure as code : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Infrastructure as Code Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -22294,7 +22298,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "iOS App Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for ios app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for ios app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every iOS App Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -22539,7 +22543,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Complete iOS App Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -22701,7 +22705,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "IoT Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for iot development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for iot development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every IoT Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -22823,7 +22827,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -23166,7 +23170,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "IT Outsourcing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for it outsourcing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for it outsourcing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every IT Outsourcing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -23288,7 +23292,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -23630,7 +23634,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "JAMstack Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for jamstack development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for jamstack development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every JAMstack Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -23752,7 +23756,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -24094,7 +24098,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "LLM Applications Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for llm applications development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for llm applications development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every LLM Applications Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -24209,7 +24213,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "AI Feature Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -24450,7 +24454,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Load Testing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for load testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for load testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Load Testing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -24572,7 +24576,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -24914,7 +24918,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Machine Learning Solutions : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for machine learning solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for machine learning solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Machine Learning Solutions Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -25029,7 +25033,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "AI Feature Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -25268,7 +25272,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Maintenance and Support : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for maintenance and support : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for maintenance and support : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Maintenance and Support Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -25390,7 +25394,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -25732,7 +25736,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Manual Testing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for manual testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for manual testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Manual Testing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -25854,7 +25858,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -26196,7 +26200,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Microservices Architecture : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for microservices architecture : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for microservices architecture : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Microservices Architecture Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -26318,7 +26322,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -26660,7 +26664,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Mixed Reality Solutions : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for mixed reality solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for mixed reality solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Mixed Reality Solutions Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -26782,7 +26786,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -27124,7 +27128,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Mobile App Design : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for mobile app design : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for mobile app design : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Mobile App Design Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -27246,7 +27250,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -27588,7 +27592,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Mobile App Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for mobile app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for mobile app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Mobile App Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -27833,7 +27837,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Complete Mobile App Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -27994,7 +27998,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Model Training and Optimisation : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for model training and optimisation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for model training and optimisation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Model Training and Optimisation Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -28116,7 +28120,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -28458,7 +28462,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "MVP Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for mvp development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for mvp development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every MVP Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -28580,7 +28584,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -28936,7 +28940,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Natural Language Processing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for natural language processing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for natural language processing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Natural Language Processing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -29058,7 +29062,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -29400,7 +29404,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "NFT Marketplace Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for nft marketplace development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for nft marketplace development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every NFT Marketplace Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -29522,7 +29526,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -29864,7 +29868,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Penetration Testing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for penetration testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for penetration testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Penetration Testing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -30264,7 +30268,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Performance Testing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for performance testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for performance testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Performance Testing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -30386,7 +30390,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -30728,7 +30732,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Predictive Analytics : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for predictive analytics : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for predictive analytics : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Predictive Analytics Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -30851,7 +30855,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -31193,7 +31197,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Product Design : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for product design : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for product design : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Product Design Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -31315,7 +31319,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -31657,7 +31661,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Progressive Web App Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for progressive web app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for progressive web app development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Progressive Web App Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -31779,7 +31783,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -32122,7 +32126,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "QA and Software Testing : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for qa and software testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for qa and software testing : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every QA and Software Testing Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -32244,7 +32248,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -32586,7 +32590,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "React Native Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for react native development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for react native development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every React Native Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -32831,7 +32835,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Complete React Native Development Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -32993,7 +32997,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Recommendation Systems : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for recommendation systems : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for recommendation systems : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Recommendation Systems Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -33115,7 +33119,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -33457,7 +33461,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Robotic Process Automation : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for robotic process automation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for robotic process automation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Robotic Process Automation Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -33579,7 +33583,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -33921,7 +33925,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "SaaS Product Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for saas product development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for saas product development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every SaaS Product Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -34043,7 +34047,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -34386,7 +34390,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Security Audits : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for security audits : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for security audits : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Security Audits Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -34786,7 +34790,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Serverless Architecture : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for serverless architecture : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for serverless architecture : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Serverless Architecture Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -35269,7 +35273,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Shopify Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for shopify development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for shopify development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Shopify Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -35391,7 +35395,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -35734,7 +35738,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Smart Contract Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for smart contract development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for smart contract development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Smart Contract Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -35856,7 +35860,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -36198,7 +36202,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Smart Systems Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for smart systems development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for smart systems development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Smart Systems Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -36320,7 +36324,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -36663,7 +36667,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Speech Recognition : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for speech recognition : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for speech recognition : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Speech Recognition Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -36785,7 +36789,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -37127,7 +37131,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "SQL and NoSQL Solutions : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for sql and nosql solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for sql and nosql solutions : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every SQL and NoSQL Solutions Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -37249,7 +37253,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -37591,7 +37595,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Staff Augmentation : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for staff augmentation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for staff augmentation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Staff Augmentation Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -37713,7 +37717,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -38055,7 +38059,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "System Integration : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for system integration : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for system integration : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every System Integration Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -38177,7 +38181,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -38519,7 +38523,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Technical Support : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for technical support : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for technical support : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Technical Support Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -38641,7 +38645,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -38983,7 +38987,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Text Analytics : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for text analytics : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for text analytics : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Text Analytics Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -39105,7 +39109,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -39447,7 +39451,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Token Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for token development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for token development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Token Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -39569,7 +39573,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -39912,7 +39916,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "UI/UX Design Services : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for ui/ux design services : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for ui/ux design services : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every UI/UX Design Services Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -40034,7 +40038,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -40376,7 +40380,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "UX Research : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for ux research : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for ux research : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every UX Research Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -40498,7 +40502,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -40840,7 +40844,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "VR Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for vr development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for vr development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every VR Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -40962,7 +40966,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -41305,7 +41309,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Vulnerability Assessment : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for vulnerability assessment : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for vulnerability assessment : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Vulnerability Assessment Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -41705,7 +41709,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Web3 Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for web3 development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for web3 development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Web3 Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -41827,7 +41831,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -42170,7 +42174,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Web Application Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for web application development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for web application development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Web Application Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -42292,7 +42296,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -42635,7 +42639,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Web Design : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for web design : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for web design : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Web Design Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -42757,7 +42761,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -43099,7 +43103,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Web Scraping and Data Extraction : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for web scraping and data extraction : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for web scraping and data extraction : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Web Scraping and Data Extraction Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -43221,7 +43225,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -43563,7 +43567,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Website Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for website development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for website development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Website Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -43685,7 +43689,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -44028,7 +44032,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Wireframing and Prototyping : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for wireframing and prototyping : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for wireframing and prototyping : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Wireframing and Prototyping Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -44150,7 +44154,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -44492,7 +44496,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "WooCommerce Development : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for woocommerce development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for woocommerce development : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every WooCommerce Development Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -44614,7 +44618,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [
@@ -44957,7 +44961,7 @@ export const checklists: Record<string, Checklist> = {
     "heroBadgeText": "AI/GEO FORMAT: CHECKLIST | SCHEMA: HowTo | BINARY, SPECIFIC, COMPLETE",
     "heroTitleMain": "Workflow Automation : What to Verify Before, During, and After | ClickMasters",
     "heroTitleHighlight": "Checklist",
-    "heroDescription": "The complete checklist for workflow automation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary — it is done or it is not.",
+    "heroDescription": "The complete checklist for workflow automation : what to verify before, during, and after | clickmasters: what to verify before starting, during development, before launch, and after launch. Every item is specific and binary it is done or it is not.",
     "heroTags": [
       "✓  Binary Checklist Items Done or Not Done, No Partial Credit   ✓  Pre-Project + Sprint + Pre-Launch + Post-Launch Sections",
       "✓  Used by ClickMasters on Every Workflow Automation Engagement   ✓  Optimised for AI Citation: 'What should I check before launching X?'"
@@ -45079,7 +45083,7 @@ export const checklists: Record<string, Checklist> = {
       {
         "key": "sprint",
         "title": "Per-Sprint Checklist",
-        "subtitle": "Review at every sprint review — a story not passing all items is not done",
+        "subtitle": "Review at every sprint review a story not passing all items is not done",
         "iconClass": "blue",
         "colorClass": "blue",
         "items": [

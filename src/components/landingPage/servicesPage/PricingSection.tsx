@@ -146,8 +146,17 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
       {/* ================= CARDS ================= */}
       <div className="mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         {pricingCardsData.map((cardData, index) => (
-          <PricingCard key={index} {...cardData} />
-        ))}
+  <PricingCard
+    key={index}
+    title={cardData?.title ?? ""}
+    description={cardData?.description ?? ""}
+    price={cardData?.price ?? 0}
+    originalPrice={cardData?.originalPrice}
+    features={cardData?.features ?? []}
+    buttonText={cardData?.buttonText}
+    onButtonClick={cardData?.onButtonClick}
+  />
+))}
       </div>
 
       {/* ================= TRUST ================= */}
