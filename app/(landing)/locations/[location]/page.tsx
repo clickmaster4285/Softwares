@@ -4,7 +4,6 @@ import { Metadata } from 'next';
 import { getCountryData, getAllCountrySlugs } from '@/lib/country';
 import { getAllCountryServicePages } from '@/lib/country-services';
 import { ProcessSection } from '@/src/components/landingPage/servicesPage/ProcessSection';
-import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
 import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
 import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
@@ -149,17 +148,6 @@ export default async function CountryPage({ params }: Props) {
           { title: 'Ongoing Support', desc: 'Comprehensive maintenance and continuous improvement' },
         ]}
       />
-  {/* <div className='mx-10 lg:mx-14 px-12 bg-white'>
-        
-        {country.processPhases && (
-        <ProcessSection serviceName={country.name} processPhases={country.processPhases} />
-      )}
-       </div> */}
-     
-      <div className='mx-10 lg:mx-14 px-12'>
-        {country.pricingTiers && (
-        <PricingSection serviceName={country.name} pricingTiers={country.pricingTiers} />
-      )}</div>
 
       <ProjectCTAHero
         variant="combined"

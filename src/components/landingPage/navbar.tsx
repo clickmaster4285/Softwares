@@ -604,7 +604,7 @@ const { data: blogs = [] } = useQuery({
                   }
                 }}
                 onMouseLeave={closeDropdowns}
-                className="absolute left-0 top-full mt-2 animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out z-50"
+                className="absolute left-0 top-full  animate-in fade-in-0 slide-in-from-top-1 duration-150 ease-out z-50 mt-10 mr-6"
               >
                 <div
                   ref={dropdownRef}

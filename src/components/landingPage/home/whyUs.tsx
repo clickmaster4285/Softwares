@@ -307,24 +307,7 @@ export function WhyChooseUs({ countryName, items, subtitle = "Competitive differ
           )}
         </div>
 
-        {/* Stats Section - Only show when using default benefits (no custom items) */}
-        {!hasCustomItems && (
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto text-center">
-            {defaultStats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl p-6 shadow-sm border border-primary/10"
-              >
-                <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-                <p className="text-slate-600">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        )}
+       
       </div>
     </section>
   );

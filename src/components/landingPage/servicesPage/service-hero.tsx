@@ -174,7 +174,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
   // Make navbar transparent using GSAP ScrollTrigger
   useEffect(() => {
-    const navbar = document.querySelector("nav");
+   const navbar = document.getElementById("main-navbar");
 
     if (navbar && heroRef.current) {
       ScrollTrigger.create({
@@ -258,7 +258,9 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
       {/* Breadcrumb */}
       <motion.div
-        className="relative z-10 border-b border-orange-500/30 w-full px-6 md:px-8 lg:px-10 xl:px-24 mt-30"
+        className="relative z-10 border-b border-orange-500/30 w-full px-6 md:px-8 lg:px-10 xl:px-24 pt-24"
+        
+
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}

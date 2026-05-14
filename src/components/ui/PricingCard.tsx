@@ -34,6 +34,14 @@ export function PricingCard({
     if (isInView && !hasAnimated) setHasAnimated(true);
   }, [isInView, hasAnimated]);
 
+  const formatPrice = (value: number) => {
+    if (!value || value <= 0) return null;
+    return value.toLocaleString("en-AU");
+  };
+
+  const hasValidPrice = price > 0;
+  const hasRange = originalPrice && originalPrice > price;
+
   return (
     <motion.div
       ref={containerRef}
@@ -43,27 +51,46 @@ export function PricingCard({
     >
       <Card className="overflow-hidden h-full">
         <div className="flex flex-col lg:flex-row">
-          {/* Left Side - Price */}
+
+          {/* ================= LEFT SIDE ================= */}
           <div className="flex flex-col justify-between p-6 lg:p-8 lg:w-5/12 bg-white">
+
             <div>
               <h3 className="text-xl font-bold text-slate-900">{title}</h3>
-              <p className="text-sm text-slate-600 mt-1.5 leading-tight">{description}</p>
+              <p className="text-sm text-slate-600 mt-1.5 leading-tight">
+                {description}
+              </p>
 
               <div className="mt-6">
-                {price > 0 ? (
+
+                {/* PRICE DISPLAY */}
+                {hasValidPrice ? (
                   <>
-                    <div className="flex items-baseline">
-                      <span className="text-4xl font-extrabold tracking-tighter">${price}</span>
-                      {originalPrice && (
-                        <span className="ml-2 text-lg text-slate-400 line-through">
-                          ${originalPrice}
+                    {/* RANGE */}
+                    {hasRange ? (
+                      <div className="flex flex-col">
+                        <span className="text-3xl font-extrabold tracking-tighter">
+                          AUD {formatPrice(price)} – {formatPrice(originalPrice!)}
                         </span>
-                      )}
-                    </div>
-                    <p className="text-xs text-slate-500 mt-1">one-time payment</p>
+                        <p className="text-xs text-slate-500 mt-1">
+                          one-time project range
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col">
+                        <span className="text-4xl font-extrabold tracking-tighter">
+                          AUD {formatPrice(price)}
+                        </span>
+                        <p className="text-xs text-slate-500 mt-1">
+                          one-time payment
+                        </p>
+                      </div>
+                    )}
                   </>
                 ) : (
-                  <span className="text-3xl font-bold">Custom Pricing</span>
+                  <span className="text-3xl font-bold text-slate-900">
+                    Custom Pricing
+                  </span>
                 )}
               </div>
             </div>
@@ -75,25 +102,35 @@ export function PricingCard({
             </div>
           </div>
 
-          {/* Right Side - Features */}
+          {/* ================= RIGHT SIDE ================= */}
           <div className="bg-slate-50 p-6 lg:p-8 lg:w-7/12">
             <div className="space-y-6">
+
               {features.map((feature, featureIndex) => (
                 <div key={featureIndex}>
-                  <h4 className="font-semibold text-base mb-3">{feature.title}</h4>
+                  <h4 className="font-semibold text-base mb-3">
+                    {feature.title}
+                  </h4>
+
                   <ul className="space-y-2.5">
                     {feature.items.map((item: string, index: number) => (
                       <li key={index} className="flex items-start gap-2 text-sm">
                         <Check className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                        <span className="leading-tight text-slate-600">{item}</span>
+                        <span className="leading-tight text-slate-600">
+                          {item}
+                        </span>
                       </li>
                     ))}
                   </ul>
-                  {featureIndex < features.length - 1 && <Separator className="my-5" />}
+
+                  {featureIndex < features.length - 1 && (
+                    <Separator className="my-5" />
+                  )}
                 </div>
               ))}
             </div>
           </div>
+
         </div>
       </Card>
     </motion.div>

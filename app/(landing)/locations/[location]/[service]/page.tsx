@@ -32,6 +32,7 @@ export function generateStaticParams(): { location: string; service: string }[] 
   return getAllCountryServicePages().map((page: CountryServicePageContent) => ({
     location: page.categorySlug,
     service: page.slug,
+    pricing:page.pricingTiers,
   }));
 }
 
@@ -104,7 +105,10 @@ export default async function CountryServicePage({ params }: Props) {
   if (page.processPhases) tocItems.push({ id: 'our-process', title: 'Our Process', level: 2 as const });
   if (techStack.length > 0) tocItems.push({ id: 'tech-stack', title: 'Technology Stack', level: 2 as const });
   if (page.industryUseCases) tocItems.push({ id: 'industries', title: 'Industries', level: 2 as const });
+  
   if (page.pricingTiers) tocItems.push({ id: 'pricing', title: 'Pricing', level: 2 as const });
+
+
   if (page.tables) {
     page.tables.forEach((table: any) => {
       const id = slugify(table.title);

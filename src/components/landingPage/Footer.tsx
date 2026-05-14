@@ -94,7 +94,7 @@ export function Footer(): JSX.Element {
       initial={{ backgroundColor: '#000000' }}
       animate={{ backgroundColor: '#0a0a0a' }}
       transition={{ duration: 0.8 }}
-      className="relative overflow-hidden text-background lg:pt-20 lg:px-10"
+      className="relative overflow-hidden text-background  lg:px-10"
     >
       {/* ================= NEW CLICKMASTERS BACKGROUND ================= */}
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -115,7 +115,7 @@ export function Footer(): JSX.Element {
 
 
 {/* Watermark */}
-<div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-[1]"
+<div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-[1] mb-10 pb-10"
   style={{
     WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
     maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
@@ -319,7 +319,7 @@ export function Footer(): JSX.Element {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8"
+          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-116 lg:mb-30"
         >
           {(Object.entries(footerLinks) as [keyof FooterLinks, FooterLink[]][]).map(
             ([category, links]) => (
@@ -366,7 +366,7 @@ export function Footer(): JSX.Element {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20"
+          className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20 mt-10"
         >
           <motion.p className="text-xs sm:text-sm text-background/60 text-center sm:text-left" whileHover={{ color: '#ffffff' }}>
             © {currentYear} ClickMasters. All rights reserved.
