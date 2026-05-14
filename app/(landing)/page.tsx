@@ -411,13 +411,13 @@ export default function LandingPage() {
     
 
 
-      <Suspense
+      {/* <Suspense
         fallback={
           <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
         }
       >
         <AppsSection />
-      </Suspense>
+      </Suspense> */}
 
 
 

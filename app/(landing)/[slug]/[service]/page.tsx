@@ -256,7 +256,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         />
       )}
 
-      <div className="min-h-screen bg-white pt-20 text-slate-900">
+      <div className="min-h-screen text-slate-900">
 
 
     <ServiceHero page={page} />
