@@ -95,6 +95,11 @@ function getUrlPriorityAndFreq(urlPath) {
     return { priority: '0.6', changefreq: 'monthly' };
   }
   
+  // Location pages - separate country/location sitemap
+  if (url.includes('/locations')) {
+    return { priority: '0.7', changefreq: 'weekly' };
+  }
+  
   // Service pages - medium priority, weekly updates
   if (isMainService(urlPath) || isSubService(urlPath)) {
     return { priority: '0.8', changefreq: 'weekly' };
@@ -171,7 +176,9 @@ async function generateSeparateSitemaps() {
     blogs: [],
     faqs: [],
     hire: [],
+    locations: [],
   };
+  const locationServicePages = {};
 
   // Generate URLs based on service structure
   if (serviceMenuSections.length > 0) {
@@ -291,13 +298,27 @@ async function generateSeparateSitemaps() {
     } else if (urlPath.includes('/case-studies/')) {
       // Skip individual case study URLs as they're handled dynamically
       return;
+    } else if (urlPath.startsWith('/locations/')) {
+      const segments = urlPath.split('/').filter(Boolean);
+      if (segments.length === 2) {
+        categorizedUrls.locations.push(url);
+      } else if (segments.length >= 3) {
+        const country = segments[1];
+        const slug = segments.slice(2).join('/');
+        if (slug.endsWith(`-${country}`)) {
+          locationServicePages[country] = locationServicePages[country] || [];
+          locationServicePages[country].push(url);
+        } else {
+          categorizedUrls.pages.push(url);
+        }
+      }
     } else if (urlPath.includes('/hire-') || urlPath.includes('/hire/')) {
       categorizedUrls.hire.push(url);
     } else if (isMainService(urlPath)) {
       categorizedUrls.mainServices.push(url);
     } else if (isSubService(urlPath)) {
       categorizedUrls.subServices.push(url);
-    }  else {
+    } else {
       categorizedUrls.pages.push(url);
     }
   });
@@ -306,6 +327,9 @@ async function generateSeparateSitemaps() {
   Object.keys(categorizedUrls).forEach(category => {
     categorizedUrls[category] = [...new Set(categorizedUrls[category])];
   });
+  Object.keys(locationServicePages).forEach(country => {
+    locationServicePages[country] = [...new Set(locationServicePages[country])];
+  });
   
   // Print categorization summary
   console.log('\n📋 URL Categorization Summary:');
@@ -313,6 +337,9 @@ async function generateSeparateSitemaps() {
     console.log(`  ${category}: ${urls.length} URLs`);
   });
     
+  // Clean legacy location sitemap files from older versions.
+  cleanOldLocationServiceSitemapFiles();
+
   // Generate individual sitemaps
   await createSitemapFile('page-sitemap.xml', categorizedUrls.pages);
   await createSitemapFile('main-services-sitemap.xml', categorizedUrls.mainServices);
@@ -321,6 +348,8 @@ async function generateSeparateSitemaps() {
   await createSitemapFile('blog-sitemap.xml', categorizedUrls.blogs);
   await createSitemapFile('faq-sitemap.xml', categorizedUrls.faqs);
   await createSitemapFile('hire-sitemap.xml', categorizedUrls.hire);
+  await createSitemapFile('locations-sitemap.xml', categorizedUrls.locations);
+  await createLocationServiceSitemapFiles(locationServicePages);
   
   // Create main sitemap index
   await createSitemapIndex();
@@ -333,6 +362,10 @@ async function generateSeparateSitemaps() {
   console.log('  - main-services-sitemap.xml');
   console.log('  - sub-services-sitemap.xml');
   console.log('  - hire-sitemap.xml');
+  console.log('  - locations-sitemap.xml');
+  Object.keys(locationServicePages).forEach(country => {
+    console.log(`  - ${country}-services-sitemap.xml`);
+  });
   console.log('  - page-sitemap.xml');
   console.log('  - sitemap.xml (main index)');
 }
@@ -366,6 +399,45 @@ async function createSitemapFile(filename, urls, defaultPriority = '0.7') {
   console.log(`📄 Created ${filename} with ${urls.length} URLs`);
 }
 
+async function createLocationServiceSitemapFiles(locationServicePages) {
+  if (!locationServicePages || Object.keys(locationServicePages).length === 0) {
+    return;
+  }
+
+  Object.entries(locationServicePages).forEach(([country, urls]) => {
+    const filename = `${country}-services-sitemap.xml`;
+    createSitemapFile(filename, urls);
+  });
+}
+
+function getLocationServiceSitemapFiles() {
+  const locationServiceSitemapFiles = [];
+  try {
+    const files = fs.readdirSync(PUBLIC_DIR);
+    files.forEach(file => {
+      if (file.endsWith('-services-sitemap.xml')) {
+        locationServiceSitemapFiles.push(file);
+      }
+    });
+  } catch (error) {
+    // Ignore missing folder errors
+  }
+  return locationServiceSitemapFiles;
+}
+
+function cleanOldLocationServiceSitemapFiles() {
+  try {
+    const files = fs.readdirSync(PUBLIC_DIR);
+    files.forEach(file => {
+      if (file.startsWith('locations-') && file.endsWith('-sitemap.xml') && file !== 'locations-sitemap.xml') {
+        fs.unlinkSync(path.join(PUBLIC_DIR, file));
+      }
+    });
+  } catch (error) {
+    // Ignore cleanup failures
+  }
+}
+
 async function createSitemapIndex() {
   const indexPath = path.join(PUBLIC_DIR, 'sitemap.xml');
   const sitemapFiles = [
@@ -376,7 +448,11 @@ async function createSitemapIndex() {
     'blog-sitemap.xml',
     'faq-sitemap.xml',
     'hire-sitemap.xml',
+    'locations-sitemap.xml',
   ];
+  
+  const locationCountryFiles = getLocationServiceSitemapFiles();
+  sitemapFiles.push(...locationCountryFiles);
   
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
