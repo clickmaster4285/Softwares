@@ -263,7 +263,14 @@ async function generateSeparateSitemaps() {
   // Extract all URLs from the sitemap
   const urlRegex = /<loc>(.*?)<\/loc>/g;
   const matches = sitemapContent.match(urlRegex) || [];
-  const allUrls = matches.map(match => match.replace(/<\/?loc>/g, ''));
+  let allUrls = matches.map(match => match.replace(/<\/?loc>/g, ''));
+  
+  // Remove /services/ from URLs to match the updated routing
+  allUrls = allUrls.map(url => {
+    const urlObj = new URL(url);
+    urlObj.pathname = urlObj.pathname.replace(/\/services\//, '/');
+    return urlObj.toString();
+  });
   
   console.log(`📊 Found ${allUrls.length} total URLs to categorize`);
   

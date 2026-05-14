@@ -144,11 +144,11 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
       </div>
 
       {/* ================= CARDS ================= */}
-      <div className="mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+      {/* <div className="mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         {pricingCardsData.map((cardData, index) => (
           <PricingCard key={index} {...cardData} />
         ))}
-      </div>
+      </div> */}
 
       {/* ================= TRUST ================= */}
       <motion.div

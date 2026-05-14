@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { checklists, Checklist } from '@/src/lib/service_checklist';
 
 export default function ChecklistPage() {
@@ -92,7 +93,7 @@ export default function ChecklistPage() {
       <div className="max-w-5xl mx-auto px-5 md:px-10 py-16 text-center">
         <h1 className="text-3xl font-bold text-[#1A1A2E] mb-4">Checklist Not Found</h1>
         <p className="text-[#5A5A72] mb-6">The checklist you're looking for doesn't exist.</p>
-        <a href="/" className="bg-[#E8692A] text-white font-bold px-6 py-3 rounded-lg inline-block hover:bg-[#F5845A]">Go Home</a>
+        <Link href="/" className="bg-[#E8692A] text-white font-bold px-6 py-3 rounded-lg inline-block hover:bg-[#F5845A]">Go Home</Link>
       </div>
     );
   }
@@ -274,8 +275,7 @@ export default function ChecklistPage() {
             <p className="text-[15px] text-white/55 max-w-lg leading-relaxed">{checklist.ctaDescription}</p>
           </div>
           <div className="text-center">
-            <a className="bg-[#E8692A] text-white font-bold text-[15px] px-8 py-3.5 rounded-lg inline-block hover:bg-[#F5845A] transition-colors" href={checklist.ctaLink}>{checklist.ctaButtonText}</a>
-            <div className="text-xs text-white/35 mt-2">{checklist.ctaLink}</div>
+          
           </div>
         </div>
       </div>
