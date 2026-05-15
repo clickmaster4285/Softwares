@@ -139,7 +139,7 @@ export default function CountryServicesSection({
             </div>
 
             <h2 className="text-2xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">
-             Services We Provide in Canada
+             Services We Provide in {countryName}
             </h2>
 
             <p className="mt-5 text-slate-600 text-lg">

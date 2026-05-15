@@ -3,6 +3,7 @@
 
 import { motion } from "framer-motion";
 import { PricingCard } from "@/components/ui/PricingCard";
+import { useState } from "react";
 
 interface PricingTier {
   type: string;
@@ -48,12 +49,30 @@ const parseInvestment = (value: string) => {
   };
 };
 
+
+const chunkArray = <T,>(array: T[], size: number): T[][] => {
+  const chunks: T[][] = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
+};
+
 export function PricingSection({ serviceName, pricingTiers }: PricingSectionProps) {
+
+
+const CHUNK_SIZE = 6;
+
+const pricingChunks = chunkArray(pricingTiers, CHUNK_SIZE);
+const [activePage, setActivePage] = useState(0);
+
+const activeTiers = pricingChunks[activePage] || [];
+
   if (!pricingTiers || pricingTiers.length === 0) return null;
   console.log("pricingTiers in PricingSection", pricingTiers);
   console.log("serviceName", serviceName);
   
-  const pricingCardsData = pricingTiers
+  const pricingCardsData = activeTiers
     .map((tier) => {
       const parsed = parseInvestment(tier.investment);
 
@@ -105,7 +124,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
   return (
     <motion.section
       id="pricing"
-      className="scroll-mt-24 py-6 sm:py-8 md:py-12"
+      className="scroll-mt-24 py-6 sm:py-8 md:py-12 mx-6"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -144,20 +163,42 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
       </div>
 
       {/* ================= CARDS ================= */}
-      {/* <div className="mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-        {pricingCardsData.map((cardData, index) => (
-  <PricingCard
-    key={index}
-    title={cardData?.title ?? ""}
-    description={cardData?.description ?? ""}
-    price={cardData?.price ?? 0}
-    originalPrice={cardData?.originalPrice}
-    features={cardData?.features ?? []}
-    buttonText={cardData?.buttonText}
-    onButtonClick={cardData?.onButtonClick}
-  />
-))}
-      </div>
+{/* ================= CARDS ================= */}
+<div className="mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+  {pricingCardsData.map((cardData, index) => (
+    <PricingCard
+      key={index}
+      title={cardData?.title ?? ""}
+      description={cardData?.description ?? ""}
+      price={cardData?.price ?? 0}
+      originalPrice={cardData?.originalPrice}
+      features={cardData?.features ?? []}
+      buttonText={cardData?.buttonText}
+      onButtonClick={cardData?.onButtonClick}
+    />
+  ))}
+</div>
+
+{/* ================= PAGINATION ================= */}
+{pricingChunks.length > 1 && (
+  <div className="flex justify-center gap-2 mt-10">
+    {pricingChunks.map((_, idx) => (
+      <button
+        key={idx}
+        onClick={() => setActivePage(idx)}
+        className={`px-3 py-1 rounded-md text-sm border transition ${
+          activePage === idx
+            ? "bg-primary text-white"
+            : "bg-white text-slate-600"
+        }`}
+      >
+        {idx + 1}
+      </button>
+    ))}
+  </div>
+)}
+      
+      
 
       {/* ================= TRUST ================= */}
       <motion.div
