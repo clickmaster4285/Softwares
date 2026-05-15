@@ -134,7 +134,7 @@ export function TrustedClientsSection() {
   
     
 
-      {/* Header — original design */}
+      {/* Header original design */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
            <span className="h-[2px] w-8 rounded-full bg-orange-400" />

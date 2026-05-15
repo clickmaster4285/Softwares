@@ -469,7 +469,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               </motion.div>
             </motion.div>
 
-            {/* RIGHT COLUMN — Hero Image */}
+            {/* RIGHT COLUMN Hero Image */}
             <motion.div
               className="relative flex-shrink-0 w-full lg:w-[52%] xl:w-[55%] flex items-end justify-center lg:justify-end mt-8 lg:mt-0"
               variants={fadeInRight}

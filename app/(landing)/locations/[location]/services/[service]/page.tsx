@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: `${siteConfig.url}/og/services.webp`,
           width: 1200,
           height: 630,
-          alt: `${page.title} — ClickMasters software services`,
+          alt: `${page.title} ClickMasters software services`,
         },
       ],
     },

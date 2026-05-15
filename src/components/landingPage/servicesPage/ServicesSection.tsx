@@ -60,7 +60,7 @@ export const ServicesSection = ({ serviceName, servicesCards }: ServicesSectionP
       </div>
 
       <p className="mt-6 text-lg text-slate-600 leading-relaxed">
-        ClickMasters operates as a full-stack <span className="font-black">{serviceName.toLowerCase()}</span> partner. Our team handles every layer of the software delivery lifecycle — product strategy, UI/UX design, backend engineering, cloud infrastructure, QA, and ongoing support.
+        ClickMasters operates as a full-stack <span className="font-black">{serviceName.toLowerCase()}</span> partner. Our team handles every layer of the software delivery lifecycle product strategy, UI/UX design, backend engineering, cloud infrastructure, QA, and ongoing support.
       </p>
 
       {/* Cards Container - 3 in a row */}

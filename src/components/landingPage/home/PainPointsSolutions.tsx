@@ -54,7 +54,7 @@ const painPoints: PainPoint[] = [
 
 const solutions = [
   { title: 'Predictable ROI Architecture', description: 'Modern, maintainable stack (Node.js + React + Cloud-native) built to last.', metric: 'Up to 70% lower maintenance costs' },
-  { title: 'Radical Transparency', description: 'Agile sprints with weekly demos. You always see real progress — never surprises.', metric: '98% on-time delivery' },
+  { title: 'Radical Transparency', description: 'Agile sprints with weekly demos. You always see real progress never surprises.', metric: '98% on-time delivery' },
   { title: 'Enterprise-Grade Security', description: 'OWASP Top 10, GDPR compliant, regular penetration testing by default.', metric: 'Zero security breaches' },
   { title: 'Built for 10x Growth', description: 'Auto-scaling AWS/Azure infrastructure designed for massive traffic from day one.', metric: '99.99% uptime SLA' },
 ];
@@ -103,7 +103,7 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             {hasLocation 
               ? 'Common challenges that hinder business growth and efficiency'
-              : 'Most agencies deliver headaches wrapped in pretty proposals. Here\'s the reality — and why ClickMasters approaches development differently.'
+              : 'Most agencies deliver headaches wrapped in pretty proposals. Here\'s the reality and why ClickMasters approaches development differently.'
             }
           </p>
         </div>

@@ -3,7 +3,7 @@
 import { SplineScene } from '@/components/ui/splite';
 import { cn } from '@/lib/utils';
 
-/** Spline scene URL — replace with your own .splinecode export if needed */
+/** Spline scene URL replace with your own .splinecode export if needed */
 export const HERO_SPLINE_SCENE =
   'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode';
 

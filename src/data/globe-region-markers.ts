@@ -165,7 +165,7 @@ const AU_MARKERS: GlobeRegionMarker[] = [
   { id: "au-nt", location: [-12.4634, 130.8456], region: "NT", name: "Northern Territory" },
 ];
 
-/** New Zealand — regional council / major hub centroids */
+/** New Zealand regional council / major hub centroids */
 const NZ_MARKERS: GlobeRegionMarker[] = [
   { id: "nz-northland", location: [-35.725, 174.324], region: "Northland", name: "Northland" },
   { id: "nz-auckland", location: [-36.8485, 174.7633], region: "Auckland", name: "Auckland" },
@@ -224,7 +224,7 @@ const NZ_MARKERS: GlobeRegionMarker[] = [
   },
 ];
 
-/** UK — England NUTS1 regions + Scotland, Wales, Northern Ireland */
+/** UK England NUTS1 regions + Scotland, Wales, Northern Ireland */
 const UK_MARKERS: GlobeRegionMarker[] = [
   {
     id: "uk-ne",
