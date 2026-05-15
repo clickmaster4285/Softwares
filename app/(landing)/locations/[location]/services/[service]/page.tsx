@@ -182,7 +182,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     tocItems.push({ id: 'industries', title: 'Industries', level: 2 as const });
   }
 
-  if (page.pricingTiers && !tocItems.find(item => item.id === 'pricing')) {
+  if (page.countryPricingTiers && !tocItems.find(item => item.id === 'pricing')) {
     tocItems.push({ id: 'pricing', title: 'Pricing', level: 2 as const });
   }
 

@@ -422,7 +422,9 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   </div>
 </div>
 
-                <CaseStudySection /></div>
+                <CaseStudySection />
+              
+              </div>
 
               {/* FAQ Section */}
             {faqs.length > 0 && <FAQSection faqs={faqs} />}

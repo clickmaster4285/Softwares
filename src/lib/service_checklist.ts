@@ -17327,8 +17327,8 @@ export const checklists: Record<string, Checklist> = {
 
     "lastUpdated": "2026-05-13T17:25:07.999858"
   },
-  "ecommerce-development": {
-    "slug": "ecommerce-development",
+  "e-commerce-development": {
+    "slug": "e-commerce-development",
     "serviceName": "E-Commerce Development : What to Verify Before, During, and After | ClickMasters",
     "category": "Web Development",
     "categorySlug": "services",
@@ -18257,8 +18257,8 @@ export const checklists: Record<string, Checklist> = {
 
     "lastUpdated": "2026-05-13T17:25:08.022865"
   },
-  "enterprise-software": {
-    "slug": "enterprise-software",
+  "enterprise-software-development": {
+    "slug": "enterprise-software-development",
     "serviceName": "Enterprise Software : What to Verify Before, During, and After | ClickMasters",
     "category": "Business & Enterprise",
     "categorySlug": "services",
@@ -20412,8 +20412,8 @@ export const checklists: Record<string, Checklist> = {
 
     "lastUpdated": "2026-05-13T17:25:08.073291"
   },
-  "headless-ecommerce": {
-    "slug": "headless-ecommerce",
+  "headless-e-commerce": {
+    "slug": "headless-e-commerce",
     "serviceName": "Headless E-Commerce : What to Verify Before, During, and After | ClickMasters",
     "category": "Web Development",
     "categorySlug": "services",
@@ -31650,8 +31650,8 @@ export const checklists: Record<string, Checklist> = {
 
     "lastUpdated": "2026-05-13T17:25:08.296534"
   },
-  "pwa-development": {
-    "slug": "pwa-development",
+  "progressive-web-app-development": {
+    "slug": "progressive-web-app-development",
     "serviceName": "Progressive Web App Development : What to Verify Before, During, and After | ClickMasters",
     "category": "Web Development",
     "categorySlug": "services",
@@ -39905,8 +39905,8 @@ export const checklists: Record<string, Checklist> = {
 
     "lastUpdated": "2026-05-13T17:25:08.460337"
   },
-  "uiux-design-services": {
-    "slug": "uiux-design-services",
+  "ui-ux-design": {
+    "slug": "ui-ux-design",
     "serviceName": "UI/UX Design Services : What to Verify Before, During, and After | ClickMasters",
     "category": "Design & UX",
     "categorySlug": "services",
