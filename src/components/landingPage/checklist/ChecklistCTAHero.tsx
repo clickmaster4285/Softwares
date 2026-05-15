@@ -36,7 +36,7 @@ const defaultCards = [
   { title: "ISO", subtitle: "Certified Team" },
 ];
 
-export function ProjectCTAHero({ 
+export function ChecklistCTAHero({ 
   badge = "Build Your Project",
   title = "Ready to Start Your Project? Let's Build Something Amazing Together",
   description = "Whether you need a custom web app, mobile solution, or enterprise software, our team is ready to bring your vision to life.",
@@ -177,4 +177,4 @@ export function ProjectCTAHero({
   );
 }
 
-export default ProjectCTAHero;
+export default ChecklistCTAHero;

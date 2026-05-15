@@ -1,3 +1,6 @@
+
+
+
 // app/locations/[location]/page.tsx
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
@@ -17,6 +20,7 @@ import CountryServicesSection from '@/src/components/landingPage/location/Countr
 import { HeroSection, StatsSection } from '@/src/components/landingPage/location/LocationHero';
 import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
 import FaqSection from '@/src/components/landingPage/location/FaqSection';
+import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
 
 
 type Props = { params: Promise<{ location: string }> };
@@ -179,13 +183,20 @@ export default async function CountryPage({ params }: Props) {
  
 
 
-      <CTASectionImage
-        title={`Looking for a reliable software development company in ${country.name}?`}
+   
+
+
+
+
+      <ChecklistCTAHero    title={`Looking for a reliable software development company in ${country.name}?`}
         description="Let's build something amazing together"
         buttons={[
           { text: "Start Your Project", href: `/contact-us?location=${location}`, variant: "primary" },
           { text: "Book Free Consultation", href: "#services", variant: "outline" },
-        ]}/>
+        ]}
+      />
     </div>
   );
 }
+
+

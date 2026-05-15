@@ -1,3 +1,9 @@
+
+
+
+
+
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -26,7 +32,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="h-8 sm:h-10 md:h-12 w-1 rounded-full bg-primaryshrink-0"
+         className="h-8 sm:h-10 md:h-12 w-1 rounded-full bg-primary shrink-0"
           />
           <div>
             <motion.h2 
@@ -52,7 +58,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
         </div>
         
         <motion.div
-          className="flex items-center gap-2 text-xs sm:text-sm text-primaryml-4 sm:ml-0"
+         className="flex items-center gap-2 text-xs sm:text-sm text-primary ml-4 sm:ml-0"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -64,7 +70,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
       </div>
 
       {/* Mobile: 1 column, Tablet: 2-3 columns, Desktop: 5 columns */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4">
+     <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4 w-full">
         {checklist.map((item, i) => (
           <motion.div
             key={i}
@@ -76,7 +82,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
           >
             <div className="bg-white rounded-xl overflow-hidden border border-slate-200 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
               {/* Top accent bar */}
-              <div className="h-1 bg-gradient-to-r from-primary to-primaryw-0 group-hover:w-full transition-all duration-500" />
+            <div className="h-1 bg-gradient-to-r from-primary to-primary w-0 group-hover:w-full transition-all duration-500" />
               
               <div className="p-4 sm:p-5">
                 <div className="flex items-center justify-between mb-3 sm:mb-4">
@@ -122,3 +128,5 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
     </section>
   );
 };
+
+
