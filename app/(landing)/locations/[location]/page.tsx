@@ -1,11 +1,9 @@
-
-
-
 // app/locations/[location]/page.tsx
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { getCountryData, getAllCountrySlugs } from '@/lib/country';
-import { getAllCountryServicePages } from '@/lib/country-services';
+import { servicesByCountry } from '@/lib/country-services';
+
 import { ProcessSection } from '@/src/components/landingPage/servicesPage/ProcessSection';
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
 import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
@@ -21,7 +19,7 @@ import { HeroSection, StatsSection } from '@/src/components/landingPage/location
 import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
 import FaqSection from '@/src/components/landingPage/location/FaqSection';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
-
+import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 
 type Props = { params: Promise<{ location: string }> };
 
@@ -35,17 +33,6 @@ function createSlug(text: string): string {
     .trim();
 }
 
-// Helper function to get the correct service slug for a country
-function getServiceSlugForCountry(service: string, country: string): string {
-  const allPages = getAllCountryServicePages();
-  const matchingPage = allPages.find((page: any) => 
-    page.categorySlug === country && 
-    page.serviceName === service
-  );
-  
-  return matchingPage?.slug || `${createSlug(service)}-${country.toLowerCase()}`;
-}
-
 // Generate static paths
 export async function generateStaticParams() {
   const slugs = getAllCountrySlugs();
@@ -55,7 +42,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { location } = await params;
   const country = getCountryData(location);
-  
+
   if (!country) {
     return { title: 'Location Not Found' };
   }
@@ -78,36 +65,44 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CountryPage({ params }: Props) {
   const { location } = await params;
+
   const country = getCountryData(location);
 
   if (!country) {
     notFound();
   }
 
-  // Pre-compute all service slugs (Important: No functions passed to client)
+
+  // ✅ EXTRACT PRICING FROM SERVICES ONLY
+ const countryPricingTiers =
+  servicesByCountry[country.name]?.[0]?.countryPricingTiers || [];
+
+const serviceData = servicesByCountry[country.name] || [];
+  const faqs = serviceData.flatMap(service => service.faqs);
+ const countryFaqs =
+  servicesByCountry[country.name]?.[0]?.faqs || [];
+
+  
+  // Pre-compute service slugs
   const serviceSlugMap = Object.fromEntries(
     country.servicesByCategory.flatMap((category: any) =>
       category.services.map((service: string) => [
         service,
-        getServiceSlugForCountry(service, location),
+        `${createSlug(service)}-${location.toLowerCase()}`
       ])
     )
   );
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
 
-
+      {/* HERO */}
       <HeroSection country={country} location={location} />
       <StatsSection country={country} location={location} />
-    
-    <PainPointsSolutions countryName={country.name} />
 
-    
+      <PainPointsSolutions countryName={country.name} />
 
-
-      {/* Services Section - FIXED */}
+      {/* SERVICES */}
       <CountryServicesSection
         countryName={country.name}
         location={location}
@@ -115,32 +110,30 @@ export default async function CountryPage({ params }: Props) {
         serviceSlugMap={serviceSlugMap}
       />
 
+      {/* 🔥 PRICING (ONLY FROM country-services.ts) */}
+      {countryPricingTiers.length > 0 && (
+        <ProjectCTAHero
+          variant="combined"
+          badge="Pricing Plans"
+          title="Flexible Pricing for Every Stage"
+          description="Choose a plan that fits your business needs"
+          location={location}
+          sliderCards={countryPricingTiers.map((tier) => ({
+            title: tier.investment,
+            subtitle: tier.type,
+          }))}
+          buttons={[
+            { text: "Book Free Consultation", href: `/contact-us?location=${location}`, variant: "primary" },
+            { text: "Call Us Now", href: "tel:+1234567890", variant: "outline" },
+          ]}
+        />
+      )}
 
-     <ProjectCTAHero
-        variant="combined"
-        badge="Global Clients"
-        title="Trusted by Global Clients"
-        description=" Building confidence through proven expertise and exceptional results"
-        buttons={[
-          { text: "Book Free Consultation", href: `/contact-us?location=${location}`, variant: "primary" },
-          { text: "Call Us Now", href: "tel:+1234567890", variant: "outline" },
-        ]}
-        sliderCards={[
-          { title: "100+", subtitle: "Projects Delivered" },
-          { title: "50+", subtitle: "International Clients" },
-          { title: "10+", subtitle: "Years" },
-          { title: "98%", subtitle: "Client Satisfaction" },
-         
-        ]}
-        location={location}
-      />
-      {/* Other Sections */}
+      {/* OTHER SECTIONS */}
       <TrustedClientsSection />
-
-
-      <CTASectionImage/>
+      <CTASectionImage />
       <SolutionsPage />
-    
+
       <WhyChooseUs
         countryName={country.name}
         items={[
@@ -158,6 +151,7 @@ export default async function CountryPage({ params }: Props) {
         badge="Build Your Project"
         title="Ready to Transform Your Business? Let's Build Something Amazing Together"
         description="Get started with a free consultation..."
+        location={location}
         buttons={[
           { text: "Book Free Consultation", href: `/contact-us?location=${location}`, variant: "primary" },
           { text: "Call Us Now", href: "tel:+1234567890", variant: "outline" },
@@ -169,34 +163,36 @@ export default async function CountryPage({ params }: Props) {
           { title: "24/7", subtitle: "Support" },
           { title: "50+", subtitle: "Happy Clients" },
         ]}
-        location={location}
       />
+
+      <div className="px-20  ">
+        <PricingSection
+  serviceName={`Software Development in ${country.name}`}
+  pricingTiers={countryPricingTiers}
+/></div>
 
       <TechStackSection />
       <FeaturedInsights />
       <TestimonialsSection />
 
-      {country.faqs && country.faqs.length > 0 && (
-        <FaqSection faqs={country.faqs} location={location} title="Frequently Asked Questions" subtitle="Answers before you start" />
-      )}
+    
+       <FaqSection
+  faqs={countryFaqs}
+  location={location}
+  title="Frequently Asked Questions"
+  subtitle="Answers before you start"
+/>
+     
 
- 
-
-
-   
-
-
-
-
-      <ChecklistCTAHero    title={`Looking for a reliable software development company in ${country.name}?`}
+     <div className="lg:-mb-12"> <ChecklistCTAHero
+        title={`Looking for a reliable software development company in ${country.name}?`}
         description="Let's build something amazing together"
         buttons={[
           { text: "Start Your Project", href: `/contact-us?location=${location}`, variant: "primary" },
           { text: "Book Free Consultation", href: "#services", variant: "outline" },
         ]}
-      />
+      /></div>
+
     </div>
   );
 }
-
-

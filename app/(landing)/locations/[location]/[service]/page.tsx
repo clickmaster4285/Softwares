@@ -32,7 +32,7 @@ export function generateStaticParams(): { location: string; service: string }[] 
   return getAllCountryServicePages().map((page: CountryServicePageContent) => ({
     location: page.categorySlug,
     service: page.slug,
-    pricing:page.pricingTiers,
+    pricing:page.countryPricingTiers,
   }));
 }
 
@@ -106,7 +106,7 @@ export default async function CountryServicePage({ params }: Props) {
   if (techStack.length > 0) tocItems.push({ id: 'tech-stack', title: 'Technology Stack', level: 2 as const });
   if (page.industryUseCases) tocItems.push({ id: 'industries', title: 'Industries', level: 2 as const });
   
-  if (page.pricingTiers) tocItems.push({ id: 'pricing', title: 'Pricing', level: 2 as const });
+  if (page.countryPricingTiers) tocItems.push({ id: 'pricing', title: 'Pricing', level: 2 as const });
 
 
   if (page.tables) {
@@ -196,9 +196,9 @@ export default async function CountryServicePage({ params }: Props) {
                 </div>
               )}
 
-              {page.pricingTiers && (
+              {page.countryPricingTiers && (
                 <div id="pricing">
-                  <PricingSection serviceName={page.serviceName} pricingTiers={page.pricingTiers} />
+                  <PricingSection serviceName={page.serviceName} pricingTiers={page.countryPricingTiers} />
                 </div>
               )}
 

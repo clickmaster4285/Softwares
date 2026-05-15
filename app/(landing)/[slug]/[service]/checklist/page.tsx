@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { checklists, Checklist } from '@/src/lib/service_checklist';
 import ChecklistMainContent from '@/src/components/landingPage/checklist/ChecklistMainContent';
-import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
+import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero.tsx';
 import { WhyChooseUs } from '@/src/components/landingPage/servicesPage/WhyChooseUs';
 import ChecklistHero from '@/src/components/landingPage/checklist/ChecklistHero';
 import Link from 'next/link';
@@ -250,9 +250,9 @@ export default function ChecklistPage() {
      {/* Engineering Baseline Section */}
 <div className="py-16 px-5 md:px-10 lg:px-24 w-full">
   <EngineeringBaseline
-   serviceName={`${(checklist.title || service)
+   serviceName={`${checklist.serviceName
   .replace(/-/g, ' ')
-  .replace(/\b\w/g, char => char.toUpperCase())} Checklist`}
+            .replace(/\b\w/g, char => char.toUpperCase())} Checklist`}
    checklist={checklist.howToUse.map((item) => ({
   item: item.desc,
   standard: item.title,
