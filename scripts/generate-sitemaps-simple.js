@@ -37,6 +37,35 @@ try {
   console.log('Could not load service structure:', error.message);
 }
 
+// Helper function to extract all country service URLs from the country-services data file
+function extractCountryServiceUrls() {
+  const countryServicesPath = path.join(process.cwd(), 'src/lib/country-services.ts');
+  const urlsByCountry = {};
+
+  if (!fs.existsSync(countryServicesPath)) {
+    return urlsByCountry;
+  }
+
+  const content = fs.readFileSync(countryServicesPath, 'utf8');
+  const urlRegex = /slug:\s*'([^']+)'[\s\S]*?country:\s*'([^']+)'/g;
+  let match;
+
+  while ((match = urlRegex.exec(content)) !== null) {
+    const slug = match[1];
+    const countryName = match[2];
+    const countryKey = countryName.toLowerCase() === 'usa' ? 'usa' : countryName.toLowerCase();
+    const url = `${SITE_URL}/locations/${countryKey}/${slug}`;
+    urlsByCountry[countryKey] = urlsByCountry[countryKey] || [];
+    urlsByCountry[countryKey].push(url);
+  }
+
+  Object.keys(urlsByCountry).forEach(country => {
+    urlsByCountry[country] = [...new Set(urlsByCountry[country])];
+  });
+
+  return urlsByCountry;
+}
+
 // Helper function to identify main services
 function isMainService(urlPath) {
   const mainServices = [
@@ -93,6 +122,11 @@ function getUrlPriorityAndFreq(urlPath) {
   // Hire pages - high priority
   if (url.includes('/hire-') || url.includes('/hire/')) {
     return { priority: '0.6', changefreq: 'monthly' };
+  }
+  
+  // Location pages - separate country/location sitemap
+  if (url.includes('/locations')) {
+    return { priority: '0.7', changefreq: 'weekly' };
   }
   
   // Service pages - medium priority, weekly updates
@@ -171,7 +205,16 @@ async function generateSeparateSitemaps() {
     blogs: [],
     faqs: [],
     hire: [],
+    locations: [],
   };
+  const extraCountryServiceUrls = extractCountryServiceUrls();
+  const validCountryServiceUrlsMap = Object.fromEntries(
+    Object.entries(extraCountryServiceUrls).map(([country, urls]) => [country, new Set(urls)])
+  );
+
+  const locationServicePages = Object.fromEntries(
+    Object.entries(extraCountryServiceUrls).map(([country, urls]) => [country, [...new Set(urls)]])
+  );
 
   // Generate URLs based on service structure
   if (serviceMenuSections.length > 0) {
@@ -263,7 +306,14 @@ async function generateSeparateSitemaps() {
   // Extract all URLs from the sitemap
   const urlRegex = /<loc>(.*?)<\/loc>/g;
   const matches = sitemapContent.match(urlRegex) || [];
-  const allUrls = matches.map(match => match.replace(/<\/?loc>/g, ''));
+  let allUrls = matches.map(match => match.replace(/<\/?loc>/g, ''));
+  
+  // Remove /services/ from URLs to match the updated routing
+  allUrls = allUrls.map(url => {
+    const urlObj = new URL(url);
+    urlObj.pathname = urlObj.pathname.replace(/\/services\//, '/');
+    return urlObj.toString();
+  });
   
   console.log(`📊 Found ${allUrls.length} total URLs to categorize`);
   
@@ -284,13 +334,24 @@ async function generateSeparateSitemaps() {
     } else if (urlPath.includes('/case-studies/')) {
       // Skip individual case study URLs as they're handled dynamically
       return;
+    } else if (urlPath.startsWith('/locations/')) {
+      const segments = urlPath.split('/').filter(Boolean);
+      if (segments.length === 2) {
+        categorizedUrls.locations.push(url);
+      } else if (segments.length >= 3) {
+        const country = segments[1];
+        if (validCountryServiceUrlsMap[country] && validCountryServiceUrlsMap[country].has(url)) {
+          locationServicePages[country] = locationServicePages[country] || [];
+          locationServicePages[country].push(url);
+        }
+      }
     } else if (urlPath.includes('/hire-') || urlPath.includes('/hire/')) {
       categorizedUrls.hire.push(url);
     } else if (isMainService(urlPath)) {
       categorizedUrls.mainServices.push(url);
     } else if (isSubService(urlPath)) {
       categorizedUrls.subServices.push(url);
-    }  else {
+    } else {
       categorizedUrls.pages.push(url);
     }
   });
@@ -299,6 +360,9 @@ async function generateSeparateSitemaps() {
   Object.keys(categorizedUrls).forEach(category => {
     categorizedUrls[category] = [...new Set(categorizedUrls[category])];
   });
+  Object.keys(locationServicePages).forEach(country => {
+    locationServicePages[country] = [...new Set(locationServicePages[country])];
+  });
   
   // Print categorization summary
   console.log('\n📋 URL Categorization Summary:');
@@ -306,6 +370,9 @@ async function generateSeparateSitemaps() {
     console.log(`  ${category}: ${urls.length} URLs`);
   });
     
+  // Clean legacy location sitemap files from older versions.
+  cleanOldLocationServiceSitemapFiles();
+
   // Generate individual sitemaps
   await createSitemapFile('page-sitemap.xml', categorizedUrls.pages);
   await createSitemapFile('main-services-sitemap.xml', categorizedUrls.mainServices);
@@ -314,6 +381,8 @@ async function generateSeparateSitemaps() {
   await createSitemapFile('blog-sitemap.xml', categorizedUrls.blogs);
   await createSitemapFile('faq-sitemap.xml', categorizedUrls.faqs);
   await createSitemapFile('hire-sitemap.xml', categorizedUrls.hire);
+  await createSitemapFile('locations-sitemap.xml', categorizedUrls.locations);
+  await createLocationServiceSitemapFiles(locationServicePages);
   
   // Create main sitemap index
   await createSitemapIndex();
@@ -326,6 +395,10 @@ async function generateSeparateSitemaps() {
   console.log('  - main-services-sitemap.xml');
   console.log('  - sub-services-sitemap.xml');
   console.log('  - hire-sitemap.xml');
+  console.log('  - locations-sitemap.xml');
+  Object.keys(locationServicePages).forEach(country => {
+    console.log(`  - ${country}-services-sitemap.xml`);
+  });
   console.log('  - page-sitemap.xml');
   console.log('  - sitemap.xml (main index)');
 }
@@ -359,6 +432,45 @@ async function createSitemapFile(filename, urls, defaultPriority = '0.7') {
   console.log(`📄 Created ${filename} with ${urls.length} URLs`);
 }
 
+async function createLocationServiceSitemapFiles(locationServicePages) {
+  if (!locationServicePages || Object.keys(locationServicePages).length === 0) {
+    return;
+  }
+
+  Object.entries(locationServicePages).forEach(([country, urls]) => {
+    const filename = `${country}-services-sitemap.xml`;
+    createSitemapFile(filename, urls);
+  });
+}
+
+function getLocationServiceSitemapFiles() {
+  const locationServiceSitemapFiles = [];
+  try {
+    const files = fs.readdirSync(PUBLIC_DIR);
+    files.forEach(file => {
+      if (file.endsWith('-services-sitemap.xml')) {
+        locationServiceSitemapFiles.push(file);
+      }
+    });
+  } catch (error) {
+    // Ignore missing folder errors
+  }
+  return locationServiceSitemapFiles;
+}
+
+function cleanOldLocationServiceSitemapFiles() {
+  try {
+    const files = fs.readdirSync(PUBLIC_DIR);
+    files.forEach(file => {
+      if (file.startsWith('locations-') && file.endsWith('-sitemap.xml') && file !== 'locations-sitemap.xml') {
+        fs.unlinkSync(path.join(PUBLIC_DIR, file));
+      }
+    });
+  } catch (error) {
+    // Ignore cleanup failures
+  }
+}
+
 async function createSitemapIndex() {
   const indexPath = path.join(PUBLIC_DIR, 'sitemap.xml');
   const sitemapFiles = [
@@ -369,12 +481,16 @@ async function createSitemapIndex() {
     'blog-sitemap.xml',
     'faq-sitemap.xml',
     'hire-sitemap.xml',
+    'locations-sitemap.xml',
   ];
+  
+  // Remove duplicates
+  const uniqueSitemapFiles = [...new Set(sitemapFiles)];
   
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   
-  sitemapFiles.forEach(sitemap => {
+  uniqueSitemapFiles.forEach(sitemap => {
     xml += '  <sitemap>\n';
     xml += `    <loc>${SITE_URL}/${sitemap}</loc>\n`;
     xml += `    <lastmod>${new Date().toISOString()}</lastmod>\n`;
@@ -384,7 +500,7 @@ async function createSitemapIndex() {
   xml += '</sitemapindex>';
   
   fs.writeFileSync(indexPath, xml);
-  console.log(`📋 Created main sitemap index with ${sitemapFiles.length} sitemaps`);
+  console.log(`📋 Created main sitemap index with ${uniqueSitemapFiles.length} sitemaps`);
 }
 
 function escapeXml(unsafe) {

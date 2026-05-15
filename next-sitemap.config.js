@@ -12,8 +12,9 @@ module.exports = {
   generateIndexSitemap: true,
   sitemapSize: 50000, // Max URLs per sitemap
   transform: async (config, path) => {
+    const canonicalPath = path.replace(/\/services\//g, '/');
     return {
-      loc: path,
+      loc: canonicalPath,
       changefreq: 'daily',
       priority: 0.7,
       lastmod: new Date().toISOString(),

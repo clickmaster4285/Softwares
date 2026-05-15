@@ -41,7 +41,6 @@ export async function POST(req: NextRequest) {
     let fullPath = fullPathFor(filename);
     while (true) {
       try {
-        // eslint-disable-next-line no-await-in-loop
         await (await import('fs/promises')).stat(fullPath);
         // file exists -> try next suffix
         i += 1;
