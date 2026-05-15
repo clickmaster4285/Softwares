@@ -2,6 +2,7 @@
 'use client';
 
 import { Checklist } from '@/src/lib/service_checklist';
+import Image from 'next/image';
 import { useState } from 'react';
 
 interface ChecklistMainContentProps {
@@ -10,8 +11,11 @@ interface ChecklistMainContentProps {
   setActiveTab: (tab: 'all' | string) => void;
   renderPhaseSection: (phaseKey: string) => React.ReactNode;
   phaseIcons: Record<string, { icon: string; color: string; bg: string }>;
-}
 
+  checkedItems: Record<string, boolean>;
+  toggleItem: (itemId: string) => void;
+  checkAll: (phaseKey: string) => void;
+}
 
 
 export default function ChecklistMainContent({
@@ -20,46 +24,35 @@ export default function ChecklistMainContent({
   setActiveTab,
   renderPhaseSection,
   phaseIcons,
+  checkedItems,
+  toggleItem,
+  checkAll,
 }: ChecklistMainContentProps) {
-  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+  
+
 
 
   
-  const toggleItem = (phaseKey: string, itemId: string) => {
-    const key = `${phaseKey}-${itemId}`;
-    setCheckedItems(prev => ({ ...prev, [key]: !prev[key] }));
-  };
 
-  
-
-  const checkAllInPhase = (phaseKey: string, items: any[]) => {
-    const newState = { ...checkedItems };
-    const allChecked = items.every(item => newState[`${phaseKey}-${item.id}`]);
-    items.forEach(item => {
-      const key = `${phaseKey}-${item.id}`;
-      newState[key] = !allChecked;
-    });
-    setCheckedItems(newState);
-  };
-
-  const getCompletedCount = (phaseKey: string, items: any[]) => {
-    return items.filter(item => checkedItems[`${phaseKey}-${item.id}`]).length;
-  };
 
   return (
     <div className="relative">
       {/* Static Background Image */}
-      <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/checklist-img.webp')" }}
-      />
+     <Image
+  src="/checklist-img.webp"
+  alt="Checklist Background"
+  fill
+  priority
+  quality={100}
+  className="object-cover object-center"
+/>
       {/* Darker Overlay for Better Contrast */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/60 " />
 
       <div className="relative z-10 mx-auto px-4 sm:px-6 py-12 lg:px-24">
         
         {/* Checklist Intro Section - White Text */}
-        <section className="backdrop-blur-md mb-12">
+        <section className=" mb-12">
           <div className="max-w-5xl">
             <h2 className="font-head text-3xl md:text-3xl font-extrabold text-white tracking-tight mb-4">
               {checklist.checklistIntro.title}
@@ -105,7 +98,9 @@ export default function ChecklistMainContent({
         {/* Phase Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {checklist.phases.map((phase) => {
-            const completedCount = getCompletedCount(phase.key, phase.items);
+           const completedCount = phase.items.filter(
+  item => checkedItems[item.id]
+).length;
             const allChecked = completedCount === phase.items.length && phase.items.length > 0;
             const progress = phase.items.length ? (completedCount / phase.items.length) * 100 : 0;
 
@@ -143,7 +138,7 @@ export default function ChecklistMainContent({
                   {/* Check All Button */}
                   <div className="px-6 pt-4 pb-2">
                     <button
-                      onClick={() => checkAllInPhase(phase.key, phase.items)}
+                      onClick={() => checkAll(phase.key)}
                       className="text-sm text-gray-300 hover:text-white transition-colors flex items-center gap-1.5"
                     >
                       <i className={`fa-solid ${allChecked ? 'fa-rotate-left' : 'fa-check-double'}`} />
@@ -154,12 +149,12 @@ export default function ChecklistMainContent({
                   {/* Checklist Items */}
                   <div className="divide-y divide-white/10 max-h-[420px] overflow-y-auto custom-scroll">
                     {phase.items.map((item, idx) => {
-                      const isChecked = checkedItems[`${phase.key}-${item.id}`];
+                   const isChecked = checkedItems[item.id];
 
                       return (
                         <div
                           key={idx}
-                          onClick={() => toggleItem(phase.key, item.id)}
+                       onClick={() => toggleItem(item.id)}
                           className={`group/item p-6 cursor-pointer transition-all hover:bg-white/5 ${
                             isChecked ? 'bg-white/5' : ''
                           }`}

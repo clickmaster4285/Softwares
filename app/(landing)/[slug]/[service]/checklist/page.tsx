@@ -8,6 +8,7 @@ import { ProjectCTAHero } from '@/src/components/landingPage/checklist/ProjectCT
 import { WhyChooseUs } from '@/src/components/landingPage/servicesPage/WhyChooseUs';
 import ChecklistHero from '@/src/components/landingPage/checklist/ChecklistHero';
 import Link from 'next/link';
+import { EngineeringBaseline } from '@/src/components/landingPage/servicesPage/EngineeringBaseline';
 
 
 
@@ -233,26 +234,31 @@ export default function ChecklistPage() {
       
 
       {/* Main Content */}
-    <ChecklistMainContent
+   <ChecklistMainContent
   checklist={checklist}
   activeTab={activeTab}
   setActiveTab={setActiveTab}
   renderPhaseSection={renderPhaseSection}
   phaseIcons={phaseIcons}
-      />
+  checkedItems={checkedItems}
+  toggleItem={toggleItem}
+  checkAll={checkAll}
+/>
       
 
           {/* How to Use Section - White background with increased opacity */}
-      <div className='py-16 px-5 md:px-10 lg:px-20 lg:mx-8'>
-        <WhyChooseUs
-        
-  slug={service}
-  differentiators={checklist.howToUse.map((item) => ({
-    feature: item.title,
-    description: item.desc,
-  }))}
-      />
-      </div>
+     {/* Engineering Baseline Section */}
+<div className="py-16 px-5 md:px-10 lg:px-24 w-full">
+  <EngineeringBaseline
+   serviceName={`${(checklist.title || service)
+  .replace(/-/g, ' ')
+  .replace(/\b\w/g, char => char.toUpperCase())} Checklist`}
+   checklist={checklist.howToUse.map((item) => ({
+  item: item.desc,
+  standard: item.title,
+}))}
+  />
+</div>
 
 
         {/* CTA Section - Semi-transparent with increased transparency */}
