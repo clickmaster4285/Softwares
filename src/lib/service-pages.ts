@@ -96,7 +96,7 @@ export const serviceMenuSections: ServiceMenuSection[] = [
  items: [
       { title: 'Web Application Development', description: 'Modern web apps and business portals.' },
       { title: 'Website Development', description: 'SEO-friendly websites that convert.' },
-      { title: 'Progressive Web App Development', description: 'Installable web apps with offline support.' },
+      { title: 'PWA Development', description: 'Installable web apps with offline support.' },
       { title: 'Headless CMS Development', description: 'Flexible content systems with API delivery.' },
       { title: 'JAMstack Development', description: 'Fast static-first web architectures.' },
       { title: 'E-commerce Development', description: 'Scalable online stores and checkout flows.' },
@@ -119,7 +119,7 @@ export const serviceMenuSections: ServiceMenuSection[] = [
   {
  label: 'Design UI/UX',
  items: [
-      { title: 'UI/UX Design', description: 'User-first interfaces with measurable outcomes.' },
+      { title: 'UI/UX Design Services', description: 'User-first interfaces with measurable outcomes.' },
       { title: 'Product Design', description: 'End-to-end product thinking and execution.' },
       { title: 'Web Design', description: 'Modern web layouts with clear hierarchy.' },
       { title: 'Mobile App Design', description: 'Mobile-first design systems and flows.' },
@@ -150,7 +150,7 @@ export const serviceMenuSections: ServiceMenuSection[] = [
       { title: 'Machine Learning Experts', description: 'Expert ML practitioners for model-driven products.' },
       { title: 'Predictive Analytics', description: 'Forecasting models to guide decisions.' },
       { title: 'Recommendation Systems', description: 'Personalized recommendations for engagement.' },
-      { title: 'Model Training & Optimization', description: 'Training pipelines and model performance tuning.' },
+      { title: 'Model Training Optimisation', description: 'Training pipelines and model performance tuning.' },
       { title: 'Deep Learning Solutions', description: 'Advanced neural models for complex problems.' },
       { title: 'Deep Learning Experts', description: 'Specialists in deep learning architecture and deployment.' },
  ],
@@ -158,10 +158,10 @@ export const serviceMenuSections: ServiceMenuSection[] = [
   {
  label: 'NLP & Computer Vision',
  items: [
-      { title: 'Natural Language Processing (NLP)', description: 'Text understanding and language workflows.' },
-      { title: 'Speech Recognition Systems', description: 'Voice-to-text and speech processing solutions.' },
+      { title: 'Natural Language Processing', description: 'Text understanding and language workflows.' },
+      { title: 'Speech Recognition', description: 'Voice-to-text and speech processing solutions.' },
       { title: 'Text Analytics', description: 'Insights from unstructured text data.' },
-      { title: 'Computer Vision Solutions', description: 'Image and video understanding pipelines.' },
+      { title: 'Computer Vision', description: 'Image and video understanding pipelines.' },
       { title: 'Image Processing', description: 'Image enhancement, detection, and classification.' },
       { title: 'Video Analytics', description: 'Real-time and batch video intelligence.' },
  ],
@@ -209,7 +209,7 @@ export const serviceMenuSections: ServiceMenuSection[] = [
  items: [
       { title: 'Business Process Automation', description: 'Automate repetitive business workflows.' },
       { title: 'Workflow Automation', description: 'Orchestrated process automation across teams.' },
-      { title: 'Robotic Process Automation (RPA)', description: 'RPA bots for operational efficiency.' },
+      { title: 'RPA', description: 'RPA bots for operational efficiency.' },
       { title: 'System Integration', description: 'Connect platforms and eliminate silos.' },
       { title: 'API Integration', description: 'Reliable integration between tools and services.' },
       { title: 'Web Scraping & Data Extraction', description: 'Structured data extraction for operations.' },
@@ -219,13 +219,14 @@ export const serviceMenuSections: ServiceMenuSection[] = [
  label: 'Cloud & DevOps',
  items: [
       { title: 'Cloud Solutions', description: 'Cloud architecture and migration services.' },
+      { title: 'Cloud Solutions DevOps', description: 'Cloud architecture with DevOps practices.' },
       { title: 'Cloud-Native Development', description: 'Cloud-native apps built for resilience.' },
       { title: 'DevOps Services', description: 'Delivery pipelines and release automation.' },
       { title: 'DevSecOps', description: 'Security integrated into DevOps practices.' },
       { title: 'CI/CD Pipeline Setup', description: 'Automated build, test, and deployment workflows.' },
       { title: 'Serverless Architecture', description: 'Event-driven serverless application design.' },
-      { title: 'Containerization (Docker & Kubernetes)', description: 'Containerized deployments at scale.' },
-      { title: 'Infrastructure as Code (IaC)', description: 'Versioned, repeatable infrastructure setup.' },
+      { title: 'Containerisation', description: 'Containerized deployments at scale.' },
+      { title: 'Infrastructure as Code', description: 'Versioned, repeatable infrastructure setup.' },
  ],
   },
   {
@@ -234,7 +235,7 @@ export const serviceMenuSections: ServiceMenuSection[] = [
       { title: 'Database Design', description: 'Data models optimized for real workloads.' },
       { title: 'Database Management', description: 'Database operations, reliability, and health.' },
       { title: 'Data Migration', description: 'Safe migration with minimal downtime.' },
-      { title: 'Database Optimization', description: 'Performance tuning for faster queries.' },
+      { title: 'Database Optimisation', description: 'Performance tuning for faster queries.' },
       { title: 'SQL & NoSQL Solutions', description: 'Right-fit SQL and NoSQL implementations.' },
  ],
   },
@@ -275,7 +276,7 @@ export const serviceMenuSections: ServiceMenuSection[] = [
  items: [
       { title: 'Blockchain Development', description: 'Blockchain platforms and custom protocols.' },
       { title: 'Smart Contract Development', description: 'Secure smart contract implementation.' },
-      { title: 'Decentralized App (DApp) Development', description: 'DApp architecture and frontend integration.' },
+      { title: 'DApp Development', description: 'DApp architecture and frontend integration.' },
       { title: 'Web3 Development', description: 'Web3 product development and integrations.' },
       { title: 'Crypto Wallet Development', description: 'Wallet apps with secure asset handling.' },
       { title: 'NFT Marketplace Development', description: 'NFT marketplace platforms and tooling.' },
@@ -296,7 +297,7 @@ export const serviceMenuSections: ServiceMenuSection[] = [
  items: [
       { title: 'AR Development', description: 'Augmented reality experiences and apps.' },
       { title: 'VR Development', description: 'Virtual reality applications for training and products.' },
-      { title: 'Mixed Reality (MR) Solutions', description: 'Mixed reality for collaborative experiences.' },
+      { title: 'Mixed Reality Solutions', description: 'Mixed reality for collaborative experiences.' },
       { title: '3D Application Development', description: 'Interactive 3D applications and simulations.' },
  ],
   },

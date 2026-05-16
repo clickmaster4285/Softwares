@@ -4,7 +4,7 @@ import { howToGuides, type HowToGuide } from '@/src/lib/how-to';
 import { getAllServicePages } from '@/lib/service-pages';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
 
-type Props = { params: { slug: string; service: string } };
+type Props = { params: Promise<{ slug: string; service: string }> };
 
 export function generateStaticParams(): { slug: string; service: string }[] {
   // Pre-render how-to pages only for services that have a guide
