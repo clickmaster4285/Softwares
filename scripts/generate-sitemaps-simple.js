@@ -66,6 +66,55 @@ function extractCountryServiceUrls() {
   return urlsByCountry;
 }
 
+// Helper function to extract checklist service slugs from service_checklist.ts
+function extractChecklistSlugs() {
+  const checklistPath = path.join(process.cwd(), 'src/lib/service_checklist.ts');
+  if (!fs.existsSync(checklistPath)) {
+    return new Set();
+  }
+
+  const content = fs.readFileSync(checklistPath, 'utf8');
+  const startMatch = content.match(/export const checklists:[\s\S]*?=\s*\{/);
+  if (!startMatch) {
+    return new Set();
+  }
+
+  const objectStart = content.indexOf('{', startMatch.index);
+  if (objectStart === -1) {
+    return new Set();
+  }
+
+  let depth = 0;
+  let endIndex = -1;
+  for (let i = objectStart; i < content.length; i++) {
+    const char = content[i];
+    if (char === '{') {
+      depth++;
+    } else if (char === '}') {
+      depth--;
+      if (depth === 0) {
+        endIndex = i;
+        break;
+      }
+    }
+  }
+
+  if (endIndex === -1) {
+    return new Set();
+  }
+
+  const objContent = content.slice(objectStart + 1, endIndex);
+  const slugRegex = /^\s*['"]([a-z0-9-]+)['"]\s*:/gm;
+  const slugs = new Set();
+  let slugMatch;
+
+  while ((slugMatch = slugRegex.exec(objContent)) !== null) {
+    slugs.add(slugMatch[1]);
+  }
+
+  return slugs;
+}
+
 // Helper function to identify main services
 function isMainService(urlPath) {
   const mainServices = [
@@ -206,6 +255,7 @@ async function generateSeparateSitemaps() {
     faqs: [],
     hire: [],
     locations: [],
+    checklists: [],
   };
   const extraCountryServiceUrls = extractCountryServiceUrls();
   const validCountryServiceUrlsMap = Object.fromEntries(
@@ -314,6 +364,8 @@ async function generateSeparateSitemaps() {
     urlObj.pathname = urlObj.pathname.replace(/\/services\//, '/');
     return urlObj.toString();
   });
+
+  const checklistSlugs = extractChecklistSlugs();
   
   console.log(`📊 Found ${allUrls.length} total URLs to categorize`);
   
@@ -326,7 +378,9 @@ async function generateSeparateSitemaps() {
       return; // Skip admin URLs
     }
     
-    if (urlPath.includes('/faqs/') && urlPath !== '/faqs') {
+    if (urlPath.includes('/checklist')) {
+      categorizedUrls.checklists.push(url);
+    } else if (urlPath.includes('/faqs/') && urlPath !== '/faqs') {
       categorizedUrls.faqs.push(url);
     } else if (urlPath.includes('/blog/')) {
       // Skip individual blog URLs as they're handled dynamically
@@ -356,6 +410,16 @@ async function generateSeparateSitemaps() {
     }
   });
   
+  // Add checklist URLs from service pages if a checklist exists for the service slug
+  allUrls.forEach(url => {
+    const urlPath = new URL(url).pathname;
+    const segments = urlPath.split('/').filter(Boolean);
+
+    if (segments.length === 2 && checklistSlugs.has(segments[1])) {
+      categorizedUrls.checklists.push(`${SITE_URL}${urlPath}/checklist`);
+    }
+  });
+
   // Remove duplicates from each category
   Object.keys(categorizedUrls).forEach(category => {
     categorizedUrls[category] = [...new Set(categorizedUrls[category])];
@@ -382,6 +446,7 @@ async function generateSeparateSitemaps() {
   await createSitemapFile('faq-sitemap.xml', categorizedUrls.faqs);
   await createSitemapFile('hire-sitemap.xml', categorizedUrls.hire);
   await createSitemapFile('locations-sitemap.xml', categorizedUrls.locations);
+  await createSitemapFile('checklist-sitemap.xml', categorizedUrls.checklists);
   await createLocationServiceSitemapFiles(locationServicePages);
   
   // Create main sitemap index
@@ -482,9 +547,13 @@ async function createSitemapIndex() {
     'faq-sitemap.xml',
     'hire-sitemap.xml',
     'locations-sitemap.xml',
+    'checklist-sitemap.xml',
   ];
   
-  // Remove duplicates
+  const locationCountryFiles = getLocationServiceSitemapFiles().sort();
+  sitemapFiles.push(...locationCountryFiles);
+  
+  // Remove duplicates and preserve order
   const uniqueSitemapFiles = [...new Set(sitemapFiles)];
   
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
