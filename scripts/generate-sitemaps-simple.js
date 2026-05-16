@@ -115,6 +115,85 @@ function extractChecklistSlugs() {
   return slugs;
 }
 
+function extractHowToGuideSlugs() {
+  const howToPath = path.join(process.cwd(), 'src/lib/how-to.ts');
+  if (!fs.existsSync(howToPath)) {
+    return new Set();
+  }
+
+  const content = fs.readFileSync(howToPath, 'utf8');
+  const match = content.match(/export const howToGuides\s*:\s*Record<[^>]+>\s*=\s*\{/);
+  if (!match) {
+    return new Set();
+  }
+
+  const objectStart = content.indexOf('{', match.index);
+  if (objectStart === -1) {
+    return new Set();
+  }
+
+  let depth = 0;
+  let endIndex = -1;
+  for (let i = objectStart; i < content.length; i++) {
+    const char = content[i];
+    if (char === '{') {
+      depth++;
+    } else if (char === '}') {
+      depth--;
+      if (depth === 0) {
+        endIndex = i;
+        break;
+      }
+    }
+  }
+
+  if (endIndex === -1) {
+    return new Set();
+  }
+
+  const slugs = new Set();
+  let i = objectStart + 1;
+  let currentDepth = 1;
+
+  while (i < endIndex) {
+    const char = content[i];
+    if (char === '{') {
+      currentDepth++;
+      i++;
+      continue;
+    }
+    if (char === '}') {
+      currentDepth--;
+      i++;
+      continue;
+    }
+
+    if (currentDepth === 1) {
+      if (char === '"' || char === "'") {
+        const quote = char;
+        let key = '';
+        i++;
+        while (i < endIndex && content[i] !== quote) {
+          key += content[i];
+          i++;
+        }
+        i++;
+        while (i < endIndex && /[\s]/.test(content[i])) {
+          i++;
+        }
+        if (content[i] === ':') {
+          slugs.add(key);
+        }
+        continue;
+      }
+    }
+
+    i++;
+  }
+
+  return slugs;
+}
+
 // Helper function to identify main services
 function isMainService(urlPath) {
   const mainServices = [
@@ -178,6 +257,11 @@ function getUrlPriorityAndFreq(urlPath) {
     return { priority: '0.7', changefreq: 'weekly' };
   }
   
+  // How-to pages - slightly lower than service pages
+  if (url.includes('/how-to')) {
+    return { priority: '0.75', changefreq: 'weekly' };
+  }
+
   // Service pages - medium priority, weekly updates
   if (isMainService(urlPath) || isSubService(urlPath)) {
     return { priority: '0.8', changefreq: 'weekly' };
@@ -256,6 +340,7 @@ async function generateSeparateSitemaps() {
     hire: [],
     locations: [],
     checklists: [],
+    howTo: [],
   };
   const extraCountryServiceUrls = extractCountryServiceUrls();
   const validCountryServiceUrlsMap = Object.fromEntries(
@@ -265,6 +350,8 @@ async function generateSeparateSitemaps() {
   const locationServicePages = Object.fromEntries(
     Object.entries(extraCountryServiceUrls).map(([country, urls]) => [country, [...new Set(urls)]])
   );
+
+  const howToGuideSlugs = extractHowToGuideSlugs();
 
   // Generate URLs based on service structure
   if (serviceMenuSections.length > 0) {
@@ -288,6 +375,11 @@ async function generateSeparateSitemaps() {
         // Add FAQ URL for each sub-service
         const faqUrl = `${SITE_URL}/faqs/${subServiceSlug}`;
         categorizedUrls.faqs.push(faqUrl);
+
+        // Add how-to URL when a guide exists for the service
+        if (howToGuideSlugs.has(subServiceSlug)) {
+          categorizedUrls.howTo.push(`${subServiceUrl}/how-to`);
+        }
       });
     });
   }
@@ -381,6 +473,8 @@ async function generateSeparateSitemaps() {
 
     if (segments.length === 3 && segments[2] === 'checklist' && segments[0] !== 'faqs') {
       categorizedUrls.checklists.push(url);
+    } else if (urlPath.includes('/how-to')) {
+      categorizedUrls.howTo.push(url);
     } else if (urlPath.includes('/faqs/') && urlPath !== '/faqs') {
       categorizedUrls.faqs.push(url);
     } else if (urlPath.includes('/blog/')) {
@@ -455,6 +549,7 @@ async function generateSeparateSitemaps() {
   await createSitemapFile('faq-sitemap.xml', categorizedUrls.faqs);
   await createSitemapFile('hire-sitemap.xml', categorizedUrls.hire);
   await createSitemapFile('locations-sitemap.xml', categorizedUrls.locations);
+  await createSitemapFile('how-to-sitemap.xml', categorizedUrls.howTo);
   await createSitemapFile('checklist-sitemap.xml', categorizedUrls.checklists);
   await createLocationServiceSitemapFiles(locationServicePages);
   
@@ -466,6 +561,7 @@ async function generateSeparateSitemaps() {
   console.log('  - blog-sitemap.xml');
   console.log('  - case-study-sitemap.xml');
   console.log('  - faq-sitemap.xml');
+  console.log('  - how-to-sitemap.xml');
   console.log('  - main-services-sitemap.xml');
   console.log('  - sub-services-sitemap.xml');
   console.log('  - hire-sitemap.xml');
@@ -556,6 +652,7 @@ async function createSitemapIndex() {
     'faq-sitemap.xml',
     'hire-sitemap.xml',
     'locations-sitemap.xml',
+    'how-to-sitemap.xml',
     'checklist-sitemap.xml',
   ];
   

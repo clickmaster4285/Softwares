@@ -1,6 +1,3 @@
-
-
-// components/ChecklistMainContent.tsx
 'use client';
 
 import { Checklist } from '@/src/lib/service_checklist';
