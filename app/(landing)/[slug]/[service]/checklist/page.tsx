@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
+import Head from 'next/head';
 import { checklists, Checklist } from '@/src/lib/service_checklist';
 import ChecklistMainContent from '@/src/components/landingPage/checklist/ChecklistMainContent';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero.tsx';
@@ -9,6 +10,7 @@ import { WhyChooseUs } from '@/src/components/landingPage/servicesPage/WhyChoose
 import ChecklistHero from '@/src/components/landingPage/checklist/ChecklistHero';
 import Link from 'next/link';
 import { EngineeringBaseline } from '@/src/components/landingPage/servicesPage/EngineeringBaseline';
+import { siteConfig } from '@/app/metadata-config';
 
 
 
@@ -131,6 +133,8 @@ export default function ChecklistPage() {
     ? Math.round((getTotalDone() / checklist.totalItems) * 100)
     : 0;
 
+  const canonical = `${siteConfig.url}/${slug}/${service}/checklist`;
+
   const phaseIcons: Record<string, { icon: string; color: string; bg: string }> = {
     pre: { icon: 'fa-solid fa-file-signature', color: '#D97706', bg: '#FEF3C7' },
     sprint: { icon: 'fa-solid fa-arrows-rotate', color: '#2563EB', bg: '#DBEAFE' },
@@ -222,6 +226,9 @@ export default function ChecklistPage() {
 
   return (
     <>
+      <Head>
+        <link rel="canonical" href={canonical} />
+      </Head>
       {/* Hero Section */}
     <ChecklistHero
   checklist={checklist}
