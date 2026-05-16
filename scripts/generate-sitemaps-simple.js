@@ -372,13 +372,14 @@ async function generateSeparateSitemaps() {
   // Categorize URLs
   allUrls.forEach(url => {
     const urlPath = new URL(url).pathname;
-    
+    const segments = urlPath.split('/').filter(Boolean);
+
     // Skip admin URLs
     if (urlPath.includes('/admin')) {
       return; // Skip admin URLs
     }
-    
-    if (urlPath.includes('/checklist')) {
+
+    if (segments.length === 3 && segments[2] === 'checklist' && segments[0] !== 'faqs') {
       categorizedUrls.checklists.push(url);
     } else if (urlPath.includes('/faqs/') && urlPath !== '/faqs') {
       categorizedUrls.faqs.push(url);
@@ -415,7 +416,15 @@ async function generateSeparateSitemaps() {
     const urlPath = new URL(url).pathname;
     const segments = urlPath.split('/').filter(Boolean);
 
-    if (segments.length === 2 && checklistSlugs.has(segments[1])) {
+    if (
+      segments.length === 2 &&
+      segments[0] !== 'faqs' &&
+      segments[0] !== 'blog' &&
+      segments[0] !== 'case-studies' &&
+      segments[0] !== 'locations' &&
+      segments[0] !== 'hire' &&
+      checklistSlugs.has(segments[1])
+    ) {
       categorizedUrls.checklists.push(`${SITE_URL}${urlPath}/checklist`);
     }
   });
