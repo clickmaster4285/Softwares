@@ -1,0 +1,33 @@
+
+Example:
+
+```text
+/artificial-intelligence/ai-agents-development/ai-agents-development-for-ctos
+```
+
+- `slug` → category (breadcrumb)
+- `service` → base service (breadcrumb)
+- `persona-based` → **full persona slug** from data (this is what you look up)
+
+---
+
+## Data shape in `persona-based.ts`
+
+Each entry matches `ServicePageData`:
+
+```24:38:src/lib/persona-based.ts
+export interface ServicePageData {
+  slug: string;
+  metaTitle: string;
+  metaDescription: string;
+  canonical: string;
+  schema: string[];
+  title: string;
+  subtitle: string;
+  topBullets: string[];
+  sections: ServiceSection[];
+  pricing: PricingTier[];
+  faqs: FAQItem[];
+  callToAction: Record<string, string>;
+  internalLinks: Array<Record<string, string>>;
+}
