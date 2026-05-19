@@ -1,6 +1,7 @@
 // app/locations/[location]/page.tsx
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { siteConfig } from '@/app/metadata-config';
 import { getCountryData, getAllCountrySlugs } from '@/lib/country';
 import { servicesByCountry } from '@/lib/country-services';
 
@@ -50,10 +51,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: country.title,
     description: country.description,
+    alternates: {
+      canonical: `${siteConfig.url}/locations/${location}`,
+    },
     openGraph: {
       title: country.title,
       description: country.description,
-      url: `/locations/${location}`,
+      url: `${siteConfig.url}/locations/${location}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -95,7 +99,6 @@ const serviceData = servicesByCountry[country.name] || [];
 
   return (
     <div className="min-h-screen bg-white">
-
       {/* HERO */}
       <HeroSection country={country} location={location} />
       <StatsSection country={country} location={location} />

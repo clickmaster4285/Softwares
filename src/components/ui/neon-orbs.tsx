@@ -97,8 +97,8 @@ export function NeonOrbs() {
       </div>
 
       {/* Center text - OPTIONAL: You can remove this or keep it hidden */}
-      <div className="relative z-10 text-center text-indigo-900 dark:text-white transition-colors duration-500 opacity-0 pointer-events-none">
-        <h1 
+      <div className="relative z-10 text-center text-indigo-900 dark:text-white transition-colors duration-500 opacity-0 pointer-events-none" aria-hidden="true">
+        <div
           className={`text-4xl md:text-7xl font-extralight tracking-[0.2em] mb-4 transition-all duration-1000 ease-out ${
             mounted 
               ? "opacity-100 translate-y-0 blur-0" 
@@ -117,8 +117,8 @@ export function NeonOrbs() {
               {char === " " ? "\u00A0" : char}
             </span>
           ))}
-        </h1>
-        <p 
+        </div>
+        <p
           className={`text-lg md:text-xl font-light tracking-widest text-indigo-600/60 dark:text-white/60 transition-all duration-1000 ease-out ${
             mounted 
               ? "opacity-100 translate-y-0 blur-0" 

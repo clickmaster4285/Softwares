@@ -54,6 +54,8 @@ export default async function FaqDetailPage({ params }: Props) {
         </h1>
       </header>
 
+      <h2 className="sr-only">Frequently asked questions</h2>
+
       {faqs.length === 0 ? (
         <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 text-slate-700">
           FAQs for this service are coming soon.

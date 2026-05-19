@@ -1,7 +1,33 @@
-import { notFound } from "next/navigation";
-import Project from "../../../lib/models/Project";
-import dbConnect from "../../../lib/mongoose";
-import { resolveImageUrl } from "@/lib/utils";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Project from '../../../lib/models/Project';
+import dbConnect from '../../../lib/mongoose';
+import { resolveImageUrl } from '@/lib/utils';
+import { siteConfig } from '@/app/metadata-config';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  await dbConnect();
+  const project = await Project.findById(id).select('title description').lean();
+
+  if (!project) {
+    return { title: 'Solution Not Found' };
+  }
+
+  const doc = project as { title: string; description?: string };
+
+  return {
+    title: `${doc.title} | ClickMasters`,
+    description: doc.description?.slice(0, 160),
+    alternates: {
+      canonical: `${siteConfig.url}/software-solutions/${id}`,
+    },
+  };
+}
 
 export default async function ProjectPage({
   params,

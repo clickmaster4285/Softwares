@@ -399,10 +399,6 @@ export const defaultMetadata: Metadata = {
 
   description: siteConfig.description,
 
-  alternates: {
-    canonical: siteConfig.url,
-  },
-
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',

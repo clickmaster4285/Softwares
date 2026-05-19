@@ -5,6 +5,7 @@ import { getAllServicePages, getServicePage } from '@/lib/service-pages';
 import { ServiceSubpageBreadcrumb } from '@/src/components/landingPage/servicesPage/ServiceSubpageBreadcrumb';
 import { subpageInnerPadding, subpageOuterPadding } from '@/src/components/landingPage/servicesPage/subpage-layout';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
+import { siteConfig } from '@/app/metadata-config';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: guide.title,
     alternates: {
-      canonical: `/${slug}/${service}/how-to`,
+      canonical: `${siteConfig.url}/${slug}/${service}/how-to`,
     },
   };
 }
@@ -143,7 +144,7 @@ export default async function HowToPage({ params }: Props) {
               The Complete Process
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-              {guide.title.replace(' | ClickMasters', '')}
+              Step-by-step guide
             </h2>
           </div>
 
