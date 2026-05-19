@@ -69,7 +69,6 @@ const [activePage, setActivePage] = useState(0);
 const activeTiers = pricingChunks[activePage] || [];
 
   if (!pricingTiers || pricingTiers.length === 0) return null;
-  console.log("pricingTiers in PricingSection", pricingTiers);
   console.log("serviceName", serviceName);
   
   const pricingCardsData = activeTiers
