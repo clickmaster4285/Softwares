@@ -210,6 +210,76 @@ function slugify(value) {
     .replace(/^-+|-+$/g, '');
 }
 
+// Match slugify from src/lib/service-pages.ts
+function servicePagesSlugify(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+function extractAllServicePageUrls() {
+  const servicePagesPath = path.join(process.cwd(), 'src/lib/service-pages.ts');
+  const pagesBySlug = new Map();
+
+  if (serviceMenuSections.length > 0) {
+    serviceMenuSections.forEach((section) => {
+      const categorySlug = servicePagesSlugify(section.label);
+      section.items.forEach((item) => {
+        const slug = servicePagesSlugify(item.title);
+        pagesBySlug.set(slug, {
+          categorySlug,
+          slug,
+          url: `${SITE_URL}/${categorySlug}/${slug}`,
+        });
+      });
+    });
+  }
+
+  if (fs.existsSync(servicePagesPath)) {
+    const content = fs.readFileSync(servicePagesPath, 'utf8');
+    const overrideRegex =
+      /const\s+\w+Override:\s*ServicePageContent\s*=\s*\{[\s\S]*?slug:\s*'([^']+)'[\s\S]*?categorySlug:\s*'([^']+)'/g;
+    let match;
+
+    while ((match = overrideRegex.exec(content)) !== null) {
+      const [, slug, categorySlug] = match;
+      pagesBySlug.set(slug, {
+        categorySlug,
+        slug,
+        url: `${SITE_URL}/${categorySlug}/${slug}`,
+      });
+    }
+  }
+
+  return [...pagesBySlug.values()];
+}
+
+const SERVICE_HERO_IMAGE = '/images/hero-img.png';
+const CHECKLIST_IMAGE = '/images/checklist-img.webp';
+const HOMEPAGE_IMAGES = [
+  '/images/hero.webp',
+  '/images/hero-bg.jpg',
+  '/images/logo1.webp',
+  '/images/logo-white1.webp',
+  '/images/ctaImage.png',
+  '/og/logo-white.webp',
+];
+
+function getPartnerImages() {
+  const partnersDir = path.join(PUBLIC_DIR, 'partners');
+  if (!fs.existsSync(partnersDir)) {
+    return [];
+  }
+
+  return fs
+    .readdirSync(partnersDir)
+    .filter((file) => IMAGE_EXTENSIONS.has(path.extname(file).toLowerCase()))
+    .map((file) => `/partners/${file}`);
+}
+
 function extractPersonaSlugs() {
   const personaPath = path.join(process.cwd(), 'src/lib/persona-based.ts');
   if (!fs.existsSync(personaPath)) {
@@ -832,36 +902,6 @@ function walkPublicMediaFiles(relativeDir = '', extensionSet) {
   return results;
 }
 
-function guessPageForStaticImage(imagePath) {
-  const normalized = imagePath.toLowerCase();
-
-  if (normalized.includes('checklist')) {
-    return `${SITE_URL}/services`;
-  }
-  if (normalized.includes('ceo')) {
-    return `${SITE_URL}/about-us`;
-  }
-  if (normalized.includes('location')) {
-    return `${SITE_URL}/locations/usa`;
-  }
-  if (normalized.includes('services') || normalized.includes('service')) {
-    return `${SITE_URL}/services`;
-  }
-  if (normalized.includes('login')) {
-    return null;
-  }
-  if (
-    normalized.includes('hero') ||
-    normalized.includes('logo') ||
-    normalized.includes('partner') ||
-    normalized.includes('/og/')
-  ) {
-    return `${SITE_URL}/`;
-  }
-
-  return `${SITE_URL}/`;
-}
-
 function addImageEntry(pageImagesMap, pageUrl, imageUrl, title = '') {
   const resolvedPage = resolveMediaUrl(pageUrl);
   const resolvedImage = resolveMediaUrl(imageUrl);
@@ -912,39 +952,29 @@ function addVideoEntry(pageVideosMap, pageUrl, video) {
   });
 }
 
-async function collectImageSitemapEntries(categorizedUrls, locationServicePages) {
+async function collectImageSitemapEntries(_categorizedUrls, locationServicePages) {
   const pageImagesMap = new Map();
+  const servicePages = extractAllServicePageUrls();
+  const checklistSlugs = extractChecklistSlugs();
 
-  walkPublicMediaFiles('', IMAGE_EXTENSIONS).forEach((imagePath) => {
-    if (IMAGE_SITEMAP_SKIP.has(imagePath)) {
-      return;
+  [...HOMEPAGE_IMAGES, ...getPartnerImages()].forEach((imagePath) => {
+    addImageEntry(pageImagesMap, `${SITE_URL}/`, imagePath, path.basename(imagePath));
+  });
+
+  if (fs.existsSync(path.join(PUBLIC_DIR, 'images', 'ceo.jpeg'))) {
+    addImageEntry(pageImagesMap, `${SITE_URL}/about-us`, '/images/ceo.jpeg', 'CEO');
+  }
+
+  servicePages.forEach(({ url, slug }) => {
+    addImageEntry(pageImagesMap, url, SERVICE_HERO_IMAGE, 'Service hero');
+
+    if (checklistSlugs.has(slug)) {
+      addImageEntry(pageImagesMap, `${url}/checklist`, CHECKLIST_IMAGE, 'Service checklist');
     }
-
-    const pageUrl = guessPageForStaticImage(imagePath);
-    if (!pageUrl) {
-      return;
-    }
-
-    addImageEntry(pageImagesMap, pageUrl, imagePath, path.basename(imagePath));
-  });
-
-  categorizedUrls.checklists.forEach((pageUrl) => {
-    addImageEntry(pageImagesMap, pageUrl, '/images/checklist-img.webp', 'Service checklist');
-    addImageEntry(pageImagesMap, pageUrl, '/images/checklist.webp', 'Checklist illustration');
-  });
-
-  categorizedUrls.subServices.forEach((pageUrl) => {
-    addImageEntry(pageImagesMap, pageUrl, '/images/hero-img.png', 'Service hero');
-    addImageEntry(pageImagesMap, pageUrl, '/images/services_hero.png', 'Services overview');
-  });
-
-  categorizedUrls.mainServices.forEach((pageUrl) => {
-    addImageEntry(pageImagesMap, pageUrl, '/images/services.jpg', 'Services');
   });
 
   Object.values(locationServicePages).flat().forEach((pageUrl) => {
-    addImageEntry(pageImagesMap, pageUrl, '/images/hero-img.png', 'Service hero');
-    addImageEntry(pageImagesMap, pageUrl, '/images/services_hero.png', 'Services overview');
+    addImageEntry(pageImagesMap, pageUrl, SERVICE_HERO_IMAGE, 'Service hero');
   });
 
   try {
@@ -1008,8 +1038,9 @@ async function collectImageSitemapEntries(categorizedUrls, locationServicePages)
   return pageImagesMap;
 }
 
-function collectVideoSitemapEntries(categorizedUrls, locationServicePages) {
+function collectVideoSitemapEntries(_categorizedUrls, locationServicePages) {
   const pageVideosMap = new Map();
+  const servicePages = extractAllServicePageUrls();
   const video = {
     content_loc: '/video/services-video.mp4',
     thumbnail_loc: '/images/services_hero.png',
@@ -1019,8 +1050,7 @@ function collectVideoSitemapEntries(categorizedUrls, locationServicePages) {
   };
 
   const videoPages = new Set([
-    ...categorizedUrls.subServices,
-    ...categorizedUrls.mainServices,
+    ...servicePages.map((page) => page.url),
     ...Object.values(locationServicePages).flat(),
   ]);
 
