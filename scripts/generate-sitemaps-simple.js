@@ -3,6 +3,13 @@ const path = require('path');
 
 const SITE_URL = 'https://software.clickmasters.pk';
 const PUBLIC_DIR = path.join(process.cwd(), 'public');
+const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg']);
+const VIDEO_EXTENSIONS = new Set(['.mp4', '.webm', '.mov', '.m4v']);
+const IMAGE_SITEMAP_SKIP = new Set([
+  '/svg/favicon.svg',
+  '/images/placeholder.svg',
+  '/favicon.svg',
+]);
 
 // Helper function to fetch data from API
 async function fetchFromApi(endpoint) {
@@ -624,12 +631,19 @@ async function generateSeparateSitemaps() {
   await createSitemapFile('how-to-sitemap.xml', categorizedUrls.howTo);
   await createSitemapFile('checklist-sitemap.xml', categorizedUrls.checklists);
   await createLocationServiceSitemapFiles(locationServicePages);
+
+  const pageImagesMap = await collectImageSitemapEntries(categorizedUrls, locationServicePages);
+  const pageVideosMap = collectVideoSitemapEntries(categorizedUrls, locationServicePages);
+  await createImageSitemapFile('image-sitemap.xml', pageImagesMap);
+  await createVideoSitemapFile('video-sitemap.xml', pageVideosMap);
   
   // Create main sitemap index
   await createSitemapIndex();
   
   console.log('\n✅ Separate sitemaps generated successfully!');
   console.log('\n📁 Generated files:');
+  console.log('  - image-sitemap.xml');
+  console.log('  - video-sitemap.xml');
   console.log('  - blog-sitemap.xml');
   console.log('  - case-study-sitemap.xml');
   console.log('  - faq-sitemap.xml');
@@ -728,6 +742,8 @@ async function createSitemapIndex() {
     'persona-sitemap.xml',
     'how-to-sitemap.xml',
     'checklist-sitemap.xml',
+    'image-sitemap.xml',
+    'video-sitemap.xml',
   ];
   
   const locationCountryFiles = getLocationServiceSitemapFiles().sort();
@@ -762,6 +778,329 @@ function escapeXml(unsafe) {
       case '"': return '&quot;';
     }
   });
+}
+
+function resolveMediaUrl(value) {
+  if (!value || typeof value !== 'string') {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed;
+  }
+
+  if (trimmed.startsWith('/')) {
+    return `${SITE_URL}${trimmed}`;
+  }
+
+  return `${SITE_URL}/${trimmed}`;
+}
+
+function walkPublicMediaFiles(relativeDir = '', extensionSet) {
+  const absoluteDir = path.join(PUBLIC_DIR, relativeDir);
+  if (!fs.existsSync(absoluteDir)) {
+    return [];
+  }
+
+  const results = [];
+  const entries = fs.readdirSync(absoluteDir, { withFileTypes: true });
+
+  entries.forEach((entry) => {
+    const nextRelative = relativeDir ? `${relativeDir}/${entry.name}` : entry.name;
+
+    if (entry.isDirectory()) {
+      if (entry.name === 'uploads') {
+        return;
+      }
+      results.push(...walkPublicMediaFiles(nextRelative, extensionSet));
+      return;
+    }
+
+    const ext = path.extname(entry.name).toLowerCase();
+    if (!extensionSet.has(ext)) {
+      return;
+    }
+
+    results.push(`/${nextRelative.replace(/\\/g, '/')}`);
+  });
+
+  return results;
+}
+
+function guessPageForStaticImage(imagePath) {
+  const normalized = imagePath.toLowerCase();
+
+  if (normalized.includes('checklist')) {
+    return `${SITE_URL}/services`;
+  }
+  if (normalized.includes('ceo')) {
+    return `${SITE_URL}/about-us`;
+  }
+  if (normalized.includes('location')) {
+    return `${SITE_URL}/locations/usa`;
+  }
+  if (normalized.includes('services') || normalized.includes('service')) {
+    return `${SITE_URL}/services`;
+  }
+  if (normalized.includes('login')) {
+    return null;
+  }
+  if (
+    normalized.includes('hero') ||
+    normalized.includes('logo') ||
+    normalized.includes('partner') ||
+    normalized.includes('/og/')
+  ) {
+    return `${SITE_URL}/`;
+  }
+
+  return `${SITE_URL}/`;
+}
+
+function addImageEntry(pageImagesMap, pageUrl, imageUrl, title = '') {
+  const resolvedPage = resolveMediaUrl(pageUrl);
+  const resolvedImage = resolveMediaUrl(imageUrl);
+
+  if (!resolvedPage || !resolvedImage) {
+    return;
+  }
+
+  if (!pageImagesMap.has(resolvedPage)) {
+    pageImagesMap.set(resolvedPage, []);
+  }
+
+  const entries = pageImagesMap.get(resolvedPage);
+  if (entries.some((entry) => entry.loc === resolvedImage)) {
+    return;
+  }
+
+  entries.push({
+    loc: resolvedImage,
+    title: title || path.basename(resolvedImage),
+  });
+}
+
+function addVideoEntry(pageVideosMap, pageUrl, video) {
+  const resolvedPage = resolveMediaUrl(pageUrl);
+  const contentLoc = resolveMediaUrl(video.content_loc);
+  const thumbnailLoc = resolveMediaUrl(video.thumbnail_loc);
+
+  if (!resolvedPage || !contentLoc || !thumbnailLoc) {
+    return;
+  }
+
+  if (!pageVideosMap.has(resolvedPage)) {
+    pageVideosMap.set(resolvedPage, []);
+  }
+
+  const entries = pageVideosMap.get(resolvedPage);
+  const duplicate = entries.some((entry) => entry.content_loc === contentLoc);
+  if (duplicate) {
+    return;
+  }
+
+  entries.push({
+    content_loc: contentLoc,
+    thumbnail_loc: thumbnailLoc,
+    title: video.title || 'ClickMasters',
+    description: video.description || 'ClickMasters software development services video.',
+  });
+}
+
+async function collectImageSitemapEntries(categorizedUrls, locationServicePages) {
+  const pageImagesMap = new Map();
+
+  walkPublicMediaFiles('', IMAGE_EXTENSIONS).forEach((imagePath) => {
+    if (IMAGE_SITEMAP_SKIP.has(imagePath)) {
+      return;
+    }
+
+    const pageUrl = guessPageForStaticImage(imagePath);
+    if (!pageUrl) {
+      return;
+    }
+
+    addImageEntry(pageImagesMap, pageUrl, imagePath, path.basename(imagePath));
+  });
+
+  categorizedUrls.checklists.forEach((pageUrl) => {
+    addImageEntry(pageImagesMap, pageUrl, '/images/checklist-img.webp', 'Service checklist');
+    addImageEntry(pageImagesMap, pageUrl, '/images/checklist.webp', 'Checklist illustration');
+  });
+
+  categorizedUrls.subServices.forEach((pageUrl) => {
+    addImageEntry(pageImagesMap, pageUrl, '/images/hero-img.png', 'Service hero');
+    addImageEntry(pageImagesMap, pageUrl, '/images/services_hero.png', 'Services overview');
+  });
+
+  categorizedUrls.mainServices.forEach((pageUrl) => {
+    addImageEntry(pageImagesMap, pageUrl, '/images/services.jpg', 'Services');
+  });
+
+  Object.values(locationServicePages).flat().forEach((pageUrl) => {
+    addImageEntry(pageImagesMap, pageUrl, '/images/hero-img.png', 'Service hero');
+    addImageEntry(pageImagesMap, pageUrl, '/images/services_hero.png', 'Services overview');
+  });
+
+  try {
+    const blogs = await fetchFromApi('/blog');
+    blogs.forEach((blog) => {
+      if (!blog.published || !blog.slug) {
+        return;
+      }
+
+      const pageUrl = `${SITE_URL}/blog/${blog.slug}`;
+      if (blog.thumbnail) {
+        addImageEntry(pageImagesMap, pageUrl, blog.thumbnail, blog.title || 'Blog post');
+      }
+      if (blog.authorImage) {
+        addImageEntry(pageImagesMap, pageUrl, blog.authorImage, blog.author || 'Author');
+      }
+    });
+  } catch (error) {
+    console.log('Warning: Could not fetch blog images:', error.message);
+  }
+
+  try {
+    const caseStudies = await fetchFromApi('/case-studies');
+    caseStudies.forEach((caseStudy) => {
+      if (!caseStudy.published || !caseStudy.slug) {
+        return;
+      }
+
+      const pageUrl = `${SITE_URL}/case-studies/${caseStudy.slug}`;
+      const image =
+        caseStudy.thumbnail ||
+        caseStudy.project?.thumbnail ||
+        '';
+
+      if (image) {
+        addImageEntry(pageImagesMap, pageUrl, image, caseStudy.title || 'Case study');
+      }
+    });
+  } catch (error) {
+    console.log('Warning: Could not fetch case study images:', error.message);
+  }
+
+  try {
+    const projects = await fetchFromApi('/projects');
+    projects.forEach((project) => {
+      if (!project._id || !project.thumbnail) {
+        return;
+      }
+
+      addImageEntry(
+        pageImagesMap,
+        `${SITE_URL}/software-solutions/${project._id}`,
+        project.thumbnail,
+        project.title || 'Software solution',
+      );
+    });
+  } catch (error) {
+    console.log('Warning: Could not fetch project images:', error.message);
+  }
+
+  return pageImagesMap;
+}
+
+function collectVideoSitemapEntries(categorizedUrls, locationServicePages) {
+  const pageVideosMap = new Map();
+  const video = {
+    content_loc: '/video/services-video.mp4',
+    thumbnail_loc: '/images/services_hero.png',
+    title: 'ClickMasters Software Development Services',
+    description:
+      'Overview video showcasing ClickMasters software development services, web apps, mobile apps, and SaaS solutions.',
+  };
+
+  const videoPages = new Set([
+    ...categorizedUrls.subServices,
+    ...categorizedUrls.mainServices,
+    ...Object.values(locationServicePages).flat(),
+  ]);
+
+  videoPages.forEach((pageUrl) => {
+    addVideoEntry(pageVideosMap, pageUrl, video);
+  });
+
+  return pageVideosMap;
+}
+
+async function createImageSitemapFile(filename, pageImagesMap) {
+  if (!pageImagesMap.size) {
+    console.log(`⚠️  Skipping ${filename} (no images)`);
+    return;
+  }
+
+  const filePath = path.join(PUBLIC_DIR, filename);
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
+  xml += ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n';
+
+  let imageCount = 0;
+
+  pageImagesMap.forEach((images, pageUrl) => {
+    xml += '  <url>\n';
+    xml += `    <loc>${escapeXml(pageUrl)}</loc>\n`;
+
+    images.forEach((image) => {
+      xml += '    <image:image>\n';
+      xml += `      <image:loc>${escapeXml(image.loc)}</image:loc>\n`;
+      if (image.title) {
+        xml += `      <image:title>${escapeXml(image.title)}</image:title>\n`;
+      }
+      xml += '    </image:image>\n';
+      imageCount++;
+    });
+
+    xml += '  </url>\n';
+  });
+
+  xml += '</urlset>';
+
+  fs.writeFileSync(filePath, xml);
+  console.log(`📄 Created ${filename} with ${imageCount} images across ${pageImagesMap.size} pages`);
+}
+
+async function createVideoSitemapFile(filename, pageVideosMap) {
+  if (!pageVideosMap.size) {
+    console.log(`⚠️  Skipping ${filename} (no videos)`);
+    return;
+  }
+
+  const filePath = path.join(PUBLIC_DIR, filename);
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
+  xml += ' xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n';
+
+  let videoCount = 0;
+
+  pageVideosMap.forEach((videos, pageUrl) => {
+    xml += '  <url>\n';
+    xml += `    <loc>${escapeXml(pageUrl)}</loc>\n`;
+
+    videos.forEach((video) => {
+      xml += '    <video:video>\n';
+      xml += `      <video:thumbnail_loc>${escapeXml(video.thumbnail_loc)}</video:thumbnail_loc>\n`;
+      xml += `      <video:title>${escapeXml(video.title)}</video:title>\n`;
+      xml += `      <video:description>${escapeXml(video.description)}</video:description>\n`;
+      xml += `      <video:content_loc>${escapeXml(video.content_loc)}</video:content_loc>\n`;
+      xml += '    </video:video>\n';
+      videoCount++;
+    });
+
+    xml += '  </url>\n';
+  });
+
+  xml += '</urlset>';
+
+  fs.writeFileSync(filePath, xml);
+  console.log(`📄 Created ${filename} with ${videoCount} videos across ${pageVideosMap.size} pages`);
 }
 
 // Run the script
