@@ -1,8 +1,12 @@
 // app/services/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import { getServiceData, getAllServiceSlugs } from '@/src/lib/services';
-import { metadataConfig } from '@/app/metadata-config';
+import { metadataConfig, siteConfig } from '@/app/metadata-config';
 import ServiceClient from './ServiceClient';
+import {
+  getCategoryServiceFaqs,
+  ServiceStructuredData,
+} from '@/src/components/landingPage/servicesPage/ServiceStructuredData';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -38,5 +42,16 @@ export default async function ServicePage({ params }: Props) {
     notFound();
   }
 
-  return <ServiceClient serviceData={serviceData} />;
+  return (
+    <>
+      <ServiceStructuredData
+        idSlug={slug}
+        name={serviceData.title}
+        description={serviceData.description}
+        url={`${siteConfig.url}/${slug}`}
+        faqs={getCategoryServiceFaqs(serviceData.title)}
+      />
+      <ServiceClient serviceData={serviceData} />
+    </>
+  );
 }
