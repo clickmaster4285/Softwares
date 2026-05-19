@@ -32,7 +32,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { TableOfContents } from '@/components/table-of-contents';
-import { breadcrumbSchema, siteConfig } from '@/app/metadata-config';
+import { breadcrumbSchema, faqSchema, homepageFaqSchema, serviceSchema, siteConfig } from '@/app/metadata-config';
 import {
   getAllServicePages,
   getServicePage,
@@ -55,9 +55,13 @@ import { PricingSection } from '@/src/components/landingPage/servicesPage/Pricin
 import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
 import { CTAComponents } from '@/src/components/landingPage/servicesPage/FooterCTA';
 import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
-import { ServiceStructuredData } from '@/src/components/landingPage/servicesPage/ServiceStructuredData';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
+
+const defaultFaqs = homepageFaqSchema.mainEntity.map((item) => ({
+  question: item.name,
+  answer: item.acceptedAnswer.text,
+}));
 
 export function generateStaticParams(): { slug: string; service: string }[] {
   return getAllServicePages().map((page) => ({
@@ -202,14 +206,20 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     tocItems.push({ id: 'faq', title: 'FAQ', level: 2 as const });
   }
 
+  const serviceJsonLd = serviceSchema(page.serviceName, page.metaDescription, url);
+  const faqJsonLd = faqSchema(faqs.length > 0 ? faqs : defaultFaqs);
+
   return (
     <>
-      <ServiceStructuredData
-        idSlug={page.slug}
-        name={page.title}
-        description={page.metaDescription}
-        url={url}
-        faqs={faqs}
+      <Script
+        id={`service-schema-${page.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <Script
+        id={`faq-schema-${page.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Script
         id={`breadcrumb-${page.slug}`}

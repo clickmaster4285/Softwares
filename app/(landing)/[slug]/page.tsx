@@ -1,14 +1,16 @@
 // app/services/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import { getServiceData, getAllServiceSlugs } from '@/src/lib/services';
-import { metadataConfig, siteConfig } from '@/app/metadata-config';
+import { metadataConfig, faqSchema, homepageFaqSchema, serviceSchema, siteConfig } from '@/app/metadata-config';
 import ServiceClient from './ServiceClient';
-import {
-  getCategoryServiceFaqs,
-  ServiceStructuredData,
-} from '@/src/components/landingPage/servicesPage/ServiceStructuredData';
+import Script from 'next/script';
 
 type Props = { params: Promise<{ slug: string }> };
+
+const categoryFaqs = homepageFaqSchema.mainEntity.map((item) => ({
+  question: item.name,
+  answer: item.acceptedAnswer.text,
+}));
 
 // Generate static paths for all services at build time
 export async function generateStaticParams() {
@@ -42,14 +44,21 @@ export default async function ServicePage({ params }: Props) {
     notFound();
   }
 
+  const url = `${siteConfig.url}/${slug}`;
+  const serviceJsonLd = serviceSchema(serviceData.title, serviceData.description, url);
+  const faqJsonLd = faqSchema(categoryFaqs);
+
   return (
     <>
-      <ServiceStructuredData
-        idSlug={slug}
-        name={serviceData.title}
-        description={serviceData.description}
-        url={`${siteConfig.url}/${slug}`}
-        faqs={getCategoryServiceFaqs(serviceData.title)}
+      <Script
+        id={`service-schema-${slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <Script
+        id={`faq-schema-${slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <ServiceClient serviceData={serviceData} />
     </>
