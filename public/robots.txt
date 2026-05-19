@@ -1,8 +1,11 @@
 # *
 User-agent: *
 Allow: /
+Allow: /_next/static/
+Allow: /_next/image/
+Allow: /api/uploads/
 Disallow: /admin
-Disallow: /api
+Disallow: /api/
 
 # Host
 Host: https://software.clickmasters.pk

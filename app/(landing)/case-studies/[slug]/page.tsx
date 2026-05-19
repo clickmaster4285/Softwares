@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import mongoose from 'mongoose';
@@ -9,7 +9,7 @@ import '../../../../lib/models/Category';
 import dbConnect from '../../../../lib/mongoose';
 import { resolveImageUrl, getCategoryName } from '../../../../lib/utils';
 import { Button } from '@/components/ui/button';
-import { breadcrumbSchema } from '@/app/metadata-config';
+import { breadcrumbSchema, metadataConfig } from '@/app/metadata-config';
 import { TableOfContents } from '@/components/table-of-contents';
 import Script from 'next/script';
 
@@ -28,6 +28,20 @@ function slugify(value: string) {
     .replace(/['"]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+function getCaseStudyCanonicalSlug(doc: {
+  slug?: string;
+  title?: string;
+  _id?: mongoose.Types.ObjectId | string;
+}): string {
+  const stored = typeof doc.slug === 'string' ? doc.slug.trim() : '';
+  if (stored) return stored;
+
+  const fromTitle = slugify(String(doc.title ?? ''));
+  if (fromTitle) return fromTitle;
+
+  return String(doc._id ?? '');
 }
 
 function toMetaDescription(text: string | undefined, fallback: string): string {
@@ -92,43 +106,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   await dbConnect();
   const { slug } = await params;
-  const normalized = slugify(slug);
-
-  let doc: any = null;
-  doc = await CaseStudy.findOne({ slug, published: true }).select('title excerpt').lean();
-  if (!doc && normalized && normalized !== slug) {
-    doc = await CaseStudy.findOne({ slug: normalized, published: true }).select('title excerpt').lean();
-  }
-  if (!doc && mongoose.Types.ObjectId.isValid(slug)) {
-    doc = await CaseStudy.findOne({ _id: slug, published: true }).select('title excerpt').lean();
-  }
-  if (!doc) {
-    const list = await CaseStudy.find({ published: true }).select('title').lean();
-    const match = list.find(
-      (d: any) =>
-        slugify(String(d?.title ?? '')) === normalized ||
-        slugify(String(d?.title ?? '')) === slug,
-    );
-    if (match?._id) {
-      doc = await CaseStudy.findOne({ _id: match._id, published: true })
-        .select('title excerpt')
-        .lean();
-    }
-  }
+  const doc = await findCaseStudyBySlugOrId(slug);
 
   if (!doc) return { title: 'Case study' };
-  const d = doc as { title?: string; excerpt?: string };
-  const title = d.title ?? 'Case study';
+
+  const cs = doc as { title?: string; excerpt?: string; slug?: string; _id?: mongoose.Types.ObjectId };
+  const title = cs.title ?? 'Case study';
+  const canonicalSlug = getCaseStudyCanonicalSlug(cs);
   const description = toMetaDescription(
-    d.excerpt,
+    cs.excerpt,
     `Case study: ${title} custom software delivery by ClickMasters. Web, mobile, SaaS, and enterprise outcomes.`,
   );
-  return {
-    title: `${title} | ClickMasters`,
-    description,
-    openGraph: { title: `${title} | ClickMasters`, description },
-    twitter: { description },
-  };
+
+  return metadataConfig.caseStudyDetail(title, description, canonicalSlug);
 }
 
 export default async function CaseStudyDetailPage({
@@ -141,6 +131,14 @@ export default async function CaseStudyDetailPage({
   const raw = await findCaseStudyBySlugOrId(slug);
 
   if (!raw) notFound();
+
+  const canonicalSlug = getCaseStudyCanonicalSlug(
+    raw as { slug?: string; title?: string; _id?: mongoose.Types.ObjectId },
+  );
+
+  if (slug !== canonicalSlug && slugify(slug) !== slugify(canonicalSlug)) {
+    redirect(`/case-studies/${encodeURIComponent(canonicalSlug)}`);
+  }
 
   const cs = raw as {
     title: string;
@@ -186,13 +184,13 @@ export default async function CaseStudyDetailPage({
             breadcrumbSchema([
               { name: 'Home', url: '/' },
               { name: 'Case Studies', url: '/case-studies' },
-              { name: cs.title, url: `/case-studies/${slug}` },
+              { name: cs.title, url: `/case-studies/${canonicalSlug}` },
             ]),
           ),
         }}
       />
 
-      <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pt-10">
+      <main className="min-h-screen bg-slate-50 font-sans text-slate-900 pt-10">
         <article>
 
           {/* ── Hero header ───────────────────────────────────────────────── */}
@@ -368,7 +366,7 @@ export default async function CaseStudyDetailPage({
           </section>
 
         </article>
-      </div>
+      </main>
     </>
   );
 }

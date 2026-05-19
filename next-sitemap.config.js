@@ -5,7 +5,11 @@ module.exports = {
   exclude: ["/admin/*", "/api/*"],
   robotsTxtOptions: {
     policies: [
-      { userAgent: "*", allow: "/", disallow: ["/admin", "/api"] },
+      {
+        userAgent: '*',
+        allow: ['/', '/_next/static/', '/_next/image/', '/api/uploads/'],
+        disallow: ['/admin', '/api/'],
+      },
     ],
   },
   // Generate sitemap index and individual sitemap files

@@ -12,7 +12,7 @@ import BlogToc from '@/components/blog/BlogToc';
 import BlogCta from '@/components/blog/BlogCta'; // Import the Client Component
 import BlogFaqSection from '@/components/blog/BlogFaqSection';
 import BlogRelatedSlider, { type RelatedBlogCard } from '@/components/blog/BlogRelatedSlider';
-import { breadcrumbSchema } from '@/app/metadata-config';
+import { breadcrumbSchema, siteConfig } from '@/app/metadata-config';
 import Script from 'next/script';
 
 const BlogPostModel = BlogPost as any;
@@ -197,7 +197,14 @@ export async function generateMetadata({
   return {
     title: `${title} | ClickMasters`,
     description,
-    openGraph: { title: `${title} | ClickMasters`, description },
+    alternates: {
+      canonical: `${siteConfig.url}/blog/${slug}`,
+    },
+    openGraph: {
+      title: `${title} | ClickMasters`,
+      description,
+      url: `${siteConfig.url}/blog/${slug}`,
+    },
     twitter: { description },
   };
 }

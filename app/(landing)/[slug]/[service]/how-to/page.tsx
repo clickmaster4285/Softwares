@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { howToGuides, type HowToGuide } from '@/src/lib/how-to';
-import { getAllServicePages } from '@/lib/service-pages';
+import { getAllServicePages, getServicePage } from '@/lib/service-pages';
+import { ServiceSubpageBreadcrumb } from '@/src/components/landingPage/servicesPage/ServiceSubpageBreadcrumb';
+import { subpageInnerPadding, subpageOuterPadding } from '@/src/components/landingPage/servicesPage/subpage-layout';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
+import { siteConfig } from '@/app/metadata-config';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -20,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: guide.title,
     alternates: {
-      canonical: `/${slug}/${service}/how-to`,
+      canonical: `${siteConfig.url}/${slug}/${service}/how-to`,
     },
   };
 }
@@ -52,10 +55,7 @@ function StepCard({ step }: { step: HowToGuide['steps'][number] }) {
         </div>
       </div>
       <div style={{ flex: 1 }}>
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 8 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', color: '#E8692A', background: '#FFF3ED', padding: '4px 10px', borderRadius: 999 }}>Step {step.num}</span>
-          <h3 style={{ fontSize: 18, fontWeight: 800, margin: 0 }}>{step.title}</h3>
-        </div>
+        <h3 style={{ fontSize: 18, fontWeight: 800, margin: 0, marginBottom: 8 }}>{step.title}</h3>
         <p style={{ marginTop: 6, marginBottom: 12, color: '#5A5A72', lineHeight: 1.6, textAlign: 'justify' }}>{step.body}</p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#F2F4F8', border: '1px solid #E4E6EF', padding: '6px 12px', borderRadius: 999, color: '#5A5A72', fontWeight: 600 }}>
@@ -90,18 +90,28 @@ export default async function HowToPage({ params }: Props) {
   if (!guide) return notFound();
 
   const serviceName = guide.title.split(':')[0].replace(/^How to\s+/i, '').trim();
+  const servicePage = getServicePage(service);
 
   return (
     <div className="min-h-screen bg-white text-slate-950">
-      <div className="border-b border-slate-200 bg-slate-100">
-        <div className="mx-auto max-w-8xl px-6 py-3 text-sm text-slate-500 lg:px-16">
-          <span className="font-semibold text-orange-500">{guide.slug.replace(/-/g, ' ')}</span>
-        </div>
-      </div>
+      <ServiceSubpageBreadcrumb
+        crumbs={[
+          { label: 'Home', href: '/' },
+          {
+            label: servicePage?.category ?? slug.replace(/-/g, ' '),
+            href: `/${servicePage?.categorySlug ?? slug}`,
+          },
+          {
+            label: servicePage?.serviceName ?? serviceName,
+            href: `/${slug}/${service}`,
+          },
+          { label: 'How-to' },
+        ]}
+      />
 
       <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-8xl px-6 py-20 lg:px-16">
-          <div className="grid gap-16 lg:grid-cols-[1fr_360px] items-start">
+        <div className={`${subpageOuterPadding} py-20`}>
+          <div className={`${subpageInnerPadding} grid gap-16 lg:grid-cols-[1fr_360px] items-start`}>
             <div>
               <h1 className="max-w-4xl text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">
                 {guide.title.replace(' | ClickMasters', '')}
@@ -127,13 +137,14 @@ export default async function HowToPage({ params }: Props) {
       </section>
 
       <main>
-        <div className="mx-auto max-w-8xl px-6 py-20 lg:px-16">
+        <div className={`${subpageOuterPadding} py-20`}>
+          <div className={subpageInnerPadding}>
           <div className="mb-16">
             <div className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-orange-500">
               The Complete Process
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-              {guide.title.replace(' | ClickMasters', '')}
+              Step-by-step guide
             </h2>
           </div>
 
@@ -164,6 +175,7 @@ export default async function HowToPage({ params }: Props) {
               buttons={[{ text: 'Book a Free Consultation', href: '/contact-us', variant: 'primary' }]}
             />
           </div>
+        </div>
         </div>
       </main>
     </div>

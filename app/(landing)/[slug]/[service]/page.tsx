@@ -32,7 +32,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { TableOfContents } from '@/components/table-of-contents';
-import { breadcrumbSchema, serviceSchema, siteConfig } from '@/app/metadata-config';
+import { breadcrumbSchema, faqSchema, homepageFaqSchema, serviceSchema, siteConfig } from '@/app/metadata-config';
 import {
   getAllServicePages,
   getServicePage,
@@ -57,6 +57,11 @@ import { CTAComponents } from '@/src/components/landingPage/servicesPage/FooterC
 import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
+
+const defaultFaqs = homepageFaqSchema.mainEntity.map((item) => ({
+  question: item.name,
+  answer: item.acceptedAnswer.text,
+}));
 
 export function generateStaticParams(): { slug: string; service: string }[] {
   return getAllServicePages().map((page) => ({
@@ -201,33 +206,20 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     tocItems.push({ id: 'faq', title: 'FAQ', level: 2 as const });
   }
 
-  const jsonLd = serviceSchema(page.title, page.metaDescription, url);
-  const professionalServiceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: 'ClickMasters',
-    serviceType: page.title,
-    url,
-    areaServed: ['US', 'GB', 'CA', 'AU', 'DE', 'EU'],
-  };
-  const faqSchema = faqs.length
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqs.map((faq) => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-        })),
-      }
-    : null;
+  const serviceJsonLd = serviceSchema(page.serviceName, page.metaDescription, url);
+  const faqJsonLd = faqSchema(faqs.length > 0 ? faqs : defaultFaqs);
 
   return (
     <>
       <Script
-        id={`schema-${page.slug}`}
+        id={`service-schema-${page.slug}`}
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <Script
+        id={`faq-schema-${page.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Script
         id={`breadcrumb-${page.slug}`}
@@ -243,18 +235,6 @@ export default async function ServiceByCategoryPage({ params }: Props) {
           ),
         }}
       />
-      <Script
-        id={`professional-${page.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
-      />
-      {faqSchema && (
-        <Script
-          id={`faq-${page.slug}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
 
       <div className="min-h-screen text-slate-900">
 

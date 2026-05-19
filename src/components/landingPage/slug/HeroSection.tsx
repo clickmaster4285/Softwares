@@ -184,8 +184,11 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
           {/* Main Heading with Typewriter */}
           <div className="mb-6 animate-[fadeInUp_0.6s_ease-out_0.1s_forwards] opacity-0">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white">
-              <TypewriterText texts={typewriterPhrases} delay={120} />
+              {serviceData.title}
             </h1>
+            <p className="mt-4 text-lg md:text-xl text-orange-300 max-w-2xl mx-auto">
+              <TypewriterText texts={typewriterPhrases} delay={120} />
+            </p>
           </div>
 
           {/* Description */}

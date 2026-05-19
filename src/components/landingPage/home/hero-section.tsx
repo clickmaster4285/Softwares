@@ -218,16 +218,10 @@ export function HeroSection(): JSX.Element {
             <div className="flex flex-col justify-center text-left">
               {/* Heading */}
               <div className="mb-6 md:mb-8">
-                <div className="overflow-hidden">
-                  <div className="animate-slide-in-up font-display text-[1.65rem] font-bold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
-                     Software Development Company
-                  </div>
-                </div>
-                <div className="overflow-hidden mt-2">
-                  <div className="animate-slide-in-up font-display text-[1.45rem] font-bold leading-tight tracking-tight text-gray-300 sm:text-3xl md:text-4xl lg:text-5xl">
-                     <span className="text-primary">That Scales Your Business Revenue</span>
-                  </div>
-                </div>
+                <h1 id="hero-heading" className="font-display text-[1.65rem] font-bold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                  Software Development Company{' '}
+                  <span className="text-primary">That Scales Your Business Revenue</span>
+                </h1>
               </div>
 
               {/* Sub-description */}

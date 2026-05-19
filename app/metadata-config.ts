@@ -399,10 +399,6 @@ export const defaultMetadata: Metadata = {
 
   description: siteConfig.description,
 
-  alternates: {
-    canonical: siteConfig.url,
-  },
-
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
@@ -707,7 +703,20 @@ export const metadataConfig = {
     },
   }),
 
-  // ── /blog ───────────────────────────────────────────────────────────────────      
+  // ── /case-studies/[slug] ─────────────────────────────────────────────────────
+  caseStudyDetail: (title: string, description: string, slug: string): Metadata => ({
+    title: `${title} | ClickMasters`,
+    description,
+    alternates: { canonical: `${siteConfig.url}/case-studies/${slug}` },
+    openGraph: {
+      title: `${title} | ClickMasters`,
+      description,
+      url: `${siteConfig.url}/case-studies/${slug}`,
+    },
+    twitter: { description },
+  }),
+
+  // ── /blog ───────────────────────────────────────────────────────────────────
   blog: (): Metadata => ({
     title: 'The Hidden Formula Behind Fast-Growing Software Products',
 
