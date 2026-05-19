@@ -2,7 +2,7 @@
 
 import { Checklist } from '@/src/lib/service_checklist';
 import Image from 'next/image';
-import { useState } from 'react';
+import { subpageInnerPadding, subpageOuterPadding } from '@/src/components/landingPage/servicesPage/subpage-layout';
 
 interface ChecklistMainContentProps {
   checklist: Checklist;
@@ -48,7 +48,8 @@ export default function ChecklistMainContent({
       {/* Darker Overlay for Better Contrast */}
       <div className="absolute inset-0 bg-black/60 " />
 
-      <div className="relative z-10 mx-auto px-4 sm:px-6 py-12 lg:px-24">
+      <div className={`relative z-10 py-12 ${subpageOuterPadding}`}>
+        <div className={subpageInnerPadding}>
         
         {/* Checklist Intro Section - White Text */}
         <section className=" mb-12">
@@ -222,6 +223,7 @@ export default function ChecklistMainContent({
             );
           })}
         </div>
+      </div>
       </div>
 
       {/* Custom Scrollbar */}

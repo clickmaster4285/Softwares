@@ -11,6 +11,8 @@ import ChecklistHero from '@/src/components/landingPage/checklist/ChecklistHero'
 import Link from 'next/link';
 import { EngineeringBaseline } from '@/src/components/landingPage/servicesPage/EngineeringBaseline';
 import { siteConfig } from '@/app/metadata-config';
+import { ServiceSubpageBreadcrumb } from '@/src/components/landingPage/servicesPage/ServiceSubpageBreadcrumb';
+import { subpageInnerPadding, subpageOuterPadding } from '@/src/components/landingPage/servicesPage/subpage-layout';
 
 
 
@@ -224,11 +226,21 @@ export default function ChecklistPage() {
     );
   };
 
+  const serviceDisplayName = checklist.serviceName.split(':')[0].trim();
+
   return (
     <>
       <Head>
         <link rel="canonical" href={canonical} />
       </Head>
+      <ServiceSubpageBreadcrumb
+        crumbs={[
+          { label: 'Home', href: '/' },
+          { label: checklist.category, href: `/${checklist.categorySlug}` },
+          { label: serviceDisplayName, href: `/${slug}/${service}` },
+          { label: 'Checklist' },
+        ]}
+      />
       {/* Hero Section */}
     <ChecklistHero
   checklist={checklist}
@@ -255,7 +267,8 @@ export default function ChecklistPage() {
 
           {/* How to Use Section - White background with increased opacity */}
      {/* Engineering Baseline Section */}
-<div className="py-16 px-5 md:px-10 lg:px-24 w-full">
+<div className={`py-16 w-full ${subpageOuterPadding}`}>
+  <div className={subpageInnerPadding}>
   <EngineeringBaseline
    serviceName={`${checklist.serviceName
   .replace(/-/g, ' ')
@@ -265,6 +278,7 @@ export default function ChecklistPage() {
   standard: item.title,
 }))}
   />
+</div>
 </div>
 
 

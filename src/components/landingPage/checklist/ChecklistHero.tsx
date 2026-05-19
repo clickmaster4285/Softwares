@@ -2,6 +2,7 @@
 
 import { Check } from "lucide-react";
 import { useEffect, useState } from "react";
+import { subpageInnerPadding, subpageOuterPadding } from "@/src/components/landingPage/servicesPage/subpage-layout";
 
 interface ChecklistHeroProps {
   checklist: any;
@@ -42,8 +43,9 @@ export default function ChecklistHero({
   getDoneCount,
 }: ChecklistHeroProps) {
   return (
-    <section className="bg-white border-b border-[#E4E6EF] py-16 px-5 md:px-10 lg:px-20 lg:mx-8 mt-5 lg:mt-20">
-      <div className="mx-auto grid md:grid-cols-[1fr_420px] gap-16 items-start">
+    <section className="bg-white border-b border-[#E4E6EF] py-16">
+      <div className={subpageOuterPadding}>
+        <div className={`${subpageInnerPadding} grid md:grid-cols-[1fr_420px] gap-16 items-start`}>
         
         {/* Left Section - Hero Content */}
         <div className="max-w-5xl">
@@ -191,6 +193,7 @@ export default function ChecklistHero({
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

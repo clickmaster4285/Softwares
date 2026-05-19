@@ -16,12 +16,16 @@ import {
   splitBullets,
 } from '@/src/lib/persona-utils';
 import { cn } from '@/lib/utils';
+import { ServiceSubpageBreadcrumb } from '@/src/components/landingPage/servicesPage/ServiceSubpageBreadcrumb';
+import { subpageInnerPadding, subpageOuterPadding } from '@/src/components/landingPage/servicesPage/subpage-layout';
 
 type PersonaPageClientProps = {
   page: ServicePageData;
   categorySlug: string;
   serviceSlug: string;
   serviceTitle?: string;
+  categoryName?: string;
+  serviceName?: string;
 };
 
 function useReveal(threshold = 0.1) {
@@ -78,47 +82,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PersonaBreadcrumb({
-  categorySlug,
-  serviceSlug,
-  serviceTitle,
-  personaLabel,
-}: {
-  categorySlug: string;
-  serviceSlug: string;
-  serviceTitle?: string;
-  personaLabel: string;
-}) {
-  return (
-    <nav
-      className="border-b border-stone-200 bg-white/80 py-3 text-sm text-stone-500"
-      aria-label="Breadcrumb"
-    >
-      <ol className="mx-auto flex max-w-8xl flex-wrap items-center gap-2 px-6 lg:px-16">
-        <li>
-          <Link href="/" className="hover:text-primary">
-            Home
-          </Link>
-        </li>
-        <li aria-hidden>/</li>
-        <li>
-          <Link href={`/${categorySlug}`} className="hover:text-primary capitalize">
-            {categorySlug.replace(/-/g, ' ')}
-          </Link>
-        </li>
-        <li aria-hidden>/</li>
-        <li>
-          <Link href={`/${categorySlug}/${serviceSlug}`} className="hover:text-primary">
-            {serviceTitle ?? serviceSlug.replace(/-/g, ' ')}
-          </Link>
-        </li>
-        <li aria-hidden>/</li>
-        <li className="font-medium text-stone-800">{personaLabel}</li>
-      </ol>
-    </nav>
-  );
-}
-
 function Hero({ page }: { page: ServicePageData }) {
   const features = getFeatureSection(page);
   const checklist =
@@ -133,7 +96,8 @@ function Hero({ page }: { page: ServicePageData }) {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_70%_40%,#FDEEE3_0%,transparent_65%)]"
         aria-hidden
       />
-      <div className="relative mx-auto grid max-w-8xl items-center gap-12 px-6 py-24 lg:grid-cols-2 lg:gap-16 lg:px-16 lg:py-28">
+      <div className={`relative ${subpageOuterPadding} py-24 lg:py-28`}>
+        <div className={`relative grid items-center gap-12 lg:grid-cols-2 lg:gap-16 ${subpageInnerPadding}`}>
         <div>
           <SectionLabel>{page.subtitle}</SectionLabel>
           <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight text-stone-900 sm:text-5xl lg:text-[3.25rem]">
@@ -175,6 +139,7 @@ function Hero({ page }: { page: ServicePageData }) {
             </ul>
           </div>
         )}
+        </div>
       </div>
     </section>
   );
@@ -186,7 +151,8 @@ function Pillars({ page }: { page: ServicePageData }) {
 
   return (
     <section className="bg-stone-50 py-20 lg:py-24">
-      <div className="mx-auto max-w-8xl px-6 lg:px-16">
+      <div className={subpageOuterPadding}>
+        <div className={subpageInnerPadding}>
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
           <Reveal>
             <SectionLabel>Core pillars</SectionLabel>
@@ -213,6 +179,7 @@ function Pillars({ page }: { page: ServicePageData }) {
           </div>
         </div>
       </div>
+      </div>
     </section>
   );
 }
@@ -226,7 +193,8 @@ function LongFormContent({ page }: { page: ServicePageData }) {
 
   return (
     <section className="bg-white py-20 lg:py-24">
-      <div className="mx-auto max-w-8xl px-6 lg:px-16">
+      <div className={subpageOuterPadding}>
+        <div className={subpageInnerPadding}>
         <Reveal>
           <SectionLabel>Deep dive</SectionLabel>
           <h2 className="max-w-3xl font-display text-3xl font-semibold text-stone-900 sm:text-4xl">
@@ -245,6 +213,7 @@ function LongFormContent({ page }: { page: ServicePageData }) {
           )}
         </div>
       </div>
+      </div>
     </section>
   );
 }
@@ -261,7 +230,8 @@ function PersonaPricing({ page }: { page: ServicePageData }) {
         className="pointer-events-none absolute -right-24 -top-24 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-3xl"
         aria-hidden
       />
-      <div className="relative mx-auto max-w-8xl px-6 lg:px-16">
+      <div className={`relative ${subpageOuterPadding}`}>
+        <div className={subpageInnerPadding}>
         <Reveal className="mb-12 text-center md:mb-14">
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-400">
             Transparent pricing
@@ -323,6 +293,7 @@ function PersonaPricing({ page }: { page: ServicePageData }) {
           ))}
         </div>
       </div>
+      </div>
     </section>
   );
 }
@@ -332,7 +303,8 @@ function InternalLinks({ page }: { page: ServicePageData }) {
 
   return (
     <section className="border-t border-stone-200 bg-stone-50 py-12">
-      <div className="mx-auto max-w-8xl px-6 lg:px-16">
+      <div className={subpageOuterPadding}>
+        <div className={subpageInnerPadding}>
         <h3 className="text-lg font-semibold text-stone-900">Related pages</h3>
         <ul className="mt-4 flex flex-wrap gap-4">
           {page.internalLinks.map((link, i) => {
@@ -348,6 +320,7 @@ function InternalLinks({ page }: { page: ServicePageData }) {
           })}
         </ul>
       </div>
+      </div>
     </section>
   );
 }
@@ -357,17 +330,27 @@ export default function PersonaPageClient({
   categorySlug,
   serviceSlug,
   serviceTitle,
+  categoryName,
+  serviceName,
 }: PersonaPageClientProps) {
   const ctaRow = getPricingCtaRow(page.pricing);
   const ctaText = cleanText(page.callToAction?.text ?? '');
 
   return (
     <div className="min-h-screen bg-white font-sans text-stone-900 antialiased">
-      <PersonaBreadcrumb
-        categorySlug={categorySlug}
-        serviceSlug={serviceSlug}
-        serviceTitle={serviceTitle}
-        personaLabel={page.subtitle.replace(/^FOR\s+/i, '')}
+      <ServiceSubpageBreadcrumb
+        crumbs={[
+          { label: 'Home', href: '/' },
+          {
+            label: categoryName ?? categorySlug.replace(/-/g, ' '),
+            href: `/${categorySlug}`,
+          },
+          {
+            label: serviceName ?? serviceTitle ?? serviceSlug.replace(/-/g, ' '),
+            href: `/${categorySlug}/${serviceSlug}`,
+          },
+          { label: page.subtitle.replace(/^FOR\s+/i, '') },
+        ]}
       />
       <Hero page={page} />
       <LongFormContent page={page} />

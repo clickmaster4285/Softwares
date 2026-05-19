@@ -58,6 +58,8 @@ export default async function PersonaBasedPage({ params }: Props) {
       categorySlug={resolved.slug}
       serviceSlug={resolved.service}
       serviceTitle={baseService?.title}
+      categoryName={baseService?.category}
+      serviceName={baseService?.serviceName}
     />
   );
 }
