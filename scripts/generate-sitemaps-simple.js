@@ -194,6 +194,66 @@ function extractHowToGuideSlugs() {
   return slugs;
 }
 
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function extractPersonaSlugs() {
+  const personaPath = path.join(process.cwd(), 'src/lib/persona-based.ts');
+  if (!fs.existsSync(personaPath)) {
+    return [];
+  }
+
+  const content = fs.readFileSync(personaPath, 'utf8');
+  const match = content.match(/export const servicePages\s*:\s*ServicePageData\[\]\s*=\s*(\[.*\])/s);
+  if (!match) {
+    return [];
+  }
+
+  const arrayText = match[1];
+  const slugMatches = [...arrayText.matchAll(/["']?slug["']?\s*:\s*["']([^"']+)["']/g)];
+  return slugMatches.map((m) => m[1]).filter((slug) => slug.includes('-for-'));
+}
+
+const PERSONA_SUFFIXES = [
+  '-for-enterprise-it-directors',
+  '-for-non-technical-ceos',
+  '-for-product-managers',
+  '-for-startup-founders',
+  '-for-ctos',
+];
+
+function baseServiceSlugFromPersona(personaSlug) {
+  for (const suffix of PERSONA_SUFFIXES) {
+    if (personaSlug.endsWith(suffix)) {
+      return personaSlug.slice(0, -suffix.length);
+    }
+  }
+  return personaSlug;
+}
+
+function getPersonaCategorySlug(serviceSlug) {
+  for (const section of serviceMenuSections) {
+    const categorySlug = slugify(section.label);
+    for (const item of section.items) {
+      if (slugify(item.title) === serviceSlug) {
+        return categorySlug;
+      }
+    }
+  }
+  return 'services';
+}
+
+function isPersonaBasedUrl(urlPath) {
+  const segments = urlPath.split('/').filter(Boolean);
+  return segments.length === 4 && segments[3].includes('-for-');
+}
+
 // Helper function to identify main services
 function isMainService(urlPath) {
   const mainServices = [
@@ -339,6 +399,7 @@ async function generateSeparateSitemaps() {
     faqs: [],
     hire: [],
     locations: [],
+    personaBased: [],
     checklists: [],
     howTo: [],
   };
@@ -383,6 +444,14 @@ async function generateSeparateSitemaps() {
       });
     });
   }
+
+  const personaSlugs = extractPersonaSlugs();
+  console.log(`🧭 Found ${personaSlugs.length} persona-based slugs`);
+  personaSlugs.forEach((personaSlug) => {
+    const baseServiceSlug = baseServiceSlugFromPersona(personaSlug);
+    const categorySlug = getPersonaCategorySlug(baseServiceSlug);
+    categorizedUrls.personaBased.push(`${SITE_URL}/${categorySlug}/${baseServiceSlug}/${personaSlug}`);
+  });
 
   // Add hire URLs from navbar structure
   const hireUrls = [
@@ -496,6 +565,8 @@ async function generateSeparateSitemaps() {
       }
     } else if (urlPath.includes('/hire-') || urlPath.includes('/hire/')) {
       categorizedUrls.hire.push(url);
+    } else if (isPersonaBasedUrl(urlPath)) {
+      categorizedUrls.personaBased.push(url);
     } else if (isMainService(urlPath)) {
       categorizedUrls.mainServices.push(url);
     } else if (isSubService(urlPath)) {
@@ -549,6 +620,7 @@ async function generateSeparateSitemaps() {
   await createSitemapFile('faq-sitemap.xml', categorizedUrls.faqs);
   await createSitemapFile('hire-sitemap.xml', categorizedUrls.hire);
   await createSitemapFile('locations-sitemap.xml', categorizedUrls.locations);
+  await createSitemapFile('persona-sitemap.xml', categorizedUrls.personaBased);
   await createSitemapFile('how-to-sitemap.xml', categorizedUrls.howTo);
   await createSitemapFile('checklist-sitemap.xml', categorizedUrls.checklists);
   await createLocationServiceSitemapFiles(locationServicePages);
@@ -566,6 +638,7 @@ async function generateSeparateSitemaps() {
   console.log('  - sub-services-sitemap.xml');
   console.log('  - hire-sitemap.xml');
   console.log('  - locations-sitemap.xml');
+  console.log('  - persona-sitemap.xml');
   Object.keys(locationServicePages).forEach(country => {
     console.log(`  - ${country}-services-sitemap.xml`);
   });
@@ -652,6 +725,7 @@ async function createSitemapIndex() {
     'faq-sitemap.xml',
     'hire-sitemap.xml',
     'locations-sitemap.xml',
+    'persona-sitemap.xml',
     'how-to-sitemap.xml',
     'checklist-sitemap.xml',
   ];
