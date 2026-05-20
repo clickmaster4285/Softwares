@@ -3,13 +3,6 @@ const path = require('path');
 
 const SITE_URL = 'https://software.clickmasters.pk';
 const PUBLIC_DIR = path.join(process.cwd(), 'public');
-const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg']);
-const VIDEO_EXTENSIONS = new Set(['.mp4', '.webm', '.mov', '.m4v']);
-const IMAGE_SITEMAP_SKIP = new Set([
-  '/svg/favicon.svg',
-  '/images/placeholder.svg',
-  '/favicon.svg',
-]);
 
 // Helper function to fetch data from API
 async function fetchFromApi(endpoint) {
@@ -257,29 +250,6 @@ function extractAllServicePageUrls() {
   return [...pagesBySlug.values()];
 }
 
-const SERVICE_HERO_IMAGE = '/images/hero-img.png';
-const CHECKLIST_IMAGE = '/images/checklist-img.webp';
-const HOMEPAGE_IMAGES = [
-  '/images/hero.webp',
-  '/images/hero-bg.jpg',
-  '/images/logo1.webp',
-  '/images/logo-white1.webp',
-  '/images/ctaImage.png',
-  '/og/logo-white.webp',
-];
-
-function getPartnerImages() {
-  const partnersDir = path.join(PUBLIC_DIR, 'partners');
-  if (!fs.existsSync(partnersDir)) {
-    return [];
-  }
-
-  return fs
-    .readdirSync(partnersDir)
-    .filter((file) => IMAGE_EXTENSIONS.has(path.extname(file).toLowerCase()))
-    .map((file) => `/partners/${file}`);
-}
-
 function extractPersonaSlugs() {
   const personaPath = path.join(process.cwd(), 'src/lib/persona-based.ts');
   if (!fs.existsSync(personaPath)) {
@@ -304,6 +274,51 @@ const PERSONA_SUFFIXES = [
   '-for-startup-founders',
   '-for-ctos',
 ];
+
+const GOAL_URL_SUFFIXES = ['to-increase-revenue', 'to-launch-faster', 'to-reduce-costs'];
+
+function parseGoalCompositeSlug(compositeSlug) {
+  for (const suffix of GOAL_URL_SUFFIXES) {
+    if (compositeSlug.endsWith(`-${suffix}`)) {
+      return {
+        serviceSlug: compositeSlug.slice(0, -(suffix.length + 1)),
+        goalUrlSlug: suffix,
+      };
+    }
+  }
+  return null;
+}
+
+function isGoalBasedUrl(urlPath) {
+  const segments = urlPath.split('/').filter(Boolean);
+  if (segments.length !== 3) return false;
+  return GOAL_URL_SUFFIXES.includes(segments[2]);
+}
+
+function extractGoalBasedUrls() {
+  const goalBasedPath = path.join(process.cwd(), 'src/lib/goal-based.ts');
+  if (!fs.existsSync(goalBasedPath)) {
+    return [];
+  }
+
+  const content = fs.readFileSync(goalBasedPath, 'utf8');
+  // Only top-level goal page objects (slug is the first property)
+  const slugRegex =
+    /\{\s*\n\s*"slug":\s*"([^"]+-to-(?:increase-revenue|launch-faster|reduce-costs))"/g;
+  const servicePages = extractAllServicePageUrls();
+  const categoryByService = new Map(servicePages.map((p) => [p.slug, p.categorySlug]));
+
+  const urls = [];
+  let match;
+  while ((match = slugRegex.exec(content)) !== null) {
+    const parsed = parseGoalCompositeSlug(match[1]);
+    if (!parsed) continue;
+    const categorySlug = categoryByService.get(parsed.serviceSlug) || 'services';
+    urls.push(`${SITE_URL}/${categorySlug}/${parsed.serviceSlug}/${parsed.goalUrlSlug}`);
+  }
+
+  return [...new Set(urls)];
+}
 
 function baseServiceSlugFromPersona(personaSlug) {
   for (const suffix of PERSONA_SUFFIXES) {
@@ -399,6 +414,11 @@ function getUrlPriorityAndFreq(urlPath) {
     return { priority: '0.75', changefreq: 'weekly' };
   }
 
+  // Goal-based landing pages (/{category}/{service}/{goal})
+  if (isGoalBasedUrl(urlPath)) {
+    return { priority: '0.75', changefreq: 'weekly' };
+  }
+
   // Service pages - medium priority, weekly updates
   if (isMainService(urlPath) || isSubService(urlPath)) {
     return { priority: '0.8', changefreq: 'weekly' };
@@ -477,6 +497,7 @@ async function generateSeparateSitemaps() {
     hire: [],
     locations: [],
     personaBased: [],
+    goalBased: [],
     checklists: [],
     howTo: [],
   };
@@ -529,6 +550,10 @@ async function generateSeparateSitemaps() {
     const categorySlug = getPersonaCategorySlug(baseServiceSlug);
     categorizedUrls.personaBased.push(`${SITE_URL}/${categorySlug}/${baseServiceSlug}/${personaSlug}`);
   });
+
+  const goalBasedUrls = extractGoalBasedUrls();
+  console.log(`🎯 Found ${goalBasedUrls.length} goal-based URLs`);
+  categorizedUrls.goalBased.push(...goalBasedUrls);
 
   // Add hire URLs from navbar structure
   const hireUrls = [
@@ -642,6 +667,8 @@ async function generateSeparateSitemaps() {
       }
     } else if (urlPath.includes('/hire-') || urlPath.includes('/hire/')) {
       categorizedUrls.hire.push(url);
+    } else if (isGoalBasedUrl(urlPath)) {
+      categorizedUrls.goalBased.push(url);
     } else if (isPersonaBasedUrl(urlPath)) {
       categorizedUrls.personaBased.push(url);
     } else if (isMainService(urlPath)) {
@@ -698,22 +725,16 @@ async function generateSeparateSitemaps() {
   await createSitemapFile('hire-sitemap.xml', categorizedUrls.hire);
   await createSitemapFile('locations-sitemap.xml', categorizedUrls.locations);
   await createSitemapFile('persona-sitemap.xml', categorizedUrls.personaBased);
+  await createSitemapFile('goal-sitemap.xml', categorizedUrls.goalBased);
   await createSitemapFile('how-to-sitemap.xml', categorizedUrls.howTo);
   await createSitemapFile('checklist-sitemap.xml', categorizedUrls.checklists);
   await createLocationServiceSitemapFiles(locationServicePages);
-
-  const pageImagesMap = await collectImageSitemapEntries(categorizedUrls, locationServicePages);
-  const pageVideosMap = collectVideoSitemapEntries(categorizedUrls, locationServicePages);
-  await createImageSitemapFile('image-sitemap.xml', pageImagesMap);
-  await createVideoSitemapFile('video-sitemap.xml', pageVideosMap);
   
   // Create main sitemap index
   await createSitemapIndex();
   
   console.log('\n✅ Separate sitemaps generated successfully!');
   console.log('\n📁 Generated files:');
-  console.log('  - image-sitemap.xml');
-  console.log('  - video-sitemap.xml');
   console.log('  - blog-sitemap.xml');
   console.log('  - case-study-sitemap.xml');
   console.log('  - faq-sitemap.xml');
@@ -723,6 +744,7 @@ async function generateSeparateSitemaps() {
   console.log('  - hire-sitemap.xml');
   console.log('  - locations-sitemap.xml');
   console.log('  - persona-sitemap.xml');
+  console.log('  - goal-sitemap.xml');
   Object.keys(locationServicePages).forEach(country => {
     console.log(`  - ${country}-services-sitemap.xml`);
   });
@@ -810,10 +832,9 @@ async function createSitemapIndex() {
     'hire-sitemap.xml',
     'locations-sitemap.xml',
     'persona-sitemap.xml',
+    'goal-sitemap.xml',
     'how-to-sitemap.xml',
     'checklist-sitemap.xml',
-    'image-sitemap.xml',
-    'video-sitemap.xml',
   ];
   
   const locationCountryFiles = getLocationServiceSitemapFiles().sort();
@@ -848,289 +869,6 @@ function escapeXml(unsafe) {
       case '"': return '&quot;';
     }
   });
-}
-
-function resolveMediaUrl(value) {
-  if (!value || typeof value !== 'string') {
-    return null;
-  }
-
-  const trimmed = value.trim();
-  if (!trimmed) {
-    return null;
-  }
-
-  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
-    return trimmed;
-  }
-
-  if (trimmed.startsWith('/')) {
-    return `${SITE_URL}${trimmed}`;
-  }
-
-  return `${SITE_URL}/${trimmed}`;
-}
-
-function walkPublicMediaFiles(relativeDir = '', extensionSet) {
-  const absoluteDir = path.join(PUBLIC_DIR, relativeDir);
-  if (!fs.existsSync(absoluteDir)) {
-    return [];
-  }
-
-  const results = [];
-  const entries = fs.readdirSync(absoluteDir, { withFileTypes: true });
-
-  entries.forEach((entry) => {
-    const nextRelative = relativeDir ? `${relativeDir}/${entry.name}` : entry.name;
-
-    if (entry.isDirectory()) {
-      if (entry.name === 'uploads') {
-        return;
-      }
-      results.push(...walkPublicMediaFiles(nextRelative, extensionSet));
-      return;
-    }
-
-    const ext = path.extname(entry.name).toLowerCase();
-    if (!extensionSet.has(ext)) {
-      return;
-    }
-
-    results.push(`/${nextRelative.replace(/\\/g, '/')}`);
-  });
-
-  return results;
-}
-
-function addImageEntry(pageImagesMap, pageUrl, imageUrl, title = '') {
-  const resolvedPage = resolveMediaUrl(pageUrl);
-  const resolvedImage = resolveMediaUrl(imageUrl);
-
-  if (!resolvedPage || !resolvedImage) {
-    return;
-  }
-
-  if (!pageImagesMap.has(resolvedPage)) {
-    pageImagesMap.set(resolvedPage, []);
-  }
-
-  const entries = pageImagesMap.get(resolvedPage);
-  if (entries.some((entry) => entry.loc === resolvedImage)) {
-    return;
-  }
-
-  entries.push({
-    loc: resolvedImage,
-    title: title || path.basename(resolvedImage),
-  });
-}
-
-function addVideoEntry(pageVideosMap, pageUrl, video) {
-  const resolvedPage = resolveMediaUrl(pageUrl);
-  const contentLoc = resolveMediaUrl(video.content_loc);
-  const thumbnailLoc = resolveMediaUrl(video.thumbnail_loc);
-
-  if (!resolvedPage || !contentLoc || !thumbnailLoc) {
-    return;
-  }
-
-  if (!pageVideosMap.has(resolvedPage)) {
-    pageVideosMap.set(resolvedPage, []);
-  }
-
-  const entries = pageVideosMap.get(resolvedPage);
-  const duplicate = entries.some((entry) => entry.content_loc === contentLoc);
-  if (duplicate) {
-    return;
-  }
-
-  entries.push({
-    content_loc: contentLoc,
-    thumbnail_loc: thumbnailLoc,
-    title: video.title || 'ClickMasters',
-    description: video.description || 'ClickMasters software development services video.',
-  });
-}
-
-async function collectImageSitemapEntries(_categorizedUrls, locationServicePages) {
-  const pageImagesMap = new Map();
-  const servicePages = extractAllServicePageUrls();
-  const checklistSlugs = extractChecklistSlugs();
-
-  [...HOMEPAGE_IMAGES, ...getPartnerImages()].forEach((imagePath) => {
-    addImageEntry(pageImagesMap, `${SITE_URL}/`, imagePath, path.basename(imagePath));
-  });
-
-  if (fs.existsSync(path.join(PUBLIC_DIR, 'images', 'ceo.jpeg'))) {
-    addImageEntry(pageImagesMap, `${SITE_URL}/about-us`, '/images/ceo.jpeg', 'CEO');
-  }
-
-  servicePages.forEach(({ url, slug }) => {
-    addImageEntry(pageImagesMap, url, SERVICE_HERO_IMAGE, 'Service hero');
-
-    if (checklistSlugs.has(slug)) {
-      addImageEntry(pageImagesMap, `${url}/checklist`, CHECKLIST_IMAGE, 'Service checklist');
-    }
-  });
-
-  Object.values(locationServicePages).flat().forEach((pageUrl) => {
-    addImageEntry(pageImagesMap, pageUrl, SERVICE_HERO_IMAGE, 'Service hero');
-  });
-
-  try {
-    const blogs = await fetchFromApi('/blog');
-    blogs.forEach((blog) => {
-      if (!blog.published || !blog.slug) {
-        return;
-      }
-
-      const pageUrl = `${SITE_URL}/blog/${blog.slug}`;
-      if (blog.thumbnail) {
-        addImageEntry(pageImagesMap, pageUrl, blog.thumbnail, blog.title || 'Blog post');
-      }
-      if (blog.authorImage) {
-        addImageEntry(pageImagesMap, pageUrl, blog.authorImage, blog.author || 'Author');
-      }
-    });
-  } catch (error) {
-    console.log('Warning: Could not fetch blog images:', error.message);
-  }
-
-  try {
-    const caseStudies = await fetchFromApi('/case-studies');
-    caseStudies.forEach((caseStudy) => {
-      if (!caseStudy.published || !caseStudy.slug) {
-        return;
-      }
-
-      const pageUrl = `${SITE_URL}/case-studies/${caseStudy.slug}`;
-      const image =
-        caseStudy.thumbnail ||
-        caseStudy.project?.thumbnail ||
-        '';
-
-      if (image) {
-        addImageEntry(pageImagesMap, pageUrl, image, caseStudy.title || 'Case study');
-      }
-    });
-  } catch (error) {
-    console.log('Warning: Could not fetch case study images:', error.message);
-  }
-
-  try {
-    const projects = await fetchFromApi('/projects');
-    projects.forEach((project) => {
-      if (!project._id || !project.thumbnail) {
-        return;
-      }
-
-      addImageEntry(
-        pageImagesMap,
-        `${SITE_URL}/software-solutions/${project._id}`,
-        project.thumbnail,
-        project.title || 'Software solution',
-      );
-    });
-  } catch (error) {
-    console.log('Warning: Could not fetch project images:', error.message);
-  }
-
-  return pageImagesMap;
-}
-
-function collectVideoSitemapEntries(_categorizedUrls, locationServicePages) {
-  const pageVideosMap = new Map();
-  const servicePages = extractAllServicePageUrls();
-  const video = {
-    content_loc: '/video/services-video.mp4',
-    thumbnail_loc: '/images/services_hero.png',
-    title: 'ClickMasters Software Development Services',
-    description:
-      'Overview video showcasing ClickMasters software development services, web apps, mobile apps, and SaaS solutions.',
-  };
-
-  const videoPages = new Set([
-    ...servicePages.map((page) => page.url),
-    ...Object.values(locationServicePages).flat(),
-  ]);
-
-  videoPages.forEach((pageUrl) => {
-    addVideoEntry(pageVideosMap, pageUrl, video);
-  });
-
-  return pageVideosMap;
-}
-
-async function createImageSitemapFile(filename, pageImagesMap) {
-  if (!pageImagesMap.size) {
-    console.log(`⚠️  Skipping ${filename} (no images)`);
-    return;
-  }
-
-  const filePath = path.join(PUBLIC_DIR, filename);
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
-  xml += ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n';
-
-  let imageCount = 0;
-
-  pageImagesMap.forEach((images, pageUrl) => {
-    xml += '  <url>\n';
-    xml += `    <loc>${escapeXml(pageUrl)}</loc>\n`;
-
-    images.forEach((image) => {
-      xml += '    <image:image>\n';
-      xml += `      <image:loc>${escapeXml(image.loc)}</image:loc>\n`;
-      if (image.title) {
-        xml += `      <image:title>${escapeXml(image.title)}</image:title>\n`;
-      }
-      xml += '    </image:image>\n';
-      imageCount++;
-    });
-
-    xml += '  </url>\n';
-  });
-
-  xml += '</urlset>';
-
-  fs.writeFileSync(filePath, xml);
-  console.log(`📄 Created ${filename} with ${imageCount} images across ${pageImagesMap.size} pages`);
-}
-
-async function createVideoSitemapFile(filename, pageVideosMap) {
-  if (!pageVideosMap.size) {
-    console.log(`⚠️  Skipping ${filename} (no videos)`);
-    return;
-  }
-
-  const filePath = path.join(PUBLIC_DIR, filename);
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
-  xml += ' xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n';
-
-  let videoCount = 0;
-
-  pageVideosMap.forEach((videos, pageUrl) => {
-    xml += '  <url>\n';
-    xml += `    <loc>${escapeXml(pageUrl)}</loc>\n`;
-
-    videos.forEach((video) => {
-      xml += '    <video:video>\n';
-      xml += `      <video:thumbnail_loc>${escapeXml(video.thumbnail_loc)}</video:thumbnail_loc>\n`;
-      xml += `      <video:title>${escapeXml(video.title)}</video:title>\n`;
-      xml += `      <video:description>${escapeXml(video.description)}</video:description>\n`;
-      xml += `      <video:content_loc>${escapeXml(video.content_loc)}</video:content_loc>\n`;
-      xml += '    </video:video>\n';
-      videoCount++;
-    });
-
-    xml += '  </url>\n';
-  });
-
-  xml += '</urlset>';
-
-  fs.writeFileSync(filePath, xml);
-  console.log(`📄 Created ${filename} with ${videoCount} videos across ${pageVideosMap.size} pages`);
 }
 
 // Run the script

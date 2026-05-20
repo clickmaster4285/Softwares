@@ -395,17 +395,16 @@ const { data: blogs = [] } = useQuery({
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 transition-opacity hover:opacity-90 h-8"
+          className="flex min-w-0 max-w-[min(100%,calc(100%-3.5rem))] shrink items-center gap-2 transition-opacity hover:opacity-90"
           onClick={closeDropdowns}
         >
           <Image
-          
             key={logoToShow}
             src={logoToShow}
             alt="ClickMasters"
             width={600}
             height={400}
-            className="h-12 w-30 sm:w-48 xl:w-64"
+            className="h-10 w-auto max-h-10 max-w-[160px] object-contain object-left sm:h-12 sm:max-h-12 sm:max-w-[200px] xl:max-w-[256px]"
             priority
             fetchPriority="high"
           />
@@ -657,20 +656,23 @@ const { data: blogs = [] } = useQuery({
           </Link>
         </div> */}
 
-        {/* Mobile Menu Trigger */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="xl:hidden">
-            <button
-              className={cn(
-                'p-2 transition-colors',
-                isLightHero
-                  ? 'text-white/90 hover:text-primary'
-                  : 'text-black/70 hover:text-primary'
-              )}
-            >
-              <Menu className="h-6 w-6" />
-            </button>
-          </SheetTrigger>
+        {/* Mobile menu: logo must stay constrained or flex pushes this off-screen; keep trigger from shrinking */}
+        <div className="flex shrink-0 xl:hidden">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <button
+                type="button"
+                aria-label="Open menu"
+                className={cn(
+                  'p-2 transition-colors',
+                  isLightHero
+                    ? 'text-white/90 hover:text-primary'
+                    : 'text-black/70 hover:text-primary'
+                )}
+              >
+                <Menu className="h-6 w-6 shrink-0" />
+              </button>
+            </SheetTrigger>
           <SheetContent
             side="right"
             className="w-full sm:max-w-md p-0 bg-white border-l border-black/10"
@@ -770,7 +772,8 @@ const { data: blogs = [] } = useQuery({
               </div> */}
             </div>
           </SheetContent>
-        </Sheet>
+          </Sheet>
+        </div>
       </div>
 
       {/* Full-width Dropdown Menu for Solutions */}

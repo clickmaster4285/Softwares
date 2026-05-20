@@ -31,6 +31,12 @@ interface ServiceHeroProps {
     lead: string;
     highlights?: string[];
     marketStats?: Array<{ label: string; value: string }>;
+    /** Goal-based subpage: e.g. "Launch Faster" */
+    currentPageLabel?: string;
+    /** Goal-based subpage: parent service link in breadcrumb */
+    parentService?: { label: string; href: string };
+    /** Terms to emphasize in the lead (goal pages) */
+    boldTerms?: string[];
   };
 }
 
@@ -136,28 +142,38 @@ export function ServiceHero({ page }: ServiceHeroProps) {
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Helper function to make service name bold in text
-  const makeBoldInText = (text: string, serviceName: string) => {
-    if (!text || !serviceName) return text;
+  const isGoalPage = Boolean(page.parentService && page.currentPageLabel);
+  const boldTerms =
+    page.boldTerms?.filter(Boolean) ??
+    (page.serviceName ? [page.serviceName] : []);
 
-    const parts: (string | React.ReactNode)[] = [];
-    const regex = new RegExp(`(${serviceName})`, "gi");
+  // Helper function to emphasize key terms in text
+  const makeBoldInText = (text: string, terms: string[]) => {
+    if (!text || terms.length === 0) return text;
+
+    const escaped = terms
+      .filter(Boolean)
+      .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    if (escaped.length === 0) return text;
+
+    const regex = new RegExp(`(${escaped.join("|")})`, "gi");
     const split = text.split(regex);
+    const lowerTerms = terms.map((t) => t.toLowerCase());
 
-    split.forEach((part, index) => {
-      if (part.toLowerCase() === serviceName.toLowerCase()) {
-        parts.push(
+    return split.map((part, index) => {
+      const isBold = terms.some((t) => part.toLowerCase() === t.toLowerCase());
+      if (isBold) {
+        return (
           <span key={index} className="font-black text-primary">
             {part}
           </span>
         );
-      } else {
-        parts.push(part);
       }
+      return part;
     });
-
-    return parts;
   };
+
+  const breadcrumbCurrent = page.currentPageLabel ?? page.serviceName;
 
   useEffect(() => {
     if (isInView) controls.start("visible");
@@ -280,8 +296,32 @@ export function ServiceHero({ page }: ServiceHeroProps) {
             >
               {page.category}
             </Link>
+            {page.parentService && (
+              <>
+                <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
+                <Link
+                  href={page.parentService.href}
+                  className="text-slate-300 hover:text-primary transition-colors font-medium"
+                >
+                  {page.parentService.label}
+                </Link>
+              </>
+            )}
             <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
-            <span className="font-black text-white">{page.serviceName}</span>
+            {isGoalPage && page.parentService ? (
+              <>
+                <Link
+                  href={page.parentService.href}
+                  className="text-slate-300 hover:text-primary transition-colors font-medium"
+                >
+                  {page.parentService.label}
+                </Link>
+                <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
+                <span className="font-black text-white">{page.currentPageLabel}</span>
+              </>
+            ) : (
+              <span className="font-black text-white">{page.serviceName}</span>
+            )}
           </nav>
         </div>
       </motion.div>
@@ -300,16 +340,25 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               initial="hidden"
               animate={controls}
             >
-              {/* Category Badge */}
+              {/* Category / goal badge */}
               <motion.div variants={fadeInUp}>
-                <Link href={`/${page.categorySlug}`}>
+                {isGoalPage && page.currentPageLabel ? (
                   <Badge
-                    className="mb-5 rounded-md border-0 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white hover:bg-primary transition-colors cursor-pointer"
+                    className="mb-5 rounded-md border border-orange-300/50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white"
                     style={{ background: "#ea580c" }}
                   >
-                    {page.category}
+                    Goal · {page.currentPageLabel}
                   </Badge>
-                </Link>
+                ) : (
+                  <Link href={`/${page.categorySlug}`}>
+                    <Badge
+                      className="mb-5 rounded-md border-0 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white hover:bg-primary transition-colors cursor-pointer"
+                      style={{ background: "#ea580c" }}
+                    >
+                      {page.category}
+                    </Badge>
+                  </Link>
+                )}
               </motion.div>
 
               {/* Title */}
@@ -325,7 +374,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                 className="mt-5 max-w-xl text-base leading-relaxed text-slate-200 lg:text-lg"
                 variants={fadeInUp}
               >
-                {makeBoldInText(page.lead, page.serviceName)}
+                {makeBoldInText(page.lead, boldTerms)}
               </motion.p>
 
               {/* Highlight Pills */}
@@ -402,7 +451,15 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                     asChild
                     className="group rounded-full border-slate-400 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-primary font-semibold text-white transition-all"
                   >
-                    <Link href="#">View all services</Link>
+                    <Link
+                      href={
+                        isGoalPage && page.parentService
+                          ? page.parentService.href
+                          : `/${page.categorySlug}`
+                      }
+                    >
+                      {isGoalPage ? "View parent service" : "View all services"}
+                    </Link>
                   </Button>
                 </motion.div>
               </motion.div>

@@ -1,3 +1,4 @@
+import { getServicePage } from '@/lib/service-pages';
 import {
   servicePages,
   type ServicePageData,
