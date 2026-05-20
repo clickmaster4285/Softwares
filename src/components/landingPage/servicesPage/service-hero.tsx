@@ -31,6 +31,12 @@ interface ServiceHeroProps {
     lead: string;
     highlights?: string[];
     marketStats?: Array<{ label: string; value: string }>;
+    /** When set, breadcrumb is Home → category → parent service → current page label */
+    parentService?: { label: string; href: string };
+    /** Label for the current page in breadcrumb (defaults to serviceName) */
+    currentPageLabel?: string;
+    /** Terms to highlight in the lead paragraph (defaults to [serviceName]) */
+    boldTerms?: string[];
   };
 }
 
@@ -137,15 +143,22 @@ export function ServiceHero({ page }: ServiceHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Helper function to make service name bold in text
-  const makeBoldInText = (text: string, serviceName: string) => {
-    if (!text || !serviceName) return text;
+  const makeBoldInText = (text: string, terms: string[]) => {
+    if (!text || terms.length === 0) return text;
+
+    const pattern = terms
+      .filter(Boolean)
+      .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+      .join("|");
+    if (!pattern) return text;
 
     const parts: (string | React.ReactNode)[] = [];
-    const regex = new RegExp(`(${serviceName})`, "gi");
+    const regex = new RegExp(`(${pattern})`, "gi");
     const split = text.split(regex);
+    const lowerTerms = terms.map((t) => t.toLowerCase());
 
     split.forEach((part, index) => {
-      if (part.toLowerCase() === serviceName.toLowerCase()) {
+      if (lowerTerms.includes(part.toLowerCase())) {
         parts.push(
           <span key={index} className="font-black text-primary">
             {part}
@@ -158,6 +171,11 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
     return parts;
   };
+
+  const boldTerms =
+    page.boldTerms ??
+    (page.serviceName ? [page.serviceName] : []);
+  const breadcrumbCurrent = page.currentPageLabel ?? page.serviceName;
 
   useEffect(() => {
     if (isInView) controls.start("visible");
@@ -280,8 +298,19 @@ export function ServiceHero({ page }: ServiceHeroProps) {
             >
               {page.category}
             </Link>
+            {page.parentService && (
+              <>
+                <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
+                <Link
+                  href={page.parentService.href}
+                  className="text-slate-300 hover:text-primary transition-colors font-medium"
+                >
+                  {page.parentService.label}
+                </Link>
+              </>
+            )}
             <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
-            <span className="font-black text-white">{page.serviceName}</span>
+            <span className="font-black text-white">{breadcrumbCurrent}</span>
           </nav>
         </div>
       </motion.div>
@@ -325,7 +354,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                 className="mt-5 max-w-xl text-base leading-relaxed text-slate-200 lg:text-lg"
                 variants={fadeInUp}
               >
-                {makeBoldInText(page.lead, page.serviceName)}
+                {makeBoldInText(page.lead, boldTerms)}
               </motion.p>
 
               {/* Highlight Pills */}
