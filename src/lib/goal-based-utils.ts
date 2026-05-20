@@ -176,12 +176,20 @@ function findApproachIntro(sections: ServiceSection[]): GoalApproachIntro | unde
   };
 }
 
+const SPEED_SECTION_EMOJI_PREFIXES = ['\u{1F4C8}', '\u{1F680}', '\u{1F4B0}'] as const;
+
+function titleStartsWithSpeedEmoji(title: string): boolean {
+  const first = title.codePointAt(0);
+  if (first === undefined) return false;
+  return SPEED_SECTION_EMOJI_PREFIXES.some((prefix) => title.startsWith(prefix));
+}
+
 function findSpeedSection(sections: ServiceSection[]): NormalizedGoalSection | undefined {
   const section = sections.find(
     (s) =>
       (/Why|How Software|ROI Framework|Reduces Costs|Generates Revenue|matters/i.test(s.title) &&
         !/Approach/i.test(s.title)) ||
-      /^[📈🚀💰]/.test(s.title)
+      titleStartsWithSpeedEmoji(s.title)
   );
   if (!section) return undefined;
   return { heading: section.title.replace(/^[^\w]+/, '').trim(), body: section.body };

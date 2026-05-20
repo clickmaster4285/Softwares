@@ -79,6 +79,9 @@ export const organizationSchema = {
   ],
 };
 
+/** Alias used by the homepage */
+export const homepageOrganizationSchema = organizationSchema;
+
 /** WebSite – enables Google Sitelinks Search Box */
 export const webSiteSchema = {
   '@context': 'https://schema.org',
