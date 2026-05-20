@@ -329,21 +329,14 @@ function baseServiceSlugFromPersona(personaSlug) {
   return personaSlug;
 }
 
-function getPersonaCategorySlug(serviceSlug) {
-  for (const section of serviceMenuSections) {
-    const categorySlug = slugify(section.label);
-    for (const item of section.items) {
-      if (slugify(item.title) === serviceSlug) {
-        return categorySlug;
-      }
-    }
-  }
-  return 'services';
+function getPersonaCategorySlug(serviceSlug, categoryByService) {
+  return categoryByService.get(serviceSlug) || 'services';
 }
 
 function isPersonaBasedUrl(urlPath) {
   const segments = urlPath.split('/').filter(Boolean);
-  return segments.length === 4 && segments[3].includes('-for-');
+  if (segments.length !== 3) return false;
+  return PERSONA_SUFFIXES.some((suffix) => segments[2].endsWith(suffix));
 }
 
 // Helper function to identify main services
@@ -544,10 +537,12 @@ async function generateSeparateSitemaps() {
   }
 
   const personaSlugs = extractPersonaSlugs();
+  const servicePages = extractAllServicePageUrls();
+  const categoryByService = new Map(servicePages.map((p) => [p.slug, p.categorySlug]));
   console.log(`🧭 Found ${personaSlugs.length} persona-based slugs`);
   personaSlugs.forEach((personaSlug) => {
     const baseServiceSlug = baseServiceSlugFromPersona(personaSlug);
-    const categorySlug = getPersonaCategorySlug(baseServiceSlug);
+    const categorySlug = getPersonaCategorySlug(baseServiceSlug, categoryByService);
     categorizedUrls.personaBased.push(`${SITE_URL}/${categorySlug}/${baseServiceSlug}/${personaSlug}`);
   });
 

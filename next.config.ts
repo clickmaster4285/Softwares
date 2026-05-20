@@ -39,6 +39,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/locationImg.webp",
+        destination: "/images/locationImg.webp",
+        permanent: true,
+      },
+      {
+        source: "/locationimg.webp",
+        destination: "/images/locationImg.webp",
+        permanent: true,
+      },
+      {
         source: "/logo1.webp",
         destination: "/images/logo1.webp",
         permanent: true,
