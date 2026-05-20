@@ -662,10 +662,9 @@ async function generateSeparateSitemaps() {
       }
     } else if (urlPath.includes('/hire-') || urlPath.includes('/hire/')) {
       categorizedUrls.hire.push(url);
-    } else if (isGoalBasedUrl(urlPath)) {
-      categorizedUrls.goalBased.push(url);
-    } else if (isPersonaBasedUrl(urlPath)) {
-      categorizedUrls.personaBased.push(url);
+    } else if (isGoalBasedUrl(urlPath) || isPersonaBasedUrl(urlPath)) {
+      // Goal and persona URLs are generated with canonical category slugs above.
+      return;
     } else if (isMainService(urlPath)) {
       categorizedUrls.mainServices.push(url);
     } else if (isSubService(urlPath)) {

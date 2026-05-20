@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { notFound, permanentRedirect, redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Script from 'next/script';
 import type { CSSProperties, ReactNode } from 'react';
 import { siteConfig, breadcrumbSchema, faqSchema, serviceSchema } from '@/app/metadata-config';
@@ -635,7 +635,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const description = personaPage.metaDescription;
 
     if (servicePage.categorySlug !== slug) {
-      return { title, description };
+      notFound();
     }
 
     const canonical = `${siteConfig.url}${canonicalPath}`;
@@ -717,7 +717,7 @@ export default async function GoalBasedLandingPage({ params }: PageProps) {
     const { personaPage, servicePage, serviceSlug, canonicalPath } = personaRoute;
 
     if (servicePage.categorySlug !== slug) {
-      permanentRedirect(canonicalPath);
+      notFound();
     }
 
     const pageAbsoluteUrl = `${siteConfig.url}${canonicalPath}`;
