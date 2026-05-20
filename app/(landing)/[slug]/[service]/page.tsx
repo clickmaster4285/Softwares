@@ -52,9 +52,14 @@ import { EngineeringBaseline } from '@/src/components/landingPage/servicesPage/E
 import { WhyChooseUs } from '@/src/components/landingPage/servicesPage/WhyChooseUs';
 import { TechStack } from '@/src/components/landingPage/servicesPage/TechStack';
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
-import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
+import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
 import { CTAComponents } from '@/src/components/landingPage/servicesPage/FooterCTA';
 import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
+import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
+import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
+import FaqSection from '@/src/components/landingPage/home/FaqSection';
+import DynamicSections from '@/src/components/landingPage/servicesPage/DynamicSections';
+import ChecklistCTAHero from '@/src/components/landingPage/checklist/ChecklistCTAHero';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -148,7 +153,6 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     return `section-${index}-${slugify(heading)}`;
   };
 
-  
   // Add generic sections to TOC
   sections.forEach((section, index) => {
     const id = getSectionId(section.heading, index);
@@ -257,112 +261,100 @@ export default async function ServiceByCategoryPage({ params }: Props) {
       )}
 
       <div className="min-h-screen text-slate-900">
+        <ServiceHero page={page} />
 
-
-    <ServiceHero page={page} />
-
-
-        {/* Main Content with Table of Contents */}
-        <div className="mx-auto max-w-8xl px-16 md:px-8 lg:px-16">
-          <div className="relative lg:grid lg:grid-cols-[1fr_260px] lg:gap-16">
+        {/* Main Content with Table of Contents - FIXED CONTAINER CLASSES */}
+        <div className="mx-4 max-w-full px-6 md:px-8 lg:px-10 xl:px-24">
+          <div className="relative lg:grid lg:grid-cols-[1fr_280px] lg:gap-12 xl:gap-16">
             {/* Main Content */}
-            <main className="py-12 lg:py-10">
-              {/* Section Content */}
-              {sections.map((section, index) => (
-                <section
-                  key={section.heading}
-                  id={getSectionId(section.heading, index)}
-                  className="scroll-mt-24"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-1 rounded-full bg-primary" />
-                    <h2 
-                      className="text-2xl font-semibold text-slate-900 sm:text-3xl"
-                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.heading, page.serviceName) }}
-                    />
-                  </div>
+            <main className="py-12 lg:py-10 min-w-0">
 
-                  <div className="mt-6 space-y-4 text-slate-600 leading-relaxed">
-                    <p 
-                      className="text-lg whitespace-pre-line"
-                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.body, page.serviceName) }}
-                    />
-                    
-                    {/* Render items if present in section */}
-                    {section.items && (
-                      <ul className="mt-6 space-y-4">
-                        {section.items.map((item, i) => (
-                          <li key={i} className="flex gap-3">
-                            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
-                              <Star className="h-3 w-3 fill-current" />
-                            </div>
-                            <span 
-                              className="italic"
-                              dangerouslySetInnerHTML={{ __html: makeBoldServiceName(item, page.serviceName) }}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
 
-                  <div className="my-6 flex items-center">
-  <div className="h-px w-full bg-gray-300" />
-</div>
-                </section>
-              ))}
-
-                 {/* Our Services Section */}
-{page.servicesCards && (
-  <ServicesSection 
-    serviceName={page.serviceName} 
-    servicesCards={page.servicesCards} 
-  />
-)}
-
-{/* Why Choose Us Section */}
-{page.differentiators && (
-  <WhyChooseUs 
-    slug={page.slug} 
-    differentiators={page.differentiators} 
-  />
-)}
-
-             
-{/* Launch Readiness Checklist */}
-{page.checklist && (
-  <EngineeringBaseline 
-    serviceName={page.serviceName} 
-    checklist={page.checklist} 
-  />
-)}
-              {/* Our Process Section */}
-             {page.processPhases && (
-  <ProcessSection 
-    serviceName={page.serviceName} 
-    processPhases={page.processPhases} 
-  />
-)}
-
-             {/* Tech Stack Section */}
-
-<div style={{ maxWidth: '1460px' }} className="mx-auto">
-  {techStack.length > 0 && <TechStack techStack={techStack as any} />}
-</div>
-              {/* Industries Section */}
-           {page.industryUseCases && (
-                <IndustriesSection industryUseCases={page.industryUseCases} />
-              )}
-
-            {page.pricingTiers && (
-  <PricingSection 
-    serviceName={page.serviceName} 
-    pricingTiers={page.pricingTiers} 
-  />
-              )}
+              {/* Overview anchor */}
+              <div id="overview" />
               
 
+              {/* Section Content */}
+      <DynamicSections
+  sections={sections}
+  serviceName={page.serviceName}
+/>
+              
+
+
+
+
+
+
+              {/* Our Services Section */}
+              {page.servicesCards && (
+                <div id="our-services">
+                  <ServicesSection 
+                    serviceName={page.serviceName} 
+                    servicesCards={page.servicesCards} 
+                  />
+                </div>
+              )}
+
+              {/* Why Choose Us Section */}
+              {page.differentiators && (
+                <div id="why-choose-us">
+                  <WhyChooseUs 
+                    slug={page.slug} 
+                    differentiators={page.differentiators} 
+                  />
+                </div>
+              )}
+             
+              {/* Launch Readiness Checklist */}
+              {page.checklist && (
+                <div id="checklist">
+                  <EngineeringBaseline 
+                    serviceName={page.serviceName} 
+                    checklist={page.checklist} 
+                  />
+                </div>
+              )}
+              
+              {/* Our Process Section */}
+              {page.processPhases && (
+                <div id="our-process">
+                  <ProcessSection 
+                    serviceName={page.serviceName} 
+                    processPhases={page.processPhases} 
+                  />
+                </div>
+              )}
+
+              {/* Tech Stack Section */}
+              {techStack.length > 0 && (
+                <div id="tech-stack">
+                  <div style={{ maxWidth: '1460px' }} className="mx-auto">
+                    <TechStackSection />
+                  </div>
+                </div>
+              )}
+              
+              {/* Industries Section */}
+              {page.industryUseCases && (
+                <div id="industries">
+                  <IndustriesSection industryUseCases={page.industryUseCases} />
+                </div>
+              )}
+
+              {/* Pricing Section */}
+              {page.pricingTiers && (
+                <div id="pricing">
+                  <PricingSection 
+                    serviceName={page.serviceName} 
+                    pricingTiers={page.pricingTiers} 
+                  />
+                </div>
+              )}
+              
+              {/* Ceo Vision Section */}
               <CeoVision />
+
               {/* Generic Tables Section */}
               {page.tables && page.tables.map((table) => (
                 <section key={table.title} id={slugify(table.title)} className="scroll-mt-24 pt-16">
@@ -404,38 +396,29 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                 </section>
               ))}
 
-             {/*  */}
-          {/* Testimonials Section */}
-<TestimonialsSection  />
+              {/* Testimonials Section */}
+              <div id="testimonials">
+                <TestimonialsSection />
+              </div>
+
+              
 
               {/* Case Study Section */}
-              <div className='mb-10 '>
-                
-                  {/* Minimal Hero Section */}
-  <div className="w-full flex flex-col mt-4 sm:mt-6 py-6 sm:py-8">
-  <div className="flex items-center gap-3 px-4 sm:px-6 md:px-8">
-    <div className="h-8 sm:h-10 w-1 rounded-full bg-primary" />
-
-    <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900">
-      Success Stories
-    </h2>
-  </div>
-</div>
-
-                <CaseStudySection />
+              <div id="case-study" className="mb-10">
               
+               <FeaturedInsights />
               </div>
 
               {/* FAQ Section */}
-            {faqs.length > 0 && <FAQSection faqs={faqs} />}
-
-              
-           
-              
+              {faqs.length > 0 && (
+                <div id="faq">
+                <FaqSection faqs={faqs} />
+                </div>
+              )}
             </main>
 
             {/* Sticky Table of Contents - Desktop */}
-            <aside className="hidden lg:block sticky top-24 self-start z-10">
+            <aside className="hidden lg:block sticky top-24 self-start z-10 flex-shrink-0">
               <div className="py-12 lg:py-10">
                 <TableOfContents items={tocItems} />
               </div>
@@ -443,21 +426,21 @@ export default async function ServiceByCategoryPage({ params }: Props) {
           </div>
         </div>
 
-      
-      
-      
         {/* Footer CTA */}
-        <section className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white py-20">
-          <div className="mx-auto max-w-5xl px-5 text-center md:px-8">
-            <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
-              Explore Related Capabilities
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-              Discover how we can help transform your business through our comprehensive services,
-              real-world case studies, or our full solutions portfolio.
-            </p>
-                      </div>
-        </section>
+        <div className='-mb-12'>
+           <ChecklistCTAHero
+       variant="combined"
+       title="Explore Related Capabilities"
+       description="Discover how we can help transform your business through our comprehensive services, real-world case studies, or our full solutions portfolio."
+       buttons={[
+         {
+           text: "Contact Us",
+           href: "/contact-us",
+           variant: "primary",
+         },
+       ]}
+     />
+      </div>
       </div>
     </>
   );

@@ -211,7 +211,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
 
 
 
-      <FaqSection/>
+      <FaqSection  faqs={faqs} />
 
       {/* Final CTA Section
       <section className="relative py-8 overflow-hidden">

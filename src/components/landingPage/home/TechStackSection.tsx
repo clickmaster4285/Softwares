@@ -70,6 +70,55 @@ const techStackData = {
   },
 };
 
+const badgeStyles: Record<string, { bg: string; text: string; border: string }> = {
+  // Blues
+  "React.js":      { bg: "#E6F6FF", text: "#0072C6", border: "#BAE0FF" },
+  "React Native":  { bg: "#E6F6FF", text: "#0072C6", border: "#BAE0FF" },
+  "Go":            { bg: "#E6F6FF", text: "#0072C6", border: "#BAE0FF" },
+  "Azure":         { bg: "#E6F6FF", text: "#0072C6", border: "#BAE0FF" },
+  "Docker":        { bg: "#E6F6FF", text: "#0072C6", border: "#BAE0FF" },
+  // Dark
+  "Next.js":        { bg: "#e5e7eb ", text: "#1a1a1a", border: "#444444" },
+  "GitHub Actions": { bg: "#e5e7eb", text: "#1a1a1a", border: "#444444" },
+  // Reds
+  "Angular":       { bg: "#FDECEA", text: "#C3002F", border: "#FFBDC8" },
+  "Laravel":       { bg: "#FDECEA", text: "#C3002F", border: "#FFBDC8" },
+  "Ruby on Rails": { bg: "#FDECEA", text: "#C3002F", border: "#FFBDC8" },
+  "Swift/iOS":     { bg: "#FDECEA", text: "#C3002F", border: "#FFBDC8" },
+  "Jenkins":       { bg: "#FDECEA", text: "#C3002F", border: "#FFBDC8" },
+  "Redis":         { bg: "#FDECEA", text: "#C3002F", border: "#FFBDC8" },
+  // Indigo blues
+  "TypeScript":    { bg: "#EEF4FF", text: "#2563EB", border: "#BFCFFF" },
+  "Flutter":       { bg: "#EEF4FF", text: "#2563EB", border: "#BFCFFF" },
+  "PostgreSQL":    { bg: "#EEF4FF", text: "#2563EB", border: "#BFCFFF" },
+  "Google Cloud":  { bg: "#EEF4FF", text: "#2563EB", border: "#BFCFFF" },
+  "Kubernetes":    { bg: "#EEF4FF", text: "#2563EB", border: "#BFCFFF" },
+  "Python/Django": { bg: "#EEF4FF", text: "#1E66B0", border: "#BFCFFF" },
+  // Cyans
+  "Tailwind CSS":  { bg: "#E0F7FA", text: "#0D7490", border: "#A5D8E6" },
+  // Greens
+  "Vue.js":         { bg: "#F0FBF0", text: "#3C7B3C", border: "#A8D8A8" },
+  "Node.js":        { bg: "#F0FBF0", text: "#3C7B3C", border: "#A8D8A8" },
+  "MongoDB":        { bg: "#F0FBF0", text: "#3C7B3C", border: "#A8D8A8" },
+  "Kotlin/Android": { bg: "#F0FBF0", text: "#3C7B3C", border: "#A8D8A8" },
+  "New Relic":      { bg: "#F0FBF0", text: "#3C7B3C", border: "#A8D8A8" },
+  // Oranges
+  "MySQL":         { bg: "#FFF0EA", text: "#B34300", border: "#FFCAAB" },
+  "Elasticsearch": { bg: "#FFF0EA", text: "#B34300", border: "#FFCAAB" },
+  "Prometheus":    { bg: "#FFF0EA", text: "#B34300", border: "#FFCAAB" },
+  // Ambers
+  "Java/Spring":   { bg: "#FFF8E1", text: "#B45309", border: "#FDDFA0" },
+  "Firebase":      { bg: "#FFF8E1", text: "#B45309", border: "#FDDFA0" },
+  "AWS":           { bg: "#FFF8E1", text: "#B45309", border: "#FDDFA0" },
+  "Grafana":       { bg: "#FFF8E1", text: "#B45309", border: "#FDDFA0" },
+  // Ionic blue
+  "Ionic":         { bg: "#EAF4FF", text: "#2B66CC", border: "#AFC4EE" },
+  // Purple
+  "Terraform":     { bg: "#F3F0FF", text: "#5B21B6", border: "#D8CAFF" },
+};
+
+const DEFAULT_STYLE = { bg: "#F1F5F9", text: "#475569", border: "#CBD5E1" };
+
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -77,7 +126,12 @@ function useInView(threshold = 0.1) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
       { threshold }
     );
     obs.observe(el);
@@ -87,23 +141,32 @@ function useInView(threshold = 0.1) {
 }
 
 function TechBadge({ item, index }: { item: { name: string; icon: string }; index: number }) {
+  const style = badgeStyles[item.name] ?? DEFAULT_STYLE;
+  const invertIcon = item.name === "GitHub Actions";
+
   return (
     <div
-      className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm transition-all duration-200 cursor-default"
-      style={{ animationDelay: `${index * 40}ms` }}
+      className="inline-flex items-center gap-2 px-3 py-[6px] rounded-full transition-all duration-200 cursor-default"
+      style={{
+        background: style.bg,
+        color: style.text,
+        border: `1.5px solid ${style.border}`,
+        animationDelay: `${index * 40}ms`,
+      }}
     >
-      <div className="relative w-5 h-5 flex-shrink-0">
+      <div className="relative w-[18px] h-[18px] flex-shrink-0">
         <Image
           src={item.icon}
           alt={item.name}
           fill
           className="object-contain"
+          style={invertIcon ? { filter: "invert(1)" } : undefined}
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = "none";
           }}
         />
       </div>
-      <span className="text-[13px] font-medium text-slate-700 whitespace-nowrap">
+      <span className="text-[13px] font-medium whitespace-nowrap">
         {item.name}
       </span>
     </div>
@@ -150,30 +213,26 @@ export function TechStackSection() {
 
   return (
     <div className="bg-white py-16 lg:py-24 lg:px-12" ref={ref}>
-      <div className=" mx-auto px-6 lg:px-10">
+      <div className="mx-auto px-6 lg:px-10">
         {/* Header */}
-  
+        <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
+              Technology Stack
+            </p>
+            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+          </div>
 
+          <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-4xl">
+            Modern tools powering scalable applications
+          </h2>
 
-            <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
-  <div className="inline-flex items-center gap-2 mb-3">
-    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
-    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-      Technology Stack
-    </p>
-    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
-  </div>
-
-  <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-4xl">
-    Modern tools powering scalable applications
- 
-  </h2>
-
-  <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-    Modern technologies and frameworks we use to build secure,
-    high-performance digital experiences.
-  </p>
-</div>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+            Modern technologies and frameworks we use to build secure,
+            high-performance digital experiences.
+          </p>
+        </div>
 
         {/* Grid */}
         <div className="border border-dashed border-slate-300 rounded-2xl overflow-hidden">

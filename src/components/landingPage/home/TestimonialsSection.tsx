@@ -132,7 +132,7 @@ export function TestimonialsSection() {
   // Show loading state
   if (isLoading) {
     return (
-     <section className="relative overflow-visible bg-secondary/40 py-24">
+     <section className="relative overflow-visible py-24">
         <div className="mx-auto  px-6 lg:px-22">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 mb-16">
             <div>

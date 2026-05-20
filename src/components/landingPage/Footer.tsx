@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -8,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Mail, ChevronRight, Phone } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import { FaWhatsapp } from "react-icons/fa";
+
 // Type definitions
 interface FooterLink {
   label: string;
@@ -90,51 +90,51 @@ export function Footer(): JSX.Element {
   const currentYear: number = new Date().getFullYear();
 
   return (
-   <motion.footer
+    <motion.footer
       initial={{ backgroundColor: '#000000' }}
       animate={{ backgroundColor: '#0a0a0a' }}
       transition={{ duration: 0.8 }}
-      className="relative overflow-hidden text-background  lg:px-10"
+      className="relative overflow-hidden text-background lg:px-10"
     >
-      {/* ================= NEW CLICKMASTERS BACKGROUND ================= */}
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* ================= BACKGROUND ================= */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-  {/* Base gradient */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
 
-  {/* Grid pattern */}
-  <div
-    className="absolute inset-0 opacity-[0.08]"
-    style={{
-      backgroundImage:
-        "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-      backgroundSize: "60px 60px",
-    }}
-  />
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
 
+        {/* Watermark — positioned to sit in the links section area */}
+        <div
+          className="absolute bottom-10 left-0 w-full flex justify-center pointer-events-none z-[1]"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+            maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+          }}
+        >
+          <div
+            className="font-black tracking-[0.15em] select-none whitespace-nowrap leading-none"
+            style={{
+              fontSize: 'clamp(72px, 13vw, 165px)',
+              color: 'transparent',
+              WebkitTextStroke: '1.5px rgba(180, 80, 20, 0.8)',
+            }}
+          >
+            CLICKMASTERS
+          </div>
+        </div>
 
+      </div>
 
-{/* Watermark */}
-<div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-[1] mb-10 pb-10"
-  style={{
-    WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
-    maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
-  }}
->
-  <div
-    className="font-black tracking-[0.15em] select-none whitespace-nowrap leading-none"
-    style={{
-      fontSize: 'clamp(72px, 13vw, 165px)',
-      color: 'transparent',
-      WebkitTextStroke: '1.5px rgba(180, 80, 20, 0.8)',
-    }}
-  >
-    CLICKMASTERS
-  </div>
-</div>
-
-</div>
-      {/* Animated background pattern */}
+      {/* Animated dot pattern */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.1 }}
@@ -148,7 +148,8 @@ export function Footer(): JSX.Element {
       />
 
       <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 md:py-12 relative z-10">
-        {/* Top Section - Stack on mobile */}
+
+        {/* ================= TOP SECTION ================= */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -178,95 +179,76 @@ export function Footer(): JSX.Element {
               ClickMasters is a software development company. We build custom software, web
               applications, mobile apps, and ERP solutions for businesses worldwide.
             </motion.p>
-            
-           
-           
-{/* Contact Numbers */}
-<motion.div variants={itemVariants} className="mt-6 space-y-2">
-  <div className="flex items-center justify-center lg:justify-start gap-3">
-    <Phone className="h-4 w-4 text-primary" />
 
-    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-      <a
-        href="https://wa.me/447988576086"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-background transition-colors text-sm"
-      >
-        🇬🇧 UK: +44 7988 576086
-      </a>
-
-      <span className="hidden sm:inline text-background/30">|</span>
-
-      <a
-        href="https://wa.me/13252024074"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-background transition-colors text-sm"
-      >
-        🇺🇸 US: +1 325 202 4074
-      </a>
-
-      <span className="hidden sm:inline text-background/30">|</span>
-
-      <a
-        href="https://wa.me/923325394285"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-background transition-colors text-sm"
-      >
-        🇵🇰 PK: +92 332 5394285
-      </a>
-    </div>
-  </div>
+            {/* Phone Numbers */}
+            <motion.div variants={itemVariants} className="mt-6 space-y-2">
+              <div className="flex items-center justify-center lg:justify-start gap-3">
+                <Phone className="h-4 w-4 text-primary" />
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                  <a
+                    href="https://wa.me/447988576086"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/70 hover:text-background transition-colors text-sm"
+                  >
+                    🇬🇧 UK: +44 7988 576086
+                  </a>
+                  <span className="hidden sm:inline text-background/30">|</span>
+                  <a
+                    href="https://wa.me/13252024074"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/70 hover:text-background transition-colors text-sm"
+                  >
+                    🇺🇸 US: +1 325 202 4074
+                  </a>
+                  <span className="hidden sm:inline text-background/30">|</span>
+                  <a
+                    href="https://wa.me/923325394285"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/70 hover:text-background transition-colors text-sm"
+                  >
+                    🇵🇰 PK: +92 332 5394285
+                  </a>
+                </div>
+              </div>
             </motion.div>
-            
 
-          <motion.div variants={itemVariants} className="mt-6 space-y-2">
-  <div className="flex items-center justify-center lg:justify-start gap-3">
-    
-    <FaWhatsapp className="h-4 w-4 text-green-600" />
-
-    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-      
-      <a
-        href="https://wa.me/447988576086?text=Hi%20I%20want%20to%20connect%20with%20you"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-green-400 transition-colors text-sm"
-      >
-        🇬🇧 UK: +44 7988 576086
-      </a>
-
-      <span className="hidden sm:inline text-background/30">|</span>
-
-      <a
-        href="https://wa.me/13252024074?text=Hi%20I%20want%20to%20connect%20with%20you"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-green-400 transition-colors text-sm"
-      >
-        🇺🇸 US: +1 325 202 4074
-      </a>
-
-      <span className="hidden sm:inline text-background/30">|</span>
-
-      <a
-        href="https://wa.me/923325394285?text=Hi%20I%20want%20to%20discuss%20a%20project"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-green-400 transition-colors text-sm"
-      >
-        🇵🇰 PK: +92 332 5394285
-      </a>
-
-    </div>
-  </div>
-</motion.div>
-            
-
-
-            
+            {/* WhatsApp Numbers */}
+            <motion.div variants={itemVariants} className="mt-4 space-y-2">
+              <div className="flex items-center justify-center lg:justify-start gap-3">
+                <FaWhatsapp className="h-4 w-4 text-green-600" />
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                  <a
+                    href="https://wa.me/447988576086?text=Hi%20I%20want%20to%20connect%20with%20you"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/70 hover:text-green-400 transition-colors text-sm"
+                  >
+                    🇬🇧 UK: +44 7988 576086
+                  </a>
+                  <span className="hidden sm:inline text-background/30">|</span>
+                  <a
+                    href="https://wa.me/13252024074?text=Hi%20I%20want%20to%20connect%20with%20you"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/70 hover:text-green-400 transition-colors text-sm"
+                  >
+                    🇺🇸 US: +1 325 202 4074
+                  </a>
+                  <span className="hidden sm:inline text-background/30">|</span>
+                  <a
+                    href="https://wa.me/923325394285?text=Hi%20I%20want%20to%20discuss%20a%20project"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/70 hover:text-green-400 transition-colors text-sm"
+                  >
+                    🇵🇰 PK: +92 332 5394285
+                  </a>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Newsletter Section */}
@@ -313,13 +295,14 @@ export function Footer(): JSX.Element {
           </motion.div>
         </motion.div>
 
-        {/* Links Grid - Responsive columns */}
+        {/* ================= LINKS GRID ================= */}
+        {/* No large bottom margin — watermark shows through the natural space below */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-116 lg:mb-30"
+          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-0"
         >
           {(Object.entries(footerLinks) as [keyof FooterLinks, FooterLink[]][]).map(
             ([category, links]) => (
@@ -344,7 +327,6 @@ export function Footer(): JSX.Element {
                       whileHover="hover"
                       className="origin-left flex items-center gap-2 group"
                     >
-                      {/* Bullet point */}
                       <ChevronRight className="h-3 w-3 text-primary/60 group-hover:text-primary transition-colors flex-shrink-0" />
                       <Link
                         href={link.href}
@@ -360,19 +342,25 @@ export function Footer(): JSX.Element {
           )}
         </motion.div>
 
-        {/* Bottom Section */}
+        {/* ================= WATERMARK SPACER ================= */}
+        {/* This empty div creates the visible space where the watermark shows through */}
+        <div className="h-32 sm:h-40 lg:h-48" />
+
+        {/* ================= BOTTOM BAR ================= */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20 mt-10"
+          className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20"
         >
-          <motion.p className="text-xs sm:text-sm text-background/60 text-center sm:text-left" whileHover={{ color: '#ffffff' }}>
+          <motion.p
+            className="text-xs sm:text-sm text-background/60 text-center sm:text-left"
+            whileHover={{ color: '#ffffff' }}
+          >
             © {currentYear} ClickMasters. All rights reserved.
           </motion.p>
-          
-          {/* Optional: Add additional footer links here if needed */}
+
           <div className="flex gap-4 text-xs sm:text-sm text-background/60">
             <Link href="/privacy-policy" className="hover:text-background transition-colors">
               Privacy
@@ -385,12 +373,8 @@ export function Footer(): JSX.Element {
             </Link>
           </div>
         </motion.div>
+
       </div>
     </motion.footer>
   );
 }
-
-
-
-
-

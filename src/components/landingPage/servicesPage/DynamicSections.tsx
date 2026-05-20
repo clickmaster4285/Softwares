@@ -1,6 +1,6 @@
 'use client';
 
-import { Star } from 'lucide-react';
+import { CheckCircle2, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 type Section = {
@@ -81,63 +81,41 @@ export default function DynamicSections({ sections, serviceName }: DynamicSectio
               </div>
 
               {/* Smart Items Layout */}
-              {items.length > 0 && (
-                <div className="mt-12">
-                  {isTwoItems ? (
-                    // 2 Cards Side by Side
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {items.map((item, i) => (
-                        <motion.div
-                          key={i}
-                          className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-md transition-shadow"
-                          initial={{ opacity: 0, y: 30 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.1 + i * 0.1 }}
-                        >
-                          <div className="flex gap-4">
-                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
-                              <Star className="h-4 w-4 fill-current" />
-                            </div>
-                            <span
-                              className="leading-relaxed text-[17px]"
-                              dangerouslySetInnerHTML={{
-                                __html: makeBoldServiceName(item, serviceName),
-                              }}
-                            />
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  ) : (
-                    // Normal List (1 or 3+ items)
-                    <ul className="space-y-6">
-                      {items.map((item, i) => (
-                        <motion.li
-                          key={i}
-                          className="flex gap-4"
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.1 + i * 0.06 }}
-                        >
-                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600 mt-0.5">
-                            <Star className="h-4 w-4 fill-current" />
-                          </div>
-                          <span
-                            className="leading-relaxed"
-                            dangerouslySetInnerHTML={{
-                              __html: makeBoldServiceName(item, serviceName),
-                            }}
-                          />
-                        </motion.li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              )}
+          {items.length > 0 && (
+  <div className="mt-6">
+    <div className="flex flex-wrap gap-2">
+   {items.length > 0 && (
+  <div className="mt-6">
+    <div className="flex flex-wrap gap-3">
+      {items.map((item, i) => (
+        <motion.div
+          key={i}
+          className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 shadow-sm hover:shadow-md transition-all hover:border-orange-200"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.05 * i }}
+        >
+          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
+            <CheckCircle2 className="h-3 w-3" />
+          </div>
+          <span
+            className="text-sm leading-relaxed text-slate-700"
+            dangerouslySetInnerHTML={{
+              __html: makeBoldServiceName(item, serviceName),
+            }}
+          />
+        </motion.div>
+      ))}
+    </div>
+  </div>
+)}
+    </div>
+  </div>
+)}
             </div>
 
             {/* Divider */}
-            <div className="mx-auto ">
+            <div className="mx-auto mb-10">
               <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
             </div>
           </motion.section>
