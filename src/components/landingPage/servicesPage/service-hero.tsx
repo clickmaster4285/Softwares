@@ -31,11 +31,19 @@ interface ServiceHeroProps {
     lead: string;
     highlights?: string[];
     marketStats?: Array<{ label: string; value: string }>;
+<<<<<<< HEAD
     /** Goal-based subpage: e.g. "Launch Faster" */
     currentPageLabel?: string;
     /** Goal-based subpage: parent service link in breadcrumb */
     parentService?: { label: string; href: string };
     /** Terms to emphasize in the lead (goal pages) */
+=======
+    /** When set, breadcrumb is Home → category → parent service → current page label */
+    parentService?: { label: string; href: string };
+    /** Label for the current page in breadcrumb (defaults to serviceName) */
+    currentPageLabel?: string;
+    /** Terms to highlight in the lead paragraph (defaults to [serviceName]) */
+>>>>>>> f68c820d5b5d05a86bf3e784afac0b984419b575
     boldTerms?: string[];
   };
 }
@@ -142,6 +150,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const videoRef = useRef<HTMLVideoElement>(null);
 
+<<<<<<< HEAD
   const isGoalPage = Boolean(page.parentService && page.currentPageLabel);
   const boldTerms =
     page.boldTerms?.filter(Boolean) ??
@@ -157,12 +166,33 @@ export function ServiceHero({ page }: ServiceHeroProps) {
     if (escaped.length === 0) return text;
 
     const regex = new RegExp(`(${escaped.join("|")})`, "gi");
-    const split = text.split(regex);
+=======
+  // Helper function to make service name bold in text
+  const makeBoldInText = (text: string, terms: string[]) => {
+    if (!text || terms.length === 0) return text;
 
+    const pattern = terms
+      .filter(Boolean)
+      .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+      .join("|");
+    if (!pattern) return text;
+
+    const parts: (string | React.ReactNode)[] = [];
+    const regex = new RegExp(`(${pattern})`, "gi");
+>>>>>>> f68c820d5b5d05a86bf3e784afac0b984419b575
+    const split = text.split(regex);
+    const lowerTerms = terms.map((t) => t.toLowerCase());
+
+<<<<<<< HEAD
     return split.map((part, index) => {
       const isBold = terms.some((t) => part.toLowerCase() === t.toLowerCase());
       if (isBold) {
         return (
+=======
+    split.forEach((part, index) => {
+      if (lowerTerms.includes(part.toLowerCase())) {
+        parts.push(
+>>>>>>> f68c820d5b5d05a86bf3e784afac0b984419b575
           <span key={index} className="font-black text-primary">
             {part}
           </span>
@@ -171,6 +201,11 @@ export function ServiceHero({ page }: ServiceHeroProps) {
       return part;
     });
   };
+
+  const boldTerms =
+    page.boldTerms ??
+    (page.serviceName ? [page.serviceName] : []);
+  const breadcrumbCurrent = page.currentPageLabel ?? page.serviceName;
 
   useEffect(() => {
     if (isInView) controls.start("visible");
@@ -293,6 +328,17 @@ export function ServiceHero({ page }: ServiceHeroProps) {
             >
               {page.category}
             </Link>
+            {page.parentService && (
+              <>
+                <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
+                <Link
+                  href={page.parentService.href}
+                  className="text-slate-300 hover:text-primary transition-colors font-medium"
+                >
+                  {page.parentService.label}
+                </Link>
+              </>
+            )}
             <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
             {isGoalPage && page.parentService ? (
               <>
