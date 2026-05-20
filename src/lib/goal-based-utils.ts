@@ -359,3 +359,10 @@ export function getAllGoalStaticParams(): {
     })
     .filter((p): p is { slug: string; service: string; 'goal-based': string } => p !== null);
 }
+
+/** Canonical path segments for every goal-based landing page (for sitemaps). */
+export function getAllGoalSitemapPaths(): string[] {
+  return getAllGoalStaticParams().map(
+    (p) => `/${p.slug}/${p.service}/${p['goal-based']}`
+  );
+}

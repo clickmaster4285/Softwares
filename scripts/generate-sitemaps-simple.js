@@ -275,6 +275,51 @@ const PERSONA_SUFFIXES = [
   '-for-ctos',
 ];
 
+const GOAL_URL_SUFFIXES = ['to-increase-revenue', 'to-launch-faster', 'to-reduce-costs'];
+
+function parseGoalCompositeSlug(compositeSlug) {
+  for (const suffix of GOAL_URL_SUFFIXES) {
+    if (compositeSlug.endsWith(`-${suffix}`)) {
+      return {
+        serviceSlug: compositeSlug.slice(0, -(suffix.length + 1)),
+        goalUrlSlug: suffix,
+      };
+    }
+  }
+  return null;
+}
+
+function isGoalBasedUrl(urlPath) {
+  const segments = urlPath.split('/').filter(Boolean);
+  if (segments.length !== 3) return false;
+  return GOAL_URL_SUFFIXES.includes(segments[2]);
+}
+
+function extractGoalBasedUrls() {
+  const goalBasedPath = path.join(process.cwd(), 'src/lib/goal-based.ts');
+  if (!fs.existsSync(goalBasedPath)) {
+    return [];
+  }
+
+  const content = fs.readFileSync(goalBasedPath, 'utf8');
+  // Only top-level goal page objects (slug is the first property)
+  const slugRegex =
+    /\{\s*\n\s*"slug":\s*"([^"]+-to-(?:increase-revenue|launch-faster|reduce-costs))"/g;
+  const servicePages = extractAllServicePageUrls();
+  const categoryByService = new Map(servicePages.map((p) => [p.slug, p.categorySlug]));
+
+  const urls = [];
+  let match;
+  while ((match = slugRegex.exec(content)) !== null) {
+    const parsed = parseGoalCompositeSlug(match[1]);
+    if (!parsed) continue;
+    const categorySlug = categoryByService.get(parsed.serviceSlug) || 'services';
+    urls.push(`${SITE_URL}/${categorySlug}/${parsed.serviceSlug}/${parsed.goalUrlSlug}`);
+  }
+
+  return [...new Set(urls)];
+}
+
 function baseServiceSlugFromPersona(personaSlug) {
   for (const suffix of PERSONA_SUFFIXES) {
     if (personaSlug.endsWith(suffix)) {
@@ -369,6 +414,11 @@ function getUrlPriorityAndFreq(urlPath) {
     return { priority: '0.75', changefreq: 'weekly' };
   }
 
+  // Goal-based landing pages (/{category}/{service}/{goal})
+  if (isGoalBasedUrl(urlPath)) {
+    return { priority: '0.75', changefreq: 'weekly' };
+  }
+
   // Service pages - medium priority, weekly updates
   if (isMainService(urlPath) || isSubService(urlPath)) {
     return { priority: '0.8', changefreq: 'weekly' };
@@ -447,6 +497,7 @@ async function generateSeparateSitemaps() {
     hire: [],
     locations: [],
     personaBased: [],
+    goalBased: [],
     checklists: [],
     howTo: [],
   };
@@ -499,6 +550,10 @@ async function generateSeparateSitemaps() {
     const categorySlug = getPersonaCategorySlug(baseServiceSlug);
     categorizedUrls.personaBased.push(`${SITE_URL}/${categorySlug}/${baseServiceSlug}/${personaSlug}`);
   });
+
+  const goalBasedUrls = extractGoalBasedUrls();
+  console.log(`🎯 Found ${goalBasedUrls.length} goal-based URLs`);
+  categorizedUrls.goalBased.push(...goalBasedUrls);
 
   // Add hire URLs from navbar structure
   const hireUrls = [
@@ -612,6 +667,8 @@ async function generateSeparateSitemaps() {
       }
     } else if (urlPath.includes('/hire-') || urlPath.includes('/hire/')) {
       categorizedUrls.hire.push(url);
+    } else if (isGoalBasedUrl(urlPath)) {
+      categorizedUrls.goalBased.push(url);
     } else if (isPersonaBasedUrl(urlPath)) {
       categorizedUrls.personaBased.push(url);
     } else if (isMainService(urlPath)) {
@@ -668,6 +725,7 @@ async function generateSeparateSitemaps() {
   await createSitemapFile('hire-sitemap.xml', categorizedUrls.hire);
   await createSitemapFile('locations-sitemap.xml', categorizedUrls.locations);
   await createSitemapFile('persona-sitemap.xml', categorizedUrls.personaBased);
+  await createSitemapFile('goal-sitemap.xml', categorizedUrls.goalBased);
   await createSitemapFile('how-to-sitemap.xml', categorizedUrls.howTo);
   await createSitemapFile('checklist-sitemap.xml', categorizedUrls.checklists);
   await createLocationServiceSitemapFiles(locationServicePages);
@@ -686,6 +744,7 @@ async function generateSeparateSitemaps() {
   console.log('  - hire-sitemap.xml');
   console.log('  - locations-sitemap.xml');
   console.log('  - persona-sitemap.xml');
+  console.log('  - goal-sitemap.xml');
   Object.keys(locationServicePages).forEach(country => {
     console.log(`  - ${country}-services-sitemap.xml`);
   });
@@ -773,6 +832,7 @@ async function createSitemapIndex() {
     'hire-sitemap.xml',
     'locations-sitemap.xml',
     'persona-sitemap.xml',
+    'goal-sitemap.xml',
     'how-to-sitemap.xml',
     'checklist-sitemap.xml',
   ];
