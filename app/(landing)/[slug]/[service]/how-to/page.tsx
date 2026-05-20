@@ -6,6 +6,11 @@ import { ServiceSubpageBreadcrumb } from '@/src/components/landingPage/servicesP
 import { subpageInnerPadding, subpageOuterPadding } from '@/src/components/landingPage/servicesPage/subpage-layout';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
 import { siteConfig } from '@/app/metadata-config';
+import WhyChooseUs from '@/src/components/landingPage/home/whyUs';
+import MistakeCard from '@/src/components/landingPage/how-to/mistakeCard';
+import { EngineeringBaseline } from '@/src/components/landingPage/servicesPage/EngineeringBaseline';
+import ProcessHoverSection from '@/src/components/landingPage/how-to/ProcessHoverSection';
+import GuideHero from '@/src/components/landingPage/how-to/GuideHero';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -70,19 +75,7 @@ function StepCard({ step }: { step: HowToGuide['steps'][number] }) {
   );
 }
 
-function MistakeCard({ m }: { m: HowToGuide['mistakes'][number] }) {
-  return (
-    <div style={{ display: 'flex', gap: 12, padding: 16, border: '1px solid #E4E6EF', borderRadius: 10, background: '#fff' }}>
-      <div style={{ width: 36, height: 36, borderRadius: 8, background: '#FEE2E2', color: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <IcoAlertTriangle color="#DC2626" />
-      </div>
-      <div>
-        <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>{m.title}</div>
-        <div style={{ color: '#5A5A72', textAlign: 'justify' }}>{m.desc}</div>
-      </div>
-    </div>
-  );
-}
+
 
 export default async function HowToPage({ params }: Props) {
   const { slug, service } = await params;
@@ -109,65 +102,61 @@ export default async function HowToPage({ params }: Props) {
         ]}
       />
 
-      <section className="border-b border-slate-200 bg-white">
-        <div className={`${subpageOuterPadding} py-20`}>
-          <div className={`${subpageInnerPadding} grid gap-16 lg:grid-cols-[1fr_360px] items-start`}>
-            <div>
-              <h1 className="max-w-4xl text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">
-                {guide.title.replace(' | ClickMasters', '')}
-              </h1>
-              <p className="mt-6 max-w-4xl text-base leading-8 text-slate-600" style={{ textAlign: 'justify' }}>
-                {guide.steps[0]?.body}
-              </p>
-            </div>
+      
 
-  <aside style={{ background: '#F8F9FC', border: '1px solid #E4E6EF', borderRadius: 12, padding: 20 }}>
-            <div style={{ fontWeight: 700, marginBottom: 12, color: '#1A1A2E' }}>Process Overview</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {guide.steps.map((s) => (
-                <a key={s.num} href={`#step-${s.num}`} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 8, color: '#5A5A72', textDecoration: 'none' }}>
-                  <div style={{ width: 28, height: 28, borderRadius: 8, background: s.accent, color: s.iconFg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800 }}>{s.num}</div>
-                  <div style={{ fontSize: 14, fontWeight: 600 }}>{s.title}</div>
-                </a>
-              ))}
-            </div>
-          </aside>
-          </div>
-        </div>
-      </section>
+
+
+
+
+
+      
+ <GuideHero 
+  guide={guide}
+  subpageOuterPadding={subpageOuterPadding}
+  subpageInnerPadding={subpageInnerPadding}
+/>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <main>
         <div className={`${subpageOuterPadding} py-20`}>
           <div className={subpageInnerPadding}>
-          <div className="mb-16">
-            <div className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-orange-500">
-              The Complete Process
-            </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-              Step-by-step guide
-            </h2>
-          </div>
+         
+         <ProcessHoverSection steps={guide.steps} />
 
-          <div className="space-y-10">
-            {guide.steps.map((step) => (
-              <div key={step.num} id={`step-${step.num}`}>
-                <StepCard step={step} />
-              </div>
-            ))}
-          </div>
+      
+         
+          <div className="">
+  <MistakeCard
+   // heading="What to Avoid"
+    subtitle="Common mistakes that can hurt your project"
+    items={guide.mistakes.map((m) => ({
+      title: m.title,
+      desc: m.desc,
+    }))}
+  />
+        </div>
+         
 
-          <div className="mt-20 border-t border-slate-200 pt-16">
-            <div className="mb-8 text-2xl font-semibold uppercase  text-orange-500">
-              What to Avoid
-            </div>
-            <div className="grid gap-6 lg:grid-cols-2">
-              {guide.mistakes.map((m, i) => (
-                <MistakeCard key={i} m={m} />
-              ))}
-            </div>
-          </div>
-
-          <div className="-mb-12 mt-16">
+       
+        </div>
+        </div>
+      </main>
+         <div className="-mb-12 ">
             <ChecklistCTAHero
               variant="combined"
               title={`Start ${serviceName} with ClickMasters`}
@@ -175,9 +164,6 @@ export default async function HowToPage({ params }: Props) {
               buttons={[{ text: 'Book a Free Consultation', href: '/contact-us', variant: 'primary' }]}
             />
           </div>
-        </div>
-        </div>
-      </main>
     </div>
   );
 }
