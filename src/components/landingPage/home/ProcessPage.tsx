@@ -200,38 +200,6 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      {/* <section ref={ctaRef} className="py-24 px-6 lg:px-8 bg-slate-900 text-white">
-        <div className="mx-auto max-w-4xl text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-            className="text-3xl font-bold tracking-tight sm:text-4xl"
-          >
-            Ready to transform your <span className="text-orange-400">software vision</span> into reality?
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}
-            className="mt-4 text-lg text-gray-300"
-          >
-            Join 200+ successful clients who trust our proven development process
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-4"
-          >
-            <button className="group inline-flex items-center gap-2 rounded-lg bg-primarypx-8 py-3 text-base font-semibold text-white shadow-lg transition-all duration-200 hover:bg-primary hover:scale-105">
-              Schedule a Free Consultation <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
-          </motion.div>
-        </div>
-      </section> */}
     </main>
   );
 }
