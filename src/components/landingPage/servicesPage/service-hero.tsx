@@ -173,9 +173,6 @@ export function ServiceHero({ page }: ServiceHeroProps) {
     });
   };
 
-  const boldTerms =
-    page.boldTerms ??
-    (page.serviceName ? [page.serviceName] : []);
   const breadcrumbCurrent = page.currentPageLabel ?? page.serviceName;
 
   useEffect(() => {

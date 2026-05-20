@@ -48,7 +48,22 @@ const nextConfig: NextConfig = {
         destination: "/images/logo-white1.webp",
         permanent: true,
       },
-          ];
+      {
+        source: "/services/wireframing-prototyping/to-launch-faster",
+        destination: "/design-ui-ux/wireframing-prototyping/to-launch-faster",
+        permanent: true,
+      },
+      {
+        source: "/services/wireframing-prototyping",
+        destination: "/design-ui-ux/wireframing-prototyping",
+        permanent: true,
+      },
+      {
+        source: "/design-ui-ux/wireframing-prototyping/launch-faster",
+        destination: "/design-ui-ux/wireframing-prototyping/to-launch-faster",
+        permanent: true,
+      },
+    ];
   },
 
   async rewrites() {

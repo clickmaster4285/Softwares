@@ -9,7 +9,11 @@ export type GoalPageContent = ServicePageContent & {
   goalLabel: string;
   serviceSlug: string;
   relatedGoals: RelatedGoalLink[];
+  canonicalPath: string;
 };
+
+/** PSEO URL slug: services/wireframing-prototyping/to-launch-faster */
+export const LAUNCH_FASTER_GOAL_SLUG = 'to-launch-faster';
 
 const WIREFRAMING_SERVICE_SLUG = 'wireframing-prototyping';
 const UI_UX_DESIGN_SERVICE_SLUG = 'ui-ux-design';
@@ -29,22 +33,27 @@ export function goalPageMatchesService(goal: GoalPageContent, serviceParam: stri
   return goal.serviceSlug === resolved || goal.serviceSlug === serviceParam;
 }
 
-function goalPath(categorySlug: string, serviceSlug: string, goalSlug: string) {
-  return `/${categorySlug}/${serviceSlug}/${goalSlug}`;
+function goalPath(serviceSlug: string, goalSlug: string) {
+  return `/services/${serviceSlug}/${goalSlug}`;
+}
+
+function servicePath(serviceSlug: string) {
+  return `/services/${serviceSlug}`;
 }
 
 const launchFasterGoalPage: GoalPageContent = {
-  slug: 'launch-faster',
+  slug: LAUNCH_FASTER_GOAL_SLUG,
   categorySlug: 'design-ui-ux',
-  sectionId: 'launch-faster',
+  sectionId: 'to-launch-faster',
   category: 'Design UI/UX',
   serviceSlug: WIREFRAMING_SERVICE_SLUG,
+  canonicalPath: goalPath(WIREFRAMING_SERVICE_SLUG, LAUNCH_FASTER_GOAL_SLUG),
   title: 'Wireframing and Prototyping to Launch Faster',
-  serviceName: 'Launch Faster',
+  serviceName: 'Wireframing & Prototyping',
   goalLabel: 'Launch Faster',
-  metaTitle: 'Wireframing & Prototyping to Launch Faster | 8–12 Weeks | ClickMasters',
+  metaTitle: 'Wireframing and Prototyping to Launch Faster | ClickMasters',
   metaDescription:
-    'ClickMasters delivers wireframing and prototyping in 8–12 weeks from scoping to production launch — fixed scope, CI/CD from sprint 1, working software every two weeks.',
+    'ClickMasters delivers wireframing and prototyping engineered to launch in 8-12 weeks -- fixed scope, CI/CD from sprint 1, working software every 2 weeks. Fixed-price.',
   lead: 'ClickMasters delivers wireframing and prototyping in 8–12 weeks from scoping to production launch — fixed scope, CI/CD from sprint 1, working software demonstrated every two weeks. The fastest path to a real product with real users.',
   highlights: [
     '8-12 Week MVP to Production — Not a Staging Environment',
@@ -55,10 +64,26 @@ const launchFasterGoalPage: GoalPageContent = {
     'Feature Flags for Safe Post-Launch Releases',
   ],
   marketStats: [
-    { label: 'MVP to Production Launch', value: '8-12 Wks' },
-    { label: 'Sprint Cadence', value: '2-Week' },
-    { label: 'Budget Model', value: 'Fixed-Price' },
-    { label: 'CI/CD Deployment', value: 'Same Day' },
+    {
+      label:
+        'ClickMasters MVP delivery timeline — from scoping workshop to production launch with the first paying customers',
+      value: '8-12 Wks',
+    },
+    {
+      label:
+        'ClickMasters sprint cadence — the PM or founder sees working software every fortnight, not at month-end milestones',
+      value: '2-Week Sprints',
+    },
+    {
+      label:
+        'Fixed-price contracts eliminate the budget conversations that delay projects — scope is agreed, price is fixed, launch date is set',
+      value: 'Fixed-Price',
+    },
+    {
+      label:
+        'ClickMasters CI/CD setup: code merged to main deploys to production automatically — no manual deployment queue adding days to the release cycle',
+      value: 'Same Day',
+    },
   ],
   sections: [
     {
@@ -221,25 +246,26 @@ const launchFasterGoalPage: GoalPageContent = {
   ],
   relatedGoals: [
     {
-      label: 'Wireframing & Prototyping to Improve Security',
-      href: goalPath('design-ui-ux', WIREFRAMING_SERVICE_SLUG, 'improve-security'),
+      label: 'Wireframing and Prototyping to Improve Security',
+      href: goalPath(WIREFRAMING_SERVICE_SLUG, 'to-improve-security'),
     },
     {
-      label: 'Wireframing & Prototyping to Increase Revenue',
-      href: goalPath('design-ui-ux', WIREFRAMING_SERVICE_SLUG, 'increase-revenue'),
+      label: 'Wireframing and Prototyping to Increase Revenue',
+      href: goalPath(WIREFRAMING_SERVICE_SLUG, 'to-increase-revenue'),
     },
     {
-      label: 'Wireframing & Prototyping to Reduce Costs',
-      href: goalPath('design-ui-ux', WIREFRAMING_SERVICE_SLUG, 'reduce-costs'),
+      label: 'Wireframing and Prototyping to Reduce Costs',
+      href: goalPath(WIREFRAMING_SERVICE_SLUG, 'to-reduce-costs'),
     },
     {
-      label: 'Core Wireframing & Prototyping Service',
-      href: '/design-ui-ux/wireframing-prototyping',
+      label: 'Wireframing and Prototyping (core service)',
+      href: servicePath(WIREFRAMING_SERVICE_SLUG),
     },
   ],
 };
 
 const goalPages: Record<string, GoalPageContent> = {
+  [LAUNCH_FASTER_GOAL_SLUG]: launchFasterGoalPage,
   'launch-faster': launchFasterGoalPage,
 };
 
@@ -268,4 +294,8 @@ export function getAllGoalStaticParams(): {
 
 export function getDefaultGoalPage(): GoalPageContent {
   return launchFasterGoalPage;
+}
+
+export function getGoalCanonicalUrl(goal: GoalPageContent): string {
+  return goal.canonicalPath;
 }
