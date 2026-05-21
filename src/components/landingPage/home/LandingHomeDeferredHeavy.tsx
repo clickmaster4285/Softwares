@@ -119,7 +119,7 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
       <LoadOnVisible skeleton={sk64} minHeightClass="min-h-64">
         <Suspense fallback={<div className="h-64 animate-pulse rounded-lg bg-gray-100" />}>
           <HelpSection />
-          <FinalCTA/>
+        <div className="-mb-12"> <FinalCTA/></div> 
         </Suspense>
       </LoadOnVisible>
 

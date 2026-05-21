@@ -3,6 +3,9 @@
 
 import { Lightbulb, Rocket, ShieldCheck, Headphones, ArrowRight, Sparkles } from "lucide-react";
 import { StackedCards, type GlassCardItem } from "@/components/ui/glass-cards";
+import SplitText from "../../ui/SplitText";
+
+
 
 const values: GlassCardItem[] = [
   {
@@ -53,11 +56,19 @@ export function AboutSection() {
             <span className="h-[2px] w-8 rounded-full bg-primary" />
             
             <div className="inline-flex items-center gap-1.5">
-              
-              <p className="text-lg font-bold uppercase tracking-[0.2em] text-primary">
-               About ClickMasters
-              </p>
-            </div>
+  <SplitText
+  text="About ClickMasters"
+  className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+  delay={60}
+  duration={0.8}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 60 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.2}
+  
+/>
+</div>
 
             <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
@@ -85,14 +96,39 @@ export function AboutSection() {
           <div className="lg:sticky lg:top-24 lg:self-start lg:pt-8 space-y-5 max-w-2xl">
             
 
-               <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-3xl leading-tight">
-          We Don't Just Build Software {" "}
-          <span className="relative inline-block text-primary">
-            We Build Revenue Systems
-            <span className="absolute -bottom-2 left-0 h-[3px] w-full rounded-md bg-gradient-to-r from-primary/60 to-primary" />
-          </span>
+            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-3xl leading-tight">
+  <SplitText
+    text="We Don't Just Build Software"
+    className="inline-block"
+    delay={50}
+    duration={0.8}
+    ease="power3.out"
+    splitType="chars"
+    from={{ opacity: 0, y: 30 }}
+    to={{ opacity: 1, y: 0 }}
+    threshold={0.2}
+  
+  />
 
-          </h2>
+  {" "}
+
+  <span className="relative inline-block text-primary">
+    <SplitText
+      text="We Build Revenue Systems"
+      className="inline-block text-primary"
+      delay={50}
+      duration={0.9}
+      ease="power3.out"
+      splitType="chars"
+      from={{ opacity: 0, y: 30 }}
+      to={{ opacity: 1, y: 0 }}
+      threshold={0.2}
+    
+    />
+
+    <span className="absolute -bottom-2 left-0 h-[3px] w-full rounded-md bg-gradient-to-r from-primary/60 to-primary" />
+  </span>
+</h2>
 
          
             
@@ -162,24 +198,23 @@ export function AboutSection() {
     by industry.
   </p>
             
-  <div className="flex flex-wrap gap-3 pt-3">
-    <a
-      href="#"
-      className="group inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-primary to-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:shadow-xl hover:shadow-primary/30"
-    >
-      Start Your Project
-      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-    </a>
+<div className="flex flex-wrap gap-3 pt-3">
+  <a
+    href="#"
+    className="group inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-primary to-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+  >
+    Start Your Project
+    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+  </a>
 
-    <a
-      href="#"
-      className="inline-flex items-center gap-2 rounded-md border border-primary/50 bg-white px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-[#fff5ef]"
-    >
-      View Our Work
-      <ArrowRight className="h-4 w-4" />
-    </a>
-            </div>
-            
+  <a
+    href="#"
+    className="inline-flex items-center gap-2 rounded-xl border border-white/50 bg-white/30 backdrop-blur-md px-7 py-3 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.05] hover:bg-white/40 hover:border-white/70 hover:shadow-md active:scale-[0.98]"
+  >
+    View Our Work
+    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+  </a>
+</div>
 
 
             

@@ -25,7 +25,7 @@ type Client = {
   industry: string;
   icon: LucideIcon;
 };
-
+import SplitText from '../../ui/SplitText';
 const trustedClients: Client[] = [
   { name: "TechCorp", industry: "Manufacturing", icon: Cpu },
   { name: "HealthPlus", industry: "Healthcare", icon: Stethoscope },
@@ -138,17 +138,28 @@ export function TrustedClientsSection() {
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
            <span className="h-[2px] w-8 rounded-full bg-primary" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                Trusted By Industry Leaders
-              </p>
+                    <div className="inline-flex items-center gap-1.5">
+  <SplitText
+  text="Trusted By Industry Leaders"
+  className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+  delay={60}
+  duration={0.8}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 60 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.2}
+  
+/>
+</div>
               <span className="h-[2px] w-8 rounded-full bg-primary" />
         </div>
 
-        <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
+        {/* <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
           Our Trusted Partners & Clients
-        </h3>
+        </h3> */}
 
-        <p className="text-gray-700 max-w-2xl mx-auto text-sm">
+        <p className="text-gray-700 max-w-2xl mx-auto text-base md:text-lg">
           Join 3,500+ businesses that trust ClickMasters to deliver exceptional software solutions
         </p>
       </div>

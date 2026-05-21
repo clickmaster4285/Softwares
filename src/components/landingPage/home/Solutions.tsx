@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CardStack } from "@/components/ui/card-stack";
 import { apiFetch } from "@/lib/api";
 import { resolveImageUrl } from "@/lib/utils";
-
+import SplitText from '../../ui/SplitText';
 interface Project {
   _id: string;
   title: string;
@@ -87,17 +87,28 @@ export default function SolutionsPage() {
           <div className="mx-auto max-w-3xl text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="h-[2px] w-8 rounded-full bg-primary" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                OUR SOLUTIONS
-              </p>
+                    <div className="inline-flex items-center gap-1.5">
+  <SplitText
+  text="Our Solutions"
+  className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+  delay={60}
+  duration={0.8}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 60 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.2}
+  
+/>
+</div>
               <span className="h-[2px] w-8 rounded-full bg-primary" />
             </div>
 
-            <h2 className="text-2xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">
+            {/* <h2 className="text-2xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">
               Our Work in Action
-            </h2>
+            </h2> */}
 
-            <p className="mt-5 text-slate-600 text-lg">
+            <p className=" text-slate-600 text-lg">
               See how we&apos;ve helped businesses transform their ideas into
               successful digital products.
             </p>

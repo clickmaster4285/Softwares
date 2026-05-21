@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import SplitText from '../../ui/SplitText';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -118,17 +118,28 @@ export function HelpSection() {
         <div ref={headerRef} className="mx-auto max-w-3xl text-center mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-[2px] w-8 rounded-full bg-primary" />
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-              Resources & Support
-            </p>
+             <div className="inline-flex items-center gap-1.5">
+  <SplitText
+  text="Resources & Support"
+  className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+  delay={60}
+  duration={0.8}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 60 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.2}
+  
+/>
+</div>
             <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
 
-          <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
+          {/* <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
             Resources & <span className="text-primary">Developer Support</span>
-          </h2>
+          </h2> */}
 
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             Documentation, tutorials, and technical support for your software. Need a custom
             solution? Get in touch with our development team.
           </p>

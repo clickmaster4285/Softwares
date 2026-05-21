@@ -78,6 +78,9 @@ import {
   Cpu as CpuIcon2,
 } from 'lucide-react';
 import { metadataConfig } from '@/app/metadata-config';
+import SplitText from '../../ui/SplitText';
+
+
 
 export const metadata = metadataConfig.home();
 
@@ -347,23 +350,37 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header */}
+
+
+
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="w-8 h-[2px] bg-primary rounded-full" />
-            <p className="text-secondarytext-[11px] font-bold tracking-[0.2em] uppercase">
-              {isServicePage ? 'Specialized Services' : 'Explore Our Ecosystem'}
-            </p>
+                  <div className="inline-flex items-center gap-1.5">
+  <SplitText
+  text="Explore Our Ecosysystem"
+  className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+  delay={60}
+  duration={0.8}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 60 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.2}
+  
+/>
+</div>
             <span className="w-8 h-[2px] bg-primary rounded-full" />
           </div>
 
-          <h2
+          {/* <h2
             id="home-explore-heading"
             className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl"
           >
             {isServicePage ? `${serviceData.title} Services` : 'Explore ClickMasters'}
-          </h2>
+          </h2> */}
 
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             {isServicePage 
               ? `Explore our specialized ${serviceData.title.toLowerCase()} services designed to meet your specific business needs.`
               : 'Discover our engineering capabilities, delivery expertise, case studies, and strategic technology solutions built for modern businesses.'

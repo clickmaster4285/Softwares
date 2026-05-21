@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SplitText from '../../ui/SplitText';
 
 type FaqItem = {
   question: string;
@@ -11,7 +12,8 @@ type FaqItem = {
   more?: { href: string; label: string };
 };
 
-const faqItems: FaqItem[] = [
+// Default FAQs (shown when no prop is passed)
+const defaultFaqItems: FaqItem[] = [
   {
     question: 'How much does custom software development cost?',
     answer:
@@ -44,8 +46,11 @@ const faqItems: FaqItem[] = [
   },
 ];
 
-export function FaqSection({ faqItems = [] }: { faqItems?: FaqItem[] }) {
+export function FaqSection({ faqItems }: { faqItems?: FaqItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  // Use provided FAQs or fallback to default ones
+  const displayedFaqs = faqItems && faqItems.length > 0 ? faqItems : defaultFaqItems;
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -65,31 +70,35 @@ export function FaqSection({ faqItems = [] }: { faqItems?: FaqItem[] }) {
         <div className="mx-auto max-w-3xl text-center mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-[2px] w-8 rounded-full bg-primary" />
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-              Frequently Asked Questions
-            </p>
+            
+            <div className="inline-flex items-center gap-1.5">
+              <SplitText
+                text="FAQ's"
+                className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+                delay={60}
+                duration={0.8}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, x: 60 }}
+                to={{ opacity: 1, x: 0 }}
+                threshold={0.2}
+              />
+            </div>
+
             <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
-
-          <h2 
-            id="homepage-faq-heading"
-            className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl"
-          >
-            Answers before you start
-          </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             Everything you need to know about our process, timelines, technology stack, and post-launch support.
           </p>
         </div>
 
-        {/* FAQ Grid - 2 columns */}
+        {/* FAQ List */}
         <div className="grid gap-4 sm:grid-cols-1">
-         {(faqItems ?? []).map((item, index) => (
+          {displayedFaqs.map((item, index) => (
             <div
-              key={item.question}
-              className=" border-b border-slate-200 transition-all "
-              style={{ height: 'fit-content' }}
+              key={index}
+              className="border-b border-slate-200 transition-all"
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -117,18 +126,18 @@ export function FaqSection({ faqItems = [] }: { faqItems?: FaqItem[] }) {
                     <div className="border-t border-slate-100 px-6 pb-6 pt-4">
                       <p className="text-base leading-7 text-slate-600">
                         {item.answer}
-                        {item.more ? (
+                        {item.more && (
                           <>
                             {' '}
                             <Link
                               href={item.more.href}
                               className="font-medium text-primary hover:underline"
-                              aria-label={`${item.more.label} ${item.more.href}`}
+                              aria-label={`${item.more.label}`}
                             >
                               {item.more.label}
                             </Link>
                           </>
-                        ) : null}
+                        )}
                       </p>
                     </div>
                   </motion.div>

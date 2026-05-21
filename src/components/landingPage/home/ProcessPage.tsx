@@ -14,7 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import ExpandOnHover from "@/components/ui/expand-cards";
-
+import SplitText from '../../ui/SplitText';
 export default function ProcessPage() {
   const metricsRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ export default function ProcessPage() {
       step: "01",
       title: "Discovery & Strategy",
       icon: Lightbulb,
-      color: "from-primary to-orange-600",
+      color: "from-primary to-primary",
       bgLight: "bg-amber-50",
       description: "We align technology with business goals through deep discovery sessions, market analysis, and technical blueprinting.",
       deliverables: ["Requirements specification", "Technical architecture design", "Roadmap & sprint planning", "Risk assessment matrix"],
@@ -69,7 +69,7 @@ export default function ProcessPage() {
       step: "05",
       title: "Deployment & Launch",
       icon: Rocket,
-      color: "from-green-500 to-orange-600",
+      color: "from-green-500 to-primary",
       bgLight: "bg-green-50",
       description: "Zero-downtime deployment, infrastructure scaling, and launch orchestration.",
       deliverables: ["CI/CD pipeline setup", "Load balancing configuration", "Backup & disaster recovery", "Launch day support"],
@@ -128,7 +128,7 @@ export default function ProcessPage() {
     }, [value, isFloat, metricsInView]);
 
     return (
-      <span className="font-bold text-orange-600">
+      <span className="font-bold text-primary">
         {isFloat ? count.toFixed(1) : Math.floor(count)}{suffix}
       </span>
     );
@@ -142,17 +142,29 @@ export default function ProcessPage() {
           <div className="mx-auto max-w-3xl text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="h-[2px] w-8 rounded-full bg-primary" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                Visual Process Journey
-              </p>
+                    <div className="inline-flex items-center gap-1.5">
+  <SplitText
+  text="
+Visual Process Journey"
+  className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+  delay={60}
+  duration={0.8}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 60 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.2}
+  
+/>
+</div>
               <span className="h-[2px] w-8 rounded-full bg-primary" />
             </div>
 
-            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-4xl">
+            {/* <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-4xl">
               See our development process in action
-            </h2>
+            </h2> */}
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+            <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
               Hover over each image to explore different stages of our software development lifecycle
             </p>
           </div>
@@ -167,9 +179,9 @@ export default function ProcessPage() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={metricsInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: idx * 0.1, duration: 0.6 }}
-                    className="text-center p-6 transition-all duration-300 hover:scale-105"
+                    className="text-center  transition-all duration-300 hover:scale-105"
                   >
-                    <div className="text-5xl  font-bold text-primarymb-2">
+                    <div className="text-3xl  font-bold text-primary mb-2">
                       <AnimatedCounter 
                         value={metric.value} 
                         suffix={metric.suffix} 

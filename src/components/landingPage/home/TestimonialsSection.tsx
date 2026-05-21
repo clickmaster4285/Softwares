@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 
+import SplitText from '../../ui/SplitText';
 import React, { useState, useRef, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -176,19 +177,30 @@ export function TestimonialsSection() {
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 mb-3">
           <span className="w-8 h-[2px] bg-primary rounded-full" />
-          <p className="text-orange-800 text-[11px] font-bold tracking-[0.2em] uppercase">
-          Testimonial
-          </p>
+                <div className="inline-flex items-center gap-1.5">
+  <SplitText
+  text="Testimonial"
+  className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+  delay={60}
+  duration={0.8}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 60 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.2}
+  
+/>
+</div>
           <span className="w-8 h-[2px] bg-primary rounded-full" />
         </div>
 
-        <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
+        {/* <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
             Hear What <span className="text-primary">Our Clients</span>{ " "}Say about Us
              
             
-          </h3>
+          </h3> */}
           
-            <p className="text-gray-700 max-w-2xl mx-auto text-sm">
+            <p className="text-gray-700 max-w-2xl mx-auto text-lg">
            Real stories from real clients who turned their ideas into successful digital products with us.
         </p>
 

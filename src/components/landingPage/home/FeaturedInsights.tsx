@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { resolveImageUrl } from "@/lib/utils";
+import SplitText from "../../ui/SplitText";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -189,7 +190,7 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
 
         {/* content always above */}
         <div className="relative z-10">
-          <p className="text-[11px] font-medium mb-1 text-orange-300">
+          <p className="text-[11px] font-medium mb-1 text-primary/10">
             {card.type}
           </p>
 
@@ -240,7 +241,7 @@ const InsightsHeader = () => {
     return () => observer.disconnect();
   }, []);
 
-  return (
+   return (
     <div 
       ref={headerRef}
       className={[
@@ -249,33 +250,38 @@ const InsightsHeader = () => {
       ].join(" ")}
     >
       <p
-        className="text-xs tracking-widest uppercase font-medium"
-        style={{ color: "#ea580c" }}
+        className="text-md tracking-widest uppercase font-medium text-primary"
       >
-        Sucess Stories
+        Success Stories
       </p>
-      <h2
-        className="text-3xl xl:text-4xl font-medium leading-tight"
-        style={{ color: "#0c2a2a" }}
-      >
-        Stories of our transformations{" "}
-        <span style={{ color: "#ea580c" }}>
-          across Services and Industries
-        </span>
-      </h2>
+
+         <div className="inline-flex items-center gap-1.5">
+  <SplitText
+  text="
+Software development company that Scales your Business revenue"
+  className="text-xl md:text-2xl text-primary"
+  delay={60}
+  duration={0.8}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 60 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.2}
+  
+/>
+</div>
     
-      <p className="text-base text-gray-800" >
-       From Concept to Completion. We deliver enterprise-grade solutions for modern
-  businesses, combining innovative technology with strategic execution. With a
-  proven track record of successful deliveries across industries worldwide, we
-  transform ideas into impactful digital experiences that drive real growth.
+      <p className="text-base text-gray-800">
+        From Concept to Completion. We deliver enterprise-grade solutions for modern
+        businesses, combining innovative technology with strategic execution. With a
+        proven track record of successful deliveries across industries worldwide, we
+        transform ideas into impactful digital experiences that drive real growth.
       </p>
-     
 
       <Link
         href="/blog"
-        className="w-fit px-6 py-2.5 rounded-full text-white text-sm font-medium transition-opacity hover:opacity-90"
-        style={{ background: "#ea580c" }}
+        className="w-fit px-6 py-2.5 rounded-full text-white text-sm font-medium 
+                   bg-primary hover:bg-primary/90 transition-all duration-200"
       >
         Explore More
       </Link>

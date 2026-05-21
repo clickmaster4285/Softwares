@@ -152,7 +152,7 @@ export function CardStack<T extends CardStackItem>({
               className={cn(
                 "h-2.5 rounded-full transition-all",
                 idx === active
-                  ? "bg-orange-500 w-8"
+                  ? "bg-primary w-8"
                   : "bg-gray-300 w-2.5 hover:bg-gray-400"
               )}
             />
