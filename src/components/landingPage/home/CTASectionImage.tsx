@@ -52,7 +52,7 @@ export default function CTASectionImage({
           </div>
 
           <img
-            src="/ctaImage.png"
+            src="/images/ctaImage.png"
             alt="Developer working"
             className="w-full max-w-[420px] object-contain drop-shadow-[0_10px_30px_rgba(220,100,40,0.16)]"
           />

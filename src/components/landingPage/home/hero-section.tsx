@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, FileText, Mail, User, Phone, Send, CheckCircle2, DollarSign } from 'lucide-react';
 import { NeonOrbs } from '@/components/ui/neon-orbs';
-
+import Image from 'next/image';
 interface CounterProps {
   end: number;
   duration?: number;
@@ -203,29 +203,35 @@ export function HeroSection(): JSX.Element {
       /* ─── CHANGE 1: mobile = auto height + scroll; desktop = h-screen ─── */
       className="relative min-h-screen flex flex-col lg:flex-row lg:items-stretch overflow-x-hidden"
       aria-labelledby="hero-heading"
-    >
-      <div className="absolute inset-0 -z-30">
-        <NeonOrbs />
-      </div>
-      <div className="absolute inset-0 -z-20 bg-black/50" />
+    ><div className="absolute inset-0 -z-30">
+  <Image
+    src="/images/background-luxury-wave-abstract-gradient-modern.png"
+    alt="Background"
+    fill
+    priority
+    className="object-cover"
+  />
+</div>
+
+<div className="absolute inset-0 -z-20 bg-black/15" />
 
       <div className="container relative z-10 mx-auto w-full max-w-full min-w-0 px-3 sm:px-4 lg:px-14 flex flex-col justify-center min-h-screen">
         <div className="mx-auto w-full min-w-0 px-4 sm:px-6 lg:px-10">
           {/* ─── CHANGE 2: single-col on mobile, two-col on lg ─── */}
-          <div className="grid gap-10 pt-24 pb-10 lg:pt-0 lg:pb-0 lg:min-h-screen lg:grid-cols-[1fr_400px] xl:gap-16 lg:items-center">
+          <div className="grid gap-10 pt-24 pb-10 lg:pt-0 lg:pb-0 lg:min-h-screen lg:grid-cols-[1fr_610px] xl:gap-16 lg:items-center">
 
             {/* ── Left column ── */}
-            <div className="flex flex-col justify-center text-left">
+            <div className="flex flex-col justify-center text-left max-w-7xl  mx-auto">
               {/* Heading */}
               <div className="mb-6 md:mb-8">
-                <h1 id="hero-heading" className="font-display text-[1.65rem] font-bold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                <h1 id="hero-heading" className="font-display max-w-5xl mx-auto text-[1.65rem] font-bold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
                   Software Development Company{' '}
                   <span className="text-primary">That Scales Your Business Revenue</span>
                 </h1>
               </div>
 
               {/* Sub-description */}
-              <p className="animate-slide-in-up text-base sm:text-lg md:text-xl text-gray-100 leading-relaxed mb-8">
+              <p className="text-base  sm:text-lg md:text-xl text-gray-100  leading-relaxed mb-8">
                 We design, build, and deploy high-performance web, mobile, SaaS, and AI-powered
                 systems for companies in the USA, Europe &amp; Middle East.
               </p>
@@ -275,7 +281,7 @@ export function HeroSection(): JSX.Element {
             className="animate-slide-in-up mt-6 lg:mt-10 grid grid-cols-2 gap-x-8 gap-y-10  pt-10 pb-10 md:grid-cols-4 md:gap-x-12"
             role="list"
             aria-label="Company achievements"
-            style={{ animationDelay: '400ms' }}
+         
           >
             {stats.map((stat, index) => (
               <div key={stat.label} className="text-left" role="listitem">
@@ -295,7 +301,7 @@ export function HeroSection(): JSX.Element {
             {/* ── Right column CTA Form, vertically centered ── */}
             <div className="flex items-center justify-center lg:h-screen w-full">
               <div className="animate-slide-in-up w-full">
-                <div className="rounded-2xl border border-white/15 bg-black/60 p-6 sm:p-8 shadow-2xl shadow-black/50 backdrop-blur-md">
+                <div className="rounded-2xl border border-white/15 bg-black/20 p-6 sm:p-8 shadow-2xl shadow-black/50 backdrop-blur-md">
                   <h2 className="font-display text-lg font-bold text-white">Get a free quote</h2>
                   <p className="mt-1 mb-6 text-sm text-gray-300">
                     Share your details we&apos;ll respond within one business day.
@@ -394,16 +400,7 @@ export function HeroSection(): JSX.Element {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes slideInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-slide-in-up {
-          animation: slideInUp 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-          opacity: 0;
-        }
-      `}</style>
+ 
     </section>
   );
 }

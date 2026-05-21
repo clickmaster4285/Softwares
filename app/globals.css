@@ -18,7 +18,7 @@
 
 
     /* Slightly deeper orange (same hue) for WCAG contrast with white text on buttons/links */
-    --primary: 14 68% 56%;
+    --primary: 38 100% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 15 54% 44%; /* very light blue-gray */

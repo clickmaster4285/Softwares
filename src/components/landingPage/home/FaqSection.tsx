@@ -44,7 +44,7 @@ const faqItems: FaqItem[] = [
   },
 ];
 
-export function FaqSection() {
+export function FaqSection({ faqItems = [] }: { faqItems?: FaqItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -85,7 +85,7 @@ export function FaqSection() {
 
         {/* FAQ Grid - 2 columns */}
         <div className="grid gap-4 sm:grid-cols-1">
-          {faqItems.map((item, index) => (
+         {(faqItems ?? []).map((item, index) => (
             <div
               key={item.question}
               className=" border-b border-slate-200 transition-all "
