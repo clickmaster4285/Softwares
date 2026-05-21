@@ -81,7 +81,7 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
 
          <div className="mx-auto max-w-3xl text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-3">
-            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+            <span className="h-[2px] w-8 rounded-full bg-primary" />
             
             <div className="inline-flex items-center gap-1.5">
               <Zap className="h-3.5 w-3.5 text-orange-700" />
@@ -90,7 +90,7 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
               </p>
             </div>
 
-            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+            <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
 
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-3xl leading-tight">

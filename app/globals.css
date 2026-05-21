@@ -7,63 +7,93 @@
 @layer base {
   :root {
 
-    --background:  0 0% 100%;/* soft cool gray */
+    --background: 0 0% 100%; /* soft cool gray */
     --foreground: 222 47% 11%; /* deep slate */
 
-    --card: 0 0% 100%; /* pure white cards */
+    --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-
-    /* Slightly deeper orange (same hue) for WCAG contrast with white text on buttons/links */
-    --primary: 38 100% 50%;
+    /* PRIMARY — Cyan 700 base */
+    --primary: 190 100% 29%; /* approx #0e7490 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 15 54% 44%; /* very light blue-gray */
+    /* Secondary muted cool tone */
+    --secondary: 200 20% 92%;
     --secondary-foreground: 222 47% 11%;
 
     --muted: 210 16% 90%;
     --muted-foreground: 222 20% 40%;
 
-    --accent: 16 85% 48%; /* deep orange accent */
+    /* Accent slightly brighter cyan/teal */
+    --accent: 185 85% 42%;
     --accent-foreground: 0 0% 100%;
 
-    /* Gradient for headings and accents */
-    --heading-gradient: linear-gradient(90deg, #f97316 0%, #fb923c 50%, #f59e0b 100%);
+    /* Heading gradient — cyan tech feel */
+    --heading-gradient: linear-gradient(
+      90deg,
+      #0e7490 0%,
+      #06b6d4 50%,
+      #22d3ee 100%
+    );
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 210 16% 85%;
     --input: 210 16% 85%;
-    --ring: 24 90% 42%;
+    --ring: 190 90% 35%; /* cyan focus ring */
 
     --radius: 0.75rem;
 
-    /* Custom design tokens */
+    /* Design tokens */
 
-    --gradient-primary: linear-gradient(135deg, hsl(24 90% 56%) 0%, hsl(16 85% 48%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 16% 93%) 100%);
-    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(24 90% 56% / 0.12), transparent);
-    --gradient-glow: radial-gradient(circle at center, hsl(24 90% 56% / 0.18), transparent 70%);
-    --shadow-glow: 0 0 60px hsl(24 90% 56% / 0.12);
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(190 100% 35%) 0%,
+      hsl(185 85% 42%) 100%
+    );
+
+    --gradient-card: linear-gradient(
+      145deg,
+      hsl(0 0% 100%) 0%,
+      hsl(200 20% 96%) 100%
+    );
+
+    --gradient-hero: radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      hsl(190 100% 35% / 0.15),
+      transparent
+    );
+
+    --gradient-glow: radial-gradient(
+      circle at center,
+      hsl(190 100% 40% / 0.18),
+      transparent 70%
+    );
+
+    --shadow-glow: 0 0 60px hsl(190 100% 40% / 0.18);
     --shadow-card: 0 8px 40px hsl(210 16% 85% / 0.3);
+
     --glass-bg: hsl(0 0% 100% / 0.85);
     --glass-border: hsl(210 16% 85% / 0.6);
 
-    --sidebar-background: 20 14% 5%;
-    --sidebar-foreground: 60 9% 98%;
-    --sidebar-primary: 24 90% 42%;
+    /* Sidebar (dark cyan tech UI) */
+    --sidebar-background: 190 45% 10%;
+    --sidebar-foreground: 210 40% 98%;
+
+    --sidebar-primary: 190 100% 35%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 20 14% 14%;
-    --sidebar-accent-foreground: 60 9% 98%;
-    --sidebar-border: 20 10% 18%;
-    --sidebar-ring: 24 90% 42%;
+
+    --sidebar-accent: 190 30% 14%;
+    --sidebar-accent-foreground: 210 40% 98%;
+
+    --sidebar-border: 190 30% 18%;
+    --sidebar-ring: 190 100% 40%;
   }
 }
-
 @layer utilities {
   .heading-gradient {
     background: var(--heading-gradient);
@@ -86,13 +116,14 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-dm-sans), sans-serif;
+    font-family: var(--font-inter), Inter, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-dm-serif), serif;
+    font-family: var(--font-inter), Inter, sans-serif;
     font-weight: 400;
   }
+
 
   strong, b {
     font-weight: 600;

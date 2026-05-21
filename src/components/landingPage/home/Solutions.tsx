@@ -86,11 +86,11 @@ export default function SolutionsPage() {
           {/* Heading */}
           <div className="mx-auto max-w-3xl text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-3">
-              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+              <span className="h-[2px] w-8 rounded-full bg-primary" />
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
                 OUR SOLUTIONS
               </p>
-              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+              <span className="h-[2px] w-8 rounded-full bg-primary" />
             </div>
 
             <h2 className="text-2xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">

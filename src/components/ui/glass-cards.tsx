@@ -12,7 +12,7 @@ export interface GlassCardItem {
   id: number | string;
   title: string;
   description: string;
-  color: string; // rgba string, e.g. 'rgba(226,106,63,0.8)'
+  color: string; 
   icon?: React.ReactNode;
   cta?: { label: string; href: string };
 }

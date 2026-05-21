@@ -55,11 +55,11 @@ export default function DynamicSections({ sections, serviceName }: DynamicSectio
             {/* Improved Header */}
             <div className="mx-auto pt-20 pb-12 text-center">
               <div className="inline-flex items-center gap-2 mb-4">
-                <span className="h-[2px] w-10 rounded-full bg-orange-400" />
+                <span className="h-[2px] w-10 rounded-full bg-primary" />
                 <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-700">
                   SERVICE DETAIL
                 </p>
-                <span className="h-[2px] w-10 rounded-full bg-orange-400" />
+                <span className="h-[2px] w-10 rounded-full bg-primary" />
               </div>
 
               <h2
