@@ -101,12 +101,12 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
       </LoadOnVisible>
 
 
-         <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
+         {/* <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-white" />}>
-         <div className=' bg-white'> <WhyChooseUs /></div>
+         <div className=' bg-white'> </div>
         </Suspense>
       </LoadOnVisible>
-      
+       */}
 
        {/* <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
@@ -116,12 +116,12 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
 
 
       {children}
-      <LoadOnVisible skeleton={sk64} minHeightClass="min-h-64">
+      {/* <LoadOnVisible skeleton={sk64} minHeightClass="min-h-64">
         <Suspense fallback={<div className="h-64 animate-pulse rounded-lg bg-gray-100" />}>
           <HelpSection />
         <div className="-mb-12"> <FinalCTA/></div> 
         </Suspense>
-      </LoadOnVisible>
+      </LoadOnVisible> */}
 
 
       

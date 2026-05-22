@@ -48,10 +48,12 @@ const values: GlassCardItem[] = [
 
 export function AboutSection() {
   return (
-    <section className="relative w-full ">
-
+    <section className="relative w-full bg-[#f5fbfb] ">
+        <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" /> 
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      
       {/* Header */}
-       <div className="mx-auto max-w-5xl px-6 pt-24 pb-12 text-center">
+       <div className="mx-auto max-w-5xl px-6 pt-10 text-center">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-[2px] w-8 rounded-full bg-primary" />
             
@@ -72,25 +74,10 @@ export function AboutSection() {
 
             <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
-
-          {/* <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-3xl leading-tight">
-         Who We Are
-          </h2> */}
-
-          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-           A results-driven <span className="font-semibold text-foreground">software house</span> building custom web apps, mobile apps, and enterprise software that powers real business growth.
-          </p>
         </div>
 
-
-
-
-
-      
-
-
       {/* MAIN GRID */}
-      <div className="mx-auto lg:px-24 px-6 pb-12">
+      <div className="mx-auto lg:px-24 px-6 pb-12 max-w-[1600px]">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-start">
           {/* LEFT COPY (sticky) */}
           <div className="lg:sticky lg:top-24 lg:self-start lg:pt-8 space-y-5 max-w-2xl">
@@ -228,10 +215,6 @@ export function AboutSection() {
           </div>
         </div>
       </div>
-
-
-
-      
 
     </section>
   );

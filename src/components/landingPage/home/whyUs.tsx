@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Rocket,
@@ -11,11 +11,9 @@ import {
   Clock,
   LucideIcon,
 } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitText from '../../ui/SplitText';
-
-gsap.registerPlugin(ScrollTrigger);
+import { TiltCard } from '../../ui/tilt-card';
+import ColorBends from '../../ui/ColorBends';
 
 // Default full benefits with all features and stats
 interface Benefit {
@@ -38,6 +36,7 @@ interface WhyChooseUsProps {
   items?: SimpleWhyChooseUsItem[];
   subtitle?: string;
 }
+
 // Default benefits (full featured)
 const defaultBenefits: Benefit[] = [
   {
@@ -90,13 +89,6 @@ const defaultBenefits: Benefit[] = [
   },
 ];
 
-// Default stats
-const defaultStats = [
-  { number: '250+', label: 'Projects Delivered' },
-  { number: '15+', label: 'Countries Served' },
-  { number: '99%', label: 'Client Satisfaction' },
-];
-
 // Map simple title to an icon
 const getIconForTitle = (title: string): LucideIcon => {
   const iconMap: Record<string, LucideIcon> = {
@@ -112,216 +104,238 @@ const getIconForTitle = (title: string): LucideIcon => {
 
 export function WhyChooseUs({ countryName, items, subtitle = "Competitive differentiation that sets us apart" }: WhyChooseUsProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  const handleCardHover = (index: number, isHovering: boolean) => {
-    setHoveredIndex(isHovering ? index : null);
-  };
 
   // Check if custom items were passed
   const hasCustomItems = items && items.length > 0;
 
   return (
-    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-white font-sans">
-      <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-10 ">
-        
-        {/* Header Section */}
-        <div className="mx-auto max-w-3xl text-center mb-12">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <span className="h-[2px] w-8 rounded-full bg-primary" />
-               <div className="inline-flex items-center gap-1.5">
-              <SplitText
-              text="
-           Why Choose ClickMasters"
-              className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
-              delay={60}
-              duration={0.8}
-              ease="power3.out"
-              splitType="chars"
-              from={{ opacity: 0, x: 60 }}
-              to={{ opacity: 1, x: 0 }}
-              threshold={0.2}
-              
-            />
-            </div>
-            <span className="h-[2px] w-8 rounded-full bg-primary" />
-          </div>
+    <section ref={sectionRef} className="relative py-24 overflow-hidden bg-black font-sans">
 
-        {/* <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
-  Why Choose ClickMasters{" "}
-  {countryName && (
-    <span>in {countryName}</span>
-  )}
-          </h2> */}
-          
 
-          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-            {subtitle}
-          </p>
-        </div>
 
-        {/* Benefits Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:px-16">
-          {hasCustomItems ? (
-            // RENDER CUSTOM SIMPLE ITEMS (just title + desc)
-            items.map((item, index) => {
-              const Icon = getIconForTitle(item.title);
-              return (
-                <motion.div
-                  key={item.title}
-                  className="relative cursor-pointer"
-                  initial={{ opacity: 0, y: 100 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: '0 25px 35px -15px rgba(249,115,22,0.3)',
-                    borderColor: 'rgb(249, 115, 22)',
-                    transition: { duration: 0.3 },
-                  }}
-                  onMouseEnter={() => handleCardHover(index, true)}
-                  onMouseLeave={() => handleCardHover(index, false)}
-                >
-                  <div className="relative bg-white rounded-2xl p-6 border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden group">
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent"
-                      animate={{ x: ['-100%', '100%'] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                    />
+  <ColorBends
+          colors={["#003843", "#005f6f", "#007f92"]}
+          rotation={90}
+          speed={0.2}
+          scale={1}
+          frequency={1}
+          warpStrength={1}
+          mouseInfluence={1}
+          noise={0.15}
+          parallax={0.5}
+          iterations={1}
+          intensity={1.5}
+          bandWidth={6}
+          transparent={true}
+          className="w-full h-full"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        />
 
-                    <motion.div
-                      className="card-icon relative mb-5"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <div className="relative inline-block">
-                        <div className="absolute inset-0 bg-primary/20 rounded-full blur-md scale-0 group-hover:scale-150 transition-transform duration-500" />
-                        <div className="relative w-12 h-12 flex items-center justify-center">
-                          <Icon className="w-6 h-6 text-black/80 group-hover:text-primary transition-colors duration-300" strokeWidth={1.5} />
-                        </div>
-                      </div>
-                    </motion.div>
 
-                    <h3 className="text-xl font-bold text-black mb-2 relative z-10 group-hover:text-primary transition-colors duration-300">
-                      {item.title}
-                    </h3>
 
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 relative z-10">
-                      {item.desc}
-                    </p>
 
-                    <div className="absolute bottom-3 right-3 w-6 h-6">
-                      <motion.div
-                        className="w-full h-full border-b border-r border-primary/20 group-hover:border-primary transition-colors duration-300"
-                        animate={{
-                          rotate: hoveredIndex === index ? 180 : 0,
-                          opacity: hoveredIndex === index ? 0.3 : 0.1,
-                        }}
-                        transition={{ duration: 0.5 }}
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })
-          ) : (
-            // RENDER DEFAULT FULL BENEFITS (with features, stats)
-            defaultBenefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <motion.div
-                  key={benefit.title}
-                  className="relative cursor-pointer"
-                  initial={{ opacity: 0, y: 100 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: '0 25px 35px -15px rgba(249,115,22,0.3)',
-                    borderColor: 'rgb(249, 115, 22)',
-                    transition: { duration: 0.3 },
-                  }}
-                  onMouseEnter={() => handleCardHover(index, true)}
-                  onMouseLeave={() => handleCardHover(index, false)}
-                >
-                  <div className="relative bg-white rounded-2xl p-6 border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden group">
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent"
-                      animate={{ x: ['-100%', '100%'] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                    />
 
-                    <motion.div
-                      className="card-icon relative mb-5"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <div className="relative inline-block">
-                        <div className="absolute inset-0 bg-primary/20 rounded-full blur-md scale-0 group-hover:scale-150 transition-transform duration-500" />
-                        <div className="relative w-12 h-12 flex items-center justify-center">
-                          <Icon className="w-6 h-6 text-black/80 group-hover:text-primary transition-colors duration-300" strokeWidth={1.5} />
-                        </div>
-                      </div>
-                    </motion.div>
+      
+     <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-10">
 
-                    <h3 className="text-xl font-bold text-black mb-2 relative z-10 group-hover:text-primary transition-colors duration-300">
-                      {benefit.title}
-                    </h3>
+  {/* Header Section */}
+  <div className="mx-auto max-w-3xl text-center mb-12">
+    <div className="inline-flex items-center gap-2 mb-3">
+      <span className="h-[2px] w-8 rounded-full bg-primary" />
 
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 relative z-10">
-                      {benefit.description}
-                    </p>
-
-                    <div className="card-features flex flex-wrap gap-2 mb-4 relative z-10">
-                      {benefit.features.map((feature, i) => (
-                        <motion.span
-                          key={feature}
-                          className="text-xs px-2 py-1 bg-gray-50 text-gray-600 rounded-full group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-300"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.1 * i }}
-                        >
-                          {feature}
-                        </motion.span>
-                      ))}
-                    </div>
-
-                    <div className="card-stats pt-3 border-t border-primary/10 flex items-baseline justify-between relative z-10">
-                      <div>
-                        <motion.span
-                          className="text-2xl font-bold text-primary block leading-none"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          {benefit.stats}
-                        </motion.span>
-                        <span className="text-xs uppercase tracking-wider text-gray-500">
-                          {benefit.statLabel}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="absolute bottom-3 right-3 w-6 h-6">
-                      <motion.div
-                        className="w-full h-full border-b border-r border-primary/20 group-hover:border-primary transition-colors duration-300"
-                        animate={{
-                          rotate: hoveredIndex === index ? 180 : 0,
-                          opacity: hoveredIndex === index ? 0.3 : 0.1,
-                        }}
-                        transition={{ duration: 0.5 }}
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })
-          )}
-        </div>
-
-       
+      <div className="inline-flex items-center gap-1.5">
+        <SplitText
+          text="Why Choose ClickMasters"
+          className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+          delay={60}
+          duration={0.8}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, x: 60 }}
+          to={{ opacity: 1, x: 0 }}
+          threshold={0.2}
+        />
       </div>
+
+      <span className="h-[2px] w-8 rounded-full bg-primary" />
+    </div>
+
+    <p className="mx-auto max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
+      {subtitle}
+    </p>
+  </div>
+
+  {/* Benefits Grid */}
+  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:px-16">
+    {hasCustomItems ? (
+      items.map((item, index) => {
+        const Icon = getIconForTitle(item.title);
+
+        return (
+          <motion.div
+            key={item.title}
+            className="relative"
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.05 }}
+          >
+            <TiltCard
+              tiltLimit={10}
+              scale={1.02}
+              perspective={1000}
+              effect="gravitate"
+              spotlight={true}
+              className="w-full h-full rounded-2xl"
+            >
+              <div
+                className="
+                  relative overflow-hidden h-full rounded-2xl
+                  border border-white/30
+                  bg-white/[0.06]
+                  backdrop-blur-xl
+                  p-6
+                  shadow-[0_8px_32px_rgba(0,148,173,0.12)]
+                  group
+                  transition-all duration-500
+                  hover:border-primary/30
+                  hover:bg-white/[0.09]
+                  hover:shadow-[0_12px_45px_rgba(0,148,173,0.25)]
+                "
+              >
+                {/* Glass Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/[0.03] to-transparent pointer-events-none" />
+
+                {/* Top Glow */}
+                <div className="absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl opacity-60" />
+
+                <div className="relative z-10">
+                  <div className="mb-5">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                      <Icon
+                        className="w-6 h-6 text-primary"
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors duration-300">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            </TiltCard>
+          </motion.div>
+        );
+      })
+    ) : (
+      defaultBenefits.map((benefit, index) => {
+        const Icon = benefit.icon;
+
+        return (
+          <motion.div
+            key={benefit.title}
+            className="relative"
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.05 }}
+          >
+            <TiltCard
+              tiltLimit={10}
+              scale={1.02}
+              perspective={1000}
+              effect="gravitate"
+              spotlight={true}
+              className="w-full h-full rounded-2xl"
+            >
+              <div
+                className="
+                  relative overflow-hidden h-full rounded-2xl
+                  border border-white/10
+                  bg-white/[0.06]
+                  backdrop-blur-xl
+                  p-6
+                  shadow-[0_8px_32px_rgba(0,148,173,0.12)]
+                  group
+                  transition-all duration-500
+                  hover:border-primary/30
+                  hover:bg-white/[0.09]
+                  hover:shadow-[0_12px_45px_rgba(0,148,173,0.25)]
+                "
+              >
+                {/* Glass Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/[0.03] to-transparent pointer-events-none" />
+
+                {/* Glow */}
+                <div className="absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl opacity-60" />
+
+                <div className="relative z-10">
+                  <div className="mb-5">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                      <Icon
+                        className="w-6 h-6 text-primary"
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors duration-300">
+                    {benefit.title}
+                  </h3>
+
+                  <p className="text-white/70 text-sm leading-relaxed mb-4">
+                    {benefit.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {benefit.features.map((feature) => (
+                      <span
+                        key={feature}
+                        className="
+                          text-xs px-2 py-1 rounded-full
+                          bg-white/[0.05]
+                          border border-white/10
+                          text-white/60
+                          group-hover:bg-primary/10
+                          group-hover:text-primary
+                          group-hover:border-primary/20
+                          transition-all duration-300
+                        "
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="pt-3 border-t border-white/10 flex items-baseline justify-between">
+                    <div>
+                      <span className="text-2xl font-bold text-primary block leading-none">
+                        {benefit.stats}
+                      </span>
+
+                      <span className="text-xs uppercase tracking-wider text-white/40">
+                        {benefit.statLabel}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TiltCard>
+          </motion.div>
+        );
+      })
+    )}
+  </div>
+</div>
+
+
+
+
     </section>
   );
 }

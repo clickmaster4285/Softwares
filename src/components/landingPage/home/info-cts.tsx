@@ -39,7 +39,7 @@ export function ProjectCTAHero() {
   const loop = [...cards, ...cards];
 
   return (
-    <section className="mx-auto bg-white">
+    <section className="mx-auto ">
       <div
         className="relative overflow-hidden  bg-primary text-primary-foreground"
         style={{

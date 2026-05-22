@@ -90,7 +90,7 @@ export function HelpSection() {
         y: -8,
         scale: 1.01,
         boxShadow: '0 20px 40px -12px rgba(0,0,0,0.1)',
-        borderColor: 'rgba(249,115,22,0.3)',
+        borderColor: 'rgba(0, 148, 173, 0.3)',
         duration: 0.3,
         ease: 'power2.out',
       });
@@ -99,7 +99,7 @@ export function HelpSection() {
         y: 0,
         scale: 1,
         boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
-        borderColor: 'rgba(249,115,22,0.1)',
+        borderColor: 'rgba(0, 148, 173, 0.3)',
         duration: 0.4,
         ease: 'power3.out',
       });
@@ -160,12 +160,12 @@ export function HelpSection() {
                 className="group relative cursor-pointer"
               >
                 {/* Premium Card Design */}
-                <div className="relative bg-white rounded-2xl p-6 border border-orange-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden transition-all duration-300">
+                <div className="relative bg-white rounded-2xl p-6 border border-primary/10 shadow-[0_4px_20px_rgb(0,0,0,0.02)] h-full overflow-hidden transition-all duration-300">
                   
                   {/* Header with Icon and Stat */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="relative">
-                      <div className="relative w-12 h-12 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-orange-50 transition-colors duration-300">
+                      <div className="relative w-12 h-12 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-primary/10 transition-colors duration-300">
                         <Icon className="w-6 h-6 text-black/70 group-hover:text-primary transition-colors duration-300" strokeWidth={1.5} />
                       </div>
                     </div>
@@ -190,7 +190,7 @@ export function HelpSection() {
                   {/* Bottom Corner Accent */}
                   <div className="absolute bottom-3 right-3 w-6 h-6">
                     <motion.div
-                      className="w-full h-full border-b border-r border-orange-200 group-hover:border-primary transition-all duration-300"
+                      className="w-full h-full border-b border-r border-primary/20 group-hover:border-primary transition-all duration-300"
                       animate={{
                         rotate: hoveredIndex === index ? 90 : 0,
                       }}

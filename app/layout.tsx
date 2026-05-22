@@ -1,12 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import { Providers } from "@/components/providers";
 import "./globals.css";
+import { Inter } from "next/font/google";
 import {
   defaultMetadata,
   organizationSchema,
   webSiteSchema,
 } from './metadata-config';
 import Script from 'next/script';
+import SplashCursor from "@/src/components/ui/SplashCursor";
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter', // CSS variable for use in Tailwind/CSS
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+});
 
 export const metadata: Metadata = defaultMetadata;
 
@@ -21,10 +30,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+       <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body
         suppressHydrationWarning
       >
+
+        <SplashCursor
+          RAINBOW_MODE={false}
+          CURL={3}
+          SPLAT_FORCE={6000}
+          DENSITY_DISSIPATION={3.5}
+          SHADING={true}
+          COLOR_UPDATE_SPEED={10}/>
         {/* Google Tag Manager */}
         <Script
           id="gtm"
