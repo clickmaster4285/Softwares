@@ -31650,8 +31650,8 @@ export const checklists: Record<string, Checklist> = {
 
     "lastUpdated": "2026-05-13T17:25:08.296534"
   },
-  "progressive-web-app-development": {
-    "slug": "progressive-web-app-development",
+  "pwa-development": {
+    "slug": "pwa-development",
     "serviceName": "Progressive Web App Development : What to Verify Before, During, and After | ClickMasters",
     "category": "Web Development",
     "categorySlug": "services",
