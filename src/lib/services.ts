@@ -244,7 +244,7 @@ export const servicesData: Record<string, ServiceData> = {
       { title: "Machine Learning Experts", description: "Expert ML practitioners for model-driven products", icon: "👨‍🔬" },
       { title: "Predictive Analytics", description: "Forecasting models to guide decisions", icon: "📊" },
       { title: "Recommendation Systems", description: "Personalized recommendations for engagement", icon: "🎯" },
-      { title: "Model Training & Optimization", description: "Training pipelines and model performance tuning", icon: "⚙️" },
+      { title: "Model Training Optimisation", description: "Training pipelines and model performance tuning", icon: "⚙️" },
       { title: "Deep Learning Solutions", description: "Advanced neural models for complex problems", icon: "🧠" },
       { title: "Deep Learning Experts", description: "Specialists in deep learning architecture and deployment", icon: "👨‍💻" }
     ],
@@ -510,7 +510,7 @@ export const servicesData: Record<string, ServiceData> = {
       { title: "Database Design", description: "Data models optimized for real workloads", icon: "🗄️" },
       { title: "Database Management", description: "Database operations, reliability, and health", icon: "⚙️" },
       { title: "Data Migration", description: "Safe migration with minimal downtime", icon: "🔄" },
-      { title: "Database Optimization", description: "Performance tuning for faster queries", icon: "⚡" },
+      { title: "Database Optimisation", description: "Performance tuning for faster queries", icon: "⚡" },
       { title: "SQL & NoSQL Solutions", description: "Right-fit SQL and NoSQL implementations", icon: "🔧" }
     ],
     lifecycle: [

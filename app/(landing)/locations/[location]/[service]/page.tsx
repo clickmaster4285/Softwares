@@ -32,7 +32,6 @@ export function generateStaticParams(): { location: string; service: string }[] 
   return getAllCountryServicePages().map((page: CountryServicePageContent) => ({
     location: page.categorySlug,
     service: page.slug,
-    pricing:page.countryPricingTiers,
   }));
 }
 
