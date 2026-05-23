@@ -24,43 +24,43 @@ type HomeExploreLink = {
 
 const homeExploreLinks: HomeExploreLink[] = [
   {
-    href: '/services',
+    href: '/software-solutions',
     title: 'Services overview',
     desc: 'Full list of development capabilities.',
     ariaLabel: 'Open the services overview page listing all development capabilities.',
   },
   {
-    href: '/services/custom-software-development',
+    href: '/software-development/custom-software-development',
     title: 'Custom Software Development',
     desc: 'End-to-end product delivery.',
     ariaLabel: 'Learn about custom software development and end-to-end product delivery.',
   },
   {
-    href: '/services/web-application-development',
+    href: '/web-development/web-application-development',
     title: 'Web Application Development',
     desc: 'SPAs, dashboards, portals.',
     ariaLabel: 'Explore web application development for SPAs, dashboards, and portals.',
   },
   {
-    href: '/services/mobile-app-development',
+    href: '/mobile-development/mobile-app-development',
     title: 'Mobile App Development',
     desc: 'Native + cross-platform builds.',
     ariaLabel: 'Read about native and cross-platform mobile app development.',
   },
   {
-    href: '/services/database-design-management',
+    href: '/database-data-management/database-design',
     title: 'Database Design & Management',
     desc: 'Modeling, migrations, tuning.',
     ariaLabel: 'See database design and management services including modeling and tuning.',
   },
   {
-    href: '/services/cloud-solutions-devops',
+    href: '/cloud-and-devops/cloud-solutions',
     title: 'Cloud Solutions & DevOps',
     desc: 'CI/CD, containers, observability.',
     ariaLabel: 'Discover cloud solutions and DevOps services including CI/CD and observability.',
   },
   {
-    href: '/services/cybersecurity-compliance',
+    href: '/cybersecurity/cybersecurity-compliance',
     title: 'Cybersecurity & Compliance',
     desc: 'Secure SDLC + audit readiness.',
     ariaLabel: 'Review cybersecurity and compliance offerings and secure SDLC practices.',

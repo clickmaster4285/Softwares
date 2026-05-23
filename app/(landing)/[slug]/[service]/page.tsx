@@ -228,7 +228,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
           __html: JSON.stringify(
             breadcrumbSchema([
               { name: 'Home', url: '/' },
-              { name: 'Services', url: '/services' },
+              { name: 'Services', url: '/software-solutions' },
               { name: page.category, url: `/${page.categorySlug}` },
               { name: page.serviceName, url: canonicalPath },
             ])

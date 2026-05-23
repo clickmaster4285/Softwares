@@ -101,10 +101,10 @@ export default function ServiceClient({ serviceData }: ServiceClientProps) {
 
   const footerLinks = {
     services: [
-      { name: "All Services", href: "/services" },
-      { name: "Software Development", href: "/services/software-development" },
-      { name: "Web Development", href: "/services/web-development" },
-      { name: "Mobile Development", href: "/services/mobile-development" }
+      { name: "All Services", href: "/software-solutions" },
+      { name: "Software Development", href: "/software-development" },
+      { name: "Web Development", href: "/web-development" },
+      { name: "Mobile Development", href: "/mobile-development" }
     ],
     company: [
       { name: "About Us", href: "/about-us" },
@@ -147,7 +147,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
           </Link>
           <ChevronRight className="h-3.5 w-3.5 text-gray-400" />
           <Link
-            href="/services"
+            href="/software-solutions"
             className="text-gray-500 hover:text-primary transition-colors font-medium"
           >
             Services

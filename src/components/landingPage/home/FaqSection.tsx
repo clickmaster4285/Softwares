@@ -28,7 +28,7 @@ const faqItems: FaqItem[] = [
     question: 'What technologies does ClickMasters use?',
     answer:
       "We use modern, proven technologies including React, Next.js, Node.js, Python, Flutter, React Native, PostgreSQL, MongoDB, AWS, Google Cloud, and Azure. We choose the best stack for each project's specific needs.",
-    more: { href: '/services', label: 'Explore our services' },
+    more: { href: '/software-solutions', label: 'Explore our services' },
   },
   {
     question: 'Do you provide post-launch support and maintenance?',

@@ -313,7 +313,8 @@ function extractGoalBasedUrls() {
   while ((match = slugRegex.exec(content)) !== null) {
     const parsed = parseGoalCompositeSlug(match[1]);
     if (!parsed) continue;
-    const categorySlug = categoryByService.get(parsed.serviceSlug) || 'services';
+    const categorySlug = categoryByService.get(parsed.serviceSlug);
+    if (!categorySlug) continue;
     urls.push(`${SITE_URL}/${categorySlug}/${parsed.serviceSlug}/${parsed.goalUrlSlug}`);
   }
 
@@ -330,7 +331,7 @@ function baseServiceSlugFromPersona(personaSlug) {
 }
 
 function getPersonaCategorySlug(serviceSlug, categoryByService) {
-  return categoryByService.get(serviceSlug) || 'services';
+  return categoryByService.get(serviceSlug);
 }
 
 function isPersonaBasedUrl(urlPath) {
@@ -543,6 +544,7 @@ async function generateSeparateSitemaps() {
   personaSlugs.forEach((personaSlug) => {
     const baseServiceSlug = baseServiceSlugFromPersona(personaSlug);
     const categorySlug = getPersonaCategorySlug(baseServiceSlug, categoryByService);
+    if (!categorySlug) return;
     categorizedUrls.personaBased.push(`${SITE_URL}/${categorySlug}/${baseServiceSlug}/${personaSlug}`);
   });
 

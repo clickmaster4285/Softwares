@@ -59,6 +59,21 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/services",
+        destination: "/software-solutions",
+        permanent: true,
+      },
+      {
+        source: "/services/:path*",
+        destination: "/:path*",
+        permanent: true,
+      },
+      {
+        source: "/locations/:location/services/:service",
+        destination: "/locations/:location/:service",
+        permanent: true,
+      },
+      {
         source: "/services/wireframing-prototyping/to-launch-faster",
         destination: "/design-ui-ux/wireframing-prototyping/to-launch-faster",
         permanent: true,

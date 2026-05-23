@@ -536,13 +536,13 @@ export const metadataConfig = {
     description:
       'Full-cycle custom software development: web apps, mobile, ERP, APIs & cloud. Trusted by startups and enterprises worldwide. Book a free consultation today.',
 
-    alternates: { canonical: `${siteConfig.url}/services` },
+    alternates: { canonical: `${siteConfig.url}/software-solutions` },
 
     openGraph: {
       title: 'Software Development Services | Web, Mobile & ERP',
       description:
         'Full-cycle development for web apps, mobile apps, ERP, APIs & cloud. Tailored to your business goals. Free consultation available get started today.',
-      url: `${siteConfig.url}/services`,
+      url: `${siteConfig.url}/software-solutions`,
       images: [
         {
           url: `${siteConfig.url}/og/og-services.jpg`,

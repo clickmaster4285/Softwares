@@ -851,8 +851,8 @@ export default async function GoalBasedLandingPage({ params }: PageProps) {
           __html: JSON.stringify(
             breadcrumbSchema([
               { name: 'Home', url: '/' },
-              { name: 'Services', url: '/services' },
-              { name: goal.serviceName, url: `/services/${goal.serviceSlug}` },
+              { name: 'Services', url: '/software-solutions' },
+              { name: goal.serviceName, url: `/${servicePage.categorySlug}/${goal.serviceSlug}` },
               { name: goal.goalLabel, url: canonicalPath },
             ])
           ),
