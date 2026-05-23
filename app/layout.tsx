@@ -22,9 +22,28 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        suppressHydrationWarning
-      >
+      <head>
+        {/* Organization Schema - Improves brand visibility in search */}
+        <Script
+          id="organization-schema"
+          strategy="beforeInteractive"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema) || "",
+          }}
+        />
+
+        {/* WebSite Schema - Enables Google Sitelinks Search Box */}
+        <Script
+          id="website-schema"
+          strategy="beforeInteractive"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(webSiteSchema) || "",
+          }}
+        />
+      </head>
+      <body suppressHydrationWarning>
         {/* Google Tag Manager */}
         <Script
           id="gtm"
@@ -49,25 +68,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Providers>
           {children}
         </Providers>
-
-        {/* Organization Schema - Improves brand visibility in search */}
-        <Script
-          id="organization-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema) || "",
-          }}
-        />
-
-        {/* WebSite Schema - Enables Google Sitelinks Search Box */}
-        <Script
-          id="website-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(webSiteSchema) || "",
-          }}
-        />
-
       </body>
     </html>
   );

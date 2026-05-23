@@ -149,10 +149,32 @@ export default async function CountryServicePage({ params }: Props) {
 
   return (
     <>
-      <Script id={`schema-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Script id={`breadcrumb-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Services', url: '/software-solutions' }, { name: page.countryName, url: `/locations/${page.categorySlug}` }, { name: page.serviceName, url: `/locations/${page.categorySlug}/${page.slug}` }])) }} />
-      <Script id={`professional-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }} />
-      {faqSchema && <Script id={`faq-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+      <Script
+        id={`schema-${page.slug}`}
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id={`breadcrumb-${page.slug}`}
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Services', url: '/software-solutions' }, { name: page.countryName, url: `/locations/${page.categorySlug}` }, { name: page.serviceName, url: `/locations/${page.categorySlug}/${page.slug}` }])) }}
+      />
+      <Script
+        id={`professional-${page.slug}`}
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
+      />
+      {faqSchema && (
+        <Script
+          id={`faq-${page.slug}`}
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <div className="min-h-screen  text-slate-900 ">
         <ServiceHero
