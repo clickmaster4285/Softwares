@@ -982,7 +982,7 @@ const { data: blogs = [] } = useQuery({
                     <div className="mb-4 flex items-center justify-between border-b border-slate-200 pb-3">
                       <h3 className="text-base font-bold text-slate-900">{section.label}</h3>
                       <Link
-                        href={`/services/${categorySlug}`}
+                        href={`/${categorySlug}`}
                         onClick={closeDropdowns}
                         className="text-xs font-semibold uppercase tracking-widest text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
                       >

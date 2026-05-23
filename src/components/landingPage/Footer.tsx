@@ -7,35 +7,63 @@ import {
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterLinks {
+  services: FooterLink[];
+  company: FooterLink[];
+  resources: FooterLink[];
+  legal: FooterLink[];
+}
+
+const footerLinks: FooterLinks = {
+  services: [
+    { label: 'Custom Software', href: '/software-development/custom-software-development' },
+    { label: 'Web Development', href: '/web-development/web-application-development' },
+    { label: 'Mobile App Development', href: '/mobile-development/mobile-app-development' },
+    { label: 'ERP & Business Apps', href: '/software-development/enterprise-software-development' },
+    { label: 'Our Solutions', href: '/software-solutions' },
+  ],
+  company: [
+    { label: 'About Us', href: '/about-us' },
+    { label: 'Contact', href: '/contact-us' },
+    { label: 'Testimonials', href: '/testimonials' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Support', href: '/#help' },
+  ],
+  resources: [
+    { label: 'Help & FAQ', href: '/contact-us' },
+    { label: 'Why Choose Us', href: '/#community' },
+    { label: 'Case Studies', href: '/case-studies' },
+    { label: 'Blog', href: '/blog' },
+  ],
+  legal: [
+    { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms of Service', href: '/terms-of-service' },
+    { label: 'Cookie Policy', href: '/cookie-policy' },
+  ],
+};
+
+// Footer columns configuration
 const cols = [
   {
     title: "Services",
-    links: [
-      { name: "Custom Software", href: "/services/web-development" },
-      { name: "Web Development", href: "/services/mobile-apps" },
-      { name: "Mobile App Development", href: "/services/cloud-devops" },
-      { name: "ERP & Business Apps", href: "/services/ai-ml" },
-      { name: "Our Solutions", href: "/services/e-commerce" },
-    ],
+    links: footerLinks.services.map(item => ({ ...item, name: item.label })),
   },
   {
     title: "Company",
-    links: [
-      { name: "About Us", href: "/about" },
-      { name: "Contact", href: "/careers" },
-      { name: "Testimonials", href: "/case-studies" },
-      { name: "Blog", href: "/blog" },
-      { name: "Support", href: "/contact" },
-    ],
+    links: footerLinks.company.map(item => ({ ...item, name: item.label })),
   },
   {
     title: "Resources",
-    links: [
-      { name: "Help & FAQ", href: "/industries/healthcare" },
-      { name: "Why Choose Us", href: "/industries/fintech" },
-      { name: "Case Studies", href: "/industries/retail" },
-      { name: "Blog", href: "/industries/manufacturing" },
-    ],
+    links: footerLinks.resources.map(item => ({ ...item, name: item.label })),
+  },
+  {
+    title: "Legal",
+    links: footerLinks.legal.map(item => ({ ...item, name: item.label })),
   },
 ];
 
@@ -96,13 +124,13 @@ export function Footer() {
         </div>
 
         {/* Columns */}
-        {cols.map((col) => (
+        {cols.map((col: any) => (
           <div key={col.title} data-footer-col>
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary/50">
               {col.title}
             </h4>
             <ul className="mt-5 space-y-3 text-sm text-background/75">
-              {col.links.map((link) => (
+              {col.links.map((link: any) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}

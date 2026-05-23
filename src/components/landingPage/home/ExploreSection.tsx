@@ -3,14 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from 'next/link';
 import {
   Code2, Smartphone, Cloud, Brain, ArrowRight, Glasses,
   CpuIcon, Globe, ShieldCheck, Workflow, BarChart3, Eye,
   Bot, LucideIcon, DatabaseZap, Headphones, TestTube,
-  Link2, Palette, Database, ChevronDown, ChevronUp,
+  Link2, Palette, Database, ChevronDown, ChevronUp, Target,
+  Building, Rocket, Monitor, Plug, Puzzle, Server, Layers3,
+  Globe2, Zap, ShoppingCart, Package, Store, ShoppingBag,
+  Sparkles, Search, Edit3, LayoutDashboard, Users, BotMessageSquare,
+  Cpu, FileText, UserCheck, MessageCircle, Microscope, BarChartIcon,
+  HardDrive, DatabaseIcon, FileSpreadsheet, FileTextIcon, Cog, Webhook,
+  Box, CreditCard, Coins, Factory, Gamepad2, Wrench, WrenchIcon,
+  Bug, Users2, Headset, Settings,
 } from "lucide-react";
-import SplitText from "../../ui/SplitText";
-import Link from "next/link";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -214,12 +220,184 @@ const services = [
     slug: "immersive-tech",
   },
 ];
+// Sub-service icon mappings
+const subServiceIcons: Record<string, LucideIcon> = {
+  // Software Development
+  'Custom Software Development': Target,
+  'Enterprise Software Development': Building,
+  'SaaS Product Development': Cloud,
+  'MVP Development': Rocket,
+  'Desktop Application Development': Monitor,
+  'API Development & Integration': Plug,
+  'Microservices Architecture': Puzzle,
+  'Backend Development': Server,
+  'Frontend Development': Code2,
+  'Full Stack Development': Layers3,
+  
+  // Web Development
+  'Web Application Development': Globe,
+  'Website Development': Globe2,
+  'Progressive Web App Development': Smartphone,
+  'PWA Development': Smartphone,
+  'Headless CMS Development': Database,
+  'JAMstack Development': Zap,
+  'E-commerce Development': ShoppingCart,
+  'Headless E-commerce': Package,
+  'Shopify Development': Store,
+  'WooCommerce Development': ShoppingBag,
+  
+  // Mobile Development
+  'Mobile App Development': Smartphone,
+  'Android App Development': Bot,
+  'iOS App Development': Target,
+  'Cross-Platform App Development': Layers3,
+  'Flutter App Development': Sparkles,
+  'React Native Development': Code2,
+  
+  // Design UI/UX
+  'UI/UX Design': Palette,
+  'UI/UX Design Services': Palette,
+  'Product Design': Package,
+  'Web Design': Globe,
+  'Mobile App Design': Smartphone,
+  'UX Research': Search,
+  'Wireframing & Prototyping': Edit3,
+  'Design Systems': LayoutDashboard,
+  
+  // AI
+  'Generative AI Solutions': Brain,
+  'AI Experts': Users,
+  'AI Developers': Code2,
+  'AI Prompt Engineers': Edit3,
+  'AI Chatbot Development': BotMessageSquare,
+  'AI Agents Development': Bot,
+  'AI Automation Systems': Workflow,
+  'AI Integration Services': Plug,
+  'AI Model Development': Cpu,
+  'LLM Applications Development': FileText,
+  
+  // Machine Learning
+  'Machine Learning Solutions': Brain,
+  'Machine Learning Experts': Users,
+  'Predictive Analytics': BarChart3,
+  'Recommendation Systems': Target,
+  'Model Training & Optimization': Settings,
+  'Deep Learning Solutions': Cpu,
+  'Deep Learning Experts': UserCheck,
+  
+  // NLP & Computer Vision
+  'Natural Language Processing (NLP)': MessageCircle,
+  'Speech Recognition Systems': Microscope,
+  'Text Analytics': FileText,
+  'Computer Vision Solutions': Eye,
+  'Image Processing': Monitor,
+  'Video Analytics': Monitor,
+  
+  // Data Services
+  'Data Science & Analytics': BarChart3,
+  'Business Intelligence (BI)': BarChartIcon,
+  'Data Engineering': Database,
+  'Data Warehousing': HardDrive,
+  'Data Visualization': BarChart3,
+  'Big Data Solutions': DatabaseIcon,
+  
+  // Data & Intelligence
+  'Data Scraping Specialists': Search,
+  'Web Scraping Specialists': Globe2,
+  'Excel Experts': FileSpreadsheet,
+  'Google Sheets Experts': FileTextIcon,
+  'Power BI Developers': BarChartIcon,
+  'Data Scientists': Brain,
+  'Data Engineers': Database,
+  'Tableau Developers': BarChart3,
+  'SQL Database Developers': DatabaseIcon,
+  
+  // Automation & Chatbot
+  'Chatbot Developers': BotMessageSquare,
+  'Chatbot Marketing Experts': Target,
+  'Chatbot UX Writers': Edit3,
+  'Process Automation Experts': Workflow,
+  'Python Automation Experts': Code2,
+  'Software Automation Experts': Cog,
+  'Web Automation Experts': Webhook,
+  'Marketing Automation Experts': MessageCircle,
+  
+  // Automation & Integration
+  'Business Process Automation': Workflow,
+  'Workflow Automation': Cog,
+  'Robotic Process Automation (RPA)': Bot,
+  'System Integration': Link2,
+  'API Integration': Plug,
+  'Web Scraping & Data Extraction': Search,
+  
+  // Cloud & DevOps
+  'Cloud Solutions': Cloud,
+  'Cloud-Native Development': Rocket,
+  'DevOps Services': Workflow,
+  'DevSecOps': ShieldCheck,
+  'CI/CD Pipeline Setup': Settings,
+  'Serverless Architecture': Zap,
+  'Containerization (Docker & Kubernetes)': Box,
+  'Infrastructure as Code (IaC)': FileText,
+  
+  // Database Services
+  'Database Design': Database,
+  'Database Management': Settings,
+  'Data Migration': ArrowRight,
+  'Database Optimization': Zap,
+  'SQL & NoSQL Solutions': DatabaseIcon,
+  
+  // Cybersecurity
+  'Cybersecurity Services': ShieldCheck,
+  'Security Audits': Search,
+  'Penetration Testing': Target,
+  'Vulnerability Assessment': Bug,
+  'Compliance & Risk Management': FileText,
+  'Application Security': ShieldCheck,
+  
+  // Testing & QA
+  'QA & Software Testing': TestTube,
+  'Automated Testing': Bot,
+  'Manual Testing': Users2,
+  'Performance Testing': Zap,
+  'Load Testing': BarChart3,
+  'Bug Fixing': WrenchIcon,
+  
+  // Support & Outsourcing
+  'Maintenance & Support': Wrench,
+  'Dedicated Development Teams': Users2,
+  'IT Outsourcing': Globe,
+  'Staff Augmentation': UserCheck,
+  'Technical Support': Headset,
+  
+  // Blockchain & Web3
+  'Blockchain Development': Link2,
+  'Smart Contract Development': FileText,
+  'Decentralized App (DApp) Development': Globe2,
+  'Web3 Development': Brain,
+  'Crypto Wallet Development': CreditCard,
+  'NFT Marketplace Development': Package,
+  'Token Development': Coins,
+  
+  // IoT & Emerging Tech
+  'IoT Development': Cpu,
+  'Smart Systems Development': Brain,
+  'Industrial IoT': Factory,
+  'Embedded Systems Development': Server,
+  
+  // Immersive Tech
+  'AR Development': Smartphone,
+  'VR Development': Headset,
+  'Mixed Reality (MR) Solutions': Glasses,
+  'Mixed Reality Solutions': Glasses,
+  'DApp Development': Link2,
+  '3D Application Development': Gamepad2,
+};
 
 const ANIMATED_SERVICES = services.slice(0, 8);
 const EXTRA_SERVICES = services.slice(8);
 
 const origins = ["right", "left", "center"] as const;
-
 
 function GridCard({ service, index }: { service: (typeof services)[number]; index: number }) {
   const { icon: Icon, title, desc, gradient, accent, slug } = service;

@@ -80,7 +80,7 @@ const phrases: string[] = [
   <div
     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
     style={{
-      backgroundImage: 'url("/locationImg.webp")',
+      backgroundImage: 'url("/images/locationImg.webp")',
     }}
   />
   

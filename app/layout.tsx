@@ -30,18 +30,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-       <html lang="en" suppressHydrationWarning className={inter.variable}>
-      <body
-        suppressHydrationWarning
-      >
+    <html lang="en" suppressHydrationWarning className={inter.variable}>
+      <head>
+        {/* Organization Schema - Improves brand visibility in search */}
+        <Script
+          id="organization-schema"
+          strategy="beforeInteractive"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema) || "",
+          }}
+        />
 
+        {/* WebSite Schema - Enables Google Sitelinks Search Box */}
+        <Script
+          id="website-schema"
+          strategy="beforeInteractive"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(webSiteSchema) || "",
+          }}
+        />
+      </head>
+      <body suppressHydrationWarning>
         <SplashCursor
           RAINBOW_MODE={false}
           CURL={3}
           SPLAT_FORCE={6000}
           DENSITY_DISSIPATION={3.5}
           SHADING={true}
-          COLOR_UPDATE_SPEED={10}/>
+          COLOR_UPDATE_SPEED={10}
+        />
         {/* Google Tag Manager */}
         <Script
           id="gtm"
@@ -66,25 +85,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Providers>
           {children}
         </Providers>
-
-        {/* Organization Schema - Improves brand visibility in search */}
-        <Script
-          id="organization-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema) || "",
-          }}
-        />
-
-        {/* WebSite Schema - Enables Google Sitelinks Search Box */}
-        <Script
-          id="website-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(webSiteSchema) || "",
-          }}
-        />
-
       </body>
     </html>
   );

@@ -32,7 +32,6 @@ export function generateStaticParams(): { location: string; service: string }[] 
   return getAllCountryServicePages().map((page: CountryServicePageContent) => ({
     location: page.categorySlug,
     service: page.slug,
-    pricing:page.countryPricingTiers,
   }));
 }
 
@@ -60,6 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       images: [`${siteConfig.url}/og/services.webp`],
     },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -149,10 +149,32 @@ export default async function CountryServicePage({ params }: Props) {
 
   return (
     <>
-      <Script id={`schema-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Script id={`breadcrumb-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }, { name: page.countryName, url: `/locations/${page.categorySlug}` }, { name: page.serviceName, url: `/locations/${page.categorySlug}/${page.slug}` }])) }} />
-      <Script id={`professional-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }} />
-      {faqSchema && <Script id={`faq-${page.slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+      <Script
+        id={`schema-${page.slug}`}
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id={`breadcrumb-${page.slug}`}
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Services', url: '/software-solutions' }, { name: page.countryName, url: `/locations/${page.categorySlug}` }, { name: page.serviceName, url: `/locations/${page.categorySlug}/${page.slug}` }])) }}
+      />
+      <Script
+        id={`professional-${page.slug}`}
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
+      />
+      {faqSchema && (
+        <Script
+          id={`faq-${page.slug}`}
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <div className="min-h-screen  text-slate-900 ">
         <ServiceHero

@@ -12,6 +12,12 @@ import {
   goalPageMatchesService,
 } from '@/lib/goal-based-utils';
 import { getServicePage } from '@/lib/service-pages';
+import PersonaPageClient from '@/app/(landing)/[slug]/[service]/[persona-based]/PersonaPageClient';
+import {
+  getAllPersonaStaticParams,
+  isPersonaSlug,
+  resolvePersonaRoute,
+} from '@/src/lib/persona-utils';
 import { ServiceSubpageBreadcrumb } from '@/src/components/landingPage/servicesPage/ServiceSubpageBreadcrumb';
 import FaqSection from '@/src/components/landingPage/home/FaqSection';
 import ChecklistCTAHero from '@/src/components/landingPage/checklist/ChecklistCTAHero';
@@ -441,12 +447,53 @@ type PageProps = {
 };
 
 export function generateStaticParams(): PageParams[] {
-  return getAllGoalStaticParams();
+  return [...getAllGoalStaticParams(), ...getAllPersonaStaticParams()];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug, service: serviceParam, 'goal-based': goalSlug } = await params;
-  const goal = getGoalPage(goalSlug, serviceParam);
+  const { slug, service: serviceParam, 'goal-based': segment } = await params;
+
+  if (isPersonaSlug(segment)) {
+    const personaRoute = resolvePersonaRoute(segment, serviceParam);
+    if (!personaRoute) return { title: 'Service' };
+
+    const { personaPage, servicePage, canonicalPath } = personaRoute;
+    const title = personaPage.metaTitle ?? `${personaPage.title} | ClickMasters`;
+    const description = personaPage.metaDescription;
+
+    if (servicePage.categorySlug !== slug) {
+      notFound();
+    }
+
+    const canonical = `${siteConfig.url}${canonicalPath}`;
+
+    return {
+      title,
+      description,
+      alternates: { canonical },
+      openGraph: {
+        title,
+        description,
+        url: canonical,
+        images: [
+          {
+            url: `${siteConfig.url}/og/services.webp`,
+            width: 1200,
+            height: 630,
+            alt: `${personaPage.title} | ClickMasters`,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [`${siteConfig.url}/og/services.webp`],
+      },
+    };
+  }
+
+  const goal = getGoalPage(segment, serviceParam);
   if (!goal || !goalPageMatchesService(goal, serviceParam)) {
     return { title: 'Goal' };
   }
@@ -488,9 +535,86 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function GoalBasedLandingPage({ params }: PageProps) {
-  const { slug, service: serviceParam, 'goal-based': goalSlug } = await params;
+  const { slug, service: serviceParam, 'goal-based': segment } = await params;
 
-  const goal = getGoalPage(goalSlug, serviceParam);
+  if (isPersonaSlug(segment)) {
+    const personaRoute = resolvePersonaRoute(segment, serviceParam);
+    if (!personaRoute) notFound();
+
+    const { personaPage, servicePage, serviceSlug, canonicalPath } = personaRoute;
+
+    if (servicePage.categorySlug !== slug) {
+      notFound();
+    }
+
+    const pageAbsoluteUrl = `${siteConfig.url}${canonicalPath}`;
+    const personaLabel = personaPage.subtitle.replace(/^FOR\s+/i, '');
+
+    const professionalServiceLd = {
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      name: personaPage.title,
+      description: personaPage.metaDescription,
+      url: pageAbsoluteUrl,
+      provider: {
+        '@type': 'Organization',
+        name: 'ClickMasters',
+        url: siteConfig.url,
+      },
+    };
+
+    return (
+      <>
+        <Script
+          id={`persona-service-${segment}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              serviceSchema(
+                servicePage.serviceName ?? servicePage.title,
+                personaPage.metaDescription,
+                pageAbsoluteUrl
+              )
+            ),
+          }}
+        />
+        <Script
+          id={`persona-professional-${segment}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceLd) }}
+        />
+        <Script
+          id={`persona-faq-${segment}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(personaPage.faqs ?? [])) }}
+        />
+        <Script
+          id={`persona-breadcrumb-${segment}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              breadcrumbSchema([
+                { name: 'Home', url: '/' },
+                { name: servicePage.category, url: `/${servicePage.categorySlug}` },
+                { name: servicePage.serviceName, url: `/${servicePage.categorySlug}/${serviceSlug}` },
+                { name: personaLabel, url: canonicalPath },
+              ])
+            ),
+          }}
+        />
+        <PersonaPageClient
+          page={personaPage}
+          categorySlug={servicePage.categorySlug}
+          serviceSlug={serviceSlug}
+          serviceTitle={servicePage.title}
+          categoryName={servicePage.category}
+          serviceName={servicePage.serviceName}
+        />
+      </>
+    );
+  }
+
+  const goal = getGoalPage(segment, serviceParam);
   if (!goal) notFound();
   if (!goalPageMatchesService(goal, serviceParam)) notFound();
 
@@ -498,11 +622,11 @@ export default async function GoalBasedLandingPage({ params }: PageProps) {
   if (!servicePage) notFound();
 
   if (servicePage.categorySlug !== slug) {
-    redirect(`/${servicePage.categorySlug}/${goal.serviceSlug}/${goalSlug}`);
+    redirect(`/${servicePage.categorySlug}/${goal.serviceSlug}/${segment}`);
   }
 
   if (serviceParam !== goal.serviceSlug && goalPageMatchesService(goal, serviceParam)) {
-    redirect(`/${servicePage.categorySlug}/${goal.serviceSlug}/${goalSlug}`);
+    redirect(`/${servicePage.categorySlug}/${goal.serviceSlug}/${segment}`);
   }
 
   const parentServiceHref = `/${servicePage.categorySlug}/${servicePage.slug}`;
@@ -525,7 +649,7 @@ export default async function GoalBasedLandingPage({ params }: PageProps) {
   return (
     <>
       <Script
-        id={`goal-service-${goalSlug}`}
+        id={`goal-service-${segment}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
@@ -538,24 +662,24 @@ export default async function GoalBasedLandingPage({ params }: PageProps) {
         }}
       />
       <Script
-        id={`goal-professional-${goalSlug}`}
+        id={`goal-professional-${segment}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceLd) }}
       />
       <Script
-        id={`goal-faq-${goalSlug}`}
+        id={`goal-faq-${segment}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(goal.faqs ?? [])) }}
       />
       <Script
-        id={`goal-breadcrumb-${goalSlug}`}
+        id={`goal-breadcrumb-${segment}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
               { name: 'Home', url: '/' },
-              { name: 'Services', url: '/services' },
-              { name: goal.serviceName, url: `/services/${goal.serviceSlug}` },
+              { name: 'Services', url: '/software-solutions' },
+              { name: goal.serviceName, url: `/${servicePage.categorySlug}/${goal.serviceSlug}` },
               { name: goal.goalLabel, url: canonicalPath },
             ])
           ),

@@ -4042,8 +4042,8 @@ export const howToGuides: Record<string, HowToGuide> = {
     ],
     "lastUpdated": "2026-05-16T10:38:17.667263"
   },
-  "ecommerce-development": {
-    "slug": "ecommerce-development",
+  "e-commerce-development": {
+    "slug": "e-commerce-development",
     "title": "How to E-Commerce Development: Step-by-Step Guide | ClickMasters",
     "steps": [
       {
@@ -4252,8 +4252,8 @@ export const howToGuides: Record<string, HowToGuide> = {
     ],
     "lastUpdated": "2026-05-16T10:38:17.691260"
   },
-  "enterprise-software": {
-    "slug": "enterprise-software",
+  "enterprise-software-development": {
+    "slug": "enterprise-software-development",
     "title": "How to Enterprise Software: Step-by-Step Guide | ClickMasters",
     "steps": [
       {
@@ -4777,8 +4777,8 @@ export const howToGuides: Record<string, HowToGuide> = {
     ],
     "lastUpdated": "2026-05-16T10:38:17.751265"
   },
-  "headless-ecommerce": {
-    "slug": "headless-ecommerce",
+  "headless-e-commerce": {
+    "slug": "headless-e-commerce",
     "title": "How to Headless E-Commerce: Step-by-Step Guide | ClickMasters",
     "steps": [
       {
@@ -9316,8 +9316,8 @@ export const howToGuides: Record<string, HowToGuide> = {
     ],
     "lastUpdated": "2026-05-16T10:38:18.339268"
   },
-  "uiux-design-services": {
-    "slug": "uiux-design-services",
+  "ui-ux-design-services": {
+    "slug": "ui-ux-design-services",
     "title": "How to UI/UX Design Services: Step-by-Step Guide | ClickMasters",
     "steps": [
       {

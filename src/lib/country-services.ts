@@ -73206,68 +73206,54 @@ export const servicesByCountry: Record<string, ServiceData[]> = {
   ],
 };
 
-// Service groupings for getAllCountryServicePages
-const aiMachineLearningServices = Object.values(servicesByCountry).flat().filter(service => 
-  service.serviceType.includes('AI') || 
-  service.serviceType.includes('Machine Learning')
-);
+// Generate all country service pages (every service in servicesByCountry for each location)
+let cachedCountryServicePages: CountryServicePageContent[] | null = null;
+let countryServicePageByKey: Map<string, CountryServicePageContent> | null = null;
 
-const appDevelopmentServices = Object.values(servicesByCountry).flat().filter(service => 
-  service.serviceType.includes('App Development') ||
-  service.serviceType.includes('Mobile') ||
-  service.serviceType.includes('Android') ||
-  service.serviceType.includes('iOS')
-);
-
-const webDevelopmentServices = Object.values(servicesByCountry).flat().filter(service => 
-  service.serviceType.includes('Web') ||
-  service.serviceType.includes('Frontend') ||
-  service.serviceType.includes('Backend') ||
-  service.serviceType.includes('Full Stack')
-);
-
-// Generate all country service pages
 export function getAllCountryServicePages(): CountryServicePageContent[] {
-  const allServices = [
-    ...aiMachineLearningServices,
-    ...appDevelopmentServices,
-    ...webDevelopmentServices
-
-  ];
+  if (cachedCountryServicePages) {
+    return cachedCountryServicePages;
+  }
 
   const countries = ['canada', 'usa', 'uk', 'germany', 'uae', 'australia'];
-  
   const allPages: CountryServicePageContent[] = [];
-  
-  countries.forEach(country => {
+
+  countries.forEach((country) => {
     const countryData = getCountryData(country);
     if (!countryData) return;
-    
 
-   
-    allServices.forEach(service => {
+    const services = servicesByCountry[countryData.name];
+    if (!services?.length) return;
+
+    services.forEach((service) => {
       allPages.push({
         ...service,
-        categorySlug: country, // Use country as category slug
+        categorySlug: country,
         countryName: countryData.name,
         countryCode: getCountryCode(country),
-        serviceName: service.title,
+        serviceName: service.serviceType,
         slug: service.slug,
-        title: `${service.title} in ${countryData.name}`,
-        metaDescription: service.metaDescription.replace(/services/gi, `${countryData.name.toLowerCase()} services`),
-        sections: service.sections?.map(section => ({
-          ...section,
-          body: section.body?.replace(/your business/gi, `${countryData.name.toLowerCase()} business`)
-        })),
-        countryPricingTiers: service.countryPricingTiers || [], // Explicitly ensure countryPricingTiers are included
-        faqs: service.faqs?.map(faq => ({
-          question: faq.question.replace(/your business/gi, `${countryData.name.toLowerCase()} business`),
-          answer: faq.answer.replace(/your business/gi, `${countryData.name.toLowerCase()} business`)
-        }))
+        title: service.title,
+        metaTitle: service.title,
+        metaDescription: service.metaDescription,
+        sections: service.sections ?? [],
+        servicesCards: undefined,
+        differentiators: undefined,
+        checklist: undefined,
+        processPhases: service.processPhases,
+        industryUseCases: undefined,
+        countryPricingTiers: service.countryPricingTiers ?? [],
+        tables: undefined,
+        faqs: service.faqs ?? [],
       });
     });
   });
-  
+
+  cachedCountryServicePages = allPages;
+  countryServicePageByKey = new Map(
+    allPages.map((page) => [`${page.categorySlug}/${page.slug}`, page])
+  );
+
   return allPages;
 }
 
@@ -73295,10 +73281,8 @@ function getCountryCode(country: string): string {
 
 // Get specific country service page
 export function getCountryServicePage(service: string, country: string): CountryServicePageContent | undefined {
-  const allPages = getAllCountryServicePages();
-  return allPages.find(page => 
-    page.slug === service && page.categorySlug === country
-  );
+  getAllCountryServicePages();
+  return countryServicePageByKey?.get(`${country}/${service}`);
 }
 
 // Get technologies for specific service and country

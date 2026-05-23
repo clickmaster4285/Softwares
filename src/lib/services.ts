@@ -1,4 +1,3 @@
-// app/services/[slug]/data.ts
 export type LifecycleStep = {
   step: number;
   title: string;
@@ -86,7 +85,7 @@ export const servicesData: Record<string, ServiceData> = {
     subServices: [
       { title: "Web Application Development", description: "Modern web apps and business portals", icon: "🌐" },
       { title: "Website Development", description: "SEO-friendly websites that convert", icon: "🌍" },
-      { title: "Progressive Web App Development", description: "Installable web apps with offline support", icon: "⚡" },
+      { title: "PWA Development", description: "Installable web apps with offline support", icon: "⚡" },
       { title: "Headless CMS Development", description: "Flexible content systems with API delivery", icon: "🔧" },
       { title: "JAMstack Development", description: "Fast static-first web architectures", icon: "⚡" },
       { title: "E-commerce Development", description: "Scalable online stores and checkout flows", icon: "🛒" },
@@ -161,7 +160,7 @@ export const servicesData: Record<string, ServiceData> = {
     benefits: ["Improved user engagement", "Higher conversion rates", "Brand consistency", "Reduced bounce rates"],
     ctaText: "Start Designing",
     subServices: [
-      { title: "UI/UX Design", description: "User-first interfaces with measurable outcomes", icon: "🎨" },
+      { title: "UI/UX Design Services", description: "User-first interfaces with measurable outcomes", icon: "🎨" },
       { title: "Product Design", description: "End-to-end product thinking and execution", icon: "📦" },
       { title: "Web Design", description: "Modern web layouts with clear hierarchy", icon: "🌐" },
       { title: "Mobile App Design", description: "Mobile-first design systems and flows", icon: "📱" },
@@ -244,7 +243,7 @@ export const servicesData: Record<string, ServiceData> = {
       { title: "Machine Learning Experts", description: "Expert ML practitioners for model-driven products", icon: "👨‍🔬" },
       { title: "Predictive Analytics", description: "Forecasting models to guide decisions", icon: "📊" },
       { title: "Recommendation Systems", description: "Personalized recommendations for engagement", icon: "🎯" },
-      { title: "Model Training & Optimization", description: "Training pipelines and model performance tuning", icon: "⚙️" },
+      { title: "Model Training Optimisation", description: "Training pipelines and model performance tuning", icon: "⚙️" },
       { title: "Deep Learning Solutions", description: "Advanced neural models for complex problems", icon: "🧠" },
       { title: "Deep Learning Experts", description: "Specialists in deep learning architecture and deployment", icon: "👨‍💻" }
     ],
@@ -510,7 +509,7 @@ export const servicesData: Record<string, ServiceData> = {
       { title: "Database Design", description: "Data models optimized for real workloads", icon: "🗄️" },
       { title: "Database Management", description: "Database operations, reliability, and health", icon: "⚙️" },
       { title: "Data Migration", description: "Safe migration with minimal downtime", icon: "🔄" },
-      { title: "Database Optimization", description: "Performance tuning for faster queries", icon: "⚡" },
+      { title: "Database Optimisation", description: "Performance tuning for faster queries", icon: "⚡" },
       { title: "SQL & NoSQL Solutions", description: "Right-fit SQL and NoSQL implementations", icon: "🔧" }
     ],
     lifecycle: [
@@ -655,7 +654,7 @@ export const servicesData: Record<string, ServiceData> = {
     subServices: [
       { title: "Blockchain Development", description: "Blockchain platforms and custom protocols", icon: "⛓️" },
       { title: "Smart Contract Development", description: "Secure smart contract implementation", icon: "📜" },
-      { title: "Decentralized App (DApp) Development", description: "DApp architecture and frontend integration", icon: "🌐" },
+      { title: "DApp Development", description: "DApp architecture and frontend integration", icon: "🌐" },
       { title: "Web3 Development", description: "Web3 product development and integrations", icon: "🌍" },
       { title: "Crypto Wallet Development", description: "Wallet apps with secure asset handling", icon: "💼" },
       { title: "NFT Marketplace Development", description: "NFT marketplace platforms and tooling", icon: "🎨" },
@@ -728,7 +727,7 @@ export const servicesData: Record<string, ServiceData> = {
     subServices: [
       { title: "AR Development", description: "Augmented reality experiences and apps", icon: "📱" },
       { title: "VR Development", description: "Virtual reality applications for training and products", icon: "🥽" },
-      { title: "Mixed Reality (MR) Solutions", description: "Mixed reality for collaborative experiences", icon: "🌐" },
+      { title: "Mixed Reality Solutions", description: "Mixed reality for collaborative experiences", icon: "🌐" },
       { title: "3D Application Development", description: "Interactive 3D applications and simulations", icon: "🎮" }
     ],
     lifecycle: [
