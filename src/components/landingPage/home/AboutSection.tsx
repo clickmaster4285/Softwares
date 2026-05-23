@@ -62,10 +62,16 @@ export function AboutSection() {
   />
 
 
-      {/* Header */}
-       <div className="mx-auto max-w-5xl px-6 pt-10 text-center">
+    
+      {/* MAIN GRID */}
+      <div className="mx-auto lg:px-24 px-6 pb-12 max-w-[1750px]">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-start">
+
+
+            {/* Header */}
+       <div className="lg:sticky lg:top-24 lg:self-start mx-auto max-w-5xl px-6 pt-10 text-center">
           <div className="inline-flex items-center gap-2 mb-3">
-            <span className="h-[2px] w-8 rounded-full bg-primary" />
+            {/* <span className="h-[2px] w-8 rounded-full bg-primary" /> */}
             
             <div className="inline-flex items-center gap-1.5 mt-12">
   <SplitText
@@ -82,13 +88,10 @@ export function AboutSection() {
 />
 </div>
 
-            <span className="h-[2px] w-8 rounded-full bg-primary" />
+            {/* <span className="h-[2px] w-8 rounded-full bg-primary" /> */}
           </div>
         </div>
 
-      {/* MAIN GRID */}
-      <div className="mx-auto lg:px-24 px-6 pb-12 max-w-[1750px]">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-start">
           {/* LEFT COPY (sticky) */}
           <div className="lg:sticky lg:top-24 lg:self-start lg:pt-8 space-y-5 max-w-2xl">
             

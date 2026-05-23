@@ -75,7 +75,7 @@ export function Footer() {
       <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl animate-pulse-slow delay-700" />
 
       {/* Main grid */}
-      <div className="relative mx-auto grid max-w-[1600px] px-10 py-14 grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5 z-10">
+      <div className="relative mx-auto grid max-w-[1600px] px-10 py-14 grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-6 z-10">
         
         {/* Logo + Description */}
         <div data-footer-col className="lg:col-span-2">
@@ -101,7 +101,7 @@ export function Footer() {
               href="mailto:marketing@clickmasters.pk"
               className="flex items-center gap-3 transition hover:text-primary"
             >
-              <Mail className="h-4 w-4" />
+              <Mail className="h-4 w-4 text-blue-500" />
               <span>marketing@clickmasters.pk</span>
             </a>
 
@@ -109,16 +109,29 @@ export function Footer() {
               href="tel:+447988576086"
               className="flex items-center gap-3 transition hover:text-primary"
             >
-              <Phone className="h-4 w-4" />
-              <FaWhatsapp className="h-4 w-4 text-green-600" />
+              <Phone className="h-4 w-4 text-orange-600" />
+             
               <span>
-                +44 7988 576086 || +1 325 202 4074 || +92 332 5394285
+                +44 7988 576086 | +1 325 202 4074 | +92 332 5394285
               </span>
             </a>
 
+             <a
+              href="tel:+447988576086"
+              className="flex items-center gap-3 transition hover:text-primary"
+            >
+            
+              <FaWhatsapp className="h-4 w-4 text-green-600" />
+              <span>
+                +44 7988 576086 | +1 325 202 4074 | +92 332 5394285
+              </span>
+            </a>
+
+
+
             <p className="flex items-center gap-3">
-              <MapPin className="h-4 w-4" />
-              PWD · Paris Shopping Mall · Makkah · Pakistan
+              <MapPin className="h-4 w-4 text-red-500" />
+              PWD · Paris Shopping Mall · Islamabad · Pakistan
             </p>
           </div>
         </div>
@@ -126,7 +139,7 @@ export function Footer() {
         {/* Columns */}
         {cols.map((col: any) => (
           <div key={col.title} data-footer-col>
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary/50">
+            <h4 className="text-lg font-bold uppercase tracking-[0.2em] text-white">
               {col.title}
             </h4>
             <ul className="mt-5 space-y-3 text-sm text-background/75">
@@ -136,7 +149,7 @@ export function Footer() {
                     href={link.href}
                     className="group inline-flex items-center gap-1.5 transition-all duration-200 hover:text-white"
                   >
-                    <span className="inline-block transition-all duration-200 group-hover:translate-x-1 group-hover:scale-105 hover:text-primary/50">
+                    <span className="inline-block transition-all duration-200 group-hover:translate-x-1 group-hover:scale-105 hover:text-primary/20">
                       {link.name}
                     </span>
                     <ArrowRight className="h-3 w-3 opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-1" />
