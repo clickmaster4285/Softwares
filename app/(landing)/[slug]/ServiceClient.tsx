@@ -1,4 +1,3 @@
-// app/services/[slug]/ServiceClient.tsx
 'use client';
 
 import Image from 'next/image';
@@ -163,7 +162,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
       <HeroSection serviceData={serviceData} />
 
 
-    <ExploreSection />
+    <ExploreSection serviceData={serviceData} />
 
    <Suspense
         fallback={

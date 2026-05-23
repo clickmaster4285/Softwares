@@ -38,7 +38,10 @@ export function generateStaticParams(): { location: string; service: string }[] 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { location, service } = await params;
   const page = getCountryServicePage(service, location);
-  if (!page || page.categorySlug !== location) return { title: 'Service' };
+
+  if (!page || page.categorySlug !== location) {
+    notFound();
+  }
 
   const description = page.metaDescription;
   const canonical = `${siteConfig.url}/locations/${page.categorySlug}/${page.slug}`;
@@ -152,26 +155,22 @@ export default async function CountryServicePage({ params }: Props) {
       <Script
         id={`schema-${page.slug}`}
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Script
         id={`breadcrumb-${page.slug}`}
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Services', url: '/software-solutions' }, { name: page.countryName, url: `/locations/${page.categorySlug}` }, { name: page.serviceName, url: `/locations/${page.categorySlug}/${page.slug}` }])) }}
       />
       <Script
         id={`professional-${page.slug}`}
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
       />
       {faqSchema && (
         <Script
           id={`faq-${page.slug}`}
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
@@ -183,8 +182,8 @@ export default async function CountryServicePage({ params }: Props) {
             categorySlug: page.categorySlug,
             serviceName: page.serviceName,
             title: page.title,
-            lead: page.metaDescription,
-            highlights: [],
+            lead: page.lead ?? page.metaDescription,
+            highlights: page.highlights ?? [],
             marketStats: [],
           }}
         />

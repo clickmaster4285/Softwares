@@ -88,6 +88,8 @@ type SolutionsClientProps = {
   heading?: string;
   /** Intro paragraph under the title */
   subheading?: string;
+  /** SSR-hydrated project list so crawlers always see the real H1 + content */
+  initialProjects?: Project[];
 };
 
 const DEFAULT_HEADING = "What We've Built | 100+ Scalable Software Systems";
@@ -97,6 +99,7 @@ const DEFAULT_SUBHEADING =
 export default function SolutionsClient({
   heading = DEFAULT_HEADING,
   subheading = DEFAULT_SUBHEADING,
+  initialProjects = [],
 }: SolutionsClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -111,13 +114,14 @@ export default function SolutionsClient({
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
 
-  const { data: projects = [], isLoading } = useQuery<Project[]>({
+  const { data: projects = initialProjects, isLoading } = useQuery<Project[]>({
     queryKey: ["projects-public"],
     queryFn: async () => {
       const res = await apiFetch("/api/projects");
       if (!res.ok) throw new Error("Failed to fetch projects");
       return res.json();
     },
+    initialData: initialProjects.length > 0 ? initialProjects : undefined,
   });
 
   // Filter projects based on search and filters
@@ -440,10 +444,11 @@ export default function SolutionsClient({
         </div>
         
         <div className="container relative z-10 mx-auto max-w-7xl px-4">
-          <div className="text-center mb-12">
-            <div className="h-px w-20 bg-primary/30 mx-auto mb-8" />
-            <div className="h-12 w-96 bg-primary/5 rounded mx-auto mb-4 animate-pulse" />
-            <div className="h-6 w-64 bg-primary/5 rounded mx-auto animate-pulse" />
+          <div className="mt-20 text-center max-w-3xl mx-auto mb-12">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-black mb-4">
+              {heading}
+            </h1>
+            <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

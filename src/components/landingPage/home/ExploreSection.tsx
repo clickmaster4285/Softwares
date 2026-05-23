@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from 'next/link';
+import { getServicePath } from '@/lib/service-pages';
+import type { ServiceData } from '@/src/lib/services';
 import {
   Code2, Smartphone, Cloud, Brain, ArrowRight, Glasses,
   CpuIcon, Globe, ShieldCheck, Workflow, BarChart3, Eye,
@@ -394,13 +396,47 @@ const subServiceIcons: Record<string, LucideIcon> = {
   '3D Application Development': Gamepad2,
 };
 
-const ANIMATED_SERVICES = services.slice(0, 8);
-const EXTRA_SERVICES = services.slice(8);
-
 const origins = ["right", "left", "center"] as const;
 
-function GridCard({ service, index }: { service: (typeof services)[number]; index: number }) {
-  const { icon: Icon, title, desc, gradient, accent, slug } = service;
+type ExploreItem = {
+  id: string;
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  gradient: string;
+  accent: string;
+  href: string;
+};
+
+function buildExploreItems(serviceData?: ServiceData): ExploreItem[] {
+  if (serviceData?.subServices?.length) {
+    return serviceData.subServices.map((subService, index) => {
+      const palette = services[index % services.length];
+      return {
+        id: `${serviceData.slug}-${index}`,
+        icon: subServiceIcons[subService.title] || Code2,
+        title: subService.title,
+        desc: subService.description,
+        gradient: palette.gradient,
+        accent: palette.accent,
+        href: getServicePath(serviceData.title, subService.title),
+      };
+    });
+  }
+
+  return services.map((service) => ({
+    id: service.id,
+    icon: service.icon,
+    title: service.title,
+    desc: service.desc,
+    gradient: service.gradient,
+    accent: service.accent,
+    href: `/${service.slug}`,
+  }));
+}
+
+function GridCard({ service, index, total }: { service: ExploreItem; index: number; total: number }) {
+  const { icon: Icon, title, desc, gradient, accent, href } = service;
 
   return (
     <div
@@ -421,7 +457,7 @@ function GridCard({ service, index }: { service: (typeof services)[number]; inde
 
         {/* Number */}
         <div className="mt-4 text-[11px] font-semibold tracking-[0.3em] text-foreground/60">
-          {String(8 + index + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
+          {String(8 + index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </div>
 
         {/* Title */}
@@ -436,7 +472,7 @@ function GridCard({ service, index }: { service: (typeof services)[number]; inde
 
         {/* Learn More */}
         <Link
-          href={`/services/${slug}`}
+          href={href}
           className=" inline-flex items-center gap-2 text-sm font-semibold text-foreground transition-all group-hover:gap-3 self-start"
         >
           Learn more 
@@ -447,10 +483,15 @@ function GridCard({ service, index }: { service: (typeof services)[number]; inde
   );
 }
 
-export default function ExploreSection() {
+export default function ExploreSection({ serviceData }: { serviceData?: ServiceData }) {
   const sectionRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
+
+  const exploreItems = useMemo(() => buildExploreItems(serviceData), [serviceData]);
+  const animatedServices = exploreItems.slice(0, 8);
+  const extraServices = exploreItems.slice(8);
+  const isServicePage = Boolean(serviceData);
 
   // GSAP Animation (unchanged logic)
   useEffect(() => {
@@ -527,7 +568,7 @@ export default function ExploreSection() {
       ScrollTrigger.getAll().forEach((st) => st.kill());
       tl.kill();
     };
-  }, []);
+  }, [exploreItems.length]);
 
   return (
     <section
@@ -538,9 +579,9 @@ export default function ExploreSection() {
       {/* Pinned GSAP Area */}
       <div ref={innerRef} className="relative min-h-screen">
         <div className="pointer-events-none absolute inset-0 [perspective:1600px] [transform-style:preserve-3d]">
-          {ANIMATED_SERVICES.map(({ icon: Icon, title, desc, gradient, accent }, i) => (
+          {animatedServices.map(({ icon: Icon, title, desc, gradient, accent, href }, i) => (
             <div
-              key={title}
+              key={`${title}-${i}`}
               data-depth-card
               data-origin={origins[i % origins.length]}
               className="pointer-events-auto absolute w-[520px] md:w-[560px] lg:w-[600px] min-h-[420px] overflow-hidden rounded-3xl p-10 shadow-2xl shadow-black/30"
@@ -554,14 +595,14 @@ export default function ExploreSection() {
                   <Icon className="h-7 w-7" />
                 </div>
                 <div className="mt-5 text-sm font-semibold tracking-[0.3em] text-foreground/60">
-                  {String(i + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
+                  {String(i + 1).padStart(2, "0")} / {String(exploreItems.length).padStart(2, "0")}
                 </div>
                 <h3 className="mt-2 font-serif text-2xl lg:text-3xl font-bold leading-tight text-foreground">
                   {title}
                 </h3>
                 <p className="mt-3 text-2xl leading-relaxed text-foreground/80">{desc}</p>
                 <Link
-                  href={`/services/${ANIMATED_SERVICES[i].slug}`}
+                  href={href}
                   className="mt-5 inline-flex items-center gap-2 text-xl font-semibold text-foreground hover:gap-3 transition-all"
                 >
                   Learn more <ArrowRight className="h-5 w-5" />
@@ -585,8 +626,8 @@ export default function ExploreSection() {
                 <>See Less <ChevronUp className="h-4 w-4" /></>
               ) : (
                 <>
-                  See More Services <ChevronDown className="h-4 w-4" />
-                  <span className="ml-1 rounded-full bg-primary/30 px-2 py-0.5 text-xs">+{EXTRA_SERVICES.length}</span>
+                  {isServicePage ? 'See More Specializations' : 'See More Services'} <ChevronDown className="h-4 w-4" />
+                  <span className="ml-1 rounded-full bg-primary/30 px-2 py-0.5 text-xs">+{extraServices.length}</span>
                 </>
               )}
             </button>
@@ -595,8 +636,8 @@ export default function ExploreSection() {
           {/* Grid */}
           {expanded && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {EXTRA_SERVICES.map((service, i) => (
-                <GridCard key={service.id} service={service} index={i} />
+              {extraServices.map((service, i) => (
+                <GridCard key={service.id} service={service} index={i} total={exploreItems.length} />
               ))}
             </div>
           )}
