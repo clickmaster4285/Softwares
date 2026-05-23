@@ -71,8 +71,14 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
 
   const hasLocation = !!countryName;
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-24 md:py-32 lg:px-14">
-      <div className="relative mx-auto px-4 sm:px-6 lg:px-12">
+    <section className="relative overflow-hidden py-24 md:py24 lg:px-14 bg-white">
+
+
+<div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" /> 
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
+      
+      <div className="relative mx-auto  max-w-[1600px]">
         
         {/* Header */}
        

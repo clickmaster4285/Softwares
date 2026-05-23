@@ -26,6 +26,7 @@ import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
 import WhyChooseUs from '@/src/components/landingPage/home/whyUs';
 import HelpSection from '@/src/components/landingPage/home/help-section';
 import { FinalCTA } from '@/src/components/landingPage/home/finalCta';
+import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
 
 export const metadata = metadataConfig.home();
 
@@ -116,17 +117,28 @@ export default function LandingPage() {
             <SolutionsPage />
           </Suspense>
 
-          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
-            <ProcessPage />
-          </Suspense>
+          
 
           <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
             <TechStackSection />
           </Suspense>
 
+
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
+            <ProcessPage />
+          </Suspense>
+
+
+   <TestimonialsSection />
+
+
+          
           <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
             <WhyChooseUs />
           </Suspense>
+
+
+
 
           <LandingHomeDeferredHeavy>
             <Suspense fallback={<div className="h-80 animate-pulse rounded-lg bg-gray-100" />}>
@@ -138,14 +150,14 @@ export default function LandingPage() {
             <HelpSection />
           </Suspense>
 
-          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
-            <div className="-mb-12"> <FinalCTA/></div> 
-          </Suspense>
+       
+          <CTASectionImage/>
+          
         </div>
       </div>
 
       {/* Robot Mascot - Fixed position across all sections */}
-      <div className="fixed bottom-8 right-8 z-50">
+      <div className="fixed bottom-7 right-8 z-50">
         <RobotMascot />
       </div>
     </main>

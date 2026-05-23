@@ -110,9 +110,9 @@ export function HelpSection() {
     <section
       ref={sectionRef}
       id="help"
-      className="relative py-24 overflow-hidden bg-white font-sans lg:px-12"
+      className="relative py-24 overflow-hidden bg-white font-sans lg:px-12 "
     >
-      <div className="relative z-10 mx-auto px-4 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-[1600px]">
         
         {/* Header Section - Matching FAQ Style */}
         <div ref={headerRef} className="mx-auto max-w-3xl text-center mb-12">
@@ -139,7 +139,7 @@ export function HelpSection() {
             Resources & <span className="text-primary">Developer Support</span>
           </h2> */}
 
-          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
             Documentation, tutorials, and technical support for your software. Need a custom
             solution? Get in touch with our development team.
           </p>
@@ -173,17 +173,17 @@ export function HelpSection() {
                     {resource.stat && (
                       <div className="text-right">
                         <p className="text-2xl font-bold text-black group-hover:text-primary transition-colors duration-300">{resource.stat}</p>
-                        <p className="text-xs uppercase tracking-wider text-gray-500">Resourcessss</p>
+                        <p className="text-xs uppercase tracking-wider text-gray-800">Resources</p>
                       </div>
                     )}
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-lg font-bold text-black mb-2 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-black mb-2 group-hover:text-primary transition-colors duration-300">
                     {resource.title}
                   </h3>
 
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-800 text-md leading-relaxed mb-4">
                     {resource.description}
                   </p>
 

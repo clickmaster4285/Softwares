@@ -12,7 +12,7 @@ type FaqItem = {
   more?: { href: string; label: string };
 };
 
-// Default FAQs (shown when no prop is passed)
+// Default FAQs
 const defaultFaqItems: FaqItem[] = [
   {
     question: 'How much does custom software development cost?',
@@ -49,7 +49,6 @@ const defaultFaqItems: FaqItem[] = [
 export function FaqSection({ faqItems }: { faqItems?: FaqItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // Use provided FAQs or fallback to default ones
   const displayedFaqs = faqItems && faqItems.length > 0 ? faqItems : defaultFaqItems;
 
   const toggleFAQ = (index: number) => {
@@ -58,14 +57,16 @@ export function FaqSection({ faqItems }: { faqItems?: FaqItem[] }) {
 
   return (
     <section 
-      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white py-16 sm:py-20 lg:px-10" 
+      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white py-16 sm:py-20" 
       aria-labelledby="homepage-faq-heading"
     >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto px-4 lg:px-12">
+      {/* Main Container - Max 1600px + Centered */}
+      <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
+
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
@@ -88,64 +89,67 @@ export function FaqSection({ faqItems }: { faqItems?: FaqItem[] }) {
             <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
 
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
             Everything you need to know about our process, timelines, technology stack, and post-launch support.
           </p>
         </div>
 
         {/* FAQ List */}
-        <div className="grid gap-4 sm:grid-cols-1">
-          {displayedFaqs.map((item, index) => (
-            <div
-              key={index}
-              className="border-b border-slate-200 transition-all"
-            >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-slate-50"
+        <div className=" mx-auto">   {/* Keeps FAQ cards nicely contained */}
+          <div className="grid gap-4">
+            {displayedFaqs.map((item, index) => (
+              <div
+                key={index}
+                className="border-b border-primary/20 transition-all"
               >
-                <h3 className="pr-8 text-lg font-semibold leading-7 text-slate-900">
-                  {item.question}
-                </h3>
-                <ChevronDown
-                  className={`h-5 w-5 shrink-0 text-slate-400 transition-transform duration-300 ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              
-              <AnimatePresence mode="wait">
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="border-t border-slate-100 px-6 pb-6 pt-4">
-                      <p className="text-base leading-7 text-slate-600">
-                        {item.answer}
-                        {item.more && (
-                          <>
-                            {' '}
-                            <Link
-                              href={item.more.href}
-                              className="font-medium text-primary hover:underline"
-                              aria-label={`${item.more.label}`}
-                            >
-                              {item.more.label}
-                            </Link>
-                          </>
-                        )}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="flex w-full items-center justify-between py-6 text-left transition-colors  rounded-xl"
+                >
+                  <h3 className=" text-lg font-semibold leading-7 text-slate-900">
+                    {item.question}
+                  </h3>
+                  <ChevronDown
+                    className={`h-5 w-5 shrink-0 text-slate-800 transition-transform duration-300 ${
+                      openIndex === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                
+                <AnimatePresence mode="wait">
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-6 pt-2">
+                        <p className="text-base leading-7 text-slate-800">
+                          {item.answer}
+                          {item.more && (
+                            <>
+                              {' '}
+                              <Link
+                                href={item.more.href}
+                                className="font-medium text-primary hover:underline"
+                                aria-label={`${item.more.label}`}
+                              >
+                                {item.more.label}
+                              </Link>
+                            </>
+                          )}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
         </div>
+
       </div>
     </section>
   );

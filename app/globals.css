@@ -107,7 +107,18 @@
     display: inline-block;
   }
 }
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.45; }
+}
 
+.animate-pulse-slow {
+  animation: pulse-slow 15s ease-in-out infinite;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
 @layer base {
   * {
     @apply border-border;

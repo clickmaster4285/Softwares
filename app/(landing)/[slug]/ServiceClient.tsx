@@ -163,7 +163,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
       <HeroSection serviceData={serviceData} />
 
 
-    <ExploreSection serviceData={serviceData}/>
+    <ExploreSection />
 
    <Suspense
         fallback={

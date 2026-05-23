@@ -76,12 +76,18 @@ export default function SolutionsPage() {
   }
 
   return (
-    <main className="bg-gradient-to-b from-white to-slate-50">
+    <main className="relative w-full bg-[#f5fbfb]">
       {/* overflow-x-clip prevents scrollbar without clipping bottom */}
-      <section className="py-12 sm:py-16 md:py-24 bg-gray-50 overflow-x-clip">
+      
+  <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" /> 
+           <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
+      
+      <section className="py-12 sm:py-16 md:py-24 overflow-x-clip">
+
 
         {/* max-w-7xl + px matches your navbar container exactly */}
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-12">
 
           {/* Heading */}
           <div className="mx-auto max-w-3xl text-center mb-12">
@@ -108,7 +114,7 @@ export default function SolutionsPage() {
               Our Work in Action
             </h2> */}
 
-            <p className=" text-slate-600 text-lg">
+            <p className=" text-slate-900 text-xl">
               See how we&apos;ve helped businesses transform their ideas into
               successful digital products.
             </p>

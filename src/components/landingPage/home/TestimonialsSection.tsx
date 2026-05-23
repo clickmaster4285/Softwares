@@ -1,27 +1,9 @@
 "use client";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/effect-coverflow";
-
-import SplitText from '../../ui/SplitText';
-import React, { useState, useRef, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Quote, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper";
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from "swiper/modules";
+import { Star, Quote } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { apiFetch } from "@/lib/api"; // Make sure this path is correct
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { apiFetch } from "@/lib/api";
+import SplitText from "../../ui/SplitText";
 
 export interface Testimonial {
   _id: string;
@@ -31,264 +13,314 @@ export interface Testimonial {
   content: string;
   avatarUrl?: string;
   rating: number;
+  statValue?: string;   // e.g. "+38%", "0", "11w", "3×"
+  statLabel?: string;   // e.g. "Conversion", "Downtime", "To Launch"
 }
 
-interface TestimonialCardProps {
+/** Get initials from a full name */
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
+/** Deterministic avatar bg color per initials */
+const AVATAR_COLORS = [
+  "bg-indigo-500",
+  "bg-teal-600",
+  "bg-orange-500",
+  "bg-emerald-500",
+  "bg-violet-500",
+  "bg-rose-500",
+];
+function avatarColor(name: string) {
+  const idx = name.charCodeAt(0) % AVATAR_COLORS.length;
+  return AVATAR_COLORS[idx];
+}
+
+/** Top border accent per card position */
+const BORDER_ACCENTS = [
+  "bg-gradient-to-r from-[#0f766e] via-[#0891b2] to-[#164e63]",
+  "bg-gradient-to-r from-[#c2410c] via-[#ea580c] to-[#7c2d12]",
+  "bg-gradient-to-r from-[#1d4ed8] via-[#4338ca] to-[#312e81]",
+  "bg-gradient-to-r from-[#047857] via-[#059669] to-[#064e3b]",
+];
+/** Stat color per card position */
+const STAT_COLORS = [
+  "text-teal-600",
+  "text-orange-500",
+  "text-blue-500",
+  "text-emerald-500",
+];
+
+interface AuthorBlockProps {
   testimonial: Testimonial;
-  isActive: boolean;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({
-  testimonial,
-  isActive,
-}) => {
-  const blobRadius =
-    "70% 30% 70% 30% / 40% 60% 40% 60%";
+function AuthorBlock({ testimonial }: AuthorBlockProps) {
+  const initials = getInitials(testimonial.authorName);
+  const colorClass = avatarColor(testimonial.authorName);
 
   return (
-    <div className="relative mx-auto w-full max-w-[420px] px-3 py-14">
-      {/* Background Blob */}
-      <div
-        aria-hidden
-        className={`absolute inset-x-2 inset-y-6 -z-0 bg-primary transition-all duration-500 ${
-          isActive
-            ? "rotate-[-10deg] scale-[1.03]"
-            : "rotate-[-8deg] opacity-90"
-        }`}
-        style={{ borderRadius: blobRadius }}
-      />
+    <div className="flex items-center gap-2.5">
+      {/* Avatar */}
+      {testimonial.avatarUrl ? (
+        <img
+          src={testimonial.avatarUrl}
+          alt={testimonial.authorName}
+          className="h-9 w-9 rounded-full object-cover flex-shrink-0"
+        />
+      ) : (
+        <div
+          className={`h-9 w-9 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0 ${colorClass}`}
+        >
+          {initials}
+        </div>
+      )}
 
-      {/* Card */}
-      <div
-        className={`relative min-h-[420px] bg-card shadow-xl transition-all duration-500 ${
-          isActive
-            ? "scale-100 shadow-2xl"
-            : "scale-95 opacity-90"
-        }`}
-        style={{ borderRadius: blobRadius }}
-      >
-        <div className="flex h-full flex-col items-center px-8 pb-14 pt-20 text-center">
-          {/* Avatar */}
-          <Avatar className="absolute -top-8 left-1/2 h-20 w-20 -translate-x-1/2 border-4 border-card shadow-md">
-            <AvatarImage
-              src={testimonial.avatarUrl}
-              alt={testimonial.authorName}
-            />
-            <AvatarFallback>
-              {testimonial.authorName.slice(0, 2).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-
-          {/* Name */}
-          <h3 className="text-lg font-semibold text-foreground">
-            {testimonial.authorName}
-          </h3>
-
-          {/* Role */}
-          <p className="mb-5 text-sm text-muted-foreground">
-            {testimonial.authorRole}
-            {testimonial.authorRole &&
-              testimonial.authorCompany &&
-              ", "}
-            {testimonial.authorCompany}
-          </p>
-
-          {/* Quote Icon */}
-          <Quote className="mb-3 h-6 w-6 fill-primary text-primary" />
-
-          {/* Content */}
-          <p className="text-sm leading-7 text-muted-foreground">
-            "{testimonial.content}"
-          </p>
+      {/* Name + Role stacked */}
+      <div>
+        <div className="font-semibold text-sm text-slate-900 leading-tight">
+          {testimonial.authorName}
+        </div>
+        <div className="text-xs text-slate-500 mt-0.5 leading-tight">
+          {testimonial.authorRole}
+          {testimonial.authorRole && testimonial.authorCompany ? ", " : ""}
+          {testimonial.authorCompany}
         </div>
       </div>
     </div>
   );
-};
+}
 
+interface StatBlockProps {
+  testimonial: Testimonial;
+  colorClass: string;
+  large?: boolean;
+}
+
+function StatBlock({ testimonial, colorClass, large }: StatBlockProps) {
+  if (!testimonial.statValue) return null;
+
+  return (
+    <div className="text-right">
+      <div
+        className={`font-bold leading-none ${colorClass} ${
+          large ? "text-3xl" : "text-xl"
+        }`}
+      >
+        {testimonial.statValue}
+      </div>
+      {testimonial.statLabel && (
+        <div className="text-[9px] uppercase tracking-widest text-slate-400 mt-1">
+          {testimonial.statLabel}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function TestimonialsSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerInView = useInView(sectionRef, { once: true, amount: 0.2 });
-
-  // Fetch testimonials from API
-  const { data: testimonials = [], isLoading, error } = useQuery<Testimonial[]>({
+  const { data: testimonials = [] } = useQuery<Testimonial[]>({
     queryKey: ["testimonials"],
     queryFn: async () => {
       const res = await apiFetch("/api/testimonials");
-      if (!res.ok) throw new Error("Failed to fetch testimonials");
+      if (!res.ok) throw new Error("Failed");
       return res.json();
     },
   });
 
-  useEffect(() => {
-    if (!swiperRef) return;
-    if (isAutoPlaying) swiperRef.autoplay?.start();
-    else swiperRef.autoplay?.stop();
-  }, [isAutoPlaying, swiperRef]);
+  if (!testimonials.length) return null;
 
-  // Show loading state
-  if (isLoading) {
-    return (
-     <section className="relative overflow-visible bg-secondary/40 py-24">
-        <div className="mx-auto  px-6 lg:px-22">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 mb-16">
-            <div>
-              <div className="h-8 w-32 bg-muted rounded animate-pulse mb-5" />
-              <div className="h-12 w-64 bg-muted rounded animate-pulse" />
-            </div>
-            <div className="flex items-start md:justify-end">
-              <div className="h-20 w-64 bg-muted rounded animate-pulse" />
-            </div>
+  const main = testimonials[0];
+  const side = testimonials.slice(1, 3);
+  const bottom = testimonials[3];
+
+  return (
+    <section className="bg-[#f7fbfa] relative py-24">
+
+       <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" /> 
+      
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" /> 
+      
+
+     <div 
+    className="pointer-events-none absolute bottom-[-180px] left-1/4 h-[480px] w-[480px] rounded-full bg-[#a7f3d0] opacity-20 blur-3xl" 
+  />
+      <div className="mx-auto max-w-[1600px] px-12 ">
+
+        {/* HEADER */}
+        <div className="text-center mb-14">
+          
+
+           <div className="inline-flex items-center gap-2 mb-3">
+                      <span className="h-[2px] w-8 rounded-full bg-primary" />
+                       <div className="inline-flex items-center gap-1.5">
+            <SplitText
+            text="Trusted by founders &amp; enterprise teams"
+            className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+            delay={60}
+            duration={0.8}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, x: 60 }}
+            to={{ opacity: 1, x: 0 }}
+            threshold={0.2}
+            
+          />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="h-96 bg-muted rounded-2xl animate-pulse" />
+                      <span className="h-[2px] w-8 rounded-full bg-primary" />
+                    </div>
+
+
+
+        
+
+          <p className="mt-3 text-slate-800 max-w-2xl mx-auto">
+            Real stories from clients who shipped production-grade products with us.
+          </p>
+
+          {/* rating */}
+          <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm border">
+            <div className="flex text-orange-400">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-current" />
+              ))}
+            </div>
+            <span className="text-sm font-semibold">4.9 / 5</span>
+            <span className="text-xs text-slate-500">320+ reviews</span>
+          </div>
+        </div>
+
+        {/* GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          {/* MAIN CARD */}
+          {main && (
+            <div
+  className="
+    lg:col-span-2 bg-white/80 rounded-3xl p-8 shadow-md border
+    relative overflow-hidden
+  "
+>
+  <div
+    className={`absolute top-0 left-0 w-full h-[8px] ${BORDER_ACCENTS[0]}`}
+  />
+          <Quote className="absolute right-6 top-6 h-24 w-24 textprimary opacity-10 pointer-events-none" />
+
+              <div className="flex gap-2 text-orange-400 mb-4">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-current" />
+                ))}
+              </div>
+
+              <p className="text-xl leading-relaxed text-slate-700">
+                &ldquo;{main.content}&rdquo;
+              </p>
+
+              <div className="mt-8 flex items-end justify-between">
+                <AuthorBlock testimonial={main} />
+                <StatBlock
+                  testimonial={main}
+                  colorClass={STAT_COLORS[0]}
+                  large
+                />
+              </div>
+            </div>
+          )}
+
+          {/* SIDE CARDS */}
+          <div className="flex flex-col gap-6">
+            {side.map((t, i) => (
+           <div
+  key={t._id}
+  className="
+    bg-white/80 rounded-3xl p-6 shadow-sm border
+    relative overflow-hidden
+  "
+>
+  <div
+    className={`absolute top-0 left-0 w-full h-[6px] ${BORDER_ACCENTS[i + 1]}`}
+  />
+                <Quote className="absolute right-4 top-4 h-10 w-10 text-slate-100" />
+
+                <div className="flex gap-1 text-orange-400 mb-3">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Star key={j} className="h-3 w-3 fill-current" />
+                  ))}
+                </div>
+
+                <p className="text-md text-slate-800">
+                  &ldquo;{t.content}&rdquo;
+                </p>
+
+                <div className="mt-6 flex items-end justify-between">
+                  <AuthorBlock testimonial={t} />
+                  <StatBlock
+                    testimonial={t}
+                    colorClass={STAT_COLORS[i + 1]}
+                  />
+                </div>
+              </div>
             ))}
           </div>
         </div>
-      </section>
-    );
-  }
 
-  // Handle error state
-  if (error) {
-    console.error("Error fetching testimonials:", error);
-    return (
-      <section className="relative overflow-hidden bg-secondary/40 py-24">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <p className="text-red-500">Failed to load testimonials. Please try again later.</p>
-        </div>
-      </section>
-    );
-  }
 
-  // Don't render if no testimonials
-  if (testimonials.length === 0) return null;
-
-  return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 py-24">
-      <div className="mx-auto px-6 ">
         
-           {/* Header original design */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 mb-3">
-          <span className="w-8 h-[2px] bg-primary rounded-full" />
-                <div className="inline-flex items-center gap-1.5">
-  <SplitText
-  text="Testimonial"
-  className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
-  delay={60}
-  duration={0.8}
-  ease="power3.out"
-  splitType="chars"
-  from={{ opacity: 0, x: 60 }}
-  to={{ opacity: 1, x: 0 }}
-  threshold={0.2}
-  
-/>
-</div>
-          <span className="w-8 h-[2px] bg-primary rounded-full" />
-        </div>
-
-        {/* <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
-            Hear What <span className="text-primary">Our Clients</span>{ " "}Say about Us
-             
-            
-          </h3> */}
-          
-            <p className="text-gray-700 max-w-2xl mx-auto text-lg">
-           Real stories from real clients who turned their ideas into successful digital products with us.
-        </p>
 
       
+    
+{/* BOTTOM GRID */}
+<div className="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+  {[bottom, testimonials[4], testimonials[5]]
+    .filter(Boolean)
+    .map((item, i) => (
+      <div
+        key={item!._id}
+        className="
+          bg-white/80 rounded-3xl p-6 shadow-sm border
+          relative overflow-hidden
+        "
+      >
+        <div
+          className={`absolute top-0 left-0 w-full h-[6px] ${
+            BORDER_ACCENTS[(i + 1) % BORDER_ACCENTS.length]
+          }`}
+        />
+
+        <Quote className="h-10 w-10 text-slate-100 mb-2" />
+
+        <div className="flex gap-1 text-orange-400 mb-3">
+          {Array.from({ length: 5 }).map((_, j) => (
+            <Star key={j} className="h-3 w-3 fill-current" />
+          ))}
+        </div>
+
+        <p className="text-md text-slate-800">
+          &ldquo;{item!.content}&rdquo;
+        </p>
+
+        <div className="mt-6 flex items-end justify-between">
+          <AuthorBlock testimonial={item!} />
+
+          <StatBlock
+            testimonial={item!}
+            colorClass={
+              STAT_COLORS[(i + 1) % STAT_COLORS.length]
+            }
+          />
+        </div>
       </div>
-
-
-
-
-        
-        
-
-       
-{/* Carousel */}
-<div className="relative pt-16">
-
-  <Swiper
-    modules={[Navigation, Pagination, Autoplay]}
-    onSwiper={setSwiperRef}
-    onSlideChange={(s) => setActiveIndex(s.realIndex)}
-    centeredSlides
-    loop={testimonials.length >= 3}
-    autoplay={
-      isAutoPlaying
-        ? { delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }
-        : false
-    }
-    speed={800}
-    spaceBetween={-20}
-    slidesPerView={1.1}
-    breakpoints={{
-      640: { slidesPerView: 1.6, spaceBetween: -10 },
-      768: { slidesPerView: 2.2, spaceBetween: 0 },
-      1024: { slidesPerView: 3, spaceBetween: 10 },
-    }}
-    className="!px-4 !py-6"
-  >
-    {testimonials.map((t, i) => (
-      <SwiperSlide key={t._id} className="!h-auto">
-        <TestimonialCard testimonial={t} isActive={i === activeIndex} />
-      </SwiperSlide>
     ))}
-  </Swiper>
 
-  {/* Controls (Prev + Play/Pause + Next) */}
-  <div className="mt-8 flex items-center justify-center gap-4">
-
-    {/* Prev */}
-    <button
-      onClick={() => {
-        swiperRef?.slidePrev();
-        setIsAutoPlaying(false);
-      }}
-      aria-label="Previous"
-      className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-primary bg-card text-primary shadow-md transition hover:bg-primary hover:text-primary-foreground"
-    >
-      <ChevronLeft className="h-5 w-5" />
-    </button>
-
-    {/* Play/Pause */}
-    <button
-      onClick={() => setIsAutoPlaying((v) => !v)}
-      className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition hover:scale-110"
-      aria-label={isAutoPlaying ? "Pause" : "Play"}
-    >
-      {isAutoPlaying ? (
-        <Pause className="h-4 w-4" />
-      ) : (
-        <Play className="h-4 w-4" />
-      )}
-    </button>
-
-    {/* Next */}
-    <button
-      onClick={() => {
-        swiperRef?.slideNext();
-        setIsAutoPlaying(false);
-      }}
-      aria-label="Next"
-      className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-primary bg-card text-primary shadow-md transition hover:bg-primary hover:text-primary-foreground"
-    >
-      <ChevronRight className="h-5 w-5" />
-    </button>
-
-  </div>
 </div>
-
-
 
       </div>
     </section>

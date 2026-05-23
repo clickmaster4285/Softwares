@@ -94,11 +94,11 @@ export function LandingHomeDeferredHeavy({ children }: { children: ReactNode }) 
      
 
 
-      <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
+      {/* <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">
         <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
           <TestimonialsSection />
         </Suspense>
-      </LoadOnVisible>
+      </LoadOnVisible> */}
 
 
          {/* <LoadOnVisible skeleton={sk96} minHeightClass="min-h-96">

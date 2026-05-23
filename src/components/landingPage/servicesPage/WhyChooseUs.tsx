@@ -120,14 +120,14 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                 const getColumnStyle = () => {
                   if (isEnterprise) {
                     if (i === 0) return { bg: "bg-primary/10" , border: "border-primary/20", text: "text-primary", label: "ClickMasters" };
-                    if (i === 1) return { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-600", label: "SAP / Oracle" };
-                    return { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-600", label: "Generic SaaS" };
+                    if (i === 1) return { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-800", label: "SAP / Oracle" };
+                    return { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-800", label: "Generic SaaS" };
                   }
                   if (isSaaS) {
-                    if (i === 0) return { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-600", label: "In House Team" };
+                    if (i === 0) return { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-800", label: "In House Team" };
                     return { bg: "bg-primary/10" , border: "border-primary/20", text: "text-primary", label: "ClickMasters ✓" };
                   }
-                  return { bg: "bg-white", border: "border-slate-100", text: "text-slate-600", label: columnHeaders[i] };
+                  return { bg: "bg-white", border: "border-slate-100", text: "text-slate-800", label: columnHeaders[i] };
                 };
                 
                 const style = getColumnStyle();
@@ -198,7 +198,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
             <div className="p-5 flex-1">
               <div className="flex items-start gap-2">
                 <div className="w-1 h-8 bg-primaryrounded-full shrink-0" />
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-slate-800 leading-relaxed">
                   {diff.description}
                 </p>
               </div>

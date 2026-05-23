@@ -301,7 +301,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
             
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
             We deliver custom software, web apps, and mobile apps with experienced developers, agile
             process, and on-time delivery.
           </p>

@@ -38,7 +38,7 @@ export function FinalCTA() {
   const loop = [...cards, ...cards];
 
   return (
-    <section className="mx-auto -mb-20">
+    <section className="mx-auto -mb-20 bg-white">
       <div
         className="relative overflow-hidden  bg-primary text-primary-foreground"
         style={{

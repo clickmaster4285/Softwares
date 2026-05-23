@@ -80,7 +80,7 @@ export const TechStack = ({ techStack }: TechStackProps) => {
           </h2>
         </div>
 
-        <p className="mb-6 sm:mb-8 md:mb-10 text-base sm:text-lg text-slate-600 leading-relaxed">
+        <p className="mb-6 sm:mb-8 md:mb-10 text-base sm:text-lg text-slate-800 leading-relaxed">
           Modern tools we use to build scalable, secure applications.
         </p>
 

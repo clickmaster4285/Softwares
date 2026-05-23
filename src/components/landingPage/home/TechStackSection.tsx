@@ -200,7 +200,7 @@ function CategoryBlock({
         transition: `opacity 0.5s ease ${delay}ms, transform 0.5s ease ${delay}ms`,
       }}
     >
-      <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-400 mb-4">
+      <p className="text-md font-semibold uppercase tracking-widest text-slate-800 mb-4">
         {category}
       </p>
       <div className="flex flex-wrap gap-3">
@@ -219,8 +219,16 @@ export function TechStackSection() {
   const rightCol = [techStackData.backend, techStackData.database, techStackData.devops];
 
   return (
-    <div className="bg-white py-16 lg:py-24 lg:px-12" ref={ref}>
-      <div className="mx-auto px-6 lg:px-10">
+<div
+  className="py-16 lg:py-24 lg:px-12"
+  ref={ref}
+  style={{
+    backgroundColor: "#FFFEFC",
+    backgroundImage: "radial-gradient(circle, #F5F0E8 1px, transparent 1px)",
+    backgroundSize: "24px 24px",
+  }}
+>
+      <div className="mx-auto  max-w-[1600px]">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
           <div className="inline-flex items-center gap-2 mb-3">
@@ -241,7 +249,7 @@ export function TechStackSection() {
             <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
 
-          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
             Modern technologies and frameworks we use to build secure,
             high-performance digital experiences.
           </p>
