@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { servicesData } from '@/src/lib/services';
+import { getServicePath } from '@/lib/service-pages';
 import {
   Layers3,
   Code2,
@@ -159,6 +160,7 @@ const subServiceIcons: Record<string, LucideIcon> = {
   'Web Application Development': Globe,
   'Website Development': Globe2,
   'Progressive Web App Development': Smartphone,
+  'PWA Development': Smartphone,
   'Headless CMS Development': Database,
   'JAMstack Development': Zap,
   'E-commerce Development': ShoppingCart,
@@ -176,6 +178,7 @@ const subServiceIcons: Record<string, LucideIcon> = {
   
   // Design UI/UX
   'UI/UX Design': Palette,
+  'UI/UX Design Services': Palette,
   'Product Design': Package,
   'Web Design': Globe,
   'Mobile App Design': Smartphone,
@@ -308,6 +311,8 @@ const subServiceIcons: Record<string, LucideIcon> = {
   'AR Development': Smartphone,
   'VR Development': VrIcon,
   'Mixed Reality (MR) Solutions': Glasses,
+  'Mixed Reality Solutions': Glasses,
+  'DApp Development': Link2,
   '3D Application Development': Gamepad2,
 };
 
@@ -320,7 +325,7 @@ export default function ExploreSection({ serviceData }: ExploreSectionProps) {
   // Generate links based on context
   const allLinks = isServicePage && serviceData.subServices 
     ? serviceData.subServices.map((subService: any, index: number) => ({
-        href: `/${serviceData.slug}/${subService.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`,
+        href: getServicePath(serviceData.title, subService.title),
         title: subService.title,
         desc: subService.description,
         ariaLabel: `Learn about ${subService.title}: ${subService.description}`,

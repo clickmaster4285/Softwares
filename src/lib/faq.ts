@@ -1034,7 +1034,7 @@ export const serviceFaqsBySlug: Record<string, ServiceFaqItem[]> = {
     },
   ],
 
-  'business-intelligence': [
+  'business-intelligence-bi': [
     {
  question: 'What is the difference between BI and data science?',
  answer:
@@ -1775,7 +1775,7 @@ export const serviceFaqsBySlug: Record<string, ServiceFaqItem[]> = {
     },
   ],
 
-  'cybersecurity-compliance': [
+  'cybersecurity-services': [
     {
  question: 'What cybersecurity services does a B2B software company need?',
  answer:
@@ -2357,7 +2357,7 @@ export const serviceFaqsBySlug: Record<string, ServiceFaqItem[]> = {
     },
   ],
 
-  'decentralized-app-dapp-development': [
+  'dapp-development': [
     {
  question: 'What is a DApp and how is it different from a regular web application?',
  answer:
@@ -4274,7 +4274,7 @@ export const serviceFaqsBySlug: Record<string, ServiceFaqItem[]> = {
     },
   ],
 
-  'mixed-reality-mr-solutions': [
+  'mixed-reality-solutions': [
     {
  question: 'What is mixed reality and how is it different from augmented reality?',
  answer:
@@ -4987,7 +4987,7 @@ export const serviceFaqsBySlug: Record<string, ServiceFaqItem[]> = {
     },
   ],
 
-  'progressive-web-app-development': [
+  'pwa-development': [
     {
  question: 'What is a Progressive Web App (PWA)?',
  answer:

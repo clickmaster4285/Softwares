@@ -2804,9 +2804,9 @@ const microservicesArchitectureOverride: ServicePageContent = {
 };
 
 const progressiveWebDevelopmentOverride: ServicePageContent = {
- slug: 'progressive-web-app-development',
+ slug: 'pwa-development',
  categorySlug: 'web-development',
- sectionId: 'progressive-web-app-development',
+ sectionId: 'pwa-development',
  category: 'Web Development',
  title: 'Progressive Web App (PWA) Development Company Building Installable Web Apps',
  serviceName: 'PWA Development',
@@ -2914,7 +2914,7 @@ const progressiveWebDevelopmentOverride: ServicePageContent = {
  ],
     },
  ],
- faqs: serviceFaqsBySlug['progressive-web-app-development'],
+ faqs: serviceFaqsBySlug['pwa-development'],
  testimonial: {
  quote: "We avoided a $120,000 native app build by choosing a ClickMasters PWA instead. The offline functionality is flawless for our field technicians, and we love shipping updates instantly without waiting for app store reviews.",
  author: "Product Manager",
@@ -7101,9 +7101,9 @@ const dataScienceAnalyticsOverride: ServicePageContent = {
 };
 
 const businessIntelligenceOverride: ServicePageContent = {
- slug: 'business-intelligence',
+ slug: 'business-intelligence-bi',
  categorySlug: 'data-services',
- sectionId: 'business-intelligence',
+ sectionId: 'business-intelligence-bi',
  category: 'Data Science & Analytics',
  title: 'Business Intelligence Services',
  serviceName: 'Business Intelligence',
@@ -7181,7 +7181,7 @@ const businessIntelligenceOverride: ServicePageContent = {
  items: [],
     },
  ],
- faqs: serviceFaqsBySlug['business-intelligence'],
+ faqs: serviceFaqsBySlug['business-intelligence-bi'],
  testimonial: {
  quote: "ClickMasters built our entire BI platform from scratch Snowflake warehouse, dbt models, Metabase dashboards. Our finance team went from 3-day manual reporting to same-day automated analytics. The CFO now has real-time MRR, churn, and cohort retention at her fingertips.",
  author: "CTO",
@@ -10390,11 +10390,11 @@ const sqlNosqlSolutionsOverride: ServicePageContent = {
 
 const cybersecurityServicesOverride: ServicePageContent = {
 
- slug: 'cybersecurity-compliance',
+ slug: 'cybersecurity-services',
 
  categorySlug: 'cybersecurity',
 
- sectionId: 'cybersecurity-compliance',
+ sectionId: 'cybersecurity-services',
 
  category: 'Cybersecurity & Compliance',
 
@@ -10598,7 +10598,7 @@ const cybersecurityServicesOverride: ServicePageContent = {
 
  ],
 
- faqs: serviceFaqsBySlug['cybersecurity-compliance'],
+ faqs: serviceFaqsBySlug['cybersecurity-services'],
 
  testimonial: {
 
@@ -15016,11 +15016,11 @@ const virtualRealityDevelopmentOverride: ServicePageContent = {
 
 const mixedRealitySolutionsOverride: ServicePageContent = {
 
- slug: 'mixed-reality-mr-solutions',
+ slug: 'mixed-reality-solutions',
 
  categorySlug: 'immersive-tech',
 
- sectionId: 'mixed-reality-mr-solutions',
+ sectionId: 'mixed-reality-solutions',
 
  category: 'Extended Reality',
 
@@ -15174,7 +15174,7 @@ const mixedRealitySolutionsOverride: ServicePageContent = {
 
  ],
 
- faqs: serviceFaqsBySlug['mixed-reality-mr-solutions'],
+ faqs: serviceFaqsBySlug['mixed-reality-solutions'],
 
  testimonial: {
 
@@ -16718,11 +16718,11 @@ const smartContractDevelopmentOverride: ServicePageContent = {
 
 const dappDevelopmentOverride: ServicePageContent = {
 
- slug: 'decentralized-app-dapp-development',
+ slug: 'dapp-development',
 
  categorySlug: 'blockchain-and-web3',
 
- sectionId: 'decentralized-app-dapp-development',
+ sectionId: 'dapp-development',
 
  category: 'Blockchain & Web3',
 
@@ -16880,7 +16880,7 @@ const dappDevelopmentOverride: ServicePageContent = {
 
  ],
 
- faqs: serviceFaqsBySlug['decentralized-app-dapp-development'],
+ faqs: serviceFaqsBySlug['dapp-development'],
 
  testimonial: {
 

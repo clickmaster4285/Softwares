@@ -60,7 +60,7 @@ const homeExploreLinks: HomeExploreLink[] = [
     ariaLabel: 'Discover cloud solutions and DevOps services including CI/CD and observability.',
   },
   {
-    href: '/cybersecurity/cybersecurity-compliance',
+    href: '/cybersecurity/cybersecurity-services',
     title: 'Cybersecurity & Compliance',
     desc: 'Secure SDLC + audit readiness.',
     ariaLabel: 'Review cybersecurity and compliance offerings and secure SDLC practices.',
