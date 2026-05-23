@@ -59,6 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       images: [`${siteConfig.url}/og/services.webp`],
     },
+    robots: { index: true, follow: true },
   };
 }
 
