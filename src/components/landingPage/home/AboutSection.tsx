@@ -54,7 +54,7 @@ export function AboutSection() {
       <div className="pointer-events-none absolute bottom-[-180px] left-1/4 h-[480px] w-[480px] rounded-full bg-[#a7f3d0] opacity-20 blur-3xl" />
 
       {/* Sticky centered label - ABOVE the grid */}
-      <div className="sticky top-24 z-10 flex justify-center pt-8 pb-4 ">
+      <div className=" z-10 flex justify-center pt-8 pb-4 ">
         <div className="inline-flex items-center gap-1.5">
 
            <span className="h-[2px] w-8 rounded-full bg-primary" />
