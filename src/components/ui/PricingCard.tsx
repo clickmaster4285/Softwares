@@ -1,9 +1,7 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
@@ -15,6 +13,7 @@ interface PricingCardProps {
   features: any[];
   buttonText?: string;
   onButtonClick?: () => void;
+  highlighted?: boolean;
 }
 
 export function PricingCard({
@@ -25,6 +24,7 @@ export function PricingCard({
   features,
   buttonText = "Get Started",
   onButtonClick,
+  highlighted = false,
 }: PricingCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
@@ -34,105 +34,96 @@ export function PricingCard({
     if (isInView && !hasAnimated) setHasAnimated(true);
   }, [isInView, hasAnimated]);
 
-  const formatPrice = (value: number) => {
-    if (!value || value <= 0) return null;
-    return value.toLocaleString("en-AU");
-  };
-
   const hasValidPrice = price > 0;
   const hasRange = originalPrice && originalPrice > price;
 
   return (
     <motion.div
       ref={containerRef}
-      initial={{ opacity: 0, y: 30 }}
-      animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0, y: highlighted ? 60 : 40 }}
+      animate={
+        hasAnimated
+          ? { opacity: 1, y: highlighted ? -16 : 0 }
+          : { opacity: 0, y: highlighted ? 60 : 40 }
+      }
+      transition={{ type: "spring", duration: 0.7 }}
+      whileHover={{ scale: highlighted ? 1.04 : 1.03 }}
+      className={`relative w-full rounded-3xl border backdrop-blur-md transition-all
+        ${
+          highlighted
+            ? "z-20 scale-105 border-2 border-primary/30 bg-primary/10 text-black shadow-2xl px-10 py-14"
+            : "z-10 border border-gray-200 bg-white text-black shadow-md px-8 py-10"
+        }`}
     >
-      <Card className="overflow-hidden h-full">
-        <div className="flex flex-col lg:flex-row">
+      {highlighted && (
+        <motion.div
+          animate={{ y: [0, -4, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          className="absolute -top-4 left-0 right-0 mx-auto w-fit rounded-full bg-primary border border-primary/20 px-5 py-1 text-xs font-extrabold text-primary-foreground shadow whitespace-nowrap"
+        >
+          Best Value
+        </motion.div>
+      )}
 
-          {/* ================= LEFT SIDE ================= */}
-          <div className="flex flex-col justify-between p-6 lg:p-8 lg:w-5/12 bg-white">
+      {/* Title */}
+      <div className={`mb-2 text-lg font-bold ${highlighted ? "text-primary" : "text-black/50"}`}>
+        {title}
+      </div>
 
-            <div>
-              <h3 className="text-xl font-bold text-slate-900">{title}</h3>
-              <p className="text-sm text-slate-600 mt-1.5 leading-tight">
-                {description}
-              </p>
+      {/* Price */}
+      <div className={`mb-2 font-black tracking-tight ${highlighted ? "text-5xl text-primary" : "text-4xl text-black"}`}>
+        {!hasValidPrice ? (
+          "Custom"
+        ) : hasRange ? (
+          `AUD ${price.toLocaleString()} – ${originalPrice!.toLocaleString()}`
+        ) : (
+          `AUD ${price.toLocaleString()}`
+        )}
+      </div>
 
-              <div className="mt-6">
+   
 
-                {/* PRICE DISPLAY */}
-                {hasValidPrice ? (
-                  <>
-                    {/* RANGE */}
-                    {hasRange ? (
-                      <div className="flex flex-col">
-                        <span className="text-3xl font-extrabold tracking-tighter">
-                          AUD {formatPrice(price)} – {formatPrice(originalPrice!)}
-                        </span>
-                        <p className="text-xs text-slate-500 mt-1">
-                          one-time project range
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col">
-                        <span className="text-4xl font-extrabold tracking-tighter">
-                          AUD {formatPrice(price)}
-                        </span>
-                        <p className="text-xs text-slate-500 mt-1">
-                          one-time payment
-                        </p>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <span className="text-3xl font-bold text-slate-900">
-                    Custom Pricing
+      <p className={`text-md mb-4 mt-2 ${highlighted ? "text-black/60" : "text-black/60"}`}>
+        {description}
+      </p>
+
+      <Separator className={`mb-5 ${highlighted ? "bg-primary/20" : "bg-black/10"}`} />
+
+      {/* Features */}
+      <div className="space-y-5 mb-6">
+        {features.map((feature, featureIndex) => (
+          <div key={featureIndex}>
+            <h4 className={`font-semibold text-sm mb-3 ${highlighted ? "text-primary/80" : "text-black/70"}`}>
+              {feature.title}
+            </h4>
+            <ul className="space-y-2">
+              {feature.items.map((item: string, i: number) => (
+                <li key={i} className="flex items-start gap-2 text-sm">
+                  <Check className={`h-4 w-4 mt-0.5 flex-shrink-0 ${highlighted ? "text-primary" : "text-black"}`} />
+                  <span className="text-black/70">
+                    {item}
                   </span>
-                )}
-              </div>
-            </div>
-
-            <div className="mt-8 lg:mt-6">
-              <Button className="w-full" size="lg" onClick={onButtonClick}>
-                {buttonText}
-              </Button>
-            </div>
-          </div>
-
-          {/* ================= RIGHT SIDE ================= */}
-          <div className="bg-slate-50 p-6 lg:p-8 lg:w-7/12">
-            <div className="space-y-6">
-
-              {features.map((feature, featureIndex) => (
-                <div key={featureIndex}>
-                  <h4 className="font-semibold text-base mb-3">
-                    {feature.title}
-                  </h4>
-
-                  <ul className="space-y-2.5">
-                    {feature.items.map((item: string, index: number) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
-                        <Check className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                        <span className="leading-tight text-slate-600">
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {featureIndex < features.length - 1 && (
-                    <Separator className="my-5" />
-                  )}
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
+            {featureIndex < features.length - 1 && (
+              <Separator className={`mt-4 ${highlighted ? "bg-primary/20" : "bg-black/10"}`} />
+            )}
           </div>
+        ))}
+      </div>
 
-        </div>
-      </Card>
+      {/* Button */}
+      <button
+        onClick={onButtonClick}
+        className={`w-full rounded-md py-2.5 font-semibold transition ${
+          highlighted
+            ? "bg-primary text-primary-foreground hover:bg-primary/90"
+            : "bg-black text-white hover:bg-black/80"
+        }`}
+      >
+        {buttonText}
+      </button>
     </motion.div>
   );
 }

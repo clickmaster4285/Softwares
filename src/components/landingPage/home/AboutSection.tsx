@@ -43,154 +43,129 @@ const values: GlassCardItem[] = [
   },
 ];
 
-// How many vh units the section "holds" while cards stack.
-// 4 cards × 80vh each = 320vh total scroll distance for the section.
-const SCROLL_HEIGHT = `${values.length * 80}vh`;
-
 export function AboutSection() {
   return (
-    /*
-     * OUTER SECTION
-     * - position: relative so sticky children anchor to it
-     * - min-height drives total scroll distance (cards reveal across this height)
-     * - overflow: clip stops the sticky children from escaping
-     */
-    <section
-      className="relative w-full bg-[#f5fbfb] overflow-clip"
-      style={{ minHeight: SCROLL_HEIGHT }}
-    >
+    <section className="relative w-full bg-[#f5fbfb]">
 
-      {/* Background blobs — unchanged */}
+      {/* Background blobs */}
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
       <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
       <div className="pointer-events-none absolute bottom-[-180px] left-1/4 h-[480px] w-[480px] rounded-full bg-[#a7f3d0] opacity-20 blur-3xl" />
 
-      {/*
-       * STICKY SHELL
-       * This div is what actually sticks. It's 100vh tall and pins to the
-       * viewport for the entire scroll distance of the outer section.
-       * Everything visible lives inside here.
-       */}
-      <div
-  className="sticky top-16 w-full flex flex-col"
-  style={{ height: "calc(100vh - 4rem)" }}
->
+      {/* Sticky centered label - ABOVE the grid */}
+      <div className="sticky top-24 z-10 flex justify-center pt-8 pb-4 ">
+        <div className="inline-flex items-center gap-1.5">
 
-        {/* ── CENTERED SECTION HEADER ── */}
-        <div className="flex justify-center pt-8 pb-4 flex-shrink-0">
-          <div className="inline-flex items-center gap-1.5">
-            <span className="h-[2px] w-8 rounded-full bg-primary" />
-            <SplitText
-              text="About ClickMasters"
-              className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
-              delay={60}
-              duration={0.8}
-              ease="power3.out"
-              splitType="chars"
-              from={{ opacity: 0, x: 60 }}
-              to={{ opacity: 1, x: 0 }}
-              threshold={0.2}
-            />
-            <span className="h-[2px] w-8 rounded-full bg-primary" />
-          </div>
+           <span className="h-[2px] w-8 rounded-full bg-primary" />
+          <SplitText
+            text="About ClickMasters"
+            className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+            delay={60}
+            duration={0.8}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, x: 60 }}
+            to={{ opacity: 1, x: 0 }}
+            threshold={0.2}
+          />
+ <span className="h-[2px] w-8 rounded-full bg-primary" />
         </div>
+      </div>
 
-        {/* ── MAIN GRID ── */}
-        <div className="mx-auto lg:px-24 px-6 w-full max-w-[1750px] flex-1 min-h-0">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 h-full items-start">
+      {/* ── MAIN GRID ── */}
+      <div className="mx-auto lg:px-24 px-6 pb-12 max-w-[1750px]">
 
-            {/* LEFT COPY
-             * sticky top-0 here means it sticks within the already-sticky shell.
-             * self-start so it doesn't stretch to full column height.
-             */}
-            <div className="lg:self-start pt-12 space-y-5 max-w-2xl overflow-y-auto" style={{ maxHeight: "calc(100vh - 100px)" }}>
-              <h2 className="font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-5xl leading-tight">
+
+
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-start">
+
+          {/* LEFT COPY (sticky) */}
+          <div className="lg:sticky lg:top-24 lg:self-start pt-24 space-y-5 max-w-2xl">
+            {/* About label removed from here */}
+
+            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-5xl leading-tight">
+              <SplitText
+                text="We Don't Just Build Software"
+                className="inline-block"
+                delay={50}
+                duration={0.8}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 30 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.2}
+              />
+
+              {" "}
+
+              <span className="relative inline-block text-primary">
                 <SplitText
-                  text="We Don't Just Build Software"
-                  className="inline-block"
+                  text="We Build Revenue Systems"
+                  className="inline-block text-primary"
                   delay={50}
-                  duration={0.8}
+                  duration={0.9}
                   ease="power3.out"
                   splitType="chars"
                   from={{ opacity: 0, y: 30 }}
                   to={{ opacity: 1, y: 0 }}
                   threshold={0.2}
                 />
+                <span className="absolute -bottom-2 left-0 h-[3px] w-full rounded-md bg-gradient-to-r from-primary/60 to-primary" />
+              </span>
+            </h2>
 
-                {" "}
+            <p className="text-lg leading-relaxed text-justify text-foreground/80">
+              ClickMasters is a{" "}
+              <span className="font-semibold text-primary">
+                professional software development company
+              </span>{" "}
+              with a proven track record delivering custom software solutions across
+              manufacturing, healthcare, retail, real estate, and education sectors. Our team of experienced{" "}
+              <span className="font-semibold">software developers</span> works as a
+              seamless extension of your business translating complex requirements into
+              reliable, scalable digital products that perform under real-world conditions.
+            </p>
 
-                <span className="relative inline-block text-primary">
-                  <SplitText
-                    text="We Build Revenue Systems"
-                    className="inline-block text-primary"
-                    delay={50}
-                    duration={0.9}
-                    ease="power3.out"
-                    splitType="chars"
-                    from={{ opacity: 0, y: 30 }}
-                    to={{ opacity: 1, y: 0 }}
-                    threshold={0.2}
-                  />
-                  <span className="absolute -bottom-2 left-0 h-[3px] w-full rounded-md bg-gradient-to-r from-primary/60 to-primary" />
-                </span>
-              </h2>
+            <p className="text-base leading-relaxed text-justify text-foreground/80">
+              As a full-service <span className="font-semibold">software house</span>,
+              we handle everything from discovery and UI/UX design to backend
+              development, QA testing, cloud deployment, and long-term maintenance end
+              to end, under one roof. Explore our{" "}
+              <a className="text-primary underline-offset-2 hover:underline" href="#">web application development</a>,{" "}
+              <a className="text-primary underline-offset-2 hover:underline" href="#">mobile app development</a>, and{" "}
+              <a className="text-primary underline-offset-2 hover:underline" href="#">custom software development</a>{" "}
+              services, or browse the{" "}
+              <a className="text-primary underline-offset-2 hover:underline" href="#">software solutions portfolio</a>{" "}
+              by industry.
+            </p>
 
-              <p className="text-lg leading-relaxed text-justify text-foreground/80">
-                ClickMasters is a{" "}
-                <span className="font-semibold text-primary">
-                  professional software development company
-                </span>{" "}
-                with a proven track record delivering custom software solutions across
-                manufacturing, healthcare, retail, real estate, and education sectors. Our team of experienced{" "}
-                <span className="font-semibold">software developers</span> works as a
-                seamless extension of your business translating complex requirements into
-                reliable, scalable digital products that perform under real-world conditions.
-              </p>
+            <div className="flex flex-wrap gap-3 pt-3">
+              <a
+                href="#"
+                className="group inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-primary to-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+              >
+                Start Your Project
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
 
-              <p className="text-base leading-relaxed text-justify text-foreground/80">
-                As a full-service <span className="font-semibold">software house</span>,
-                we handle everything from discovery and UI/UX design to backend
-                development, QA testing, cloud deployment, and long-term maintenance end
-                to end, under one roof. Explore our{" "}
-                <a className="text-primary underline-offset-2 hover:underline" href="#">web application development</a>,{" "}
-                <a className="text-primary underline-offset-2 hover:underline" href="#">mobile app development</a>, and{" "}
-                <a className="text-primary underline-offset-2 hover:underline" href="#">custom software development</a>{" "}
-                services, or browse the{" "}
-                <a className="text-primary underline-offset-2 hover:underline" href="#">software solutions portfolio</a>{" "}
-                by industry.
-              </p>
-
-              <div className="flex flex-wrap gap-3 pt-3">
-                <a
-                  href="#"
-                  className="group inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-primary to-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
-                >
-                  Start Your Project
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </a>
-
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/50 bg-white/30 backdrop-blur-md px-7 py-3 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.05] hover:bg-white/40 hover:border-white/70 hover:shadow-md active:scale-[0.98]"
-                >
-                  View Our Work
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </a>
-              </div>
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/50 bg-white/30 backdrop-blur-md px-7 py-3 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.05] hover:bg-white/40 hover:border-white/70 hover:shadow-md active:scale-[0.98]"
+              >
+                View Our Work
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
             </div>
+          </div>
 
-            {/* RIGHT — STACKED CARDS
-             * overflow-y: auto + full height so StackedCards can scroll
-             * internally driven by the outer section's scroll progress.
-             */}
-            <div className="pt-8 h-full overflow-hidden">
-              <StackedCards items={values} />
-            </div>
-
+          {/* RIGHT GLASS STACKED CARDS - stacking behavior unchanged */}
+          <div className="pt-8">
+            <StackedCards items={values} />
           </div>
         </div>
       </div>
+
     </section>
   );
 }

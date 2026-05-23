@@ -18,8 +18,11 @@ import ProcessPage from '@/src/components/landingPage/home/ProcessPage';
 import { AppsSection } from '@/src/components/landingPage/home/AppsSection';
 import TrustedClientsSection from '@/src/components/landingPage/home/TrustedClientsSection';
 import ExploreSection from '@/src/components/landingPage/home/ExploreSection';
-import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
+
 import { Suspense } from 'react';
+import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
+import TrustedBySection from '@/src/components/landingPage/home/TrustedBySection';
+import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 
 interface ServiceClientProps {
   serviceData: ServiceData;
@@ -160,11 +163,9 @@ const pricingTiers = pricingPlans.map((plan) => ({
 
       {/* Hero Section */}
       <HeroSection serviceData={serviceData} />
+<TrustedBySection/>
 
-
-    <ExploreSection serviceData={serviceData} />
-
-   <Suspense
+      <Suspense
         fallback={
           <div className="h-96 animate-pulse rounded-lg bg-white" />
         }
@@ -172,10 +173,20 @@ const pricingTiers = pricingPlans.map((plan) => ({
       <TrustedClientsSection />
       </Suspense>
 
+
+
+
    
+  
+   
+    <ExploreSection serviceData={serviceData} />
+     {/* <AppsSection/> */}
+      <SolutionsPage />
+      
 
-     <AppsSection/>
 
+
+       <FeaturedInsights />
      <ProcessPage/>
 
     <TechStackSection/>
@@ -203,11 +214,9 @@ const pricingTiers = pricingPlans.map((plan) => ({
 />
    </div>
 
-<div className='m-4 lg:m-10'>
- <TestimonialsSection sectionTitle={`${serviceData.title} client reviews`} />
-   </div>
 
 
+  <TestimonialsSection />
 
 
       <FaqSection/>
