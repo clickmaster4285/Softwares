@@ -13874,7 +13874,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "ecommerce-development-to-increase-revenue",
+    "slug": "e-commerce-development-to-increase-revenue",
     "metaTitle": "E-Commerce Development to Increase Revenue | ClickMasters",
     "metaDescription": "ClickMasters delivers e-commerce development engineered to increase revenue with the business outcome defined, measured, and proven before the engagement ends. Fixed-price. ROI-modelled before build.",
     "canonicalPath": "E-Commerce Development (core service)",
@@ -13995,7 +13995,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "ecommerce-development-to-launch-faster",
+    "slug": "e-commerce-development-to-launch-faster",
     "metaTitle": "E-Commerce Development to Launch Faster | ClickMasters",
     "metaDescription": "ClickMasters delivers e-commerce development engineered to launch in 8-12 weeks fixed scope, CI/CD from sprint 1, working software every 2 weeks. Fixed-price.",
     "canonicalPath": "E-Commerce Development (core service)",
@@ -14116,7 +14116,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "ecommerce-development-to-reduce-costs",
+    "slug": "e-commerce-development-to-reduce-costs",
     "metaTitle": "E-Commerce Development to Reduce Costs | ClickMasters",
     "metaDescription": "ClickMasters delivers e-commerce development engineered to reduce costs with the business outcome defined, measured, and proven before the engagement ends. Fixed-price. ROI-modelled before build.",
     "canonicalPath": "E-Commerce Development (core service)",
@@ -14600,7 +14600,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "enterprise-software-to-increase-revenue",
+    "slug": "enterprise-software-development-to-increase-revenue",
     "metaTitle": "Enterprise Software to Increase Revenue | ClickMasters",
     "metaDescription": "ClickMasters delivers enterprise software engineered to increase revenue with the business outcome defined, measured, and proven before the engagement ends. Fixed-price. ROI-modelled before build.",
     "canonicalPath": "Enterprise Software (core service)",
@@ -14721,7 +14721,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "enterprise-software-to-launch-faster",
+    "slug": "enterprise-software-development-to-launch-faster",
     "metaTitle": "Enterprise Software to Launch Faster | ClickMasters",
     "metaDescription": "ClickMasters delivers enterprise software engineered to launch in 8-12 weeks fixed scope, CI/CD from sprint 1, working software every 2 weeks. Fixed-price.",
     "canonicalPath": "Enterprise Software (core service)",
@@ -14842,7 +14842,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "enterprise-software-to-reduce-costs",
+    "slug": "enterprise-software-development-to-reduce-costs",
     "metaTitle": "Enterprise Software to Reduce Costs | ClickMasters",
     "metaDescription": "ClickMasters delivers enterprise software engineered to reduce costs with the business outcome defined, measured, and proven before the engagement ends. Fixed-price. ROI-modelled before build.",
     "canonicalPath": "Enterprise Software (core service)",
@@ -16407,7 +16407,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "headless-ecommerce-to-increase-revenue",
+    "slug": "headless-e-commerce-to-increase-revenue",
     "metaTitle": "Headless E-Commerce to Increase Revenue | ClickMasters",
     "metaDescription": "ClickMasters delivers headless e-commerce engineered to increase revenue with the business outcome defined, measured, and proven before the engagement ends. Fixed-price. ROI-modelled before build.",
     "canonicalPath": "Headless E-Commerce (core service)",
@@ -16528,7 +16528,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "headless-ecommerce-to-launch-faster",
+    "slug": "headless-e-commerce-to-launch-faster",
     "metaTitle": "Headless E-Commerce to Launch Faster | ClickMasters",
     "metaDescription": "ClickMasters delivers headless e-commerce engineered to launch in 8-12 weeks fixed scope, CI/CD from sprint 1, working software every 2 weeks. Fixed-price.",
     "canonicalPath": "Headless E-Commerce (core service)",
@@ -16649,7 +16649,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "headless-ecommerce-to-reduce-costs",
+    "slug": "headless-e-commerce-to-reduce-costs",
     "metaTitle": "Headless E-Commerce to Reduce Costs | ClickMasters",
     "metaDescription": "ClickMasters delivers headless e-commerce engineered to reduce costs with the business outcome defined, measured, and proven before the engagement ends. Fixed-price. ROI-modelled before build.",
     "canonicalPath": "Headless E-Commerce (core service)",
@@ -31928,7 +31928,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "uiux-design-services-to-increase-revenue",
+    "slug": "ui-ux-design-services-to-increase-revenue",
     "metaTitle": "UI/UX Design Services to Increase Revenue | ClickMasters",
     "metaDescription": "ClickMasters delivers ui/ux design services engineered to increase revenue with the business outcome defined, measured, and proven before the engagement ends. Fixed-price. ROI-modelled before build.",
     "canonicalPath": "UI/UX Design Services (core service)",
@@ -32049,7 +32049,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "uiux-design-services-to-launch-faster",
+    "slug": "ui-ux-design-services-to-launch-faster",
     "metaTitle": "UI/UX Design Services to Launch Faster | ClickMasters",
     "metaDescription": "ClickMasters delivers ui/ux design services engineered to launch in 8-12 weeks fixed scope, CI/CD from sprint 1, working software every 2 weeks. Fixed-price.",
     "canonicalPath": "UI/UX Design Services (core service)",
@@ -32170,7 +32170,7 @@ export const goalPages: GoalPageContent[] = [
     "internalLinks": []
   },
   {
-    "slug": "uiux-design-services-to-reduce-costs",
+    "slug": "ui-ux-design-services-to-reduce-costs",
     "metaTitle": "UI/UX Design Services to Reduce Costs | ClickMasters",
     "metaDescription": "ClickMasters delivers ui/ux design services engineered to reduce costs with the business outcome defined, measured, and proven before the engagement ends. Fixed-price. ROI-modelled before build.",
     "canonicalPath": "UI/UX Design Services (core service)",

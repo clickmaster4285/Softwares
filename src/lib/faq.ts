@@ -6196,7 +6196,7 @@ export const serviceFaqsBySlug: Record<string, ServiceFaqItem[]> = {
     },
   ],
 
-  'ui-ux-design': [
+  'ui-ux-design-services': [
     {
  question: 'What is UI/UX design?',
  answer:

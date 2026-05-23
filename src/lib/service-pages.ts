@@ -1,9 +1,9 @@
-﻿import { serviceFaqsBySlug, type ServiceFaqItem } from './faq';
+import { serviceFaqsBySlug, type ServiceFaqItem } from './faq';
 
 export type { ServiceFaqItem };
 export { serviceFaqsBySlug, getServiceFaqs } from './faq';
 
-// Technology item with name and icon URL
+﻿// Technology item with name and icon URL
 export type Technology = {
  name: string;
  icon: string;
@@ -74,6 +74,20 @@ export function slugify(value: string): string {
  .replace(/['"]/g, '')
  .replace(/[^a-z0-9]+/g, '-')
  .replace(/^-+|-+$/g, '');
+}
+
+/** Align menu-derived category slugs with `services.ts` hub paths. */
+function categorySlugFromSectionLabel(label: string): string {
+ const fromMenu = slugify(label);
+ const aliases: Record<string, string> = {
+  'cloud-devops': 'cloud-and-devops',
+  'blockchain-web3': 'blockchain-and-web3',
+  'data-intelligence': 'data-and-intelligence',
+  'automation-integration': 'automation-and-integration',
+  'automation-chatbot': 'automation-and-chatbot',
+  'iot-emerging-tech': 'iot-and-emerging-tech',
+ };
+ return aliases[fromMenu] ?? fromMenu;
 }
 
 
@@ -311,7 +325,7 @@ export const serviceMenuSections: ServiceMenuSection[] = [
 const baseServices: ServicePageContent[] = serviceMenuSections.flatMap((section) =>
  section.items.map((item) => {
  const slug = slugify(item.title);
- const categorySlug = slugify(section.label);
+ const categorySlug = categorySlugFromSectionLabel(section.label);
  return {
  slug,
  categorySlug,
@@ -4316,9 +4330,9 @@ const ecommerceDevelopmentOverride: ServicePageContent = {
 };
 
 const uiUxDesignOverride: ServicePageContent = {
- slug: 'ui-ux-design',
+ slug: 'ui-ux-design-services',
  categorySlug: 'design-ui-ux',
- sectionId: 'ui-ux-design',
+ sectionId: 'ui-ux-design-services',
  category: 'Design',
  title: 'UI/UX Design Services for B2B Software',
  serviceName: 'UI/UX Design',
@@ -4450,7 +4464,7 @@ const uiUxDesignOverride: ServicePageContent = {
  ],
     },
  ],
- faqs: serviceFaqsBySlug['ui-ux-design'],
+ faqs: serviceFaqsBySlug['ui-ux-design-services'],
  testimonial: {
  quote: "ClickMasters transformed our cluttered dashboard into a streamlined, professional product. Our customer NPS scores jumped significantly within 30 days of the redesign launch.",
  author: "Product Manager",
@@ -6222,7 +6236,7 @@ const deepLearningSolutionsOverride: ServicePageContent = {
 
 const naturalLanguageProcessingOverride: ServicePageContent = {
  slug: 'natural-language-processing',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'nlp-computer-vision',
  sectionId: 'natural-language-processing',
  category: 'Artificial Intelligence (AI)',
  title: 'Natural Language Processing Services',
@@ -6335,7 +6349,7 @@ const naturalLanguageProcessingOverride: ServicePageContent = {
 
 const speechRecognitionOverride: ServicePageContent = {
  slug: 'speech-recognition',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'nlp-computer-vision',
  sectionId: 'speech-recognition',
  category: 'Artificial Intelligence (AI)',
  title: 'Speech Recognition Services',
@@ -6452,7 +6466,7 @@ const speechRecognitionOverride: ServicePageContent = {
 
 const textAnalyticsOverride: ServicePageContent = {
  slug: 'text-analytics',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'nlp-computer-vision',
  sectionId: 'text-analytics',
  category: 'Artificial Intelligence (AI)',
  title: 'Text Analytics Services',
@@ -6567,7 +6581,7 @@ const textAnalyticsOverride: ServicePageContent = {
 
 const computerVisionOverride: ServicePageContent = {
  slug: 'computer-vision',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'nlp-computer-vision',
  sectionId: 'computer-vision',
  category: 'Artificial Intelligence (AI)',
  title: 'Computer Vision Services',
@@ -6682,7 +6696,7 @@ const computerVisionOverride: ServicePageContent = {
 
 const imageProcessingOverride: ServicePageContent = {
  slug: 'image-processing',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'nlp-computer-vision',
  sectionId: 'image-processing',
  category: 'Artificial Intelligence (AI)',
  title: 'Image Processing Services',
@@ -6797,7 +6811,7 @@ const imageProcessingOverride: ServicePageContent = {
 
 const videoAnalyticsOverride: ServicePageContent = {
  slug: 'video-analytics',
- categorySlug: 'artificial-intelligence-ai',
+ categorySlug: 'nlp-computer-vision',
  sectionId: 'video-analytics',
  category: 'Artificial Intelligence (AI)',
  title: 'Video Analytics Services',
@@ -9422,7 +9436,7 @@ const databaseDesignOverride: ServicePageContent = {
 
  slug: 'database-design',
 
- categorySlug: 'database-data-management',
+ categorySlug: 'database-services',
 
  sectionId: 'database-design',
 
@@ -9656,7 +9670,7 @@ const databaseManagementOverride: ServicePageContent = {
 
  slug: 'database-management',
 
- categorySlug: 'database-data-management',
+ categorySlug: 'database-services',
 
  sectionId: 'database-management',
 
@@ -9890,7 +9904,7 @@ const dataMigrationOverride: ServicePageContent = {
 
  slug: 'data-migration',
 
- categorySlug: 'database-data-management',
+ categorySlug: 'database-services',
 
  sectionId: 'data-migration',
 
@@ -10116,7 +10130,7 @@ const sqlNosqlSolutionsOverride: ServicePageContent = {
 
  slug: 'sql-nosql-solutions',
 
- categorySlug: 'database-data-management',
+ categorySlug: 'database-services',
 
  sectionId: 'sql-nosql-solutions',
 
@@ -15232,7 +15246,7 @@ const iotDevelopmentOverride: ServicePageContent = {
 
  slug: 'iot-development',
 
- categorySlug: 'iot-and-embedded',
+ categorySlug: 'iot-and-emerging-tech',
 
  sectionId: 'iot-development',
 
@@ -15476,7 +15490,7 @@ const smartSystemsDevelopmentOverride: ServicePageContent = {
 
  slug: 'smart-systems-development',
 
- categorySlug: 'iot-and-embedded',
+ categorySlug: 'iot-and-emerging-tech',
 
  sectionId: 'smart-systems-development',
 
@@ -15704,7 +15718,7 @@ const industrialIoTOverride: ServicePageContent = {
 
  slug: 'industrial-iot',
 
- categorySlug: 'iot-and-embedded',
+ categorySlug: 'iot-and-emerging-tech',
 
  sectionId: 'industrial-iot',
 
@@ -15932,7 +15946,7 @@ const embeddedSystemsDevelopmentOverride: ServicePageContent = {
 
  slug: 'embedded-systems-development',
 
- categorySlug: 'iot-and-embedded',
+ categorySlug: 'iot-and-emerging-tech',
 
  sectionId: 'embedded-systems-development',
 
