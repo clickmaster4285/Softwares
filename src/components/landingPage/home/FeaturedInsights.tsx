@@ -182,6 +182,7 @@ const InsightsHeader = () => {
         observer.disconnect();
       }
     }, { threshold: 0.1 });
+
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
@@ -222,9 +223,9 @@ const InsightsHeader = () => {
         </span>
       </h2>
 
-   <p className="text-lg leading-8 text-gray-700">
-  From concept to completion, we craft enterprise-grade digital solutions that help modern businesses grow, scale, and stay ahead in a competitive market. Our team combines strategic thinking, cutting-edge technologies, and user-focused design to deliver impactful results across web development, mobile applications, AI-powered platforms, and custom software systems. Through our success stories, detailed case studies, and insightful blogs, we showcase how innovative execution transforms ideas into measurable business outcomes.
-</p>
+      <p className="text-lg leading-8 text-gray-700 text-justify">
+        From concept to completion, we craft enterprise-grade digital solutions that help modern businesses grow, scale, and stay ahead in a competitive market. Our team combines strategic thinking, cutting-edge technologies, and user-focused design to deliver impactful results across web development, mobile applications, AI-powered platforms, and custom software systems. Through our success stories, detailed case studies, and insightful blogs, we showcase how innovative execution transforms ideas into measurable business outcomes.
+      </p>
 
       <Link
         href="/blog"
@@ -352,9 +353,11 @@ return (
       {/* Top Label */}
       <div className="mb-8 flex justify-center">
         <div className="inline-flex items-center gap-2">
-          <span className="h-[2px] w-8 rounded-full bg-primary" />
+          
 
           <div className="inline-flex items-center gap-1.5">
+
+              <span className="h-[2px] w-8 rounded-full bg-primary" />
             <SplitText
               text="Sucess Stories"
               className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
@@ -366,9 +369,10 @@ return (
               to={{ opacity: 1, x: 0 }}
               threshold={0.2}
             />
+              <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
 
-          <span className="h-[2px] w-8 rounded-full bg-primary" />
+      
         </div>
       </div>
 
