@@ -116,7 +116,7 @@ const createLiquidEffect = (texture: THREE.Texture, opts?: { strength?: number; 
       ['uStrength', new THREE.Uniform(opts?.strength ?? 0.025)],
       ['uTime', new THREE.Uniform(0)],
       ['uFreq', new THREE.Uniform(opts?.freq ?? 4.5)]
-    ])
+    ] as any)
   });
 };
 

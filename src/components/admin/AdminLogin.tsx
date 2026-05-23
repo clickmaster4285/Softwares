@@ -162,7 +162,7 @@ const AdminLogin = () => {
 
         {/* Footer */}
         <p className="text-center text-xs text-white/40 mt-6">
-          © 2026 ClickMasters. All rights reserved.
+          © 2026 ClickMasters Software Company. All rights reserved.
         </p>
       </motion.div>
     </div>
