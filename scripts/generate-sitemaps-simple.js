@@ -1,8 +1,97 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const SITE_URL = 'https://software.clickmasters.pk';
 const PUBLIC_DIR = path.join(process.cwd(), 'public');
+
+/** Runs inline via tsx — same logic as former export-sitemap-urls.ts (no extra files). */
+const SITEMAP_EXPORT_TS = `
+import { getAllCountrySlugs } from '../src/lib/country';
+import { goalPages } from '../src/lib/goal-based';
+import {
+  getGoalCanonicalUrl,
+  normalizeGoalPage,
+  parseGoalSlug,
+} from '../src/lib/goal-based-utils';
+import { getAllHireUsSlugs } from '../src/lib/hire-us-pages';
+import { getAllPersonaSitemapPaths } from '../src/lib/persona-utils';
+import { getAllServicePages, getServicePage } from '../src/lib/service-pages';
+import { getAllServiceSlugs } from '../src/lib/services';
+
+const servicePages = getAllServicePages();
+const categoryHubs = getAllServiceSlugs().map((slug) => '/' + slug);
+const subServices = servicePages.map((page) => '/' + page.categorySlug + '/' + page.slug);
+const uniqueCategories = [...new Set(servicePages.map((page) => page.categorySlug))];
+const staticPages = [
+  '/',
+  '/about-us',
+  '/contact-us',
+  '/blog',
+  '/case-studies',
+  '/faqs',
+  '/software-solutions',
+  '/testimonials',
+  '/careers',
+  '/privacy-policy',
+  '/terms-of-service',
+  '/cookie-policy',
+  '/locations',
+];
+const locations = getAllCountrySlugs().map((slug) => '/locations/' + slug);
+const hire = getAllHireUsSlugs().map((slug) => '/hire/' + slug);
+const goals = goalPages
+  .map((raw) => {
+    const { serviceSlug } = parseGoalSlug(raw.slug);
+    const normalized = normalizeGoalPage(raw, getServicePage(serviceSlug));
+    const path = getGoalCanonicalUrl(normalized);
+    if (!path.startsWith('/') || path.startsWith('/services/')) return null;
+    return path;
+  })
+  .filter((path) => path !== null);
+const personas = getAllPersonaSitemapPaths();
+console.log(JSON.stringify({
+  staticPages,
+  categoryHubs,
+  subServices,
+  uniqueCategories,
+  locations,
+  hire,
+  goals,
+  personas,
+}));
+`.trim();
+
+function loadExportedSitemapPaths() {
+  const tmpFile = path.join(process.cwd(), 'scripts', `.sitemap-export-${process.pid}.ts`);
+  fs.writeFileSync(tmpFile, SITEMAP_EXPORT_TS, 'utf8');
+  let stdout;
+  try {
+    stdout = execSync(`npx tsx "${tmpFile}"`, {
+      cwd: process.cwd(),
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024,
+      stdio: ['pipe', 'pipe', 'inherit'],
+    });
+  } finally {
+    try {
+      fs.unlinkSync(tmpFile);
+    } catch {
+      // ignore cleanup errors
+    }
+  }
+  const data = JSON.parse(stdout.trim());
+  console.log(`  subServices: ${data.subServices.length}`);
+  console.log(`  goals: ${data.goals.length}`);
+  console.log(`  personas: ${data.personas.length}`);
+  console.log(`  hire: ${data.hire.length}`);
+  return data;
+}
+
+function toAbsoluteUrl(pathname) {
+  if (pathname === '/') return `${SITE_URL}/`;
+  return `${SITE_URL}${pathname}`;
+}
 
 // Helper function to fetch data from API
 async function fetchFromApi(endpoint) {
@@ -17,24 +106,6 @@ async function fetchFromApi(endpoint) {
     console.log(`Warning: Error fetching from ${endpoint}:`, error.message);
     return [];
   }
-}
-
-// Import service structure to generate URLs
-let serviceMenuSections = [];
-try {
-  const servicePagesPath = path.join(process.cwd(), 'src/lib/service-pages.ts');
-  if (fs.existsSync(servicePagesPath)) {
-    const servicePagesContent = fs.readFileSync(servicePagesPath, 'utf8');
-    // Extract serviceMenuSections from the file
-    const match = servicePagesContent.match(/export const serviceMenuSections.*?=\s*(\[[\s\S]*?\]);/s);
-    if (match) {
-      // Simple evaluation - this is not ideal but works for our use case
-      const sectionsCode = match[1];
-      eval(`serviceMenuSections = ${sectionsCode}`);
-    }
-  }
-} catch (error) {
-  console.log('Could not load service structure:', error.message);
 }
 
 // Helper function to extract all country service URLs from the country-services data file
@@ -194,149 +265,12 @@ function extractHowToGuideSlugs() {
   return slugs;
 }
 
-function slugify(value) {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/['"]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
-// Match slugify from src/lib/service-pages.ts
-function servicePagesSlugify(text) {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim();
-}
-
-function extractAllServicePageUrls() {
-  const servicePagesPath = path.join(process.cwd(), 'src/lib/service-pages.ts');
-  const pagesBySlug = new Map();
-
-  if (serviceMenuSections.length > 0) {
-    serviceMenuSections.forEach((section) => {
-      const categorySlug = servicePagesSlugify(section.label);
-      section.items.forEach((item) => {
-        const slug = servicePagesSlugify(item.title);
-        pagesBySlug.set(slug, {
-          categorySlug,
-          slug,
-          url: `${SITE_URL}/${categorySlug}/${slug}`,
-        });
-      });
-    });
-  }
-
-  if (fs.existsSync(servicePagesPath)) {
-    const content = fs.readFileSync(servicePagesPath, 'utf8');
-    const overrideRegex =
-      /const\s+\w+Override:\s*ServicePageContent\s*=\s*\{[\s\S]*?slug:\s*'([^']+)'[\s\S]*?categorySlug:\s*'([^']+)'/g;
-    let match;
-
-    while ((match = overrideRegex.exec(content)) !== null) {
-      const [, slug, categorySlug] = match;
-      pagesBySlug.set(slug, {
-        categorySlug,
-        slug,
-        url: `${SITE_URL}/${categorySlug}/${slug}`,
-      });
-    }
-  }
-
-  return [...pagesBySlug.values()];
-}
-
-function extractPersonaSlugs() {
-  const personaPath = path.join(process.cwd(), 'src/lib/persona-based.ts');
-  if (!fs.existsSync(personaPath)) {
-    return [];
-  }
-
-  const content = fs.readFileSync(personaPath, 'utf8');
-  const match = content.match(/export const servicePages\s*:\s*ServicePageData\[\]\s*=\s*(\[.*\])/s);
-  if (!match) {
-    return [];
-  }
-
-  const arrayText = match[1];
-  const slugMatches = [...arrayText.matchAll(/["']?slug["']?\s*:\s*["']([^"']+)["']/g)];
-  return slugMatches.map((m) => m[1]).filter((slug) => slug.includes('-for-'));
-}
-
-const PERSONA_SUFFIXES = [
-  '-for-enterprise-it-directors',
-  '-for-non-technical-ceos',
-  '-for-product-managers',
-  '-for-startup-founders',
-  '-for-ctos',
-];
-
 const GOAL_URL_SUFFIXES = ['to-increase-revenue', 'to-launch-faster', 'to-reduce-costs'];
-
-function parseGoalCompositeSlug(compositeSlug) {
-  for (const suffix of GOAL_URL_SUFFIXES) {
-    if (compositeSlug.endsWith(`-${suffix}`)) {
-      return {
-        serviceSlug: compositeSlug.slice(0, -(suffix.length + 1)),
-        goalUrlSlug: suffix,
-      };
-    }
-  }
-  return null;
-}
 
 function isGoalBasedUrl(urlPath) {
   const segments = urlPath.split('/').filter(Boolean);
   if (segments.length !== 3) return false;
   return GOAL_URL_SUFFIXES.includes(segments[2]);
-}
-
-function extractGoalBasedUrls() {
-  const goalBasedPath = path.join(process.cwd(), 'src/lib/goal-based.ts');
-  if (!fs.existsSync(goalBasedPath)) {
-    return [];
-  }
-
-  const content = fs.readFileSync(goalBasedPath, 'utf8');
-  // Only top-level goal page objects (slug is the first property)
-  const slugRegex =
-    /\{\s*\n\s*"slug":\s*"([^"]+-to-(?:increase-revenue|launch-faster|reduce-costs))"/g;
-  const servicePages = extractAllServicePageUrls();
-  const categoryByService = new Map(servicePages.map((p) => [p.slug, p.categorySlug]));
-
-  const urls = [];
-  let match;
-  while ((match = slugRegex.exec(content)) !== null) {
-    const parsed = parseGoalCompositeSlug(match[1]);
-    if (!parsed) continue;
-    const categorySlug = categoryByService.get(parsed.serviceSlug) || 'services';
-    urls.push(`${SITE_URL}/${categorySlug}/${parsed.serviceSlug}/${parsed.goalUrlSlug}`);
-  }
-
-  return [...new Set(urls)];
-}
-
-function baseServiceSlugFromPersona(personaSlug) {
-  for (const suffix of PERSONA_SUFFIXES) {
-    if (personaSlug.endsWith(suffix)) {
-      return personaSlug.slice(0, -suffix.length);
-    }
-  }
-  return personaSlug;
-}
-
-function getPersonaCategorySlug(serviceSlug, categoryByService) {
-  return categoryByService.get(serviceSlug) || 'services';
-}
-
-function isPersonaBasedUrl(urlPath) {
-  const segments = urlPath.split('/').filter(Boolean);
-  if (segments.length !== 3) return false;
-  return PERSONA_SUFFIXES.some((suffix) => segments[2].endsWith(suffix));
 }
 
 // Helper function to identify main services
@@ -504,73 +438,30 @@ async function generateSeparateSitemaps() {
   );
 
   const howToGuideSlugs = extractHowToGuideSlugs();
+  const checklistSlugs = extractChecklistSlugs();
+  const exported = loadExportedSitemapPaths();
 
-  // Generate URLs based on service structure
-  if (serviceMenuSections.length > 0) {
-    serviceMenuSections.forEach(section => {
-      const mainServiceSlug = section.label.toLowerCase()
-        .replace(/[^a-z0-9\s]/g, '')
-        .replace(/\s+/g, '-');
-      
-      // Add main service URL
-      const mainServiceUrl = `${SITE_URL}/${mainServiceSlug}`;
-      categorizedUrls.mainServices.push(mainServiceUrl);
-      
-      // Add sub-service URLs with proper nesting
-      section.items.forEach(item => {
-        const subServiceSlug = item.title.toLowerCase()
-          .replace(/[^a-z0-9\s]/g, '')
-          .replace(/\s+/g, '-');
-        const subServiceUrl = `${SITE_URL}/${mainServiceSlug}/${subServiceSlug}`;
-        categorizedUrls.subServices.push(subServiceUrl);
-        
-        // Add FAQ URL for each sub-service
-        const faqUrl = `${SITE_URL}/faqs/${subServiceSlug}`;
-        categorizedUrls.faqs.push(faqUrl);
+  categorizedUrls.mainServices.push(...exported.categoryHubs.map(toAbsoluteUrl));
+  categorizedUrls.subServices.push(...exported.subServices.map(toAbsoluteUrl));
+  categorizedUrls.pages.push(...exported.staticPages.map(toAbsoluteUrl));
+  categorizedUrls.locations.push(...exported.locations.map(toAbsoluteUrl));
+  categorizedUrls.hire.push(...exported.hire.map(toAbsoluteUrl));
+  categorizedUrls.goalBased.push(...exported.goals.map(toAbsoluteUrl));
+  categorizedUrls.personaBased.push(...exported.personas.map(toAbsoluteUrl));
 
-        // Add how-to URL when a guide exists for the service
-        if (howToGuideSlugs.has(subServiceSlug)) {
-          categorizedUrls.howTo.push(`${subServiceUrl}/how-to`);
-        }
-      });
-    });
-  }
+  console.log(`🎯 Found ${exported.goals.length} goal-based URLs`);
+  console.log(`🧭 Found ${exported.personas.length} persona-based URLs`);
+  console.log(`📦 Found ${exported.subServices.length} service URLs from service-pages`);
 
-  const personaSlugs = extractPersonaSlugs();
-  const servicePages = extractAllServicePageUrls();
-  const categoryByService = new Map(servicePages.map((p) => [p.slug, p.categorySlug]));
-  console.log(`🧭 Found ${personaSlugs.length} persona-based slugs`);
-  personaSlugs.forEach((personaSlug) => {
-    const baseServiceSlug = baseServiceSlugFromPersona(personaSlug);
-    const categorySlug = getPersonaCategorySlug(baseServiceSlug, categoryByService);
-    categorizedUrls.personaBased.push(`${SITE_URL}/${categorySlug}/${baseServiceSlug}/${personaSlug}`);
-  });
-
-  const goalBasedUrls = extractGoalBasedUrls();
-  console.log(`🎯 Found ${goalBasedUrls.length} goal-based URLs`);
-  categorizedUrls.goalBased.push(...goalBasedUrls);
-
-  // Add hire URLs from navbar structure
-  const hireUrls = [
-    '/hire/hire-ai-developers',
-    '/hire/ai-agent-development-services',
-    '/hire/rag-development-services',
-    '/hire/custom-software-development',
-    '/hire/saas-development-services',
-    '/hire/ai-development-healthcare',
-    '/hire/ai-development-finance',
-    '/hire/ai-development-logistics',
-    '/hire/ai-agents-for-customer-support',
-    '/hire/ai-agents-for-sales',
-    '/hire/ai-agents-for-lead-qualification',
-    '/hire/ai-development-company-usa',
-    '/hire/ai-development-company-uk',
-    '/hire/ai-development-cost',
-    '/hire/rag-development-cost'
-  ];
-  
-  hireUrls.forEach(hireUrl => {
-    categorizedUrls.hire.push(`${SITE_URL}${hireUrl}`);
+  exported.subServices.forEach((servicePath) => {
+    const slug = servicePath.split('/').filter(Boolean).pop();
+    categorizedUrls.faqs.push(`${SITE_URL}/faqs/${slug}`);
+    if (howToGuideSlugs.has(slug)) {
+      categorizedUrls.howTo.push(toAbsoluteUrl(`${servicePath}/how-to`));
+    }
+    if (checklistSlugs.has(slug)) {
+      categorizedUrls.checklists.push(toAbsoluteUrl(`${servicePath}/checklist`));
+    }
   });
 
   // Fetch dynamic blog URLs from API
@@ -600,97 +491,6 @@ async function generateSeparateSitemaps() {
   } catch (error) {
     console.log('Warning: Could not fetch case study URLs:', error.message);
   }
-
-  // Read the generated sitemap to get any additional URLs
-  const sitemapPath = path.join(PUBLIC_DIR, 'sitemap-0.xml');
-  
-  if (!fs.existsSync(sitemapPath)) {
-    console.log('❌ No sitemap-0.xml found. Please run next-sitemap first.');
-    return;
-  }
-  
-  const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
-  
-  // Extract all URLs from the sitemap
-  const urlRegex = /<loc>(.*?)<\/loc>/g;
-  const matches = sitemapContent.match(urlRegex) || [];
-  let allUrls = matches.map(match => match.replace(/<\/?loc>/g, ''));
-  
-  // Remove /services/ from URLs to match the updated routing
-  allUrls = allUrls.map(url => {
-    const urlObj = new URL(url);
-    urlObj.pathname = urlObj.pathname.replace(/\/services\//, '/');
-    return urlObj.toString();
-  });
-
-  const checklistSlugs = extractChecklistSlugs();
-  
-  console.log(`📊 Found ${allUrls.length} total URLs to categorize`);
-  
-  // Categorize URLs
-  allUrls.forEach(url => {
-    const urlPath = new URL(url).pathname;
-    const segments = urlPath.split('/').filter(Boolean);
-
-    // Skip admin URLs
-    if (urlPath.includes('/admin')) {
-      return; // Skip admin URLs
-    }
-
-    if (segments.length === 3 && segments[2] === 'checklist' && segments[0] !== 'faqs') {
-      categorizedUrls.checklists.push(url);
-    } else if (urlPath.includes('/how-to')) {
-      categorizedUrls.howTo.push(url);
-    } else if (urlPath.includes('/faqs/') && urlPath !== '/faqs') {
-      categorizedUrls.faqs.push(url);
-    } else if (urlPath.includes('/blog/')) {
-      // Skip individual blog URLs as they're handled dynamically
-      return;
-    } else if (urlPath.includes('/case-studies/')) {
-      // Skip individual case study URLs as they're handled dynamically
-      return;
-    } else if (urlPath.startsWith('/locations/')) {
-      const segments = urlPath.split('/').filter(Boolean);
-      if (segments.length === 2) {
-        categorizedUrls.locations.push(url);
-      } else if (segments.length >= 3) {
-        const country = segments[1];
-        if (validCountryServiceUrlsMap[country] && validCountryServiceUrlsMap[country].has(url)) {
-          locationServicePages[country] = locationServicePages[country] || [];
-          locationServicePages[country].push(url);
-        }
-      }
-    } else if (urlPath.includes('/hire-') || urlPath.includes('/hire/')) {
-      categorizedUrls.hire.push(url);
-    } else if (isGoalBasedUrl(urlPath) || isPersonaBasedUrl(urlPath)) {
-      // Goal and persona URLs are generated with canonical category slugs above.
-      return;
-    } else if (isMainService(urlPath)) {
-      categorizedUrls.mainServices.push(url);
-    } else if (isSubService(urlPath)) {
-      categorizedUrls.subServices.push(url);
-    } else {
-      categorizedUrls.pages.push(url);
-    }
-  });
-  
-  // Add checklist URLs from service pages if a checklist exists for the service slug
-  allUrls.forEach(url => {
-    const urlPath = new URL(url).pathname;
-    const segments = urlPath.split('/').filter(Boolean);
-
-    if (
-      segments.length === 2 &&
-      segments[0] !== 'faqs' &&
-      segments[0] !== 'blog' &&
-      segments[0] !== 'case-studies' &&
-      segments[0] !== 'locations' &&
-      segments[0] !== 'hire' &&
-      checklistSlugs.has(segments[1])
-    ) {
-      categorizedUrls.checklists.push(`${SITE_URL}${urlPath}/checklist`);
-    }
-  });
 
   // Remove duplicates from each category
   Object.keys(categorizedUrls).forEach(category => {

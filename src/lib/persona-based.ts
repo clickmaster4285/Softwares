@@ -24326,7 +24326,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "ecommerce-development-for-ctos",
+    "slug": "e-commerce-development-for-ctos",
     "metaTitle": "E-Commerce Development for CTOs | Chief Technology Officers | ClickMasters",
     "metaDescription": "ClickMasters delivers e-commerce development for CTOs architecture-first, fixed-price, with documentation and handover designed for your in-house engineering team. Serving CTOs in the USA, UK, Canada & Australia.",
     "canonical": "E-Commerce Development (core service)",
@@ -24446,7 +24446,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "ecommerce-development-for-enterprise-it-directors",
+    "slug": "e-commerce-development-for-enterprise-it-directors",
     "metaTitle": "E-Commerce Development for Enterprise IT Directors | ClickMasters",
     "metaDescription": "ClickMasters delivers e-commerce development for enterprise it directors enterprise governance compliant, SOC 2, enterprise SSO, change management integrated. Serving IT leaders in the USA, UK, Canada & Australia.",
     "canonical": "E-Commerce Development (core service)",
@@ -24579,7 +24579,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "ecommerce-development-for-non-technical-ceos",
+    "slug": "e-commerce-development-for-non-technical-ceos",
     "metaTitle": "E-Commerce Development for Non-Technical CEOs | ClickMasters",
     "metaDescription": "ClickMasters delivers e-commerce development for non-technical ceos fixed-price, business-outcome-focused, plain-English communication. Serving business leaders in the USA, UK, Canada & Australia.",
     "canonical": "E-Commerce Development (core service)",
@@ -24708,7 +24708,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "ecommerce-development-for-product-managers",
+    "slug": "e-commerce-development-for-product-managers",
     "metaTitle": "E-Commerce Development for Product Managers | Sprint Delivery | ClickMasters",
     "metaDescription": "ClickMasters delivers e-commerce development for product managers 2-week sprints, acceptance criteria-driven, analytics-first, with feature flags for PM-controlled rollout. Serving product teams in the USA, UK, Canada & Australia.",
     "canonical": "E-Commerce Development (core service)",
@@ -24837,7 +24837,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "ecommerce-development-for-startup-founders",
+    "slug": "e-commerce-development-for-startup-founders",
     "metaTitle": "E-Commerce Development for Startup Founders | MVP and Growth Stage | ClickMasters",
     "metaDescription": "ClickMasters delivers e-commerce development for startup founders fixed-price, stage-appropriate, and scoped to validate the hypothesis before runway runs out. Serving startups in the USA, UK, Canada & Australia.",
     "canonical": "E-Commerce Development (core service)",
@@ -25606,7 +25606,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "enterprise-software-for-ctos",
+    "slug": "enterprise-software-development-for-ctos",
     "metaTitle": "Enterprise Software for CTOs | Chief Technology Officers | ClickMasters",
     "metaDescription": "ClickMasters delivers enterprise software for CTOs architecture-first, fixed-price, with documentation and handover designed for your in-house engineering team. Serving CTOs in the USA, UK, Canada & Australia.",
     "canonical": "Enterprise Software (core service)",
@@ -25726,7 +25726,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "enterprise-software-for-enterprise-it-directors",
+    "slug": "enterprise-software-development-for-enterprise-it-directors",
     "metaTitle": "Enterprise Software for Enterprise IT Directors | ClickMasters",
     "metaDescription": "ClickMasters delivers enterprise software for enterprise it directors enterprise governance compliant, SOC 2, enterprise SSO, change management integrated. Serving IT leaders in the USA, UK, Canada & Australia.",
     "canonical": "Enterprise Software (core service)",
@@ -25859,7 +25859,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "enterprise-software-for-non-technical-ceos",
+    "slug": "enterprise-software-development-for-non-technical-ceos",
     "metaTitle": "Enterprise Software for Non-Technical CEOs | ClickMasters",
     "metaDescription": "ClickMasters delivers enterprise software for non-technical ceos fixed-price, business-outcome-focused, plain-English communication. Serving business leaders in the USA, UK, Canada & Australia.",
     "canonical": "Enterprise Software (core service)",
@@ -25988,7 +25988,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "enterprise-software-for-product-managers",
+    "slug": "enterprise-software-development-for-product-managers",
     "metaTitle": "Enterprise Software for Product Managers | Sprint Delivery | ClickMasters",
     "metaDescription": "ClickMasters delivers enterprise software for product managers 2-week sprints, acceptance criteria-driven, analytics-first, with feature flags for PM-controlled rollout. Serving product teams in the USA, UK, Canada & Australia.",
     "canonical": "Enterprise Software (core service)",
@@ -26117,7 +26117,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "enterprise-software-for-startup-founders",
+    "slug": "enterprise-software-development-for-startup-founders",
     "metaTitle": "Enterprise Software for Startup Founders | MVP and Growth Stage | ClickMasters",
     "metaDescription": "ClickMasters delivers enterprise software for startup founders fixed-price, stage-appropriate, and scoped to validate the hypothesis before runway runs out. Serving startups in the USA, UK, Canada & Australia.",
     "canonical": "Enterprise Software (core service)",
@@ -28806,7 +28806,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "headless-ecommerce-for-ctos",
+    "slug": "headless-e-commerce-for-ctos",
     "metaTitle": "Headless E-Commerce for CTOs | Chief Technology Officers | ClickMasters",
     "metaDescription": "ClickMasters delivers headless e-commerce for CTOs architecture-first, fixed-price, with documentation and handover designed for your in-house engineering team. Serving CTOs in the USA, UK, Canada & Australia.",
     "canonical": "Headless E-Commerce (core service)",
@@ -28926,7 +28926,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "headless-ecommerce-for-enterprise-it-directors",
+    "slug": "headless-e-commerce-for-enterprise-it-directors",
     "metaTitle": "Headless E-Commerce for Enterprise IT Directors | ClickMasters",
     "metaDescription": "ClickMasters delivers headless e-commerce for enterprise it directors enterprise governance compliant, SOC 2, enterprise SSO, change management integrated. Serving IT leaders in the USA, UK, Canada & Australia.",
     "canonical": "Headless E-Commerce (core service)",
@@ -29059,7 +29059,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "headless-ecommerce-for-non-technical-ceos",
+    "slug": "headless-e-commerce-for-non-technical-ceos",
     "metaTitle": "Headless E-Commerce for Non-Technical CEOs | ClickMasters",
     "metaDescription": "ClickMasters delivers headless e-commerce for non-technical ceos fixed-price, business-outcome-focused, plain-English communication. Serving business leaders in the USA, UK, Canada & Australia.",
     "canonical": "Headless E-Commerce (core service)",
@@ -29188,7 +29188,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "headless-ecommerce-for-product-managers",
+    "slug": "headless-e-commerce-for-product-managers",
     "metaTitle": "Headless E-Commerce for Product Managers | Sprint Delivery | ClickMasters",
     "metaDescription": "ClickMasters delivers headless e-commerce for product managers 2-week sprints, acceptance criteria-driven, analytics-first, with feature flags for PM-controlled rollout. Serving product teams in the USA, UK, Canada & Australia.",
     "canonical": "Headless E-Commerce (core service)",
@@ -29317,7 +29317,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "headless-ecommerce-for-startup-founders",
+    "slug": "headless-e-commerce-for-startup-founders",
     "metaTitle": "Headless E-Commerce for Startup Founders | MVP and Growth Stage | ClickMasters",
     "metaDescription": "ClickMasters delivers headless e-commerce for startup founders fixed-price, stage-appropriate, and scoped to validate the hypothesis before runway runs out. Serving startups in the USA, UK, Canada & Australia.",
     "canonical": "Headless E-Commerce (core service)",
@@ -56227,7 +56227,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "uiux-design-services-for-ctos",
+    "slug": "ui-ux-design-services-for-ctos",
     "metaTitle": "UI/UX Design Services for CTOs | Chief Technology Officers | ClickMasters",
     "metaDescription": "ClickMasters delivers ui/ux design services for CTOs architecture-first, fixed-price, with documentation and handover designed for your in-house engineering team. Serving CTOs in the USA, UK, Canada & Australia.",
     "canonical": "UI/UX Design Services (core service)",
@@ -56347,7 +56347,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "uiux-design-services-for-enterprise-it-directors",
+    "slug": "ui-ux-design-services-for-enterprise-it-directors",
     "metaTitle": "UI/UX Design Services for Enterprise IT Directors | ClickMasters",
     "metaDescription": "ClickMasters delivers ui/ux design services for enterprise it directors enterprise governance compliant, SOC 2, enterprise SSO, change management integrated. Serving IT leaders in the USA, UK, Canada & Australia.",
     "canonical": "UI/UX Design Services (core service)",
@@ -56480,7 +56480,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "uiux-design-services-for-non-technical-ceos",
+    "slug": "ui-ux-design-services-for-non-technical-ceos",
     "metaTitle": "UI/UX Design Services for Non-Technical CEOs | ClickMasters",
     "metaDescription": "ClickMasters delivers ui/ux design services for non-technical ceos fixed-price, business-outcome-focused, plain-English communication. Serving business leaders in the USA, UK, Canada & Australia.",
     "canonical": "UI/UX Design Services (core service)",
@@ -56609,7 +56609,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "uiux-design-services-for-product-managers",
+    "slug": "ui-ux-design-services-for-product-managers",
     "metaTitle": "UI/UX Design Services for Product Managers | Sprint Delivery | ClickMasters",
     "metaDescription": "ClickMasters delivers ui/ux design services for product managers 2-week sprints, acceptance criteria-driven, analytics-first, with feature flags for PM-controlled rollout. Serving product teams in the USA, UK, Canada & Australia.",
     "canonical": "UI/UX Design Services (core service)",
@@ -56738,7 +56738,7 @@ export const servicePages: ServicePageData[] = [
     "internalLinks": []
   },
   {
-    "slug": "uiux-design-services-for-startup-founders",
+    "slug": "ui-ux-design-services-for-startup-founders",
     "metaTitle": "UI/UX Design Services for Startup Founders | MVP and Growth Stage | ClickMasters",
     "metaDescription": "ClickMasters delivers ui/ux design services for startup founders fixed-price, stage-appropriate, and scoped to validate the hypothesis before runway runs out. Serving startups in the USA, UK, Canada & Australia.",
     "canonical": "UI/UX Design Services (core service)",

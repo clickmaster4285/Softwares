@@ -13,7 +13,10 @@ import {
 const GOAL_URL_SUFFIXES = ['to-increase-revenue', 'to-launch-faster', 'to-reduce-costs'] as const;
 
 const GOAL_SERVICE_ALIASES: Record<string, string> = {
-  'ui-ux-design-services': 'ui-ux-design',
+  'ecommerce-development': 'e-commerce-development',
+  'enterprise-software': 'enterprise-software-development',
+  'headless-ecommerce': 'headless-e-commerce',
+  'uiux-design-services': 'ui-ux-design-services',
 };
 
 export type NormalizedGoalSection = {

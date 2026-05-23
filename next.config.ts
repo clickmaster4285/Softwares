@@ -39,38 +39,18 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/locationImg.webp",
-        destination: "/images/locationImg.webp",
+        source: "/services",
+        destination: "/software-solutions",
         permanent: true,
       },
       {
-        source: "/locationimg.webp",
-        destination: "/images/locationImg.webp",
+        source: "/services/:path*",
+        destination: "/:path*",
         permanent: true,
       },
       {
-        source: "/logo1.webp",
-        destination: "/images/logo1.webp",
-        permanent: true,
-      },
-      {
-        source: "/logo-white1.webp",
-        destination: "/images/logo-white1.webp",
-        permanent: true,
-      },
-      {
-        source: "/services/wireframing-prototyping/to-launch-faster",
-        destination: "/design-ui-ux/wireframing-prototyping/to-launch-faster",
-        permanent: true,
-      },
-      {
-        source: "/services/wireframing-prototyping",
-        destination: "/design-ui-ux/wireframing-prototyping",
-        permanent: true,
-      },
-      {
-        source: "/design-ui-ux/wireframing-prototyping/launch-faster",
-        destination: "/design-ui-ux/wireframing-prototyping/to-launch-faster",
+        source: "/locations/:location/services/:service",
+        destination: "/locations/:location/:service",
         permanent: true,
       },
     ];
