@@ -1,9 +1,9 @@
-import { serviceFaqsBySlug, type ServiceFaqItem } from './faq';
+﻿import { serviceFaqsBySlug, type ServiceFaqItem } from './faq';
 
 export type { ServiceFaqItem };
 export { serviceFaqsBySlug, getServiceFaqs } from './faq';
 
-﻿// Technology item with name and icon URL
+// Technology item with name and icon URL
 export type Technology = {
  name: string;
  icon: string;
