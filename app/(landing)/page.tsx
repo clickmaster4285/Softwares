@@ -48,7 +48,7 @@ const homeExploreLinks: HomeExploreLink[] = [
     ariaLabel: 'Read about native and cross-platform mobile app development.',
   },
   {
-    href: '/database-data-management/database-design',
+    href: '/database-services/database-design',
     title: 'Database Design & Management',
     desc: 'Modeling, migrations, tuning.',
     ariaLabel: 'See database design and management services including modeling and tuning.',

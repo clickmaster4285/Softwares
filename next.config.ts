@@ -53,31 +53,6 @@ const nextConfig: NextConfig = {
         destination: "/locations/:location/:service",
         permanent: true,
       },
-      {
-        source: "/web-development/progressive-web-app-development",
-        destination: "/web-development/pwa-development",
-        permanent: true,
-      },
-      {
-        source: "/cybersecurity/cybersecurity-compliance",
-        destination: "/cybersecurity/cybersecurity-services",
-        permanent: true,
-      },
-      {
-        source: "/immersive-tech/mixed-reality-mr-solutions",
-        destination: "/immersive-tech/mixed-reality-solutions",
-        permanent: true,
-      },
-      {
-        source: "/blockchain-and-web3/decentralized-app-dapp-development",
-        destination: "/blockchain-and-web3/dapp-development",
-        permanent: true,
-      },
-      {
-        source: "/data-services/business-intelligence",
-        destination: "/data-services/business-intelligence-bi",
-        permanent: true,
-      },
     ];
   },
 
