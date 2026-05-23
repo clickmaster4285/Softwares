@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <body suppressHydrationWarning>
         {/* Organization Schema - Improves brand visibility in search */}
         <Script
           id="organization-schema"
@@ -42,8 +42,7 @@ export default function RootLayout({
             __html: JSON.stringify(webSiteSchema) || "",
           }}
         />
-      </head>
-      <body suppressHydrationWarning>
+
         {/* Google Tag Manager */}
         <Script
           id="gtm"
