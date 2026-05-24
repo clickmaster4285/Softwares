@@ -155,43 +155,50 @@ export default function TrustedBySection() {
         }
       `}</style>
 
-      <section className="relative overflow-hidden bg-white lg:px-10">
-        <div className="mx-auto px-4 sm:px-6 lg:px-12">
-        
-          {/* Slider Wrapper */}
-          <div className="mt-4 space-y-4">
-            {/* Row 1 */}
-            <div className="relative overflow-hidden">
-              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-white to-transparent" />
-              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-white to-transparent" />
+    <section className="relative overflow-hidden  lg:px-10">
+  {/* Smooth transparent → white fade from top */}
+  <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-56 bg-gradient-to-b from-transparent via-white/30 via-white/70 to-white" />
 
-              <div className="marquee-left flex w-max gap-4 md:gap-6">
-                {rowOne.map((item, index) => (
-                  <PartnerCard
-                    key={`${item.name}-${index}-${Math.random()}`}
-                    item={item}
-                  />
-                ))}
-              </div>
-            </div>
+  <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-12 pt-32">
+    
+    {/* Slider Wrapper */}
+    <div className=" space-y-4 bg-white relative left-1/2 right-1/2 w-screen -translate-x-1/2">
+      
+      {/* Row 1 */}
+      <div className="relative overflow-hidden">
+        {/* Side fade overlays */}
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-white" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-white to-transparent" />
 
-            {/* Row 2 */}
-            <div className="relative overflow-hidden">
-              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-white to-transparent" />
-              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-white to-transparent" />
-
-              <div className="marquee-right flex w-max gap-4 md:gap-6">
-                {rowTwo.map((item, index) => (
-                  <PartnerCard
-                    key={`${item.name}-second-${index}-${Math.random()}`}
-                    item={item}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
+        <div className="marquee-left flex w-max gap-4 md:gap-6">
+          {rowOne.map((item, index) => (
+            <PartnerCard
+              key={`${item.name}-${index}-${Math.random()}`}
+              item={item}
+            />
+          ))}
         </div>
-      </section>
+      </div>
+
+      {/* Row 2 */}
+      <div className="relative overflow-hidden">
+        {/* Side fade overlays */}
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-white to-transparent" />
+
+        <div className="marquee-right flex w-max gap-4 md:gap-6">
+          {rowTwo.map((item, index) => (
+            <PartnerCard
+              key={`${item.name}-second-${index}-${Math.random()}`}
+              item={item}
+            />
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
     </>
   );
 }

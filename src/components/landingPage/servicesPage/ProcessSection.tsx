@@ -448,11 +448,11 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
 >
   {/* Decorative Lines + Label */}
   <div className="inline-flex items-center gap-2 mb-3">
-    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+    <span className="h-[2px] w-8 rounded-full bg-primary" />
     <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
       Our Process
     </p>
-    <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+    <span className="h-[2px] w-8 rounded-full bg-primary" />
   </div>
 
   {/* Main Heading */}

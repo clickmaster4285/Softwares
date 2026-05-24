@@ -48,11 +48,11 @@ export function FaqSection({
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
-            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+            <span className="h-[2px] w-8 rounded-full bg-primary" />
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
               {title}
             </p>
-            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+            <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
 
           <h2 
@@ -62,7 +62,7 @@ export function FaqSection({
             {subtitle}
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
             Everything you need to know about our process, timelines, technology stack, and post-launch support.
           </p>
         </div>
@@ -99,7 +99,7 @@ export function FaqSection({
                     className="overflow-hidden"
                   >
                     <div className="border-t border-slate-100 px-6 pb-6 pt-4">
-                      <p className="text-base leading-7 text-slate-600">
+                      <p className="text-base leading-7 text-slate-800">
                         {item.answer}
                         {item.more ? (
                           <>

@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CardStack } from "@/components/ui/card-stack";
 import { apiFetch } from "@/lib/api";
 import { resolveImageUrl } from "@/lib/utils";
-
+import SplitText from '../../ui/SplitText';
 interface Project {
   _id: string;
   title: string;
@@ -76,28 +76,45 @@ export default function SolutionsPage() {
   }
 
   return (
-    <main className="bg-gradient-to-b from-white to-slate-50">
+    <main className="relative w-full bg-[#f5fbfb]">
       {/* overflow-x-clip prevents scrollbar without clipping bottom */}
-      <section className="py-12 sm:py-16 md:py-24 bg-gray-50 overflow-x-clip">
+      
+  <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" /> 
+           <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
+      
+      <section className="py-12 sm:py-16 md:py-24 overflow-x-clip">
+
 
         {/* max-w-7xl + px matches your navbar container exactly */}
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-12">
 
           {/* Heading */}
           <div className="mx-auto max-w-3xl text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-3">
-              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                OUR SOLUTIONS
-              </p>
-              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+              <span className="h-[2px] w-8 rounded-full bg-primary" />
+                    <div className="inline-flex items-center gap-1.5">
+  <SplitText
+  text="Our Solutions"
+  className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+  delay={60}
+  duration={0.8}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 60 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.2}
+  
+/>
+</div>
+              <span className="h-[2px] w-8 rounded-full bg-primary" />
             </div>
 
-            <h2 className="text-2xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">
+            {/* <h2 className="text-2xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">
               Our Work in Action
-            </h2>
+            </h2> */}
 
-            <p className="mt-5 text-slate-600 text-lg">
+            <p className=" text-slate-900 text-xl">
               See how we&apos;ve helped businesses transform their ideas into
               successful digital products.
             </p>

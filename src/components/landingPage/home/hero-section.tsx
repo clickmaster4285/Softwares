@@ -1,409 +1,228 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, FileText, Mail, User, Phone, Send, CheckCircle2, DollarSign } from 'lucide-react';
-import { NeonOrbs } from '@/components/ui/neon-orbs';
+import { useState, useEffect, useRef } from "react";
+import { ArrowRight, FileText, Mail, Phone, User, DollarSign } from "lucide-react";
+import { AuroraCanvas } from "../../ui/AuroraCanvas";
 
-interface CounterProps {
-  end: number;
-  duration?: number;
-  delay?: number;
-}
 
-interface StatItem {
-  end: number;
-  label: string;
-}
 
-const heroBullets: string[] = [
-  'MVP to full-scale SaaS development',
-  'Native, cross-platform & enterprise mobile apps',
-  'AI & automation systems',
-  'ERP, CRM, and enterprise solutions',
-  'Built for scalability, performance & ROI',
-];
-
-function useInViewOnce(ref: React.RefObject<Element | null>, threshold = 0.15): boolean {
-  const [visible, setVisible] = useState(false);
-  const done = useRef(false);
+function AnimatedCounter({ 
+  target, 
+  suffix, 
+  label 
+}: { 
+  target: number; 
+  suffix: string; 
+  label: string 
+}) {
+  const [count, setCount] = useState(0); // Start from 0
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el || done.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
 
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          done.current = true;
-          setVisible(true);
-          io.disconnect();
-        }
+            let start = 0;
+            const duration = 1600;
+            const increment = target / (duration / 16);
+
+            const timer = setInterval(() => {
+              start += increment;
+              if (start >= target) {
+                setCount(target);
+                clearInterval(timer);
+              } else {
+                setCount(Math.floor(start));
+              }
+            }, 16);
+          }
+        });
       },
-      { threshold, rootMargin: '40px' }
+      { threshold: 0.4, rootMargin: "-60px" }
     );
 
-    io.observe(el);
-    return () => io.disconnect();
-  }, [ref, threshold]);
-
-  return visible;
-}
-
-const Counter = ({ end, duration = 2, delay = 0 }: CounterProps): JSX.Element => {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInViewOnce(ref, 0.2);
-
-  useEffect(() => {
-    if (!isInView) return;
-
-    let startTime: number;
-    let animationFrame: number;
-
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = (timestamp - startTime) / (duration * 1000);
-
-      if (progress < 1) {
-        setCount(Math.min(Math.floor(end * progress), end));
-        animationFrame = requestAnimationFrame(animate);
-      } else {
-        setCount(end);
-      }
-    };
-
-    const timeoutId = window.setTimeout(() => {
-      animationFrame = requestAnimationFrame(animate);
-    }, delay * 1000);
-
-    return () => {
-      window.clearTimeout(timeoutId);
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-    };
-  }, [isInView, end, duration, delay]);
-
-  return <span ref={ref}>{count}+</span>;
-};
-
-const stats: StatItem[] = [
-  { end: 1860, label: 'Projects Delivered' },
-  { end: 3500, label: 'Happy Clients' },
-  { end: 75, label: 'Awards Won' },
-  { end: 5, label: 'Years Experience' },
-];
-
-// Typewriter Component
-const Typewriter = ({ texts, typingSpeed = 80, deletingSpeed = 40, pauseTime = 1500 }: {
-  texts: string[];
-  typingSpeed?: number;
-  deletingSpeed?: number;
-  pauseTime?: number;
-}) => {
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isWaiting, setIsWaiting] = useState(false);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-
-    if (isWaiting) {
-      timer = setTimeout(() => {
-        setIsWaiting(false);
-        setIsDeleting(true);
-      }, pauseTime);
-      return () => clearTimeout(timer);
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
     }
 
-    const currentText = texts[currentIndex];
-
-    if (isDeleting) {
-      if (displayText.length === 0) {
-        setIsDeleting(false);
-        setCurrentIndex((prev) => (prev + 1) % texts.length);
-      } else {
-        timer = setTimeout(() => {
-          setDisplayText((prev) => prev.slice(0, -1));
-        }, deletingSpeed);
-      }
-    } else {
-      if (displayText.length === currentText.length) {
-        setIsWaiting(true);
-      } else {
-        timer = setTimeout(() => {
-          setDisplayText((prev) => currentText.slice(0, prev.length + 1));
-        }, typingSpeed);
-      }
-    }
-
-    return () => clearTimeout(timer);
-  }, [displayText, isDeleting, isWaiting, currentIndex, texts, typingSpeed, deletingSpeed, pauseTime]);
+    return () => observer.disconnect();
+  }, [target, hasAnimated]);
 
   return (
-    <span className="inline-block min-w-[280px] text-left text-primary font-medium sm:min-w-[340px] md:min-w-[400px]">
-      {displayText}
-      <span className="inline-block h-5 w-0.5 -mb-0.5 bg-primary animate-pulse" />
-    </span>
+    <div
+      ref={elementRef}
+      className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-sm p-6 transition-all duration-300"
+    >
+      <div className="text-4xl font-bold text-primary md:text-5xl tabular-nums font-mono">
+        {count.toLocaleString()}{suffix}
+      </div>
+      <div className="mt-2 text-sm text-muted-foreground">{label}</div>
+    </div>
   );
-};
+}
+export function HeroSection() {
+  return <HeroSectionContent />;
+}
 
-export function HeroSection(): JSX.Element {
-  const [heroForm, setHeroForm] = useState({
-    name: '',
+function HeroSectionContent() {
+  return (
+    <section className="relative min-h-screen overflow-hidden w-full">
+      {/* Background */}
+      <div className="fixed inset-0 -z-10 h-screen w-full">
+        <AuroraCanvas />
+      </div>
+
+      <div className="flex min-h-screen items-center justify-center pt-16 pb-20">
+        <div className="relative z-10 mx-auto grid max-w-[1600px] py-20 grid-cols-1 gap-16 lg:grid-cols-[1fr_480px]">
+          
+          {/* Left Column */}
+          <div>
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl max-w-4xl font-bold leading-tight tracking-normal text-foreground">
+              Software Development Company{" "}
+              <span className="text-primary">That Scales Your Business Revenue</span>
+            </h1>
+
+            <p className="mt-7 max-w-3xl text-xl text-gray-800">
+              We design, build, and deploy high-performance web, mobile, SaaS,
+              <br />
+              and AI-powered systems for companies in the USA, Europe &amp; Middle East.
+            </p>
+
+            <div className="mt-6 inline-flex text-lg items-center rounded-lg border border-primary/30 bg-white/40 px-5 py-3 text-primary backdrop-blur-sm">
+              ERP, CRM, and enterprise solutions
+              <span className="ml-1 inline-block h-5 w-px animate-pulse bg-primary" />
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button
+                data-hero-cta
+                data-magnetic
+                className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:shadow-xl"
+              >
+                Get Free Software Strategy Call
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
+
+              <button
+                data-hero-cta
+                data-magnetic
+                className="inline-flex items-center gap-2 rounded-md border border-foreground/15 bg-white/50 px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur-sm transition hover:bg-white/80"
+              >
+                <FileText className="h-4 w-4" />
+                Request Proposal
+              </button>
+            </div>
+
+            <div className="mt-20 grid grid-cols-2 gap-x-10 gap-y-8 md:grid-cols-4">
+              <AnimatedCounter target={1860} suffix="+" label="Projects Delivered" />
+              <AnimatedCounter target={3500} suffix="+" label="Happy Clients" />
+              <AnimatedCounter target={75} suffix="+" label="Awards Won" />
+              <AnimatedCounter target={5} suffix="+" label="Years Experience" />
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div>
+            <QuoteForm />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function QuoteForm() {
+  const [formData, setFormData] = useState({
+    fullName: '',
     email: '',
     phone: '',
     budget: '',
-    message: '',
+    message: ''
   });
-  const [heroSending, setHeroSending] = useState(false);
-  const [heroSuccess, setHeroSuccess] = useState(false);
-  const [heroError, setHeroError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const heroFieldClass = "w-full rounded-xl border border-white/25 bg-white/5 px-3 py-2.5 pl-9 text-base sm:text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30";
-
-  const handleHeroChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setHeroForm((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleHeroSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setHeroSending(true);
-    setHeroError(null);
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: heroForm.name,
-          email: heroForm.email,
-          message: heroForm.message,
-          phone: heroForm.phone || undefined,
-          budget: heroForm.budget || undefined,
-          services: 'Homepage hero inquiry',
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Something went wrong');
-      
-      setHeroSuccess(true);
-      setHeroForm({ name: '', email: '', phone: '', budget: '', message: '' });
-      setTimeout(() => setHeroSuccess(false), 5000);
-    } catch (err: unknown) {
-      setHeroError(err instanceof Error ? err.message : 'Failed to send. Please try again.');
-    } finally {
-      setHeroSending(false);
-    }
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+      setFormData({ fullName: '', email: '', phone: '', budget: '', message: '' });
+      setTimeout(() => setIsSuccess(false), 5000);
+    }, 1000);
   };
 
   return (
-    <section
-      /* ─── CHANGE 1: mobile = auto height + scroll; desktop = h-screen ─── */
-      className="relative min-h-screen flex flex-col lg:flex-row lg:items-stretch overflow-x-hidden"
-      aria-labelledby="hero-heading"
+    <form
+      data-hero-form
+      className="self-start rounded-2xl border border-white/40 bg-white/35 p-8 shadow-2xl shadow-primary/10 backdrop-blur-xl min-h-[520px]"
+      onSubmit={handleSubmit}
     >
-      <div className="absolute inset-0 -z-30">
-        <NeonOrbs />
-      </div>
-      <div className="absolute inset-0 -z-20 bg-black/50" />
+      <h3 className="text-xl font-bold text-primary">Get a free quote</h3>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Share your details we'll respond within one business day.
+      </p>
 
-      <div className="container relative z-10 mx-auto w-full max-w-full min-w-0 px-3 sm:px-4 lg:px-14 flex flex-col justify-center min-h-screen">
-        <div className="mx-auto w-full min-w-0 px-4 sm:px-6 lg:px-10">
-          {/* ─── CHANGE 2: single-col on mobile, two-col on lg ─── */}
-          <div className="grid gap-10 pt-24 pb-10 lg:pt-0 lg:pb-0 lg:min-h-screen lg:grid-cols-[1fr_400px] xl:gap-16 lg:items-center">
-
-            {/* ── Left column ── */}
-            <div className="flex flex-col justify-center text-left">
-              {/* Heading */}
-              <div className="mb-6 md:mb-8">
-                <h1 id="hero-heading" className="font-display text-[1.65rem] font-bold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
-                  Software Development Company{' '}
-                  <span className="text-primary">That Scales Your Business Revenue</span>
-                </h1>
-              </div>
-
-              {/* Sub-description */}
-              <p className="animate-slide-in-up text-base sm:text-lg md:text-xl text-gray-100 leading-relaxed mb-8">
-                We design, build, and deploy high-performance web, mobile, SaaS, and AI-powered
-                systems for companies in the USA, Europe &amp; Middle East.
-              </p>
-
-              {/* Typewriter */}
-              <div className="animate-slide-in-up mb-10">
-                <div className="inline-block rounded-2xl bg-white/5 px-4 sm:px-6 py-3 backdrop-blur-sm border border-white/10 max-w-full overflow-hidden">
-                  <div className="text-left text-sm sm:text-base lg:text-lg font-medium text-gray-100">
-                    <Typewriter texts={heroBullets} typingSpeed={60} deletingSpeed={30} pauseTime={2000} />
-                  </div>
-                </div>
-              </div>
-
-              {/* Buttons */}
-              <div className="animate-slide-in-up flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  className="group w-full sm:w-auto min-h-[52px] rounded-xl bg-primary px-6 text-sm sm:text-base font-medium hover:bg-primary/90"
-                  asChild
-                >
-                  <Link href="/contact-us">
-                    Get Free Software Strategy Call
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto min-h-[52px] rounded-xl border-white/30 hover:bg-white/5"
-                  asChild
-                >
-                  <Link href="/contact-us">
-                    <FileText className="mr-2 h-5 w-5" />
-                    Request Proposal
-                  </Link>
-                </Button>
-              </div>
-
-
-
-
-
-
-                  {/* Stats Section */}
-          <div
-            className="animate-slide-in-up mt-6 lg:mt-10 grid grid-cols-2 gap-x-8 gap-y-10  pt-10 pb-10 md:grid-cols-4 md:gap-x-12"
-            role="list"
-            aria-label="Company achievements"
-            style={{ animationDelay: '400ms' }}
-          >
-            {stats.map((stat, index) => (
-              <div key={stat.label} className="text-left" role="listitem">
-                <p className="font-display text-2xl md:text-4xl font-bold tabular-nums text-white tracking-[-2px]">
-                  <Counter end={stat.end} duration={2.2} delay={0.1 * index} />
-                </p>
-                <p className="mt-2 text-sm md:text-base text-gray-400 font-medium">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-              </div>
-              
-              
-            </div>
-
-            {/* ── Right column CTA Form, vertically centered ── */}
-            <div className="flex items-center justify-center lg:h-screen w-full">
-              <div className="animate-slide-in-up w-full">
-                <div className="rounded-2xl border border-white/15 bg-black/60 p-6 sm:p-8 shadow-2xl shadow-black/50 backdrop-blur-md">
-                  <h2 className="font-display text-lg font-bold text-white">Get a free quote</h2>
-                  <p className="mt-1 mb-6 text-sm text-gray-300">
-                    Share your details we&apos;ll respond within one business day.
-                  </p>
-
-                  {heroError && (
-                    <div className="mb-4 rounded-xl border border-red-400/40 bg-red-950/50 px-4 py-3 text-sm text-red-100">
-                      {heroError}
-                    </div>
-                  )}
-
-                  {heroSuccess ? (
-                    <div className="rounded-xl bg-green-950/40 border border-green-400/30 p-8 text-center">
-                      <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-primary" />
-                      <p className="font-semibold text-white">Message received!</p>
-                      <p className="mt-1 text-sm text-gray-300">We&apos;ll get back to you shortly.</p>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleHeroSubmit} className="space-y-4">
-                      <div className="relative">
-                        <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                        <input
-                          type="text"
-                          name="name"
-                          value={heroForm.name}
-                          onChange={handleHeroChange}
-                          placeholder="Full name"
-                          className={heroFieldClass}
-                          required
-                        />
-                      </div>
-
-                      <div className="relative">
-                        <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                        <input
-                          type="email"
-                          name="email"
-                          value={heroForm.email}
-                          onChange={handleHeroChange}
-                          placeholder="Work email"
-                          className={heroFieldClass}
-                          required
-                        />
-                      </div>
-
-                      <div className="relative">
-                        <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={heroForm.phone}
-                          onChange={handleHeroChange}
-                          placeholder="Phone (optional)"
-                          className={heroFieldClass}
-                        />
-                      </div>
-
-                      <div className="relative">
-                        <DollarSign className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                        <input
-                          type="text"
-                          name="budget"
-                          value={heroForm.budget}
-                          onChange={handleHeroChange}
-                          placeholder="Estimated budget (optional)"
-                          className={heroFieldClass}
-                        />
-                      </div>
-
-                      <textarea
-                        name="message"
-                        rows={3}
-                        value={heroForm.message}
-                        onChange={handleHeroChange}
-                        placeholder="What would you like to build?"
-                        className="min-h-[88px] w-full resize-y rounded-xl border border-white/25 bg-white/5 px-3 py-3 text-sm text-white placeholder:text-gray-200 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30"
-                        required
-                      />
-
-                      <button
-                        type="submit"
-                        disabled={heroSending}
-                        className="w-full min-h-[52px] rounded-xl bg-primary text-base font-semibold text-white transition hover:bg-primary/90 disabled:opacity-60"
-                      >
-                        {heroSending ? 'Sending...' : 'Send Message'}
-                      </button>
-                    </form>
-                  )}
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-      
+      {isSuccess ? (
+        <div className="mt-6 rounded-xl bg-green-500/20 p-6 text-center backdrop-blur-sm">
+          <div className="text-green-600 font-semibold">✓ Message received!</div>
+          <p className="mt-2 text-sm text-foreground/70">We'll get back to you shortly.</p>
         </div>
-      </div>
+      ) : (
+        <div className="mt-6 space-y-3">
+          {[
+            { icon: User, name: "fullName", ph: "Full name", type: "text" },
+            { icon: Mail, name: "email", ph: "Work email", type: "email" },
+            { icon: Phone, name: "phone", ph: "Phone (optional)", type: "tel" },
+            { icon: DollarSign, name: "budget", ph: "Estimated budget (optional)", type: "text" },
+          ].map(({ icon: Icon, name, ph, type }) => (
+            <div
+              key={name}
+              className="flex items-center gap-3 rounded-lg border border-white/50 bg-white/50 px-4 py-3 backdrop-blur transition focus-within:border-primary/60"
+            >
+              <Icon className="h-4 w-4 text-primary" />
+              <input
+                type={type}
+                name={name}
+                value={formData[name as keyof typeof formData] as string}
+                onChange={handleChange}
+                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                placeholder={ph}
+                required={name !== 'phone' && name !== 'budget'}
+              />
+            </div>
+          ))}
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-white/50 bg-white/50 px-4 py-3 text-sm outline-none backdrop-blur placeholder:text-muted-foreground focus:border-primary/60"
+            rows={3}
+            placeholder="What would you like to build?"
+            required
+          />
+        </div>
+      )}
 
-      <style jsx>{`
-        @keyframes slideInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-slide-in-up {
-          animation: slideInUp 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-          opacity: 0;
-        }
-      `}</style>
-    </section>
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        data-magnetic
+        className="mt-5 w-full rounded-lg bg-primary py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {isSubmitting ? 'Sending...' : 'Send Message'}
+      </button>
+    </form>
   );
 }

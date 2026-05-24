@@ -1,10 +1,9 @@
-
 "use client";
-
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUpRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +11,7 @@ export interface GlassCardItem {
   id: number | string;
   title: string;
   description: string;
-  color: string; // rgba string, e.g. 'rgba(226,106,63,0.8)'
+  color?: string;
   icon?: React.ReactNode;
   cta?: { label: string; href: string };
 }
@@ -23,16 +22,60 @@ interface CardProps {
   totalCards: number;
 }
 
+const CARD_COLORS = [
+  {
+    accent: "from-emerald-400/20 to-teal-400/10",
+    border: "rgba(52, 211, 153, 0.35)",
+    glow: "rgba(52, 211, 153, 0.12)",
+    badge: "bg-emerald-50 text-emerald-700 border-emerald-200/60",
+    iconBg: "bg-emerald-50",
+    iconColor: "text-emerald-600",
+    cta: "text-emerald-600 hover:text-emerald-700",
+    number: "text-emerald-200",
+  },
+  {
+    accent: "from-violet-400/20 to-purple-400/10",
+    border: "rgba(139, 92, 246, 0.35)",
+    glow: "rgba(139, 92, 246, 0.12)",
+    badge: "bg-violet-50 text-violet-700 border-violet-200/60",
+    iconBg: "bg-violet-50",
+    iconColor: "text-violet-600",
+    cta: "text-violet-600 hover:text-violet-700",
+    number: "text-violet-200",
+  },
+  {
+    accent: "from-orange-400/20 to-amber-400/10",
+    border: "rgba(251, 146, 60, 0.35)",
+    glow: "rgba(251, 146, 60, 0.12)",
+    badge: "bg-orange-50 text-orange-700 border-orange-200/60",
+    iconBg: "bg-orange-50",
+    iconColor: "text-orange-600",
+    cta: "text-orange-600 hover:text-orange-700",
+    number: "text-orange-200",
+  },
+  {
+    accent: "from-sky-400/20 to-blue-400/10",
+    border: "rgba(56, 189, 248, 0.35)",
+    glow: "rgba(56, 189, 248, 0.12)",
+    badge: "bg-sky-50 text-sky-700 border-sky-200/60",
+    iconBg: "bg-sky-50",
+    iconColor: "text-sky-600",
+    cta: "text-sky-600 hover:text-sky-700",
+    number: "text-sky-200",
+  },
+];
+
 const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const palette = CARD_COLORS[index % CARD_COLORS.length];
 
   useEffect(() => {
     const card = cardRef.current;
     const container = containerRef.current;
     if (!card || !container) return;
 
-    const targetScale = 1 - (totalCards - index) * 0.05;
+    const targetScale = 1 - (totalCards - index) * 0.04;
 
     gsap.set(card, { scale: 1, transformOrigin: "center top" });
 
@@ -56,8 +99,6 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
     };
   }, [index, totalCards]);
 
-  const color = item.color;
-
   return (
     <div
       ref={containerRef}
@@ -75,133 +116,173 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
         style={{
           position: "relative",
           width: "100%",
-          height: "420px",
-          borderRadius: "24px",
-          isolation: "isolate",
-          top: `calc(-15vh + ${index * 25}px)`,
+          maxWidth: "660px",
           transformOrigin: "top",
+          top: `${index * 18}px`,
         }}
       >
-        {/* Electric Border */}
+        {/* Outer glow */}
         <div
           style={{
             position: "absolute",
-            inset: "-3px",
-            borderRadius: "27px",
-            padding: "3px",
-            background: `conic-gradient(
-              from 0deg,
-              transparent 0deg,
-              ${color} 60deg,
-              ${color.replace("0.8", "0.6")} 120deg,
-              transparent 180deg,
-              ${color.replace("0.8", "0.4")} 240deg,
-              transparent 360deg
-            )`,
+            inset: "-1px",
+            borderRadius: "28px",
+            background: palette.glow,
+            filter: "blur(16px)",
             zIndex: -1,
           }}
         />
 
-        {/* Card */}
+        {/* Colored border ring */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "26px",
+            border: `1.5px solid ${palette.border}`,
+            pointerEvents: "none",
+            zIndex: 2,
+          }}
+        />
+
+        {/* Main card */}
         <div
           style={{
             position: "relative",
             width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "2rem",
-            borderRadius: "24px",
-            background:
-              "linear-gradient(145deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65))",
-            backdropFilter: "blur(25px) saturate(180%)",
-            border: "1px solid rgba(255,255,255,0.4)",
+            borderRadius: "26px",
+            background: "rgba(255, 255, 255, 0.92)",
+            backdropFilter: "blur(30px) saturate(200%)",
             boxShadow:
-              "0 8px 32px rgba(226,106,63,0.18), 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6)",
+              "0 20px 60px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9)",
             overflow: "hidden",
+            padding: "2.25rem 2.5rem 2rem",
           }}
         >
-          {/* Top reflection */}
+          {/* Subtle top gradient accent */}
+          <div
+            className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${palette.accent.replace("/20", "").replace("/10", "")}`}
+            style={{ opacity: 0.7 }}
+          />
+
+          {/* Diagonal background number */}
           <div
             style={{
               position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: "55%",
-              background:
-                "linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.15) 50%, transparent 100%)",
+              right: "1.75rem",
+              bottom: "1rem",
+              fontSize: "7rem",
+              fontWeight: 800,
+              lineHeight: 1,
               pointerEvents: "none",
-              borderRadius: "24px 24px 0 0",
+              userSelect: "none",
+              fontVariantNumeric: "tabular-nums",
+              letterSpacing: "-0.05em",
             }}
-          />
-          {/* Shine */}
-          <div
-            style={{
-              position: "absolute",
-              top: "10px",
-              left: "10px",
-              right: "10px",
-              height: "2px",
-              background:
-                "linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)",
-              borderRadius: "1px",
-              pointerEvents: "none",
-            }}
-          />
+            className={palette.number}
+            aria-hidden="true"
+          >
+            0{index + 1}
+          </div>
 
           {/* Content */}
           <div style={{ position: "relative", zIndex: 1 }}>
-            {item.icon && (
-              <div
+            {/* Top row: icon + badge */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                marginBottom: "1.25rem",
+              }}
+            >
+              {item.icon && (
+                <div
+                  className={`${palette.iconBg} ${palette.iconColor}`}
+                  style={{
+                    display: "inline-flex",
+                    width: 52,
+                    height: 52,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: 16,
+                    flexShrink: 0,
+                  }}
+                >
+                  {/* Render icon with size override */}
+                  <span style={{ width: 24, height: 24, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    {item.icon}
+                  </span>
+                </div>
+              )}
+
+              <span
+                className={`${palette.badge} border text-xs font-semibold tracking-wider uppercase`}
                 style={{
-                  display: "inline-flex",
-                  width: 48,
-                  height: 48,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: 14,
-                  background:
-                    "linear-gradient(135deg, #fff1e8, #fde2cf)",
-                  color: "#e26a3f",
-                  marginBottom: 16,
+                  padding: "4px 10px",
+                  borderRadius: 99,
+                  letterSpacing: "0.08em",
                 }}
               >
-                {item.icon}
-              </div>
-            )}
+                0{index + 1} / 0{totalCards}
+              </span>
+            </div>
+
+            {/* Title */}
             <h3
               style={{
-                fontSize: "1.35rem",
+                fontSize: "1.3rem",
                 fontWeight: 700,
-                color: "#1a1a1a",
-                marginBottom: 12,
+                color: "hsl(var(--primary))",
+                marginBottom: "0.65rem",
+                lineHeight: 1.3,
+                letterSpacing: "-0.01em",
               }}
             >
               {item.title}
             </h3>
+
+            {/* Divider */}
+            <div
+              style={{
+                height: "1.5px",
+                width: "2.5rem",
+                borderRadius: 2,
+                background: palette.border,
+                marginBottom: "0.85rem",
+              }}
+            />
+
+            {/* Description */}
             <p
               style={{
-                fontSize: "0.95rem",
-                lineHeight: 1.6,
-                color: "rgba(0,0,0,0.65)",
+                fontSize: "0.925rem",
+                lineHeight: 1.7,
+                color: "rgba(0,0,0,0.6)",
+                maxWidth: "90%",
               }}
             >
               {item.description}
             </p>
+
+            {/* CTA */}
             {item.cta && (
               <a
                 href={item.cta.href}
+                className={`${palette.cta} inline-flex items-center gap-1.5 transition-all`}
                 style={{
-                  display: "inline-block",
-                  marginTop: 16,
-                  fontSize: "0.9rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.35rem",
+                  marginTop: "1.35rem",
+                  fontSize: "0.85rem",
                   fontWeight: 600,
-                  color: "#e26a3f",
+                  textDecoration: "none",
+                  letterSpacing: "0.01em",
                 }}
               >
-                {item.cta.label} →
+                {item.cta.label}
+                <ArrowUpRight style={{ width: 15, height: 15 }} />
               </a>
             )}
           </div>

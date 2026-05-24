@@ -129,7 +129,7 @@ export function TestimonialsSection({
             <h2 className="text-2xl sm:text-3xl md:text-3xl font-semibold tracking-tight text-slate-900">
               What Our Clients Say
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 mt-1 sm:mt-2">Real stories from founders and teams we’ve helped</p>
+            <p className="text-sm sm:text-base text-slate-800 mt-1 sm:mt-2">Real stories from founders and teams we’ve helped</p>
           </div>
         </div>
 

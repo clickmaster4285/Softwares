@@ -96,7 +96,7 @@ export const FAQSection = ({ faqs }: FAQSectionProps) => {
                   className="overflow-hidden"
                 >
                   <div className="border-t border-slate-100 px-6 pb-6 pt-4">
-                    <p className="text-sm leading-relaxed text-slate-600">
+                    <p className="text-sm leading-relaxed text-slate-800">
                       {makeBoldWithColor(faq.answer)}
                     </p>
                   </div>

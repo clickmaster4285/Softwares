@@ -206,7 +206,7 @@ export const ParallaxProjectsContent = ({ projects }: ParallaxProjectsContentPro
             >
               {section.category && (
                 <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                  <div className="w-4 sm:w-6 h-px bg-orange-400" />
+                  <div className="w-4 sm:w-6 h-px bg-primary" />
                   <span className="text-[11px] sm:text-xs font-medium uppercase tracking-wider text-orange-600">
                     {section.category.name}
                   </span>
