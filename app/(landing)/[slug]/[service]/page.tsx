@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
+import Script from 'next/script';
 import {
   ArrowRight,
   CheckCircle2,
@@ -114,6 +115,22 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     return text.replace(regex, '<strong>$1</strong>');
   };
 
+  // Sanitize HTML coming from CMS or data sources to avoid injecting full
+  // documents (<!DOCTYPE>, <html>, <head>, <body>) into the page which can
+  // cause duplicate <head> tags. This strips those wrappers while preserving
+  // allowed inner HTML.
+  const sanitizeInjectedHtml = (html?: string) => {
+    if (!html) return '';
+    return String(html)
+      .replace(/<!doctype [^>]*>/gi, '')
+      .replace(/<html[^>]*>/gi, '')
+      .replace(/<\/html>/gi, '')
+      .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, '')
+      .replace(/<body[^>]*>/gi, '')
+      .replace(/<\/body>/gi, '')
+      .trim();
+  };
+
   // Standardized TOC items built dynamically
   const tocItems = [
     { id: 'overview', title: 'Overview', level: 2 as const },
@@ -192,17 +209,17 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
   return (
     <>
-      <script
+      <Script
         id={`service-schema-${page.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
-      <script
+      <Script
         id={`faq-schema-${page.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <script
+      <Script
         id={`breadcrumb-${page.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -243,14 +260,14 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                     <div className="h-10 w-1 rounded-full bg-primary" />
                     <h2 
                       className="text-2xl font-semibold text-slate-900 sm:text-3xl"
-                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.heading, page.serviceName) }}
+                      dangerouslySetInnerHTML={{ __html: sanitizeInjectedHtml(makeBoldServiceName(section.heading, page.serviceName)) }}
                     />
                   </div>
 
                   <div className="mt-6 space-y-4 text-slate-600 leading-relaxed">
                     <p 
                       className="text-lg whitespace-pre-line"
-                      dangerouslySetInnerHTML={{ __html: makeBoldServiceName(section.body, page.serviceName) }}
+                      dangerouslySetInnerHTML={{ __html: sanitizeInjectedHtml(makeBoldServiceName(section.body, page.serviceName)) }}
                     />
                     
                     {/* Render items if present in section */}
@@ -263,7 +280,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                             </div>
                             <span 
                               className="italic"
-                              dangerouslySetInnerHTML={{ __html: makeBoldServiceName(item, page.serviceName) }}
+                              dangerouslySetInnerHTML={{ __html: sanitizeInjectedHtml(makeBoldServiceName(item, page.serviceName)) }}
                             />
                           </li>
                         ))}
