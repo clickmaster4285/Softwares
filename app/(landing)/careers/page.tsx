@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, withSeoMetadata } from '@/app/metadata-config';
 import { StaticContentPage } from '@/components/landingPage/StaticContentPage';
 
-export const metadata: Metadata = {
-  title: 'Careers | ClickMasters',
-  description: 'Join ClickMasters and help teams build scalable software products.',
+export const metadata: Metadata = withSeoMetadata({
+  title: 'Careers',
+  description:
+    'Join ClickMasters and help teams worldwide build scalable web apps, mobile apps, SaaS platforms, and enterprise software.',
   alternates: { canonical: `${siteConfig.url}/careers` },
-};
+});
 
 export default function CareersPage() {
   return (

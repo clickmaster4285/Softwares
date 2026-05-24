@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, withSeoMetadata } from '@/app/metadata-config';
 import { StaticContentPage } from '@/components/landingPage/StaticContentPage';
 
-export const metadata: Metadata = {
-  title: 'Cookie Policy | ClickMasters',
-  description: 'How ClickMasters uses cookies and similar technologies on this website.',
+export const metadata: Metadata = withSeoMetadata({
+  title: 'Cookie Policy',
+  description:
+    'How ClickMasters uses cookies and similar technologies on this website to improve security, preferences, and analytics.',
   alternates: { canonical: `${siteConfig.url}/cookie-policy` },
-};
+});
 
 export default function CookiePolicyPage() {
   return (

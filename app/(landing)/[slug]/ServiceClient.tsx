@@ -204,7 +204,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
    </div>
 
 <div className='m-4 lg:m-10'>
- <TestimonialsSection/>
+ <TestimonialsSection sectionTitle={`${serviceData.title} client reviews`} />
    </div>
 
 

@@ -1,13 +1,13 @@
 // app/locations/[location]/page.tsx
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, buildPageMetadata, stripBrandSuffix } from '@/app/metadata-config';
 import { getCountryData, getAllCountrySlugs } from '@/lib/country';
 import { servicesByCountry, buildCountryServiceSlugMap } from '@/lib/country-services';
 
 import { ProcessSection } from '@/src/components/landingPage/servicesPage/ProcessSection';
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
-import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
+import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
 import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
 
 import ProjectCTAHero from '@/src/components/landingPage/location/ProjectCTAHero';
@@ -38,24 +38,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Location Not Found' };
   }
 
-  return {
-    title: country.title,
+  return buildPageMetadata({
+    title: stripBrandSuffix(country.title),
     description: country.description,
-    alternates: {
-      canonical: `${siteConfig.url}/locations/${location}`,
-    },
-    openGraph: {
-      title: country.title,
-      description: country.description,
-      url: `${siteConfig.url}/locations/${location}`,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: country.title,
-      description: country.description,
-    },
+    canonical: `${siteConfig.url}/locations/${location}`,
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 export default async function CountryPage({ params }: Props) {
@@ -160,7 +148,7 @@ const serviceData = servicesByCountry[country.name] || [];
 
       <TechStackSection />
       <FeaturedInsights />
-      <TestimonialsSection />
+      <TestimonialsSection sectionTitle={`Client reviews in ${country.name}`} />
 
     
        <FaqSection

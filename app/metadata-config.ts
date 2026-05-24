@@ -1,6 +1,159 @@
 import { Metadata } from 'next';
 
 // ─────────────────────────────────────────────────────────────────────────────
+//  SEO HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+
+const BRAND_SUFFIX = ' | ClickMasters';
+const BRAND_SUFFIX_PATTERN = /\s*\|\s*ClickMasters(\s*\|\s*ClickMasters)*\s*$/gi;
+const MAX_SEO_TITLE_LEN = 60;
+const MAX_META_DESC_LEN = 155;
+const MIN_META_DESC_LEN = 70;
+const MAX_HEADING_LEN = 70;
+
+export function stripBrandSuffix(title: string): string {
+  return title.replace(BRAND_SUFFIX_PATTERN, '').trim();
+}
+
+function truncateAtWord(text: string, maxLen: number): string {
+  if (text.length <= maxLen) return text;
+  const cut = text.slice(0, maxLen - 1).trimEnd();
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${lastSpace > maxLen * 0.55 ? cut.slice(0, lastSpace) : cut}…`;
+}
+
+export function truncateHeading(text: string, maxLen = MAX_HEADING_LEN): string {
+  return truncateAtWord(text.replace(/\s+/g, ' ').trim(), maxLen);
+}
+
+export function formatSeoTitle(title: string): string | { absolute: string } {
+  const stripped = stripBrandSuffix(title);
+  const full = `${stripped}${BRAND_SUFFIX}`;
+  if (full.length <= MAX_SEO_TITLE_LEN) return stripped;
+  return { absolute: truncateAtWord(full, MAX_SEO_TITLE_LEN) };
+}
+
+function resolveSeoTitle(title: string): string {
+  const formatted = formatSeoTitle(title);
+  if (typeof formatted === 'string') return `${formatted}${BRAND_SUFFIX}`;
+  return formatted.absolute;
+}
+
+export function truncateMetaDescription(text?: string, fallback?: string): string {
+  const raw = (text ?? '').replace(/\s+/g, ' ').trim();
+  let use = raw || fallback || '';
+
+  if (use.length > MAX_META_DESC_LEN) {
+    use = truncateAtWord(use, MAX_META_DESC_LEN);
+  }
+
+  if (use.length < MIN_META_DESC_LEN) {
+    const extended = truncateMetaDescription(
+      fallback && fallback !== raw
+        ? fallback
+        : `${use} Expert custom software development by ClickMasters.`,
+    );
+    if (extended.length >= MIN_META_DESC_LEN) use = extended;
+  }
+
+  return use;
+}
+
+export function withSeoMetadata(meta: Metadata): Metadata {
+  const result: Metadata = { ...meta };
+
+  if (typeof meta.title === 'string') {
+    result.title = formatSeoTitle(meta.title);
+  }
+
+  if (typeof meta.description === 'string') {
+    result.description = truncateMetaDescription(meta.description);
+  }
+
+  if (meta.openGraph) {
+    const ogTitle =
+      typeof meta.openGraph.title === 'string'
+        ? resolveSeoTitle(meta.openGraph.title)
+        : typeof meta.title === 'string'
+          ? resolveSeoTitle(meta.title)
+          : undefined;
+
+    result.openGraph = {
+      ...meta.openGraph,
+      ...(ogTitle ? { title: ogTitle } : {}),
+      ...(typeof meta.openGraph.description === 'string'
+        ? { description: truncateMetaDescription(meta.openGraph.description) }
+        : typeof meta.description === 'string'
+          ? { description: truncateMetaDescription(meta.description) }
+          : {}),
+    };
+  }
+
+  if (meta.twitter) {
+    const twitterTitle =
+      typeof meta.twitter.title === 'string'
+        ? resolveSeoTitle(meta.twitter.title)
+        : typeof meta.title === 'string'
+          ? resolveSeoTitle(meta.title)
+          : undefined;
+
+    result.twitter = {
+      ...meta.twitter,
+      ...(twitterTitle ? { title: twitterTitle } : {}),
+      ...(typeof meta.twitter.description === 'string'
+        ? { description: truncateMetaDescription(meta.twitter.description) }
+        : typeof meta.description === 'string'
+          ? { description: truncateMetaDescription(meta.description) }
+          : {}),
+    };
+  }
+
+  return result;
+}
+
+export function buildPageMetadata(options: {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  robots?: Metadata['robots'];
+}): Metadata {
+  const description = truncateMetaDescription(options.description);
+  const resolvedTitle = resolveSeoTitle(options.title);
+
+  return withSeoMetadata({
+    title: options.title,
+    description,
+    alternates: { canonical: options.canonical },
+    openGraph: {
+      title: resolvedTitle,
+      description,
+      url: options.canonical,
+      ...(options.ogImage
+        ? {
+            images: [
+              {
+                url: options.ogImage,
+                width: 1200,
+                height: 630,
+                alt: options.ogImageAlt || options.title,
+              },
+            ],
+          }
+        : {}),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: resolvedTitle,
+      description,
+      ...(options.ogImage ? { images: [options.ogImage] } : {}),
+    },
+    ...(options.robots ? { robots: options.robots } : {}),
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 //  SITE CONFIG
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -392,7 +545,7 @@ export const localBusinessSchema = {
 //  DEFAULT / FALLBACK METADATA  (used in root layout.tsx)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const defaultMetadata: Metadata = {
+export const defaultMetadata: Metadata = withSeoMetadata({
   metadataBase: new URL(siteConfig.url),
 
   title: {
@@ -449,7 +602,7 @@ export const defaultMetadata: Metadata = {
   verification: {
     google: 'tH8GZm7N2hbAICQfeQEs4YejO057UvY4eJBWLkHHJxU',
   },
-};
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  PER-PAGE METADATA
@@ -460,7 +613,7 @@ export const defaultMetadata: Metadata = {
 export const metadataConfig = {
 
   // ── / (Home) ────────────────────────────────────────────────────────────────
-  home: (): Metadata => ({
+  home: (): Metadata => withSeoMetadata({
     title: 'Best Software Development Company in Pakistan',
 
     description:
@@ -497,7 +650,7 @@ export const metadataConfig = {
   }),
 
   // ── /about-us ───────────────────────────────────────────────────────────────
-  about: (): Metadata => ({
+  about: (): Metadata => withSeoMetadata({
     title: 'ClickMasters Software House | The Team Behind 100+ Products',
 
     description:
@@ -530,7 +683,7 @@ export const metadataConfig = {
   }),
 
   // ── /services ───────────────────────────────────────────────────────────────
-  services: (): Metadata => ({
+  services: (): Metadata => withSeoMetadata({
     title: 'Software Development Services | Web, Mobile & ERP',
 
     description:
@@ -563,18 +716,18 @@ export const metadataConfig = {
   }),
 
 
-  serviceDetail: (title: string, description: string, slug: string, parentSlug?: string): Metadata => ({
-    title: `${title} | ClickMasters Software Services`,
+  serviceDetail: (title: string, description: string, slug: string, parentSlug?: string): Metadata => withSeoMetadata({
+    title,
 
-    description: description.slice(0, 155),
+    description: truncateMetaDescription(description),
 
     alternates: {
       canonical: parentSlug ? `${siteConfig.url}/${parentSlug}/${slug}` : `${siteConfig.url}/${slug}`,
     },
 
     openGraph: {
-      title: `${title} | ClickMasters Software Services`,
-      description: description.slice(0, 155),
+      title,
+      description: truncateMetaDescription(description),
       url: parentSlug ? `${siteConfig.url}/${parentSlug}/${slug}` : `${siteConfig.url}/${slug}`,
       images: [
         {
@@ -588,14 +741,14 @@ export const metadataConfig = {
 
     twitter: {
       card: 'summary_large_image',
-      title: `${title} Services | ClickMasters`,
-      description: description.slice(0, 155),
+      title,
+      description: truncateMetaDescription(description),
       images: [`${siteConfig.url}/og/og-services.jpg`],
     },
   }),
 
   // ── /software-solutions ─────────────────────────────────────────────────────
-  solutions: (): Metadata => ({
+  solutions: (): Metadata => withSeoMetadata({
     title: "What We've Built | 100+ Scalable Software Systems",
 
     description:
@@ -633,24 +786,24 @@ export const metadataConfig = {
     description: string,
     slug: string,
     ogImageUrl?: string,
-  ): Metadata => ({
-    title: `${title} | Built by ClickMasters`,
+  ): Metadata => withSeoMetadata({
+    title,
 
-    description: (
+    description: truncateMetaDescription(
       description ||
       `ClickMasters transforms ${title} into powerful, scalable, revenue-ready software. See how we built this high-impact digital product from idea to production.`
-    ).slice(0, 155),
+    ),
 
     alternates: {
       canonical: `${siteConfig.url}/software-solutions/${slug}`,
     },
 
     openGraph: {
-      title: `${title} | Built by ClickMasters`,
-      description: (
+      title,
+      description: truncateMetaDescription(
         description ||
         `We don't just build software we build growth engines. See how ClickMasters delivered a high-impact ${title} solution that scales with your business.`
-      ).slice(0, 155),
+      ),
       url: `${siteConfig.url}/software-solutions/${slug}`,
       images: [
         {
@@ -664,17 +817,17 @@ export const metadataConfig = {
 
     twitter: {
       card: 'summary_large_image',
-      title: `${title} | Built by ClickMasters`,
-      description: (
+      title,
+      description: truncateMetaDescription(
         description ||
         `ClickMasters builds scalable ${title} solutions designed for performance, growth, and real-world business impact.`
-      ).slice(0, 155),
+      ),
       images: [ogImageUrl || `${siteConfig.url}/og/og-solutions.jpg`],
     },
   }),
 
   // ── /case-studies ────────────────────────────────────────────────────────────
-  caseStudies: (): Metadata => ({
+  caseStudies: (): Metadata => withSeoMetadata({
     title: 'How Businesses Turn Ideas Into High-Performance Software',
 
     description:
@@ -707,20 +860,20 @@ export const metadataConfig = {
   }),
 
   // ── /case-studies/[slug] ─────────────────────────────────────────────────────
-  caseStudyDetail: (title: string, description: string, slug: string): Metadata => ({
-    title: `${title} | ClickMasters`,
-    description,
+  caseStudyDetail: (title: string, description: string, slug: string): Metadata => withSeoMetadata({
+    title,
+    description: truncateMetaDescription(description),
     alternates: { canonical: `${siteConfig.url}/case-studies/${slug}` },
     openGraph: {
-      title: `${title} | ClickMasters`,
-      description,
+      title,
+      description: truncateMetaDescription(description),
       url: `${siteConfig.url}/case-studies/${slug}`,
     },
-    twitter: { description },
+    twitter: { description: truncateMetaDescription(description) },
   }),
 
   // ── /blog ───────────────────────────────────────────────────────────────────
-  blog: (): Metadata => ({
+  blog: (): Metadata => withSeoMetadata({
     title: 'The Hidden Formula Behind Fast-Growing Software Products',
 
     description:
@@ -753,7 +906,7 @@ export const metadataConfig = {
   }),
 
   // ── /testimonials ───────────────────────────────────────────────────────────
-  testimonials: (): Metadata => ({
+  testimonials: (): Metadata => withSeoMetadata({
     title: 'Why 100+ Businesses Trust ClickMasters',
 
     description:
@@ -786,7 +939,7 @@ export const metadataConfig = {
   }),
 
   // ── /contact-us ─────────────────────────────────────────────────────────────
-  contact: (): Metadata => ({
+  contact: (): Metadata => withSeoMetadata({
     title: 'Turn Your Idea Into Software | Get a Free Expert Consultation',
 
     description:
@@ -820,27 +973,27 @@ export const metadataConfig = {
 
   // ── Admin pages (no-index) ───────────────────────────────────────────────────
   admin: {
-    login: (): Metadata => ({
+    login: (): Metadata => withSeoMetadata({
       title: 'Admin Login | ClickMasters',
       description: 'Secure admin access for the ClickMasters platform.',
       robots: { index: false, follow: false },
     }),
-    dashboard: (): Metadata => ({
+    dashboard: (): Metadata => withSeoMetadata({
       title: 'Admin Dashboard | ClickMasters',
       description: 'Manage your ClickMasters content and settings.',
       robots: { index: false, follow: false },
     }),
-    categories: (): Metadata => ({
+    categories: (): Metadata => withSeoMetadata({
       title: 'Manage Categories | ClickMasters Admin',
       description: 'Manage project categories for ClickMasters.',
       robots: { index: false, follow: false },
     }),
-    solutions: (): Metadata => ({
+    solutions: (): Metadata => withSeoMetadata({
       title: 'Manage Solutions | ClickMasters Admin',
       description: 'Manage software solutions and projects.',
       robots: { index: false, follow: false },
     }),
-    testimonials: (): Metadata => ({
+    testimonials: (): Metadata => withSeoMetadata({
       title: 'Manage Testimonials | ClickMasters Admin',
       description: 'Manage client testimonials.',
       robots: { index: false, follow: false },

@@ -9,7 +9,7 @@ import '../../../../lib/models/Category';
 import dbConnect from '../../../../lib/mongoose';
 import { resolveImageUrl, getCategoryName } from '../../../../lib/utils';
 import { Button } from '@/components/ui/button';
-import { breadcrumbSchema, metadataConfig } from '@/app/metadata-config';
+import { breadcrumbSchema, metadataConfig, truncateMetaDescription } from '@/app/metadata-config';
 import { TableOfContents } from '@/components/table-of-contents';
 
 type LeanProject = {
@@ -44,12 +44,7 @@ function getCaseStudyCanonicalSlug(doc: {
 }
 
 function toMetaDescription(text: string | undefined, fallback: string): string {
-  const raw = (text ?? '').replace(/\s+/g, ' ').trim();
-  const use = raw || fallback;
-  if (use.length <= 160) return use;
-  const cut = use.slice(0, 157).trimEnd();
-  const lastSpace = cut.lastIndexOf(' ');
-  return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut) + '…';
+  return truncateMetaDescription(text, fallback);
 }
 
 async function findCaseStudyBySlugOrId(slugOrId: string) {

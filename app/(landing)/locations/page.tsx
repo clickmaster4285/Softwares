@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getAllCountrySlugs, getCountryData } from '@/lib/country';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, withSeoMetadata } from '@/app/metadata-config';
 
-export const metadata: Metadata = {
-  title: 'Locations | ClickMasters',
-  description: 'ClickMasters software development services by country and region.',
+export const metadata: Metadata = withSeoMetadata({
+  title: 'Locations',
+  description:
+    'Explore ClickMasters software development services by country and region — USA, UK, Canada, Australia, UAE, and Germany delivery teams.',
   alternates: { canonical: `${siteConfig.url}/locations` },
-};
+});
 
 export default function LocationsIndexPage() {
   const countries = getAllCountrySlugs()

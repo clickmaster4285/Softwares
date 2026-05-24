@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import Script from 'next/script';
 import type { CSSProperties, ReactNode } from 'react';
-import { siteConfig, breadcrumbSchema, faqSchema, serviceSchema } from '@/app/metadata-config';
+import { siteConfig, breadcrumbSchema, faqSchema, serviceSchema, buildPageMetadata, stripBrandSuffix } from '@/app/metadata-config';
 import type { NormalizedGoalPage } from '@/lib/goal-based-utils';
 import {
   getAllGoalStaticParams,
@@ -458,8 +458,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     if (!personaRoute) return { title: 'Service' };
 
     const { personaPage, servicePage, canonicalPath } = personaRoute;
-    const title = personaPage.metaTitle ?? `${personaPage.title} | ClickMasters`;
-    const description = personaPage.metaDescription;
+    const title = stripBrandSuffix(personaPage.metaTitle ?? personaPage.title ?? 'Service');
+    const description =
+      personaPage.metaDescription ??
+      `Explore ${personaPage.title ?? 'this service'} solutions tailored to your business with ClickMasters.`;
 
     if (servicePage.categorySlug !== slug) {
       notFound();
@@ -467,30 +469,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     const canonical = `${siteConfig.url}${canonicalPath}`;
 
-    return {
+    return buildPageMetadata({
       title,
       description,
-      alternates: { canonical },
-      openGraph: {
-        title,
-        description,
-        url: canonical,
-        images: [
-          {
-            url: `${siteConfig.url}/og/services.webp`,
-            width: 1200,
-            height: 630,
-            alt: `${personaPage.title} | ClickMasters`,
-          },
-        ],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title,
-        description,
-        images: [`${siteConfig.url}/og/services.webp`],
-      },
-    };
+      canonical,
+      ogImage: `${siteConfig.url}/og/services.webp`,
+      ogImageAlt: `${personaPage.title} by ClickMasters`,
+    });
   }
 
   const goal = getGoalPage(segment, serviceParam);
@@ -499,39 +484,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const servicePage = getServicePage(goal.serviceSlug);
-  const title = goal.metaTitle ?? `${goal.title} | ClickMasters`;
-  const description = goal.metaDescription;
+  const title = stripBrandSuffix(goal.metaTitle ?? goal.title ?? 'Service Goal');
+  const description =
+    goal.metaDescription ??
+    `Learn how ClickMasters helps teams achieve ${goal.title ?? 'software goals'} with expert custom development.`;
 
   if (!servicePage || servicePage.categorySlug !== slug) {
-    return { title, description };
+    return buildPageMetadata({ title, description, canonical: siteConfig.url });
   }
 
   const canonical = `${siteConfig.url}${getGoalCanonicalUrl(goal)}`;
 
-  return {
+  return buildPageMetadata({
     title,
     description,
-    alternates: { canonical },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      images: [
-        {
-          url: `${siteConfig.url}/og/services.webp`,
-          width: 1200,
-          height: 630,
-          alt: `${goal.title} | ClickMasters`,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [`${siteConfig.url}/og/services.webp`],
-    },
-  };
+    canonical,
+    ogImage: `${siteConfig.url}/og/services.webp`,
+    ogImageAlt: `${goal.title} by ClickMasters`,
+  });
 }
 
 export default async function GoalBasedLandingPage({ params }: PageProps) {

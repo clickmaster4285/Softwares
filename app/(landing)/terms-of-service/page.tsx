@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, withSeoMetadata } from '@/app/metadata-config';
 import { StaticContentPage } from '@/components/landingPage/StaticContentPage';
 
-export const metadata: Metadata = {
-  title: 'Terms of Service | ClickMasters',
-  description: 'Terms and conditions for using ClickMasters website and services.',
+export const metadata: Metadata = withSeoMetadata({
+  title: 'Terms of Service',
+  description:
+    'Terms and conditions for using the ClickMasters website and custom software development services.',
   alternates: { canonical: `${siteConfig.url}/terms-of-service` },
-};
+});
 
 export default function TermsOfServicePage() {
   return (

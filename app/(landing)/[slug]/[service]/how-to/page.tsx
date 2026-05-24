@@ -5,7 +5,7 @@ import { getAllServicePages, getServicePage } from '@/lib/service-pages';
 import { ServiceSubpageBreadcrumb } from '@/src/components/landingPage/servicesPage/ServiceSubpageBreadcrumb';
 import { subpageInnerPadding, subpageOuterPadding } from '@/src/components/landingPage/servicesPage/subpage-layout';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, buildPageMetadata } from '@/app/metadata-config';
 import WhyChooseUs from '@/src/components/landingPage/home/whyUs';
 import MistakeCard from '@/src/components/landingPage/how-to/mistakeCard';
 import { EngineeringBaseline } from '@/src/components/landingPage/servicesPage/EngineeringBaseline';
@@ -25,12 +25,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, service } = await params;
   const guide = howToGuides[service];
   if (!guide) return { title: 'How-to' };
-  return {
+  return buildPageMetadata({
     title: guide.title,
-    alternates: {
-      canonical: `${siteConfig.url}/${slug}/${service}/how-to`,
-    },
-  };
+    description: `Step-by-step ${guide.title.toLowerCase()} guide from ClickMasters — process, best practices, and expert tips for successful software delivery.`,
+    canonical: `${siteConfig.url}/${slug}/${service}/how-to`,
+  });
 }
 
 // --- Simple inline SVG icons (stateless) ---
