@@ -329,14 +329,14 @@ export const StatsSection: React.FC<StatsSectionProps> = ({ country, location })
       <div className="relative z-30">
  <div ref={textRef} className="text-white">
 
-  <motion.h1
+  <motion.h2
     className="text-2xl md:text-4xl mb-6 text-center font-medium leading-tight"
     initial={{ opacity: 0, y: 20 }}
     animate={isInView ? { opacity: 1, y: 0 } : {}}
     transition={{ duration: 0.6, delay: 0.4 }}
   >
     Understanding {country?.name}'s Business Landscape
-  </motion.h1>
+  </motion.h2>
 
   {/* 2-item row */}
   <motion.div
