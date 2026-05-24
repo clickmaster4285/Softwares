@@ -1,4 +1,3 @@
-// app/services/[slug]/ServiceClient.tsx
 'use client';
 
 import Image from 'next/image';

@@ -1,4 +1,3 @@
-// app/services/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import { getServiceData, getAllServiceSlugs } from '@/src/lib/services';
 import { metadataConfig, faqSchema, homepageFaqSchema, serviceSchema, siteConfig } from '@/app/metadata-config';

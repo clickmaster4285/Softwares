@@ -1,4 +1,3 @@
-// app/services/[slug]/data.ts
 export type LifecycleStep = {
   step: number;
   title: string;
