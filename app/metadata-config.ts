@@ -562,7 +562,7 @@ export const metadataConfig = {
     },
   }),
 
-  // ── /services/[slug] ────────────────────────────────────────────────────────
+
   serviceDetail: (title: string, description: string, slug: string, parentSlug?: string): Metadata => ({
     title: `${title} | ClickMasters Software Services`,
 

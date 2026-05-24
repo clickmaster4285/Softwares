@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { resolveImageUrl } from "@/lib/utils";
+import SplitText from "../../ui/SplitText";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -42,57 +43,36 @@ interface InsightCard {
   index: number;
 }
 
-// ─── Unsplash image generator based on title and type ─────────────────────────
+// ─── Unsplash image generator ─────────────────────────────────────────────────
 
 const getUnsplashImage = (type: string, title: string, index: number): string => {
-  // Categories for variety
   const categories = {
-    tech: ["technology", "computer", "coding", "software", "ai", "digital"],
-    business: ["business", "office", "meeting", "startup", "corporate"],
-    design: ["design", "creative", "ui", "ux", "web-design"],
-    data: ["data", "analytics", "dashboard", "statistics"],
-    cloud: ["cloud", "server", "network", "infrastructure"],
-    mobile: ["mobile", "app", "smartphone", "ios", "android"],
-    fintech: ["finance", "banking", "money", "crypto", "blockchain"],
-    ecommerce: ["shopping", "ecommerce", "retail", "store", "marketplace"],
+    tech: ["technology", "computer", "coding", "software", "ai"],
+    business: ["business", "office", "startup", "corporate"],
+    design: ["design", "creative", "ui", "ux"],
+    fintech: ["finance", "banking", "money"],
+    ecommerce: ["shopping", "ecommerce", "retail"],
   };
 
-  // Select category based on title keywords
   let selectedCategory = categories.tech;
   const lowerTitle = title.toLowerCase();
-  
-  if (lowerTitle.includes("fintech") || lowerTitle.includes("finance") || lowerTitle.includes("banking")) {
-    selectedCategory = categories.fintech;
-  } else if (lowerTitle.includes("ecommerce") || lowerTitle.includes("shop") || lowerTitle.includes("retail")) {
-    selectedCategory = categories.ecommerce;
-  } else if (lowerTitle.includes("cloud") || lowerTitle.includes("infrastructure")) {
-    selectedCategory = categories.cloud;
-  } else if (lowerTitle.includes("design") || lowerTitle.includes("ui") || lowerTitle.includes("ux")) {
-    selectedCategory = categories.design;
-  } else if (lowerTitle.includes("data") || lowerTitle.includes("analytics")) {
-    selectedCategory = categories.data;
-  } else if (lowerTitle.includes("mobile") || lowerTitle.includes("app")) {
-    selectedCategory = categories.mobile;
-  } else if (lowerTitle.includes("business") || lowerTitle.includes("startup")) {
-    selectedCategory = categories.business;
-  }
 
-  // Pick a keyword from the category
+  if (lowerTitle.includes("fin") || lowerTitle.includes("bank")) selectedCategory = categories.fintech;
+  else if (lowerTitle.includes("shop") || lowerTitle.includes("retail")) selectedCategory = categories.ecommerce;
+  else if (lowerTitle.includes("design") || lowerTitle.includes("ui")) selectedCategory = categories.design;
+  else if (lowerTitle.includes("business") || lowerTitle.includes("startup")) selectedCategory = categories.business;
+
   const keyword = selectedCategory[index % selectedCategory.length];
-  
-  // Unsplash image URL with specific dimensions (800x600 for landscape, 800x1000 for portrait)
   const width = 800;
   const height = type === "Case Study" && index === 0 ? 1000 : 600;
-  
+
   return `https://source.unsplash.com/featured/${width}x${height}/?${keyword}&sig=${index}`;
 };
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
 function thumb(raw: string | undefined, type: string, title: string, index: number): string {
-  if (raw?.trim()) {
-    return resolveImageUrl(raw);
-  }
+  if (raw?.trim()) return resolveImageUrl(raw);
   return getUnsplashImage(type, title, index);
 }
 
@@ -106,7 +86,7 @@ function caseStudyHref(cs: CaseStudy): string {
   return `/case-studies/${encodeURIComponent(slug)}`;
 }
 
-// ─── Animated card with scroll animation ─────────────────────────────────────────────
+// ─── Card Component ───────────────────────────────────────────────────────────
 
 interface InsightCardItemProps {
   card: InsightCard;
@@ -119,20 +99,16 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
   const [imgSrc, setImgSrc] = useState<string>("");
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  useEffect(() => {
-    // Set image source after mount to avoid hydration issues
-    setImgSrc(card.thumbnail);
-  }, [card.thumbnail]);
+  useEffect(() => setImgSrc(card.thumbnail), [card.thumbnail]);
 
   useEffect(() => {
     const el = ref.current;
     if (!el || hasAnimated) return;
-    
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated) {
-          // Staggered delay based on card index for smooth wave effect
-          const delay = (card.index % 3) * 100 + (Math.floor(card.index / 3) * 50);
+          const delay = (card.index % 3) * 100 + Math.floor(card.index / 3) * 50;
           setTimeout(() => {
             setVisible(true);
             setHasAnimated(true);
@@ -140,12 +116,9 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
           observer.disconnect();
         }
       },
-      { 
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px" // Triggers slightly before card enters viewport
-      }
+      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
     );
-    
+
     observer.observe(el);
     return () => observer.disconnect();
   }, [card.index, hasAnimated]);
@@ -154,22 +127,11 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
     <Link
       ref={ref}
       href={card.href}
-      className={[
-        "relative rounded-2xl overflow-hidden cursor-pointer group block",
-        "transition-all duration-700 ease-out",
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
-      ].join(" ")}
-      style={{
-        transitionProperty: "all",
-        transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-      }}
+      className={`relative rounded-2xl overflow-hidden cursor-pointer group block transition-all duration-700 ease-out ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+      }`}
     >
-      <div
-        className={[
-          "w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900",
-          tall ? "aspect-[4/5]" : "aspect-[16/10]"
-        ].join(" ")}
-      >
+      <div className={`w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 ${tall ? "aspect-[4/5]" : "aspect-[16/10]"}`}>
         {imgSrc && (
           <img
             src={imgSrc}
@@ -181,18 +143,13 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 p-3">
-        {/* stronger dark gradient base (fixes readability instantly) */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
-
-        {/* subtle glass blur ONLY at bottom */}
         <div className="absolute inset-0 backdrop-blur-[3px]" />
-
-        {/* content always above */}
+        
         <div className="relative z-10">
-          <p className="text-[11px] font-medium mb-1 text-orange-300">
+          <p className="text-[11px] font-medium mb-1 text-primary/90">
             {card.type}
           </p>
-
           <p className="text-white text-[13px] font-medium leading-snug line-clamp-2">
             {card.title}
           </p>
@@ -207,75 +164,71 @@ const InsightCardItem = ({ card, tall = false }: InsightCardItemProps) => {
 // ─── Skeleton ──────────────────────────────────────────────────────────────────
 
 const SkeletonCard = ({ tall = false }: { tall?: boolean }) => (
-  <div
-    className={[
-      "rounded-2xl bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse",
-      tall ? "aspect-[4/5]" : "aspect-[16/10]"
-    ].join(" ")}
-  />
+  <div className={`rounded-2xl bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse ${tall ? "aspect-[4/5]" : "aspect-[16/10]"}`} />
 );
 
-// ─── Text Section Component ────────────────────────────────────────────────────
+// ─── Header ────────────────────────────────────────────────────────────────────
 
 const InsightsHeader = () => {
-  // Header animation on scroll
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerVisible, setHeaderVisible] = useState(false);
 
   useEffect(() => {
     const el = headerRef.current;
     if (!el) return;
-    
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHeaderVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setHeaderVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.1 });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div 
+    <div
       ref={headerRef}
-      className={[
-        "flex flex-col gap-5 lg:sticky lg:top-24 transition-all duration-700 ease-out",
+      className={`flex flex-col gap-5 lg:sticky lg:top-24 transition-all duration-700 ease-out ${
         headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      ].join(" ")}
+      }`}
     >
-      <p
-        className="text-xs tracking-widest uppercase font-medium"
-        style={{ color: "#ea580c" }}
-      >
-        Sucess Stories
-      </p>
-      <h2
-        className="text-3xl xl:text-4xl font-medium leading-tight"
-        style={{ color: "#0c2a2a" }}
-      >
-        Stories of our transformations{" "}
-        <span style={{ color: "#ea580c" }}>
-          across Services and Industries
+      <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-5xl leading-tight">
+        <SplitText
+          text="Software Solutions"
+          className="inline-block"
+          delay={50}
+          duration={0.8}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 30 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.2}
+        />
+        {" "}
+        <span className="relative inline-block text-primary">
+          <SplitText
+            text="That Drives Growth"
+            className="inline-block text-primary"
+            delay={50}
+            duration={0.9}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 30 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.2}
+          />
+          <span className="absolute -bottom-2 left-0 h-[3px] w-full rounded-md bg-gradient-to-r from-primary/60 to-primary" />
         </span>
       </h2>
-    
-      <p className="text-base text-gray-800" >
-       From Concept to Completion. We deliver enterprise-grade solutions for modern
-  businesses, combining innovative technology with strategic execution. With a
-  proven track record of successful deliveries across industries worldwide, we
-  transform ideas into impactful digital experiences that drive real growth.
-      </p>
-     
+
+   <p className="text-lg leading-8 text-gray-700">
+  From concept to completion, we craft enterprise-grade digital solutions that help modern businesses grow, scale, and stay ahead in a competitive market. Our team combines strategic thinking, cutting-edge technologies, and user-focused design to deliver impactful results across web development, mobile applications, AI-powered platforms, and custom software systems. Through our success stories, detailed case studies, and insightful blogs, we showcase how innovative execution transforms ideas into measurable business outcomes.
+</p>
 
       <Link
         href="/blog"
-        className="w-fit px-6 py-2.5 rounded-full text-white text-sm font-medium transition-opacity hover:opacity-90"
-        style={{ background: "#ea580c" }}
+        className="w-fit px-6 py-2.5 rounded-full text-white text-sm font-medium bg-primary hover:bg-primary/90 transition-all duration-200"
       >
         Explore More
       </Link>
@@ -283,7 +236,7 @@ const InsightsHeader = () => {
   );
 };
 
-// ─── Cards Section Component ───────────────────────────────────────────────────
+// ─── Cards Section ─────────────────────────────────────────────────────────────
 
 interface InsightsCardsProps {
   cards: InsightCard[];
@@ -291,54 +244,33 @@ interface InsightsCardsProps {
 }
 
 const InsightsCards = ({ cards, isLoading }: InsightsCardsProps) => {
-  
   const col1Cards = cards.slice(0, 2);
   const col2Cards = cards.slice(2, 5);
   const col3Cards = cards.slice(5, 8);
 
   return (
     <>
-      {/* Column 1 - 2 cards */}
-      <div className="flex flex-col gap-4 w-[260px] xl:w-[320px] justify-center">
+      <div className="flex flex-col gap-4 w-[260px] xl:w-[280px] justify-center">
         {isLoading ? (
-          <>
-            <SkeletonCard />
-            <SkeletonCard />
-          </>
+          <><SkeletonCard /><SkeletonCard /></>
         ) : (
-          col1Cards.map((card, idx) => (
-            <InsightCardItem key={card.id} card={card} tall={false} />
-          ))
+          col1Cards.map((card) => <InsightCardItem key={card.id} card={card} tall={false} />)
         )}
       </div>
 
-      {/* Column 2 - 3 cards */}
-      <div className="flex flex-col gap-4 w-[260px] xl:w-[320px]">
+      <div className="flex flex-col gap-4 w-[260px] xl:w-[280px]">
         {isLoading ? (
-          <>
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </>
+          <><SkeletonCard /><SkeletonCard /><SkeletonCard /></>
         ) : (
-          col2Cards.map((card) => (
-            <InsightCardItem key={card.id} card={card} />
-          ))
+          col2Cards.map((card) => <InsightCardItem key={card.id} card={card} />)
         )}
       </div>
 
-      {/* Column 3 - 3 cards */}
-      <div className="flex flex-col gap-4 w-[260px] xl:w-[320px]">
+      <div className="flex flex-col gap-4 w-[260px] xl:w-[280px]">
         {isLoading ? (
-          <>
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </>
+          <><SkeletonCard /><SkeletonCard /><SkeletonCard /></>
         ) : (
-          col3Cards.map((card) => (
-            <InsightCardItem key={card.id} card={card} />
-          ))
+          col3Cards.map((card) => <InsightCardItem key={card.id} card={card} />)
         )}
       </div>
     </>
@@ -371,16 +303,10 @@ export default function FeaturedInsights() {
   const publishedCS = caseStudies.filter((c) => c.published !== false).slice(0, 4);
   const publishedBlogs = blogs.filter((b) => b.published !== false).slice(0, 4);
 
-  // Layout order to achieve: Col1 (2 cards), Col2 (3 cards), Col3 (3 cards)
-  const slotOrder: Array<"cs" | "blog"> = [
-    "cs", "blog",  // First column
-    "cs", "blog", "cs",  // Second column  
-    "blog", "cs", "blog"  // Third column
-  ];
+  const slotOrder: Array<"cs" | "blog"> = ["cs", "blog", "cs", "blog", "cs", "blog", "cs", "blog"];
 
   const cards: InsightCard[] = [];
-  let csIdx = 0;
-  let blogIdx = 0;
+  let csIdx = 0, blogIdx = 0;
 
   for (const slot of slotOrder) {
     if (slot === "cs" && csIdx < publishedCS.length) {
@@ -406,48 +332,84 @@ export default function FeaturedInsights() {
     }
   }
 
-  return (
-    <section
-      className="w-full px-4 sm:px-6 lg:px-8 xl:px-22 py-16 overflow-hidden bg-gradient-to-b from-white to-slate-50 "
-     
-    >
-      {/* Mobile layout: 2 columns grid */}
+return (
+  <section className="relative w-full bg-[#f5fbfb] py-12">
+    {/* Background Blobs */}
+    <div
+    className="absolute inset-0 opacity-[0.45]"
+    style={{
+      backgroundImage: `
+        linear-gradient(to right, rgba(15,23,42,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15,23,42,0.06) 1px, transparent 1px)
+      `,
+      backgroundSize: "48px 48px",
+    }}
+  />
+
+    {/* Centered Container */}
+    <div className="mx-auto max-w-[1600px]  my-12">
+
+      {/* Top Label */}
+      <div className="mb-8 flex justify-center">
+        <div className="inline-flex items-center gap-2">
+          <span className="h-[2px] w-8 rounded-full bg-primary" />
+
+          <div className="inline-flex items-center gap-1.5">
+            <SplitText
+              text="Sucess Stories"
+              className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+              delay={60}
+              duration={0.8}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, x: 60 }}
+              to={{ opacity: 1, x: 0 }}
+              threshold={0.2}
+            />
+          </div>
+
+          <span className="h-[2px] w-8 rounded-full bg-primary" />
+        </div>
+      </div>
+
+      {/* Mobile Layout */}
       <div className="lg:hidden">
         <div className="mb-10">
           <InsightsHeader />
         </div>
+
         <div className="grid grid-cols-2 gap-4">
           {isLoading ? (
-            <>
-              <SkeletonCard tall />
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-            </>
+            Array.from({ length: 8 }).map((_, i) => (
+              <SkeletonCard key={i} tall={i === 0} />
+            ))
           ) : (
             cards.map((card) => (
-              <InsightCardItem key={card.id} card={card} tall={card.index === 0} />
+              <InsightCardItem
+                key={card.id}
+                card={card}
+                tall={card.index === 0}
+              />
             ))
           )}
         </div>
       </div>
 
-      {/* Desktop layout: 3 columns with exact distribution (2, 3, 3) */}
-      <div className="hidden lg:flex justify-between gap-6 xl:gap-8 lg:px-16">
-        {/* Header - left side */}
-        <div className="sticky top-24 flex-shrink-0 w-[280px] xl:w-[520px]">
+      {/* Desktop Layout */}
+      <div className="hidden lg:flex items-start justify-center gap-10 xl:gap-14">
+
+        {/* Sticky Header */}
+        <div className="sticky top-24 flex-shrink-0 w-[320px] xl:w-[520px]">
           <InsightsHeader />
         </div>
 
-        {/* Cards wrapper - 3 columns with exact distribution */}
-        <div className="flex gap-6 xl:gap-8 flex-1 justify-end">
+        {/* Cards */}
+        <div className="flex gap-6 xl:gap-8 justify-center">
           <InsightsCards cards={cards} isLoading={isLoading} />
         </div>
+
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }

@@ -22,28 +22,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Organization Schema - Improves brand visibility in search */}
-        <Script
+      <head />
+      <body suppressHydrationWarning>
+        <script
           id="organization-schema"
-          strategy="beforeInteractive"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema) || "",
           }}
         />
-
-        {/* WebSite Schema - Enables Google Sitelinks Search Box */}
-        <Script
+        <script
           id="website-schema"
-          strategy="beforeInteractive"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(webSiteSchema) || "",
           }}
         />
-      </head>
-      <body suppressHydrationWarning>
         {/* Google Tag Manager */}
         <Script
           id="gtm"

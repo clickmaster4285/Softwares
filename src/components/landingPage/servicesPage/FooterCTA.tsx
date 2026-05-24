@@ -20,7 +20,7 @@ export function CTAComponents() {
           <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
             Explore Related Capabilities
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-800">
             Discover how we can help transform your business through our comprehensive services,
             real-world case studies, or our full solutions portfolio.
           </p>
@@ -47,7 +47,7 @@ export function CTAComponents() {
       Get your <span className="text-orange-600">free strategy call</span>
     </h2>
 
-    <p className="mt-5 text-lg md:text-xl text-slate-600 leading-relaxed">
+    <p className="mt-5 text-lg md:text-xl text-slate-800 leading-relaxed">
       Share your requirements and our team will help you define scope, architecture,
       timeline, and delivery approach.
     </p>
@@ -88,7 +88,7 @@ export function CTAComponents() {
                 <h3 className="text-2xl md:text-3xl font-semibold text-slate-900">
                   Want a fixed-price scope in 48 hours?
                 </h3>
-                <p className="mt-3 text-slate-600 text-[15px] leading-relaxed max-w-xl">
+                <p className="mt-3 text-slate-800 text-[15px] leading-relaxed max-w-xl">
                   We’ll review your requirements and return a detailed proposal with clear phases,
                   timelines, and investment.
                 </p>

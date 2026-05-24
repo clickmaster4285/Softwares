@@ -1,147 +1,227 @@
-// ExploreSection.tsx
-'use client';
+"use client";
 
+import { useEffect, useMemo, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from 'next/link';
-import { useState } from 'react';
-import { servicesData } from '@/src/lib/services';
 import { getServicePath } from '@/lib/service-pages';
+import type { ServiceData } from '@/src/lib/services';
 import {
-  Layers3,
-  Code2,
-  Globe,
-  Smartphone,
-  Database,
-  Cloud,
-  ShieldCheck,
-  Briefcase,
-  LayoutDashboard,
-  MessageSquareQuote,
-  Newspaper,
-  Users,
-  ArrowRight,
-  LucideIcon,
-  DatabaseZap,
-  TestTube,
-  Headphones,
-  Link2,
-  Glasses,
-  Workflow,
-  Bot,
-  BarChart3,
-  Cpu,
-  Palette,
-  Brain,
-  Eye,
-  CpuIcon,
-  Target,
-  Building,
-  Rocket,
-  Monitor,
-  Plug,
-  Puzzle,
-  Server,
-  Settings,
-  Zap,
-  Wrench,
-  FileText,
-  ShoppingCart,
-  Package,
-  Store,
-  ShoppingBag,
-  MessageCircle,
-  Edit3,
-  Cog,
-  BotMessageSquare,
-  Sparkles,
-  Lightbulb,
-  Microscope,
-  FileSpreadsheet,
-  FileText as FileTextIcon,
-  BarChart as BarChartIcon,
-  Database as DatabaseIcon,
-  HardDrive,
-  Search,
-  Globe2,
-  Webhook,
-  Bug,
-  Wrench as WrenchIcon,
-  Users2,
-  UserCheck,
-  Headset,
-  Link as LinkIcon,
-  Coins,
-  CreditCard,
-  Palette as PaletteIcon,
-  Glasses as VrIcon,
-  Gamepad2,
-  Box,
-  Factory,
-  Cpu as CpuIcon2,
-} from 'lucide-react';
-import { metadataConfig } from '@/app/metadata-config';
+  Code2, Smartphone, Cloud, Brain, ArrowRight, Glasses,
+  CpuIcon, Globe, ShieldCheck, Workflow, BarChart3, Eye,
+  Bot, LucideIcon, DatabaseZap, Headphones, TestTube,
+  Link2, Palette, Database, ChevronDown, ChevronUp, Target,
+  Building, Rocket, Monitor, Plug, Puzzle, Server, Layers3,
+  Globe2, Zap, ShoppingCart, Package, Store, ShoppingBag,
+  Sparkles, Search, Edit3, LayoutDashboard, Users, BotMessageSquare,
+  Cpu, FileText, UserCheck, MessageCircle, Microscope, BarChartIcon,
+  HardDrive, DatabaseIcon, FileSpreadsheet, FileTextIcon, Cog, Webhook,
+  Box, CreditCard, Coins, Factory, Gamepad2, Wrench, WrenchIcon,
+  Bug, Users2, Headset, Settings,
+} from "lucide-react";
 
-export const metadata = metadataConfig.home();
-
-type HomeExploreLink = {
-  href: string;
-  title: string;
-  desc: string;
-  ariaLabel: string;
-  icon: LucideIcon;
-  color: string;
-  highlight?: boolean;
-};
-
-interface ExploreSectionProps {
-  serviceData?: any;
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
 }
 
-// Icon mapping for services
 const serviceIcons: Record<string, LucideIcon> = {
-  'software-development': Code2,
-  'web-development': Globe,
-  'mobile-development': Smartphone,
-  'design-ui-ux': Palette,
-  'artificial-intelligence-ai': Brain,
-  'machine-learning-ml': Cpu,
-  'nlp-computer-vision': Eye,
-  'data-services': Database,
-  'data-and-intelligence': BarChart3,
-  'automation-and-chatbot': Bot,
-  'automation-and-integration': Workflow,
-  'cloud-and-devops': Cloud,
-  'database-services': DatabaseZap,
-  'cybersecurity': ShieldCheck,
-  'testing-and-qa': TestTube,
-  'support-and-outsourcing': Headphones,
-  'blockchain-and-web3': Link2,
-  'iot-and-emerging-tech': CpuIcon,
-  'immersive-tech': Glasses,
+  "software-development": Code2,
+  "web-development": Globe,
+  "mobile-development": Smartphone,
+  "design-ui-ux": Palette,
+  "artificial-intelligence-ai": Brain,
+  "machine-learning-ml": CpuIcon,
+  "nlp-computer-vision": Eye,
+  "data-services": Database,
+  "data-and-intelligence": BarChart3,
+  "automation-and-chatbot": Bot,
+  "automation-and-integration": Workflow,
+  "cloud-and-devops": Cloud,
+  "database-services": DatabaseZap,
+  "cybersecurity": ShieldCheck,
+  "testing-and-qa": TestTube,
+  "support-and-outsourcing": Headphones,
+  "blockchain-and-web3": Link2,
+  "iot-and-emerging-tech": CpuIcon,
+  "immersive-tech": Glasses,
 };
 
-// Color mapping for services
-const serviceColors: Record<string, string> = {
-  'software-development': 'text-primary',
-  'web-development': 'text-primary',
-  'mobile-development': 'text-primary',
-  'design-ui-ux': 'text-primary',
-  'artificial-intelligence-ai': 'text-primary',
-  'machine-learning-ml': 'text-primary',
-  'nlp-computer-vision': 'text-primary',
-  'data-services': 'text-primary',
-  'data-and-intelligence': 'text-primary',
-  'automation-and-chatbot': 'text-primary',
-  'automation-and-integration': 'text-primary',
-  'cloud-and-devops': 'text-primary',
-  'database-services': 'text-primary',
-  'cybersecurity': 'text-primary',
-  'testing-and-qa': 'text-primary',
-  'support-and-outsourcing': 'text-primary',
-  'blockchain-and-web3': 'text-primary',
-  'iot-and-emerging-tech': 'text-primary',
-  'immersive-tech': 'text-primary',
-};
+const services = [
+  {
+    id: "software-development",
+    icon: serviceIcons["software-development"],
+    title: "Software Development",
+    desc: "Custom enterprise software solutions built with modern architectures and best practices.",
+    gradient: "linear-gradient(135deg, #fda4af 0%, #fbcfe8 50%, #f9a8d4 100%)",
+    accent: "#fef3c7",
+    slug: "software-development",
+  },
+  {
+    id: "web-development",
+    icon: serviceIcons["web-development"],
+    title: "Web Application Development",
+    desc: "Scalable web apps built with modern stacks—React, Next.js, Node, and edge-first architectures.",
+    gradient: "linear-gradient(135deg, #a7f3d0 0%, #a5f3fc 50%, #bae6fd 100%)",
+    accent: "#d1fae5",
+    slug: "web-development",
+  },
+  {
+    id: "mobile-development",
+    icon: serviceIcons["mobile-development"],
+    title: "Mobile App Development",
+    desc: "Native and cross-platform iOS & Android apps engineered for performance and delightful UX.",
+    gradient: "linear-gradient(135deg, #ddd6fe 0%, #c7d2fe 50%, #bfdbfe 100%)",
+    accent: "#ede9fe",
+    slug: "mobile-development",
+  },
+  {
+    id: "design-ui-ux",
+    icon: serviceIcons["design-ui-ux"],
+    title: "UI / UX Design",
+    desc: "Research-led product design, design systems, and interfaces that users genuinely love.",
+    gradient: "linear-gradient(135deg, #fed7aa 0%, #fecaca 50%, #ddd6fe 100%)",
+    accent: "#fef3c7",
+    slug: "design-ui-ux",
+  },
+  {
+    id: "artificial-intelligence-ai",
+    icon: serviceIcons["artificial-intelligence-ai"],
+    title: "AI & Machine Learning",
+    desc: "LLM integrations, computer vision, and intelligent automation that move the revenue needle.",
+    gradient: "linear-gradient(135deg, #bbf7d0 0%, #99f6e4 50%, #bae6fd 100%)",
+    accent: "#dcfce7",
+    slug: "artificial-intelligence-ai",
+  },
+  {
+    id: "machine-learning-ml",
+    icon: serviceIcons["machine-learning-ml"],
+    title: "Machine Learning",
+    desc: "Custom ML models, predictive analytics, and intelligent systems for business transformation.",
+    gradient: "linear-gradient(135deg, #fecaca 0%, #fed7aa 50%, #fef08a 100%)",
+    accent: "#fef9c3",
+    slug: "machine-learning-ml",
+  },
+  {
+    id: "nlp-computer-vision",
+    icon: serviceIcons["nlp-computer-vision"],
+    title: "NLP & Computer Vision",
+    desc: "Advanced text analysis, image recognition, and visual intelligence solutions.",
+    gradient: "linear-gradient(135deg, #fbcfe8 0%, #f5d0fe 50%, #ddd6fe 100%)",
+    accent: "#fce7f3",
+    slug: "nlp-computer-vision",
+  },
+  {
+    id: "data-services",
+    icon: serviceIcons["data-services"],
+    title: "Data Services",
+    desc: "Comprehensive data solutions from collection to insights and visualization.",
+    gradient: "linear-gradient(135deg, #bae6fd 0%, #a5f3fc 50%, #c7d2fe 100%)",
+    accent: "#e0f2fe",
+    slug: "data-services",
+  },
 
+  // Remaining Services — Reusing Same Soft Palette
+
+  // {
+  //   id: "data-and-intelligence",
+  //   icon: serviceIcons["data-and-intelligence"],
+  //   title: "Data & Intelligence",
+  //   desc: "Business intelligence dashboards, analytics, and data-driven decision making.",
+  //   gradient: "linear-gradient(135deg, #fda4af 0%, #fbcfe8 50%, #f9a8d4 100%)",
+  //   accent: "#fef3c7",
+  //   slug: "data-and-intelligence",
+  // },
+  {
+    id: "automation-and-chatbot",
+    icon: serviceIcons["automation-and-chatbot"],
+    title: "Automation & Chatbots",
+    desc: "Intelligent chatbots and workflow automation for enhanced customer engagement.",
+    gradient: "linear-gradient(135deg, #a7f3d0 0%, #a5f3fc 50%, #bae6fd 100%)",
+    accent: "#d1fae5",
+    slug: "automation-and-chatbot",
+  },
+  {
+    id: "automation-and-integration",
+    icon: serviceIcons["automation-and-integration"],
+    title: "Automation & Integration",
+    desc: "Seamless system integrations and process automation across your tech stack.",
+    gradient: "linear-gradient(135deg, #ddd6fe 0%, #c7d2fe 50%, #bfdbfe 100%)",
+    accent: "#ede9fe",
+    slug: "automation-and-integration",
+  },
+  {
+    id: "cloud-and-devops",
+    icon: serviceIcons["cloud-and-devops"],
+    title: "Cloud & DevOps",
+    desc: "AWS, GCP, Azure infrastructure with CI/CD pipelines, IaC, and 99.9% uptime SLAs.",
+    gradient: "linear-gradient(135deg, #fed7aa 0%, #fecaca 50%, #ddd6fe 100%)",
+    accent: "#fef3c7",
+    slug: "cloud-and-devops",
+  },
+  {
+    id: "database-services",
+    icon: serviceIcons["database-services"],
+    title: "Database Services",
+    desc: "Database design, optimization, migration, and management for peak performance.",
+    gradient: "linear-gradient(135deg, #bbf7d0 0%, #99f6e4 50%, #bae6fd 100%)",
+    accent: "#dcfce7",
+    slug: "database-services",
+  },
+  {
+    id: "cybersecurity",
+    icon: serviceIcons["cybersecurity"],
+    title: "Cybersecurity",
+    desc: "Pen-testing, hardening, and compliance—SOC2, ISO, GDPR—baked into your stack.",
+    gradient: "linear-gradient(135deg, #fecaca 0%, #fed7aa 50%, #fef08a 100%)",
+    accent: "#fef9c3",
+    slug: "cybersecurity",
+  },
+  {
+    id: "testing-and-qa",
+    icon: serviceIcons["testing-and-qa"],
+    title: "Testing & QA",
+    desc: "Automated testing, quality assurance, and performance testing for reliable software.",
+    gradient: "linear-gradient(135deg, #fbcfe8 0%, #f5d0fe 50%, #ddd6fe 100%)",
+    accent: "#fce7f3",
+    slug: "testing-and-qa",
+  },
+  {
+    id: "support-and-outsourcing",
+    icon: serviceIcons["support-and-outsourcing"],
+    title: "Support & Outsourcing",
+    desc: "24/7 technical support, maintenance, and managed IT services.",
+    gradient: "linear-gradient(135deg, #bae6fd 0%, #a5f3fc 50%, #c7d2fe 100%)",
+    accent: "#e0f2fe",
+    slug: "support-and-outsourcing",
+  },
+  {
+    id: "blockchain-and-web3",
+    icon: serviceIcons["blockchain-and-web3"],
+    title: "Blockchain & Web3",
+    desc: "Smart contracts, dApps, and decentralized solutions for the new internet.",
+    gradient: "linear-gradient(135deg, #99f6e4 0%, #bbf7d0 50%, #d9f99d 100%)",
+    accent: "#ccfbf1",
+    slug: "blockchain-and-web3",
+  },
+  {
+    id: "iot-and-emerging-tech",
+    icon: serviceIcons["iot-and-emerging-tech"],
+    title: "IoT & Emerging Tech",
+    desc: "Connected devices, sensor networks, and cutting-edge technology solutions.",
+    gradient: "linear-gradient(135deg, #fda4af 0%, #fbcfe8 50%, #f9a8d4 100%)",
+    accent: "#fef3c7",
+    slug: "iot-and-emerging-tech",
+  },
+  {
+    id: "immersive-tech",
+    icon: serviceIcons["immersive-tech"],
+    title: "Immersive Tech",
+    desc: "AR/VR experiences, metaverse solutions, and spatial computing applications.",
+    gradient: "linear-gradient(135deg, #a7f3d0 0%, #a5f3fc 50%, #bae6fd 100%)",
+    accent: "#d1fae5",
+    slug: "immersive-tech",
+  },
+];
 // Sub-service icon mappings
 const subServiceIcons: Record<string, LucideIcon> = {
   // Software Development
@@ -309,146 +389,259 @@ const subServiceIcons: Record<string, LucideIcon> = {
   
   // Immersive Tech
   'AR Development': Smartphone,
-  'VR Development': VrIcon,
+  'VR Development': Headset,
   'Mixed Reality (MR) Solutions': Glasses,
   'Mixed Reality Solutions': Glasses,
   'DApp Development': Link2,
   '3D Application Development': Gamepad2,
 };
 
-export default function ExploreSection({ serviceData }: ExploreSectionProps) {
-  const [showAll, setShowAll] = useState(false);
-  
-  // Determine what to show based on context
-  const isServicePage = !!serviceData;
-  
-  // Generate links based on context
-  const allLinks = isServicePage && serviceData.subServices 
-    ? serviceData.subServices.map((subService: any, index: number) => ({
-        href: getServicePath(serviceData.title, subService.title),
+const origins = ["right", "left", "center"] as const;
+
+type ExploreItem = {
+  id: string;
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  gradient: string;
+  accent: string;
+  href: string;
+};
+
+function buildExploreItems(serviceData?: ServiceData): ExploreItem[] {
+  if (serviceData?.subServices?.length) {
+    return serviceData.subServices.map((subService, index) => {
+      const palette = services[index % services.length];
+      return {
+        id: `${serviceData.slug}-${index}`,
+        icon: subServiceIcons[subService.title] || Code2,
         title: subService.title,
         desc: subService.description,
-        ariaLabel: `Learn about ${subService.title}: ${subService.description}`,
-        icon: subServiceIcons[subService.title] || Code2,
-        color: 'text-primary',
-      }))
-    : Object.values(servicesData).map((service) => ({
-        href: `/${service.slug}`,
-        title: service.title,
-        desc: service.tagline,
-        ariaLabel: `Learn about ${service.title}: ${service.description}`,
-        icon: serviceIcons[service.slug] || Code2,
-        color: serviceColors[service.slug] || 'text-blue-500',
-      }));
+        gradient: palette.gradient,
+        accent: palette.accent,
+        href: getServicePath(serviceData.title, subService.title),
+      };
+    });
+  }
 
-  // Show first 12 items (2 rows of 6) when not showing all
-  const displayedLinks = showAll ? allLinks : allLinks.slice(0, 12);
-  const hasMoreItems = allLinks.length > 12;
+  return services.map((service) => ({
+    id: service.id,
+    icon: service.icon,
+    title: service.title,
+    desc: service.desc,
+    gradient: service.gradient,
+    accent: service.accent,
+    href: `/${service.slug}`,
+  }));
+}
+
+function GridCard({ service, index, total }: { service: ExploreItem; index: number; total: number }) {
+  const { icon: Icon, title, desc, gradient, accent, href } = service;
+
+  return (
+    <div
+      className="group relative overflow-hidden rounded-2xl p-7 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col min-h-[320px]"
+      style={{ background: gradient }}
+    >
+      <div
+        className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-60 blur-2xl"
+        style={{ background: accent }}
+      />
+      <div className="pointer-events-none absolute -bottom-12 -left-10 h-32 w-32 rounded-full bg-white/50 opacity-40 blur-2xl" />
+
+      <div className="relative flex flex-col h-full">
+        {/* Icon */}
+        <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/40 text-foreground ring-1 ring-white/60 backdrop-blur-md">
+          <Icon className="h-5 w-5" />
+        </div>
+
+        {/* Number */}
+        <div className="mt-4 text-[11px] font-semibold tracking-[0.3em] text-foreground/60">
+          {String(8 + index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </div>
+
+        {/* Title */}
+        <h3 className="mt-2 font-serif text-[21px] leading-tight font-bold text-foreground">
+          {title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-[15px] leading-relaxed text-foreground/75 flex-1">
+          {desc}
+        </p>
+
+        {/* Learn More */}
+        <Link
+          href={href}
+          className=" inline-flex items-center gap-2 text-sm font-semibold text-foreground transition-all group-hover:gap-3 self-start"
+        >
+          Learn more 
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default function ExploreSection({ serviceData }: { serviceData?: ServiceData }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [expanded, setExpanded] = useState(false);
+
+  const exploreItems = useMemo(() => buildExploreItems(serviceData), [serviceData]);
+  const animatedServices = exploreItems.slice(0, 8);
+  const extraServices = exploreItems.slice(8);
+  const isServicePage = Boolean(serviceData);
+
+  // GSAP Animation (unchanged logic)
+  useEffect(() => {
+    const section = sectionRef.current;
+    const inner = innerRef.current;
+    if (!section || !inner) return;
+
+    const cards = gsap.utils.toArray<HTMLElement>("[data-depth-card]", section);
+    if (cards.length === 0) return;
+
+    cards.forEach((card) => {
+      gsap.set(card, {
+        xPercent: -50,
+        yPercent: -50,
+        left: "50%",
+        top: "50%",
+        position: "absolute",
+        opacity: 0,
+        scale: 0.85,
+      });
+    });
+
+    const stepPx = () => window.innerHeight;
+    const totalSteps = cards.length;
+
+    const offFor = (origin: string | undefined) => {
+      if (origin === "right") return { x: window.innerWidth * 0.8, y: 0, rotate: 10 };
+      if (origin === "left") return { x: -window.innerWidth * 0.8, y: 0, rotate: -10 };
+      return { x: 0, y: window.innerHeight * 0.7, rotate: 0 };
+    };
+
+    const FINAL_SCALE = 0.6;
+    const COL = 400;
+    const ROW = 160;
+
+    const finals = [
+      { x: -1.5 * COL, y: -ROW }, { x: -0.5 * COL, y: -ROW },
+      { x: 0.5 * COL, y: -ROW },  { x: 1.5 * COL, y: -ROW },
+      { x: -1.5 * COL, y: ROW },  { x: -0.5 * COL, y: ROW },
+      { x: 0.5 * COL, y: ROW },   { x: 1.5 * COL, y: ROW },
+    ];
+
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: section,
+        pin: inner,
+        start: "top top",
+        end: () => "+=" + totalSteps * stepPx(),
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+        snap: { snapTo: 1 / totalSteps, duration: 0.4, ease: "power2.inOut" },
+      },
+    });
+
+    cards.forEach((card, i) => {
+      const origin = card.dataset.origin;
+      const from = offFor(origin);
+      const final = finals[i] ?? { x: 0, y: 0 };
+
+      tl.fromTo(card, 
+        { x: from.x, y: from.y, rotate: from.rotate, opacity: 0, scale: 0.85 },
+        { x: 0, y: 0, rotate: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" },
+        i
+      );
+      tl.to(card, 
+        { x: final.x, y: final.y, scale: FINAL_SCALE, duration: 0.5, ease: "power2.inOut" },
+        i + 0.5
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+      tl.kill();
+    };
+  }, [exploreItems.length]);
 
   return (
     <section
-      className=" bg-white py-16 sm:py-20 lg:px-10"
-      aria-labelledby="home-explore-heading"
+      ref={sectionRef}
+      id="services"
+      className="relative overflow-hidden bg-foreground text-background py-14"
     >
-      <div className="mx-auto px-4 sm:px-6 lg:px-12">
-        {/* Header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <span className="w-8 h-[2px] bg-primary rounded-full" />
-            <p className="text-secondarytext-[11px] font-bold tracking-[0.2em] uppercase">
-              {isServicePage ? 'Specialized Services' : 'Explore Our Ecosystem'}
-            </p>
-            <span className="w-8 h-[2px] bg-primary rounded-full" />
-          </div>
-
-          <h2
-            id="home-explore-heading"
-            className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl"
-          >
-            {isServicePage ? `${serviceData.title} Services` : 'Explore ClickMasters'}
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-            {isServicePage 
-              ? `Explore our specialized ${serviceData.title.toLowerCase()} services designed to meet your specific business needs.`
-              : 'Discover our engineering capabilities, delivery expertise, case studies, and strategic technology solutions built for modern businesses.'
-            }
-          </p>
-        </div>
-
-        {/* Grid */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
-          {displayedLinks.map((item: any, index: number) => {
-            const Icon = typeof item.icon === 'function' ? item.icon() : item.icon;
-            const isHighlight = Boolean(item.highlight);
-
-            return (
-              <Link
-                key={`${item.href}-${index}`}
-                href={item.href}
-                aria-label={item.ariaLabel}
-                className={`group relative overflow-hidden rounded-3xl border bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${
-                  isHighlight
-                    ? 'border-primary/30 shadow-lg shadow-primary/10'
-                    : 'border-slate-200 hover:border-primary/30'
-                }`}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                <div className="relative flex justify-center">
-                  {typeof item.icon === 'function' ? (
-                    <div className="text-4xl">{Icon}</div>
-                  ) : (
-                    <Icon
-                      className={`h-12 w-12 transition-all duration-300 group-hover:scale-110 ${item.color}`}
-                      strokeWidth={2}
-                    />
-                  )}
-                </div>
-
-                <div className="relative mt-7 text-center">
-                  <h3 className="font-display text-lg font-bold text-slate-900 transition-colors group-hover:text-primary">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600 line-clamp-3">
-                    {item.desc}
-                  </p>
-                </div>
-
-                <div className="relative mt-8 flex items-center justify-center gap-2">
-                  <span className="text-sm font-medium text-primary">
-                    {isServicePage ? 'Learn more' : 'Explore now'}
-                  </span>
-                  <ArrowRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" />
-                </div>
-
-                <div className="absolute inset-0 rounded-3xl ring-1 ring-transparent transition-all duration-300 group-hover:ring-primary/20" />
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Show More / Show Less Button */}
-        {hasMoreItems && (
-          <div className="mt-12 text-center">
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-base font-semibold text-primary shadow-md transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-xl border border-primary/20"
+      {/* Pinned GSAP Area */}
+      <div ref={innerRef} className="relative min-h-screen">
+        <div className="pointer-events-none absolute inset-0 [perspective:1600px] [transform-style:preserve-3d]">
+          {animatedServices.map(({ icon: Icon, title, desc, gradient, accent, href }, i) => (
+            <div
+              key={`${title}-${i}`}
+              data-depth-card
+              data-origin={origins[i % origins.length]}
+              className="pointer-events-auto absolute w-[520px] md:w-[560px] lg:w-[600px] min-h-[420px] overflow-hidden rounded-3xl p-10 shadow-2xl shadow-black/30"
+              style={{ background: gradient }}
             >
-              {showAll ? (
-                <>
-                  Show Less
-                  <ArrowRight className="h-4 w-4 rotate-90 transition-transform duration-300" />
-                </>
+              <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-60 blur-3xl" style={{ background: accent }} />
+              <div className="absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-white/50 opacity-40 blur-3xl" />
+
+              <div className="relative">
+                <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/40 text-foreground ring-1 ring-white/60 backdrop-blur-md">
+                  <Icon className="h-7 w-7" />
+                </div>
+                <div className="mt-5 text-sm font-semibold tracking-[0.3em] text-foreground/60">
+                  {String(i + 1).padStart(2, "0")} / {String(exploreItems.length).padStart(2, "0")}
+                </div>
+                <h3 className="mt-2 font-serif text-2xl lg:text-3xl font-bold leading-tight text-foreground">
+                  {title}
+                </h3>
+                <p className="mt-3 text-2xl leading-relaxed text-foreground/80">{desc}</p>
+                <Link
+                  href={href}
+                  className="mt-5 inline-flex items-center gap-2 text-xl font-semibold text-foreground hover:gap-3 transition-all"
+                >
+                  Learn more <ArrowRight className="h-5 w-5" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* See More Section */}
+      <div className="relative z-10 bg-foreground px-6 pb-20">
+        <div className="mx-auto max-w-[1600px]">
+          {/* Toggle Button */}
+          <div className="flex justify-center mb-12">
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-3.5 text-sm font-semibold text-background backdrop-blur-md transition hover:bg-white/20 hover:scale-105"
+            >
+              {expanded ? (
+                <>See Less <ChevronUp className="h-4 w-4" /></>
               ) : (
                 <>
-                  See More ({allLinks.length - 12} more)
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  {isServicePage ? 'See More Specializations' : 'See More Services'} <ChevronDown className="h-4 w-4" />
+                  <span className="ml-1 rounded-full bg-primary/30 px-2 py-0.5 text-xs">+{extraServices.length}</span>
                 </>
               )}
             </button>
           </div>
-        )}
+
+          {/* Grid */}
+          {expanded && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {extraServices.map((service, i) => (
+                <GridCard key={service.id} service={service} index={i} total={exploreItems.length} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

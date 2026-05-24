@@ -3,25 +3,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  ChevronRight,
   Lightbulb,
   Code2,
   Rocket,
   ShieldCheck,
   RefreshCw,
   Users,
-  CheckCircle2,
-  ArrowRight,
 } from "lucide-react";
 import ExpandOnHover from "@/components/ui/expand-cards";
+import SplitText from '../../ui/SplitText';
 
 export default function ProcessPage() {
   const metricsRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
   const expandSectionRef = useRef<HTMLDivElement>(null);
 
   const metricsInView = useInView(metricsRef, { once: true });
-  const ctaInView = useInView(ctaRef, { once: true });
   const expandInView = useInView(expandSectionRef, { once: true });
 
   const phases = [
@@ -29,7 +25,7 @@ export default function ProcessPage() {
       step: "01",
       title: "Discovery & Strategy",
       icon: Lightbulb,
-      color: "from-primary to-orange-600",
+      color: "from-primary to-primary",
       bgLight: "bg-amber-50",
       description: "We align technology with business goals through deep discovery sessions, market analysis, and technical blueprinting.",
       deliverables: ["Requirements specification", "Technical architecture design", "Roadmap & sprint planning", "Risk assessment matrix"],
@@ -69,7 +65,7 @@ export default function ProcessPage() {
       step: "05",
       title: "Deployment & Launch",
       icon: Rocket,
-      color: "from-green-500 to-orange-600",
+      color: "from-green-500 to-primary",
       bgLight: "bg-green-50",
       description: "Zero-downtime deployment, infrastructure scaling, and launch orchestration.",
       deliverables: ["CI/CD pipeline setup", "Load balancing configuration", "Backup & disaster recovery", "Launch day support"],
@@ -107,9 +103,9 @@ export default function ProcessPage() {
   const AnimatedCounter = ({ value, suffix, isFloat = false }: { value: number; suffix: string; isFloat?: boolean }) => {
     const [count, setCount] = useState(0);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (!metricsInView) return;
-      
+
       let start = 0;
       const duration = 1800;
       const increment = value / (duration / 16);
@@ -128,78 +124,83 @@ export default function ProcessPage() {
     }, [value, isFloat, metricsInView]);
 
     return (
-      <span className="font-bold text-orange-600">
+      <span className="font-bold text-primary">
         {isFloat ? count.toFixed(1) : Math.floor(count)}{suffix}
       </span>
     );
   };
 
   return (
-    <main className="bg-gradient-to-b from-white to-slate-50 overflow-x-hidden">
+    <main className="bg-[#f5fbfb] overflow-x-hidden relative">
+      {/* Background Decorative Blobs */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
+
       <section ref={expandSectionRef} className="py-6 lg:py-12 px-6 lg:px-8">
-        <div className="mx-auto lg:px-10">
+        {/* Main Centered Container - Max 1600px */}
+        <div className="mx-auto max-w-[1600px]">
+
           {/* Header Section */}
-          <div className="mx-auto max-w-3xl text-center mb-16">
+          <div className="mx-auto max-w-3xl text-center mb-8 mt-12">
             <div className="inline-flex items-center gap-2 mb-3">
-              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                Visual Process Journey
-              </p>
-              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+              <span className="h-[2px] w-8 rounded-full bg-primary" />
+              <SplitText
+                text="Visual Process Journey"
+                className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+                delay={60}
+                duration={0.8}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, x: 60 }}
+                to={{ opacity: 1, x: 0 }}
+                threshold={0.2}
+              />
+              <span className="h-[2px] w-8 rounded-full bg-primary" />
             </div>
 
-            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-4xl">
-              See our development process in action
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-              Hover over each image to explore different stages of our software development lifecycle
-            </p>
+           
           </div>
 
           {/* Metrics Section */}
-          <section ref={metricsRef} className="mb-16 px-6 lg:px-8">
-            <div className="mx-auto ">
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:mx-20">
-                {metrics.map((metric, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={metricsInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: idx * 0.1, duration: 0.6 }}
-                    className="text-center p-6 transition-all duration-300 hover:scale-105"
-                  >
-                    <div className="text-5xl  font-bold text-primarymb-2">
-                      <AnimatedCounter 
-                        value={metric.value} 
-                        suffix={metric.suffix} 
-                        isFloat={metric.isFloat} 
-                      />
-                    </div>
-                    <p className="text-gray-700 font-medium">{metric.label}</p>
-                  </motion.div>
-                ))}
-              </div>
+          <section ref={metricsRef} className="mb-16">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 px-4 lg:px-8">
+              {metrics.map((metric, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={metricsInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: idx * 0.1, duration: 0.6 }}
+                  className="text-center transition-all duration-300 hover:scale-105"
+                >
+                  <div className="text-4xl font-bold text-primary mb-2">
+                    <AnimatedCounter 
+                      value={metric.value} 
+                      suffix={metric.suffix} 
+                      isFloat={metric.isFloat} 
+                    />
+                  </div>
+                  <p className="text-gray-700 font-medium">{metric.label}</p>
+                </motion.div>
+              ))}
             </div>
           </section>
 
-          {/* ExpandOnHover Component */}
-          <div className=" overflow-hidden ">
+          {/* ExpandOnHover Section */}
+          <div className="overflow-hidden ">
             <ExpandOnHover
               images={allProcessImages}
               phases={phases}
               defaultExpandedIndex={3}
               containerHeight="28rem"
-             
-            
               onImageChange={(index, phase) => {
                 console.log(`Viewing process stage ${index}: ${phase?.title}`);
               }}
             />
           </div>
+
         </div>
       </section>
-
     </main>
   );
 }

@@ -1,16 +1,32 @@
 import dynamic from 'next/dynamic';
 import { Suspense } from "react";
-import Link from 'next/link';
 import SchemaMarkup from '@/components/SchemaMarkup';
 import { FaqSection } from '@/components/landingPage/home/FaqSection';
 import { LandingHomeDeferredHeavy } from '@/components/landingPage/home/LandingHomeDeferredHeavy';
+import { RobotMascot } from '@/components/ui/RobotMascot';
+import {  LucideIcon,} from 'lucide-react';
 import {
   homepageFaqSchema,
-  homepageOrganizationSchema,
+  organizationSchema,
   homepageServiceSchema,
-  homepageWebPageSchema,
+  webSiteSchema,
   metadataConfig,
 } from '@/app/metadata-config';
+import TrustedBySection from '@/src/components/landingPage/home/TrustedBySection';
+import TrustedClientsSection from '@/src/components/landingPage/home/TrustedClientsSection';
+import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
+import { CaseStudySection } from '@/src/components/landingPage/servicesPage/CaseStudySection';
+import ProcessPage from '@/src/components/landingPage/home/ProcessPage';
+import PainPointsSolutions from '@/src/components/landingPage/home/PainPointsSolutions';
+import SolutionsPage from '@/src/components/landingPage/home/Solutions';
+import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
+import ExploreSection from '@/src/components/landingPage/home/ExploreSection';
+import {ProjectCTAHero} from '@/src/components/landingPage/home/info-cts';
+import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
+import WhyChooseUs from '@/src/components/landingPage/home/whyUs';
+import HelpSection from '@/src/components/landingPage/home/help-section';
+import { FinalCTA } from '@/src/components/landingPage/home/finalCta';
+import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
 
 export const metadata = metadataConfig.home();
 
@@ -19,6 +35,8 @@ type HomeExploreLink = {
   title: string;
   desc: string;
   ariaLabel: string;
+  icon?: LucideIcon;
+  color?: string;
   highlight?: boolean;
 };
 
@@ -110,7 +128,7 @@ const HeroSection = dynamic(
   {
     loading: () => (
       <div
-        className="relative min-h-[100svh] flex items-center justify-center bg-slate-900"
+        className="relative flex min-h-[100svh] items-center justify-center bg-slate-900"
         aria-hidden
       >
         <div className="h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
@@ -121,67 +139,109 @@ const HeroSection = dynamic(
 
 const AboutSection = dynamic(
   () => import('@/components/landingPage/home/AboutSection'),
-  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
+  {
+    loading: () => (
+      <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+    ),
+  }
 );
+
 const AppsSection = dynamic(
-  () => import('@/components/landingPage/home/AppsSection').then((m) => m.AppsSection),
-  { loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-lg" /> }
+  () =>
+    import('@/components/landingPage/home/AppsSection').then(
+      (m) => m.AppsSection
+    ),
+  {
+    loading: () => (
+      <div className="h-96 animate-pulse rounded-lg bg-gray-100" />
+    ),
+  }
 );
+
 export default function LandingPage() {
   return (
-    <main className="min-h-screen" role="main" aria-label="ClickMasters software development company homepage">
-      <SchemaMarkup data={homepageOrganizationSchema} />
+    <main className="min-h-screen">
+      <SchemaMarkup data={organizationSchema} />
       <SchemaMarkup data={homepageServiceSchema} />
       <SchemaMarkup data={homepageFaqSchema} />
-      <SchemaMarkup data={homepageWebPageSchema} />
-      <HeroSection />
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <AboutSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-100 rounded-lg" />}>
-        <AppsSection />
-      </Suspense>
+      <SchemaMarkup data={webSiteSchema} />
 
-      {/* Hub internal links (SEO + crawler-friendly) */}
-      <section className="border-y border-slate-200/80 bg-white py-16 sm:py-20" aria-labelledby="home-explore-heading">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 id="home-explore-heading" className="font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Explore ClickMasters
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600">
-              Start with our service offerings, review proof, and read insights — everything you need to choose the right solution.
-            </p>
-          </div>
+       <div className="min-h-screen">  <HeroSection /> </div>
+       
 
-          <div className="mt-10 grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {homeExploreLinks.map((item) => {
-              const isHighlight = Boolean(item.highlight);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-label={item.ariaLabel}
-                  className={
-                    isHighlight
-                      ? 'group flex min-h-[48px] flex-col rounded-2xl border border-primary/30 bg-white p-6 shadow-sm transition-all hover:shadow-md'
-                      : 'group flex min-h-[48px] flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-primary/30 hover:shadow-md'
-                  }
-                >
-                  <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-primary">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-700">{item.desc}</p>
-                </Link>
-              );
-            })}
-          </div>
+
+      {/* Content - starts TRANSPARENT, becomes white as you scroll */}
+      <div className="relative z-20 ">
+        
+        {/* White background starts building from here */}
+        <div className="">
+          
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
+            <AboutSection />
+          </Suspense>
+
+
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
+            <PainPointsSolutions />
+          </Suspense>
+
+          <ExploreSection />
+
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-white lg:px-10" />}>
+            <TrustedClientsSection />
+          </Suspense>
+
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gradient-to-b from-white to-gray-50" />}>
+            <FeaturedInsights />
+          </Suspense>
+
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-white" />}>
+            <SolutionsPage />
+          </Suspense>
+
+          
+
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
+            <TechStackSection />
+          </Suspense>
+
+
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
+            <ProcessPage />
+          </Suspense>
+
+
+   <TestimonialsSection />
+
+
+          
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
+            <WhyChooseUs />
+          </Suspense>
+
+
+
+
+          <LandingHomeDeferredHeavy>
+            <Suspense fallback={<div className="h-80 animate-pulse rounded-lg bg-gray-100" />}>
+              <FaqSection />
+            </Suspense>
+          </LandingHomeDeferredHeavy>
+
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
+            <HelpSection />
+          </Suspense>
+
+       
+          <CTASectionImage/>
+          
         </div>
-      </section>
+      </div>
 
-      <LandingHomeDeferredHeavy>
-        <Suspense fallback={<div className="h-80 animate-pulse rounded-lg bg-gray-100" />}>
-          <FaqSection />
-        </Suspense>
-      </LandingHomeDeferredHeavy>
+      {/* Robot Mascot - Fixed position across all sections */}
+      <div className="fixed bottom-7 right-8 z-50">
+        <RobotMascot />
+      </div>
     </main>
   );
 }

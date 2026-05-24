@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { siteConfig } from '@/app/metadata-config';
 import { getCountryData, getAllCountrySlugs } from '@/lib/country';
-import { servicesByCountry } from '@/lib/country-services';
+import { servicesByCountry, buildCountryServiceSlugMap } from '@/lib/country-services';
 
 import { ProcessSection } from '@/src/components/landingPage/servicesPage/ProcessSection';
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
@@ -23,16 +23,6 @@ import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/Checkli
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 
 type Props = { params: Promise<{ location: string }> };
-
-// Helper function to create URL-friendly slugs
-function createSlug(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim();
-}
 
 // Generate static paths
 export async function generateStaticParams() {
@@ -64,6 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: country.title,
       description: country.description,
     },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -87,15 +78,8 @@ const serviceData = servicesByCountry[country.name] || [];
   servicesByCountry[country.name]?.[0]?.faqs || [];
 
   
-  // Pre-compute service slugs
-  const serviceSlugMap = Object.fromEntries(
-    country.servicesByCategory.flatMap((category: any) =>
-      category.services.map((service: string) => [
-        service,
-        `${createSlug(service)}-${location.toLowerCase()}`
-      ])
-    )
-  );
+  // Map service display names to actual slugs from country-services data
+  const serviceSlugMap = buildCountryServiceSlugMap(country.name, location);
 
   return (
     <div className="min-h-screen bg-white">

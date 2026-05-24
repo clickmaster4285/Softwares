@@ -1,14 +1,12 @@
-
-'use client';
-
-import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Mail, ChevronRight, Phone } from 'lucide-react';
-import { motion, Variants } from 'framer-motion';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  ArrowRight,
+} from "lucide-react";
+import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
-// Type definitions
+
 interface FooterLink {
   label: string;
   href: string;
@@ -49,348 +47,124 @@ const footerLinks: FooterLinks = {
   ],
 };
 
-// Animation variants
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
+// Footer columns configuration
+const cols = [
+  {
+    title: "Services",
+    links: footerLinks.services.map(item => ({ ...item, name: item.label })),
   },
-};
-
-const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 12,
-    },
+  {
+    title: "Company",
+    links: footerLinks.company.map(item => ({ ...item, name: item.label })),
   },
-};
-
-const linkVariants: Variants = {
-  hover: {
-    x: 5,
-    color: '#ffffff',
-    transition: {
-      type: 'spring',
-      stiffness: 400,
-      damping: 10,
-    },
+  {
+    title: "Resources",
+    links: footerLinks.resources.map(item => ({ ...item, name: item.label })),
   },
-};
+  {
+    title: "Legal",
+    links: footerLinks.legal.map(item => ({ ...item, name: item.label })),
+  },
+];
 
-export function Footer(): JSX.Element {
-  const currentYear: number = new Date().getFullYear();
-
+export function Footer() {
   return (
-   <motion.footer
-      initial={{ backgroundColor: '#000000' }}
-      animate={{ backgroundColor: '#0a0a0a' }}
-      transition={{ duration: 0.8 }}
-      className="relative overflow-hidden text-background  lg:px-10"
-    >
-      {/* ================= NEW CLICKMASTERS BACKGROUND ================= */}
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <footer className="relative overflow-hidden bg-foreground text-background">
+      {/* Animated Background Glows */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl animate-pulse-slow" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl animate-pulse-slow delay-700" />
 
-  {/* Base gradient */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
+      {/* Main grid */}
+      <div className="relative mx-auto grid max-w-[1600px] px-10 py-14 grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5 z-10">
+        
+        {/* Logo + Description */}
+        <div data-footer-col className="lg:col-span-2">
+          <Link href="/" className="inline-block">
+            <div className="flex flex-col leading-none">
+              <span className="font-serif text-2xl font-bold tracking-tight">
+                CLICK<span className="text-[color:var(--brand-peach)]">M</span>
+                ASTERS
+              </span>
+              <span className="mt-1 text-[10px] tracking-[0.18em] text-background/60">
+                DIGITAL MARKETING AGENCY &amp; SOFTWARE HOUSE
+              </span>
+            </div>
+          </Link>
 
-  {/* Grid pattern */}
-  <div
-    className="absolute inset-0 opacity-[0.08]"
-    style={{
-      backgroundImage:
-        "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-      backgroundSize: "60px 60px",
-    }}
-  />
+          <p className="mt-6 max-w-sm text-sm leading-relaxed text-background/70">
+            A senior software house building web, mobile, and AI-powered
+            systems for ambitious teams across the USA, Europe &amp; Middle East.
+          </p>
 
-
-
-{/* Watermark */}
-<div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-[1] mb-10 pb-10"
-  style={{
-    WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
-    maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
-  }}
->
-  <div
-    className="font-black tracking-[0.15em] select-none whitespace-nowrap leading-none"
-    style={{
-      fontSize: 'clamp(72px, 13vw, 165px)',
-      color: 'transparent',
-      WebkitTextStroke: '1.5px rgba(180, 80, 20, 0.8)',
-    }}
-  >
-    CLICKMASTERS
-  </div>
-</div>
-
-</div>
-      {/* Animated background pattern */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 1.5 }}
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)',
-          backgroundSize: '40px 40px',
-        }}
-      />
-
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 md:py-12 relative z-10">
-        {/* Top Section - Stack on mobile */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 mb-8 pb-8 border-b border-background/20"
-        >
-          {/* Logo and Description */}
-          <motion.div variants={itemVariants} className="text-center lg:text-left">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-              className="inline-block lg:inline-block"
+          <div className="mt-6 space-y-2.5 text-sm text-background/80">
+            <a
+              href="mailto:marketing@clickmasters.pk"
+              className="flex items-center gap-3 transition hover:text-primary"
             >
-              <Link href="/" className="flex items-center justify-center lg:justify-start gap-2">
-                <Image
-                  src="/images/logo-white1.webp"
-                  alt="ClickMasters"
-                  width={600}
-                  height={400}
-                  className="h-auto w-32 sm:w-40 md:w-48 lg:w-56"
-                  loading="lazy"
-                />
-              </Link>
-            </motion.div>
-            <motion.p variants={itemVariants} className="text-background/70 max-w-md mx-auto lg:mx-0 mt-4 text-sm sm:text-base">
-              ClickMasters is a software development company. We build custom software, web
-              applications, mobile apps, and ERP solutions for businesses worldwide.
-            </motion.p>
-            
-           
-           
-{/* Contact Numbers */}
-<motion.div variants={itemVariants} className="mt-6 space-y-2">
-  <div className="flex items-center justify-center lg:justify-start gap-3">
-    <Phone className="h-4 w-4 text-primary" />
+              <Mail className="h-4 w-4" />
+              <span>marketing@clickmasters.pk</span>
+            </a>
 
-    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-      <a
-        href="https://wa.me/447988576086"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-background transition-colors text-sm"
-      >
-        🇬🇧 UK: +44 7988 576086
-      </a>
-
-      <span className="hidden sm:inline text-background/30">|</span>
-
-      <a
-        href="https://wa.me/13252024074"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-background transition-colors text-sm"
-      >
-        🇺🇸 US: +1 325 202 4074
-      </a>
-
-      <span className="hidden sm:inline text-background/30">|</span>
-
-      <a
-        href="https://wa.me/923325394285"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-background transition-colors text-sm"
-      >
-        🇵🇰 PK: +92 332 5394285
-      </a>
-    </div>
-  </div>
-            </motion.div>
-            
-
-          <motion.div variants={itemVariants} className="mt-6 space-y-2">
-  <div className="flex items-center justify-center lg:justify-start gap-3">
-    
-    <FaWhatsapp className="h-4 w-4 text-green-600" />
-
-    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-      
-      <a
-        href="https://wa.me/447988576086?text=Hi%20I%20want%20to%20connect%20with%20you"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-green-400 transition-colors text-sm"
-      >
-        🇬🇧 UK: +44 7988 576086
-      </a>
-
-      <span className="hidden sm:inline text-background/30">|</span>
-
-      <a
-        href="https://wa.me/13252024074?text=Hi%20I%20want%20to%20connect%20with%20you"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-green-400 transition-colors text-sm"
-      >
-        🇺🇸 US: +1 325 202 4074
-      </a>
-
-      <span className="hidden sm:inline text-background/30">|</span>
-
-      <a
-        href="https://wa.me/923325394285?text=Hi%20I%20want%20to%20discuss%20a%20project"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-background/70 hover:text-green-400 transition-colors text-sm"
-      >
-        🇵🇰 PK: +92 332 5394285
-      </a>
-
-    </div>
-  </div>
-</motion.div>
-            
-
-
-            
-          </motion.div>
-
-          {/* Newsletter Section */}
-          <motion.div variants={itemVariants} className="text-center lg:text-left">
-            <motion.h3
-              variants={itemVariants}
-              className="text-base sm:text-lg font-semibold text-background mb-3 flex items-center justify-center lg:justify-start gap-2"
+            <a
+              href="tel:+447988576086"
+              className="flex items-center gap-3 transition hover:text-primary"
             >
-              <Mail className="h-5 w-5" />
-              Subscribe to our newsletter
-            </motion.h3>
-            <motion.p variants={itemVariants} className="text-background/70 mb-4 text-sm sm:text-base">
-              Get product updates, tech insights, and company news.
-            </motion.p>
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-3"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            >
-              <div className="relative flex-1">
-                <Input
-                  placeholder="Enter your email"
-                  className="bg-background/10 border-background/20 text-background placeholder:text-background/50 focus:border-primary transition-all duration-300 focus:ring-2 focus:ring-primary/20 h-11"
-                  type="email"
-                  aria-label="Email for newsletter"
-                />
-              </div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 whitespace-nowrap relative overflow-hidden group h-11 px-6 w-full sm:w-auto"
-                  aria-label="Subscribe to newsletter"
-                >
-                  <span className="relative z-10">Subscribe</span>
-                  <motion.div
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ x: '-100%' }}
-                    whileHover={{ x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+              <Phone className="h-4 w-4" />
+              <FaWhatsapp className="h-4 w-4 text-green-600" />
+              <span>
+                +44 7988 576086 || +1 325 202 4074 || +92 332 5394285
+              </span>
+            </a>
 
-        {/* Links Grid - Responsive columns */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-116 lg:mb-30"
-        >
-          {(Object.entries(footerLinks) as [keyof FooterLinks, FooterLink[]][]).map(
-            ([category, links]) => (
-              <motion.div key={category} variants={itemVariants}>
-                <motion.h4
-                  className="font-semibold text-background mb-4 capitalize relative inline-block text-sm sm:text-base"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {category}
-                  <motion.div
-                    className="absolute -bottom-1 left-0 h-0.5 bg-primary"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.h4>
-                <ul className="space-y-2 sm:space-y-3">
-                  {links.map((link: FooterLink) => (
-                    <motion.li
-                      key={link.label}
-                      variants={linkVariants}
-                      whileHover="hover"
-                      className="origin-left flex items-center gap-2 group"
-                    >
-                      {/* Bullet point */}
-                      <ChevronRight className="h-3 w-3 text-primary/60 group-hover:text-primary transition-colors flex-shrink-0" />
-                      <Link
-                        href={link.href}
-                        className="text-background/70 hover:text-background transition-colors text-sm sm:text-base"
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            )
-          )}
-        </motion.div>
+            <p className="flex items-center gap-3">
+              <MapPin className="h-4 w-4" />
+              PWD · Paris Shopping Mall · Makkah · Pakistan
+            </p>
+          </div>
+        </div>
 
-        {/* Bottom Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-background/20 mt-10"
-        >
-          <motion.p className="text-xs sm:text-sm text-background/60 text-center sm:text-left" whileHover={{ color: '#ffffff' }}>
-            © {currentYear} ClickMasters. All rights reserved.
-          </motion.p>
-          
-          {/* Optional: Add additional footer links here if needed */}
-          <div className="flex gap-4 text-xs sm:text-sm text-background/60">
-            <Link href="/privacy-policy" className="hover:text-background transition-colors">
-              Privacy
+        {/* Columns */}
+        {cols.map((col: any) => (
+          <div key={col.title} data-footer-col>
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary/50">
+              {col.title}
+            </h4>
+            <ul className="mt-5 space-y-3 text-sm text-background/75">
+              {col.links.map((link: any) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="group inline-flex items-center gap-1.5 transition-all duration-200 hover:text-white"
+                  >
+                    <span className="inline-block transition-all duration-200 group-hover:translate-x-1 group-hover:scale-105 hover:text-primary/50">
+                      {link.name}
+                    </span>
+                    <ArrowRight className="h-3 w-3 opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-1" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* Bottom bar */}
+      <div className="relative border-t border-white/10 z-10">
+        <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-3 px-10 py-6 text-xs text-background/60 md:flex-row">
+          <p>© {new Date().getFullYear()} ClickMasters. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="transition hover:text-background">
+              Privacy Policy
             </Link>
-            <Link href="/terms-of-service" className="hover:text-background transition-colors">
-              Terms
+            <Link href="/terms" className="transition hover:text-background">
+              Terms of Service
             </Link>
-            <Link href="/sitemap" className="hover:text-background transition-colors">
-              Sitemap
+            <Link href="/cookies" className="transition hover:text-background">
+              Cookies
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }
-
-
-
-
-

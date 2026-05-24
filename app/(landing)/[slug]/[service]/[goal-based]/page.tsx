@@ -19,6 +19,11 @@ import {
   resolvePersonaRoute,
 } from '@/src/lib/persona-utils';
 import { ServiceSubpageBreadcrumb } from '@/src/components/landingPage/servicesPage/ServiceSubpageBreadcrumb';
+import FaqSection from '@/src/components/landingPage/home/FaqSection';
+import ChecklistCTAHero from '@/src/components/landingPage/checklist/ChecklistCTAHero';
+import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
+import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
+import GoalIntroSections from '@/src/components/landingPage/goal-based/GoalIntroSections';
 
 const orange = '#E8692A';
 const orangeLight = '#F5845A';
@@ -151,6 +156,8 @@ function GoalPageView({ goal, parentServiceHref }: GoalPageViewProps) {
 
       {/* Hero */}
       <div style={{ background: bg, padding: '56px 0 48px' }}>
+
+        
         <div className={SECTION_INNER}>
           <div
             style={{
@@ -208,40 +215,7 @@ function GoalPageView({ goal, parentServiceHref }: GoalPageViewProps) {
             </div>
           )}
 
-          {highlights.length > 0 && (
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 10,
-                marginBottom: 40,
-              }}
-            >
-              {highlights.map((pill) => (
-                <div
-                  key={pill}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'flex-start',
-                    gap: 8,
-                    background: bg2,
-                    border: `1px solid ${border}`,
-                    borderRadius: 100,
-                    padding: '8px 16px',
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: text,
-                    maxWidth: '100%',
-                  }}
-                >
-                  <span style={{ color: orange, fontWeight: 700, flexShrink: 0 }} aria-hidden>
-                    ✓
-                  </span>
-                  <span>{pill}</span>
-                </div>
-              ))}
-            </div>
-          )}
+      
 
           {marketStats.length > 0 && (
             <div
@@ -284,80 +258,30 @@ function GoalPageView({ goal, parentServiceHref }: GoalPageViewProps) {
         </div>
       </div>
 
-      {/* The ClickMasters Approach */}
-      {approachIntro && (
-        <div style={{ background: bg, padding: '48px 0' }}>
-          <div className={SECTION_INNER}>
-            {approachIntro.eyebrow && (
-              <div
-                style={{
-                  display: 'inline-block',
-                  fontSize: 11,
-                  fontWeight: 700,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: orange,
-                  marginBottom: 16,
-                  fontFamily: fontHead,
-                }}
-              >
-                {approachIntro.eyebrow}
-              </div>
-            )}
-            <h2
-              style={{
-                fontFamily: fontHead,
-                fontSize: 'clamp(22px, 3vw, 32px)',
-                fontWeight: 700,
-                color: dark,
-                margin: '0 0 24px',
-                maxWidth: 900,
-                lineHeight: 1.25,
-              }}
-            >
-              {approachIntro.title}
-            </h2>
-            {approachIntro.paragraphs.map((paragraph) => (
-              <p
-                key={paragraph.slice(0, 64)}
-                style={{
-                  fontSize: 16,
-                  color: text2,
-                  margin: '0 0 16px',
-                  maxWidth: 900,
-                  lineHeight: 1.65,
-                }}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-      )}
 
-      {/* Why speed to market */}
-      {speedSection && (
-        <div style={{ background: bg2, padding: '48px 0', borderTop: `1px solid ${border}` }}>
-          <div className={SECTION_INNER}>
-            <h2
-              style={{
-                fontFamily: fontHead,
-                fontSize: 'clamp(22px, 3vw, 30px)',
-                fontWeight: 700,
-                color: dark,
-                margin: '0 0 20px',
-                lineHeight: 1.25,
-              }}
-            >
-              {speedSection.heading}
-            </h2>
-            <p style={{ fontSize: 16, color: text2, margin: 0, maxWidth: 900, lineHeight: 1.65 }}>
-              {speedSection.body}
-            </p>
-          </div>
-        </div>
-      )}
 
+      
+
+      <GoalIntroSections
+  approachIntro={approachIntro}
+  speedSection={speedSection}
+  SECTION_INNER={SECTION_INNER}
+  fontHead={fontHead}
+  dark={dark}
+  text2={text2}
+  orange={orange}
+  bg={bg}
+  bg2={bg2}
+  border={border}
+/>
+
+
+
+
+
+
+
+      
       {/* Key service areas */}
       {serviceCards.length > 0 && (
         <div style={{ background: bg, padding: '48px 0 64px' }}>
@@ -431,184 +355,87 @@ function GoalPageView({ goal, parentServiceHref }: GoalPageViewProps) {
         </div>
       )}
 
-      {/* Mid CTA */}
-      {midCta && (
-        <div style={{ background: dark, padding: '56px 0' }}>
-          <div
-            className={`${SECTION_INNER} lf-hero-grid`}
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: 24,
-            }}
-          >
-            <div style={{ flex: '1 1 320px' }}>
-              <h2
-                style={{
-                  fontFamily: fontHead,
-                  fontSize: 'clamp(20px, 3vw, 28px)',
-                  fontWeight: 700,
-                  color: '#fff',
-                  margin: '0 0 8px',
-                  lineHeight: 1.25,
-                }}
-              >
-                {midCta.title}
-              </h2>
-              <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.78)', margin: 0 }}>{midCta.body}</p>
-            </div>
-            <PrimaryButton href={CONTACT_HREF}>{midCta.primaryLabel}</PrimaryButton>
-          </div>
-        </div>
-      )}
+    
+     {/* Mid CTA */}
+{midCta && (
+  <div >
+    <div>
+      <CTASectionImage
+        title={midCta.title}
+        description={midCta.body}
+        buttons={[
+          {
+            text: midCta.primaryLabel,
+            href: '/contact-us',
+            variant: 'primary',
+          },
+        ]}
+      />
+    </div>
+  </div>
+)}
 
-      {/* Pricing table */}
-      {pricingTiers.length > 0 && (
-        <div style={{ background: bg, padding: '56px 0' }}>
-          <div className={SECTION_INNER}>
-            <h2
-              style={{
-                fontFamily: fontHead,
-                fontSize: 'clamp(24px, 3vw, 32px)',
-                fontWeight: 700,
-                color: dark,
-                margin: '0 0 28px',
-                textAlign: 'center',
-              }}
-            >
-              Pricing
-            </h2>
-            <div className="lf-pricing-table-wrap">
-              <table className="lf-price-table">
-                <thead>
-                  <tr>
-                    <th>Engagement</th>
-                    <th>Investment</th>
-                    <th>Timeline</th>
-                    <th>Scope</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pricingTiers.map((tier) => (
-                    <tr key={tier.type}>
-                      <td style={{ fontWeight: 600, color: dark }}>{tier.type}</td>
-                      <td style={{ fontWeight: 700, color: orange }}>{tier.investment}</td>
-                      <td>{tier.timeline}</td>
-                      <td style={{ color: text2, fontSize: 14 }}>{tier.bestFor}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            {goal.pricingFootnote && (
-              <p
-                style={{
-                  marginTop: 24,
-                  fontSize: 14,
-                  color: text2,
-                  lineHeight: 1.65,
-                  maxWidth: 900,
-                }}
-              >
-                {goal.pricingFootnote}
-              </p>
-            )}
-          </div>
-        </div>
-      )}
+     {/* Pricing */}
+{pricingTiers.length > 0 && (
+  <div >
+    <div>
+      <PricingSection
+        serviceName={goal.serviceName ?? goal.serviceSlug}
+        pricingTiers={pricingTiers}
+      />
+    </div>
 
-      {/* Workshop closing */}
-      {goal.workshopClosing && (
-        <div style={{ background: bg2, padding: '48px 0', borderTop: `1px solid ${border}` }}>
-          <div className={SECTION_INNER}>
-            <div
-              style={{
-                background: bg,
-                border: `1px solid ${border}`,
-                borderRadius: 16,
-                padding: '32px 36px',
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: 24,
-              }}
-            >
-              <div style={{ flex: '1 1 280px' }}>
-                <h2
-                  style={{
-                    fontFamily: fontHead,
-                    fontSize: 'clamp(18px, 2.5vw, 24px)',
-                    fontWeight: 700,
-                    color: dark,
-                    margin: '0 0 8px',
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {goal.workshopClosing.title}
-                </h2>
-                <p style={{ fontSize: 15, color: text2, margin: 0 }}>{goal.workshopClosing.body}</p>
-              </div>
-              <PrimaryButton href={CONTACT_HREF}>{goal.workshopClosing.ctaLabel}</PrimaryButton>
-            </div>
-          </div>
-        </div>
-      )}
+    {/* {goal.pricingFootnote && (
+      <div className={SECTION_INNER}>
+        <p
+          style={{
+            marginTop: 24,
+            fontSize: 14,
+            color: text2,
+            lineHeight: 1.65,
+            maxWidth: 900,
+          }}
+        >
+          {goal.pricingFootnote}
+        </p>
+      </div>
+    )} */}
+  </div>
+)}
 
+    
       {/* FAQ */}
-      {faqs.length > 0 && (
-        <div style={{ background: bg, padding: '56px 0 72px' }}>
-          <div className={SECTION_INNER}>
-            <h2
-              style={{
-                fontFamily: fontHead,
-                fontSize: 'clamp(24px, 3vw, 32px)',
-                fontWeight: 700,
-                color: dark,
-                margin: '0 0 28px',
-                textAlign: 'center',
-              }}
-            >
-              FAQ
-            </h2>
-            <div style={{ maxWidth: 900, margin: '0 auto' }}>
-              {faqs.map((faq) => (
-                <details key={faq.question} className="lf-faq" style={{ borderBottom: `1px solid ${border}` }}>
-                  <summary
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: 16,
-                      padding: '20px 0',
-                      cursor: 'pointer',
-                      listStyle: 'none',
-                      fontFamily: fontHead,
-                      fontSize: 16,
-                      fontWeight: 600,
-                      color: dark,
-                      textAlign: 'left',
-                    }}
-                  >
-                    <span style={{ flex: 1 }}>Q: {faq.question}</span>
-                    <span className="lf-faq-chevron" aria-hidden>
-                      ▼
-                    </span>
-                  </summary>
-                  <div style={{ paddingBottom: 20 }}>
-                    <p style={{ fontSize: 15, color: text2, margin: 0, lineHeight: 1.75, textAlign: 'justify' }}>
-                      {faq.answer}
-                    </p>
-                  </div>
-                </details>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+ 
+{faqs.length > 0 && (
+  <FaqSection
+    faqItems={faqs.map((faq) => ({
+      question: faq.question,
+      answer: faq.answer,
+    }))}
+  />
+)}
+
+      
+  {/* Workshop closing */}
+{goal.workshopClosing && (
+  <div className="-mb-12">
+   
+      <ChecklistCTAHero
+        variant="combined"
+        title={goal.workshopClosing.title}
+        description={goal.workshopClosing.body}
+        buttons={[
+          {
+            text: goal.workshopClosing.ctaLabel,
+            href: '/contact-us',
+            variant: 'primary',
+          },
+        ]}
+      />
+    </div>
+
+)}
+                  
     </div>
   );
 }
@@ -859,6 +686,7 @@ export default async function GoalBasedLandingPage({ params }: PageProps) {
         }}
       />
       <GoalPageView goal={goal} parentServiceHref={parentServiceHref} />
+      
     </>
   );
 }

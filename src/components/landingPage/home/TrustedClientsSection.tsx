@@ -26,6 +26,8 @@ type Client = {
   icon: LucideIcon;
 };
 
+import SplitText from '../../ui/SplitText';
+
 const trustedClients: Client[] = [
   { name: "TechCorp", industry: "Manufacturing", icon: Cpu },
   { name: "HealthPlus", industry: "Healthcare", icon: Stethoscope },
@@ -43,12 +45,6 @@ const trustedClients: Client[] = [
   { name: "Lumina Insurance", industry: "Insurance", icon: ShieldCheck },
   { name: "Vertex Solutions", industry: "Consulting", icon: BarChart3 },
 ];
-
-// const stats = [
-//   { value: "3,500+", label: "Clients worldwide" },
-//   { value: "12", label: "Industries served" },
-//   { value: "98%", label: "Satisfaction rate" },
-// ];
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -86,35 +82,27 @@ function ClientCard({
 
   return (
     <div
-      className="group relative bg-white hover:bg-gray-50 transition-colors duration-200 p-8 flex flex-col items-center justify-center gap-5 min-h-[180px]"
+      className="group relative bg-white/40 hover:bg-white transition-colors duration-200 p-8 flex flex-col items-center justify-center gap-5 min-h-[180px]"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(20px)",
         transition: `opacity 0.4s ease ${index * 50}ms, transform 0.4s ease ${index * 50}ms, background-color 0.2s`,
       }}
     >
-      {/* Gold bottom accent bar on hover */}
       <span
         className="absolute bottom-0 left-0 w-full h-[3px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200"
         aria-hidden="true"
       />
 
-      {/* Icon */}
-      <div className="w-16 h-16 flex items-center justify-center rounded-xl  group-hover:border-primary group-hover:bg-primary/10 transition-all duration-200">
-        <Icon
-          size={28}
-          className="text-primary"
-          strokeWidth={1.5}
-          aria-hidden
-        />
+      <div className="w-16 h-16 flex items-center justify-center rounded-xl group-hover:border-primary group-hover:bg-primary/10 transition-all duration-200">
+        <Icon size={28} className="text-primary" strokeWidth={1.5} />
       </div>
 
-      {/* Text */}
       <div className="text-center">
-        <p className="text-base font-semibold text-gray-900 leading-snug">
+        <p className="text-xl font-semibold text-gray-900 leading-snug">
           {client.name}
         </p>
-        <p className="text-[11px] uppercase tracking-widest text-gray-400 mt-1">
+        <p className="text-sm uppercase tracking-widest text-gray-800 mt-1">
           {client.industry}
         </p>
       </div>
@@ -126,69 +114,53 @@ export function TrustedClientsSection() {
   const { ref, visible } = useInView();
 
   return (
-    <section ref={ref} className="bg-gradient-to-b from-white to-slate-50  py-6 px-6 lg:px-26 lg:py-16 ">
+    <section ref={ref} className="relative w-full bg-[#f5fbfb] py-14">
+      {/* Background Decorative Blobs */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
 
+      {/* Centered Container - max-w-1600px */}
+      <div className="mx-auto max-w-[1600px] px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-[2px] w-8 rounded-full bg-primary" />
+            <div className="inline-flex items-center gap-1.5 mt-6">
+              <SplitText
+                text="Trusted By Industry Leaders"
+                className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+                delay={60}
+                duration={0.8}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, x: 60 }}
+                to={{ opacity: 1, x: 0 }}
+                threshold={0.2}
+              />
+            </div>
+            <span className="h-[2px] w-8 rounded-full bg-primary" />
+          </div>
 
-
-     
-  
-    
-
-      {/* Header original design */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 mb-3">
-           <span className="h-[2px] w-8 rounded-full bg-orange-400" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                Trusted By Industry Leaders
-              </p>
-              <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+          <p className="text-gray-800 max-w-2xl mx-auto text-base md:text-lg">
+            Join 3,500+ businesses that trust ClickMasters to deliver exceptional software solutions
+          </p>
         </div>
 
-        <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-3">
-          Our Trusted Partners & Clients
-        </h3>
-
-        <p className="text-gray-700 max-w-2xl mx-auto text-sm">
-          Join 3,500+ businesses that trust ClickMasters to deliver exceptional software solutions
-        </p>
+        {/* Client Grid */}
+        <div className="border border-gray-200 rounded-xl overflow-hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 divide-x divide-y divide-gray-200">
+          {trustedClients.map((client, idx) => (
+            <ClientCard
+              key={client.name}
+              client={client}
+              index={idx}
+              visible={visible}
+            />
+          ))}
+        </div>
       </div>
-
-      {/* Client Grid */}
-      <div className="border border-gray-200 rounded-xl overflow-hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 divide-x divide-y divide-gray-200 lg:mx-20">
-        {trustedClients.map((client, idx) => (
-          <ClientCard
-            key={client.name}
-            client={client}
-            index={idx}
-            visible={visible}
-          />
-        ))}
-      </div>
-
-      {/* Stats Bar */}
-      {/* <div className="mt-10 flex items-center justify-center gap-10 flex-wrap">
-        {stats.map((stat, i) => (
-          <React.Fragment key={stat.label}>
-            {i > 0 && (
-              <span className="w-px h-8 bg-gray-200 hidden sm:block" aria-hidden />
-            )}
-            <div className="text-center">
-              <p
-                className="text-2xl font-semibold text-gray-900"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              >
-                {stat.value}
-              </p>
-              <p className="text-[10px] uppercase tracking-widest text-gray-400 mt-0.5">
-                {stat.label}
-              </p>
-            </div>
-          </React.Fragment>
-        ))}
-      </div> */}
     </section>
   );
 }
 
 export default TrustedClientsSection;
-

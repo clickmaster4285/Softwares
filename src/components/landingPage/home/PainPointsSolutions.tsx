@@ -12,6 +12,7 @@ import {
   Zap
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SplitText from '../../ui/SplitText';
 
 interface PainPoint {
   id: string;
@@ -34,7 +35,7 @@ const painPoints: PainPoint[] = [
     title: 'The Infinite Timeline',
     description: '"It’ll be ready next quarter..." Agency black-box development with zero visibility.',
     icon: Clock,
-    gradient: 'from-primary to-orange-600',
+    gradient: 'from-primary toprimary/80',
   },
   {
     id: 'security',
@@ -48,7 +49,7 @@ const painPoints: PainPoint[] = [
     title: 'The Scalability Ceiling',
     description: 'Your app crashes during success. Legacy systems can’t handle real growth.',
     icon: TrendingUp,
-    gradient: 'from-rose-500 to-orange-600',
+    gradient: 'from-rose-500 toprimary/80',
   },
 ];
 
@@ -70,8 +71,14 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
 
   const hasLocation = !!countryName;
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-24 md:py-32 lg:px-14">
-      <div className="relative mx-auto px-4 sm:px-6 lg:px-12">
+    <section className="relative overflow-hidden py-24 md:py24 lg:px-14 bg-white">
+
+
+<div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" /> 
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
+      
+      <div className="relative mx-auto  max-w-[1600px]">
         
         {/* Header */}
        
@@ -81,26 +88,37 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
 
          <div className="mx-auto max-w-3xl text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-3">
-            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+           <span className="h-[2px] w-8 rounded-full bg-primary" />
             
-            <div className="inline-flex items-center gap-1.5">
-              <Zap className="h-3.5 w-3.5 text-orange-700" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-                {hasLocation ? `Problems Businesses Face in ${countryName}` : 'Stop Settling For Mediocre'}
-              </p>
-            </div>
+           <div className="inline-flex items-center gap-1.5">
+  <SplitText
+    text={
+      hasLocation
+        ? `Problems Businesses Face in ${countryName}`
+        : "Real Development Fixes"
+    }
+    className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+    delay={50}
+    duration={0.8}
+    ease="power3.out"
+    splitType="chars"
+    from={{ opacity: 0, x: 40 }}
+    to={{ opacity: 1, x: 0 }}
+    threshold={0.2}
+  />
+</div>
 
-            <span className="h-[2px] w-8 rounded-full bg-orange-400" />
+           <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
 
-          <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-3xl leading-tight">
+          {/* <h2 className="mt-5 font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-3xl leading-tight">
             {hasLocation 
               ? `Painful Development Realities in ${countryName} and How We Fix Them`
               : 'Painful Development Realities and How We Fix them'
             }
-          </h2>
+          </h2> */}
 
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             {hasLocation 
               ? 'Common challenges that hinder business growth and efficiency'
               : 'Most agencies deliver headaches wrapped in pretty proposals. Here\'s the reality and why ClickMasters approaches development differently.'
@@ -136,7 +154,7 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
 
                   {/* Icon */}
                   <motion.div 
-                    className="mb-6 inline-flex rounded-2xl  p-4 text-orange-600"
+                    className="mb-6 inline-flex rounded-2xl  p-4 text-red-600"
                     whileHover={{ scale: 1.12 }}
                   >
                     <Icon className="h-8 w-8" />
@@ -174,7 +192,7 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
                     <p className="text-slate-600 flex-1 leading-relaxed font-medium">{solution.description}</p>
 
                     {solution.metric && (
-                      <div className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-orange-50 px-4 py-2.5 text-sm font-semibold text-orange-700">
+                      <div className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-primary/0 px-4 py-2.5 text-sm font-semibold text-primary">
                         📈 {solution.metric}
                       </div>
                     )}
