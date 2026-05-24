@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import Script from 'next/script';
 import {
   ArrowRight,
   CheckCircle2,
@@ -193,17 +192,17 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
   return (
     <>
-      <Script
+      <script
         id={`service-schema-${page.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
-      <Script
+      <script
         id={`faq-schema-${page.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <Script
+      <script
         id={`breadcrumb-${page.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{
