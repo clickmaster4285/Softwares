@@ -243,10 +243,14 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
 
         {/* Main Content with Table of Contents */}
-        <div className="mx-auto max-w-8xl px-16 md:px-8 lg:px-16">
-          <div className="relative lg:grid lg:grid-cols-[1fr_260px] lg:gap-16">
-            {/* Main Content */}
-            <main className="py-12 lg:py-10">
+       <div className="mx-auto max-w-[1600px] px-6 lg:px-10">
+    
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12 lg:gap-16">
+      
+      {/* MAIN CONTENT */}
+            <main className="py-10 lg:py-12 min-w-0">
+              
+
               {/* Section Content */}
               {sections.map((section, index) => (
                 <section
@@ -415,11 +419,10 @@ export default async function ServiceByCategoryPage({ params }: Props) {
             </main>
 
             {/* Sticky Table of Contents - Desktop */}
-            <aside className="hidden lg:block sticky top-24 self-start z-10">
-              <div className="py-12 lg:py-10">
-                <TableOfContents items={tocItems} />
-              </div>
-            </aside>
+             <aside className="hidden lg:block sticky top-24 self-start">
+        <TableOfContents items={tocItems} />
+      </aside>
+
           </div>
         </div>
 
