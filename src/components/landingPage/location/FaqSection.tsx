@@ -22,7 +22,7 @@ export function FaqSection({
   faqs, 
   location, 
   title = "Frequently Asked Questions",
-  subtitle = "Answer objections and improve SEO"
+  subtitle = 'Common questions about our services and process',
 }: FaqSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

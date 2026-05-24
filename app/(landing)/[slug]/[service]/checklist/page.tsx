@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { checklists } from '@/src/lib/service_checklist';
 import { getAllServicePages } from '@/lib/service-pages';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, buildPageMetadata } from '@/app/metadata-config';
 import { ChecklistPageClient } from '@/src/components/landingPage/checklist/ChecklistHero';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
@@ -21,13 +21,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Checklist' };
   }
 
-  return {
+  return buildPageMetadata({
     title: checklist.metaTitle,
     description: checklist.metaDescription,
-    alternates: {
-      canonical: `${siteConfig.url}/${slug}/${service}/checklist`,
-    },
-  };
+    canonical: `${siteConfig.url}/${slug}/${service}/checklist`,
+  });
 }
 
 export default async function ChecklistPage({ params }: Props) {

@@ -20,10 +20,12 @@ interface Testimonial {
 
 export function TestimonialsSection({ 
   featuredOnly = true, 
-  limit = 9 
+  limit = 9,
+  sectionTitle = 'What Our Clients Say',
 }: { 
   featuredOnly?: boolean; 
   limit?: number;
+  sectionTitle?: string;
 }) {
   const [currentGroup, setCurrentGroup] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -95,7 +97,7 @@ export function TestimonialsSection({
           <div className="flex items-center gap-3 mb-8 sm:mb-10">
             <div className="h-8 sm:h-10 w-1 " />
             <h2 className="text-2xl sm:text-3xl md:text-3xl font-semibold tracking-tight text-slate-900">
-              What Our Clients Say
+              {sectionTitle}
             </h2>
           </div>
           <div className="h-80 flex items-center justify-center">
@@ -110,7 +112,7 @@ export function TestimonialsSection({
     return (
       <section id="testimonials" className="scroll-mt-24 py-12 sm:py-16 md:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-3 sm:mb-4">What Our Clients Say</h2>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-3 sm:mb-4">{sectionTitle}</h2>
           <p className="text-sm sm:text-base text-slate-500">No testimonials available yet.</p>
         </div>
       </section>
@@ -127,7 +129,7 @@ export function TestimonialsSection({
           <div className="h-8 sm:h-10 w-1 rounded-full bg-gradient-to-b from-primary to-orange-600" />
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-3xl font-semibold tracking-tight text-slate-900">
-              What Our Clients Say
+              {sectionTitle}
             </h2>
             <p className="text-sm sm:text-base text-slate-800 mt-1 sm:mt-2">Real stories from founders and teams we’ve helped</p>
           </div>

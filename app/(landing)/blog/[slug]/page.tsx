@@ -12,7 +12,7 @@ import BlogToc from '@/components/blog/BlogToc';
 import BlogCta from '@/components/blog/BlogCta'; // Import the Client Component
 import BlogFaqSection from '@/components/blog/BlogFaqSection';
 import BlogRelatedSlider, { type RelatedBlogCard } from '@/components/blog/BlogRelatedSlider';
-import { breadcrumbSchema, siteConfig } from '@/app/metadata-config';
+import { breadcrumbSchema, siteConfig, buildPageMetadata, truncateMetaDescription, stripBrandSuffix, truncateHeading } from '@/app/metadata-config';
 
 const BlogPostModel = BlogPost as any;
 
@@ -52,9 +52,14 @@ function buildContentWithToc(html: string) {
   const withIds = html.replace(
     /<(h[1-3])([^>]*)>([\s\S]*?)<\/\1>/gi,
     (_m, tag: string, attrs: string, inner: string) => {
+      let normalizedTag = tag;
       const text = stripTags(inner);
       if (!text) return _m;
-      const level = parseInt(tag[1]) as 1 | 2 | 3;
+      let level = parseInt(normalizedTag[1]) as 1 | 2 | 3;
+      if (level === 1) {
+        normalizedTag = 'h2';
+        level = 2;
+      }
       if (level > 2) return _m;
       
       if (isLikelyParagraph(inner, text)) return _m;
@@ -74,9 +79,9 @@ function buildContentWithToc(html: string) {
 
       if (existingIdMatch) {
         const normalizedAttrs = attrs.replace(/\sid\s*=\s*["'][^"']*["']/i, ` id="${id}"`);
-        return `<${tag}${normalizedAttrs}>${inner}</${tag}>`;
+        return `<${normalizedTag}${normalizedAttrs}>${inner}</${normalizedTag}>`;
       }
-      return `<${tag}${attrs} id="${id}">${inner}</${tag}>`;
+      return `<${normalizedTag}${attrs} id="${id}">${inner}</${normalizedTag}>`;
     }
   );
 
@@ -84,12 +89,7 @@ function buildContentWithToc(html: string) {
 }
 
 function toMetaDescription(text: string | undefined, fallback: string): string {
-  const raw = (text ?? '').replace(/\s+/g, ' ').trim();
-  const use = raw || fallback;
-  if (use.length <= 160) return use;
-  const cut = use.slice(0, 157).trimEnd();
-  const lastSpace = cut.lastIndexOf(' ');
-  return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut) + '…';
+  return truncateMetaDescription(text, fallback);
 }
 
 function formatDate(value?: string) {
@@ -188,24 +188,16 @@ export async function generateMetadata({
   if (!doc) return { title: 'Blog post' };
 
   const d = doc as { title?: string; excerpt?: string };
-  const title = d.title ?? 'Blog post';
+  const title = stripBrandSuffix(d.title ?? 'Blog post');
   const description = toMetaDescription(
     d.excerpt,
     `Software development insights from ClickMasters: ${title}. Custom software, SaaS, and engineering best practices.`,
   );
-  return {
-    title: `${title} | ClickMasters`,
+  return buildPageMetadata({
+    title,
     description,
-    alternates: {
-      canonical: `${siteConfig.url}/blog/${slug}`,
-    },
-    openGraph: {
-      title: `${title} | ClickMasters`,
-      description,
-      url: `${siteConfig.url}/blog/${slug}`,
-    },
-    twitter: { description },
-  };
+    canonical: `${siteConfig.url}/blog/${slug}`,
+  });
 }
 
 export default async function BlogDetailPage({
@@ -322,7 +314,7 @@ export default async function BlogDetailPage({
                 </Link>
               </Button>
               <h1 className="max-w-4xl font-display text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
-                {post.title}
+                {truncateHeading(stripBrandSuffix(post.title))}
               </h1>
               <div className="mt-6 flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">

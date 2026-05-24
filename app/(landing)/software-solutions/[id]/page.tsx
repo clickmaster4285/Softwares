@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Project from '../../../../lib/models/Project';
 import dbConnect from '../../../../lib/mongoose';
 import { resolveImageUrl } from '@/lib/utils';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, metadataConfig } from '@/app/metadata-config';
 
 export async function generateMetadata({
   params,
@@ -20,13 +20,11 @@ export async function generateMetadata({
 
   const doc = project as { title: string; description?: string };
 
-  return {
-    title: `${doc.title} | ClickMasters`,
-    description: doc.description?.slice(0, 160),
-    alternates: {
-      canonical: `${siteConfig.url}/software-solutions/${id}`,
-    },
-  };
+  return metadataConfig.solutionsDetail(
+    doc.title,
+    doc.description ?? '',
+    id,
+  );
 }
 
 export default async function ProjectPage({

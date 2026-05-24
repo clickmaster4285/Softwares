@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, buildPageMetadata } from '@/app/metadata-config';
 import { getAllHireUsSlugs, getHireUsPage } from '@/lib/hire-us-pages';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -15,11 +15,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = getHireUsPage(slug);
   if (!page) return { title: 'Hire | ClickMasters' };
 
-  return {
-    title: `${page.title} | ClickMasters`,
+  return buildPageMetadata({
+    title: page.title,
     description: page.metaDescription,
-    alternates: { canonical: `${siteConfig.url}/hire/${slug}` },
-  };
+    canonical: `${siteConfig.url}/hire/${slug}`,
+  });
 }
 
 export default async function HireUsPage({ params }: Props) {

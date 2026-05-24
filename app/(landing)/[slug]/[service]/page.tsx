@@ -32,7 +32,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { TableOfContents } from '@/components/table-of-contents';
-import { breadcrumbSchema, faqSchema, homepageFaqSchema, serviceSchema, siteConfig } from '@/app/metadata-config';
+import { breadcrumbSchema, faqSchema, homepageFaqSchema, serviceSchema, siteConfig, buildPageMetadata } from '@/app/metadata-config';
 import {
   getAllServicePages,
   getServicePage,
@@ -75,34 +75,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = getServicePage(service);
   if (!page || page.categorySlug !== slug) return { title: 'Service' };
 
-  const description = page.metaDescription;
   const canonicalPath = getCanonicalPath(page);
   const canonical = `${siteConfig.url}${canonicalPath}`;
 
-  return {
-    title: page.metaTitle ?? `${page.title} Services | ClickMasters`,
-    description,
-    alternates: { canonical },
-    openGraph: {
-      title: `${page.title} | ClickMasters`,
-      description,
-      url: canonical,
-      images: [
-        {
-          url: `${siteConfig.url}/og/services.webp`,
-          width: 1200,
-          height: 630,
-          alt: `${page.title} ClickMasters software services`,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${page.title} | ClickMasters`,
-      description,
-      images: [`${siteConfig.url}/og/services.webp`],
-    },
-  };
+  return buildPageMetadata({
+    title: page.metaTitle ?? `${page.title} Services`,
+    description: page.metaDescription,
+    canonical,
+    ogImage: `${siteConfig.url}/og/services.webp`,
+    ogImageAlt: `${page.title} ClickMasters software services`,
+  });
 }
 
 function getCanonicalPath(page: ServicePageContent): string {
@@ -390,7 +372,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
              {/*  */}
           {/* Testimonials Section */}
-<TestimonialsSection  />
+<TestimonialsSection sectionTitle={`${page.title} client reviews`} />
 
               {/* Case Study Section */}
               <div className='mb-10 '>

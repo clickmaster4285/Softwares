@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getAllServiceSlugs, getServicePage } from '@/lib/service-pages';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, buildPageMetadata } from '@/app/metadata-config';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -22,13 +22,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  return {
-    title: `${service.title} FAQs | ClickMasters`,
-    description: `Frequently asked questions about ${service.title}.`,
-    alternates: {
-      canonical: `${siteConfig.url}/faqs/${service.slug}`,
-    },
-  };
+  return buildPageMetadata({
+    title: `${service.title} FAQs`,
+    description: `Answers to common questions about ${service.title} — pricing, timelines, process, and how ClickMasters delivers ${service.title.toLowerCase()} projects.`,
+    canonical: `${siteConfig.url}/faqs/${service.slug}`,
+  });
 }
 
 export default async function FaqDetailPage({ params }: Props) {

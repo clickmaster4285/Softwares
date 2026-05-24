@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getAllServicePages } from '@/lib/service-pages';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, withSeoMetadata } from '@/app/metadata-config';
 
-export const metadata: Metadata = {
-  title: 'FAQs by Service | ClickMasters',
+export const metadata: Metadata = withSeoMetadata({
+  title: 'FAQs by Service',
   description:
-    'Browse frequently asked questions by service. Select any service card to view detailed FAQs.',
+    'Browse frequently asked questions by service. Select any service card to view detailed FAQs about process, pricing, and delivery.',
   alternates: {
     canonical: `${siteConfig.url}/faqs`,
   },
-};
+});
 
 const services = getAllServicePages();
 

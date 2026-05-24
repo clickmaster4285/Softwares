@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { siteConfig } from '@/app/metadata-config';
+import { siteConfig, withSeoMetadata } from '@/app/metadata-config';
 import { StaticContentPage } from '@/components/landingPage/StaticContentPage';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | ClickMasters',
-  description: 'How ClickMasters collects, uses, and protects your personal information.',
+export const metadata: Metadata = withSeoMetadata({
+  title: 'Privacy Policy',
+  description:
+    'How ClickMasters collects, uses, and protects your personal information when you use our website and software development services.',
   alternates: { canonical: `${siteConfig.url}/privacy-policy` },
-};
+});
 
 export default function PrivacyPolicyPage() {
   return (

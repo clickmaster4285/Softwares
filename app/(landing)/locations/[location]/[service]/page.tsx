@@ -3,7 +3,7 @@ import { notFound, redirect } from 'next/navigation';
 import Script from 'next/script';
 
 import { TableOfContents } from '@/components/table-of-contents';
-import { breadcrumbSchema, serviceSchema, siteConfig } from '@/app/metadata-config';
+import { breadcrumbSchema, serviceSchema, siteConfig, buildPageMetadata } from '@/app/metadata-config';
 
 import {
   getAllCountryServicePages,
@@ -22,7 +22,7 @@ import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
 import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
 import FaqSection from '@/src/components/landingPage/location/FaqSection';
-import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
+import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
 import DynamicSections from '@/src/components/landingPage/servicesPage/DynamicSections';
 import { ProjectCTAHero } from '@/src/components/landingPage/home/info-cts';
 
@@ -43,27 +43,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     notFound();
   }
 
-  const description = page.metaDescription;
   const canonical = `${siteConfig.url}/locations/${page.categorySlug}/${page.slug}`;
 
-  return {
-    title: page.metaTitle ?? `${page.title} Services | ClickMasters`,
-    description,
-    alternates: { canonical },
-    openGraph: {
-      title: `${page.title} | ClickMasters`,
-      description,
-      url: canonical,
-      images: [{ url: `${siteConfig.url}/og/services.webp`, width: 1200, height: 630 }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${page.title} | ClickMasters`,
-      description,
-      images: [`${siteConfig.url}/og/services.webp`],
-    },
+  return buildPageMetadata({
+    title: page.metaTitle ?? `${page.title} in ${page.countryName}`,
+    description: page.metaDescription,
+    canonical,
+    ogImage: `${siteConfig.url}/og/services.webp`,
+    ogImageAlt: `${page.title} services by ClickMasters`,
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 export default async function CountryServicePage({ params }: Props) {
@@ -228,7 +217,7 @@ export default async function CountryServicePage({ params }: Props) {
               </div>
 
               <div id="testimonials">
-                <TestimonialsSection />
+                <TestimonialsSection sectionTitle={`${page.title} in ${page.countryName}`} />
               </div>
 
               <div id="case-study" className="lg:-ml-20 -pl-4">
