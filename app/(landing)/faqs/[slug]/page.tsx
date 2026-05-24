@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return buildPageMetadata({
-    title: `${service.title} FAQs`,
-    description: `Answers to common questions about ${service.title} — pricing, timelines, process, and how ClickMasters delivers ${service.title.toLowerCase()} projects.`,
+    title: `${service.serviceName} FAQs`,
+    description: `Answers to common questions about ${service.serviceName} — pricing, timelines, process, and how ClickMasters delivers ${service.serviceName.toLowerCase()} projects.`,
     canonical: `${siteConfig.url}/faqs/${service.slug}`,
   });
 }
