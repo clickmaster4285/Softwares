@@ -6,6 +6,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  htmlLimitedBots: /.*/,
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },

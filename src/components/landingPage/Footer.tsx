@@ -166,13 +166,13 @@ export function Footer() {
         <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-3 px-10 py-6 text-xs text-background/60 md:flex-row">
           <p>© {new Date().getFullYear()} ClickMasters. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="transition hover:text-background">
+            <Link href="/privacy-policy" className="transition hover:text-background">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="transition hover:text-background">
+            <Link href="/terms-of-service" className="transition hover:text-background">
               Terms of Service
             </Link>
-            <Link href="/cookies" className="transition hover:text-background">
+            <Link href="/cookie-policy" className="transition hover:text-background">
               Cookies
             </Link>
           </div>
