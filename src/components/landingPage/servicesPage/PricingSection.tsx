@@ -1,7 +1,6 @@
-// /src/components/landingPage/servicesPage/PricingSection.tsx
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { PricingCard } from "@/components/ui/PricingCard";
 import { useState } from "react";
 
@@ -22,33 +21,21 @@ const parseInvestment = (value: string) => {
 
   const isCustom = value.toLowerCase().includes("custom");
 
-  // extract numbers safely (handles commas + ranges + /mo)
   const numbers = value
     .replace(/,/g, "")
     .match(/\d+/g)
     ?.map(Number);
 
   if (!numbers || numbers.length === 0) {
-    return isCustom
-      ? { min: 0, max: 0, isCustom: true }
-      : null;
+    return isCustom ? { min: 0, max: 0, isCustom: true } : null;
   }
 
   if (numbers.length >= 2) {
-    return {
-      min: numbers[0],
-      max: numbers[1],
-      isCustom,
-    };
+    return { min: numbers[0], max: numbers[1], isCustom };
   }
 
-  return {
-    min: numbers[0],
-    max: numbers[0],
-    isCustom,
-  };
+  return { min: numbers[0], max: numbers[0], isCustom };
 };
-
 
 const chunkArray = <T,>(array: T[], size: number): T[][] => {
   const chunks: T[][] = [];
@@ -59,40 +46,29 @@ const chunkArray = <T,>(array: T[], size: number): T[][] => {
 };
 
 export function PricingSection({ serviceName, pricingTiers }: PricingSectionProps) {
-
-
-const CHUNK_SIZE = 6;
-
-const pricingChunks = chunkArray(pricingTiers, CHUNK_SIZE);
-const [activePage, setActivePage] = useState(0);
-
-const activeTiers = pricingChunks[activePage] || [];
+  const CHUNK_SIZE = 6;
+  const pricingChunks = chunkArray(pricingTiers, CHUNK_SIZE);
+  const [activePage, setActivePage] = useState(0);
+  const activeTiers = pricingChunks[activePage] || [];
 
   if (!pricingTiers || pricingTiers.length === 0) return null;
-  console.log("serviceName", serviceName);
-  
+
   const pricingCardsData = activeTiers
     .map((tier) => {
       const parsed = parseInvestment(tier.investment);
-
-      // ❌ skip invalid tiers completely
       if (!parsed) return null;
 
       const { min, max, isCustom } = parsed;
 
       return {
         title: tier.type,
-
         description: `Perfect for businesses that need ${tier.type.toLowerCase()} solutions`,
-
         price: isCustom ? 0 : min,
-
         originalPrice: isCustom
           ? undefined
           : max > min
-            ? max
-            : Math.round(min * 1.5),
-
+          ? max
+          : Math.round(min * 1.5),
         features: [
           {
             title: "Package Includes",
@@ -102,7 +78,7 @@ const activeTiers = pricingChunks[activePage] || [];
               `Budget Range: ${
                 isCustom
                   ? "Custom"
-                  : `${min.toLocaleString()} - ${max.toLocaleString()} AUD`
+                  : `${min.toLocaleString()} – ${max.toLocaleString()} AUD`
               }`,
               "Dedicated Project Manager",
               "Quality Assurance Testing",
@@ -110,15 +86,13 @@ const activeTiers = pricingChunks[activePage] || [];
             ],
           },
         ],
-
         buttonText: isCustom ? "Contact Us" : "Get Started",
-
         onButtonClick: () => {
           console.log(`Selected ${tier.type} plan`);
         },
       };
     })
-    .filter(Boolean); // remove nulls safely
+    .filter(Boolean);
 
   return (
     <motion.section
@@ -131,7 +105,6 @@ const activeTiers = pricingChunks[activePage] || [];
     >
       {/* ================= HEADER ================= */}
       <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
-
         <div className="inline-flex items-center gap-2 mb-3">
           <span className="h-[2px] w-8 rounded-full bg-primary" />
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
@@ -162,42 +135,40 @@ const activeTiers = pricingChunks[activePage] || [];
       </div>
 
       {/* ================= CARDS ================= */}
-{/* ================= CARDS ================= */}
-<div className="mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-  {pricingCardsData.map((cardData, index) => (
-    <PricingCard
-      key={index}
-      title={cardData?.title ?? ""}
-      description={cardData?.description ?? ""}
-      price={cardData?.price ?? 0}
-      originalPrice={cardData?.originalPrice}
-      features={cardData?.features ?? []}
-      buttonText={cardData?.buttonText}
-      onButtonClick={cardData?.onButtonClick}
-    />
-  ))}
-</div>
+      <div className="mt-6 mx-auto max-w-[1600px]   p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
+        {pricingCardsData.map((cardData, index) => (
+          <PricingCard
+            key={index}
+            title={cardData?.title ?? ""}
+            description={cardData?.description ?? ""}
+            price={cardData?.price ?? 0}
+            originalPrice={cardData?.originalPrice}
+            features={cardData?.features ?? []}
+            buttonText={cardData?.buttonText}
+            onButtonClick={cardData?.onButtonClick}
+            highlighted={index === 1}
+          />
+        ))}
+      </div>
 
-{/* ================= PAGINATION ================= */}
-{pricingChunks.length > 1 && (
-  <div className="flex justify-center gap-2 mt-10">
-    {pricingChunks.map((_, idx) => (
-      <button
-        key={idx}
-        onClick={() => setActivePage(idx)}
-        className={`px-3 py-1 rounded-md text-sm border transition ${
-          activePage === idx
-            ? "bg-primary text-white"
-            : "bg-white text-slate-600"
-        }`}
-      >
-        {idx + 1}
-      </button>
-    ))}
-  </div>
-)}
-      
-      
+      {/* ================= PAGINATION ================= */}
+      {pricingChunks.length > 1 && (
+        <div className="flex justify-center gap-2 mt-10">
+          {pricingChunks.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActivePage(idx)}
+              className={`px-3 py-1 rounded-md text-sm border transition ${
+                activePage === idx
+                  ? "bg-primary text-white"
+                  : "bg-white text-slate-600"
+              }`}
+            >
+              {idx + 1}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* ================= TRUST ================= */}
       <motion.div
@@ -237,9 +208,7 @@ const activeTiers = pricingChunks[activePage] || [];
           ))}
         </div>
 
-        <p className="text-center text-xs text-slate-400 max-w-md">
-          * All prices are estimates and may vary based on requirements.
-        </p>
+       
       </motion.div>
     </motion.section>
   );

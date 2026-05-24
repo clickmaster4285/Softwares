@@ -4,6 +4,8 @@ import { metadataConfig, faqSchema, homepageFaqSchema, serviceSchema, siteConfig
 import ServiceClient from './ServiceClient';
 import Script from 'next/script';
 
+export const dynamic = 'force-dynamic';
+
 type Props = { params: Promise<{ slug: string }> };
 
 /** Static routes under (landing) — must not be handled by this dynamic segment */

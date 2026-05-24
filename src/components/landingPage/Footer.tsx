@@ -164,7 +164,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="relative border-t border-white/10 z-10">
         <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-3 px-10 py-6 text-xs text-background/60 md:flex-row">
-          <p>© {new Date().getFullYear()} ClickMasters. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} ClickMasters Software Company. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy-policy" className="transition hover:text-background">
               Privacy Policy
