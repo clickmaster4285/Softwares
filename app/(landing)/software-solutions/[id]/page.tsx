@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Project from '../../../lib/models/Project';
-import dbConnect from '../../../lib/mongoose';
+import Project from '../../../../lib/models/Project';
+import dbConnect from '../../../../lib/mongoose';
 import { resolveImageUrl } from '@/lib/utils';
 import { siteConfig } from '@/app/metadata-config';
 
