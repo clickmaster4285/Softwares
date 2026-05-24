@@ -4,7 +4,6 @@ import '../../../lib/models/Project';
 import '../../../lib/models/Category';
 import dbConnect from '../../../lib/mongoose';
 import CaseStudiesClient, { type CaseStudyCard } from './CaseStudiesClient';
-import Script from 'next/script';
 
 export const metadata = metadataConfig.caseStudies();
 
@@ -30,7 +29,7 @@ export default async function CaseStudiesPage() {
 
   return (
     <>
-      <Script
+      <script
         id="case-studies-breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

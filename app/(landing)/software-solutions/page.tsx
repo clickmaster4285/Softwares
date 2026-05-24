@@ -1,13 +1,26 @@
 import { breadcrumbSchema, metadataConfig } from '@/app/metadata-config';
 import SolutionsClient from './SolutionsClient';
-import Script from 'next/script';
+import dbConnect from '../../../lib/mongoose';
+import Project from '../../../lib/models/Project';
 
 export const metadata = metadataConfig.solutions();
 
-export default function SolutionsPage() {
+export default async function SolutionsPage() {
+  let initialProjects: Awaited<ReturnType<typeof Project.find>> = [];
+
+  try {
+    await dbConnect();
+    initialProjects = await Project.find()
+      .populate('category', 'name description showOnHome')
+      .sort({ createdAt: -1 })
+      .lean();
+  } catch (error) {
+    console.error('SolutionsPage SSR project fetch failed:', error);
+  }
+
   return (
     <>
-      <Script
+      <script
         id="solutions-breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -19,7 +32,7 @@ export default function SolutionsPage() {
           ),
         }}
       />
-      <SolutionsClient />
+      <SolutionsClient initialProjects={JSON.parse(JSON.stringify(initialProjects))} />
     </>
   );
 }

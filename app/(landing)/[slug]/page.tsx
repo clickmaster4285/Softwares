@@ -6,6 +6,24 @@ import Script from 'next/script';
 
 type Props = { params: Promise<{ slug: string }> };
 
+/** Static routes under (landing) — must not be handled by this dynamic segment */
+const RESERVED_SLUGS = new Set([
+  'software-solutions',
+  'blog',
+  'case-studies',
+  'about-us',
+  'contact-us',
+  'testimonials',
+  'faqs',
+  'careers',
+  'locations',
+  'privacy-policy',
+  'terms-of-service',
+  'cookie-policy',
+  'admin',
+  'hire',
+]);
+
 const categoryFaqs = homepageFaqSchema.mainEntity.map((item) => ({
   question: item.name,
   answer: item.acceptedAnswer.text,
@@ -13,12 +31,17 @@ const categoryFaqs = homepageFaqSchema.mainEntity.map((item) => ({
 
 // Generate static paths for all services at build time
 export async function generateStaticParams() {
-  const slugs = getAllServiceSlugs();
+  const slugs = getAllServiceSlugs().filter((slug) => !RESERVED_SLUGS.has(slug));
   return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
+
+  if (RESERVED_SLUGS.has(slug)) {
+    return { title: 'Page Not Found | ClickMasters', robots: { index: false, follow: false } };
+  }
+
   const serviceData = getServiceData(slug);
   
   if (!serviceData) {
@@ -34,6 +57,10 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function ServicePage({ params }: Props) {
   const { slug } = await params;
+
+  if (RESERVED_SLUGS.has(slug)) {
+    notFound();
+  }
   
   // Get service data from our data file based on URL slug
   const serviceData = getServiceData(slug);

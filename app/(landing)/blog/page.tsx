@@ -3,7 +3,6 @@ import { apiGet } from '@/lib/api';
 import BlogPost from '../../../lib/models/BlogPost';
 import dbConnect from '../../../lib/mongoose';
 import BlogClient, { type BlogCard } from './BlogClient';
-import Script from 'next/script';
 
 export const metadata = metadataConfig.blog();
 
@@ -27,7 +26,7 @@ export default async function BlogPage() {
 
   return (
     <>
-      <Script
+      <script
         id="blog-breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

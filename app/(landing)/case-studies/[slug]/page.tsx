@@ -11,7 +11,6 @@ import { resolveImageUrl, getCategoryName } from '../../../../lib/utils';
 import { Button } from '@/components/ui/button';
 import { breadcrumbSchema, metadataConfig } from '@/app/metadata-config';
 import { TableOfContents } from '@/components/table-of-contents';
-import Script from 'next/script';
 
 type LeanProject = {
   _id?: mongoose.Types.ObjectId;
@@ -176,7 +175,7 @@ export default async function CaseStudyDetailPage({
 
   return (
     <>
-      <Script
+      <script
         id="case-study-detail-breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

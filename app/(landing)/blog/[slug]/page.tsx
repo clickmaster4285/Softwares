@@ -13,7 +13,6 @@ import BlogCta from '@/components/blog/BlogCta'; // Import the Client Component
 import BlogFaqSection from '@/components/blog/BlogFaqSection';
 import BlogRelatedSlider, { type RelatedBlogCard } from '@/components/blog/BlogRelatedSlider';
 import { breadcrumbSchema, siteConfig } from '@/app/metadata-config';
-import Script from 'next/script';
 
 const BlogPostModel = BlogPost as any;
 
@@ -271,7 +270,7 @@ export default async function BlogDetailPage({
 
   return (
     <>
-      <Script
+      <script
         id="blog-detail-breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -284,7 +283,7 @@ export default async function BlogDetailPage({
           ) || "",
         }}
       />
-      <Script
+      <script
         id="blog-detail-article-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

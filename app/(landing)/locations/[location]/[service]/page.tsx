@@ -38,7 +38,10 @@ export function generateStaticParams(): { location: string; service: string }[] 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { location, service } = await params;
   const page = getCountryServicePage(service, location);
-  if (!page || page.categorySlug !== location) return { title: 'Service' };
+
+  if (!page || page.categorySlug !== location) {
+    notFound();
+  }
 
   const description = page.metaDescription;
   const canonical = `${siteConfig.url}/locations/${page.categorySlug}/${page.slug}`;
@@ -179,8 +182,8 @@ export default async function CountryServicePage({ params }: Props) {
             categorySlug: page.categorySlug,
             serviceName: page.serviceName,
             title: page.title,
-            lead: page.metaDescription,
-            highlights: [],
+            lead: page.lead ?? page.metaDescription,
+            highlights: page.highlights ?? [],
             marketStats: [],
           }}
         />

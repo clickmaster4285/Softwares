@@ -80,8 +80,8 @@ export default function CountryServicesSection({
   // Track which tab was previously active so we always re-trigger the animation
   const [animKey, setAnimKey] = useState(0);
 
-  const getServiceSlug = (service: string): string =>
-    serviceSlugMap[service] || service.toLowerCase().replace(/\s+/g, '-');
+  const getServiceSlug = (service: string): string | undefined =>
+    serviceSlugMap[service];
 
   const handleTabChange = ({ value }: { value: string }) => {
     setActiveTab(value);
@@ -200,10 +200,12 @@ export default function CountryServicesSection({
                   <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {tab.services.map((service, idx) => {
                       const slug = getServiceSlug(service);
+                      if (!slug) return null;
+
                       return (
                         <Link
                           key={idx}
-                          href={`/locations/${countryName.toLowerCase()}/${slug}`}
+                          href={`/locations/${location}/${slug}`}
                           style={{
                             animationDelay: `${idx * 60}ms`,   /* stagger */
                           }}
