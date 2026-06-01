@@ -352,7 +352,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         </div>
 
       
-      
+      <div/>
       
         {/* Footer CTA */}
         <CTASectionImage/>
