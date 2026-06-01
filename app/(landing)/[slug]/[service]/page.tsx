@@ -79,7 +79,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   // If the category slug doesn't match, redirect to the correct one (canonical URL)
   if (page.categorySlug !== slug) {
     redirect(`/${page.categorySlug}/${page.slug}`);
-  }
+  }       
 
   const sections = page.sections || [];
   const faqs = page.faqs || [];
@@ -400,7 +400,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         </div>
 
       
-    <div></div>
+    
       
         {/* Footer CTA */}
         <CTASectionImage/>
