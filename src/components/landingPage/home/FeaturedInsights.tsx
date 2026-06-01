@@ -348,7 +348,7 @@ return (
   />
 
     {/* Centered Container */}
-    <div className="mx-auto max-w-[1600px]  my-12">
+    <div className="mx-auto max-w-[1700px]  my-12">
 
       {/* Top Label */}
       <div className="mb-8 flex justify-center">

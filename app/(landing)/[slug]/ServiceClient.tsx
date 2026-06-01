@@ -186,7 +186,6 @@ const pricingTiers = pricingPlans.map((plan) => ({
 
 
 
-       <FeaturedInsights />
      <ProcessPage/>
 
     <TechStackSection/>
