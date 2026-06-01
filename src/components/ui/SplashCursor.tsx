@@ -81,6 +81,7 @@ export default function SplashCursor({
 
     // Initialize canvas size BEFORE creating WebGL context
     function initCanvasSize() {
+      if (!canvas) return;
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
