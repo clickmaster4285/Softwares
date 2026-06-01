@@ -79,6 +79,16 @@ export default function SplashCursor({
 
     let isActive = true;
 
+    // Initialize canvas size BEFORE creating WebGL context
+    function initCanvasSize() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+    }
+
+    initCanvasSize();
+
     const config = {
       SIM_RESOLUTION,
       DYE_RESOLUTION,
@@ -1012,6 +1022,7 @@ export default function SplashCursor({
     window.addEventListener('touchstart', handleTouchStart);
     window.addEventListener('touchmove', handleTouchMove);
     window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('resize', initCanvasSize);
 
     updateFrame();
 
@@ -1026,6 +1037,7 @@ export default function SplashCursor({
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('resize', initCanvasSize);
     };
   }, [SIM_RESOLUTION, DYE_RESOLUTION, DENSITY_DISSIPATION, VELOCITY_DISSIPATION, PRESSURE, PRESSURE_ITERATIONS, CURL, SPLAT_RADIUS, SPLAT_FORCE, SHADING, COLOR_UPDATE_SPEED, TRANSPARENT, RAINBOW_MODE, COLOR]);
 
