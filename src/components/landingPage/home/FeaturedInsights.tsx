@@ -348,19 +348,19 @@ return (
   />
 
     {/* Centered Container */}
-    <div className="mx-auto max-w-[1700px]  my-12">
+    <div className="mx-auto my-12 w-full max-w-[1700px] px-4 sm:px-6 lg:px-10">
 
       {/* Top Label */}
       <div className="mb-8 flex justify-center">
-        <div className="inline-flex items-center gap-2">
+        <div className="flex max-w-full flex-wrap items-center justify-center gap-2">
           
 
-          <div className="inline-flex items-center gap-1.5">
+          <div className="flex max-w-full flex-wrap items-center justify-center gap-1.5">
 
-              <span className="h-[2px] w-8 rounded-full bg-primary" />
+              <span className="hidden h-[2px] w-8 rounded-full bg-primary sm:block" />
             <SplitText
               text="Sucess Stories"
-              className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+              className="text-center text-xl font-bold uppercase tracking-[0.14em] text-primary sm:text-2xl sm:tracking-[0.25em] md:text-3xl"
               delay={60}
               duration={0.8}
               ease="power3.out"
@@ -369,7 +369,7 @@ return (
               to={{ opacity: 1, x: 0 }}
               threshold={0.2}
             />
-              <span className="h-[2px] w-8 rounded-full bg-primary" />
+              <span className="hidden h-[2px] w-8 rounded-full bg-primary sm:block" />
           </div>
 
       
@@ -382,7 +382,7 @@ return (
           <InsightsHeader />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {isLoading ? (
             Array.from({ length: 8 }).map((_, i) => (
               <SkeletonCard key={i} tall={i === 0} />

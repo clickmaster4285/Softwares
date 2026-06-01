@@ -76,23 +76,23 @@ function HeroSectionContent() {
         <AuroraCanvas />
       </div>
 
-      <div className="flex min-h-screen items-center justify-center pt-16 pb-20">
-        <div className="relative z-10 mx-auto grid max-w-[1600px] py-20 grid-cols-1 gap-16 lg:grid-cols-[1fr_480px]">
+      <div className="flex min-h-screen items-center justify-center px-4 pb-16 pt-20 sm:px-6 lg:px-10 lg:pb-20 lg:pt-16">
+        <div className="relative z-10 mx-auto grid w-full max-w-[1600px] min-w-0 grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_480px] lg:gap-16 lg:py-20">
           
           {/* Left Column */}
-          <div>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl max-w-4xl font-bold leading-tight tracking-normal text-foreground">
+          <div className="min-w-0">
+            <h1 className="max-w-4xl text-4xl font-bold leading-tight tracking-normal text-foreground sm:text-5xl lg:text-7xl">
               Software Development Company{" "}
               <span className="text-primary">That Scales Your Business Revenue</span>
             </h1>
 
-            <p className="mt-7 max-w-3xl text-xl text-gray-800">
+            <p className="mt-7 max-w-3xl text-lg text-gray-800 sm:text-xl">
               We design, build, and deploy high-performance web, mobile, SaaS,
-              <br />
+              <br className="hidden sm:block" />
               and AI-powered systems for companies in the USA, Europe &amp; Middle East.
             </p>
 
-            <div className="mt-6 inline-flex text-lg items-center rounded-lg border border-primary/30 bg-white/40 px-5 py-3 text-primary backdrop-blur-sm">
+            <div className="mt-6 inline-flex max-w-full items-center rounded-lg border border-primary/30 bg-white/40 px-4 py-3 text-base text-primary backdrop-blur-sm sm:px-5 sm:text-lg">
               ERP, CRM, and enterprise solutions
               <span className="ml-1 inline-block h-5 w-px animate-pulse bg-primary" />
             </div>
@@ -117,7 +117,7 @@ function HeroSectionContent() {
               </button>
             </div>
 
-            <div className="mt-20 grid grid-cols-2 gap-x-10 gap-y-8 md:grid-cols-4">
+            <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:mt-20 lg:gap-x-10 lg:gap-y-8">
               <AnimatedCounter target={1860} suffix="+" label="Projects Delivered" />
               <AnimatedCounter target={3500} suffix="+" label="Happy Clients" />
               <AnimatedCounter target={75} suffix="+" label="Awards Won" />
@@ -126,7 +126,7 @@ function HeroSectionContent() {
           </div>
 
           {/* Right Column */}
-          <div>
+          <div className="min-w-0">
             <QuoteForm />
           </div>
         </div>
@@ -166,7 +166,7 @@ function QuoteForm() {
   return (
     <form
       data-hero-form
-      className="self-start rounded-2xl border border-white/40 bg-white/35 p-8 shadow-2xl shadow-primary/10 backdrop-blur-xl min-h-[520px]"
+      className="min-h-[520px] w-full self-start rounded-2xl border border-white/40 bg-white/35 p-5 shadow-2xl shadow-primary/10 backdrop-blur-xl sm:p-8"
       onSubmit={handleSubmit}
     >
       <h3 className="text-xl font-bold text-primary">Get a free quote</h3>

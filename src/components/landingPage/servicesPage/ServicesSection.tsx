@@ -1,11 +1,8 @@
-// components/landingPage/servicesPage/ServicesSection.tsx
+// src/components/landingPage/servicesPage/ServicesSection.tsx
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { LargeStackedCards, LargeGlassCardItem } from "@/components/ui/large-stacked-cards";
+import SplitText from "../../ui/SplitText";
 
 interface ServiceCard {
   title: string;
@@ -18,82 +15,61 @@ interface ServicesSectionProps {
 }
 
 export const ServicesSection = ({ serviceName, servicesCards }: ServicesSectionProps) => {
-  const cardsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!cardsRef.current) return;
-
-    const cards = cardsRef.current.children;
-
-    gsap.fromTo(
-      cards,
-      {
-        opacity: 0,
-        y: 60,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+  // Transform your service cards to match LargeGlassCardItem format
+  const stackedCardsItems: LargeGlassCardItem[] = servicesCards.map((card, index) => ({
+    id: index,
+    title: card.title,
+    description: card.description,
+    // Optional: Add features/bullet points
+    // features: ["Feature 1", "Feature 2", "Feature 3"],
+    // Optional: Add icons for each card
+    // icon: <YourIconComponent />,
+    // Optional: Add CTA for each card
+    // cta: { label: "Learn More", href: `/services/${card.title.toLowerCase().replace(/\s+/g, '-')}` }
+  }));
 
   return (
     <section id="our-services" className="scroll-mt-24">
-      <div className="flex items-center gap-3">
-        <div className="h-10 w-1 rounded-full bg-primary" />
-        <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
-          <span className="font-black">{serviceName}</span> Services We Deliver
-        </h2>
+
+
+
+
+        <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
+                <div className="inline-flex items-center gap-2 mb-3">
+                  <span className="h-[2px] w-8 rounded-full bg-primary" />
+                  <div className="inline-flex items-center gap-1.5">
+                    <SplitText
+                      text={`${serviceName} Services We Deliver`}
+                      className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+                      delay={60}
+                      duration={0.8}
+                      ease="power3.out"
+                      splitType="words"
+                      from={{ opacity: 0, x: 60 }}
+                      to={{ opacity: 1, x: 0 }}
+                      threshold={0.2}
+                    />
+                  </div>
+                  <span className="h-[2px] w-8 rounded-full bg-primary" />
+                </div>
+      
+                <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
+                  ClickMasters operates as a full-stack <span className="font-black">{serviceName.toLowerCase()}</span> partner. Our team handles every layer of the software delivery lifecycle product strategy, UI/UX design, backend engineering, cloud infrastructure, QA, and ongoing support.
+                </p>
       </div>
+      
 
-      <p className="mt-6 text-lg text-slate-600 leading-relaxed">
-        ClickMasters operates as a full-stack <span className="font-black">{serviceName.toLowerCase()}</span> partner. Our team handles every layer of the software delivery lifecycle product strategy, UI/UX design, backend engineering, cloud infrastructure, QA, and ongoing support.
-      </p>
 
-      {/* Cards Container - 3 in a row */}
-      <div 
-        ref={cardsRef}
-        className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        {servicesCards.map((service, index) => (
-          <div
-            key={service.title}
-            className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-8 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-1 bg-gradient-to-br from-white to-orange-50/60 hover:to-orange-50"
-          >
-            {/* Top Accent */}
-            <div className="absolute top-0 left-0 h-1.5 w-0 bg-gradient-to-r from-primary to-primary transition-all duration-500 group-hover:w-full" />
 
-            <div className="relative z-10 pt-2">
-              <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">
-                {service.title}
-              </h3>
 
-              <div className="my-6 h-px bg-slate-100 group-hover:bg-orange-100 transition-colors" />
-
-              <p className="text-slate-600 leading-relaxed text-[17px]">
-                {service.description}
-              </p>
-            </div>
-          </div>
-        ))}
+      {/* Large Stacked Cards Container */}
+      <div className="mt-12">
+        <LargeStackedCards items={stackedCardsItems} />
       </div>
 
       {/* Bottom Divider */}
-      <div className="mt-16 flex items-center">
-        <div className="h-px w-full bg-gray-300" />
+      <div className="my-16 flex items-center gap-4">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
       </div>
     </section>
   );

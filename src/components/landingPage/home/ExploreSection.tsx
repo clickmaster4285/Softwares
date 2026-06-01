@@ -440,7 +440,7 @@ function GridCard({ service, index, total }: { service: ExploreItem; index: numb
 
   return (
     <div
-      className="group relative overflow-hidden rounded-2xl p-7 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col min-h-[320px]"
+      className="group relative overflow-hidden rounded-2xl p-7 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col min-h-[260px]"
       style={{ background: gradient }}
     >
       <div
@@ -465,18 +465,51 @@ function GridCard({ service, index, total }: { service: ExploreItem; index: numb
           {title}
         </h3>
 
-        {/* Description */}
-        <p className="text-[15px] leading-relaxed text-foreground/75 flex-1">
+     <p className="text-[15px] leading-relaxed text-foreground/75">
+  {desc}
+</p>
+
+<Link
+  href={href}
+  className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-foreground transition-all group-hover:gap-3 self-start"
+>
+  Learn more
+  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+</Link>
+      </div>
+    </div>
+  );
+}
+
+
+function MobileCard({ service }: { service: ExploreItem }) {
+  const { icon: Icon, title, desc, gradient, accent, href } = service;
+
+  return (
+    <div
+      className="group relative overflow-hidden rounded-3xl p-8 shadow-lg transition-all hover:shadow-xl flex flex-col min-h-[280px]"
+      style={{ background: gradient }}
+    >
+      <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-60 blur-2xl" style={{ background: accent }} />
+      
+      <div className="relative flex flex-col h-full">
+        <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/30 text-foreground ring-1 ring-white/50 backdrop-blur-md">
+          <Icon className="h-6 w-6" />
+        </div>
+
+        <h3 className="mt-6 font-serif text-2xl font-bold text-foreground leading-tight">
+          {title}
+        </h3>
+
+        <p className="mt-3 text-[15px] leading-relaxed text-foreground/80 flex-1">
           {desc}
         </p>
 
-        {/* Learn More */}
         <Link
           href={href}
-          className=" inline-flex items-center gap-2 text-sm font-semibold text-foreground transition-all group-hover:gap-3 self-start"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-foreground mt-4 group-hover:gap-3 transition-all"
         >
-          Learn more 
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
     </div>
@@ -493,8 +526,10 @@ export default function ExploreSection({ serviceData }: { serviceData?: ServiceD
   const extraServices = exploreItems.slice(8);
   const isServicePage = Boolean(serviceData);
 
-  // GSAP Animation (unchanged logic)
+  // GSAP Animation - Desktop Only
   useEffect(() => {
+    if (window.innerWidth < 768) return; // Skip animation on mobile
+
     const section = sectionRef.current;
     const inner = innerRef.current;
     if (!section || !inner) return;
@@ -536,16 +571,16 @@ export default function ExploreSection({ serviceData }: { serviceData?: ServiceD
 
     const tl = gsap.timeline({
       defaults: { ease: "none" },
-      scrollTrigger: {
-        trigger: section,
-        pin: inner,
-        start: "top top",
-        end: () => "+=" + totalSteps * stepPx(),
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-        snap: { snapTo: 1 / totalSteps, duration: 0.4, ease: "power2.inOut" },
-      },
+    scrollTrigger: {
+  trigger: section,
+  pin: inner,
+  start: "top top",
+  end: () => "+=" + totalSteps * stepPx() * 0.65,
+  scrub: 0.8,
+  invalidateOnRefresh: true,
+  anticipatePin: 1,
+  snap: { snapTo: 1 / totalSteps, duration: 0.4, ease: "power2.inOut" },
+},
     });
 
     cards.forEach((card, i) => {
@@ -570,79 +605,135 @@ export default function ExploreSection({ serviceData }: { serviceData?: ServiceD
     };
   }, [exploreItems.length]);
 
-  return (
+       return (
     <section
       ref={sectionRef}
       id="services"
       className="relative overflow-hidden bg-foreground text-background py-14"
     >
-      {/* Pinned GSAP Area */}
-      <div ref={innerRef} className="relative min-h-screen">
-        <div className="pointer-events-none absolute inset-0 [perspective:1600px] [transform-style:preserve-3d]">
-          {animatedServices.map(({ icon: Icon, title, desc, gradient, accent, href }, i) => (
-            <div
-              key={`${title}-${i}`}
-              data-depth-card
-              data-origin={origins[i % origins.length]}
-              className="pointer-events-auto absolute w-[520px] md:w-[560px] lg:w-[600px] min-h-[420px] overflow-hidden rounded-3xl p-10 shadow-2xl shadow-black/30"
-              style={{ background: gradient }}
-            >
-              <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-60 blur-3xl" style={{ background: accent }} />
-              <div className="absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-white/50 opacity-40 blur-3xl" />
+      {/* Desktop: GSAP Animated Section (First 8) */}
+      <div className="hidden md:block">
+        <div ref={innerRef} className="relative h-screen">
+          <div className="pointer-events-none absolute inset-0 [perspective:1600px] [transform-style:preserve-3d]">
+            {animatedServices.map(({ icon: Icon, title, desc, gradient, accent, href }, i) => (
+              <div
+                key={`${title}-${i}`}
+                data-depth-card
+                data-origin={origins[i % origins.length]}
+                className="pointer-events-auto absolute w-[520px] md:w-[560px] lg:w-[600px] min-h-[420px] overflow-hidden rounded-3xl p-10 shadow-2xl shadow-black/30"
+                style={{ background: gradient }}
+              >
+                <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-60 blur-3xl" style={{ background: accent }} />
+                <div className="absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-white/50 opacity-40 blur-3xl" />
 
-              <div className="relative">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/40 text-foreground ring-1 ring-white/60 backdrop-blur-md">
-                  <Icon className="h-7 w-7" />
+                <div className="relative">
+                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/40 text-foreground ring-1 ring-white/60 backdrop-blur-md">
+                    <Icon className="h-7 w-7" />
+                  </div>
+                  <div className="mt-5 text-sm font-semibold tracking-[0.3em] text-foreground/60">
+                    {String(i + 1).padStart(2, "0")} / {String(exploreItems.length).padStart(2, "0")}
+                  </div>
+                  <h3 className="mt-2 font-serif text-2xl lg:text-3xl font-bold leading-tight text-foreground">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-2xl leading-relaxed text-foreground/80">{desc}</p>
+                  <Link
+                    href={href}
+                    className="mt-5 inline-flex items-center gap-2 text-xl font-semibold text-foreground hover:gap-3 transition-all"
+                  >
+                    Learn more <ArrowRight className="h-5 w-5" />
+                  </Link>
                 </div>
-                <div className="mt-5 text-sm font-semibold tracking-[0.3em] text-foreground/60">
-                  {String(i + 1).padStart(2, "0")} / {String(exploreItems.length).padStart(2, "0")}
-                </div>
-                <h3 className="mt-2 font-serif text-2xl lg:text-3xl font-bold leading-tight text-foreground">
-                  {title}
-                </h3>
-                <p className="mt-3 text-2xl leading-relaxed text-foreground/80">{desc}</p>
-                <Link
-                  href={href}
-                  className="mt-5 inline-flex items-center gap-2 text-xl font-semibold text-foreground hover:gap-3 transition-all"
-                >
-                  Learn more <ArrowRight className="h-5 w-5" />
-                </Link>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ==================== MOBILE ==================== */}
+      <div className="md:hidden px-5">
+        <div className="grid grid-cols-1 gap-6">
+          {exploreItems.slice(0, 4).map((service) => (
+            <MobileCard key={service.id} service={service} />
           ))}
         </div>
-      </div>
 
-      {/* See More Section */}
-      <div className="relative z-10 bg-foreground px-6 pb-20">
-        <div className="mx-auto max-w-[1600px]">
-          {/* Toggle Button */}
-          <div className="flex justify-center mb-12">
+        {/* See More Button */}
+        {!expanded && exploreItems.length > 4 && (
+          <div className="flex justify-center mt-12">
             <button
-              onClick={() => setExpanded((v) => !v)}
+              onClick={() => setExpanded(true)}
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-3.5 text-sm font-semibold text-background backdrop-blur-md transition hover:bg-white/20 hover:scale-105"
             >
-              {expanded ? (
-                <>See Less <ChevronUp className="h-4 w-4" /></>
-              ) : (
-                <>
-                  {isServicePage ? 'See More Specializations' : 'See More Services'} <ChevronDown className="h-4 w-4" />
-                  <span className="ml-1 rounded-full bg-primary/30 px-2 py-0.5 text-xs">+{extraServices.length}</span>
-                </>
-              )}
+              See More Services <ChevronDown className="h-4 w-4" />
+              <span className="ml-1 rounded-full bg-primary/30 px-2 py-0.5 text-xs">+{exploreItems.length - 4}</span>
             </button>
           </div>
+        )}
 
-          {/* Grid */}
-          {expanded && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {extraServices.map((service, i) => (
-                <GridCard key={service.id} service={service} index={i} total={exploreItems.length} />
+        {/* All remaining cards together */}
+        {expanded && (
+          <>
+            <div className="grid grid-cols-1 gap-6 mt-8">
+              {exploreItems.slice(4).map((service) => (
+                <MobileCard key={service.id} service={service} />
               ))}
             </div>
-          )}
-        </div>
+
+            {/* See Less at the END */}
+            <div className="flex justify-center mt-12">
+              <button
+                onClick={() => setExpanded(false)}
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-3.5 text-sm font-semibold text-background backdrop-blur-md transition hover:bg-white/20 hover:scale-105"
+              >
+                See Less <ChevronUp className="h-4 w-4" />
+              </button>
+            </div>
+          </>
+        )}
       </div>
+
+      {/* ==================== DESKTOP EXTRA SERVICES - FIXED SPACING ==================== */}
+      {extraServices.length > 0 && (
+        <div className="hidden md:block relative z-10 bg-foreground px-6 pb-16">
+          <div className="mx-auto max-w-[1600px]">
+            
+            {/* See More Button */}
+            {!expanded && (
+              <div className="flex justify-center mb-12">
+                <button
+                  onClick={() => setExpanded(true)}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-3.5 text-sm font-semibold text-background backdrop-blur-md transition hover:bg-white/20 hover:scale-105"
+                >
+                  See More Services <ChevronDown className="h-4 w-4" />
+                  <span className="ml-1 rounded-full bg-primary/30 px-2 py-0.5 text-xs">+{extraServices.length}</span>
+                </button>
+              </div>
+            )}
+
+            {/* Extra Cards + See Less at the bottom */}
+            {expanded && (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {extraServices.map((service, i) => (
+                    <GridCard key={service.id} service={service} index={i} total={exploreItems.length} />
+                  ))}
+                </div>
+
+                {/* See Less Button at the END */}
+                <div className="flex justify-center mt-16">
+                  <button
+                    onClick={() => setExpanded(false)}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-3.5 text-sm font-semibold text-background backdrop-blur-md transition hover:bg-white/20 hover:scale-105"
+                  >
+                    See Less <ChevronUp className="h-4 w-4" />
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

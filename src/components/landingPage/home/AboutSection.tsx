@@ -55,12 +55,12 @@ export function AboutSection() {
 
       {/* Sticky centered label - ABOVE the grid */}
       <div className=" z-10 flex justify-center pt-8 pb-4 ">
-        <div className="inline-flex items-center gap-1.5">
+        <div className="flex max-w-full flex-wrap items-center justify-center gap-1.5 px-4">
 
-           <span className="h-[2px] w-8 rounded-full bg-primary" />
+           <span className="hidden h-[2px] w-8 rounded-full bg-primary sm:block" />
           <SplitText
             text="About ClickMasters"
-            className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+            className="text-center text-xl font-bold uppercase tracking-[0.12em] text-primary sm:text-2xl sm:tracking-[0.25em] md:text-3xl"
             delay={60}
             duration={0.8}
             ease="power3.out"
@@ -69,7 +69,7 @@ export function AboutSection() {
             to={{ opacity: 1, x: 0 }}
             threshold={0.2}
           />
- <span className="h-[2px] w-8 rounded-full bg-primary" />
+ <span className="hidden h-[2px] w-8 rounded-full bg-primary sm:block" />
         </div>
       </div>
 
@@ -81,7 +81,7 @@ export function AboutSection() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-start">
 
           {/* LEFT COPY (sticky) */}
-          <div className="lg:sticky lg:top-24 lg:self-start pt-24 space-y-5 max-w-2xl">
+          <div className="min-w-0 max-w-2xl space-y-5 pt-10 lg:sticky lg:top-24 lg:self-start lg:pt-24">
             {/* About label removed from here */}
 
             <h2 className="font-display text-3xl font-bold tracking-tight sm:text-2xl lg:text-5xl leading-tight">

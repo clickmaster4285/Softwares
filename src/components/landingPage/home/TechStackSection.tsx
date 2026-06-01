@@ -220,7 +220,7 @@ export function TechStackSection() {
 
   return (
 <div
-  className="py-16 lg:py-24 lg:px-12"
+  className="py-16 lg:py-24 lg:px-12 sm:px-6 px-4"
   ref={ref}
   style={{
     backgroundColor: "#FFFEFC",

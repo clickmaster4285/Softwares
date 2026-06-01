@@ -160,7 +160,7 @@ const AppsSection = dynamic(
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-clip">
       <SchemaMarkup data={organizationSchema} />
       <SchemaMarkup data={homepageServiceSchema} />
       <SchemaMarkup data={homepageFaqSchema} />
@@ -171,7 +171,7 @@ export default function LandingPage() {
 
 
       {/* Content - starts TRANSPARENT, becomes white as you scroll */}
-      <div className="relative z-20 ">
+      <div className="relative z-20 w-full overflow-x-clip">
         
         {/* White background starts building from here */}
         <div className="">

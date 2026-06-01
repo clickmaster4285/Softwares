@@ -152,7 +152,7 @@ export function TestimonialsSection() {
      <div 
     className="pointer-events-none absolute bottom-[-180px] left-1/4 h-[480px] w-[480px] rounded-full bg-[#a7f3d0] opacity-20 blur-3xl" 
   />
-      <div className="mx-auto max-w-[1600px] px-12 ">
+      <div className="mx-auto max-w-[1600px] lg:px-12 sm:px-6 px-4">
 
         {/* HEADER */}
         <div className="text-center mb-14">
