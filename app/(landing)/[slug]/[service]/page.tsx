@@ -94,6 +94,22 @@ export default async function ServiceByCategoryPage({ params }: Props) {
     return text.replace(regex, '<strong>$1</strong>');
   };
 
+  // Sanitize HTML coming from CMS or data sources to avoid injecting full
+  // documents (<!DOCTYPE>, <html>, <head>, <body>) into the page which can
+  // cause duplicate <head> tags. This strips those wrappers while preserving
+  // allowed inner HTML.
+  const sanitizeInjectedHtml = (html?: string) => {
+    if (!html) return '';
+    return String(html)
+      .replace(/<!doctype [^>]*>/gi, '')
+      .replace(/<html[^>]*>/gi, '')
+      .replace(/<\/html>/gi, '')
+      .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, '')
+      .replace(/<body[^>]*>/gi, '')
+      .replace(/<\/body>/gi, '')
+      .trim();
+  };
+
   // Standardized TOC items built dynamically
   const tocItems = [
     { id: 'overview', title: 'Overview', level: 2 as const },
@@ -219,11 +235,43 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
 
               {/* Section Content */}
-              
-           <SectionContent sections={sections} serviceName={page.serviceName} />
+              {sections.map((section, index) => (
+                <section
+                  key={section.heading}
+                  id={getSectionId(section.heading, index)}
+                  className="scroll-mt-24"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-1 rounded-full bg-primary" />
+                    <h2 
+                      className="text-2xl font-semibold text-slate-900 sm:text-3xl"
+                      dangerouslySetInnerHTML={{ __html: sanitizeInjectedHtml(makeBoldServiceName(section.heading, page.serviceName)) }}
+                    />
+                  </div>
 
-              
-
+                  <div className="mt-6 space-y-4 text-slate-600 leading-relaxed">
+                    <p 
+                      className="text-lg whitespace-pre-line"
+                      dangerouslySetInnerHTML={{ __html: sanitizeInjectedHtml(makeBoldServiceName(section.body, page.serviceName)) }}
+                    />
+                    
+                    {/* Render items if present in section */}
+                    {section.items && (
+                      <ul className="mt-6 space-y-4">
+                        {section.items.map((item, i) => (
+                          <li key={i} className="flex gap-3">
+                            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
+                              <Star className="h-3 w-3 fill-current" />
+                            </div>
+                            <span 
+                              className="italic"
+                              dangerouslySetInnerHTML={{ __html: sanitizeInjectedHtml(makeBoldServiceName(item, page.serviceName)) }}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
 
 
                 <div className="my-6 flex items-center">
