@@ -424,7 +424,7 @@ const { data: blogs = [] } = useQuery({
             <button
               onClick={handleSolutionsClick}
               className={cn(
-                'text-lg font-bold transition-colors flex items-center gap-1',
+                'text-lg transition-colors flex items-center gap-1',
                 activeDropdown === 'solutions'
                   ? 'text-primary'
                   : isPageLoading
@@ -453,7 +453,7 @@ const { data: blogs = [] } = useQuery({
             <button
               onClick={handleServicesClick}
               className={cn(
-                'text-lg font-bold transition-colors flex items-center gap-1',
+                'text-lg  transition-colors flex items-center gap-1',
                 activeDropdown === 'services'
                   ? 'text-primary'
                   : isPageLoading
@@ -486,7 +486,7 @@ const { data: blogs = [] } = useQuery({
       // or router.push('/case-studies') if you prefer
     }}
     className={cn(
-      'text-lg font-bold transition-colors flex items-center gap-1',
+      'text-lg  transition-colors flex items-center gap-1',
       activeDropdown === 'resources'
         ? 'text-primary'
         : isPageLoading
@@ -522,7 +522,7 @@ const { data: blogs = [] } = useQuery({
             <button
               onClick={handleHireUsClick}
               className={cn(
-                'text-lg font-bold transition-colors flex items-center gap-1',
+                'text-lg transition-colors flex items-center gap-1',
                 activeDropdown === 'hire-us'
                   ? 'text-primary'
                   : isPageLoading
@@ -548,7 +548,7 @@ const { data: blogs = [] } = useQuery({
             href="/about-us"
             onClick={closeDropdowns}
             className={cn(
-              'text-lg font-bold transition-colors',
+              'text-lg  transition-colors',
               linkStyle(isActivePath('/about-us'))
             )}
           >
@@ -559,7 +559,7 @@ const { data: blogs = [] } = useQuery({
             href="/contact-us"
             onClick={closeDropdowns}
             className={cn(
-              'text-lg font-bold transition-colors',
+              'text-lg  transition-colors',
               linkStyle(isActivePath('/contact-us'))
             )}
           >
@@ -574,7 +574,7 @@ const { data: blogs = [] } = useQuery({
           >
             <button
               className={cn(
-                'text-lg font-bold transition-colors flex items-center gap-1',
+                'text-lg transition-colors flex items-center gap-1',
                 activeDropdown === 'locations'
                   ? 'text-primary'
                   : isPageLoading

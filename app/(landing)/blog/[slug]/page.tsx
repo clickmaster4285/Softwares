@@ -6,7 +6,7 @@ import { ArrowLeft, Clock3, RefreshCcw, ExternalLink } from 'lucide-react';
 import BlogPost from '../../../../lib/models/BlogPost';
 import dbConnect from '../../../../lib/mongoose';
 import { calculateReadTimeText } from '../../../../src/lib/readTime';
-import { resolveImageUrl } from '../../../../lib/utils';
+import { resolveImageUrl } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import BlogToc from '@/components/blog/BlogToc';
 import BlogCta from '@/components/blog/BlogCta'; // Import the Client Component

@@ -318,7 +318,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 backdrop-blur-sm bg-white/5">
                   <Image
-                    src="/images/hero-img.png"
+                    src="/images/locationImg.webp"
                     alt={page.title}
                     width={600}
                     height={600}

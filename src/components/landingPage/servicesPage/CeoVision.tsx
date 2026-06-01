@@ -78,7 +78,7 @@ export function CeoVision() {
                 { value: "98%", label: "Retention" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <p className="text-xl md:text-2xl font-bold text-orange-600">{stat.value}</p>
+                  <p className="text-xl md:text-2xl font-bold text-primary">{stat.value}</p>
                   <p className="text-[10px] uppercase tracking-widest text-zinc-500 mt-0.5">
                     {stat.label}
                   </p>

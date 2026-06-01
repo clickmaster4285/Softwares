@@ -1,7 +1,6 @@
-// components/landingPage/servicesPage/IndustriesSection.tsx
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import {
   Heart,
   Landmark,
@@ -12,6 +11,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import SplitText from "../../ui/SplitText";
+
 interface IndustryUseCase {
   name: string;
 }
@@ -20,200 +21,154 @@ interface IndustriesSectionProps {
   industryUseCases: IndustryUseCase[];
 }
 
-// Icon mapping matching your exact industry names
+/* ---------------- ICON MAP ---------------- */
 const iconMap: Record<string, LucideIcon> = {
-  'Manufacturing & Industrial Operations': Factory,
-  'Healthcare & MedTech': Heart,
-  'Logistics & Supply Chain': Truck,
-  'Fintech & Financial Services': Landmark,
-  'Real Estate & PropTech': Building2,
-  'SaaS & Technology Companies': Cpu,
-  'Manufacturing': Factory,
-  'Healthcare': Heart,
-  'Logistics': Truck,
-  'Fintech': Landmark,
-  'Real Estate': Building2,
-  'SaaS': Cpu,
-  'Technology': Cpu,
+  "Manufacturing & Industrial Operations": Factory,
+  "Healthcare & MedTech": Heart,
+  "Logistics & Supply Chain": Truck,
+  "Fintech & Financial Services": Landmark,
+  "Real Estate & PropTech": Building2,
+  "SaaS & Technology Companies": Cpu,
+  Manufacturing: Factory,
+  Healthcare: Heart,
+  Logistics: Truck,
+  Fintech: Landmark,
+  "Real Estate": Building2,
+  SaaS: Cpu,
+  Technology: Cpu,
 };
 
-// Different color gradients for each industry
-const colorMap: Record<string, { from: string; to: string; iconFrom: string; iconTo: string }> = {
-  'Manufacturing & Industrial Operations': {
-    from: 'from-blue-500',
-    to: 'to-cyan-500',
-    iconFrom: 'from-blue-600',
-    iconTo: 'to-cyan-600'
-  },
-  'Healthcare & MedTech': {
-    from: 'from-emerald-500',
-    to: 'to-teal-500',
-    iconFrom: 'from-emerald-600',
-    iconTo: 'to-teal-600'
-  },
-  'Logistics & Supply Chain': {
-    from: 'from-primary',
-    to: 'to-red-500',
-    iconFrom: 'from-orange-600',
-    iconTo: 'to-red-600'
-  },
-  'Fintech & Financial Services': {
-    from: 'from-purple-500',
-    to: 'to-pink-500',
-    iconFrom: 'from-purple-600',
-    iconTo: 'to-pink-600'
-  },
-  'Real Estate & PropTech': {
-    from: 'from-primary',
-    to: 'to-yellow-500',
-    iconFrom: 'from-amber-600',
-    iconTo: 'to-yellow-600'
-  },
-  'SaaS & Technology Companies': {
-    from: 'from-indigo-500',
-    to: 'to-violet-500',
-    iconFrom: 'from-indigo-600',
-    iconTo: 'to-violet-600'
-  },
-  // Default fallback
-  'default': {
-    from: 'from-slate-500',
-    to: 'to-gray-500',
-    iconFrom: 'from-slate-600',
-    iconTo: 'to-gray-600'
-  }
-};
+const getIcon = (name: string): LucideIcon => iconMap[name] || Building2;
 
-const getColors = (industryName: string) => {
-  if (colorMap[industryName]) {
-    return colorMap[industryName];
-  }
-  return colorMap.default;
-};
+/* ---------------- INVIEW HOOK ---------------- */
+function useInView(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
 
-const getIcon = (industryName: string): LucideIcon => {
-  if (iconMap[industryName]) {
-    return iconMap[industryName];
-  }
-  return Building2;
-};
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
 
-export const IndustriesSection = ({ industryUseCases }: IndustriesSectionProps) => {
-  if (!industryUseCases || industryUseCases.length === 0) return null;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold }
+    );
+
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+
+  return { ref, visible };
+}
+
+/* ---------------- CARD ---------------- */
+function IndustryCard({
+  name,
+  index,
+  visible,
+}: {
+  name: string;
+  index: number;
+  visible: boolean;
+}) {
+  const Icon = getIcon(name);
 
   return (
-    <motion.section 
-      id="industries" 
-      className="scroll-mt-24"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+    <div
+      className="group relative bg-white/40 hover:bg-white transition-colors duration-200 p-8 flex flex-col items-center justify-center gap-5 min-h-[180px]"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transition: `opacity 0.4s ease ${index * 60}ms, transform 0.4s ease ${index * 60}ms`,
+      }}
     >
-      <div className="flex items-center gap-3">
-        <motion.div
-          initial={{ height: 0 }}
-          whileInView={{ height: 40 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="h-10 w-1 rounded-full bg-gradient-to-b from-primary to-primary"
-        />
-        <motion.h2 
-          className="text-2xl font-semibold text-slate-900 sm:text-3xl"
-          initial={{ scale: 0.8, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          Industry-Specific Expertise
-        </motion.h2>
+      {/* bottom hover line */}
+      <span
+        className="absolute bottom-0 left-0 w-full h-[3px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+      />
+
+      {/* icon */}
+      <div className="w-16 h-16 flex items-center justify-center rounded-xl group-hover:bg-primary/10 transition-all duration-200">
+        <Icon size={28} className="text-primary" strokeWidth={1.5} />
       </div>
 
-      <motion.p 
-        className="mt-4 text-lg text-slate-600 leading-relaxed"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        Deep expertise across various sectors with tailored solutions
-      </motion.p>
+      {/* text */}
+      <div className="text-center">
+        <p className="text-xl font-semibold text-gray-900 leading-snug">
+          {name}
+        </p>
+      </div>
+    </div>
+  );
+}
 
-      {/* Square Card Grid - 1:1 aspect ratio */}
-     <div className="mt-10 grid gap-6 grid-cols-1 md:grid-cols-4 lg:grid-cols-6">
-  {industryUseCases.map((useCase, index) => {
-    const Icon = getIcon(useCase.name);
-    const colors = getColors(useCase.name);
-    
-    return (
-      <motion.div
-        key={useCase.name}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        whileHover={{ y: -8 }}
-        className="group"
-      >
-        <div className="relative rounded-2xl bg-white p-6 text-left border border-slate-200 transition-all duration-300 hover:shadow-xl overflow-hidden h-full">
-          {/* Square aspect ratio container */}
-          <div className="flex flex-col h-full items-center">
-            {/* Animated Background Gradient on Hover - Industry specific color */}
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-5"
-              style={{
-                background: `linear-gradient(to bottom right, ${colors.from.replace('from-', '')}, ${colors.to.replace('to-', '')})`
-              }}
-            />
-            
-            {/* Icon Container with Industry Specific Color - Centered */}
-            <motion.div 
-              className="relative mb-4"
-              whileHover={{ scale: 1.05, x: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="relative inline-block">
-                {/* Glow Effect - Industry specific */}
-                <motion.div 
-                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${colors.from} ${colors.to} blur-xl`}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileHover={{ opacity: 0.4, scale: 1.5 }}
-                  transition={{ duration: 0.4 }}
-                />
-                {/* Icon Background - Industry specific gradient */}
-                <div className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${colors.iconFrom} ${colors.iconTo} shadow-lg`}>
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent" />
-                  <Icon className="relative h-7 w-7 text-white drop-shadow-md" />
-                </div>
-              </div>
-            </motion.div>
+/* ---------------- SECTION ---------------- */
+export const IndustriesSection = ({
+  industryUseCases,
+}: IndustriesSectionProps) => {
+  const { ref, visible } = useInView();
 
-            {/* Industry Name - Centered */}
-            <h3 className="text-lg font-semibold text-slate-800 transition-colors duration-300 text-center">
-              {useCase.name}
-            </h3>
+  if (!industryUseCases?.length) return null;
 
-            {/* Decorative Line - Centered */}
-            <motion.div 
-              className={`mt-3 h-0.5 w-12 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full mx-auto`}
-            />
+  return (
+    <section ref={ref} className="relative w-full bg-[#f5fbfb] py-14">
+      
+      <div
+    className="absolute inset-0 opacity-[0.45]"
+    style={{
+      backgroundImage: `
+        linear-gradient(to right, rgba(15,23,42,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15,23,42,0.06) 1px, transparent 1px)
+      `,
+      backgroundSize: "48px 48px",
+    }}
+  />
+
+      <div className="mx-auto max-w-[1600px] px-6 lg:px-8">
+        {/* ✅ EXACT SAME HEADER STYLE (Split header like TrustedClients) */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-[2px] w-8 rounded-full bg-primary" />
+
+            <div className="inline-flex items-center gap-1.5 mt-6">
+              <SplitText
+                text="Industry Expertise"
+                className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+                delay={60}
+                duration={0.8}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, x: 60 }}
+                to={{ opacity: 1, x: 0 }}
+                threshold={0.2}
+              />
+            </div>
+
+            <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
-        </div>
-      </motion.div>
-    );
-  })}
-</div>
 
-      {/* Bottom Divider with Animation */}
-      <motion.div 
-        className="my-16 flex items-center gap-4"
-        initial={{ opacity: 0, scaleX: 0 }}
-        whileInView={{ opacity: 1, scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-      >
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-      </motion.div>
-    </motion.section>
+          <p className="text-gray-800 max-w-2xl mx-auto text-base md:text-lg">
+            Deep expertise across multiple industries with tailored AI and software solutions
+          </p>
+        </div>
+
+        {/* GRID SAME STYLE */}
+        <div className="border border-gray-200 rounded-xl overflow-hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 divide-x divide-y divide-gray-200">
+          {industryUseCases.map((item, idx) => (
+            <IndustryCard
+              key={item.name}
+              name={item.name}
+              index={idx}
+              visible={visible}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };

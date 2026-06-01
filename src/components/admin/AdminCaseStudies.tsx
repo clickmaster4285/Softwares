@@ -28,7 +28,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { CaseStudy, Project } from '../../../lib/storage';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
-import { resolveImageUrl, getCategoryName } from '../../../lib/utils';
+import { resolveImageUrl, getCategoryName } from '@/lib/utils';
 import Link from 'next/link';
 
 function rowId(p: { _id?: string; id?: string }) {

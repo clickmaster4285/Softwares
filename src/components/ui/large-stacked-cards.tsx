@@ -268,7 +268,7 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
             </p>
 
             {/* Optional bullet points or features */}
-            {item.features && (
+            {/* {item.features && (
               <ul style={{ marginTop: "1rem", marginBottom: "1rem" }}>
                 {item.features.map((feature, idx) => (
                   <li key={idx} style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem", fontSize: "0.95rem", color: "rgba(0,0,0,0.6)" }}>
@@ -277,7 +277,7 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
                   </li>
                 ))}
               </ul>
-            )}
+            )} */}
 
             {/* CTA - larger */}
             {item.cta && (

@@ -109,17 +109,7 @@ const serviceData = servicesByCountry[country.name] || [];
       <CTASectionImage />
       <SolutionsPage />
 
-      <WhyChooseUs
-        countryName={country.name}
-        items={[
-          { title: 'Agile Development', desc: 'Flexible and iterative approach for faster delivery' },
-          { title: 'Dedicated Teams', desc: 'Focused experts committed to your project success' },
-          { title: 'Transparent Communication', desc: 'Regular updates and complete project visibility' },
-          { title: 'Timezone Flexibility', desc: 'Working hours aligned with your business needs' },
-          { title: 'Scalable Architecture', desc: 'Future-proof solutions that grow with your business' },
-          { title: 'Ongoing Support', desc: 'Comprehensive maintenance and continuous improvement' },
-        ]}
-      />
+      <WhyChooseUs />
 
       <ProjectCTAHero
         variant="combined"

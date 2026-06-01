@@ -16,7 +16,7 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { CaseStudy, Project } from '../../../lib/storage';
-import { resolveImageUrl } from '../../../lib/utils';
+import { resolveImageUrl } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { compressAndConvertImage, getImageDimensions } from '../../../src/utils/imageUtils';
 

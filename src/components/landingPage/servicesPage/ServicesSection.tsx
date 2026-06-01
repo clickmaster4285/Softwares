@@ -29,10 +29,21 @@ export const ServicesSection = ({ serviceName, servicesCards }: ServicesSectionP
   }));
 
   return (
-    <section id="our-services" className="scroll-mt-24">
+    <section id="our-services" className="relative w-full bg-[#f5fbfb] py-14">
 
 
 
+    {/* Background Blobs */}
+    <div
+    className="absolute inset-0 opacity-[0.45]"
+    style={{
+      backgroundImage: `
+        linear-gradient(to right, rgba(15,23,42,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15,23,42,0.06) 1px, transparent 1px)
+      `,
+      backgroundSize: "48px 48px",
+    }}
+  />
 
         <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
                 <div className="inline-flex items-center gap-2 mb-3">

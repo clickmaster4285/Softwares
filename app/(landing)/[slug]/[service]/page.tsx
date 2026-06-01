@@ -32,6 +32,8 @@ import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights
 import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
 import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
 import { SectionContent } from '@/src/components/landingPage/servicesPage/SectionContent';
+import SolutionsPage from '@/src/components/landingPage/home/Solutions';
+import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -195,23 +197,34 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         }}
       />
 
-      <div className="min-h-screen text-slate-900">
+      <div className="min-h-screen text-slate-900 bg-[#f5fbfb]">
 
 
     <ServiceHero page={page} />
 
 
+
         {/* Main Content with Table of Contents */}
        <div className="mx-auto max-w-[1600px] px-6 lg:px-10">
     
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12 lg:gap-16">
+          
+
+
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12 lg:gap-16  ">
       
+            
       {/* MAIN CONTENT */}
             <main className="py-10 lg:py-12 min-w-0">
               
 
+
               {/* Section Content */}
+              
            <SectionContent sections={sections} serviceName={page.serviceName} />
+
+              
+
+
 
                 <div className="my-6 flex items-center">
                             <div className="h-px w-full " />
@@ -233,7 +246,8 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   />
 )}
 
-             
+              <SolutionsPage />    
+              
 {/* Launch Readiness Checklist */}
 {page.checklist && (
   <EngineeringBaseline 
@@ -256,6 +270,9 @@ export default async function ServiceByCategoryPage({ params }: Props) {
            {page.industryUseCases && (
                 <IndustriesSection industryUseCases={page.industryUseCases} />
               )}
+
+
+
 
             {page.pricingTiers && (
   <PricingSection 
@@ -313,8 +330,10 @@ export default async function ServiceByCategoryPage({ params }: Props) {
    <TestimonialsSection />
 
 
-              {/* Case Study Section */}
-              <FeaturedInsights />
+           
+
+              
+             
 
               {/* FAQ Section */}
             {faqs.length > 0 && <FAQSection faqs={faqs} />}
@@ -336,17 +355,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
       
       
         {/* Footer CTA */}
-        <section className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white py-20">
-          <div className="mx-auto max-w-5xl px-5 text-center md:px-8">
-            <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
-              Explore Related Capabilities
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-              Discover how we can help transform your business through our comprehensive services,
-              real-world case studies, or our full solutions portfolio.
-            </p>
-                      </div>
-        </section>
+        <CTASectionImage/>
       </div>
     </>
   );
