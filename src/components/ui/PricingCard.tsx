@@ -71,36 +71,36 @@ export function PricingCard({
       </div>
 
       {/* Price */}
-      <div className={`mb-2 font-black tracking-tight ${highlighted ? "text-5xl text-primary" : "text-4xl text-black"}`}>
+      <div className={`mb-2 font-black tracking-tight ${highlighted ? "text-3xl text-primary" : "text-2xl text-black"}`}>
         {!hasValidPrice ? (
           "Custom"
         ) : hasRange ? (
-          `AUD ${price.toLocaleString()} – ${originalPrice!.toLocaleString()}`
+          ` ${price.toLocaleString()} – ${originalPrice!.toLocaleString()}`
         ) : (
-          `AUD ${price.toLocaleString()}`
+          ` ${price.toLocaleString()}`
         )}
       </div>
 
    
 
-      <p className={`text-md mb-4 mt-2 ${highlighted ? "text-black/60" : "text-black/60"}`}>
+      <p className={`text-md mb-4 mt-2 ${highlighted ? "text-gray-800" : "text-gray-800"}`}>
         {description}
       </p>
 
-      <Separator className={`mb-5 ${highlighted ? "bg-primary/20" : "bg-black/10"}`} />
+      {/* <Separator className={`mb-5 ${highlighted ? "bg-primary/20" : "bg-black/10"}`} /> */}
 
       {/* Features */}
       <div className="space-y-5 mb-6">
         {features.map((feature, featureIndex) => (
           <div key={featureIndex}>
-            <h4 className={`font-semibold text-sm mb-3 ${highlighted ? "text-primary/80" : "text-black/70"}`}>
+            <h4 className={`font-semibold text-sm mb-3 ${highlighted ? "text-primary/80" : "text-gray-800"}`}>
               {feature.title}
             </h4>
             <ul className="space-y-2">
               {feature.items.map((item: string, i: number) => (
                 <li key={i} className="flex items-start gap-2 text-sm">
-                  <Check className={`h-4 w-4 mt-0.5 flex-shrink-0 ${highlighted ? "text-primary" : "text-black"}`} />
-                  <span className="text-black/70">
+                  <Check className={`h-4 w-4 mt-0.5 text-primary flex-shrink-0 ${highlighted ? "text-primary" : "text-black"}`} />
+                  <span className="text-gray-800">
                     {item}
                   </span>
                 </li>

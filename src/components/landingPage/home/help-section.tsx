@@ -110,7 +110,7 @@ export function HelpSection() {
     <section
       ref={sectionRef}
       id="help"
-      className="relative py-24 overflow-hidden bg-white font-sans lg:px-12 "
+      className="relative py-24 overflow-hidden bg-white font-sans lg:px-12 sm:px-6 px-4"
     >
       <div className="relative z-10 mx-auto max-w-[1600px]">
         

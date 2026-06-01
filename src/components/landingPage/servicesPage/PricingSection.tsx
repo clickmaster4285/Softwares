@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { PricingCard } from "@/components/ui/PricingCard";
 import { useState } from "react";
+import SplitText from "../../ui/SplitText";
 
 interface PricingTier {
   type: string;
@@ -37,23 +38,16 @@ const parseInvestment = (value: string) => {
   return { min: numbers[0], max: numbers[0], isCustom };
 };
 
-const chunkArray = <T,>(array: T[], size: number): T[][] => {
-  const chunks: T[][] = [];
-  for (let i = 0; i < array.length; i += size) {
-    chunks.push(array.slice(i, i + size));
-  }
-  return chunks;
-};
-
 export function PricingSection({ serviceName, pricingTiers }: PricingSectionProps) {
-  const CHUNK_SIZE = 6;
-  const pricingChunks = chunkArray(pricingTiers, CHUNK_SIZE);
-  const [activePage, setActivePage] = useState(0);
-  const activeTiers = pricingChunks[activePage] || [];
+  const INITIAL_VISIBLE = 3;
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
+  
+  const visibleTiers = pricingTiers.slice(0, visibleCount);
+  const hasMore = visibleCount < pricingTiers.length;
 
   if (!pricingTiers || pricingTiers.length === 0) return null;
 
-  const pricingCardsData = activeTiers
+  const pricingCardsData = visibleTiers
     .map((tier) => {
       const parsed = parseInvestment(tier.investment);
       if (!parsed) return null;
@@ -94,6 +88,10 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
     })
     .filter(Boolean);
 
+  const handleSeeMore = () => {
+    setVisibleCount(prev => Math.min(prev + 3, pricingTiers.length));
+  };
+
   return (
     <motion.section
       id="pricing"
@@ -103,71 +101,85 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
+
+
+      
       {/* ================= HEADER ================= */}
-      <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
-        <div className="inline-flex items-center gap-2 mb-3">
-          <span className="h-[2px] w-8 rounded-full bg-primary" />
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-            Pricing
-          </p>
-          <span className="h-[2px] w-8 rounded-full bg-primary" />
-        </div>
-
-        <motion.h2
-          className="mt-5 font-display text-3xl font-bold tracking-tight text-slate-900"
-          initial={{ scale: 0.9, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="font-black">{serviceName}</span> Development Pricing
-        </motion.h2>
-
-        <motion.p
-          className="mx-auto mt-5 max-w-2xl text-base sm:text-lg text-slate-600"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          Transparent pricing tailored to your business needs
-        </motion.p>
-      </div>
+          <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
+                      <div className="inline-flex items-center gap-2 mb-3">
+                        <span className="h-[2px] w-8 rounded-full bg-primary" />
+                        <div className="inline-flex items-center gap-1.5">
+                          <SplitText
+                            text={`${serviceName} Pricing`}
+                            className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+                            delay={60}
+                            duration={0.8}
+                            ease="power3.out"
+                            splitType="words"
+                            from={{ opacity: 0, x: 60 }}
+                            to={{ opacity: 1, x: 0 }}
+                            threshold={0.2}
+                          />
+                        </div>
+                        <span className="h-[2px] w-8 rounded-full bg-primary" />
+                      </div>
+            
+                      <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
+                         Transparent pricing tailored to your business needs
+                      </p>
+            </div>
 
       {/* ================= CARDS ================= */}
-      <div className="mt-6 mx-auto max-w-[1600px]   p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
+      <div className="mt-6 mx-auto max-w-[1600px] p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
         {pricingCardsData.map((cardData, index) => (
-          <PricingCard
+          <motion.div
             key={index}
-            title={cardData?.title ?? ""}
-            description={cardData?.description ?? ""}
-            price={cardData?.price ?? 0}
-            originalPrice={cardData?.originalPrice}
-            features={cardData?.features ?? []}
-            buttonText={cardData?.buttonText}
-            onButtonClick={cardData?.onButtonClick}
-            highlighted={index === 1}
-          />
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+          >
+            <PricingCard
+              title={cardData?.title ?? ""}
+              description={cardData?.description ?? ""}
+              price={cardData?.price ?? 0}
+              originalPrice={cardData?.originalPrice}
+              features={cardData?.features ?? []}
+              buttonText={cardData?.buttonText}
+              onButtonClick={cardData?.onButtonClick}
+              highlighted={index === 1}
+            />
+          </motion.div>
         ))}
       </div>
 
-      {/* ================= PAGINATION ================= */}
-      {pricingChunks.length > 1 && (
-        <div className="flex justify-center gap-2 mt-10">
-          {pricingChunks.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActivePage(idx)}
-              className={`px-3 py-1 rounded-md text-sm border transition ${
-                activePage === idx
-                  ? "bg-primary text-white"
-                  : "bg-white text-slate-600"
-              }`}
+      {/* ================= SEE MORE BUTTON ================= */}
+      {hasMore && (
+        <motion.div
+          className="flex justify-center mt-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <button
+            onClick={handleSeeMore}
+            className="group px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl"
+          >
+            <span>See More Plans</span>
+            <svg
+              className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              {idx + 1}
-            </button>
-          ))}
-        </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        </motion.div>
       )}
 
       {/* ================= TRUST ================= */}
@@ -207,8 +219,6 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
             </motion.div>
           ))}
         </div>
-
-       
       </motion.div>
     </motion.section>
   );

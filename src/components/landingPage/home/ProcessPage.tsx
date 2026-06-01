@@ -137,7 +137,7 @@ export default function ProcessPage() {
       <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
       <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
 
-      <section ref={expandSectionRef} className="py-6 lg:py-12 px-6 lg:px-8">
+      <section ref={expandSectionRef} className="py-6 lg:py-12 px-4 lg:px-8">
         {/* Main Centered Container - Max 1600px */}
         <div className="mx-auto max-w-[1600px]">
 
@@ -187,17 +187,63 @@ export default function ProcessPage() {
           </section>
 
           {/* ExpandOnHover Section */}
-          <div className="overflow-hidden ">
-            <ExpandOnHover
-              images={allProcessImages}
-              phases={phases}
-              defaultExpandedIndex={3}
-              containerHeight="28rem"
-              onImageChange={(index, phase) => {
-                console.log(`Viewing process stage ${index}: ${phase?.title}`);
-              }}
-            />
-          </div>
+          {/* Desktop */}
+<div className="hidden lg:block overflow-hidden">
+  <ExpandOnHover
+    images={allProcessImages}
+    phases={phases}
+    defaultExpandedIndex={3}
+    containerHeight="28rem"
+    onImageChange={(index, phase) => {
+      console.log(`Viewing process stage ${index}: ${phase?.title}`);
+    }}
+  />
+</div>
+
+{/* Mobile */}
+<div className="lg:hidden space-y-4 px-2">
+  {phases.map((phase, index) => (
+    <div
+      key={phase.step}
+      className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+    >
+      <img
+        src={allProcessImages[index]}
+        alt={phase.title}
+        className="h-48 w-full object-cover"
+      />
+
+      <div className="p-5">
+        <div className="mb-2 text-sm font-bold text-primary">
+          Step {phase.step}
+        </div>
+
+        <h3 className="mb-2 text-xl font-bold text-slate-900">
+          {phase.title}
+        </h3>
+
+        <p className="mb-4 text-sm text-slate-600">
+          {phase.description}
+        </p>
+
+        <div className="mb-4 flex flex-wrap gap-2">
+          {phase.deliverables.slice(0, 3).map((item) => (
+            <span
+              key={item}
+              className="rounded-full bg-primary/10 px-2.5 py-1 text-xs text-primary"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+
+        <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium">
+          {phase.duration}
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
 
         </div>
       </section>

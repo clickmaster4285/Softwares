@@ -102,7 +102,7 @@ function ClientCard({
         <p className="text-xl font-semibold text-gray-900 leading-snug">
           {client.name}
         </p>
-        <p className="text-sm uppercase tracking-widest text-gray-800 mt-1">
+        <p className="text-sm sm:text-xs uppercase tracking-widest text-gray-800 mt-1">
           {client.industry}
         </p>
       </div>

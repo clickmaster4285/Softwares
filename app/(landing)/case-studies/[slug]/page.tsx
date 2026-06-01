@@ -7,7 +7,7 @@ import CaseStudy from '../../../../lib/models/CaseStudy';
 import '../../../../lib/models/Project';
 import '../../../../lib/models/Category';
 import dbConnect from '../../../../lib/mongoose';
-import { resolveImageUrl, getCategoryName } from '../../../../lib/utils';
+import { resolveImageUrl, getCategoryName } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { breadcrumbSchema, metadataConfig, truncateMetaDescription } from '@/app/metadata-config';
 import { TableOfContents } from '@/components/table-of-contents';

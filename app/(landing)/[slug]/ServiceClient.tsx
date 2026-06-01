@@ -9,7 +9,7 @@ import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
 import LifecycleSection from '@/src/components/landingPage/slug/LifecycleSection';
 import { ParallaxProjectsSection } from '@/src/components/landingPage/slug/ProjectsSection';
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
-import { WhyChooseUs } from '@/src/components/landingPage/servicesPage/WhyChooseUs';
+
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 import Testimonials from '@/src/components/landingPage/Testimonials/page';
 import FaqSection from '@/src/components/landingPage/home/FaqSection';
@@ -23,6 +23,7 @@ import { Suspense } from 'react';
 import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
 import TrustedBySection from '@/src/components/landingPage/home/TrustedBySection';
 import SolutionsPage from '@/src/components/landingPage/home/Solutions';
+import WhyChooseUs from '@/src/components/landingPage/home/whyUs';
 
 interface ServiceClientProps {
   serviceData: ServiceData;
@@ -186,7 +187,6 @@ const pricingTiers = pricingPlans.map((plan) => ({
 
 
 
-       <FeaturedInsights />
      <ProcessPage/>
 
     <TechStackSection/>
@@ -198,12 +198,14 @@ const pricingTiers = pricingPlans.map((plan) => ({
 
 
       
-      <div className='m-4 lg:m-10'>
+      {/* <div className='m-4 lg:m-10'>
  <WhyChooseUs
   slug={serviceData.slug}
   differentiators={whyChooseDifferentiators}
       />
-   </div>
+   </div> */}
+      
+      <WhyChooseUs/>
 
       
 

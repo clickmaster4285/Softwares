@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { useQuery } from '@tanstack/react-query';
 import { Project } from '../../../lib/storage';
-import { getCategoryName } from '../../../lib/utils';
+import { getCategoryName } from '@/lib/utils';
 
 const AdminDashboard = () => {
   // Fetch projects from backend

@@ -3,34 +3,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import Script from 'next/script';
-import {
-  ArrowRight,
-  CheckCircle2,
-  Layers3,
-  Target,
-  TrendingUp,
-  Handshake,
-  Code2,
-  Smartphone,
-  Database,
-  Cloud,
-  Zap,
-  Users,
-  Shield,
-  BarChart3,
-  Globe,
-  HelpCircle,
-  Star,
-  Quote,
-  Play,
-  ChevronRight,
-  Award,
-  Clock,
-  Headphones,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+
 import { TableOfContents } from '@/components/table-of-contents';
 import { breadcrumbSchema, faqSchema, homepageFaqSchema, serviceSchema, siteConfig, buildPageMetadata } from '@/app/metadata-config';
 import {
@@ -40,21 +13,27 @@ import {
   slugify,
   type ServicePageContent,
 } from '@/lib/service-pages';
-import { IndustryCard3D } from '@/src/components/IndustryCard3D';
+
 import { ServiceHero } from '@/components/landingPage/servicesPage/service-hero';
 import { ServicesSection } from '@/src/components/landingPage/servicesPage/ServicesSection';
 import { ProcessSection } from '@/src/components/landingPage/servicesPage/ProcessSection';
 import { IndustriesSection } from '@/src/components/landingPage/servicesPage/IndustriesSection';
-import { CaseStudySection } from '@/src/components/landingPage/servicesPage/CaseStudySection';
+
 import { FAQSection } from '@/src/components/landingPage/servicesPage/FAQSection';
 
 import { EngineeringBaseline } from '@/src/components/landingPage/servicesPage/EngineeringBaseline';
 import { WhyChooseUs } from '@/src/components/landingPage/servicesPage/WhyChooseUs';
-import { TechStack } from '@/src/components/landingPage/servicesPage/TechStack';
+
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
-import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
-import { CTAComponents } from '@/src/components/landingPage/servicesPage/FooterCTA';
+
+
 import { CeoVision } from '@/src/components/landingPage/servicesPage/CeoVision';
+import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
+import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
+import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
+import { SectionContent } from '@/src/components/landingPage/servicesPage/SectionContent';
+import SolutionsPage from '@/src/components/landingPage/home/Solutions';
+import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -234,20 +213,26 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         }}
       />
 
-      <div className="min-h-screen text-slate-900">
+      <div className="min-h-screen text-slate-900 bg-[#f5fbfb]">
 
 
     <ServiceHero page={page} />
 
 
+
         {/* Main Content with Table of Contents */}
        <div className="mx-auto max-w-[1600px] px-6 lg:px-10">
     
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12 lg:gap-16">
+          
+
+
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12 lg:gap-16  ">
       
+            
       {/* MAIN CONTENT */}
             <main className="py-10 lg:py-12 min-w-0">
               
+
 
               {/* Section Content */}
               {sections.map((section, index) => (
@@ -288,12 +273,11 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                     )}
                   </div>
 
-                  <div className="my-6 flex items-center">
-  <div className="h-px w-full bg-gray-300" />
-</div>
-                </section>
-              ))}
 
+                <div className="my-6 flex items-center">
+                            <div className="h-px w-full " />
+              </div>
+              
                  {/* Our Services Section */}
 {page.servicesCards && (
   <ServicesSection 
@@ -310,7 +294,8 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   />
 )}
 
-             
+              <SolutionsPage />    
+              
 {/* Launch Readiness Checklist */}
 {page.checklist && (
   <EngineeringBaseline 
@@ -328,13 +313,14 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
              {/* Tech Stack Section */}
 
-<div style={{ maxWidth: '1460px' }} className="mx-auto">
-  {techStack.length > 0 && <TechStack techStack={techStack as any} />}
-</div>
+ <TechStackSection />
               {/* Industries Section */}
            {page.industryUseCases && (
                 <IndustriesSection industryUseCases={page.industryUseCases} />
               )}
+
+
+
 
             {page.pricingTiers && (
   <PricingSection 
@@ -388,25 +374,14 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
              {/*  */}
           {/* Testimonials Section */}
-<TestimonialsSection sectionTitle={`${page.title} client reviews`} />
 
-              {/* Case Study Section */}
-              <div className='mb-10 '>
-                
-                  {/* Minimal Hero Section */}
-  <div className="w-full flex flex-col mt-4 sm:mt-6 py-6 sm:py-8">
-  <div className="flex items-center gap-3 px-4 sm:px-6 md:px-8">
-    <div className="h-8 sm:h-10 w-1 rounded-full bg-primary" />
+   <TestimonialsSection />
 
-    <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900">
-      Success Stories
-    </h2>
-  </div>
-</div>
 
-                <CaseStudySection />
+           
+
               
-              </div>
+             
 
               {/* FAQ Section */}
             {faqs.length > 0 && <FAQSection faqs={faqs} />}
@@ -428,17 +403,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
       
       
         {/* Footer CTA */}
-        <section className="border-t border-slate-200 bg-gradient-to-b from-slate-50 to-white py-20">
-          <div className="mx-auto max-w-5xl px-5 text-center md:px-8">
-            <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
-              Explore Related Capabilities
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-              Discover how we can help transform your business through our comprehensive services,
-              real-world case studies, or our full solutions portfolio.
-            </p>
-                      </div>
-        </section>
+        <CTASectionImage/>
       </div>
     </>
   );

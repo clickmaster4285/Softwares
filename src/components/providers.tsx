@@ -15,6 +15,10 @@ const SonnerToaster = dynamic(
   () => import('@/components/ui/sonner').then((m) => m.Toaster),
   { ssr: false },
 );
+const SplashCursor = dynamic(
+  () => import('@/components/ui/SplashCursor').then((m) => m.default),
+  { ssr: false },
+);
 
 // Create a client
 const queryClient = new QueryClient({
@@ -35,9 +39,10 @@ const queryClient = new QueryClient({
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
         <AuthProvider>
           <TooltipProvider>
+            <SplashCursor />
             <RadixToaster />
             <SonnerToaster />
             {children}

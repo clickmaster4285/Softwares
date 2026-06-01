@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Search, Zap, Target, Rocket, LucideIcon, ArrowRight, Clock, Gem, Code, BarChart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import SplitText from '../../ui/SplitText';
 
 interface ProcessPhase {
   phase: string;
@@ -71,12 +72,12 @@ const HPipe = ({ delay, reverse = false, startAnimation }: { delay: number; reve
         transition={{ delay: delay + PIPE_DURATION, duration: 0.3, type: "spring", stiffness: 200 }}
         className="hidden lg:block order-last -ml-4"
       >
-        <div className="w-0 h-0 border-y-[14px] border-y-transparent border-l-[24px] border-l-orange-700" />
+        <div className="w-0 h-0 border-y-[14px] border-y-transparent border-l-[24px] border-l-primary" />
       </motion.div>
     )}
     
-    <div className="relative flex-1 h-3 mx-2 rounded-full bg-orange-100 overflow-hidden min-w-[200px] hidden lg:block">
-      <div className="absolute inset-0 bg-orange-100 rounded-full" />
+    <div className="relative flex-1 h-3 mx-2 rounded-full bg-primary/10 overflow-hidden min-w-[200px] hidden lg:block">
+      <div className="absolute inset-0 bg-primary/10 rounded-full" />
       <motion.div
         initial={{ scaleX: 0 }}
         animate={startAnimation ? { scaleX: 1 } : { scaleX: 0 }}
@@ -101,8 +102,8 @@ const HPipe = ({ delay, reverse = false, startAnimation }: { delay: number; reve
 
 const VPipe = ({ delay, startAnimation }: { delay: number; startAnimation: boolean }) => (
   <div className="relative flex flex-col items-center">
-    <div className="relative w-3 h-12 my-2 rounded-full bg-orange-100 overflow-hidden hidden lg:block">
-      <div className="absolute inset-0 bg-orange-100 rounded-full" />
+    <div className="relative w-3 h-12 my-2 rounded-full bg-primary/10 overflow-hidden hidden lg:block">
+      <div className="absolute inset-0 bg-primary/10 rounded-full" />
       <motion.div
         initial={{ scaleY: 0 }}
         animate={startAnimation ? { scaleY: 1 } : { scaleY: 0 }}
@@ -117,7 +118,7 @@ const VPipe = ({ delay, startAnimation }: { delay: number; startAnimation: boole
       transition={{ delay: delay + PIPE_DURATION, duration: 0.3, type: "spring", stiffness: 200 }}
       className="hidden lg:block -mt-3"
     >
-      <div className="w-0 h-0 border-x-[12px] border-x-transparent border-t-[20px] border-t-orange-700" />
+      <div className="w-0 h-0 border-x-[12px] border-x-transparent border-t-[20px] border-t-primary" />
     </motion.div>
   </div>
 );
@@ -151,7 +152,7 @@ const DesktopProcessCard = ({ phase, delay, side, startAnimation }: { phase: any
         damping: 16,
         mass: 0.7,
       }}
-      className="relative w-72 lg:w-80 xl:w-96 rounded-2xl bg-white border border-orange-200 shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 md:p-6 flex flex-col gap-3 md:gap-4"
+      className="relative w-96 lg:w-[350px] xl:w-[400px]  rounded-2xl bg-white border border-primary/20 shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 md:p-6 flex flex-col gap-3 md:gap-4"
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
@@ -159,7 +160,7 @@ const DesktopProcessCard = ({ phase, delay, side, startAnimation }: { phase: any
             {phase.phase}
           </span>
           <div className="flex items-center gap-2 mt-1 md:mt-2">
-            <Badge variant="outline" className="border-orange-200 bg-orange-50 text-secondarytext-xs px-2 py-0.5 md:py-1 font-medium">
+            <Badge variant="outline" className="border-primary bg-primary/10 text-primary text-xs px-2 py-0.5 md:py-1 font-medium">
               <Clock className="h-3 w-3 mr-1" />
               {phase.timeline}
             </Badge>
@@ -230,7 +231,7 @@ const MobileProcessCard = ({ phase, index, startAnimation }: { phase: any; index
         delay: index * 0.15,
         ease: "easeOut"
       }}
-      className="rounded-2xl bg-white border border-orange-200 shadow-lg p-7 flex flex-col gap-3"
+      className="rounded-2xl bg-white border border-primary/20 shadow-lg p-7 flex flex-col gap-3"
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
@@ -238,7 +239,7 @@ const MobileProcessCard = ({ phase, index, startAnimation }: { phase: any; index
             {phase.phase}
           </span>
           <div className="flex items-center gap-2 mt-1">
-            <Badge variant="outline" className="border-orange-200 bg-orange-50 text-secondarytext-xs px-2 py-0.5 font-medium">
+            <Badge variant="outline" className="border-primary bg-primary/10 text-primary text-xs px-2 py-0.5 font-medium">
               <Clock className="h-3 w-3 mr-1" />
               {phase.timeline}
             </Badge>
@@ -438,45 +439,51 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
       key={cycle} 
       ref={sectionRef}
       id="our-process" 
-      className="scroll-mt-24 py-8 md:py-12 lg:py-16 bg-white px-4 md:px-0"
+      className="scroll-mt-24 py-8 md:py-12 lg:py-16 bg-[#f5fbfb] w-full px-4 md:px-0"
     >
-   <motion.div
-  initial={{ opacity: 0, y: 30 }}
-  animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-  transition={{ duration: 0.6 }}
-  className="mb-8 md:mb-12 mx-auto max-w-3xl text-center"
->
-  {/* Decorative Lines + Label */}
-  <div className="inline-flex items-center gap-2 mb-3">
-    <span className="h-[2px] w-8 rounded-full bg-primary" />
-    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-800">
-      Our Process
-    </p>
-    <span className="h-[2px] w-8 rounded-full bg-primary" />
-  </div>
 
-  {/* Main Heading */}
-  <motion.h2 
-    className="mt-5 font-display text-3xl sm:text-3xl lg:text-3xl font-bold tracking-tight text-slate-900"
-    initial={{ scale: 0.9, opacity: 0 }}
-    animate={startAnimation ? { scale: 1, opacity: 1 } : { scale: 0.9, opacity: 0 }}
-    transition={{ duration: 0.6, delay: 0.1 }}
-  >
-    Our <span className="font-black">{serviceName}</span> Process
-  </motion.h2>
 
-  {/* Subtitle */}
-  <motion.p 
-    initial={{ opacity: 0, y: 20 }}
-    animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-    transition={{ duration: 0.5, delay: 0.3 }}
-    className="mx-auto mt-5 max-w-2xl text-base sm:text-lg leading-7 text-slate-600"
-  >
-    A proven methodology that transforms your vision into reality
-  </motion.p>
-</motion.div>
+
+
+      {/* SAME BLOBS AS TRUSTED CLIENTS */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
+
+
+
+
+    <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
+                <div className="inline-flex items-center gap-2 mb-3">
+                  <span className="h-[2px] w-8 rounded-full bg-primary" />
+                  <div className="inline-flex items-center gap-1.5">
+                    <SplitText
+                      text={`Our ${serviceName} Process`}
+                      className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+                      delay={60}
+                      duration={0.8}
+                      ease="power3.out"
+                      splitType="words"
+                      from={{ opacity: 0, x: 60 }}
+                      to={{ opacity: 1, x: 0 }}
+                      threshold={0.2}
+                    />
+                  </div>
+                  <span className="h-[2px] w-8 rounded-full bg-primary" />
+                </div>
       
-      <div className="mx-auto max-w-full">
+                <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
+                    A proven methodology that transforms your vision into reality
+                </p>
+      </div>
+
+
+
+
+
+
+      
+    <div className="mx-auto w-full max-w-[1600px]">
         
 
         {/* Mobile Layout - Simple fade-in one by one */}

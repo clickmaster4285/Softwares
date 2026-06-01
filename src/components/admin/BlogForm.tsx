@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
-import { resolveImageUrl } from '../../../lib/utils';
+import { resolveImageUrl } from '@/lib/utils';
 import { compressAndConvertImage } from '../../../src/utils/imageUtils';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 

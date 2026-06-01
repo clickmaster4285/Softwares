@@ -1,26 +1,114 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation, Variants } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  ArrowRight,
-  CheckCircle2,
-  ChevronRight,
-  Star,
-  Award,
-  Layers3,
-  Users,
-  Headphones,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ChevronRight, Star, Award, Layers3, Users, Headphones } from 'lucide-react';
+import PixelBlast from '../../ui/pixelBlast';
+import Aurora from '../../ui/Aurora';
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+// Counter component with animation
+function Counter({ targetValue }: { targetValue: string | number }) {
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
+  
+  const parseValue = (val: string | number): number => {
+    const strVal = String(val);
+    const match = strVal.match(/\d+(?:\.\d+)?/);
+    return match ? parseFloat(match[0]) : 0;
+  };
+  
+  const rawNumber = parseValue(targetValue);
+  const displaySuffix = String(targetValue).replace(/\d+(?:\.\d+)?/, '');
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          let start = 0;
+          const duration = 2000;
+          const increment = rawNumber / (duration / 16);
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= rawNumber) {
+              setCount(rawNumber);
+              clearInterval(timer);
+            } else {
+              setCount(Math.floor(start));
+            }
+          }, 16);
+          return () => clearInterval(timer);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+    
+    return () => observer.disconnect();
+  }, [rawNumber, hasAnimated]);
+  
+  return (
+    <div ref={elementRef}>
+      {hasAnimated ? count.toLocaleString() : '0'}{displaySuffix}
+    </div>
+  );
+}
+
+// Typewriter component
+function TypewriterText({ texts, delay = 100 }: { texts: string[]; delay?: number }) {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
+
+  useEffect(() => {
+    const currentText = texts[currentIndex];
+    
+    if (isWaiting) {
+      const waitTimer = setTimeout(() => {
+        setIsWaiting(false);
+        setIsDeleting(true);
+      }, 2000);
+      return () => clearTimeout(waitTimer);
+    }
+
+    let timer: NodeJS.Timeout;
+    
+    if (isDeleting) {
+      if (displayText.length === 0) {
+        setIsDeleting(false);
+        setCurrentIndex((prev) => (prev + 1) % texts.length);
+      } else {
+        timer = setTimeout(() => {
+          setDisplayText(prev => prev.slice(0, -1));
+        }, delay / 2);
+      }
+    } else {
+      if (displayText.length === currentText.length) {
+        setIsWaiting(true);
+      } else {
+        timer = setTimeout(() => {
+          setDisplayText(currentText.slice(0, displayText.length + 1));
+        }, delay);
+      }
+    }
+    
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, isWaiting, currentIndex, texts, delay]);
+
+  return (
+    <>
+      {displayText}
+      <span className="animate-pulse text-primary">|</span>
+    </>
+  );
+}
 
 interface ServiceHeroProps {
   page: {
@@ -31,121 +119,22 @@ interface ServiceHeroProps {
     lead: string;
     highlights?: string[];
     marketStats?: Array<{ label: string; value: string }>;
-    /** Goal-based subpage: e.g. "Launch Faster" */
     currentPageLabel?: string;
-    /** Goal-based subpage: parent service link in breadcrumb */
     parentService?: { label: string; href: string };
-    /** Terms to emphasize in the lead (goal pages) */
     boldTerms?: string[];
   };
 }
 
-// Counter Component with Animation
-function Counter({
-  targetValue,
-  suffix = "",
-  prefix = "",
-}: {
-  targetValue: string | number;
-  suffix?: string;
-  prefix?: string;
-}) {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLDivElement>(null);
-
-  const numericMatch = String(targetValue).match(/\d+/);
-  const numericTarget = numericMatch ? parseInt(numericMatch[0], 10) : 0;
-  const originalSuffix = String(targetValue).replace(/\d+/, "");
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (elementRef.current) observer.observe(elementRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-    let startTime: number;
-    let animationFrame: number;
-    const duration = 2000;
-
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(easeOutQuart * numericTarget));
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      } else {
-        setCount(numericTarget);
-      }
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-    return () => {
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-    };
-  }, [isVisible, numericTarget]);
-
-  return (
-    <div
-      ref={elementRef}
-      className="text-2xl sm:text-2xl lg:text-4xl xl:text-4xl font-bold text-white"
-    >
-      {prefix}
-      {count}
-      {suffix || originalSuffix}
-    </div>
-  );
-}
-
-// Animation variants
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
-
-const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.15 },
-  },
-};
-
 export function ServiceHero({ page }: ServiceHeroProps) {
-  const controls = useAnimation();
-  const sectionRef = useRef(null);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   const isGoalPage = Boolean(page.parentService && page.currentPageLabel);
-  const boldTerms =
-    page.boldTerms?.filter(Boolean) ??
-    (page.serviceName ? [page.serviceName] : []);
+  const boldTerms = page.boldTerms?.filter(Boolean) ?? (page.serviceName ? [page.serviceName] : []);
+
+  // Create typewriter phrases
+  const typewriterPhrases = [
+    "MVP to Enterprise",
+    "Fixed + Agile Engagements",
+    "Post-Launch Support",
+  ];
 
   // Helper function to emphasize key terms in text
   const makeBoldInText = (text: string, terms: string[]) => {
@@ -158,7 +147,6 @@ export function ServiceHero({ page }: ServiceHeroProps) {
 
     const regex = new RegExp(`(${escaped.join("|")})`, "gi");
     const split = text.split(regex);
-    const lowerTerms = terms.map((t) => t.toLowerCase());
 
     return split.map((part, index) => {
       const isBold = terms.some((t) => part.toLowerCase() === t.toLowerCase());
@@ -173,75 +161,6 @@ export function ServiceHero({ page }: ServiceHeroProps) {
     });
   };
 
-  const breadcrumbCurrent = page.currentPageLabel ?? page.serviceName;
-
-  useEffect(() => {
-    if (isInView) controls.start("visible");
-  }, [controls, isInView]);
-
-  // Auto-play video when component mounts
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.log("Video autoplay failed:", error);
-      });
-    }
-  }, []);
-
-  // Make navbar transparent using GSAP ScrollTrigger
-  useEffect(() => {
-   const navbar = document.getElementById("main-navbar");
-
-    if (navbar && heroRef.current) {
-      ScrollTrigger.create({
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        onToggle: (self) => {
-          if (self.isActive) {
-            gsap.to(navbar, {
-              backgroundColor: "transparent",
-              backdropFilter: "blur(8px)",
-              borderBottomColor: "rgba(255, 255, 255, 0.1)",
-              duration: 0.3,
-              ease: "power2.out",
-            });
-            const navLinks = navbar.querySelectorAll("a, button, span");
-            navLinks.forEach((link) => {
-              if (link.closest("nav")) {
-                gsap.to(link, {
-                  color: "white",
-                  duration: 0.3,
-                });
-              }
-            });
-          } else {
-            gsap.to(navbar, {
-              backgroundColor: "white",
-              backdropFilter: "blur(0px)",
-              borderBottomColor: "rgb(229, 231, 235)",
-              duration: 0.3,
-              ease: "power2.out",
-            });
-            const navLinks = navbar.querySelectorAll("a, button, span");
-            navLinks.forEach((link) => {
-              if (link.closest("nav")) {
-                gsap.to(link, {
-                  color: "",
-                  duration: 0.3,
-                });
-              }
-            });
-          }
-        },
-      });
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
   const stats = [
     { icon: Award, value: "8+", label: "Years Experience" },
     { icon: Layers3, value: "150+", label: "Projects Delivered" },
@@ -250,304 +169,196 @@ export function ServiceHero({ page }: ServiceHeroProps) {
   ];
 
   return (
-    <div
-      ref={heroRef}
-      className="w-full relative overflow-hidden bg-black/40 min-h-screen flex flex-col  "
-    >
-      {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full z-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          poster="/videos/services-video-poster.jpg"
-        >
-          <source src="/video/services-video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        {/* Dark Overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
-      </div>
-
-      {/* Breadcrumb */}
-      <motion.div
-        className="relative z-10 border-b border-orange-500/30 w-full px-6 md:px-8 lg:px-10 xl:px-24 pt-24"
-        
-
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-      >
-        <div className="mx-auto px-4 md:px-8 lg:px-12 py-3.5 bg-black/30 backdrop-blur-sm">
-          <nav className="flex items-center gap-1.5 text-sm">
+    <section className="relative min-h-screen flex flex-col overflow-hidden">
+     
+<div className="absolute inset-0 -z-10 h-[140vh]">
+  <Aurora
+    colorStops={["#7cff67", "#B497CF", "#5227FF"]}
+    blend={0.5}
+    amplitude={1.0}
+    speed={1}
+  />
+</div>
+      {/* Breadcrumbs - positioned below navbar, not overlapping */}
+      <div className="w-full pt-14 md:pt-28 lg:pt-28">
+        <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-8">
+          <motion.nav
+            className="flex items-center gap-1.5 text-md flex-wrap"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
             <Link
               href="/"
-              className="text-slate-300 hover:text-primary transition-colors font-medium"
+              className="text-gray-800 hover:text-primary transition-colors font-medium"
             >
               Home
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
+            <ChevronRight className="h-3.5 w-3.5 text-gray-800" />
             <Link
               href={`/${page.categorySlug}`}
-              className="text-slate-300 hover:text-primary transition-colors font-medium"
+              className="text-gray-800 hover:text-primary transition-colors font-medium"
             >
               {page.category}
             </Link>
             {page.parentService && (
               <>
-                <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
+                <ChevronRight className="h-3.5 w-3.5 text-gray-800" />
                 <Link
                   href={page.parentService.href}
-                  className="text-slate-300 hover:text-primary transition-colors font-medium"
+                  className="text-gray-800 hover:text-primary transition-colors font-medium"
                 >
                   {page.parentService.label}
                 </Link>
               </>
             )}
-            <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
+            <ChevronRight className="h-3.5 w-3.5 text-gray-800" />
             {isGoalPage && page.parentService ? (
               <>
                 <Link
                   href={page.parentService.href}
-                  className="text-slate-300 hover:text-primary transition-colors font-medium"
+                  className="text-gray-800 hover:text-primary transition-colors font-medium"
                 >
                   {page.parentService.label}
                 </Link>
-                <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
-                <span className="font-black text-white">{page.currentPageLabel}</span>
+                <ChevronRight className="h-3.5 w-3.5 text-gray-800" />
+                <span className="font-bold text-primary">{page.currentPageLabel}</span>
               </>
             ) : (
-              <span className="font-black text-white">{page.serviceName}</span>
+              <span className="font-bold text-primary">{page.serviceName}</span>
             )}
-          </nav>
+          </motion.nav>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Main Hero Content */}
-      <section
-        ref={sectionRef}
-        className="relative z-10 w-full flex-1 flex items-center px-6 md:px-6 lg:px-6 xl:px-20"
-      >
-        <div className="mx-auto px-4 md:px-8 lg:px-12 py-12 lg:py-16 w-full">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 xl:gap-12">
-            {/* LEFT COLUMN */}
-            <motion.div
-              className="flex-1 min-w-0"
-              variants={staggerContainer}
-              initial="hidden"
-              animate={controls}
-            >
-              {/* Category / goal badge */}
-              <motion.div variants={fadeInUp}>
-                {isGoalPage && page.currentPageLabel ? (
-                  <Badge
-                    className="mb-5 rounded-md border border-orange-300/50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white"
-                    style={{ background: "#ea580c" }}
-                  >
-                    Goal · {page.currentPageLabel}
-                  </Badge>
-                ) : (
-                  <Link href={`/${page.categorySlug}`}>
-                    <Badge
-                      className="mb-5 rounded-md border-0 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white hover:bg-primary transition-colors cursor-pointer"
-                      style={{ background: "#ea580c" }}
-                    >
-                      {page.category}
-                    </Badge>
-                  </Link>
-                )}
-              </motion.div>
+      {/* Main Content - Vertically Centered */}
+      <div className="flex-1 flex items-center justify-center py-12 md:py-16 lg:-mt-6">
+        <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-8 ">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            {/* Left Content */}
+            <div className="flex-1 text-left">
+              {/* Main Heading with Typewriter */}
+              <div className="mb-6 animate-[fadeInUp_0.6s_ease-out_0.1s_forwards] opacity-0">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary">
+                  {page.title}
+                </h1>
+                <div className="mt-4 text-lg md:text-xl text-primary border-primary/30 bg-white/20 rounded-md max-w-xl">
+                  <TypewriterText texts={typewriterPhrases} delay={120} />
+                </div>
+              </div>
 
-              {/* Title */}
-              <motion.h1
-                className="text-balance text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl leading-[1.15]"
-                variants={fadeInUp}
-              >
-                {page.title}
-              </motion.h1>
-
-              {/* Lead */}
-              <motion.p
-                className="mt-5 max-w-xl text-base leading-relaxed text-slate-200 lg:text-lg"
-                variants={fadeInUp}
-              >
+              {/* Description */}
+              <p className="text-lg md:text-xl text-gray-800 max-w-2xl mb-8 leading-relaxed animate-[fadeInUp_0.6s_ease-out_0.2s_forwards] opacity-0">
                 {makeBoldInText(page.lead, boldTerms)}
-              </motion.p>
-
-              {/* Highlight Pills */}
-              {page.highlights && page.highlights.length > 0 && (
-                <motion.div
-                  className="mt-6 flex flex-wrap gap-2.5"
-                  variants={staggerContainer}
-                >
-                  {page.highlights.map((h) => (
-                    <motion.div
-                      key={h}
-                      variants={fadeInUp}
-                      className="flex items-center gap-2 rounded-full border border-orange-400/40 bg-black/40 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm"
-                    >
-                      <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
-                      {h}
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
+              </p>
 
               {/* Market Stats */}
               {page.marketStats && page.marketStats.length > 0 && (
-                <motion.div
-                  className="mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-orange-400/30 bg-black/40 p-5 backdrop-blur-sm sm:grid-cols-4"
-                  variants={fadeInUp}
-                >
+                <div className="grid grid-cols-2 gap-4 rounded-2xl border border-primary/20 bg-white/5 p-5 backdrop-blur-sm mb-8 animate-[fadeInUp_0.6s_ease-out_0.3s_forwards] opacity-0 sm:grid-cols-4">
                   {page.marketStats.map((stat) => (
                     <div key={stat.label} className="text-center sm:text-left">
                       <p className="text-2xl font-extrabold text-primary sm:text-3xl">
                         {stat.value}
                       </p>
-                      <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-slate-300">
+                      <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-gray-600">
                         {stat.label}
                       </p>
                     </div>
                   ))}
-                </motion.div>
+                </div>
               )}
 
               {/* CTA Buttons */}
-              <motion.div
-                className="mt-8 flex flex-wrap items-center gap-3"
-                variants={staggerContainer}
-              >
-                <motion.div
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <Button
-                    asChild
-                    size="lg"
-                    className="rounded-full px-7 text-white font-semibold shadow-lg transition-all"
-                    style={{
-                      background: "#ea580c",
-                      boxShadow: "0 8px 24px rgba(234,88,12,0.40)",
-                    }}
-                  >
-                    <Link href="/contact-us">
-                      Get your free strategy call
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </motion.div>
-                <motion.div
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    asChild
-                    className="group rounded-full border-slate-400 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-primary font-semibold text-white transition-all"
-                  >
-                    <Link
-                      href={
-                        isGoalPage && page.parentService
-                          ? page.parentService.href
-                          : `/${page.categorySlug}`
-                      }
-                    >
-                      {isGoalPage ? "View parent service" : "View all services"}
-                    </Link>
-                  </Button>
-                </motion.div>
-              </motion.div>
+              <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-[fadeInUp_0.6s_ease-out_0.35s_forwards] opacity-0">
+                <button className="group relative px-8 py-3.5 bg-gradient-to-r from-primary to-primary rounded-md text-white font-semibold text-lg shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
+                  <span className="relative z-10">Get your free strategy call</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </button>
+                <button className="px-8 py-3.5 bg-transparent border border-primary/20 rounded-md text-primary font-semibold text-lg hover:bg-primary/10 transition-all duration-300 hover:-translate-y-0.5">
+                  Learn More
+                </button>
+              </div>
 
-              {/* Stats Bar */}
-              <motion.div className="mt-10 w-full" variants={staggerContainer}>
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                  {stats.map((stat) => (
-                    <motion.div
-                      key={stat.label}
-                      className="flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-4 sm:py-5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-orange-400/30 transition-all cursor-default"
-                      variants={fadeInUp}
-                      whileHover={{
-                        y: -2,
-                        scale: 1.02,
-                        transition: { duration: 0.15 },
-                      }}
-                    >
-                     
-                      <div>
+              {/* Stats Grid - Left aligned */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl">
+                {stats.map((stat, index) => (
+                  <div
+                    key={index}
+                    className="text-left group animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0"
+                    style={{ animationDelay: `${400 + index * 100}ms` }}
+                  >
+                    <div className="flex items-center gap-2">
+                      {/* <stat.icon className="h-6 w-6 text-primary" /> */}
+                      <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary drop-shadow-[0_0_12px_rgba(14,116,144,0.45)] group-hover:drop-shadow-[0_0_20px_rgba(14,116,144,0.65)] transition-all duration-300">
                         <Counter targetValue={stat.value} />
-                        <p className="text-xs sm:text-sm font-medium text-slate-300 mt-0.5">
-                          {stat.label}
-                        </p>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+                    </div>
+                    <div className="text-xs md:text-sm text-gray-700 mt-1.5 font-medium tracking-wide">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
 
               {/* Trust Indicators */}
-              <motion.div
-                className="mt-8 flex flex-wrap items-center gap-5 text-sm text-slate-300"
-                variants={staggerContainer}
-              >
-                <motion.div className="flex items-center gap-2" variants={fadeInUp}>
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div
-                        key={i}
-                        className="h-8 w-8 rounded-full border-2 border-white/80"
-                        style={{
-                          background: `hsl(${20 + i * 15}, 60%, ${50 + i * 4}%)`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <span>
-                    <strong className="text-white">150+</strong> clients worldwide
-                  </span>
-                </motion.div>
-
-                <motion.div className="flex items-center gap-1" variants={fadeInUp}>
+              {/* <div className="flex flex-wrap items-center gap-5 mt-8 text-sm text-gray-600 animate-[fadeInUp_0.6s_ease-out_0.5s_forwards] opacity-0">
+                <div className="flex items-center gap-1">
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <Star
-                      key={i}
-                      className="h-4 w-4 fill-primary text-primary"
-                    />
+                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                   ))}
                   <span className="ml-1">
-                    <strong className="text-white">4.9/5</strong> rating
+                    <strong className="text-gray-900">4.9/5</strong> rating
                   </span>
-                </motion.div>
-              </motion.div>
-            </motion.div>
+                </div>
+              </div> */}
+            </div>
 
-            {/* RIGHT COLUMN Hero Image */}
-            <motion.div
-              className="relative flex-shrink-0 w-full lg:w-[52%] xl:w-[55%] flex items-end justify-center lg:justify-end mt-8 lg:mt-0"
-              variants={fadeInRight}
-              initial="hidden"
-              animate={controls}
-            >
-              <div className="relative w-full max-w-2xl lg:max-w-none">
-                <Image
-                  src="/images/hero-img.png"
-                  alt="Platform dashboard preview"
-                  width={860}
-                  height={620}
-                  priority
-                  className="w-full h-auto object-contain drop-shadow-2xl"
-                  style={{ maxHeight: "520px" }}
-                />
+            {/* Right Image */}
+            <div className="flex-1 flex justify-center lg:justify-end animate-[fadeInUp_0.6s_ease-out_0.2s_forwards] opacity-0">
+              <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 backdrop-blur-sm bg-white/5">
+                  <Image
+                    src="/images/locationImg.webp"
+                    alt={page.title}
+                    width={600}
+                    height={600}
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+{/* <div className="absolute inset-0 -z-10 h-[140vh]">
+  <Aurora
+    colorStops={["#7cff67", "#B497CF", "#5227FF"]}
+    blend={0.5}
+    amplitude={1.0}
+    speed={1}
+  />
+</div> */}
+      {/* Scroll indicator */}
+      {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse" />
+        </div>
+      </div> */}
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </section>
   );
 }

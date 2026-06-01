@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Project, Category } from '../../../lib/storage';
-import { resolveImageUrl } from '../../../lib/utils';
+import { resolveImageUrl } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { compressAndConvertImage, getImageDimensions } from '../../../src/utils/imageUtils';
 
