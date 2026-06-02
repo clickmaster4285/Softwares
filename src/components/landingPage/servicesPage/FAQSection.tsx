@@ -26,6 +26,7 @@ export const FAQSection = ({ faqs }: FAQSectionProps) => {
 
   return (
     <section 
+      id="faq"
       className="relative overflow-hidden  py-16 sm:py-20" 
       aria-labelledby="faq-heading"
     >

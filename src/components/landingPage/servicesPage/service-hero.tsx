@@ -169,16 +169,24 @@ export function ServiceHero({ page }: ServiceHeroProps) {
   ];
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden">
+    <section id="overview" className="relative min-h-screen flex flex-col overflow-hidden bg-[#f5fbfb] ">
      
-<div className="absolute inset-0 -z-10 h-[140vh]">
+
+      {/* SAME BLOBS AS TRUSTED CLIENTS */}
+            <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
+            <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
+      
+
+
+{/* <div className="absolute inset-0 -z-10 h-[140vh]">
   <Aurora
     colorStops={["#7cff67", "#B497CF", "#5227FF"]}
     blend={0.5}
     amplitude={1.0}
     speed={1}
   />
-</div>
+</div> */}
       {/* Breadcrumbs - positioned below navbar, not overlapping */}
       <div className="w-full pt-14 md:pt-28 lg:pt-28">
         <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-8">
@@ -269,15 +277,22 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               )}
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-[fadeInUp_0.6s_ease-out_0.35s_forwards] opacity-0">
-                <button className="group relative px-8 py-3.5 bg-gradient-to-r from-primary to-primary rounded-md text-white font-semibold text-lg shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
-                  <span className="relative z-10">Get your free strategy call</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </button>
-                <button className="px-8 py-3.5 bg-transparent border border-primary/20 rounded-md text-primary font-semibold text-lg hover:bg-primary/10 transition-all duration-300 hover:-translate-y-0.5">
-                  Learn More
-                </button>
-              </div>
+             <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-[fadeInUp_0.6s_ease-out_0.35s_forwards] opacity-0">
+  <Link
+    href="/contact-us"
+    className="group relative px-8 py-3.5 bg-gradient-to-r from-primary to-primary rounded-md text-white font-semibold text-lg shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden text-center"
+  >
+    <span className="relative z-10">Get your free strategy call</span>
+    <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+  </Link>
+
+  <Link
+    href="/about-us"
+    className="px-8 py-3.5 bg-transparent border border-primary/20 rounded-md text-primary font-semibold text-lg hover:bg-primary/10 transition-all duration-300 hover:-translate-y-0.5 text-center"
+  >
+    Learn More
+  </Link>
+</div>
 
               {/* Stats Grid - Left aligned */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl">
@@ -318,7 +333,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 backdrop-blur-sm bg-white/5">
                   <Image
-                    src="/images/locationImg.webp"
+                    src="/images/webApp.webp"
                     alt={page.title}
                     width={600}
                     height={600}

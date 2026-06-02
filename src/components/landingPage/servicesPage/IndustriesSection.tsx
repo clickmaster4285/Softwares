@@ -116,7 +116,7 @@ export const IndustriesSection = ({
   if (!industryUseCases?.length) return null;
 
   return (
-    <section ref={ref} className="relative w-full bg-[#f5fbfb] py-14">
+    <section id="industries" ref={ref} className="relative w-full bg-[#f5fbfb] py-14">
       
       <div
     className="absolute inset-0 opacity-[0.45]"

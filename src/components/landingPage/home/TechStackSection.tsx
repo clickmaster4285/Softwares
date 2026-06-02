@@ -219,8 +219,9 @@ export function TechStackSection() {
   const rightCol = [techStackData.backend, techStackData.database, techStackData.devops];
 
   return (
-<div
-  className="py-16 lg:py-24 lg:px-12 sm:px-6 px-4"
+<section
+  id="tech-stack"
+  className="py-16 lg:py-24 lg:px-12 sm:px-6 px-4 scroll-mt-24"
   ref={ref}
   style={{
     backgroundColor: "#FFFEFC",
@@ -296,7 +297,7 @@ export function TechStackSection() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

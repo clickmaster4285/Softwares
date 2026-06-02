@@ -140,7 +140,7 @@ export function TestimonialsSection() {
   const bottom = testimonials[3];
 
   return (
-    <section className="bg-[#f7fbfa] relative py-24">
+    <section id="testimonials" className="bg-[#f7fbfa] relative py-24 scroll-mt-24">
 
        <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" /> 
       

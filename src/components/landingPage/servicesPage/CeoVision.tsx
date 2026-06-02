@@ -5,7 +5,13 @@ import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
 export function CeoVision() {
   return (
-    <section className="w-full overflow-hidden">
+    <section id="case-study" className="w-full overflow-hidden relative bg-[#f5fbfb]">
+
+   {/* SAME BLOBS AS TRUSTED CLIENTS */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
+
       <ContainerScroll
         titleComponent={
           <div className="space-y-6 px-4 sm:px-6 md:px-10 mt-40">
@@ -61,7 +67,7 @@ export function CeoVision() {
             </blockquote>
 
             <div className="flex items-center gap-4 mt-2">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-amber-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
+              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-primary flex items-center justify-center text-white font-bold text-sm shrink-0">
                 AK
               </div>
               <div>

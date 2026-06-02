@@ -7,7 +7,7 @@ import { servicesByCountry, buildCountryServiceSlugMap } from '@/lib/country-ser
 
 import { ProcessSection } from '@/src/components/landingPage/servicesPage/ProcessSection';
 import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights';
-import { TestimonialsSection } from '@/src/components/landingPage/servicesPage/TestimonialsSection';
+
 import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
 
 import ProjectCTAHero from '@/src/components/landingPage/location/ProjectCTAHero';
@@ -16,11 +16,14 @@ import TrustedClientsSection from '@/src/components/landingPage/home/TrustedClie
 import PainPointsSolutions from '@/src/components/landingPage/home/PainPointsSolutions';
 import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 import CountryServicesSection from '@/src/components/landingPage/location/CountryServicesSection';
-import { HeroSection, StatsSection } from '@/src/components/landingPage/location/LocationHero';
+import { HeroSection } from '@/src/components/landingPage/location/LocationHero';
 import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
 import FaqSection from '@/src/components/landingPage/location/FaqSection';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
+import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
+import WorldMapHero from '@/src/components/landingPage/location/AnimatedPins';
+
 
 type Props = { params: Promise<{ location: string }> };
 
@@ -73,8 +76,10 @@ const serviceData = servicesByCountry[country.name] || [];
     <div className="min-h-screen bg-white">
       {/* HERO */}
       <HeroSection country={country} location={location} />
-      <StatsSection country={country} location={location} />
+      {/* <StatsSection country={country} location={location} /> */}
 
+      
+      {/* <WorldMapHero/> */}
       <PainPointsSolutions countryName={country.name} />
 
       {/* SERVICES */}
@@ -85,24 +90,6 @@ const serviceData = servicesByCountry[country.name] || [];
         serviceSlugMap={serviceSlugMap}
       />
 
-      {/* 🔥 PRICING (ONLY FROM country-services.ts) */}
-      {countryPricingTiers.length > 0 && (
-        <ProjectCTAHero
-          variant="combined"
-          badge="Pricing Plans"
-          title="Flexible Pricing for Every Stage"
-          description="Choose a plan that fits your business needs"
-          location={location}
-          sliderCards={countryPricingTiers.map((tier) => ({
-            title: tier.investment,
-            subtitle: tier.type,
-          }))}
-          buttons={[
-            { text: "Book Free Consultation", href: `/contact-us?location=${location}`, variant: "primary" },
-            { text: "Call Us Now", href: "tel:+1234567890", variant: "outline" },
-          ]}
-        />
-      )}
 
       {/* OTHER SECTIONS */}
       <TrustedClientsSection />
@@ -136,9 +123,36 @@ const serviceData = servicesByCountry[country.name] || [];
   pricingTiers={countryPricingTiers}
 /></div>
 
+
+
+
+
+      {/* 🔥 PRICING (ONLY FROM country-services.ts) */}
+      {countryPricingTiers.length > 0 && (
+        <ProjectCTAHero
+          variant="combined"
+          badge="Pricing Plans"
+          title="Flexible Pricing for Every Stage"
+          description="Choose a plan that fits your business needs"
+          location={location}
+          sliderCards={countryPricingTiers.map((tier) => ({
+            title: tier.investment,
+            subtitle: tier.type,
+          }))}
+          buttons={[
+            { text: "Book Free Consultation", href: `/contact-us?location=${location}`, variant: "primary" },
+            { text: "Call Us Now", href: "tel:+1234567890", variant: "outline" },
+          ]}
+        />
+      )}
+
+
+
       <TechStackSection />
       <FeaturedInsights />
-      <TestimonialsSection sectionTitle={`Client reviews in ${country.name}`} />
+    
+
+     <TestimonialsSection />
 
     
        <FaqSection

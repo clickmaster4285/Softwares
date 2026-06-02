@@ -200,15 +200,22 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-20 animate-[fadeInUp_0.6s_ease-out_0.3s_forwards] opacity-0">
-              <button className="group relative px-8 py-3.5 bg-gradient-to-r from-primary to-primary rounded-md text-white font-semibold text-lg shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
-                <span className="relative z-10">{serviceData.ctaText}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </button>
-           <button className="px-8 py-3.5 bg-transparent border border-primary/20 rounded-md text-primary font-semibold text-lg hover:bg-primary/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5">
-  Learn More
-</button>
-            </div>
+           <div className="flex flex-col sm:flex-row gap-4 mb-20 animate-[fadeInUp_0.6s_ease-out_0.3s_forwards] opacity-0">
+  <Link
+    href="/contact-us"
+    className="group relative px-8 py-3.5 bg-gradient-to-r from-primary to-primary rounded-md text-white font-semibold text-lg shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden text-center"
+  >
+    <span className="relative z-10">{serviceData.ctaText}</span>
+    <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+  </Link>
+
+  <Link
+    href="/about-us"
+    className="px-8 py-3.5 bg-transparent border border-primary/20 rounded-md text-primary font-semibold text-lg hover:bg-primary/10 hover:text-white transition-all duration-300 hover:-translate-y-0.5 text-center"
+  >
+    Learn More
+  </Link>
+</div>
 
             {/* Stats Grid - Left aligned */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl">
@@ -235,7 +242,7 @@ export default function HeroSection({ serviceData }: HeroSectionProps) {
             <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 backdrop-blur-sm bg-white/5">
                 <Image
-                  src="/images/locationImg.webp"
+                  src="/images/webApp.webp"
                   alt="Hero Image"
                   width={600}
                   height={600}

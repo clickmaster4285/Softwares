@@ -298,7 +298,7 @@ const { data: blogs = [] } = useQuery({
     return () => clearTimeout(timer);
   }, [pathname]);
 
-  const isLightHero = ( isAbout || isLocation) && !isScrolled && !isPageLoading;
+  const isLightHero = ( isAbout ) && !isScrolled && !isPageLoading;
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 24);

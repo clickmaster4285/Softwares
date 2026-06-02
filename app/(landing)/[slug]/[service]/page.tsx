@@ -197,7 +197,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         }}
       />
 
-      <div className="min-h-screen text-slate-900 bg-[#f5fbfb]">
+      <div className="min-h-screen text-slate-900 bg-[#f5fbfb] overflow-x-hidden w-full">
 
 
     <ServiceHero page={page} />
@@ -205,16 +205,16 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
 
         {/* Main Content with Table of Contents */}
-       <div className="mx-auto max-w-[1600px] px-6 lg:px-10">
+       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10">
     
           
 
 
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12 lg:gap-16  ">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 sm:gap-10 lg:gap-16 w-full">
       
             
       {/* MAIN CONTENT */}
-            <main className="py-10 lg:py-12 min-w-0">
+            <main className="py-8 sm:py-10 lg:py-12 min-w-0 w-full">
               
 
 
@@ -343,8 +343,8 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               
             </main>
 
-            {/* Sticky Table of Contents - Desktop */}
-             <aside className="hidden lg:block sticky top-24 self-start">
+            {/* Sticky Table of Contents - Desktop Only */}
+             <aside className="hidden lg:block sticky top-24 self-start min-w-0">
         <TableOfContents items={tocItems} />
       </aside>
 

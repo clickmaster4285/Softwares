@@ -3,6 +3,9 @@
 import { Lightbulb, Rocket, ShieldCheck, Headphones, ArrowRight } from "lucide-react";
 import { StackedCards, type GlassCardItem } from "@/components/ui/glass-cards";
 import SplitText from "../../ui/SplitText";
+import Link from "next/link";
+
+
 
 const values: GlassCardItem[] = [
   {
@@ -140,23 +143,23 @@ export function AboutSection() {
               by industry.
             </p>
 
-            <div className="flex flex-wrap gap-3 pt-3">
-              <a
-                href="#"
-                className="group inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-primary to-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
-              >
-                Start Your Project
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
+          <div className="flex flex-wrap gap-3 pt-3">
+  <Link
+    href="/contact-us"
+    className="group inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-primary to-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+  >
+    Start Your Project
+    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+  </Link>
 
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/50 bg-white/30 backdrop-blur-md px-7 py-3 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.05] hover:bg-white/40 hover:border-white/70 hover:shadow-md active:scale-[0.98]"
-              >
-                View Our Work
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </div>
+  <Link
+    href="/software-solutions"
+    className="group inline-flex items-center gap-2 rounded-xl border border-white/50 bg-white/30 backdrop-blur-md px-7 py-3 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:scale-[1.05] hover:bg-white/40 hover:border-white/70 hover:shadow-md active:scale-[0.98]"
+  >
+    View Our Work
+    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+  </Link>
+</div>
           </div>
 
           {/* RIGHT GLASS STACKED CARDS - stacking behavior unchanged */}

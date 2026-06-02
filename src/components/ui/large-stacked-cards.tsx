@@ -15,6 +15,9 @@ export interface LargeGlassCardItem {
   color?: string;
   icon?: React.ReactNode;
   cta?: { label: string; href: string };
+  tags?: string[];
+  metrics?: { label: string; value: string }[];
+  backgroundImage?: string;
 }
 
 interface CardProps {
@@ -25,58 +28,100 @@ interface CardProps {
 
 const CARD_COLORS = [
   {
-    accent: "from-emerald-400/20 to-teal-400/10",
-    border: "rgba(52, 211, 153, 0.35)",
-    glow: "rgba(52, 211, 153, 0.12)",
-    badge: "bg-emerald-50 text-emerald-700 border-emerald-200/60",
-    iconBg: "bg-emerald-50",
-    iconColor: "text-emerald-600",
-    cta: "text-emerald-600 hover:text-emerald-700",
-    number: "text-emerald-200",
+    border: "rgba(253, 164, 175, 0.5)", // rose
+    buttonBg: "bg-rose-300 hover:bg-rose-400",
+    badge: "bg-rose-300/20 text-rose-200 border-rose-300/30",
+    iconBg: "bg-white/10",
+    iconColor: "text-rose-300",
+    cta: "text-rose-300 hover:text-rose-200",
+    number: "text-rose-300/30",
   },
   {
-    accent: "from-violet-400/20 to-purple-400/10",
-    border: "rgba(139, 92, 246, 0.35)",
-    glow: "rgba(139, 92, 246, 0.12)",
-    badge: "bg-violet-50 text-violet-700 border-violet-200/60",
-    iconBg: "bg-violet-50",
-    iconColor: "text-violet-600",
-    cta: "text-violet-600 hover:text-violet-700",
-    number: "text-violet-200",
+    border: "rgba(167, 243, 208, 0.5)", // mint
+    buttonBg: "bg-emerald-300 hover:bg-emerald-400",
+    badge: "bg-emerald-300/20 text-emerald-200 border-emerald-300/30",
+    iconBg: "bg-white/10",
+    iconColor: "text-emerald-300",
+    cta: "text-emerald-300 hover:text-emerald-200",
+    number: "text-emerald-300/30",
   },
   {
-    accent: "from-orange-400/20 to-amber-400/10",
-    border: "rgba(251, 146, 60, 0.35)",
-    glow: "rgba(251, 146, 60, 0.12)",
-    badge: "bg-orange-50 text-orange-700 border-orange-200/60",
-    iconBg: "bg-orange-50",
-    iconColor: "text-orange-600",
-    cta: "text-orange-600 hover:text-orange-700",
-    number: "text-orange-200",
+    border: "rgba(221, 214, 254, 0.5)", // lavender
+    buttonBg: "bg-violet-300 hover:bg-violet-400",
+    badge: "bg-violet-300/20 text-violet-200 border-violet-300/30",
+    iconBg: "bg-white/10",
+    iconColor: "text-violet-300",
+    cta: "text-violet-300 hover:text-violet-200",
+    number: "text-violet-300/30",
   },
   {
-    accent: "from-sky-400/20 to-blue-400/10",
-    border: "rgba(56, 189, 248, 0.35)",
-    glow: "rgba(56, 189, 248, 0.12)",
-    badge: "bg-sky-50 text-sky-700 border-sky-200/60",
-    iconBg: "bg-sky-50",
-    iconColor: "text-sky-600",
-    cta: "text-sky-600 hover:text-sky-700",
-    number: "text-sky-200",
+    border: "rgba(254, 215, 170, 0.5)", // peach
+    buttonBg: "bg-orange-300 hover:bg-orange-400",
+    badge: "bg-orange-300/20 text-orange-200 border-orange-300/30",
+    iconBg: "bg-white/10",
+    iconColor: "text-orange-300",
+    cta: "text-orange-300 hover:text-orange-200",
+    number: "text-orange-300/30",
   },
+  {
+    border: "rgba(187, 247, 208, 0.5)", // soft green
+    buttonBg: "bg-green-300 hover:bg-green-400",
+    badge: "bg-green-300/20 text-green-200 border-green-300/30",
+    iconBg: "bg-white/10",
+    iconColor: "text-green-300",
+    cta: "text-green-300 hover:text-green-200",
+    number: "text-green-300/30",
+  },
+  {
+    border: "rgba(254, 202, 202, 0.5)", // coral
+    buttonBg: "bg-red-300 hover:bg-red-400",
+    badge: "bg-red-300/20 text-red-200 border-red-300/30",
+    iconBg: "bg-white/10",
+    iconColor: "text-red-300",
+    cta: "text-red-300 hover:text-red-200",
+    number: "text-red-300/30",
+  },
+  {
+    border: "rgba(251, 207, 232, 0.5)", // pink
+    buttonBg: "bg-pink-300 hover:bg-pink-400",
+    badge: "bg-pink-300/20 text-pink-200 border-pink-300/30",
+    iconBg: "bg-white/10",
+    iconColor: "text-pink-300",
+    cta: "text-pink-300 hover:text-pink-200",
+    number: "text-pink-300/30",
+  },
+  {
+    border: "rgba(186, 230, 253, 0.5)", // sky
+    buttonBg: "bg-sky-300 hover:bg-sky-400",
+    badge: "bg-sky-300/20 text-sky-200 border-sky-300/30",
+    iconBg: "bg-white/10",
+    iconColor: "text-sky-300",
+    cta: "text-sky-300 hover:text-sky-200",
+    number: "text-sky-300/30",
+  },
+];
+
+// Default background images
+const DEFAULT_BG_IMAGES = [
+  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&h=900&fit=crop",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&h=900&fit=crop",
+  "https://images.unsplash.com/photo-1551434678-e076c2236a9d?w=1600&h=900&fit=crop",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=900&fit=crop",
 ];
 
 const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const palette = CARD_COLORS[index % CARD_COLORS.length];
+  
+  const backgroundImage = item.backgroundImage || DEFAULT_BG_IMAGES[index % DEFAULT_BG_IMAGES.length];
 
   useEffect(() => {
     const card = cardRef.current;
     const container = containerRef.current;
     if (!card || !container) return;
 
-    const targetScale = 1 - (totalCards - index) * 0.03; // Less scale reduction for larger cards
+    const targetScale = 1 - (totalCards - index) * 0.03;
 
     gsap.set(card, { scale: 1, transformOrigin: "center top" });
 
@@ -117,18 +162,18 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
         style={{
           position: "relative",
           width: "100%",
-          maxWidth: "880px", // Increased from 660px
+          maxWidth: "1080px",
           transformOrigin: "top",
-          top: `${index * 24}px`, // Increased stack offset
+          top: `${index * 24}px`,
         }}
       >
         {/* Outer glow */}
         <div
           style={{
             position: "absolute",
-            inset: "-2px", // Slightly larger glow
-            borderRadius: "32px", // Larger border radius
-            background: palette.glow,
+            inset: "-2px",
+            borderRadius: "32px",
+            background: palette.border.replace('0.5', '0.15'),
             filter: "blur(20px)",
             zIndex: -1,
           }}
@@ -146,50 +191,87 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
           }}
         />
 
-        {/* Main card - LARGER with more height */}
+        {/* Main card - DARK THEME */}
         <div
           style={{
             position: "relative",
             width: "100%",
             borderRadius: "30px",
-            background: "rgba(255, 255, 255, 0.94)",
-            backdropFilter: "blur(30px) saturate(200%)",
-            boxShadow:
-              "0 25px 70px rgba(0,0,0,0.08), 0 5px 20px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9)",
+            background: "rgba(0, 0, 0, 0.75)",
+            backdropFilter: "blur(20px) saturate(200%)",
+            boxShadow: "0 25px 70px rgba(0,0,0,0.5), 0 5px 20px rgba(0,0,0,0.3)",
             overflow: "hidden",
-            padding: "3rem 3rem 2.5rem", // Increased padding
-            minHeight: "480px", // Added minimum height
+            padding: "3rem 3rem 2.5rem",
+            minHeight: "580px",
           }}
         >
-          {/* Subtle top gradient accent - thicker */}
+          {/* Background Image */}
           <div
-            className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${palette.accent.replace("/20", "").replace("/10", "")}`}
-            style={{ opacity: 0.7 }}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundImage: `url(${backgroundImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              opacity: 0.4,
+              zIndex: 0,
+            }}
           />
 
-          {/* Diagonal background number - larger */}
+          {/* Dark Gradient Overlay */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: "linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%)",
+              zIndex: 0,
+            }}
+          />
+
+          {/* Color Tint Overlay */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: `linear-gradient(135deg, ${palette.border.replace('0.5', '0.2')}, transparent)`,
+              zIndex: 0,
+            }}
+          />
+
+          {/* Diagonal background number */}
           <div
             style={{
               position: "absolute",
               right: "2rem",
               bottom: "1.5rem",
-              fontSize: "9rem", // Larger number
+              fontSize: "9rem",
               fontWeight: 800,
               lineHeight: 1,
               pointerEvents: "none",
               userSelect: "none",
               fontVariantNumeric: "tabular-nums",
               letterSpacing: "-0.05em",
+              zIndex: 1,
             }}
             className={palette.number}
             aria-hidden="true"
           >
-            0{index + 1}
+            {(index + 1).toString().padStart(2, "0")}
           </div>
 
           {/* Content */}
-          <div style={{ position: "relative", zIndex: 1 }}>
-            {/* Top row: icon + badge - larger */}
+          <div style={{ position: "relative", zIndex: 2 }}>
+            {/* Top row: icon + badge */}
             <div
               style={{
                 display: "flex",
@@ -203,12 +285,13 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
                   className={`${palette.iconBg} ${palette.iconColor}`}
                   style={{
                     display: "inline-flex",
-                    width: 64, // Larger icon container
+                    width: 64,
                     height: 64,
                     alignItems: "center",
                     justifyContent: "center",
                     borderRadius: 20,
                     flexShrink: 0,
+                    backdropFilter: "blur(10px)",
                   }}
                 >
                   <span style={{ width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -217,24 +300,39 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
                 </div>
               )}
 
-              <span
-                className={`${palette.badge} border text-sm font-semibold tracking-wider uppercase`} // Larger text
-                style={{
-                  padding: "6px 14px",
-                  borderRadius: 99,
-                  letterSpacing: "0.08em",
-                }}
-              >
-                0{index + 1} / 0{totalCards}
-              </span>
+              <div style={{ display: "flex", gap: "0.75rem" }}>
+                {item.tags && item.tags.slice(0, 2).map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className={`${palette.badge} border text-xs font-semibold tracking-wider uppercase`}
+                    style={{
+                      padding: "6px 14px",
+                      borderRadius: 99,
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+                <span
+                  className={`${palette.badge} border text-sm font-semibold tracking-wider uppercase`}
+                  style={{
+                    padding: "6px 14px",
+                    borderRadius: 99,
+                    letterSpacing: "0.08em",
+                  }}
+                >
+                  {(index + 1).toString().padStart(2, "0")} / {totalCards.toString().padStart(2, "0")}
+                </span>
+              </div>
             </div>
 
-            {/* Title - larger */}
+            {/* Title */}
             <h3
               style={{
-                fontSize: "2rem", // Larger title
+                fontSize: "2rem",
                 fontWeight: 700,
-                color: "hsl(var(--primary))",
+                color: "white",
                 marginBottom: "0.85rem",
                 lineHeight: 1.25,
                 letterSpacing: "-0.02em",
@@ -243,7 +341,7 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
               {item.title}
             </h3>
 
-            {/* Divider - thicker */}
+            {/* Divider */}
             <div
               style={{
                 height: "2px",
@@ -254,45 +352,60 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
               }}
             />
 
-            {/* Description - larger text with more spacing */}
+            {/* Description */}
             <p
               style={{
-                fontSize: "1.25rem", // Larger description text
+                fontSize: "1.25rem",
                 lineHeight: 1.75,
-                color: "rgba(0,0,0,0.65)",
+                color: "rgba(255,255,255,0.7)",
                 maxWidth: "90%",
                 marginBottom: "1.5rem",
               }}
             >
-              {item.description}
+              {item.description} End-to-end software development services designed for ambitious businesses.
+We transform ideas into secure, scalable, and high-performing digital products
+that deliver lasting value for customers, teams, and stakeholders.
             </p>
 
-            {/* Optional bullet points or features */}
-            {/* {item.features && (
-              <ul style={{ marginTop: "1rem", marginBottom: "1rem" }}>
-                {item.features.map((feature, idx) => (
-                  <li key={idx} style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem", fontSize: "0.95rem", color: "rgba(0,0,0,0.6)" }}>
-                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: palette.border }} />
-                    {feature}
-                  </li>
+            {/* Metrics */}
+            {item.metrics && item.metrics.length > 0 && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", marginBottom: "1.5rem" }}>
+                {item.metrics.map((metric, idx) => (
+                  <div key={idx} style={{ display: "flex", flexDirection: "column" }}>
+                    <span
+                      style={{
+                        fontSize: "1.5rem",
+                        fontWeight: "bold",
+                        color: palette.border.replace('0.5', '1'),
+                      }}
+                    >
+                      {metric.value}
+                    </span>
+                    <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                      {metric.label}
+                    </span>
+                  </div>
                 ))}
-              </ul>
-            )} */}
+              </div>
+            )}
 
-            {/* CTA - larger */}
+            {/* CTA */}
             {item.cta && (
               <a
                 href={item.cta.href}
-                className={`${palette.cta} inline-flex items-center gap-2 transition-all`}
+                className={`${palette.buttonBg} inline-flex items-center gap-2 transition-all`}
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "0.5rem",
                   marginTop: "1.5rem",
+                  padding: "0.75rem 1.5rem",
+                  borderRadius: "0.75rem",
                   fontSize: "0.95rem",
                   fontWeight: 600,
                   textDecoration: "none",
                   letterSpacing: "0.01em",
+                  color: "white",
                 }}
               >
                 {item.cta.label}

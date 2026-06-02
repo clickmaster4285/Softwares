@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, FileText, Mail, Phone, User, DollarSign } from "lucide-react";
 import { AuroraCanvas } from "../../ui/AuroraCanvas";
-
+import Link from "next/link";
 
 
 function AnimatedCounter({ 
@@ -98,15 +98,19 @@ function HeroSectionContent() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <button
-                data-hero-cta
-                data-magnetic
-                className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:shadow-xl"
-              >
-                Get Free Software Strategy Call
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </button>
+              <Link href="/contact-us">
+  <button
+    data-hero-cta
+    data-magnetic
+    className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:shadow-xl"
+  >
+    Get Free Software Strategy Call
+    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+  </button>
+</Link>
 
+
+ <Link href="/contact-us">
               <button
                 data-hero-cta
                 data-magnetic
@@ -115,6 +119,7 @@ function HeroSectionContent() {
                 <FileText className="h-4 w-4" />
                 Request Proposal
               </button>
+              </Link>
             </div>
 
             <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:mt-20 lg:gap-x-10 lg:gap-y-8">
