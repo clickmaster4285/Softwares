@@ -22,7 +22,7 @@ import FaqSection from '@/src/components/landingPage/location/FaqSection';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
-import WorldMapHero from '@/src/components/landingPage/location/WorldMapHero';
+import WorldMapHero from '@/src/components/landingPage/location/AnimatedPins';
 
 
 type Props = { params: Promise<{ location: string }> };

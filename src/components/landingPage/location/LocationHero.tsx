@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Link from "next/link";
 import type { CountryData } from "@/lib/country";
-import AnimatedPins from './WorldMapHero'; // We'll create this component
+import AnimatedPins from './AnimatedPins';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,7 +64,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
   return (
     <motion.section
       ref={heroRef}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex items-center overflow-hidden"
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 0.8 }}
@@ -84,54 +84,76 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
         <AnimatedPins />
       </div>
 
-      {/* Content - Dark Text for Light Theme */}
-      <motion.div
-        className="container mx-auto max-w-6xl px-4 relative z-10"
-        initial={{ y: 50 }}
-        animate={isInView ? { y: 0 } : {}}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        <motion.div className="text-center bg-white/80 backdrop-blur-sm py-8 px-4 rounded-2xl">
-          <motion.h1
-            className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
-            initial={{ scale: 0.9 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            {country?.heroHeadline || "Empowering Digital Innovation"}
-          </motion.h1>
-
-          <motion.p
-            className="text-gray-700 mt-4 text-md md:text-xl max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            {country?.heroSubheadline || "Transform your business with cutting-edge technology solutions"}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-8 flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link
-              href={`/contact-us?location=${location}`}
-              className="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 transform hover:scale-105 inline-block text-center"
+      {/* Content - Left Aligned with Max Width 1600px */}
+      <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
+        <motion.div
+          className="flex justify-start"
+          initial={{ y: 50 }}
+          animate={isInView ? { y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {/* Glass Card - No white background, just blur with text visibility */}
+          <motion.div className="max-w-4xl text-left">
+            <motion.h1
+              className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
+              initial={{ scale: 0.9 }}
+              animate={isInView ? { scale: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
-              Get Free Consultation
-            </Link>
+              {country?.heroHeadline || "Empowering Digital Innovation"}
+            </motion.h1>
 
-            <Link
-              href={`/contact-us?location=${location}`}
-              className="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 transform hover:scale-105 inline-block text-center"
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.5 }}
             >
-              Discuss Your Project
-            </Link>
+              <p className="text-white/95 text-base md:text-xl leading-relaxed drop-shadow-md">
+                {country?.heroSubheadline ||
+                  "Transform your business with cutting-edge technology solutions."}
+              </p>
+              
+              <p className="text-white/90 text-base md:text-lg leading-relaxed drop-shadow-md">
+                Empowering businesses with innovative software, web, and digital
+                transformation solutions tailored for growth and success.
+              </p>
+              
+              <p className="text-white/90 text-base md:text-lg leading-relaxed drop-shadow-md">
+                Our team combines technology, creativity, and strategy to deliver
+                scalable solutions that drive measurable results.
+              </p>
+              
+              <p className="text-white/90 text-base md:text-lg leading-relaxed drop-shadow-md">
+                From startups to enterprises, we help organizations streamline
+                operations, enhance customer experiences, and stay ahead of the
+                competition.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="mt-8 flex flex-col sm:flex-row gap-4 justify-start"
+            >
+              <Link
+                href={`/contact-us?location=${location}`}
+                className="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 transform hover:scale-105 inline-block text-center shadow-lg"
+              >
+                Get Free Consultation
+              </Link>
+
+              <Link
+                href={`/contact-us?location=${location}`}
+                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 transform hover:scale-105 inline-block text-center border border-white/30 shadow-lg"
+              >
+                Discuss Your Project
+              </Link>
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </motion.section>
   );
 };
