@@ -93,14 +93,25 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
   };
 
   return (
-    <motion.section
+  <motion.section
       id="pricing"
-      className="scroll-mt-24 py-6 sm:py-8 md:py-12 mx-6"
+      className="relative scroll-mt-24 py-6 sm:py-8 md:py-12 mx-6 overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
+      {/* ================= GRID PATTERN OVERLAY ================= */}
+      <div
+        className="absolute inset-0 opacity-[0.35] pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(15,23,42,0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(15,23,42,0.08) 1px, transparent 1px)
+          `,
+          backgroundSize: "48px 48px",
+        }}
+      />
 
 
       

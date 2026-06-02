@@ -439,7 +439,7 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
       key={cycle} 
       ref={sectionRef}
       id="our-process" 
-      className="scroll-mt-24 py-8 md:py-12 lg:py-16 bg-[#f5fbfb] w-full px-4 md:px-0"
+      className="scroll-mt-24 py-8 md:py-12 lg:py-16 bg-[#f5fbfb] w-full px-4 md:px-0 relative "
     >
 
 
