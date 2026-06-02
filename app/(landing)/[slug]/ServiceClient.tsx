@@ -12,7 +12,7 @@ import FeaturedInsights from '@/src/components/landingPage/home/FeaturedInsights
 
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 import Testimonials from '@/src/components/landingPage/Testimonials/page';
-import FaqSection from '@/src/components/landingPage/home/FaqSection';
+
 import TechStackSection from '@/src/components/landingPage/home/TechStackSection';
 import ProcessPage from '@/src/components/landingPage/home/ProcessPage';
 import { AppsSection } from '@/src/components/landingPage/home/AppsSection';
@@ -24,6 +24,7 @@ import { TestimonialsSection } from '@/src/components/landingPage/home/Testimoni
 import TrustedBySection from '@/src/components/landingPage/home/TrustedBySection';
 import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 import WhyChooseUs from '@/src/components/landingPage/home/whyUs';
+import FaqSection from '@/src/components/landingPage/home/FaqSection';
 
 interface ServiceClientProps {
   serviceData: ServiceData;
@@ -138,10 +139,10 @@ const pricingTiers = pricingPlans.map((plan) => ({
   bestFor: plan.description,
 }));
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden w-full">
       {/* Breadcrumb Navigation */}
-      <div className="mx-auto px-4 md:px-8 lg:px-12 py-3.5 mt-8 bg-white backdrop-blur-sm border-b border-gray-100">
-        <nav className="flex items-center gap-1.5 text-sm max-w-7xl mx-auto">
+      <div className="mx-auto w-full px-4 md:px-8 lg:px-12 py-3.5 mt-8 bg-white backdrop-blur-sm border-b border-gray-100">
+        <nav className="flex items-center gap-1.5 text-sm w-full">
           <Link
             href="/"
             className="text-gray-500 hover:text-primary transition-colors font-medium"
@@ -164,7 +165,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
 
       {/* Hero Section */}
       <HeroSection serviceData={serviceData} />
-<TrustedBySection/>
+
 
       <Suspense
         fallback={
@@ -174,7 +175,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
       <TrustedClientsSection />
       </Suspense>
 
-
+<TrustedBySection/>
 
 
    
@@ -221,7 +222,7 @@ const pricingTiers = pricingPlans.map((plan) => ({
   <TestimonialsSection />
 
 
-      <FaqSection/>
+         <FaqSection/>
 
       {/* Final CTA Section
       <section className="relative py-8 overflow-hidden">

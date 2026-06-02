@@ -25,7 +25,7 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
   if (!checklist || checklist.length === 0) return null;
 
   return (
-   <section  className="relative w-full bg-[#f5fbfb] py-14">
+   <section id="checklist" className="relative w-full bg-[#f5fbfb] py-14">
     {/* Background Blobs */}
     <div
     className="absolute inset-0 opacity-[0.45]"

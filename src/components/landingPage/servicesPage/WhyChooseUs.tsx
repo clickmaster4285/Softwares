@@ -189,7 +189,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#f5fbfb] py-24 px-4 sm:px-8">
+    <section id="why-choose-us" className="relative overflow-hidden bg-[#f5fbfb] py-24 px-4 sm:px-8">
       {/* ambient background blobs */}
       <div className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-sky-200/40 blur-3xl" />
       <div className="pointer-events-none absolute -right-32 bottom-20 h-96 w-96 rounded-full bg-purple-200/40 blur-3xl" />

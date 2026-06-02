@@ -5,7 +5,7 @@ import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
 export function CeoVision() {
   return (
-    <section className="w-full overflow-hidden relative bg-[#f5fbfb]">
+    <section id="case-study" className="w-full overflow-hidden relative bg-[#f5fbfb]">
 
    {/* SAME BLOBS AS TRUSTED CLIENTS */}
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
