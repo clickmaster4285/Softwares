@@ -238,10 +238,6 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Robot Mascot - Fixed position across all sections */}
-      <div className="fixed bottom-7 right-8 z-50">
-        <RobotMascot />
-      </div>
     </main>
   );
 }

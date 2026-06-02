@@ -6,6 +6,7 @@ import {
   organizationSchema,
   webSiteSchema,
 } from './metadata-config';
+import { RobotMascot } from '@/components/ui/RobotMascot';
 import Script from 'next/script';
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -65,6 +66,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Providers>
           {children}
         </Providers>
+        {/* Robot Mascot - Fixed position across all pages */}
+        <div className="fixed bottom-7 right-8 z-50">
+          <RobotMascot />
+        </div>
       </body>
     </html>
   );
