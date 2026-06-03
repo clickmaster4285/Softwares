@@ -122,7 +122,7 @@ export function ServiceDetailFeatures() {
                   <h3 className="text-2xl font-medium tracking-tight text-slate-900 sm:text-3xl">
                     {feature.title}
                   </h3>
-                  <p className="leading-relaxed text-slate-600">{feature.description}</p>
+                  <p className="leading-relaxed text-slate-900">{feature.description}</p>
                 </div>
               </div>
             );

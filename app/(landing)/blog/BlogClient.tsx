@@ -212,11 +212,11 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
       <section className="py-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {isLoading ? (
-            <p className="text-slate-600">Loading newsroom...</p>
+            <p className="text-slate-900">Loading newsroom...</p>
           ) : !featured ? (
             <div className="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
               <p className="font-medium text-slate-900">No stories found.</p>
-              <p className="mt-2 text-sm text-slate-600">Try another search or topic filter.</p>
+              <p className="mt-2 text-sm text-slate-900">Try another search or topic filter.</p>
             </div>
           ) : (
             <>
@@ -242,7 +242,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                     <h2 className="mt-2 font-display text-2xl font-bold leading-tight text-slate-900 group-hover:text-primary">
                       {featured.title}
                     </h2>
-                    <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600">
+                    <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-900">
                       {featured.excerpt}
                     </p>
                     <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-500">
@@ -377,7 +377,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                           <h3 className="mt-1 line-clamp-2 text-lg font-semibold leading-snug text-slate-900 group-hover:text-primary">
                             {post.title}
                           </h3>
-                          <p className="mt-2 line-clamp-3 text-sm text-slate-600">{post.excerpt}</p>
+                          <p className="mt-2 line-clamp-3 text-sm text-slate-900">{post.excerpt}</p>
                           <p className="mt-3 flex flex-wrap items-center gap-1 text-xs text-slate-500">
                             {authorLinkedin(post) ? (
                               <a

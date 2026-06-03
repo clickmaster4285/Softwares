@@ -229,7 +229,7 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
      
 
         {/* Bento Grid */}
-        <div className="grid auto-rows-[300px] grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
+        <div className="grid auto-rows-[350px] grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
           {differentiators.map((diff, idx) => {
             const theme = THEMES[idx % THEMES.length];
             const span = SPANS[idx % SPANS.length];
@@ -265,12 +265,12 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                 {/* Category badge */}
                 <div
                   className={cn(
-                    "relative inline-flex w-fit items-center gap-1.5 rounded-lg px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm",
+                    "relative inline-flex w-fit items-center gap-1.5 rounded-lg px-2.5 py-1 text-sm font-semibold uppercase tracking-wider backdrop-blur-sm",
                     theme.badgeBg,
                     theme.badgeText,
                   )}
                 >
-                  <Sparkles className="h-3 w-3" />
+                  {/* <Sparkles className="h-3 w-3" /> */}
                   {theme.category}
                 </div>
 
@@ -307,10 +307,10 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
                
               {/* Text content */}
 <div className="relative mt-auto flex-1 flex flex-col justify-end">
-  <h3 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+  <h3 className="text-xl font-bold leading-snug text-slate-900 sm:text-xl">
     {diff.feature}
   </h3>
-  <p className="mt-1.5 line-clamp-4 text-sm leading-relaxed text-slate-600">
+  <p className="mt-1.5 line-clamp-4 text-lg leading-relaxed text-slate-900">
     {displayDescription}
   </p>
   

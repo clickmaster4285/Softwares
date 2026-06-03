@@ -30,7 +30,7 @@ export function GlobalGlobeSection(): JSX.Element {
               Built for teams{" "}
               <span className="text-primary">everywhere</span>
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-900">
               Pins mark every U.S. state and D.C., all Canadian provinces and territories, Australian
               states and territories, New Zealand regions, and major UK regions. We still collaborate
               across Europe and the Middle East beyond what you see here.

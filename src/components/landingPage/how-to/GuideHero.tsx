@@ -16,7 +16,7 @@ const GuideHero = ({ guide, subpageOuterPadding, subpageInnerPadding }: any) => 
               {guide.title.replace(' | ClickMasters', '')}
             </h1>
             
-            <p className="mt-6 max-w-4xl text-base leading-8 text-slate-600" style={{ textAlign: 'justify' }}>
+            <p className="mt-6 max-w-4xl text-base leading-8 text-slate-900" style={{ textAlign: 'justify' }}>
               {guide.steps[0]?.body}
             </p>
 

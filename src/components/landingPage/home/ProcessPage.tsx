@@ -222,7 +222,7 @@ export default function ProcessPage() {
           {phase.title}
         </h3>
 
-        <p className="mb-4 text-sm text-slate-600">
+        <p className="mb-4 text-sm text-slate-900">
           {phase.description}
         </p>
 

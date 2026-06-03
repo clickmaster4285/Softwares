@@ -26,7 +26,7 @@ export default function BlogFaqSection({ title, items }: BlogFaqSectionProps) {
             <AccordionTrigger className="text-left text-base font-semibold text-slate-900 hover:no-underline">
               {item.question}
             </AccordionTrigger>
-            <AccordionContent className="pt-0 text-sm leading-7 text-slate-600">
+            <AccordionContent className="pt-0 text-sm leading-7 text-slate-900">
               {item.answer}
             </AccordionContent>
           </AccordionItem>
