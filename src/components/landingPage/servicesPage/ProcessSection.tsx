@@ -156,11 +156,11 @@ const DesktopProcessCard = ({ phase, delay, side, startAnimation }: { phase: any
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-primary">
+          <span className="text-sm font-semibold uppercase tracking-wider text-primary">
             {phase.phase}
           </span>
           <div className="flex items-center gap-2 mt-1 md:mt-2">
-            <Badge variant="outline" className="border-primary bg-primary/10 text-primary text-xs px-2 py-0.5 md:py-1 font-medium">
+            <Badge variant="outline" className="border-primary bg-primary/10 text-primary text-sm px-2 py-0.5 md:py-1 font-medium">
               <Clock className="h-3 w-3 mr-1" />
               {phase.timeline}
             </Badge>
@@ -180,7 +180,7 @@ const DesktopProcessCard = ({ phase, delay, side, startAnimation }: { phase: any
           initial={{ opacity: 0 }}
           animate={startAnimation ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: delay + 0.25 }}
-          className="text-lg md:text-xl lg:text-2xl font-bold text-slate-900 leading-tight mb-2 md:mb-3"
+          className="text-xl md:text-xl lg:text-2xl font-bold text-slate-900 leading-tight mb-2 md:mb-3"
         >
           {phase.title}
         </motion.h3>
@@ -189,7 +189,7 @@ const DesktopProcessCard = ({ phase, delay, side, startAnimation }: { phase: any
           initial={{ opacity: 0 }}
           animate={startAnimation ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: delay + 0.35 }}
-          className="text-sm text-gray-900 leading-relaxed"
+          className="text-lg text-gray-900 leading-relaxed"
         >
           {phase.text}
         </motion.p>
@@ -472,7 +472,7 @@ export const ProcessSection = ({ serviceName, processPhases }: ProcessSectionPro
                   <span className="h-[2px] w-8 rounded-full bg-primary" />
                 </div>
       
-                <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
+                <p className="mx-auto max-w-2xl text-base leading-7 text-slate-900 sm:text-lg">
                     A proven methodology that transforms your vision into reality
                 </p>
       </div>

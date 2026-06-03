@@ -378,7 +378,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
                           {cs.technologies.slice(0, 4).map((tech) => (
                             <span
                               key={tech}
-                              className="rounded-md bg-slate-100 px-2 py-0.5 font-mono text-[11px] font-medium text-slate-600"
+                              className="rounded-md bg-slate-100 px-2 py-0.5 font-mono text-[11px] font-medium text-slate-900"
                             >
                               {tech}
                             </span>

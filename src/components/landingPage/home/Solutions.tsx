@@ -114,7 +114,7 @@ export default function SolutionsPage() {
               Our Work in Action
             </h2> */}
 
-            <p className=" text-slate-900 text-xl">
+            <p className=" text-black text-xl">
               See how we&apos;ve helped businesses transform their ideas into
               successful digital products.
             </p>

@@ -14,7 +14,7 @@ export function StaticContentPage({ title, description, children }: StaticConten
         ← Home
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{title}</h1>
-      {description ? <p className="mt-4 text-base text-slate-600">{description}</p> : null}
+      {description ? <p className="mt-4 text-base text-slate-900">{description}</p> : null}
       <div className="prose prose-slate mt-8 max-w-none">{children}</div>
     </main>
   );

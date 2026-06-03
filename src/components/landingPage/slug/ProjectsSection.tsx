@@ -237,7 +237,7 @@ export const ParallaxProjectsContent = ({ projects }: ParallaxProjectsContentPro
 
               <motion.div style={{ y: translateContents[index] }} className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4">
                 {formattedDate(section.createdAt) && (
-                  <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-600">
+                  <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-slate-900">
                     <Calendar className="h-3 w-3 text-primary flex-shrink-0" />
                     <span className="truncate">{formattedDate(section.createdAt)}</span>
                   </div>
@@ -259,7 +259,7 @@ export const ParallaxProjectsContent = ({ projects }: ParallaxProjectsContentPro
                       </span>
                     ))}
                     {section.tags.length > 3 && (
-                      <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                      <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-900">
                         +{section.tags.length - 3}
                       </span>
                     )}

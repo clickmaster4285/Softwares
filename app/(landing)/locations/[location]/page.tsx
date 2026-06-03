@@ -78,11 +78,11 @@ const serviceData = servicesByCountry[country.name] || [];
     <div className="min-h-screen bg-white">
       {/* HERO */}
       <HeroSection country={country} location={location} />
-      {/* <StatsSection country={country} location={location} /> */}
+      <StatsCard country={country}  />
 <TrustedBySection/>
       
 
-      <StatsCard/>
+      {/* <StatsCard country={country}/> */}
       {/* <WorldMapHero/> */}
       <PainPointsSolutions countryName={country.name} />
 

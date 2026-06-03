@@ -89,7 +89,7 @@ export default function BlogRelatedSlider({ posts, categoryLabel }: BlogRelatedS
           <h2 id="related-blogs-heading" className="mt-0.5 font-display text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             Related articles
           </h2>
-          <p className="mt-0.5 max-w-xl text-xs text-slate-600 sm:text-sm">
+          <p className="mt-0.5 max-w-xl text-xs text-slate-900 sm:text-sm">
             {/* <span className="font-medium text-slate-800">{categoryLabel}</span>
             <span className="text-slate-500"> · scrolling newest first</span> */}
           </p>

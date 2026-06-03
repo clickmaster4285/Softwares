@@ -620,7 +620,7 @@ const { data: blogs = [] } = useQuery({
                           <Link
                             href={item.href}
                             onClick={closeDropdowns}
-                            className="block w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors hover:bg-white/70 hover:text-slate-900 text-slate-600"
+                            className="block w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors hover:bg-white/70 hover:text-slate-900 text-slate-900"
                           >
                             <div className="flex items-center justify-between">
                               <span>{item.title}</span>

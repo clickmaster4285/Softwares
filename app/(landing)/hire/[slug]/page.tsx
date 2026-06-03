@@ -33,7 +33,7 @@ export default async function HireUsPage({ params }: Props) {
         ← Contact us
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{page.title}</h1>
-      <p className="mt-4 text-base text-slate-600">{page.lead}</p>
+      <p className="mt-4 text-base text-slate-900">{page.lead}</p>
       <ul className="mt-6 list-disc space-y-2 pl-6 text-slate-700">
         {page.highlights.map((item) => (
           <li key={item}>{item}</li>

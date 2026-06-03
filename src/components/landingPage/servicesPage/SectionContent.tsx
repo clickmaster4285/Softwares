@@ -71,7 +71,7 @@ export function SectionContent({ sections, serviceName }: SectionContentProps) {
               {/* Left Column - Content */}
               <div className="space-y-6">
                 <p 
-                  className="text-lg leading-relaxed text-slate-800"
+                  className="text-xl leading-relaxed text-slate-900"
                   dangerouslySetInnerHTML={{ 
                     __html: makeBoldServiceName(section.body, serviceName) 
                   }}
@@ -85,13 +85,13 @@ export function SectionContent({ sections, serviceName }: SectionContentProps) {
                     {section?.items?.map((item, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
+                        className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-lg hover:shadow-md transition-shadow"
                       >
                         <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                          <Check className="h-3 w-3 stroke-[3]" />
+                          <Check className="h-6 w-6 stroke-[3]" />
                         </div>
                         <span 
-                          className="text-sm font-medium text-slate-900"
+                          className="text-lg font-medium text-slate-900"
                           dangerouslySetInnerHTML={{ 
                             __html: makeBoldServiceName(item, serviceName) 
                           }}

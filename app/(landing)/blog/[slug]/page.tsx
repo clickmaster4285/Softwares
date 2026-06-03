@@ -307,7 +307,7 @@ export default async function BlogDetailPage({
         <article>
           <div className="border-b border-slate-200/80 bg-white">
             <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-              <Button variant="ghost" className="-ml-2 mb-6 gap-2 text-slate-600" asChild>
+              <Button variant="ghost" className="-ml-2 mb-6 gap-2 text-slate-900" asChild>
                 <Link href="/blog">
                   <ArrowLeft className="h-4 w-4" />
                   All posts
@@ -338,7 +338,7 @@ export default async function BlogDetailPage({
                     <p className="text-xs text-slate-500">Author</p>
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-900">
                   {authorLinkedinUrl ? (
                     <a
                       href={authorLinkedinUrl}

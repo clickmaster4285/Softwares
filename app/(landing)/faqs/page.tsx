@@ -21,7 +21,7 @@ export default function FaqsPage() {
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
           FAQs by Service
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600">
+        <p className="mx-auto mt-4 max-w-2xl text-base text-slate-900">
           Choose any service card to open its FAQ page.
         </p>
       </section>
@@ -43,7 +43,7 @@ export default function FaqsPage() {
               <h2 className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-primary">
                 {service.title}
               </h2>
-              <p className="mt-2 line-clamp-3 text-sm text-slate-600">{service.metaDescription}</p>
+              <p className="mt-2 line-clamp-3 text-sm text-slate-900">{service.metaDescription}</p>
               <p className="mt-4 text-sm font-medium text-primary">
                 {faqCount} FAQ{faqCount === 1 ? '' : 's'} available
               </p>

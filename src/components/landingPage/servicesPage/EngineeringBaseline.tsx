@@ -1,9 +1,3 @@
-
-
-
-
-
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -25,18 +19,21 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
   if (!checklist || checklist.length === 0) return null;
 
   return (
-   <section id="checklist" className="relative w-full bg-[#f5fbfb] py-14">
-    {/* Background Blobs */}
-    <div
-    className="absolute inset-0 opacity-[0.45]"
-    style={{
-      backgroundImage: `
-        linear-gradient(to right, rgba(15,23,42,0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(15,23,42,0.06) 1px, transparent 1px)
-      `,
-      backgroundSize: "48px 48px",
-    }}
-  />
+    <section id="checklist" className="relative w-full bg-[#f8fbfa] py-16 md:py-20 overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(15,23,42,0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(15,23,42,0.06) 1px, transparent 1px)
+          `,
+          backgroundSize: "52px 52px",
+        }}
+      />
+
+      <div className="mx-auto max-w-7xl px-6">
+        {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
                 <div className="inline-flex items-center gap-2 mb-3">
                   <span className="h-[2px] w-8 rounded-full bg-primary" />
@@ -60,69 +57,65 @@ export const EngineeringBaseline = ({ serviceName, checklist }: EngineeringBasel
                    Our engineering standards and best practices
                 </p> */}
       </div>
-      
 
-
-
-
-      {/* Mobile: 1 column, Tablet: 2-3 columns, Desktop: 5 columns */}
-     <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4 w-full">
-        {checklist.map((item, i) => (
-          <motion.div
-            key={i}
-            className="group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.05 }}
-          >
-            <div className="bg-white rounded-xl overflow-hidden border border-slate-200 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
-              {/* Top accent bar */}
-            <div className="h-1 bg-gradient-to-r from-primary to-primary w-0 group-hover:w-full transition-all duration-500" />
-              
-              <div className="p-4 sm:p-5">
-                <div className="flex items-center justify-between mb-3 sm:mb-4">
-                  <div className="text-2xl sm:text-3xl font-bold text-primary  transition-colors duration-300">
+        {/* Checklist Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {checklist.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="group"
+            >
+              <div className="h-full bg-white rounded-2xl border border-slate-200 p-8 flex flex-col transition-all duration-500 group-hover:border-primary/20 group-hover:shadow-xl group-hover:-translate-y-1">
+                {/* Top Row: Number + Icon */}
+                <div className="flex items-start justify-between mb-6">
+                  <div className="text-5xl font-bold text-primary/60 group-hover:text-slate-200 transition-colors duration-300 select-none">
                     {(i + 1).toString().padStart(2, '0')}
                   </div>
-                  <Badge className="bg-transparent border border-slate-200 text-slate-800 group-hover:bg-primary/10 group-hover:border-primary/10 group-hover:text-primary transition-all duration-300 text-xs sm:text-xs">
+                  
+                  <div className="text-primary/80 group-hover:text-primary transition-colors">
+                    <CheckCircle2 className="w-9 h-9" strokeWidth={1.75} />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1">
+                  <Badge 
+                    variant="outline"
+                    className="mb-4 text-lg font-medium border-primary/20 text-primary group-hover:border-primary/30 group-hover:text-primary transition-colors"
+                  >
                     {item.standard}
                   </Badge>
-                </div>
-                
-                <h3 className="font-semibold text-slate-900 text-lg mb-1 sm:mb-2 line-clamp-2">
-                  {item.item}
-                </h3>
-                
-                <p className="text-xs sm:text-sm text-slate-800">
-                  Industry-standard compliance
-                </p>
-                
-                {/* Slide up icon on hover - visible on desktop only */}
-                <div className="mt-3 sm:mt-4 flex justify-end overflow-hidden">
-                  <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="text-primary hidden sm:block"
-                  >
-                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                  </motion.div>
-                  {/* Always visible arrow on mobile */}
-                  <ArrowRight className="w-3 h-3 text-primary sm:hidden" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
 
-      {/* Bottom Divider */}
-      <div className="my-8 sm:my-12 md:my-16 flex items-center gap-4">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+                  <h3 className="text-xl font-semibold text-slate-900 leading-tight mb-3 group-hover:text-primary transition-colors">
+                    {item.item}
+                  </h3>
+
+                  <p className="text-slate-800 text-md leading-relaxed">
+                    Industry-standard compliance and best practice implementation.
+                  </p>
+                </div>
+
+                {/* Footer Arrow */}
+                {/* <div className="mt-8 flex justify-end">
+                  <div className="flex items-center gap-2 text-primary text-sm font-medium group-hover:gap-3 transition-all duration-300">
+                    Learn more
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  </div>
+                </div> */}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom Accent */}
+        <div className="mt-16 flex justify-center">
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+        </div>
       </div>
     </section>
   );
 };
-
-

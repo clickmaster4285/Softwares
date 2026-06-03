@@ -15,9 +15,6 @@ export interface LargeGlassCardItem {
   color?: string;
   icon?: React.ReactNode;
   cta?: { label: string; href: string };
-  tags?: string[];
-  metrics?: { label: string; value: string }[];
-  backgroundImage?: string;
 }
 
 interface CardProps {
@@ -28,142 +25,141 @@ interface CardProps {
 
 const CARD_COLORS = [
   {
-    border: "rgba(253, 164, 175, 0.5)", // rose
-    buttonBg: "bg-rose-300 hover:bg-rose-400",
-    badge: "bg-rose-300/20 text-rose-200 border-rose-300/30",
-    iconBg: "bg-white/10",
-    iconColor: "text-rose-300",
-    cta: "text-rose-300 hover:text-rose-200",
-    number: "text-rose-300/30",
+    accent: "from-emerald-400/30 to-teal-400/15",
+    border: "rgba(52, 211, 153, 0.4)",
+    glow: "rgba(52, 211, 153, 0.1)",
+    badge: "bg-white/80 text-emerald-700 border-emerald-200",
+    iconBg: "bg-white/80",
+    iconColor: "text-emerald-600",
+    cta: "text-emerald-600 hover:text-emerald-700",
+    number: "text-black/10",
   },
   {
-    border: "rgba(167, 243, 208, 0.5)", // mint
-    buttonBg: "bg-emerald-300 hover:bg-emerald-400",
-    badge: "bg-emerald-300/20 text-emerald-200 border-emerald-300/30",
-    iconBg: "bg-white/10",
-    iconColor: "text-emerald-300",
-    cta: "text-emerald-300 hover:text-emerald-200",
-    number: "text-emerald-300/30",
+    accent: "from-violet-400/30 to-purple-400/15",
+    border: "rgba(139, 92, 246, 0.4)",
+    glow: "rgba(139, 92, 246, 0.1)",
+    badge: "bg-white/80 text-violet-700 border-violet-200",
+    iconBg: "bg-white/80",
+    iconColor: "text-violet-600",
+    cta: "text-violet-600 hover:text-violet-700",
+    number: "text-black/10",
   },
   {
-    border: "rgba(221, 214, 254, 0.5)", // lavender
-    buttonBg: "bg-violet-300 hover:bg-violet-400",
-    badge: "bg-violet-300/20 text-violet-200 border-violet-300/30",
-    iconBg: "bg-white/10",
-    iconColor: "text-violet-300",
-    cta: "text-violet-300 hover:text-violet-200",
-    number: "text-violet-300/30",
+    accent: "from-orange-400/30 to-amber-400/15",
+    border: "rgba(251, 146, 60, 0.4)",
+    glow: "rgba(251, 146, 60, 0.1)",
+    badge: "bg-white/80 text-orange-700 border-orange-200",
+    iconBg: "bg-white/80",
+    iconColor: "text-orange-600",
+    cta: "text-orange-600 hover:text-orange-700",
+    number: "text-black/10",
   },
   {
-    border: "rgba(254, 215, 170, 0.5)", // peach
-    buttonBg: "bg-orange-300 hover:bg-orange-400",
-    badge: "bg-orange-300/20 text-orange-200 border-orange-300/30",
-    iconBg: "bg-white/10",
-    iconColor: "text-orange-300",
-    cta: "text-orange-300 hover:text-orange-200",
-    number: "text-orange-300/30",
-  },
-  {
-    border: "rgba(187, 247, 208, 0.5)", // soft green
-    buttonBg: "bg-green-300 hover:bg-green-400",
-    badge: "bg-green-300/20 text-green-200 border-green-300/30",
-    iconBg: "bg-white/10",
-    iconColor: "text-green-300",
-    cta: "text-green-300 hover:text-green-200",
-    number: "text-green-300/30",
-  },
-  {
-    border: "rgba(254, 202, 202, 0.5)", // coral
-    buttonBg: "bg-red-300 hover:bg-red-400",
-    badge: "bg-red-300/20 text-red-200 border-red-300/30",
-    iconBg: "bg-white/10",
-    iconColor: "text-red-300",
-    cta: "text-red-300 hover:text-red-200",
-    number: "text-red-300/30",
-  },
-  {
-    border: "rgba(251, 207, 232, 0.5)", // pink
-    buttonBg: "bg-pink-300 hover:bg-pink-400",
-    badge: "bg-pink-300/20 text-pink-200 border-pink-300/30",
-    iconBg: "bg-white/10",
-    iconColor: "text-pink-300",
-    cta: "text-pink-300 hover:text-pink-200",
-    number: "text-pink-300/30",
-  },
-  {
-    border: "rgba(186, 230, 253, 0.5)", // sky
-    buttonBg: "bg-sky-300 hover:bg-sky-400",
-    badge: "bg-sky-300/20 text-sky-200 border-sky-300/30",
-    iconBg: "bg-white/10",
-    iconColor: "text-sky-300",
-    cta: "text-sky-300 hover:text-sky-200",
-    number: "text-sky-300/30",
+    accent: "from-sky-400/30 to-blue-400/15",
+    border: "rgba(56, 189, 248, 0.4)",
+    glow: "rgba(56, 189, 248, 0.1)",
+    badge: "bg-white/80 text-sky-700 border-sky-200",
+    iconBg: "bg-white/80",
+    iconColor: "text-sky-600",
+    cta: "text-sky-600 hover:text-sky-700",
+    number: "text-black/10",
   },
 ];
 
-// Default background images
-const DEFAULT_BG_IMAGES = [
-  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&h=900&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&h=900&fit=crop",
-  "https://images.unsplash.com/photo-1551434678-e076c2236a9d?w=1600&h=900&fit=crop",
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=900&fit=crop",
+// Lighter, brighter software/tech-related images
+// const CARD_BG_IMAGES = [
+//   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&q=80&brightness=90", // Code on bright screen
+//   "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=80&brightness=90", // Circuit board light
+//   "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1600&q=80&brightness=90", // Laptop bright
+//   "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&q=80&brightness=90", // Coding light
+//   "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=1600&q=80&brightness=90", // Workspace bright
+//   "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=1600&q=80&brightness=90", // Code light theme
+//   "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1600&q=80&brightness=90", // Digital light
+//   "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1600&q=80&brightness=90", // Server room bright
+// ];
+
+
+const CARD_BG_IMAGES = [
+  "/images/card-stack/bg1.jpg",
+  "/images/card-stack/bg2.jpg",
+  //"/images/card-stack/bg8.jpg",
+ 
+  "/images/card-stack/bg4.jpg",
+  "/images/card-stack/bg5.jpg",
+ // "/images/card-stack/bg6.jpg",
+  "/images/card-stack/bg7.jpg",
+   "/images/card-stack/bg3.jpg",
+  
 ];
 
 const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const palette = CARD_COLORS[index % CARD_COLORS.length];
-  const backgroundImage = item.backgroundImage || DEFAULT_BG_IMAGES[index % DEFAULT_BG_IMAGES.length];
+  const cardBgImage = CARD_BG_IMAGES[index % CARD_BG_IMAGES.length];
 
   useEffect(() => {
     const card = cardRef.current;
-    if (!card) return;
+    const container = containerRef.current;
+    if (!card || !container) return;
 
-    const targetScale = Math.max(0.88, 1 - (totalCards - index) * 0.045);
+    const targetScale = 1 - (totalCards - index) * 0.025; // Less scale reduction
 
-    gsap.set(card, { 
-      scale: 1, 
-      y: index * 32,
-      transformOrigin: "center top" 
-    });
+    gsap.set(card, { scale: 1, transformOrigin: "center top" });
 
     const trigger = ScrollTrigger.create({
-      trigger: card.parentElement,
-      start: "top top",
+      trigger: container,
+      start: "top center",
       end: "bottom center",
-      scrub: 1.1,
+      scrub: 1,
       onUpdate: (self) => {
         const progress = self.progress;
         const scale = gsap.utils.interpolate(1, targetScale, progress);
-        const y = gsap.utils.interpolate(index * 32, 0, progress);
-
         gsap.set(card, {
           scale: Math.max(scale, targetScale),
-          y: Math.max(y, 0),
+          transformOrigin: "center top",
         });
       },
     });
 
-    return () => trigger.kill();
+    return () => {
+      trigger.kill();
+    };
   }, [index, totalCards]);
 
   return (
-    <div className="h-screen sticky top-0 flex items-center justify-center z-10">
+    <div
+      ref={containerRef}
+      style={{
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "sticky",
+        top: 0,
+      }}
+    >
       <div
         ref={cardRef}
-        className="relative w-full max-w-[1080px] mx-auto"
-        style={{ transformOrigin: "center top" }}
+        style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: "1080px", // Increased from 880px
+          transformOrigin: "top",
+          top: `${index * 20}px`, // Slightly less stack offset
+        }}
       >
-        {/* Outer glow */}
-        <div
+        {/* Outer glow - reduced */}
+        {/* <div
           style={{
             position: "absolute",
             inset: "-2px",
             borderRadius: "32px",
-            background: palette.border.replace('0.5', '0.15'),
-            filter: "blur(20px)",
+            background: palette.glow,
+            filter: "blur(12px)", // Less blur
             zIndex: -1,
           }}
-        />
+        /> */}
 
         {/* Colored border ring */}
         <div
@@ -171,27 +167,26 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
             position: "absolute",
             inset: 0,
             borderRadius: "30px",
-            border: `2px solid ${palette.border}`,
+           border: "1px solid rgba(255,255,255,0.12)",
             pointerEvents: "none",
             zIndex: 2,
           }}
         />
 
-        {/* Main card - DARK THEME */}
+        {/* Main card with background image */}
         <div
           style={{
             position: "relative",
             width: "100%",
             borderRadius: "30px",
-            background: "rgba(0, 0, 0, 0.75)",
-            backdropFilter: "blur(20px) saturate(200%)",
-            boxShadow: "0 25px 70px rgba(0,0,0,0.5), 0 5px 20px rgba(0,0,0,0.3)",
+            backgroundImage: `url(${cardBgImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
             overflow: "hidden",
-            padding: "3rem 3rem 2.5rem",
-            minHeight: "580px",
+            minHeight: "560px", // Increased from 480px
           }}
         >
-          {/* Background Image */}
+          {/* Lighter overlay for text readability - much lighter */}
           <div
             style={{
               position: "absolute",
@@ -199,203 +194,168 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: `url(${backgroundImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              opacity: 0.4,
-              zIndex: 0,
-            }}
-          />
-
-          {/* Dark Gradient Overlay */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: "linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%)",
-              zIndex: 0,
-            }}
-          />
-
-          {/* Color Tint Overlay */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: `linear-gradient(135deg, ${palette.border.replace('0.5', '0.2')}, transparent)`,
-              zIndex: 0,
-            }}
-          />
-
-          {/* Diagonal background number */}
-          <div
-            style={{
-              position: "absolute",
-              right: "2rem",
-              bottom: "1.5rem",
-              fontSize: "9rem",
-              fontWeight: 800,
-              lineHeight: 1,
-              pointerEvents: "none",
-              userSelect: "none",
-              fontVariantNumeric: "tabular-nums",
-              letterSpacing: "-0.05em",
+              background: "linear-gradient(135deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.6) 100%)",
               zIndex: 1,
             }}
-            className={palette.number}
-            aria-hidden="true"
-          >
-            {(index + 1).toString().padStart(2, "0")}
-          </div>
+          />
 
-          {/* Content */}
-          <div style={{ position: "relative", zIndex: 2 }}>
-            {/* Top row: icon + badge */}
+          {/* Minimal glass overlay - much less blur */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            //  background: "rgba(255, 255, 255, 0.15)",
+              backdropFilter: "blur(1px)", // Much less blur
+              zIndex: 2,
+            }}
+          />
+
+          {/* Content container */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 3,
+              padding: "3.5rem 3.5rem 3rem", // More padding
+            }}
+          >
+            {/* Subtle top gradient accent */}
+            <div
+              className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${palette.accent}`}
+              style={{ opacity: 0.5 }}
+            />
+
+            {/* Diagonal background number */}
             <div
               style={{
-                display: "flex",
-                alignItems: "flex-start",
-                justifyContent: "space-between",
-                marginBottom: "1.75rem",
+                position: "absolute",
+                right: "2rem",
+                bottom: "1.5rem",
+                fontSize: "10rem", // Larger number
+                fontWeight: 800,
+                lineHeight: 1,
+                pointerEvents: "none",
+                userSelect: "none",
+                fontVariantNumeric: "tabular-nums",
+                letterSpacing: "-0.05em",
+                opacity: 0.4,
               }}
+              className={palette.number}
+              aria-hidden="true"
             >
-              {item.icon && (
-                <div
-                  className={`${palette.iconBg} ${palette.iconColor}`}
-                  style={{
-                    display: "inline-flex",
-                    width: 64,
-                    height: 64,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderRadius: 20,
-                    flexShrink: 0,
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <span style={{ width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    {item.icon}
-                  </span>
-                </div>
-              )}
+              0{index + 1}
+            </div>
 
-              <div style={{ display: "flex", gap: "0.75rem" }}>
-                {item.tags && item.tags.slice(0, 2).map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className={`${palette.badge} border text-xs font-semibold tracking-wider uppercase`}
+            {/* Content */}
+            <div style={{ position: "relative", zIndex: 1 }}>
+              {/* Top row: icon + badge */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
+                  marginBottom: "2rem",
+                }}
+              >
+                {item.icon && (
+                  <div
+                    className={`${palette.iconBg} ${palette.iconColor}`}
                     style={{
-                      padding: "6px 14px",
-                      borderRadius: 99,
-                      letterSpacing: "0.08em",
+                      display: "inline-flex",
+                      width: 72, // Larger icon container
+                      height: 72,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 24,
+                      flexShrink: 0,
+                      background: "rgba(255, 255, 255, 0.9)",
                     }}
                   >
-                    {tag}
-                  </span>
-                ))}
+                    <span style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {item.icon}
+                    </span>
+                  </div>
+                )}
+
                 <span
                   className={`${palette.badge} border text-sm font-semibold tracking-wider uppercase`}
                   style={{
-                    padding: "6px 14px",
+                    padding: "8px 16px",
                     borderRadius: 99,
                     letterSpacing: "0.08em",
+                    background: "rgba(255, 255, 255, 0.9)",
                   }}
                 >
-                  {(index + 1).toString().padStart(2, "0")} / {totalCards.toString().padStart(2, "0")}
+                  0{index + 1} / 0{totalCards}
                 </span>
               </div>
-            </div>
 
-            {/* Title */}
-            <h3
-              style={{
-                fontSize: "2rem",
-                fontWeight: 700,
-                color: "white",
-                marginBottom: "0.85rem",
-                lineHeight: 1.25,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {item.title}
-            </h3>
-
-            {/* Divider */}
-            <div
-              style={{
-                height: "2px",
-                width: "3rem",
-                borderRadius: 2,
-                background: palette.border,
-                marginBottom: "1.25rem",
-              }}
-            />
-
-            {/* Description */}
-            <p
-              style={{
-                fontSize: "1.25rem",
-                lineHeight: 1.75,
-                color: "rgba(255,255,255,0.7)",
-                maxWidth: "90%",
-                marginBottom: "1.5rem",
-              }}
-            >
-              {item.description}
-            </p>
-
-            {/* Metrics */}
-            {item.metrics && item.metrics.length > 0 && (
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", marginBottom: "1.5rem" }}>
-                {item.metrics.map((metric, idx) => (
-                  <div key={idx} style={{ display: "flex", flexDirection: "column" }}>
-                    <span
-                      style={{
-                        fontSize: "1.5rem",
-                        fontWeight: "bold",
-                        color: palette.border.replace('0.5', '1'),
-                      }}
-                    >
-                      {metric.value}
-                    </span>
-                    <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                      {metric.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* CTA */}
-            {item.cta && (
-              <a
-                href={item.cta.href}
-                className={`${palette.buttonBg} inline-flex items-center gap-2 transition-all`}
+              {/* Title - dark for light theme */}
+              <h3
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  marginTop: "1.5rem",
-                  padding: "0.75rem 1.5rem",
-                  borderRadius: "0.75rem",
-                  fontSize: "0.95rem",
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  letterSpacing: "0.01em",
-                  color: "white",
+                  fontSize: "2.5rem", // Larger title
+                  fontWeight: 700,
+                  color: "#1a1a1a",
+                  marginBottom: "1rem",
+                  lineHeight: 1.25,
+                  letterSpacing: "-0.02em",
                 }}
               >
-                {item.cta.label}
-                <ArrowUpRight style={{ width: 18, height: 18 }} />
-              </a>
-            )}
+                {item.title}
+              </h3>
+
+              {/* Divider */}
+              <div
+                style={{
+                  height: "3px",
+                  width: "5rem",
+                  borderRadius: 2,
+                  background: palette.border,
+                  marginBottom: "1.5rem",
+                }}
+              />
+
+              {/* Description - dark text */}
+              <p
+                style={{
+                  fontSize: "1.35rem", // Larger description
+                  lineHeight: 1.6,
+                 color: "#1F2937",
+                  maxWidth: "85%",
+                  marginBottom: "2rem",
+                }}
+              >
+                {item.description} We build software that scales with your ambition from first-user MVPs to enterprise-grade, cloud-native systems. Whether you need a multi-tenant SaaS platform, a custom ERP, an API-first integration layer, or a cross-platform mobile app, our approach remains the same: clean architecture, production-ready quality, and infrastructure designed for 10x growth. No shortcuts, no silos just maintainable, high-performance software tailored to your business.
+              </p>
+
+              {/* CTA */}
+              {item.cta && (
+                <a
+                  href={item.cta.href}
+                  className={`${palette.cta} inline-flex items-center gap-2 transition-all`}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    marginTop: "1rem",
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    textDecoration: "none",
+                    letterSpacing: "0.01em",
+                    background: "rgba(255, 255, 255, 0.95)",
+                    padding: "12px 28px",
+                    borderRadius: 99,
+                    color: palette.cta.includes("emerald") ? "#059669" : palette.cta.includes("violet") ? "#7c3aed" : palette.cta.includes("orange") ? "#ea580c" : "#0284c7",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  {item.cta.label}
+                  <ArrowUpRight style={{ width: 18, height: 18 }} />
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -408,18 +368,8 @@ interface LargeStackedCardsProps {
 }
 
 export const LargeStackedCards: React.FC<LargeStackedCardsProps> = ({ items }) => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh(true);
-    }, 150);
-
-    return () => clearTimeout(timer);
-  }, [items.length]);
-
   return (
-    <section ref={sectionRef} className="relative">
+    <section style={{ width: "100%" }}>
       {items.map((card, index) => (
         <Card
           key={card.id}

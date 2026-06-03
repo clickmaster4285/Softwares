@@ -48,7 +48,34 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
   if (!pricingTiers || pricingTiers.length === 0) return null;
 
   const pricingCardsData = visibleTiers
-    .map((tier) => {
+    .map((tier, idx) => {
+      // Make the 3rd card (index 2) a custom plan
+      if (idx === 2) {
+        return {
+          title: "Custom Enterprise Plan",
+          description: "Tailored solution for your unique business needs",
+          price: 0,
+          originalPrice: undefined,
+          features: [
+            {
+              title: "Custom Package Includes",
+              items: [
+                "Fully customized solution",
+                "Dedicated support team",
+                "Unlimited revisions",
+                "Priority response time",
+                "SLA agreement",
+                "On-site training available",
+              ],
+            },
+          ],
+          buttonText: "Contact Sales",
+          onButtonClick: () => {
+            console.log("Contact sales for custom plan");
+          },
+        };
+      }
+      
       const parsed = parseInvestment(tier.investment);
       if (!parsed) return null;
 
@@ -93,7 +120,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
   };
 
   return (
-  <motion.section
+    <motion.section
       id="pricing"
       className="relative scroll-mt-24 py-6 sm:py-8 md:py-12 mx-6 overflow-hidden"
       initial={{ opacity: 0 }}
@@ -101,7 +128,6 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      {/* ================= GRID PATTERN OVERLAY ================= */}
       <div
         className="absolute inset-0 opacity-[0.35] pointer-events-none"
         style={{
@@ -113,34 +139,30 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
         }}
       />
 
+      <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
+        <div className="inline-flex items-center gap-2 mb-3">
+          <span className="h-[2px] w-8 rounded-full bg-primary" />
+          <div className="inline-flex items-center gap-1.5">
+            <SplitText
+              text={`${serviceName} Pricing`}
+              className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+              delay={60}
+              duration={0.8}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, x: 60 }}
+              to={{ opacity: 1, x: 0 }}
+              threshold={0.2}
+            />
+          </div>
+          <span className="h-[2px] w-8 rounded-full bg-primary" />
+        </div>
 
-      
-      {/* ================= HEADER ================= */}
-          <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
-                      <div className="inline-flex items-center gap-2 mb-3">
-                        <span className="h-[2px] w-8 rounded-full bg-primary" />
-                        <div className="inline-flex items-center gap-1.5">
-                          <SplitText
-                            text={`${serviceName} Pricing`}
-                            className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
-                            delay={60}
-                            duration={0.8}
-                            ease="power3.out"
-                            splitType="words"
-                            from={{ opacity: 0, x: 60 }}
-                            to={{ opacity: 1, x: 0 }}
-                            threshold={0.2}
-                          />
-                        </div>
-                        <span className="h-[2px] w-8 rounded-full bg-primary" />
-                      </div>
-            
-                      <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
-                         Transparent pricing tailored to your business needs
-                      </p>
-            </div>
+        <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
+          Transparent pricing tailored to your business needs
+        </p>
+      </div>
 
-      {/* ================= CARDS ================= */}
       <div className="mt-6 mx-auto max-w-[1600px] p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
         {pricingCardsData.map((cardData, index) => (
           <motion.div
@@ -163,7 +185,6 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
         ))}
       </div>
 
-      {/* ================= SEE MORE BUTTON ================= */}
       {hasMore && (
         <motion.div
           className="flex justify-center mt-10"
@@ -193,7 +214,6 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
         </motion.div>
       )}
 
-      {/* ================= TRUST ================= */}
       <motion.div
         className="mt-12 sm:mt-16 flex flex-col items-center gap-5 sm:gap-6"
         initial={{ opacity: 0, y: 30 }}

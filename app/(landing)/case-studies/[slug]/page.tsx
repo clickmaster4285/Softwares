@@ -305,7 +305,7 @@ export default async function CaseStudyDetailPage({
                     <h2 className="font-display text-2xl font-normal text-slate-950 sm:text-3xl">
                       {s.label}
                     </h2>
-                    <div className="mt-5 whitespace-pre-wrap text-[15px] leading-[1.8] text-slate-600">
+                    <div className="mt-5 whitespace-pre-wrap text-[15px] leading-[1.8] text-slate-900">
                       {s.content}
                     </div>
                   </section>
