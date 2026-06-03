@@ -29,7 +29,7 @@ export const ServicesSection = ({ serviceName, servicesCards }: ServicesSectionP
   }));
 
   return (
-    <section id="our-services" className="relative w-full bg-[#f5fbfb] py-14">
+    <section id="our-services" className="relative w-full overflow-visible bg-[#f5fbfb] py-14">
 
 
 
@@ -74,7 +74,7 @@ export const ServicesSection = ({ serviceName, servicesCards }: ServicesSectionP
 
 
       {/* Large Stacked Cards Container */}
-      <div className="mt-12">
+      <div className="relative mt-12 overflow-visible">
         <LargeStackedCards items={stackedCardsItems} />
       </div>
 

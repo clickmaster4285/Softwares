@@ -187,9 +187,9 @@ export default function RadialOrbitalTimeline({
       case "in-progress":
         return "text-black bg-orange-100 border-orange-300";
       case "pending":
-        return "text-gray-500 bg-gray-100 border-gray-200";
+        return "text-gray-800 bg-gray-100 border-gray-200";
       default:
-        return "text-gray-500 bg-gray-100 border-gray-200";
+        return "text-gray-800 bg-gray-100 border-gray-200";
     }
   };
 
@@ -270,7 +270,7 @@ export default function RadialOrbitalTimeline({
                         <span className="text-xs text-gray-400 font-mono">Step {item.id}</span>
                         <ChevronRight size={12} className={`text-primary transition-transform ${isSelected ? "translate-x-0.5" : ""}`} />
                       </div>
-                      <h4 className={`font-semibold text-sm ${isSelected ? "text-orange-600" : "text-gray-700"}`}>
+                      <h4 className={`font-semibold text-sm ${isSelected ? "text-orange-600" : "text-gray-900 "}`}>
                         {item.title}
                       </h4>
                     </div>
@@ -331,7 +331,7 @@ export default function RadialOrbitalTimeline({
                           <span className="text-xs text-gray-400 font-mono">Step {item.id}</span>
                           <ChevronRight size={12} className={`text-primary ${isSelected ? "translate-x-0.5" : ""}`} />
                         </div>
-                        <h4 className={`font-semibold text-sm ${isSelected ? "text-orange-600" : "text-gray-700"}`}>
+                        <h4 className={`font-semibold text-sm ${isSelected ? "text-orange-600" : "text-gray-900 "}`}>
                           {item.title}
                         </h4>
                       </div>
@@ -433,7 +433,7 @@ export default function RadialOrbitalTimeline({
                     absolute top-14 left-1/2 -translate-x-1/2 whitespace-nowrap
                     text-xs font-semibold tracking-wider
                     transition-all duration-300
-                    ${isExpanded ? "text-primaryscale-110 font-bold" : "text-gray-500 group-hover:text-orange-600"}
+                    ${isExpanded ? "text-primaryscale-110 font-bold" : "text-gray-800 group-hover:text-orange-600"}
                     ${isMobile && !isExpanded ? 'hidden' : ''}
                   `}
                   >
@@ -549,9 +549,9 @@ function DetailContent({ step, sortedData, onSelectStep }: {
       case "in-progress":
         return "text-black bg-orange-100 border-orange-300";
       case "pending":
-        return "text-gray-500 bg-gray-100 border-gray-200";
+        return "text-gray-800 bg-gray-100 border-gray-200";
       default:
-        return "text-gray-500 bg-gray-100 border-gray-200";
+        return "text-gray-800 bg-gray-100 border-gray-200";
     }
   };
 
@@ -571,13 +571,13 @@ function DetailContent({ step, sortedData, onSelectStep }: {
         <span className="text-xs text-gray-400 font-mono">{step.date}</span>
       </div>
 
-      <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+      <p className="text-sm text-gray-800 mb-4 leading-relaxed">
         {step.content}
       </p>
 
       <div className="mt-4 pt-3 border-t border-gray-100">
         <div className="flex justify-between items-center text-xs mb-1">
-          <span className="flex items-center text-gray-500">
+          <span className="flex items-center text-gray-800">
             <Zap size={10} className="mr-1 text-primary" />
             Progress
           </span>
@@ -607,7 +607,7 @@ function DetailContent({ step, sortedData, onSelectStep }: {
                   key={relatedId}
                   variant="outline"
                   size="sm"
-                  className="flex items-center h-6 px-2 py-0 text-xs rounded-md border-orange-200 bg-white hover:bg-orange-50 text-gray-600 hover:text-primary transition-all"
+                  className="flex items-center h-6 px-2 py-0 text-xs rounded-md border-orange-200 bg-white hover:bg-orange-50 text-gray-800 hover:text-primary transition-all"
                   onClick={(e) => {
                     e.stopPropagation();
                     onSelectStep(relatedId);
@@ -631,7 +631,7 @@ function EmptyState() {
       <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
         <Zap size={24} className="text-gray-400" />
       </div>
-      <h4 className="text-gray-600 font-medium mb-2">No Step Selected</h4>
+      <h4 className="text-gray-800 font-medium mb-2">No Step Selected</h4>
       <p className="text-gray-400 text-sm">
         Click on any step from the left sidebar or orbit to view details
       </p>

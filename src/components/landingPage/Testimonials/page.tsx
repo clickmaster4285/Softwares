@@ -214,7 +214,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
                 <Star
                   className={`w-4 h-4 ${i < (testimonial.rating ?? 5)
                     ? 'fill-amber-400 text-amber-400'
-                    : 'text-gray-300 dark:text-gray-600'
+                    : 'text-gray-300 dark:text-gray-800'
                     }`}
                 />
               </motion.div>
@@ -225,7 +225,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
         {/* Testimonial content with quote mark */}
         <div className="relative mb-8">
           <Quote className={`absolute -top-2 -left-2 w-6 h-6 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-30`} />
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed pl-6 line-clamp-4">
+          <p className="text-gray-900  dark:text-gray-300 leading-relaxed pl-6 line-clamp-4">
             "{testimonial.content}"
           </p>
         </div>
@@ -245,7 +245,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
           <div>
             <h4 className="font-bold text-gray-900 dark:text-white text-lg">{testimonial.authorName}</h4>
             {(testimonial.authorRole || testimonial.authorCompany) && (
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-gray-800 dark:text-gray-400">
                 {testimonial.authorRole}
                 {testimonial.authorRole && testimonial.authorCompany && ' at '}
                 {testimonial.authorCompany && (
@@ -260,7 +260,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
 
         {/* Stats indicator */}
         <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
-          <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+          <div className="flex items-center justify-between text-xs text-gray-800 dark:text-gray-400">
             <span className="flex items-center gap-1">
               <TrendingUp className="w-3 h-3" />
               +{Math.floor(Math.random() * 30 + 20)}% growth
@@ -585,7 +585,7 @@ const Testimonials: React.FC = () => {
                 {displayTestimonials.length > 1 && (
                   <div className="flex items-center justify-center gap-4 mt-8">
                     <button
-                      className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-900  dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                       onClick={() => setIsAutoPlaying(false)}
                       disabled={displayTestimonials.length <= 1}
                     >
@@ -600,7 +600,7 @@ const Testimonials: React.FC = () => {
                     </button>
 
                     <button
-                      className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-900  dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                       onClick={() => setIsAutoPlaying(false)}
                       disabled={displayTestimonials.length <= 1}
                     >

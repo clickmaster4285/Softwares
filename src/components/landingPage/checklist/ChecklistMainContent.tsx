@@ -192,7 +192,7 @@ export default function ChecklistMainContent({
                               {item.subtext && (
                                 <p
                                   className={`text-sm mt-1.5 ${
-                                    isChecked ? 'text-gray-500' : 'text-gray-400'
+                                    isChecked ? 'text-gray-800' : 'text-gray-400'
                                   }`}
                                 >
                                   {item.subtext}

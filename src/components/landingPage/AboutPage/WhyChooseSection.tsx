@@ -70,7 +70,7 @@ export const WhyChooseSection = () => {
               <span className="text-4xl">{reason.icon}</span>
             </motion.div>
             <h3 className="text-xl font-semibold text-black mb-4 relative z-10">{reason.title}</h3>
-            <p className="text-gray-700 relative z-10">{reason.description}</p>
+            <p className="text-gray-900  relative z-10">{reason.description}</p>
           </motion.div>
         ))}
       </div>

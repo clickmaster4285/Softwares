@@ -501,7 +501,7 @@ function MobileCard({ service }: { service: ExploreItem }) {
           {title}
         </h3>
 
-        <p className="mt-3 text-[15px] leading-relaxed text-foreground/80 flex-1">
+        <p className="mt-3 text-[15px] leading-relaxed text-gray-900 flex-1">
           {desc}
         </p>
 
@@ -636,7 +636,7 @@ export default function ExploreSection({ serviceData }: { serviceData?: ServiceD
                   <h3 className="mt-2 font-serif text-2xl lg:text-3xl font-bold leading-tight text-foreground">
                     {title}
                   </h3>
-                  <p className="mt-3 text-2xl leading-relaxed text-foreground/80">{desc}</p>
+                  <p className="mt-3 text-2xl leading-relaxed text-gray-900">{desc}</p>
                   <Link
                     href={href}
                     className="mt-5 inline-flex items-center gap-2 text-xl font-semibold text-foreground hover:gap-3 transition-all"

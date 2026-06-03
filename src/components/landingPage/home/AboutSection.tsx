@@ -118,7 +118,7 @@ export function AboutSection() {
               </span>
             </h2>
 
-            <p className="text-lg leading-relaxed text-justify text-foreground/80">
+            <p className="text-xl leading-relaxed text-justify text-gray-900">
               ClickMasters is a{" "}
               <span className="font-semibold text-primary">
                 professional software development company
@@ -130,7 +130,7 @@ export function AboutSection() {
               reliable, scalable digital products that perform under real-world conditions.
             </p>
 
-            <p className="text-base leading-relaxed text-justify text-foreground/80">
+            <p className="text-xl leading-relaxed text-justify text-gray-900">
               As a full-service <span className="font-semibold">software house</span>,
               we handle everything from discovery and UI/UX design to backend
               development, QA testing, cloud deployment, and long-term maintenance end

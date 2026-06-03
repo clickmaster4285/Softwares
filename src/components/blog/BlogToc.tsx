@@ -207,7 +207,7 @@ export default function BlogToc({ items, scrollOffset = 112, className = '' }: B
                       ? 'border-l-2 border-l-primarybg-orange-50 text-secondaryshadow-sm font-medium'
                       : isHovered
                       ? 'border-l-2 border-l-orange-300 bg-orange-50/50 text-primary translate-x-0.5'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800 hover:translate-x-0.5'
+                      : 'text-gray-900 hover:bg-slate-50 hover:text-slate-800 hover:translate-x-0.5'
                   } ${item.level === 2 ? 'ml-3' : item.level === 3 ? 'ml-6' : ''}`}
                 >
                   <div className="flex items-center gap-2">

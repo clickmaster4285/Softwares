@@ -352,7 +352,7 @@ export default function SolutionsClient({
               {project.title}
             </h3>
             
-            <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
+            <p className="text-gray-800 text-sm leading-relaxed line-clamp-2 mb-4">
               {project.description}
             </p>
 
@@ -368,7 +368,7 @@ export default function SolutionsClient({
                   </span>
                 ))}
                 {project.technologies.length > 3 && (
-                  <span className="text-xs px-2 py-1 bg-gray-50 text-gray-600 rounded-full">
+                  <span className="text-xs px-2 py-1 bg-gray-50 text-gray-800 rounded-full">
                     +{project.technologies.length - 3}
                   </span>
                 )}
@@ -448,7 +448,7 @@ export default function SolutionsClient({
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-black mb-4">
               {heading}
             </h1>
-            <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
+            <p className="text-gray-900  max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -500,7 +500,7 @@ export default function SolutionsClient({
             {heading}
           </h1>
 
-          <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
+          <p className="text-gray-900  max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
         </div>
 
     
@@ -523,7 +523,7 @@ export default function SolutionsClient({
               <FolderKanban className="relative h-14 w-14 text-primary mx-auto mb-4" />
             </motion.div>
             <h3 className="text-xl font-bold text-black mb-2">No projects found</h3>
-            <p className="text-gray-600 max-w-md mx-auto mb-6">
+            <p className="text-gray-800 max-w-md mx-auto mb-6">
               Try adjusting your search or filters to find what you're looking for.
             </p>
             <button
@@ -583,7 +583,7 @@ export default function SolutionsClient({
         >
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-gray-800 hover:text-primary transition-colors"
           >
             <ArrowUpRight className="h-4 w-4 rotate-90" />
             Back to Top

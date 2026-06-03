@@ -180,7 +180,7 @@ export default function ProcessPage() {
                       isFloat={metric.isFloat} 
                     />
                   </div>
-                  <p className="text-gray-700 font-medium">{metric.label}</p>
+                  <p className="text-gray-900 text-md  font-medium">{metric.label}</p>
                 </motion.div>
               ))}
             </div>

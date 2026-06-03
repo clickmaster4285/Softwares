@@ -223,7 +223,7 @@ const ProjectForm = ({ project, onSubmit, onCancel }: ProjectFormProps) => {
       <div className="space-y-4">
         <div className="text-center py-8">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
-          <p className="mt-2 text-sm text-gray-500">Loading categories...</p>
+          <p className="mt-2 text-sm text-gray-800">Loading categories...</p>
         </div>
       </div>
     );

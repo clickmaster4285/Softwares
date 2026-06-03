@@ -235,7 +235,7 @@ export default async function CaseStudyDetailPage({
                   {cs.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-md bg-slate-100 px-2.5 py-1 font-mono text-[11px] font-medium text-slate-600 ring-1 ring-slate-200"
+                      className="rounded-md bg-slate-100 px-2.5 py-1 font-mono text-[11px] font-medium text-gray-900 ring-1 ring-slate-200"
                     >
                       {tech}
                     </span>

@@ -97,7 +97,7 @@ export const CoreValuesSection = () => {
             </span>
           </h2>
 
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-800 max-w-3xl mx-auto">
             These core values shape our culture, guide our decisions, and define how we work with our clients and each other.
           </p>
         </motion.div>
@@ -148,7 +148,7 @@ const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
         <h3 className="text-xl font-bold text-gray-900 mb-2">{value.title}</h3>
         
         {/* Description */}
-        <p className="text-sm text-gray-600 mb-4">{value.description}</p>
+        <p className="text-sm text-gray-800 mb-4">{value.description}</p>
 
         {/* Features List - appears on hover (exactly like FeatureCard) */}
         <AnimatePresence>
@@ -171,7 +171,7 @@ const CoreValueCard = ({ value, index }: CoreValueCardProps) => {
                     className="flex items-start gap-2"
                   >
                     <span className="text-primary text-sm">•</span>
-                    <span className="text-sm text-gray-600">{feature}</span>
+                    <span className="text-sm text-gray-800">{feature}</span>
                   </motion.div>
                 ))}
               </div>

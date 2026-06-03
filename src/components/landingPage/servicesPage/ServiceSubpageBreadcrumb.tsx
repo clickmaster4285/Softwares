@@ -26,7 +26,7 @@ export function ServiceSubpageBreadcrumb({ crumbs }: ServiceSubpageBreadcrumbPro
               {crumb.href ? (
                 <Link
                   href={crumb.href}
-                  className="font-medium text-gray-500 transition-colors hover:text-primary"
+                  className="font-medium text-gray-800 transition-colors hover:text-primary"
                 >
                   {crumb.label}
                 </Link>

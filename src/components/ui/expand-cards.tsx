@@ -148,7 +148,7 @@ const ExpandOnHover = ({
                       {phaseContent.title}
                     </h3>
 
-                    <p className="mt-2 text-sm text-gray-200">
+                    <p className="mt-2 text-lg text-gray-200">
                       {phaseContent.description}
                     </p>
 
@@ -157,7 +157,7 @@ const ExpandOnHover = ({
                       {phaseContent.deliverables.slice(0, 3).map((d, i) => (
                         <span
                           key={i}
-                          className="rounded-full bg-white/10 px-2 py-1 text-[10px] text-white backdrop-blur-sm"
+                          className="rounded-full bg-white/10 px-2 py-1 text-md text-white backdrop-blur-sm"
                         >
                           {d}
                         </span>
@@ -175,7 +175,7 @@ const ExpandOnHover = ({
         </div>
 
         {/* MOBILE TEXT */}
-        <div className="mt-5 text-center text-sm text-gray-500 md:hidden">
+        <div className="mt-5 text-center text-sm text-gray-800 md:hidden">
           👆 Tap images to explore stages
         </div>
       </div>

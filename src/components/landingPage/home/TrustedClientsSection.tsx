@@ -1,49 +1,108 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import {
-  Cpu,
-  Stethoscope,
-  ShoppingBag,
-  Building2,
-  GraduationCap,
-  Coins,
-  Truck,
-  Tv2,
-  Landmark,
-  Leaf,
-  Hotel,
-  Activity,
-  CircuitBoard,
-  ShieldCheck,
-  BarChart3,
-  LucideIcon,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import SplitText from '../../ui/SplitText';
 
 type Client = {
   name: string;
   industry: string;
-  icon: LucideIcon;
+  image: any;
+  description: string;
 };
 
-import SplitText from '../../ui/SplitText';
-
 const trustedClients: Client[] = [
-  { name: "TechCorp", industry: "Manufacturing", icon: Cpu },
-  { name: "HealthPlus", industry: "Healthcare", icon: Stethoscope },
-  { name: "RetailHub", industry: "Retail", icon: ShoppingBag },
-  { name: "EstatePro", industry: "Real Estate", icon: Building2 },
-  { name: "EduSmart", industry: "Education", icon: GraduationCap },
-  { name: "FinTrust", industry: "Finance", icon: Coins },
-  { name: "LogiFlow", industry: "Logistics", icon: Truck },
-  { name: "MediaWave", industry: "Media", icon: Tv2 },
-  { name: "NovaBank", industry: "Banking", icon: Landmark },
-  { name: "GreenField", industry: "Agriculture", icon: Leaf },
-  { name: "Skyline Hotels", industry: "Hospitality", icon: Hotel },
-  { name: "Pulse Fitness", industry: "Health & Fitness", icon: Activity },
-  { name: "Quantum Dynamics", industry: "Technology", icon: CircuitBoard },
-  { name: "Lumina Insurance", industry: "Insurance", icon: ShieldCheck },
-  { name: "Vertex Solutions", industry: "Consulting", icon: BarChart3 },
+  {
+    name: "TechCorp",
+    industry: "Manufacturing",
+    image: "/images/industries/manufacturing.jpg",
+    description: "Automate production lines and streamline factory operations with intelligent control systems.",
+  },
+  {
+    name: "HealthPlus",
+    industry: "Healthcare",
+    image: "/images/industries/healthcare.jpg",
+    description: "Build intelligent diagnostic tools and automated patient management systems to improve care accuracy and streamline clinical workflows.",
+  },
+  {
+    name: "RetailHub",
+    industry: "Retail",
+    image: "/images/industries/retail.jpg",
+    description: "Modernize storefronts and online shops with smart inventory, checkout, and loyalty experiences.",
+  },
+  {
+    name: "EstatePro",
+    industry: "Real Estate",
+    image: "/images/industries/realestate.jpg",
+    description: "Manage listings, contracts, and tenant relationships with unified property platforms.",
+  },
+  {
+    name: "EduSmart",
+    industry: "Education",
+    image: "/images/industries/education.jpg",
+    description: "Deliver adaptive learning experiences and digital classrooms that scale with every student.",
+  },
+  {
+    name: "FinTrust",
+    industry: "Finance",
+    image: "/images/industries/finance.jpg",
+    description: "Secure trading platforms and analytics dashboards built for speed, accuracy, and compliance.",
+  },
+  {
+    name: "LogiFlow",
+    industry: "Logistics",
+    image: "/images/industries/logistics.jpg",
+    description: "Track shipments end-to-end and optimize fleets with real-time routing intelligence.",
+  },
+  {
+    name: "MediaWave",
+    industry: "Media",
+    image: "/images/industries/media.jpg",
+    description: "Power broadcasting, streaming, and content workflows with high-performance production tools.",
+  },
+  {
+    name: "NovaBank",
+    industry: "Banking",
+    image: "/images/industries/banking.jpg",
+    description: "Modern core banking, digital onboarding, and fraud protection for next-generation institutions.",
+  },
+  {
+    name: "GreenField",
+    industry: "Agriculture",
+    image: "/images/industries/agriculture.jpg",
+    description: "Precision farming software that turns sensor data into higher yields and lower waste.",
+  },
+  {
+    name: "Skyline Hotels",
+    industry: "Hospitality",
+    image: "/images/industries/hospitality.jpg",
+    description: "Reservation, guest experience, and operations platforms for premium hotel brands.",
+  },
+  {
+    name: "Pulse Fitness",
+    industry: "Health & Fitness",
+    image: "/images/industries/fitness.jpg",
+    description: "Member apps, class booking, and performance tracking to grow modern fitness communities.",
+  },
+  {
+    name: "Quantum Dynamics",
+    industry: "Technology",
+    image: "/images/industries/technology.jpg",
+    description: "Cutting-edge platforms, APIs, and infrastructure for software-first technology companies.",
+  },
+  {
+    name: "Lumina Insurance",
+    industry: "Insurance",
+    image: "/images/industries/insurance.jpg",
+    description: "Quote, underwrite, and service policies faster with automated insurance workflows.",
+  },
+  {
+    name: "Vertex Solutions",
+    industry: "Consulting",
+    image: "/images/industries/consulting.jpg",
+    description: "Client portals, analytics, and engagement tooling tailored for high-performing consultancies.",
+  },
 ];
 
 function useInView(threshold = 0.15) {
@@ -73,38 +132,67 @@ function ClientCard({
   client,
   index,
   visible,
+  isActive,
+  onHover,
+  onLeave,
 }: {
   client: Client;
   index: number;
   visible: boolean;
+  isActive: boolean;
+  onHover: () => void;
+  onLeave: () => void;
 }) {
-  const Icon = client.icon;
-
   return (
     <div
-      className="group relative bg-white/40 hover:bg-white transition-colors duration-200 p-8 flex flex-col items-center justify-center gap-5 min-h-[180px]"
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+      onFocus={onHover}
+      onBlur={onLeave}
+      tabIndex={0}
+      className="group relative overflow-hidden min-h-[320px] cursor-pointer outline-none border border-black/20"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(20px)",
-        transition: `opacity 0.4s ease ${index * 50}ms, transform 0.4s ease ${index * 50}ms, background-color 0.2s`,
+        transition: `opacity 0.5s ease ${index * 40}ms, transform 0.5s ease ${index * 40}ms`,
       }}
     >
-      <span
-        className="absolute bottom-0 left-0 w-full h-[3px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-        aria-hidden="true"
-      />
+      {/* Only active card gets PURE BLUR - no color filling! */}
+      {isActive && (
+        <div
+          className="absolute inset-0 backdrop-blur-md transition-all duration-500"
+          aria-hidden="true"
+        />
+      )}
 
-      <div className="w-16 h-16 flex items-center justify-center rounded-xl group-hover:border-primary group-hover:bg-primary/10 transition-all duration-200">
-        <Icon size={28} className="text-primary" strokeWidth={1.5} />
-      </div>
+      {/* Content */}
+      <div className="relative z-10 flex h-full min-h-[320px] flex-col justify-end p-7 text-white">
+        <h3 className="text-2xl font-semibold tracking-tight">{client.industry}</h3>
 
-      <div className="text-center">
-        <p className="text-xl font-semibold text-gray-900 leading-snug">
-          {client.name}
-        </p>
-        <p className="text-sm sm:text-xs uppercase tracking-widest text-gray-800 mt-1">
-          {client.industry}
-        </p>
+        {/* Description: only visible on the active card */}
+        <div
+          className={[
+            "grid transition-[grid-template-rows] duration-500 ease-out",
+            isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+          ].join(" ")}
+        >
+          <div className="overflow-hidden">
+            <p className="mt-4 text-lg leading-relaxed text-white/90">
+              {client.description}
+            </p>
+          </div>
+        </div>
+
+        {/* Explore More: only on the active card */}
+        <div
+          className={[
+            "mt-5 flex items-center gap-2 text-sm font-medium transition-all duration-500 delay-100",
+            isActive ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1",
+          ].join(" ")}
+        >
+          <span>Explore More</span>
+          <ArrowRight size={16} />
+        </div>
       </div>
     </div>
   );
@@ -112,17 +200,12 @@ function ClientCard({
 
 export function TrustedClientsSection() {
   const { ref, visible } = useInView();
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section ref={ref} className="relative w-full bg-[#f5fbfb] py-14">
-      {/* Background Decorative Blobs */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
-      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
-
-      {/* Centered Container - max-w-1600px */}
+    <section ref={ref} className="relative w-full bg-[#f5fbfb] py-16">
       <div className="mx-auto max-w-[1600px] px-6 lg:px-8">
-        {/* Header */}
+        {/* Header - Exact same as your original */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-[2px] w-8 rounded-full bg-primary" />
@@ -147,16 +230,40 @@ export function TrustedClientsSection() {
           </p>
         </div>
 
-        {/* Client Grid */}
-        <div className="border border-gray-200 rounded-xl overflow-hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 divide-x divide-y divide-gray-200">
-          {trustedClients.map((client, idx) => (
-            <ClientCard
-              key={client.name}
-              client={client}
-              index={idx}
-              visible={visible}
-            />
+        {/* Client Grid with shared background image */}
+        <div className="relative rounded-xl overflow-hidden border border-white/60 shadow-lg">
+          {/* Shared background — swaps to the hovered card's image */}
+          {trustedClients.map((c, i) => (
+            <div
+              key={c.name}
+              className="absolute inset-0 transition-opacity duration-700 ease-out"
+              style={{
+                opacity: (activeIndex === null && i === 0) || activeIndex === i ? 1 : 0,
+              }}
+            >
+              <Image
+                src={c.image}
+                alt=""
+                fill
+                className="object-cover"
+                priority={i === 0}
+              />
+            </div>
           ))}
+
+          <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[1px]">
+            {trustedClients.map((client, idx) => (
+              <ClientCard
+                key={client.name}
+                client={client}
+                index={idx}
+                visible={visible}
+                isActive={activeIndex === idx}
+                onHover={() => setActiveIndex(idx)}
+                onLeave={() => setActiveIndex((curr) => (curr === idx ? null : curr))}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

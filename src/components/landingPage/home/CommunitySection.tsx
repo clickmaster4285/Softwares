@@ -372,7 +372,7 @@ const cardsData: CardData[] = communityFeatures.map((feature, index) => ({
                     {hasPlusSign && <span className="ml-1 text-primary">+</span>}
                   </motion.p>
 
-                  <p className="text-xs sm:text-sm uppercase tracking-wider text-gray-500 mt-1">
+                  <p className="text-xs sm:text-sm uppercase tracking-wider text-gray-800 mt-1">
                     {stat.label}
                   </p>
 

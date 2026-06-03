@@ -83,7 +83,7 @@ export const TopCompanySection = () => {
         
         <div
           ref={contentRef}
-          className="space-y-4 text-gray-700"
+          className="space-y-4 text-gray-900 "
         >
           {[
             "Clickmasters is a top software development company in Pakistan, focused on web and mobile applications, custom software solutions, cloud integrations, and more.",

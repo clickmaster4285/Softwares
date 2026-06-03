@@ -118,7 +118,7 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
             }
           </h2> */}
 
-          <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto max-w-2xl text-xl leading-7 text-gray-900 sm:text-lg">
             {hasLocation 
               ? 'Common challenges that hinder business growth and efficiency'
               : 'Most agencies deliver headaches wrapped in pretty proposals. Here\'s the reality and why ClickMasters approaches development differently.'
@@ -166,7 +166,7 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
                     animate={{ opacity: isActive ? 0 : 1, scale: isActive ? 0.95 : 1 }}
                   >
                     <h3 className="text-2xl font-bold text-slate-900 mb-3 leading-tight">{pain.title}</h3>
-                    <p className="text-slate-600 leading-relaxed font-medium">{pain.description}</p>
+                    <p className="text-gray-900 text-lg leading-relaxed font-medium">{pain.description}</p>
                   </motion.div>
 
                   {/* Solution Reveal */}
@@ -189,7 +189,7 @@ export default function PainPointsSolutions({ countryName }: PainPointsSolutions
                       </div>
                     </div>
 
-                    <p className="text-slate-600 flex-1 leading-relaxed font-medium">{solution.description}</p>
+                    <p className="text-gray-900 flex-1 text-lg leading-relaxed font-medium">{solution.description}</p>
 
                     {solution.metric && (
                       <div className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-primary/0 px-4 py-2.5 text-sm font-semibold text-primary">

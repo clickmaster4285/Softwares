@@ -62,7 +62,7 @@ export default function LifecycleSection({
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{title}</h2>
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-primarymx-auto rounded-full mb-4" />
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">{subtitle}</p>
+            <p className="text-lg text-gray-800 max-w-2xl mx-auto">{subtitle}</p>
           </div>
 
           <div className="relative max-w-6xl mx-auto">
@@ -95,12 +95,12 @@ export default function LifecycleSection({
                             <span className="text-3xl">{step.icon}</span>
                             <h3 className="text-xl font-bold text-gray-900">{step.title}</h3>
                           </div>
-                          <p className="text-gray-600 mb-3 leading-relaxed">
+                          <p className="text-gray-800 mb-3 leading-relaxed">
                             {step.description}
                           </p>
                           <div className="flex items-center gap-2 text-sm">
                             <span className="text-orange-600">⏱️</span>
-                            <span className="text-gray-500">Estimated: {step.duration}</span>
+                            <span className="text-gray-800">Estimated: {step.duration}</span>
                           </div>
                         </div>
                       </div>
@@ -117,12 +117,12 @@ export default function LifecycleSection({
                           <h3 className="text-lg font-bold text-gray-900">{step.title}</h3>
                         </div>
                       </div>
-                      <p className="text-gray-600 mb-3 leading-relaxed text-sm">
+                      <p className="text-gray-800 mb-3 leading-relaxed text-sm">
                         {step.description}
                       </p>
                       <div className="flex items-center gap-2 text-sm">
                         <span className="text-orange-600">⏱️</span>
-                        <span className="text-gray-500">{step.duration}</span>
+                        <span className="text-gray-800">{step.duration}</span>
                       </div>
                     </div>
                   </div>
@@ -156,7 +156,7 @@ export default function LifecycleSection({
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{title}</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-primarymx-auto rounded-full mb-4" />
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">{subtitle}</p>
+          <p className="text-lg text-gray-800 max-w-2xl mx-auto">{subtitle}</p>
         </div>
 
         {/* Orbital Timeline */}

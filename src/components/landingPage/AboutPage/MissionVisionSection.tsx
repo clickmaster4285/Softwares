@@ -181,7 +181,7 @@ export const MissionVisionSection = () => {
           </motion.h3>
           
           <motion.p 
-            className="text-gray-700 leading-relaxed"
+            className="text-gray-900  leading-relaxed"
             whileHover={{ x: 5 }}
             transition={{ duration: 0.2 }}
           >
@@ -246,7 +246,7 @@ export const MissionVisionSection = () => {
           </motion.h3>
           
           <motion.p 
-            className="text-gray-700 leading-relaxed"
+            className="text-gray-900  leading-relaxed"
             whileHover={{ x: 5 }}
             transition={{ duration: 0.2 }}
           >

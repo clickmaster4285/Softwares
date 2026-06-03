@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { List } from "lucide-react";
@@ -14,58 +14,129 @@ interface TOCItem {
 interface TableOfContentsProps {
   items: TOCItem[];
   title?: string;
+  scrollOffset?: number;
 }
 
-export function TableOfContents({ items, title = "On this page" }: TableOfContentsProps) {
-  const [activeId, setActiveId] = useState<string>("overview");
+export function TableOfContents({
+  items,
+  title = "On this page",
+  scrollOffset = 96,
+}: TableOfContentsProps) {
+  const [activeId, setActiveId] = useState(items[0]?.id ?? "overview");
+  const navRef = useRef<HTMLElement>(null);
+  const isScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Get all currently visible entries
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top); // Topmost first
+    if (!items.length) return;
 
-        if (visibleEntries.length > 0) {
-          setActiveId(visibleEntries[0].target.id);
+    const getHeadings = () =>
+      items
+        .map((item) => {
+          const element = document.getElementById(item.id);
+          if (!element) return null;
+          const rect = element.getBoundingClientRect();
+          return {
+            id: item.id,
+            top: rect.top,
+            bottom: rect.bottom,
+            offsetTop: element.offsetTop,
+          };
+        })
+        .filter((item): item is NonNullable<typeof item> => item !== null);
+
+    const findActiveHeading = () => {
+      const headings = getHeadings();
+      if (!headings.length) return items[0]?.id;
+
+      const scrollPosition = window.scrollY + scrollOffset;
+      let active = headings[0];
+      let bestDistance = Infinity;
+
+      for (const heading of headings) {
+        const distance = scrollPosition - heading.offsetTop;
+        const isPast = distance >= -80;
+        const distAbs = Math.abs(distance);
+
+        if (isPast && distAbs < bestDistance) {
+          bestDistance = distAbs;
+          active = heading;
         }
-      },
-      {
-        rootMargin: "-100px 0px -35% 0px",
-        threshold: [0.1, 0.3, 0.5, 0.7],
       }
+
+      return active?.id ?? items[items.length - 1]?.id;
+    };
+
+    const onScroll = () => {
+      if (isScrollingRef.current) return;
+      const current = findActiveHeading();
+      if (current) setActiveId(current);
+    };
+
+    const debouncedScroll = () => {
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(onScroll, 50);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", debouncedScroll, { passive: true });
+    window.addEventListener("resize", debouncedScroll);
+
+    return () => {
+      window.removeEventListener("scroll", debouncedScroll);
+      window.removeEventListener("resize", debouncedScroll);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
+  }, [items, scrollOffset]);
+
+  useEffect(() => {
+    if (!activeId || !navRef.current || isScrollingRef.current) return;
+
+    const safeId =
+      typeof CSS !== "undefined" && typeof CSS.escape === "function"
+        ? CSS.escape(activeId)
+        : activeId.replace(/[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~]/g, "\\$&");
+
+    const activeLink = navRef.current.querySelector<HTMLAnchorElement>(
+      `a[href="#${safeId}"]`
     );
+    if (!activeLink) return;
 
-    const elements = items
-      .map((item) => document.getElementById(item.id))
-      .filter(Boolean) as HTMLElement[];
+    const container = navRef.current;
+    const linkRect = activeLink.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const isVisible =
+      linkRect.top >= containerRect.top &&
+      linkRect.bottom <= containerRect.bottom;
 
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, [items]);
+    if (!isVisible) {
+      activeLink.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+  }, [activeId]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 110;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+    const target = document.getElementById(id);
+    if (!target) return;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+    isScrollingRef.current = true;
+    setActiveId(id);
 
-      setActiveId(id);
-    }
+    const targetTop = Math.max(
+      0,
+      window.scrollY + target.getBoundingClientRect().top - scrollOffset
+    );
+
+    window.scrollTo({ top: targetTop, behavior: "smooth" });
+    window.history.pushState(null, "", `#${encodeURIComponent(id)}`);
+
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 900);
   };
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      {/* Header */}
       <div className="flex items-center gap-2 pb-4">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
           <List className="h-4 w-4 text-primary" />
@@ -73,8 +144,10 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
         <p className="text-sm font-semibold text-slate-900">{title}</p>
       </div>
 
-      {/* Navigation */}
-      <nav className="relative">
+      <nav
+        ref={navRef}
+        className="toc-nav max-h-[calc(100vh-11rem)] overflow-y-auto overscroll-contain pr-1 scrollbar-thin"
+      >
         <div className="space-y-1">
           {items.map((item, index) => {
             const isActive = activeId === item.id;
@@ -112,12 +185,9 @@ export function TableOfContents({ items, title = "On this page" }: TableOfConten
         </div>
       </nav>
 
-      {/* Quick action */}
       <div className="mt-6 rounded-xl bg-gradient-to-br from-primary/10 to-primary/10 p-4">
         <p className="text-xs font-medium text-slate-800">Need help?</p>
-        <p className="mt-1 text-sm font-semibold text-slate-900">
-          Talk to an expert
-        </p>
+        <p className="mt-1 text-sm font-semibold text-slate-900">Talk to an expert</p>
         <Link
           href="/contact-us"
           className="mt-2 inline-flex items-center text-sm font-medium text-primary hover:text-primary"

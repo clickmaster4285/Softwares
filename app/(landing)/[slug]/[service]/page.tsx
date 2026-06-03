@@ -197,7 +197,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
         }}
       />
 
-      <div className="min-h-screen text-slate-900 bg-[#f5fbfb] overflow-x-hidden w-full">
+      <div className="min-h-screen text-slate-900 bg-[#f5fbfb] overflow-x-clip w-full">
 
 
     <ServiceHero page={page} />
@@ -210,11 +210,11 @@ export default async function ServiceByCategoryPage({ params }: Props) {
           
 
 
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 sm:gap-10 lg:gap-16 w-full">
+    <div className="relative grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-16 w-full">
       
             
       {/* MAIN CONTENT */}
-            <main className="py-8 sm:py-10 lg:py-12 min-w-0 w-full">
+            <div className="min-w-0 w-full py-8 sm:py-10 lg:py-12">
               
 
 
@@ -308,7 +308,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
                           {table.rows.map((row, i) => (
                             <tr key={i} className="hover:bg-slate-50/50 text-sm sm:text-base">
                               {row.map((cell, j) => (
-                                <td key={j} className="px-6 py-4 text-slate-600 border-b border-slate-100">
+                                <td key={j} className="px-6 py-4 text-gray-900 border-b border-slate-100">
                                   {cell}
                                 </td>
                               ))}
@@ -341,12 +341,14 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               
            
               
-            </main>
+            </div>
 
-            {/* Sticky Table of Contents - Desktop Only */}
-             <aside className="hidden lg:block sticky top-24 self-start min-w-0">
-        <TableOfContents items={tocItems} />
-      </aside>
+            {/* Sticky Table of Contents - stays through full article scroll */}
+            <aside className="hidden lg:sticky lg:top-24 lg:block lg:z-10 lg:w-[280px] lg:shrink-0 lg:self-start">
+              <div className="py-8 sm:py-10 lg:py-12">
+                <TableOfContents items={tocItems} scrollOffset={96} />
+              </div>
+            </aside>
 
           </div>
         </div>

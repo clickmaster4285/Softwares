@@ -140,7 +140,7 @@ export function MistakeCard({ countryName, items, subtitle = "Competitive differ
           </h2>
           
 
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-gray-900 sm:text-lg">
             {subtitle}
           </p>
         </div>
@@ -192,7 +192,7 @@ borderColor: 'rgb(239, 68, 68)',
                       {item.title}
                     </h3>
 
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 relative z-10">
+                    <p className="text-gray-800 text-sm leading-relaxed mb-4 relative z-10">
                       {item.desc}
                     </p>
 
@@ -255,7 +255,7 @@ borderColor: 'rgb(239, 68, 68)',
                       {benefit.title}
                     </h3>
 
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 relative z-10">
+                    <p className="text-gray-800 text-sm leading-relaxed mb-4 relative z-10">
                       {benefit.description}
                     </p>
 
@@ -263,7 +263,7 @@ borderColor: 'rgb(239, 68, 68)',
                       {benefit.features.map((feature, i) => (
                         <motion.span
                           key={feature}
-                          className="text-xs px-2 py-1 bg-gray-50 text-gray-600 rounded-full group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-300"
+                          className="text-xs px-2 py-1 bg-gray-50 text-gray-800 rounded-full group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-300"
                           initial={{ opacity: 0, scale: 0.8 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
@@ -282,7 +282,7 @@ borderColor: 'rgb(239, 68, 68)',
                         >
                           {benefit.stats}
                         </motion.span>
-                        <span className="text-xs uppercase tracking-wider text-gray-500">
+                        <span className="text-xs uppercase tracking-wider text-gray-800">
                           {benefit.statLabel}
                         </span>
                       </div>

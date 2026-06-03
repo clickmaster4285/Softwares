@@ -183,7 +183,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
               className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
                 activeTag === 'all'
                   ? 'border-slate-900 bg-slate-900 text-white'
-                  : 'border-slate-300 bg-white text-slate-600 hover:border-slate-500'
+                  : 'border-slate-300 bg-white text-gray-900 hover:border-slate-500'
               }`}
             >
               All topics
@@ -199,7 +199,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                 className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
                   activeTag === tag
                     ? 'border-slate-900 bg-slate-900 text-white'
-                    : 'border-slate-300 bg-white text-slate-600 hover:border-slate-500'
+                    : 'border-slate-300 bg-white text-gray-900 hover:border-slate-500'
                 }`}
               >
                 {tag}
@@ -418,7 +418,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                     type="button"
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                     disabled={safePage === 1}
-                    className="rounded border border-slate-300 bg-white p-1.5 text-slate-600 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="rounded border border-slate-300 bg-white p-1.5 text-gray-900 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </button>
@@ -443,7 +443,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                     type="button"
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                     disabled={safePage === totalPages}
-                    className="rounded border border-slate-300 bg-white p-1.5 text-slate-600 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="rounded border border-slate-300 bg-white p-1.5 text-gray-900 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </button>

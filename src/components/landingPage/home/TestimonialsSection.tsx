@@ -86,7 +86,7 @@ function AuthorBlock({ testimonial }: AuthorBlockProps) {
         <div className="font-semibold text-sm text-slate-900 leading-tight">
           {testimonial.authorName}
         </div>
-        <div className="text-xs text-slate-500 mt-0.5 leading-tight">
+        <div className="text-xs text-gray-800  mt-0.5 leading-tight">
           {testimonial.authorRole}
           {testimonial.authorRole && testimonial.authorCompany ? ", " : ""}
           {testimonial.authorCompany}
@@ -181,7 +181,7 @@ export function TestimonialsSection() {
 
         
 
-          <p className="mt-3 text-slate-800 max-w-2xl mx-auto">
+          <p className="mt-3 text-gray-900 max-w-2xl mx-auto">
             Real stories from clients who shipped production-grade products with us.
           </p>
 
@@ -193,7 +193,7 @@ export function TestimonialsSection() {
               ))}
             </div>
             <span className="text-sm font-semibold">4.9 / 5</span>
-            <span className="text-xs text-slate-500">320+ reviews</span>
+            <span className="text-xs text-gray-800 ">320+ reviews</span>
           </div>
         </div>
 
@@ -219,7 +219,7 @@ export function TestimonialsSection() {
                 ))}
               </div>
 
-              <p className="text-xl leading-relaxed text-slate-700">
+              <p className="text-2xl leading-relaxed text-slate-700">
                 &ldquo;{main.content}&rdquo;
               </p>
 
@@ -255,7 +255,7 @@ export function TestimonialsSection() {
                   ))}
                 </div>
 
-                <p className="text-md text-slate-800">
+                <p className="text-xl text-slate-00">
                   &ldquo;{t.content}&rdquo;
                 </p>
 
@@ -303,7 +303,7 @@ export function TestimonialsSection() {
           ))}
         </div>
 
-        <p className="text-md text-slate-800">
+        <p className="text-xl text-slate-800">
           &ldquo;{item!.content}&rdquo;
         </p>
 

@@ -79,7 +79,7 @@ export function AppsSection() {
       <section className="py-6 bg-white">
         <div className="container mx-auto  px-4 text-center">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-          <p className="mt-4 text-gray-600">Loading solutions...</p>
+          <p className="mt-4 text-gray-800">Loading solutions...</p>
         </div>
       </section>
     );
@@ -90,7 +90,7 @@ export function AppsSection() {
       <div className="container mx-auto  px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Our Solutions</h2>
-          <p className="text-gray-700 text-lg">
+          <p className="text-gray-900  text-lg">
             Explore custom software, web applications, and software solutions we've built for
             clients worldwide.
           </p>
@@ -137,7 +137,7 @@ export function AppsSection() {
                         <h3 className="font-semibold text-black mb-2 line-clamp-1">
                           {project.title}
                         </h3>
-                        <p className="text-gray-600 text-sm line-clamp-2">{project.description}</p>
+                        <p className="text-gray-800 text-sm line-clamp-2">{project.description}</p>
                       </div>
                     </div>
                   </Link>

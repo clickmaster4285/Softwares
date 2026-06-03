@@ -26,7 +26,7 @@ export function CeoVision() {
             </h2>
 
             {/* Subtitle */}
-            <p className="mx-auto max-w-2xl text-base md:text-lg text-slate-600 leading-relaxed px-2 sm:px-0">
+            <p className="mx-auto max-w-2xl text-base md:text-lg text-gray-900 leading-relaxed px-2 sm:px-0">
               To build scalable, intelligent custom software development solutions that empower businesses to grow, automate, and transform in a digital-first world.
             </p>
           </div>

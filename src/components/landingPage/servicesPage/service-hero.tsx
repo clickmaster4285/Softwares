@@ -268,7 +268,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                       <p className="text-2xl font-extrabold text-primary sm:text-3xl">
                         {stat.value}
                       </p>
-                      <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-gray-600">
+                      <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-gray-800">
                         {stat.label}
                       </p>
                     </div>
@@ -308,7 +308,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                         <Counter targetValue={stat.value} />
                       </div>
                     </div>
-                    <div className="text-xs md:text-sm text-gray-700 mt-1.5 font-medium tracking-wide">
+                    <div className="text-xs md:text-sm text-gray-900  mt-1.5 font-medium tracking-wide">
                       {stat.label}
                     </div>
                   </div>
@@ -316,7 +316,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               </div>
 
               {/* Trust Indicators */}
-              {/* <div className="flex flex-wrap items-center gap-5 mt-8 text-sm text-gray-600 animate-[fadeInUp_0.6s_ease-out_0.5s_forwards] opacity-0">
+              {/* <div className="flex flex-wrap items-center gap-5 mt-8 text-sm text-gray-800 animate-[fadeInUp_0.6s_ease-out_0.5s_forwards] opacity-0">
                 <div className="flex items-center gap-1">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <Star key={i} className="h-4 w-4 fill-primary text-primary" />

@@ -136,7 +136,7 @@ export const ParallaxCaseStudiesSection = ({ caseStudies, isLoading }: ParallaxC
               {/* Description */}
               <motion.p 
                 style={{ y: translateContents[index] }} 
-                className="text-slate-600 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4"
+                className="text-gray-900 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4"
               >
                 {section.description}
               </motion.p>
