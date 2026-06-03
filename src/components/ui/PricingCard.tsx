@@ -65,11 +65,11 @@ export function PricingCard({
         </motion.div>
       )}
 
-      <div className={`mb-2 text-lg font-bold ${highlighted ? "text-primary" : "text-black/50"}`}>
+      <div className={`mb-2 text-xl font-bold ${highlighted ? "text-primary" : "text-black"}`}>
         {title}
       </div>
 
-      <div className={`mb-2 font-black tracking-tight ${highlighted ? "text-3xl text-primary" : "text-2xl text-black"}`}>
+      <div className={`mb-2 font-black tracking-tight ${highlighted ? "text-3xl text-primary" : "text-3xl text-black"}`}>
         {!hasValidPrice ? (
           "Custom"
         ) : hasRange ? (
@@ -79,19 +79,19 @@ export function PricingCard({
         )}
       </div>
 
-      <p className={`text-md mb-4 mt-2 ${highlighted ? "text-gray-800" : "text-gray-800"}`}>
+      <p className={`text-lg mb-4 mt-2 ${highlighted ? "text-gray-800" : "text-gray-800"}`}>
         {description}
       </p>
 
       <div className="space-y-5 mb-6">
         {features.map((feature, featureIndex) => (
           <div key={featureIndex}>
-            <h4 className={`font-semibold text-sm mb-3 ${highlighted ? "text-primary/80" : "text-gray-800"}`}>
+            <h4 className={`font-semibold text-lg mb-3 ${highlighted ? "text-primary" : "text-gray-800"}`}>
               {feature.title}
             </h4>
             <ul className="space-y-2">
               {feature.items.map((item: string, i: number) => (
-                <li key={i} className="flex items-start gap-2 text-sm">
+                <li key={i} className="flex items-start gap-2 text-lg">
                   <Check className={`h-4 w-4 mt-0.5 text-primary flex-shrink-0 ${highlighted ? "text-primary" : "text-black"}`} />
                   <span className="text-gray-800">
                     {item}

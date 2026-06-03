@@ -256,7 +256,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
               </div>
 
               {/* Description */}
-              <p className="text-lg md:text-xl text-gray-800 max-w-2xl mb-8 leading-relaxed animate-[fadeInUp_0.6s_ease-out_0.2s_forwards] opacity-0">
+              <p className="text-lg md:text-xl lg:text-2xl text-gray-800 max-w-2xl mb-8 leading-relaxed animate-[fadeInUp_0.6s_ease-out_0.2s_forwards] opacity-0">
                 {makeBoldInText(page.lead, boldTerms)}
               </p>
 
