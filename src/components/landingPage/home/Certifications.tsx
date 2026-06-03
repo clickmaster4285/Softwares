@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import SplitText from "../../ui/SplitText";
 
 const certifications = [
   { name: "Amazon", logo: "/images/certifications/c1.png" },
@@ -75,10 +76,36 @@ export default function CertificationsSection() {
         <div className="relative mx-auto w-full max-w-screen-2xl px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Certifications</h2>
-            <p className="text-lg text-gray-600">Our trusted certifications and partnerships</p>
-          </div>
+
+
+
+
+
+           <div className="mx-auto max-w-3xl text-center mb-8 mt-12">
+                      <div className="inline-flex items-center gap-2 mb-3">
+                        <span className="h-[2px] w-8 rounded-full bg-primary" />
+                        <SplitText
+                          text="Visual Process Journey"
+                          className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+                          delay={60}
+                          duration={0.8}
+                          ease="power3.out"
+                          splitType="chars"
+                          from={{ opacity: 0, x: 60 }}
+                          to={{ opacity: 1, x: 0 }}
+                          threshold={0.2}
+                        />
+                        <span className="h-[2px] w-8 rounded-full bg-primary" />
+                      </div>
+          
+                       <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">   
+                     Our trusted certifications and partnerships
+                               </p>
+                    </div>
+
+                  
+          
+     
 
           {/* Full Width Marquee */}
           <div className="relative overflow-hidden">

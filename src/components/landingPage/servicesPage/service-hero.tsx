@@ -308,7 +308,7 @@ export function ServiceHero({ page }: ServiceHeroProps) {
                         <Counter targetValue={stat.value} />
                       </div>
                     </div>
-                    <div className="text-xs md:text-sm text-gray-700 mt-1.5 font-medium tracking-wide">
+                    <div className="text-xs md:text-sm text-gray-900  mt-1.5 font-medium tracking-wide">
                       {stat.label}
                     </div>
                   </div>

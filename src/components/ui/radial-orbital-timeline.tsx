@@ -270,7 +270,7 @@ export default function RadialOrbitalTimeline({
                         <span className="text-xs text-gray-400 font-mono">Step {item.id}</span>
                         <ChevronRight size={12} className={`text-primary transition-transform ${isSelected ? "translate-x-0.5" : ""}`} />
                       </div>
-                      <h4 className={`font-semibold text-sm ${isSelected ? "text-orange-600" : "text-gray-700"}`}>
+                      <h4 className={`font-semibold text-sm ${isSelected ? "text-orange-600" : "text-gray-900 "}`}>
                         {item.title}
                       </h4>
                     </div>
@@ -331,7 +331,7 @@ export default function RadialOrbitalTimeline({
                           <span className="text-xs text-gray-400 font-mono">Step {item.id}</span>
                           <ChevronRight size={12} className={`text-primary ${isSelected ? "translate-x-0.5" : ""}`} />
                         </div>
-                        <h4 className={`font-semibold text-sm ${isSelected ? "text-orange-600" : "text-gray-700"}`}>
+                        <h4 className={`font-semibold text-sm ${isSelected ? "text-orange-600" : "text-gray-900 "}`}>
                           {item.title}
                         </h4>
                       </div>

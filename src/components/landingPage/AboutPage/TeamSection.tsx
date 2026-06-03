@@ -22,7 +22,7 @@ export const TeamSection = () => {
         </motion.h2>
         
         <motion.p
-          className="text-center text-gray-700 max-w-3xl mx-auto mb-12"
+          className="text-center text-gray-900  max-w-3xl mx-auto mb-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2 }}

@@ -448,7 +448,7 @@ export default function SolutionsClient({
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-black mb-4">
               {heading}
             </h1>
-            <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
+            <p className="text-gray-900  max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -500,7 +500,7 @@ export default function SolutionsClient({
             {heading}
           </h1>
 
-          <p className="text-gray-700 max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
+          <p className="text-gray-900  max-w-2xl mx-auto text-lg mt-4">{subheading}</p>
         </div>
 
     

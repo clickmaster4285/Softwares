@@ -273,11 +273,11 @@ Competitive differentiation that sets us apart
                           <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
                         </div>
 
-                        <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-primary transition-colors">
+                        <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-primary transition-colors">
                           {step.title}
                         </h3>
 
-                     <p className="text-gray-800 text-sm leading-relaxed mb-4">
+                     <p className="text-gray-800 text-lg leading-relaxed mb-4">
   {step.description}
 </p>
 
@@ -286,7 +286,7 @@ Competitive differentiation that sets us apart
   {step.features.map((feature) => (
     <span
       key={feature}
-      className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary"
+      className="rounded-full bg-primary/10 px-2.5 py-1 text-sm font-medium text-primary"
     >
       {feature}
     </span>

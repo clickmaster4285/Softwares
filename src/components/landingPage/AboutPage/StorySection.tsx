@@ -63,7 +63,7 @@ export const StorySection = () => {
         
         <div
           ref={contentRef}
-          className="space-y-4 text-gray-700"
+          className="space-y-4 text-gray-900 "
         >
           {[
             "What began as a small team of passionate coders has evolved into Clickmasters, a full-service software development company delivering cutting-edge solutions designed to meet our clients' unique challenges.",

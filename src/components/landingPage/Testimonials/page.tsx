@@ -225,7 +225,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
         {/* Testimonial content with quote mark */}
         <div className="relative mb-8">
           <Quote className={`absolute -top-2 -left-2 w-6 h-6 text-transparent bg-clip-text bg-gradient-to-r ${gradient} opacity-30`} />
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed pl-6 line-clamp-4">
+          <p className="text-gray-900  dark:text-gray-300 leading-relaxed pl-6 line-clamp-4">
             "{testimonial.content}"
           </p>
         </div>
@@ -585,7 +585,7 @@ const Testimonials: React.FC = () => {
                 {displayTestimonials.length > 1 && (
                   <div className="flex items-center justify-center gap-4 mt-8">
                     <button
-                      className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="testimonial-prev w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-900  dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                       onClick={() => setIsAutoPlaying(false)}
                       disabled={displayTestimonials.length <= 1}
                     >
@@ -600,7 +600,7 @@ const Testimonials: React.FC = () => {
                     </button>
 
                     <button
-                      className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="testimonial-next w-14 h-14 rounded-full bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-900  dark:text-gray-300 hover:text-primary dark:hover:text-primary/80 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
                       onClick={() => setIsAutoPlaying(false)}
                       disabled={displayTestimonials.length <= 1}
                     >

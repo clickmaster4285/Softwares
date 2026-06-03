@@ -139,13 +139,13 @@ function HeroSectionContent() {
         Reviewed on
       </span>
       <div className="flex items-center gap-1.5">
-        <Image
-          src="/partners/clutch.png"
-          alt="Clutch"
-          width={40}
-          height={28}
-          className="w-auto object-contain"
-        />
+       <Image
+  src="/partners/clutch.png"
+  alt="Clutch"
+  width={90}
+  height={60}
+  className="w-auto h-12 object-contain"
+/>
         <div className="flex flex-col">
           <div className="flex items-center gap-0.5">
             {[...Array(5)].map((_, i) => (
@@ -162,6 +162,9 @@ function HeroSectionContent() {
     </div>
   </div>
 </Link>
+
+
+            
 
             <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:mt-10 lg:gap-x-10 lg:gap-y-8">
               <AnimatedCounter target={1860} suffix="+" label="Projects Delivered" />

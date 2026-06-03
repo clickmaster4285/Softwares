@@ -223,7 +223,7 @@ const InsightsHeader = () => {
         </span>
       </h2>
 
-      <p className="text-lg leading-8 text-gray-700 text-justify">
+      <p className="text-xl leading-8 text-gray-900  text-justify">
         From concept to completion, we craft enterprise-grade digital solutions that help modern businesses grow, scale, and stay ahead in a competitive market. Our team combines strategic thinking, cutting-edge technologies, and user-focused design to deliver impactful results across web development, mobile applications, AI-powered platforms, and custom software systems. Through our success stories, detailed case studies, and insightful blogs, we showcase how innovative execution transforms ideas into measurable business outcomes.
       </p>
 
