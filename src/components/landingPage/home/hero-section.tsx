@@ -218,8 +218,8 @@ function QuoteForm() {
       className="min-h-[520px] w-full self-start rounded-2xl border border-white/40 bg-white/35 p-5 shadow-2xl shadow-primary/10 backdrop-blur-xl sm:p-8"
       onSubmit={handleSubmit}
     >
-      <h3 className="text-xl font-bold text-primary">Get a free quote</h3>
-      <p className="mt-1 text-sm text-muted-foreground">
+      <h3 className="text-2xl font-bold text-primary">Get a free quote</h3>
+      <p className="mt-1 text-lg text-muted-foreground">
         Share your details we'll respond within one business day.
       </p>
 
@@ -246,7 +246,7 @@ function QuoteForm() {
                 name={name}
                 value={formData[name as keyof typeof formData] as string}
                 onChange={handleChange}
-                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                className="w-full bg-transparent text-md outline-none placeholder:text-muted-foreground"
                 placeholder={ph}
                 required={name !== 'phone' && name !== 'budget'}
               />
@@ -256,7 +256,7 @@ function QuoteForm() {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            className="w-full rounded-lg border border-white/50 bg-white/50 px-4 py-3 text-sm outline-none backdrop-blur placeholder:text-muted-foreground focus:border-primary/60"
+            className="w-full rounded-lg border border-white/50 bg-white/50 px-4 py-3 text-md outline-none backdrop-blur placeholder:text-muted-foreground focus:border-primary/60"
             rows={3}
             placeholder="What would you like to build?"
             required
@@ -268,7 +268,7 @@ function QuoteForm() {
         type="submit"
         disabled={isSubmitting}
         data-magnetic
-        className="mt-5 w-full rounded-lg bg-primary py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-5 w-full rounded-lg bg-primary py-3.5 text-md font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? 'Sending...' : 'Send Message'}
       </button>

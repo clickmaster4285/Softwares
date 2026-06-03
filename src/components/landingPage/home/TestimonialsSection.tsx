@@ -219,7 +219,7 @@ export function TestimonialsSection() {
                 ))}
               </div>
 
-              <p className="text-xl leading-relaxed text-slate-700">
+              <p className="text-2xl leading-relaxed text-slate-700">
                 &ldquo;{main.content}&rdquo;
               </p>
 
@@ -255,7 +255,7 @@ export function TestimonialsSection() {
                   ))}
                 </div>
 
-                <p className="text-xl text-slate-900">
+                <p className="text-xl text-slate-00">
                   &ldquo;{t.content}&rdquo;
                 </p>
 
@@ -303,7 +303,7 @@ export function TestimonialsSection() {
           ))}
         </div>
 
-        <p className="text-md text-slate-800">
+        <p className="text-xl text-slate-800">
           &ldquo;{item!.content}&rdquo;
         </p>
 

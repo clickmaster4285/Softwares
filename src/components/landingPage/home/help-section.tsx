@@ -110,8 +110,15 @@ export function HelpSection() {
     <section
       ref={sectionRef}
       id="help"
-      className="relative py-24 overflow-hidden bg-white font-sans lg:px-12 sm:px-6 px-4"
+      className="relative py-24 overflow-hidden bg-[#f5fbfb]  font-sans lg:px-12 sm:px-6 px-4"
     >
+
+ <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-[-180px] left-1/4 h-[480px] w-[480px] rounded-full bg-[#a7f3d0] opacity-20 blur-3xl" />
+
+
       <div className="relative z-10 mx-auto max-w-[1600px]">
         
         {/* Header Section - Matching FAQ Style */}
@@ -179,11 +186,11 @@ export function HelpSection() {
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-bold text-black mb-2 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-primary mb-2 group-hover:text-primary transition-colors duration-300">
                     {resource.title}
                   </h3>
 
-                  <p className="text-gray-800 text-md leading-relaxed mb-4">
+                  <p className="text-gray-800 text-lg leading-relaxed mb-4">
                     {resource.description}
                   </p>
 
