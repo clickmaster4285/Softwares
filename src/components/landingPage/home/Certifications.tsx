@@ -85,7 +85,7 @@ export default function CertificationsSection() {
                       <div className="inline-flex items-center gap-2 mb-3">
                         <span className="h-[2px] w-8 rounded-full bg-primary" />
                         <SplitText
-                          text="Visual Process Journey"
+                          text="Certifications"
                           className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
                           delay={60}
                           duration={0.8}

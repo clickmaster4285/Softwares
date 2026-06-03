@@ -188,7 +188,6 @@ export default function LandingPage() {
             <PainPointsSolutions />
           </Suspense>
 
-  <CertificationsSection />
           <ExploreSection />
 
 
@@ -217,7 +216,7 @@ export default function LandingPage() {
             <ProcessPage />
           </Suspense>
 
-
+ <CertificationsSection />
    <TestimonialsSection />
 
 

@@ -42,7 +42,7 @@ export function Providers({ children }: { children: ReactNode }) {
       <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
         <AuthProvider>
           <TooltipProvider>
-            <SplashCursor />
+            {/* <SplashCursor /> */}
             <RadixToaster />
             <SonnerToaster />
             {children}

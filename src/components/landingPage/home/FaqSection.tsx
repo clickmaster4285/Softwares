@@ -57,9 +57,23 @@ export function FaqSection({ faqItems }: { faqItems?: FaqItem[] }) {
 
   return (
     <section 
-      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white py-16 sm:py-20" 
+      className="relative overflow-hidden  bg-[#f5fbfb] py-16 sm:py-20" 
       aria-labelledby="homepage-faq-heading"
     >
+
+
+        {/* Background Blobs */}
+    <div
+    className="absolute inset-0 opacity-[0.45]"
+    style={{
+      backgroundImage: `
+        linear-gradient(to right, rgba(15,23,42,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15,23,42,0.06) 1px, transparent 1px)
+      `,
+      backgroundSize: "48px 48px",
+    }}
+  />
+   
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>

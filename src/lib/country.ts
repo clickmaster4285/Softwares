@@ -1480,7 +1480,7 @@ export const countryData: Record<string, CountryData> = {
     faqs: [
       {
         question: 'How much does software development cost in UAE?',
-        answer: 'Costs vary based on complexity, typically ranging from AED 40,000 to AED 400,000+ for custom solutions.'
+        answer: 'Costs vary based on complexity, typically ranging from $ 40,000 to $ 400,000+ for custom solutions.'
       },
       {
         question: 'Do you work remotely with international clients?',

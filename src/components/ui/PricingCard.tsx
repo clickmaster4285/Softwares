@@ -65,12 +65,10 @@ export function PricingCard({
         </motion.div>
       )}
 
-      {/* Title */}
       <div className={`mb-2 text-lg font-bold ${highlighted ? "text-primary" : "text-black/50"}`}>
         {title}
       </div>
 
-      {/* Price */}
       <div className={`mb-2 font-black tracking-tight ${highlighted ? "text-3xl text-primary" : "text-2xl text-black"}`}>
         {!hasValidPrice ? (
           "Custom"
@@ -81,15 +79,10 @@ export function PricingCard({
         )}
       </div>
 
-   
-
       <p className={`text-md mb-4 mt-2 ${highlighted ? "text-gray-800" : "text-gray-800"}`}>
         {description}
       </p>
 
-      {/* <Separator className={`mb-5 ${highlighted ? "bg-primary/20" : "bg-black/10"}`} /> */}
-
-      {/* Features */}
       <div className="space-y-5 mb-6">
         {features.map((feature, featureIndex) => (
           <div key={featureIndex}>
@@ -113,7 +106,6 @@ export function PricingCard({
         ))}
       </div>
 
-      {/* Button */}
       <button
         onClick={onButtonClick}
         className={`w-full rounded-md py-2.5 font-semibold transition ${
