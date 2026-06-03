@@ -55,7 +55,7 @@ export const TeamSection = () => {
                 </span>
               </motion.div>
               <h3 className="text-lg font-semibold text-black mb-2">{member.title}</h3>
-              <p className="text-sm text-gray-600">{member.description}</p>
+              <p className="text-sm text-gray-800">{member.description}</p>
             </motion.div>
           ))}
         </div>

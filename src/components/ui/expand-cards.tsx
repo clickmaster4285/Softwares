@@ -175,7 +175,7 @@ const ExpandOnHover = ({
         </div>
 
         {/* MOBILE TEXT */}
-        <div className="mt-5 text-center text-sm text-gray-500 md:hidden">
+        <div className="mt-5 text-center text-sm text-gray-800 md:hidden">
           👆 Tap images to explore stages
         </div>
       </div>

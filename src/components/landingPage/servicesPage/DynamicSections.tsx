@@ -72,7 +72,7 @@ export default function DynamicSections({ sections, serviceName }: DynamicSectio
 
             {/* Content */}
             <div className="mx-auto  pb-16">
-              <div className="space-y-6 text-slate-600 leading-relaxed text-[17px]">
+              <div className="space-y-6 text-gray-900 leading-relaxed text-[17px]">
                 <p
                   dangerouslySetInnerHTML={{
                     __html: makeBoldServiceName(section.body, serviceName),

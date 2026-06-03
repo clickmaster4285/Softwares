@@ -189,7 +189,7 @@ const DesktopProcessCard = ({ phase, delay, side, startAnimation }: { phase: any
           initial={{ opacity: 0 }}
           animate={startAnimation ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: delay + 0.35 }}
-          className="text-sm text-slate-600 leading-relaxed"
+          className="text-sm text-gray-900 leading-relaxed"
         >
           {phase.text}
         </motion.p>
@@ -255,7 +255,7 @@ const MobileProcessCard = ({ phase, index, startAnimation }: { phase: any; index
           {phase.title}
         </h3>
         
-        <p className="text-sm text-slate-600 leading-relaxed">
+        <p className="text-sm text-gray-900 leading-relaxed">
           {phase.text}
         </p>
 

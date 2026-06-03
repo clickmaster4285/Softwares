@@ -133,7 +133,7 @@ export default function SolutionsPage() {
                 {...responsiveConfig}
               />
             ) : (
-              <p className="text-center py-20 text-gray-500">
+              <p className="text-center py-20 text-gray-800">
                 No projects available yet.
               </p>
             )}

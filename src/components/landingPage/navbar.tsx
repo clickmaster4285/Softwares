@@ -830,7 +830,7 @@ const { data: blogs = [] } = useQuery({
                                 'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between',
                                 active
                                   ? 'bg-white text-slate-900 shadow-sm'
-                                  : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
+                                  : 'text-gray-900 hover:bg-white/70 hover:text-slate-900'
                               )}
                             >
                               <span>{section.category}</span>
@@ -876,7 +876,7 @@ const { data: blogs = [] } = useQuery({
                             <Link
                               href="/software-solutions"
                               onClick={closeDropdowns}
-                              className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                              className="text-xs font-semibold uppercase tracking-widest text-gray-900 hover:text-primary transition-colors"
                             >
                               Browse all solutions →
                             </Link>
@@ -945,7 +945,7 @@ const { data: blogs = [] } = useQuery({
               'block w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors',
               active
                 ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-600 hover:bg-white/70 hover:text-slate-900'
+                : 'text-gray-900 hover:bg-white/70 hover:text-slate-900'
             )}
           >
             <div className="flex items-center justify-between">
@@ -1085,7 +1085,7 @@ const { data: blogs = [] } = useQuery({
               'w-full rounded-md px-3 py-2.5 text-left text-sm font-semibold transition-colors flex items-center justify-between hover:bg-white/70',
               active
                 ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-600 hover:text-slate-900'
+                : 'text-gray-900 hover:text-slate-900'
             )}
           >
             <span>
@@ -1158,7 +1158,7 @@ const { data: blogs = [] } = useQuery({
                   <Link
                     href="/case-studies"
                     onClick={closeDropdowns}
-                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                    className="text-xs font-semibold uppercase tracking-widest text-gray-900 hover:text-primary transition-colors"
                   >
                     View all case studies ({caseStudies.length}) →
                   </Link>
@@ -1211,7 +1211,7 @@ const { data: blogs = [] } = useQuery({
                   <Link
                     href="/blog"
                     onClick={closeDropdowns}
-                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                    className="text-xs font-semibold uppercase tracking-widest text-gray-900 hover:text-primary transition-colors"
                   >
                     View all blogs ({blogs.length}) →
                   </Link>
@@ -1253,7 +1253,7 @@ const { data: blogs = [] } = useQuery({
                   <Link
                     href="/faqs"
                     onClick={closeDropdowns}
-                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                    className="text-xs font-semibold uppercase tracking-widest text-gray-900 hover:text-primary transition-colors"
                   >
                     View all FAQs →
                   </Link>
@@ -1293,7 +1293,7 @@ const { data: blogs = [] } = useQuery({
                           {testimonial.company && (
                             <p className="text-xs text-slate-500">{testimonial.company}</p>
                           )}
-                          <p className="text-sm text-slate-600 mt-2 italic line-clamp-3">
+                          <p className="text-sm text-gray-900 mt-2 italic line-clamp-3">
                             "{testimonial.content?.substring(0, 150)}..."
                           </p>
                         </div>
@@ -1307,7 +1307,7 @@ const { data: blogs = [] } = useQuery({
                   <Link
                     href="/testimonials"
                     onClick={closeDropdowns}
-                    className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                    className="text-xs font-semibold uppercase tracking-widest text-gray-900 hover:text-primary transition-colors"
                   >
                     View all testimonials ({testimonials.length}) →
                   </Link>
@@ -1386,7 +1386,7 @@ const { data: blogs = [] } = useQuery({
                     <Link
                       href="/contact-us"
                       onClick={closeDropdowns}
-                      className="text-xs font-semibold uppercase tracking-widest text-slate-600 hover:text-primary transition-colors"
+                      className="text-xs font-semibold uppercase tracking-widest text-gray-900 hover:text-primary transition-colors"
                     >
                       Contact sales →
                     </Link>

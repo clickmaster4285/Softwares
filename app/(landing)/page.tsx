@@ -27,6 +27,7 @@ import WhyChooseUs from '@/src/components/landingPage/home/whyUs';
 import HelpSection from '@/src/components/landingPage/home/help-section';
 import { FinalCTA } from '@/src/components/landingPage/home/finalCta';
 import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
+import CertificationsSection from '@/src/components/landingPage/home/Certifications';
 
 export const metadata = metadataConfig.home();
 
@@ -180,12 +181,18 @@ export default function LandingPage() {
             <AboutSection />
           </Suspense>
 
+        
+          
 
           <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
             <PainPointsSolutions />
           </Suspense>
 
+  <CertificationsSection />
           <ExploreSection />
+
+
+         
 
           <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-white lg:px-10" />}>
             <TrustedClientsSection />

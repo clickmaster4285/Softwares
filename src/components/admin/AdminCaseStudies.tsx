@@ -244,7 +244,7 @@ const AdminCaseStudies = () => {
                             {proj && typeof proj === 'object' ? (
                               <>
                                 ·{' '}
-                                <span className="text-foreground/80">
+                                <span className="text-gray-900">
                                   {getCategoryName(proj.category)}
                                 </span>
                               </>

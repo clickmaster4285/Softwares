@@ -214,7 +214,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
                 <Star
                   className={`w-4 h-4 ${i < (testimonial.rating ?? 5)
                     ? 'fill-amber-400 text-amber-400'
-                    : 'text-gray-300 dark:text-gray-600'
+                    : 'text-gray-300 dark:text-gray-800'
                     }`}
                 />
               </motion.div>
@@ -245,7 +245,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
           <div>
             <h4 className="font-bold text-gray-900 dark:text-white text-lg">{testimonial.authorName}</h4>
             {(testimonial.authorRole || testimonial.authorCompany) && (
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-gray-800 dark:text-gray-400">
                 {testimonial.authorRole}
                 {testimonial.authorRole && testimonial.authorCompany && ' at '}
                 {testimonial.authorCompany && (
@@ -260,7 +260,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index, i
 
         {/* Stats indicator */}
         <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
-          <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+          <div className="flex items-center justify-between text-xs text-gray-800 dark:text-gray-400">
             <span className="flex items-center gap-1">
               <TrendingUp className="w-3 h-3" />
               +{Math.floor(Math.random() * 30 + 20)}% growth

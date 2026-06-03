@@ -142,7 +142,7 @@ export default function CountryServicesSection({
              Services We Provide in {countryName}
             </h2>
 
-            <p className="mt-5 text-slate-600 text-lg">
+            <p className="mt-5 text-gray-900 text-lg">
               Comprehensive software development solutions tailored for Canada businesses
             </p>
           </div>
@@ -167,7 +167,7 @@ export default function CountryServicesSection({
                       className="
                         tab-trigger relative
                         flex items-center gap-2 px-6 py-3 text-sm font-medium
-                        text-slate-600 rounded-t-lg whitespace-nowrap
+                        text-gray-900 rounded-t-lg whitespace-nowrap
                         transition-all duration-200
                         hover:text-slate-900
                         data-[selected]:bg-white data-[selected]:text-slate-900
@@ -235,7 +235,7 @@ export default function CountryServicesSection({
                             </h4>
 
                             {/* Description */}
-                            <p className="text-slate-600 text-[15px] leading-relaxed mb-6">
+                            <p className="text-gray-900 text-[15px] leading-relaxed mb-6">
                               Professional {service.toLowerCase()} solutions designed
                               to scale your business efficiently in {countryName}.
                             </p>

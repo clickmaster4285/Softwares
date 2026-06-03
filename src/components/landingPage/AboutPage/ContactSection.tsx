@@ -46,7 +46,7 @@ export const ContactSection = () => {
           >
             Feel Free to <span className="text-primary">Contact Us</span> Anytime!
           </motion.h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+          <p className="text-lg text-gray-800 max-w-3xl mx-auto mb-8">
            Whether you need expert guidance on web, mobile, cloud, or any other custom software solutions, our team is here to help.
           </p>
         </motion.div>
@@ -86,7 +86,7 @@ export const ContactSection = () => {
                 </motion.span>
                 {info.title}
               </motion.h3>
-              <p className="text-sm text-gray-600">{info.value}</p>
+              <p className="text-sm text-gray-800">{info.value}</p>
             </motion.div>
           ))}
         </div>

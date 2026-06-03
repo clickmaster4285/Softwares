@@ -116,7 +116,7 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
         style={{
           position: "relative",
           width: "100%",
-          maxWidth: "660px",
+          maxWidth: "700px",
           transformOrigin: "top",
           top: `${index * 18}px`,
         }}
@@ -157,6 +157,7 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
               "0 20px 60px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9)",
             overflow: "hidden",
             padding: "2.25rem 2.5rem 2rem",
+            minHeight: "500px",
           }}
         >
           {/* Subtle top gradient accent */}
@@ -217,7 +218,7 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
               )}
 
               <span
-                className={`${palette.badge} border text-xs font-semibold tracking-wider uppercase`}
+                className={`${palette.badge} border text-base font-semibold tracking-wider uppercase`}
                 style={{
                   padding: "4px 10px",
                   borderRadius: 99,
@@ -231,7 +232,7 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
             {/* Title */}
             <h3
               style={{
-                fontSize: "1.3rem",
+                fontSize: "2rem",
                 fontWeight: 700,
                 color: "hsl(var(--primary))",
                 marginBottom: "0.65rem",
@@ -256,9 +257,9 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
             {/* Description */}
             <p
               style={{
-                fontSize: "0.925rem",
+                fontSize: "1.25rem",
                 lineHeight: 1.7,
-                color: "rgba(0,0,0,0.6)",
+                 color: "#111827",
                 maxWidth: "90%",
               }}
             >
@@ -267,23 +268,22 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
 
             {/* CTA */}
             {item.cta && (
-              <a
-                href={item.cta.href}
-                className={`${palette.cta} inline-flex items-center gap-1.5 transition-all`}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.35rem",
-                  marginTop: "1.35rem",
-                  fontSize: "0.85rem",
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  letterSpacing: "0.01em",
-                }}
-              >
-                {item.cta.label}
-                <ArrowUpRight style={{ width: 15, height: 15 }} />
-              </a>
+             <a
+  href={item.cta.href}
+  className={`${palette.cta} inline-flex items-center gap-2 transition-all`}
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    marginTop: "1.5rem",
+    fontSize: "1.2rem",
+    fontWeight: 700,
+    textDecoration: "none",
+  }}
+>
+  {item.cta.label}
+  <ArrowUpRight style={{ width: 20, height: 20 }} />
+</a>
             )}
           </div>
         </div>

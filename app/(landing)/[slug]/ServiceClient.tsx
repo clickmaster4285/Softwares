@@ -145,14 +145,14 @@ const pricingTiers = pricingPlans.map((plan) => ({
         <nav className="flex items-center gap-1.5 text-sm w-full">
           <Link
             href="/"
-            className="text-gray-500 hover:text-primary transition-colors font-medium"
+            className="text-gray-800 hover:text-primary transition-colors font-medium"
           >
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5 text-gray-400" />
           <Link
             href="/software-solutions"
-            className="text-gray-500 hover:text-primary transition-colors font-medium"
+            className="text-gray-800 hover:text-primary transition-colors font-medium"
           >
             Services
           </Link>

@@ -20,8 +20,8 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
         <Navbar />
       </header>
 
-      {/* Page content */}
-      <main className="">{children}</main>
+      {/* Page content — no overflow here so sticky TOC / card stacks use document scroll */}
+      <div className="flex-1">{children}</div>
 
       {/* Footer */}
       <Footer />
