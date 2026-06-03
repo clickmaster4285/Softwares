@@ -111,61 +111,47 @@ const DEFAULT_BG_IMAGES = [
 
 const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const palette = CARD_COLORS[index % CARD_COLORS.length];
-  
   const backgroundImage = item.backgroundImage || DEFAULT_BG_IMAGES[index % DEFAULT_BG_IMAGES.length];
 
   useEffect(() => {
     const card = cardRef.current;
-    const container = containerRef.current;
-    if (!card || !container) return;
+    if (!card) return;
 
-    const targetScale = 1 - (totalCards - index) * 0.03;
+    const targetScale = Math.max(0.88, 1 - (totalCards - index) * 0.045);
 
-    gsap.set(card, { scale: 1, transformOrigin: "center top" });
+    gsap.set(card, { 
+      scale: 1, 
+      y: index * 32,
+      transformOrigin: "center top" 
+    });
 
     const trigger = ScrollTrigger.create({
-      trigger: container,
-      start: "top center",
+      trigger: card.parentElement,
+      start: "top top",
       end: "bottom center",
-      scrub: 1,
+      scrub: 1.1,
       onUpdate: (self) => {
         const progress = self.progress;
         const scale = gsap.utils.interpolate(1, targetScale, progress);
+        const y = gsap.utils.interpolate(index * 32, 0, progress);
+
         gsap.set(card, {
           scale: Math.max(scale, targetScale),
-          transformOrigin: "center top",
+          y: Math.max(y, 0),
         });
       },
     });
 
-    return () => {
-      trigger.kill();
-    };
+    return () => trigger.kill();
   }, [index, totalCards]);
 
   return (
-    <div
-      ref={containerRef}
-      style={{
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "sticky",
-        top: 0,
-      }}
-    >
+    <div className="h-screen sticky top-0 flex items-center justify-center z-10">
       <div
         ref={cardRef}
-        style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: "1080px",
-          transformOrigin: "top",
-          top: `${index * 24}px`,
-        }}
+        className="relative w-full max-w-[1080px] mx-auto"
+        style={{ transformOrigin: "center top" }}
       >
         {/* Outer glow */}
         <div
@@ -362,9 +348,7 @@ const Card: React.FC<CardProps> = ({ item, index, totalCards }) => {
                 marginBottom: "1.5rem",
               }}
             >
-              {item.description} End-to-end software development services designed for ambitious businesses.
-We transform ideas into secure, scalable, and high-performing digital products
-that deliver lasting value for customers, teams, and stakeholders.
+              {item.description}
             </p>
 
             {/* Metrics */}
@@ -424,8 +408,18 @@ interface LargeStackedCardsProps {
 }
 
 export const LargeStackedCards: React.FC<LargeStackedCardsProps> = ({ items }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh(true);
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [items.length]);
+
   return (
-    <section style={{ width: "100%" }}>
+    <section ref={sectionRef} className="relative">
       {items.map((card, index) => (
         <Card
           key={card.id}

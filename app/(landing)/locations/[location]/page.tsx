@@ -22,6 +22,8 @@ import FaqSection from '@/src/components/landingPage/location/FaqSection';
 import { ChecklistCTAHero } from '@/src/components/landingPage/checklist/ChecklistCTAHero';
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 import { TestimonialsSection } from '@/src/components/landingPage/home/TestimonialsSection';
+import TrustedBySection from '@/src/components/landingPage/home/TrustedBySection';
+import { StatsCard } from '@/src/components/landingPage/location/StatsCard';
 //import WorldMapHero from '@/src/components/landingPage/location/AnimatedPins';
 
 
@@ -77,8 +79,10 @@ const serviceData = servicesByCountry[country.name] || [];
       {/* HERO */}
       <HeroSection country={country} location={location} />
       {/* <StatsSection country={country} location={location} /> */}
-
+<TrustedBySection/>
       
+
+      <StatsCard/>
       {/* <WorldMapHero/> */}
       <PainPointsSolutions countryName={country.name} />
 
