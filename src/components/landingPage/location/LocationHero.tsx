@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Link from "next/link";
 import type { CountryData } from "@/lib/country";
-import AnimatedPins from './AnimatedPins';
+import AnimatedPins from '../../ui/AnimatedPins';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,6 +77,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
             backgroundImage: 'url("/images/locationImg.webp")',
           }}
         />
+        <div className="absolute inset-0 bg-white/70" />
       </div>
 
       {/* Animated Pins Overlay */}
@@ -84,7 +85,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
         <AnimatedPins />
       </div>
 
-      {/* Content - Left Aligned with Max Width 1600px */}
+      {/* Content */}
       <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
         <motion.div
           className="flex justify-start"
@@ -92,10 +93,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
           animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          {/* Glass Card - No white background, just blur with text visibility */}
           <motion.div className="max-w-4xl text-left">
+            
             <motion.h1
-              className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
+              className="glass-title text-4xl md:text-6xl font-bold text-primary mb-6 drop-shadow-lg"
               initial={{ scale: 0.9 }}
               animate={isInView ? { scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -103,33 +104,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
               {country?.heroHeadline || "Empowering Digital Innovation"}
             </motion.h1>
 
-            <motion.div
-              className="space-y-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <p className="text-white/95 text-base md:text-xl leading-relaxed drop-shadow-md">
-                {country?.heroSubheadline ||
-                  "Transform your business with cutting-edge technology solutions."}
-              </p>
-              
-              <p className="text-white/90 text-base md:text-lg leading-relaxed drop-shadow-md">
-                Empowering businesses with innovative software, web, and digital
-                transformation solutions tailored for growth and success.
-              </p>
-              
-              <p className="text-white/90 text-base md:text-lg leading-relaxed drop-shadow-md">
-                Our team combines technology, creativity, and strategy to deliver
-                scalable solutions that drive measurable results.
-              </p>
-              
-              <p className="text-white/90 text-base md:text-lg leading-relaxed drop-shadow-md">
-                From startups to enterprises, we help organizations streamline
-                operations, enhance customer experiences, and stay ahead of the
-                competition.
-              </p>
-            </motion.div>
+         <motion.div
+  className="space-y-4"
+  initial={{ opacity: 0, y: 20 }}
+  animate={isInView ? { opacity: 1, y: 0 } : {}}
+  transition={{ duration: 0.6, delay: 0.5 }}
+>
+  <p className="glass-text text-black text-2xl leading-relaxed text-justify">
+    {country?.heroSubheadline ||
+      "Transform your business with cutting-edge technology solutions."} 
+    Empowering businesses with innovative software, web, and digital transformation solutions tailored for growth and success. Our team combines technology, creativity, and strategy to deliver scalable solutions that drive measurable results. From startups to enterprises, we help organizations streamline operations, enhance customer experiences, and stay ahead of the competition. We leverage the latest technologies including AI, cloud computing, and responsive design to future-proof your business. Partner with us to unlock new opportunities, reduce operational costs, and accelerate your digital journey with confidence.
+  </p>
+</motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -146,7 +132,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
 
               <Link
                 href={`/contact-us?location=${location}`}
-                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 transform hover:scale-105 inline-block text-center border border-white/30 shadow-lg"
+                className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-black font-semibold py-3 px-8 rounded-md transition-all duration-300 transform hover:scale-105 inline-block text-center border border-white/30 shadow-lg"
               >
                 Discuss Your Project
               </Link>
@@ -154,6 +140,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Glass Effect Styles for Text */}
+      <style jsx>{`
+        .glass-title {
+          text-shadow: 
+            0 2px 6px rgba(0, 0, 0, 0.25),
+            0 4px 12px rgba(0, 0, 0, 0.15),
+            0 0 15px rgba(255, 255, 255, 0.6);
+        }
+
+        .glass-text {
+          text-shadow: 
+            0 1px 3px rgba(255, 255, 255, 0.9),
+            0 2px 6px rgba(0, 0, 0, 0.2),
+            0 4px 12px rgba(0, 0, 0, 0.15);
+          -webkit-text-stroke: 0.5px rgba(255,255,255,0.3);
+        }
+      `}</style>
     </motion.section>
   );
 };
