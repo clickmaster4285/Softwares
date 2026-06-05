@@ -59,7 +59,7 @@ export function ServiceDetailFeatures() {
           <h2 className="max-w-3xl text-4xl font-medium text-slate-900 sm:text-5xl lg:text-6xl">
             Removing roadblocks to delivery
           </h2>
-          <p className="max-w-xl text-base text-slate-700 md:text-lg">
+          <p className="max-w-xl text-base text-slate-900 md:text-lg">
             We remove the noise, reduce delivery risk, and keep your software roadmap focused on
             outcomes that create measurable business value.
           </p>
@@ -72,7 +72,7 @@ export function ServiceDetailFeatures() {
               <Marquee className="[--duration:45s] [--gap:0.75rem]" repeat={4}>
                 {m1.map((q) => (
                   <Badge
-                    className="rounded-full border-orange-200 bg-orange-100 px-3 py-1 text-slate-700"
+                    className="rounded-full border-orange-200 bg-orange-100 px-3 py-1 text-slate-900"
                     key={q}
                     variant="outline"
                   >
@@ -84,7 +84,7 @@ export function ServiceDetailFeatures() {
               <Marquee className="[--duration:50s] [--gap:0.75rem]" repeat={4} reverse>
                 {m2.map((q) => (
                   <Badge
-                    className="rounded-full border-orange-200 bg-orange-100 px-3 py-1 text-slate-700"
+                    className="rounded-full border-orange-200 bg-orange-100 px-3 py-1 text-slate-900"
                     key={q}
                     variant="outline"
                   >
@@ -96,7 +96,7 @@ export function ServiceDetailFeatures() {
               <Marquee className="[--duration:42s] [--gap:0.75rem]" repeat={4}>
                 {m3.map((q) => (
                   <Badge
-                    className="rounded-full border-orange-200 bg-orange-100 px-3 py-1 text-slate-700"
+                    className="rounded-full border-orange-200 bg-orange-100 px-3 py-1 text-slate-900"
                     key={q}
                     variant="outline"
                   >

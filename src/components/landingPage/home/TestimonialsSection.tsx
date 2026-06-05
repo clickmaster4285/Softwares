@@ -219,7 +219,7 @@ export function TestimonialsSection() {
                 ))}
               </div>
 
-              <p className="text-2xl leading-relaxed text-slate-700">
+              <p className="text-2xl leading-relaxed text-slate-900">
                 &ldquo;{main.content}&rdquo;
               </p>
 

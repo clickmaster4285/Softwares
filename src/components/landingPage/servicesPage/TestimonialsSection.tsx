@@ -160,7 +160,7 @@ export function TestimonialsSection({
                       {/* Large Quote Icon */}
                       <Quote className="h-8 w-8 sm:h-10 sm:w-10 text-orange-200 mb-4 sm:mb-6" />
 
-                      <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-700 flex-1">
+                      <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-900 flex-1">
                         “{testimonial.content}”
                       </p>
 
@@ -214,7 +214,7 @@ export function TestimonialsSection({
                   onClick={handlePrevious}
                   className="p-2 sm:p-3 rounded-full bg-white border border-slate-200 shadow-md hover:shadow-xl hover:border-orange-200 transition-all duration-300"
                 >
-                  <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
+                  <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-slate-900" />
                 </button>
                 
                 {/* Dots */}
@@ -240,7 +240,7 @@ export function TestimonialsSection({
                   onClick={handleNext}
                   className="p-2 sm:p-3 rounded-full bg-white border border-slate-200 shadow-md hover:shadow-xl hover:border-orange-200 transition-all duration-300"
                 >
-                  <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
+                  <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-slate-900" />
                 </button>
               </div>
               
