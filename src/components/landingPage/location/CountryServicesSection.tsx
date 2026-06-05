@@ -295,7 +295,7 @@ export default function CountryServicesSection({
                 from={{ opacity: 0, x: 60 }}
                 to={{ opacity: 1, x: 0 }}
                 threshold={0.2}
-              />
+              /> 
             </div>
             <span className="h-[2px] w-8 rounded-full bg-primary" />
           </div>
