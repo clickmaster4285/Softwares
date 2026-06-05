@@ -350,7 +350,7 @@ export default function CaseStudiesClient({ initialCaseStudies }: CaseStudiesCli
                       )}
                       {/* Badges */}
                       <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-                        <span className="rounded-md bg-white/95 px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 shadow-sm backdrop-blur">
+                        <span className="rounded-md bg-white/95 px-2.5 py-0.5 text-[11px] font-semibold text-slate-900 shadow-sm backdrop-blur">
                           {category}
                         </span>
                         <span className={`rounded-md px-2.5 py-0.5 text-[11px] font-semibold ${statusClasses(cs.status)}`}>

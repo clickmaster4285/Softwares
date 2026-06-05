@@ -12,43 +12,35 @@ interface Pin {
 
 // More targeted distribution
 const generateRandomPins = (count: number): Pin[] => {
-  const pins: Pin[] = [];
   const animationTypes: Pin['animationType'][] = ['drop', 'bounce', 'fade', 'rotate', 'wave'];
+const fixedPositions = [
+    { x: 22, y: 28 }, // Canada (moved right + down)
+    { x: 55, y: 18 }, // Central Asia (moved left + down)
+    { x: 20, y: 62 }, // South America (moved right + up)
+    { x: 78, y: 55 }, // Australia (moved left)
+  { x: 65, y: 50 }, // Southeast Asia (moved left)
+    { x: 72, y: 38 }, // Above Southeast Asia
+  { x: 60, y: 35 },
+  { x: 66, y: 25 },
+      
+   { x: 80, y: 38 }, // Next to pin 6 (right)
+  { x: 68, y: 35 },
+    
+   { x: 88, y: 38 }, // Right next to pin 9
+    { x: 76, y: 35 },
 
-  for (let i = 0; i < count; i++) {
-    // Distribution: 40% right-top, 30% right-middle, 20% left-top, 10% other
-    let x: number, y: number;
-    const area = Math.random();
-    
-    if (area < 0.4) {
-      // Right-top corner
-      x = 70 + Math.random() * 30; // 70-100%
-      y = Math.random() * 40;       // 0-40%
-    } else if (area < 0.7) {
-      // Right-middle
-      x = 70 + Math.random() * 30; // 70-100%
-      y = 40 + Math.random() * 40; // 40-80%
-    } else if (area < 0.9) {
-      // Left-top
-      x = Math.random() * 30;       // 0-30%
-      y = Math.random() * 40;       // 0-40%
-    } else {
-      // Random anywhere
-      x = Math.random() * 100;
-      y = Math.random() * 100;
-    }
-    
-    pins.push({
-      id: i,
-      x: x,
-      y: y,
-      delay: Math.random() * 0.5,
-      animationType: animationTypes[Math.floor(Math.random() * animationTypes.length)],
-    });
-  }
-  return pins;
+  { x: 12, y: 28 }, 
+     { x: 22, y: 38 },
+  ];
+
+  return fixedPositions.slice(0, count).map((pos, i) => ({
+    id: i,
+    x: pos.x,
+    y: pos.y,
+    delay: i * 0.2,
+    animationType: animationTypes[i % animationTypes.length],
+  }));
 };
-
 const AnimatedPins: React.FC = () => {
   const [visiblePins, setVisiblePins] = useState<Pin[]>([]);
   const [glowPins, setGlowPins] = useState<Set<number>>(new Set());

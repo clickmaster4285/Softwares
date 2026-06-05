@@ -75,7 +75,7 @@ const serviceData = servicesByCountry[country.name] || [];
   const serviceSlugMap = buildCountryServiceSlugMap(country.name, location);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen ">
       {/* HERO */}
       <HeroSection country={country} location={location} />
       <StatsCard country={country}  />
@@ -91,18 +91,19 @@ const serviceData = servicesByCountry[country.name] || [];
         countryName={country.name}
         location={location}
         servicesByCategory={country.servicesByCategory}
+        
         serviceSlugMap={serviceSlugMap}
       />
 
 
       {/* OTHER SECTIONS */}
       <TrustedClientsSection />
-      <CTASectionImage />
+ 
       <SolutionsPage />
 
       <WhyChooseUs />
 
-      <ProjectCTAHero
+      {/* <ProjectCTAHero
         variant="combined"
         badge="Build Your Project"
         title="Ready to Transform Your Business? Let's Build Something Amazing Together"
@@ -119,7 +120,7 @@ const serviceData = servicesByCountry[country.name] || [];
           { title: "24/7", subtitle: "Support" },
           { title: "50+", subtitle: "Happy Clients" },
         ]}
-      />
+      /> */}
 
       <div className="px-20  ">
         <PricingSection
@@ -131,24 +132,7 @@ const serviceData = servicesByCountry[country.name] || [];
 
 
 
-      {/* 🔥 PRICING (ONLY FROM country-services.ts) */}
-      {countryPricingTiers.length > 0 && (
-        <ProjectCTAHero
-          variant="combined"
-          badge="Pricing Plans"
-          title="Flexible Pricing for Every Stage"
-          description="Choose a plan that fits your business needs"
-          location={location}
-          sliderCards={countryPricingTiers.map((tier) => ({
-            title: tier.investment,
-            subtitle: tier.type,
-          }))}
-          buttons={[
-            { text: "Book Free Consultation", href: `/contact-us?location=${location}`, variant: "primary" },
-            { text: "Call Us Now", href: "tel:+1234567890", variant: "outline" },
-          ]}
-        />
-      )}
+   
 
 
 
@@ -167,15 +151,18 @@ const serviceData = servicesByCountry[country.name] || [];
 />
      
 
-     <div className="lg:-mb-12"> <ChecklistCTAHero
+     {/* <div className="lg:-mb-12"> <ChecklistCTAHero
         title={`Looking for a reliable software development company in ${country.name}?`}
         description="Let's build something amazing together"
         buttons={[
           { text: "Start Your Project", href: `/contact-us?location=${location}`, variant: "primary" },
           { text: "Book Free Consultation", href: "#services", variant: "outline" },
         ]}
-      /></div>
+      /></div> */}
 
+
+     <CTASectionImage />
+      
     </div>
   );
 }

@@ -34,7 +34,7 @@ export default async function HireUsPage({ params }: Props) {
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{page.title}</h1>
       <p className="mt-4 text-base text-slate-900">{page.lead}</p>
-      <ul className="mt-6 list-disc space-y-2 pl-6 text-slate-700">
+      <ul className="mt-6 list-disc space-y-2 pl-6 text-slate-900">
         {page.highlights.map((item) => (
           <li key={item}>{item}</li>
         ))}
@@ -42,7 +42,7 @@ export default async function HireUsPage({ params }: Props) {
       {page.sections.map((section) => (
         <section key={section.heading} className="mt-10">
           <h2 className="text-xl font-semibold text-slate-900">{section.heading}</h2>
-          <p className="mt-3 text-slate-700">{section.body}</p>
+          <p className="mt-3 text-slate-900">{section.body}</p>
         </section>
       ))}
       <div className="mt-10">

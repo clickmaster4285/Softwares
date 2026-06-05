@@ -156,7 +156,7 @@ export const ParallaxProjectsContent = ({ projects }: ParallaxProjectsContentPro
       case 'planned':
         return 'bg-blue-50 text-blue-700 border-blue-100';
       default:
-        return 'bg-slate-50 text-slate-700 border-slate-100';
+        return 'bg-slate-50 text-slate-900 border-slate-100';
     }
   };
 

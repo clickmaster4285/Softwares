@@ -55,7 +55,7 @@ export default async function FaqDetailPage({ params }: Props) {
       <h2 className="sr-only">Frequently asked questions</h2>
 
       {faqs.length === 0 ? (
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 text-slate-700">
+        <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 text-slate-900">
           FAQs for this service are coming soon.
         </section>
       ) : (
@@ -66,7 +66,7 @@ export default async function FaqDetailPage({ params }: Props) {
               className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
             >
               <h2 className="text-lg font-semibold text-slate-900">{faq.question}</h2>
-              <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-700">
+              <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-900">
                 {faq.answer}
               </p>
             </article>

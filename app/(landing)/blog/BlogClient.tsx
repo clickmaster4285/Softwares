@@ -432,7 +432,7 @@ export default function BlogClient({ initialPosts }: BlogClientProps) {
                         className={`h-8 min-w-8 rounded border px-2 text-sm ${
                           n === safePage
                             ? 'border-slate-900 bg-slate-900 text-white'
-                            : 'border-slate-300 bg-white text-slate-700'
+                            : 'border-slate-300 bg-white text-slate-900'
                         }`}
                       >
                         {n}

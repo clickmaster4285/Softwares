@@ -36,7 +36,7 @@ export default function BlogCta() {
             <path d="M10 1L12.5 7L19 7.5L14 12L15.5 19L10 15L4.5 19L6 12L1 7.5L7.5 7L10 1Z" fill="#FBBF24" stroke="#FBBF24"/>
           </svg>
         </div>
-        <span className="tag-sticky-text text-sm font-medium text-slate-700">| 4.9</span>
+        <span className="tag-sticky-text text-sm font-medium text-slate-900">| 4.9</span>
       </div>
       <div className="sticky-content-wrap mb-4">
         <div className="sticky-title text-xl font-semibold text-slate-900 leading-tight">

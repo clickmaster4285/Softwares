@@ -201,7 +201,7 @@ export function IndustryCard3D({
 
         {/* Industry name with 3D effect */}
         <h3
-          className="mt-6 text-center text-sm font-semibold text-slate-700 leading-snug transition-all duration-300"
+          className="mt-6 text-center text-sm font-semibold text-slate-900 leading-snug transition-all duration-300"
           style={{
             transform: `translateZ(${isHovered ? "25px" : "10px"})`,
             color: isHovered ? "#1e293b" : "#475569",
