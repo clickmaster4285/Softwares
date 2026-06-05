@@ -67,11 +67,11 @@ export function SectionContent({ sections, serviceName }: SectionContentProps) {
             </div>
 
             {/* Left - Right Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+    <div className={`grid grid-cols-1 gap-8 lg:gap-12 ${hasItems ? 'lg:grid-cols-2' : ''}`}>
               {/* Left Column - Content */}
               <div className="space-y-6">
                 <p 
-                  className="text-xl leading-relaxed text-slate-900"
+                  className="text-xl leading-relaxed text-slate-900 text-justify"
                   dangerouslySetInnerHTML={{ 
                     __html: makeBoldServiceName(section.body, serviceName) 
                   }}
