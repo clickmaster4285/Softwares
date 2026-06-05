@@ -310,32 +310,54 @@ export default function CountryServicesSection({
           }}
           className="mt-16"
         >
-          {/* Tab triggers */}
-          <div className="relative mx-auto max-w-7xl">
-            <div className="absolute inset-0 -z-10 rounded-full bg-card/40 backdrop-blur-xl p-2" />
-            <Tabs.List className="flex flex-wrap items-center justify-center gap-2 rounded-full border border-border/60 bg-card/60 p-4 shadow-[var(--shadow-card)]">
-              {tabs.map((tab) => {
-                const Icon = tab.Icon;
-                return (
-                  <Tabs.Trigger
-                    key={tab.value}
-                    value={tab.value}
-                    className="
-                      cs-trigger group inline-flex items-center gap-2 rounded-full
-                      px-4 py-2.5 text-md font-medium
-                      text-muted-foreground transition-all duration-300
-                      hover:text-foreground
-                      data-[selected]:bg-primary/10
-                      data-[selected]:text-primary
-                    "
-                  >
-                    <Icon className="cs-trigger-icon h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
-                    <span className="whitespace-nowrap">{tab.label}</span>
-                  </Tabs.Trigger>
-                );
-              })}
-            </Tabs.List>
-          </div>
+         
+      
+
+{/* Tab triggers */}
+<div className="relative mx-auto w-full max-w-7xl px-4">
+  <div className="absolute inset-0 -z-10 rounded-[32px] bg-card/40 backdrop-blur-xl" />
+
+  <Tabs.List
+    className="
+      flex flex-wrap justify-center gap-2
+      rounded-[32px]
+      border border-border/60
+      bg-card/60
+      p-2 sm:p-3 md:p-4
+      shadow-[var(--shadow-card)]
+
+      max-h-[240px] overflow-y-auto
+      md:max-h-none md:overflow-visible
+    "
+  >
+    {tabs.map((tab) => {
+      const Icon = tab.Icon;
+
+      return (
+        <Tabs.Trigger
+          key={tab.value}
+          value={tab.value}
+          className="
+            cs-trigger group inline-flex items-center gap-2 rounded-full
+            px-3 py-2 text-sm
+            sm:px-4 sm:py-2.5 sm:text-base
+            font-medium
+            text-muted-foreground
+            transition-all duration-300
+            hover:text-foreground
+            data-[selected]:bg-primary/10
+            data-[selected]:text-primary
+          "
+        >
+          <Icon className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
+          <span className="whitespace-nowrap">
+            {tab.label}
+          </span>
+        </Tabs.Trigger>
+      );
+    })}
+  </Tabs.List>
+</div>
 
           {/* Tab panels */}
           {tabs.map((tab) => {
