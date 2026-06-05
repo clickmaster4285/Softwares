@@ -65,7 +65,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
   return (
     <motion.section
       ref={heroRef}
-      className="relative h-screen flex items-center overflow-hidden"
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 0.8 }}
@@ -73,19 +73,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
       {/* Background Color */}
       <div className="absolute inset-0 z-0 bg-bg-[#f5fbfb]" />
 
-       {/* Background blobs */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
-      <div className="pointer-events-none absolute top-1/2 -left-32 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[-180px] left-1/4 h-[480px] w-[480px] rounded-full bg-[#a7f3d0] opacity-20 blur-3xl" />
+      {/* Background blobs (mobile-safe: avoid negative offsets that can create extra scroll space) */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] md:top-auto md:-top-40 left-1/2 md:-translate-x-1/2 -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl hidden md:block" style={{ width: 600 }} />
+      <div className="pointer-events-none absolute top-0 right-0 h-[420px] md:h-[500px] md:-right-40 rounded-full bg-[#fdba74] opacity-25 blur-3xl hidden lg:block" style={{ width: 500 }} />
+      <div className="pointer-events-none absolute left-0 top-0 h-[420px] md:top-1/2 md:-left-32 md:-translate-y-1/2 rounded-full bg-[#93c5fd] opacity-25 blur-3xl hidden md:block" style={{ width: 550 }} />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-[380px] md:bottom-[-180px] md:left-1/4 rounded-full bg-[#a7f3d0] opacity-20 blur-3xl hidden lg:block" style={{ width: 480 }} />
 
       {/* Split Screen Content */}
-      <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+      <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 py-10 lg:py-20">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mx-auto max-w-[1600px]">
           
           {/* LEFT SIDE - Text Content */}
           <motion.div 
-            className="lg:w-1/2 w-full text-left z-20"
+            className="lg:w-1/2 w-full min-w-0 text-left z-20"
             initial={{ x: -100, opacity: 0 }}
             animate={isInView ? { x: 0, opacity: 1 } : {}}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -105,7 +105,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <p className=" text-black text-xl leading-relaxed text-justify">
+              <p className="text-black text-base sm:text-xl leading-relaxed text-left">
                 {country?.heroSubheadline ||
                   "Transform your business with cutting-edge technology solutions."} {" "}
                  Empowering businesses with innovative software, web, and digital transformation solutions tailored for growth and success. Our team combines technology, creativity, and strategy to deliver scalable solutions that drive measurable results.  From startups to enterprises, we help organizations streamline operations, enhance customer experiences, and stay ahead of the competition. We leverage the latest technologies including AI, cloud computing, and responsive design to future-proof your business. Partner with us to unlock new opportunities, reduce operational costs, and accelerate your digital journey with confidence.
@@ -175,7 +175,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
 
           {/* RIGHT SIDE - Image with Pins INSIDE the image */}
           <motion.div 
-            className="lg:w-1/2 w-full flex justify-center items-center relative"
+            className="hidden lg:flex lg:w-1/2 justify-center items-center relative"
             initial={{ x: 100, opacity: 0, rotate: 5 }}
             animate={isInView ? { x: 0, opacity: 1, rotate: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}

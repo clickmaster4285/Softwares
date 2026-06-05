@@ -155,14 +155,14 @@ export default function TrustedBySection() {
         }
       `}</style>
 
-    <section className="relative overflow-hidden  lg:px-10">
+    <section className="relative w-full overflow-x-hidden lg:px-10">
   {/* Smooth transparent → white fade from top */}
   <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-56 bg-gradient-to-b from-transparent via-white/30 via-white/70 to-white" />
 
-  <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-12">
+  <div className="relative z-10 w-full">
     
-    {/* Slider Wrapper */}
-    <div className=" space-y-4 bg-white relative left-1/2 right-1/2 w-screen -translate-x-1/2">
+    {/* Slider Wrapper — full bleed without w-screen (avoids mobile horizontal overflow) */}
+    <div className="space-y-4 bg-white w-full">
       
       {/* Row 1 */}
       <div className="relative overflow-hidden">

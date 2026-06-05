@@ -13,7 +13,7 @@ interface StatsCardProps {
 
 export const StatsCard: React.FC<StatsCardProps> = ({ country }) => {
   return (
-    <div className="relative z-30 w-full bg-foreground ">
+    <div className="relative z-30 w-full overflow-hidden bg-foreground">
 
        <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#a7f3d0] opacity-30 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#fdba74] opacity-25 blur-3xl" />
