@@ -122,7 +122,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
   return (
     <motion.section
       id="pricing"
-      className="relative scroll-mt-24 py-6 sm:py-8 md:py-12 mx-6 overflow-hidden"
+      className="relative scroll-mt-24 py-6 sm:py-8 md:py-12 px-4 sm:px-6 md:mx-auto overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -140,12 +140,12 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
       />
 
       <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-14 md:mb-16">
-        <div className="inline-flex items-center gap-2 mb-3">
-          <span className="h-[2px] w-8 rounded-full bg-primary" />
-          <div className="inline-flex items-center gap-1.5">
+        <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 mb-3 px-1">
+          <span className="hidden h-[2px] w-8 shrink-0 rounded-full bg-primary sm:block" />
+          <div className="inline-flex max-w-full items-center justify-center gap-1.5">
             <SplitText
               text={`${serviceName} Pricing`}
-              className="text-2xl md:text-3xl font-bold uppercase tracking-[0.25em] text-primary"
+              className="text-center text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-[0.1em] sm:tracking-[0.25em] text-primary"
               delay={60}
               duration={0.8}
               ease="power3.out"
@@ -155,7 +155,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
               threshold={0.2}
             />
           </div>
-          <span className="h-[2px] w-8 rounded-full bg-primary" />
+          <span className="hidden h-[2px] w-8 shrink-0 rounded-full bg-primary sm:block" />
         </div>
 
         <p className="mx-auto max-w-2xl text-base leading-7 text-slate-800 sm:text-lg">
@@ -163,7 +163,7 @@ export function PricingSection({ serviceName, pricingTiers }: PricingSectionProp
         </p>
       </div>
 
-      <div className="mt-6 mx-auto max-w-[1600px] p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
+      <div className="mt-6 mx-auto max-w-[1600px] lg:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center ">
         {pricingCardsData.map((cardData, index) => (
           <motion.div
             key={index}

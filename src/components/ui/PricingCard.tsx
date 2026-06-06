@@ -48,11 +48,11 @@ export function PricingCard({
       }
       transition={{ type: "spring", duration: 0.7 }}
       whileHover={{ scale: highlighted ? 1.04 : 1.03 }}
-      className={`relative w-full rounded-3xl border backdrop-blur-md transition-all
+      className={`relative w-full rounded-3xl border mb-6 backdrop-blur-md transition-all
         ${
           highlighted
-            ? "z-20 scale-105 border-2 border-primary/30 bg-primary/10 text-black shadow-2xl px-10 py-14"
-            : "z-10 border border-gray-200 bg-white text-black shadow-md px-8 py-10"
+            ? "z-20 max-sm:scale-100 sm:scale-105 border-2 border-primary/30 bg-primary/10 text-black shadow-2xl px-4 sm:px-8 md:px-10 py-10 sm:py-14"
+            : "z-10 border border-gray-200 bg-white text-black shadow-md px-4 sm:px-6 md:px-8 py-10"
         }`}
     >
       {highlighted && (

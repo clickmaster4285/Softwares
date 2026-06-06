@@ -75,7 +75,7 @@ const serviceData = servicesByCountry[country.name] || [];
   const serviceSlugMap = buildCountryServiceSlugMap(country.name, location);
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen w-full overflow-x-clip">
       {/* HERO */}
       <HeroSection country={country} location={location} />
       <StatsCard country={country}  />
@@ -122,11 +122,12 @@ const serviceData = servicesByCountry[country.name] || [];
         ]}
       /> */}
 
-      <div className="px-20  ">
+      <div className="px-0">
         <PricingSection
-  serviceName={`Software Development in ${country.name}`}
-  pricingTiers={countryPricingTiers}
-/></div>
+          serviceName={`Software Development in ${country.name}`}
+          pricingTiers={countryPricingTiers}
+        />
+      </div>
 
 
 
