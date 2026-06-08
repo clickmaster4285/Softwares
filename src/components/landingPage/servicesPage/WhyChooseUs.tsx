@@ -148,16 +148,16 @@ const THEMES: Theme[] = [
 // Row 2: [span-1 row-2 (tall)] [span-1] [span-2]
 // Row 3: (tall continues) [span-1] [span-1] [span-1]
 const SPANS = [
-  "md:col-span-2 md:row-span-1",
-  "md:col-span-1 md:row-span-1",
-  "md:col-span-1 md:row-span-1",
-  "md:col-span-1 md:row-span-2", // tall
-  "md:col-span-1 md:row-span-1",
-  "md:col-span-2 md:row-span-1",
-  "md:col-span-1 md:row-span-1",
-  "md:col-span-1 md:row-span-1",
+  "md:col-span-2 md:row-span-1", // 1
+  "md:col-span-1 md:row-span-1", // 2
+  "md:col-span-1 md:row-span-1", // 3
+  "md:col-span-1 md:row-span-2", // 4 (tall)
+  "md:col-span-1 md:row-span-1", // 5
+  "md:col-span-2 md:row-span-1", // 6
+  "md:col-span-1 md:row-span-1", // 7
+  "md:col-span-1 md:row-span-1", // 8
+  "md:col-span-1 md:row-span-1", // 9 ← changed from col-span-2 to col-span-1
 ];
-
 export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
   if (!differentiators || differentiators.length === 0) return null;
 
@@ -229,10 +229,10 @@ export const WhyChooseUs = ({ slug, differentiators }: WhyChooseUsProps) => {
      
 
         {/* Bento Grid */}
-        <div className="grid auto-rows-[350px] grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
+     <div className="grid auto-rows-[350px] grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4 md:[grid-auto-flow:dense]">
           {differentiators.map((diff, idx) => {
             const theme = THEMES[idx % THEMES.length];
-            const span = SPANS[idx % SPANS.length];
+       const span = SPANS[idx] || "md:col-span-1 md:row-span-1";
             const Icon = theme.Icon;
             const isTall = span.includes("row-span-2");
             const isWide = span.includes("col-span-2");
