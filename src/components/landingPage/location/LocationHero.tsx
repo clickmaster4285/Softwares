@@ -105,7 +105,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ country, location }) =
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <p className="text-black text-base sm:text-xl leading-relaxed text-left">
+              <p className="text-black text-base ext-justify sm:text-xl leading-relaxed text-left">
                 {country?.heroSubheadline ||
                   "Transform your business with cutting-edge technology solutions."} {" "}
                  Empowering businesses with innovative software, web, and digital transformation solutions tailored for growth and success. Our team combines technology, creativity, and strategy to deliver scalable solutions that drive measurable results.  From startups to enterprises, we help organizations streamline operations, enhance customer experiences, and stay ahead of the competition. We leverage the latest technologies including AI, cloud computing, and responsive design to future-proof your business. Partner with us to unlock new opportunities, reduce operational costs, and accelerate your digital journey with confidence.

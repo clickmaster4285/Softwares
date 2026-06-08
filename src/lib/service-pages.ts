@@ -402,6 +402,10 @@ const customSoftwareDevelopmentOverride: ServicePageContent = {
     { feature: 'B2B Industry Depth', description: 'We\'ve shipped software for manufacturing, healthcare, logistics, fintech, and real estate industries with complex data and compliance requirements.' },
     { feature: 'Timezone-Flexible', description: 'We serve clients across the USA, UK, Europe, Canada, and Australia with overlap hours and async-first communication protocols.' },
     { feature: 'Security Built-In', description: 'OWASP ASVS compliance, GDPR-aligned data handling, penetration testing, and application security reviews built into every project.' },
+    {
+  feature: 'Future-Proof Technology',
+  description: 'We build with modern, battle-tested technologies and scalable architectures that reduce technical debt and support long-term business growth.'
+},
  ],
  processPhases: [
     { phase: 'Phase 1', title: 'Discovery & Technical Requirements', timeline: 'Week 1-2', text: 'We run structured discovery sessions with your stakeholders to document functional requirements, technical constraints, integration dependencies, and success metrics. Output: a detailed Technical Requirements Document (TRD) and project scope.' },
@@ -2221,13 +2225,44 @@ const desktopApplicationDevelopmentOverride: ServicePageContent = {
     { title: 'Cross-Platform with Flutter', description: 'Building desktop targets from a shared Flutter/Dart codebase. Ideal for organizations wanting one team across mobile and desktop platforms.' },
     { title: 'Desktop Modernization', description: 'Migrating legacy VB6, WinForms, or MFC apps to modern .NET or Tauri. Incremental migration paths to maintain business continuity.' },
  ],
- differentiators: [
-    { feature: 'Framework Selection', description: 'Right-fit framework for your constraints | Basic: One-size-fits-all approach' },
-    { feature: 'OS Integration', description: 'Deep hardware, tray & shortcut access | Basic: Limited web-wrapped shells' },
-    { feature: 'Distribution Expertise', description: 'EV Code Signing & SCCM/Intune ready | None: Manual installs only' },
-    { feature: 'Auto-Update Infra', description: 'Differential silent background updates | None: Manual manual updates' },
-    { feature: 'Security Standards', description: 'ContextIsolation & Rust-level safety | Basic: Insecure IPC patterns' },
- ],
+differentiators: [
+  { 
+    feature: 'Framework Selection', 
+    description: 'We evaluate Electron, Tauri, Wails, and Neutralino against your constraints team skills, bundle size, and maintainability then recommend the right fit rather than defaulting to the most popular option.' 
+  },
+  { 
+    feature: 'OS Integration', 
+    description: 'We tap native OS capabilities beyond browser APIs: system tray, global hotkeys, file associations, and hardware access things web-wrapped shells simply cannot deliver reliably.' 
+  },
+  { 
+    feature: 'Distribution Expertise', 
+    description: 'We handle EV code signing for Windows SmartScreen, notarization for macOS Gatekeeper, and SCCM/Intune packaging so enterprise IT can deploy silently across thousands of machines.' 
+  },
+  { 
+    feature: 'Auto-Update Infra', 
+    description: 'We build differential update pipelines that download only changed bytes, verify signatures before applying, and install silently in the background no update prompts, ever.' 
+  },
+  { 
+    feature: 'Security Standards', 
+    description: 'We enforce context isolation, disable Node integration in renderers, sandbox IPC channels, and shift sensitive logic into Rust or Go native modules where the attack surface demands it.' 
+  },
+  { 
+    feature: 'Performance Tuning', 
+    description: 'Cold launch under two seconds, lean idle RAM, and smooth 60fps interactions are treated as hard requirements from day one not post-launch afterthoughts.' 
+  },
+  { 
+    feature: 'Cross-Platform Builds', 
+    description: 'We configure per-platform CI build matrices, handle font and DPI differences, and test on real machines not just VMs so it truly runs well on macOS, Windows, and Linux.' 
+  },
+  { 
+    feature: 'Crash Reporting', 
+    description: 'We instrument native crash dump collection alongside Sentry so you get full stack traces, OS version, and hardware context the moment something goes wrong in production.' 
+  },
+  { 
+    feature: 'Offline-First Design', 
+    description: 'We architect local-first data layers with deterministic conflict resolution and background sync queues so your app feels instant whether the user is online or on a plane.' 
+  },
+],
  processPhases: [
     { phase: 'Phase 1', title: 'Framework Selection', timeline: 'Week 1', text: 'Validating desktop vs web, platform targets, and OS capability audit to drive the optimal framework choice.' },
     { phase: 'Phase 2', title: 'UI Architecture', timeline: 'Week 2-4', text: 'Designing IPC contracts, main/renderer boundaries, and pixel-perfect OS-compliant interfaces (Fluent/HIG).' },
@@ -2352,13 +2387,17 @@ const apiDevelopmentIntegrationOverride: ServicePageContent = {
     { title: 'API Security Engineering', description: 'OAuth 2.0, JWT, and mTLS implementation. Scope-based authorization and OWASP API Security Top 10 hardening.' },
     { title: 'API Migration & Versioning', description: 'Structured modernization paths with URL versioning, backward compatibility analysis, and partner migration support.' },
  ],
- differentiators: [
-    { feature: 'Versioning Strategy', description: '12-month deprecation timeline | Basic: Breaking changes without notice' },
-    { feature: 'Error Standards', description: 'RFC 7807 Problem Details | Basic: Inconsistent error envelopes' },
-    { feature: 'Pagination Design', description: 'Cursor-based for large sets | Basic: Simple offset only' },
-    { feature: 'Security Depth', description: 'mTLS & OAuth 2.0 Flows | Basic: API keys in query strings' },
-    { feature: 'Spec-First Design', description: 'OpenAPI before code | Basic: Docs as an afterthought' },
- ],
+differentiators: [
+  { feature: 'Versioning Strategy', description: 'Structured 12-month deprecation timelines, never silent breaking changes.' },
+  { feature: 'Error Standards', description: 'RFC 7807 Problem Details with consistent, machine-readable error envelopes.' },
+  { feature: 'Pagination Design', description: 'Cursor-based pagination for large datasets, offset where appropriate.' },
+  { feature: 'Security Depth', description: 'mTLS, OAuth 2.0 flows  never API keys dangling in query strings.' },
+  { feature: 'Spec-First Design', description: 'OpenAPI contract written before a single line of code is touched.' },
+  { feature: 'Rate Limiting', description: 'Token-bucket throttling with Retry-After headers baked in by default.' },
+  { feature: 'Idempotency', description: 'Idempotency keys on all mutating endpoints  safe to retry, always.' },
+  { feature: 'Observability', description: 'Structured logs, trace IDs, and latency histograms on every route.' },
+  { feature: 'Backward Compatibility', description: 'Additive-only changes guarded by automated contract-breaking CI checks.' },
+],
  processPhases: [
     { phase: 'Phase 1', title: 'API Strategy', timeline: 'Week 1', text: 'Defining consumers, data requirements, security patterns, and SLA targets (latency/availability).' },
     { phase: 'Phase 2', title: 'Schema-First Design', timeline: 'Week 1-2', text: 'Full OpenAPI 3.0 contract design covering all endpoints, request/response models, and error catalogs.' },
@@ -2453,13 +2492,17 @@ const backendDevelopmentOverride: ServicePageContent = {
     { title: 'Background Job Processing', description: 'BullMQ or Celery for async tasks. Priority queues, exponential backoff retries, and dead letter queue management.' },
     { title: 'Database Design & Optimization', description: 'PostgreSQL normalized schemas, index strategy (GIN/B-tree), connection pooling (PgBouncer), and Redis caching layers.' },
  ],
- differentiators: [
-    { feature: 'Error Standards', description: 'RFC 7807 Problem Details | Basic: Inconsistent error envelopes' },
-    { feature: 'Security Depth', description: 'RS256 JWT & Refresh Rotation | Basic: Long-lived HS256 tokens' },
-    { feature: 'Performance', description: 'Fastify & PgBouncer | Basic: Express with connection leaks' },
-    { feature: 'Validation', description: 'Real PostgreSQL in tests | Basic: Mocking databases in CI' },
-    { feature: 'Transparency', description: 'AWS costs at provider rates | Basic: Markup on infra spend' },
- ],
+differentiators: [
+  { feature: 'Error Standards', description: 'RFC 7807 Problem Details with consistent, machine-readable error envelopes.' },
+  { feature: 'Security Depth', description: 'RS256 JWT with refresh rotation no long-lived insecure HS256 tokens.' },
+  { feature: 'Performance', description: 'Fastify and PgBouncer keep throughput high and connections leak-free.' },
+  { feature: 'Validation', description: 'Real PostgreSQL in CI catches what mocked databases silently let through.' },
+  { feature: 'Transparency', description: 'AWS costs passed at provider rates zero markup on your infra spend.' },
+  { feature: 'Schema Design', description: 'Normalized schemas with indexed foreign keys, not ad-hoc JSON blobs.' },
+  { feature: 'Migration Safety', description: 'Every schema change is versioned, reversible, and tested before deploy.' },
+  { feature: 'Rate Limiting', description: 'Token-bucket throttling with Retry-After headers baked in by default.' },
+  { feature: 'Observability', description: 'Structured logs, trace IDs, and latency histograms on every endpoint.' },
+],
  processPhases: [
     { phase: 'Phase 1', title: 'Architecture Design', timeline: 'Week 1', text: 'Defining resource models, auth flows, and data schemas in a comprehensive Backend Architecture Document.' },
     { phase: 'Phase 2', title: 'Spec-First Contract', timeline: 'Week 1-2', text: 'Full OpenAPI 3.0 specification covering endpoints, error catalogs, and rate limiting tiers before code.' },
@@ -2545,13 +2588,17 @@ const frontendDevelopmentOverride: ServicePageContent = {
     { title: 'Frontend Accessibility', description: 'Legal compliance with WCAG 2.1 AA. axe-core integrated into CI and manual screen reader testing for inclusive B2B products.' },
     { title: 'Modernization & Migration', description: 'Upgrading legacy React apps. CRA to Vite, Redux to Zustand, and JavaScript to TypeScript strict mode migrations without disrupting ops.' },
  ],
- differentiators: [
-    { feature: 'Performance Enforced', description: 'Lighthouse 90+ CI gate | Basic: Post-launch aspiration' },
-    { feature: 'Accessibility Debt', description: 'WCAG 2.1 AA by default | Basic: Retrofitted after audit' },
-    { feature: 'Type Safety', description: 'TS Strict (Zero any) | Basic: any types everywhere' },
-    { feature: 'Visual Integrity', description: 'Chromatic Regression | Basic: Manual visual QA only' },
-    { feature: 'Architecture', description: 'Server Components First | Basic: Client-side waterfalls' },
- ],
+differentiators: [
+  { feature: 'Performance Enforced', description: 'Lighthouse 90+ CI gate blocks every merge not a post-launch wish.' },
+  { feature: 'Accessibility', description: 'WCAG 2.1 AA built in from component one, never retrofitted after audit.' },
+  { feature: 'Type Safety', description: 'TypeScript strict mode with zero any caught at compile time, not runtime.' },
+  { feature: 'Visual Integrity', description: 'Chromatic snapshot diffing catches regressions before they reach users.' },
+  { feature: 'Architecture', description: 'Server Components first eliminates client-side waterfalls by default.' },
+  { feature: 'Bundle Discipline', description: 'Code-split, tree-shaken, and analyzed on every build no bloat ships.' },
+  { feature: 'State Management', description: 'Server state via React Query, UI state local no unnecessary global stores.' },
+  { feature: 'Design Fidelity', description: 'Pixel-perfect implementation reviewed against Figma before every release.' },
+  { feature: 'Error Boundaries', description: 'Granular error boundaries isolate failures so one crash never kills the page.' },
+],
  processPhases: [
     { phase: 'Phase 1', title: 'Frontend Architecture', timeline: 'Week 1', text: 'Selecting framework (Next.js/Vite), rendering strategy, and state management boundaries in a formal document.' },
     { phase: 'Phase 2', title: 'Component Foundation', timeline: 'Week 1-3', text: 'Establishing the design system in Storybook, extracting tokens from Figma, and building accessible UI primitives.' },
@@ -2650,13 +2697,50 @@ const fullStackDevelopmentOverride: ServicePageContent = {
     { title: 'Full Stack API Platforms', description: 'Public-facing APIs with developer portals. Webhook management, SDK generation from OpenAPI specs, and interactive documentation for integration partners.' },
     { title: 'Real-Time Applications', description: 'Collaborative tools with WebSocket sync (Socket.io), optimistic UI updates, conflict resolution (CRDT/Yjs), and real-time presence indicators.' },
  ],
+
+ 
  differentiators: [
-    { feature: 'Engineering Cohesion', description: 'One team owns the full lifecycle | Basic: Handoff friction between vendors' },
-    { feature: 'Type Integrity', description: 'TypeScript End-to-End | Basic: API contract mismatches' },
-    { feature: 'Data Isolation', description: 'DB-Level RLS Tenancy | Basic: Risky app-level filtering' },
-    { feature: 'Validation Depth', description: 'Real DB in tests (Testcontainers) | Basic: Mocks that hide bugs' },
-    { feature: 'Infrastructure', description: 'AWS + Vercel (Best of breed) | Basic: Single-vendor compromise' },
- ],
+  {
+    feature: 'Engineering Cohesion',
+    description: 'One team owns the full lifecycle | Typical Agency: Multiple vendors and handoff friction'
+  },
+  {
+    feature: 'Type Integrity',
+    description: 'End-to-End TypeScript consistency | Typical Agency: API contract mismatches'
+  },
+  {
+    feature: 'Data Isolation',
+    description: 'Database-Level RLS security | Typical Agency: Application-only filtering'
+  },
+  {
+    feature: 'Validation Depth',
+    description: 'Real database testing with Testcontainers | Typical Agency: Mock-heavy testing'
+  },
+  {
+    feature: 'Cloud Infrastructure',
+    description: 'AWS + Vercel best-of-breed stack | Typical Agency: Single-platform limitations'
+  },
+  {
+    feature: 'Performance First',
+    description: 'Core Web Vitals optimized delivery | Typical Agency: Performance considered later'
+  },
+  {
+    feature: 'Security by Design',
+    description: 'Security embedded from day one | Typical Agency: Security added after launch'
+  },
+  {
+    feature: 'Scalable Architecture',
+    description: 'Built for future growth and integrations | Typical Agency: Rebuild required as you scale'
+  },
+  {
+    feature: 'Ongoing Partnership',
+    description: 'Continuous optimization and support | Typical Agency: Project ends at launch'
+  }
+],
+
+
+
+
  processPhases: [
     { phase: 'Phase 1', title: 'Architecture Design', timeline: 'Week 1-2', text: 'Defining user stories, data models, API contracts (REST/tRPC), and auth architecture in a comprehensive document.' },
     { phase: 'Phase 2', title: 'Foundation Setup', timeline: 'Week 2-3', text: 'Setting up Next.js, Fastify/tRPC, Prisma, AWS ECS, and CI/CD pipelines to ensure every feature is built on production-ready infra.' },
@@ -2737,13 +2821,17 @@ const microservicesArchitectureOverride: ServicePageContent = {
     { title: 'Service Observability Stack', description: 'Implementing the three pillars: distributed tracing (OpenTelemetry/Jaeger), structured logging (ELK/Loki), and Prometheus metrics.' },
     { title: 'Monolith to Microservices', description: 'Incremental extraction using the Strangler Fig pattern. Parallel operation, data migration, and traffic cutover without big-bang rewrites.' },
  ],
- differentiators: [
-    { feature: 'Decomposition Method', description: 'DDD Bounded Contexts | Basic: Randomly split endpoints' },
-    { feature: 'Migration Pattern', description: 'Strangler Fig (Incremental) | Basic: Risky Big-Bang rewrite' },
-    { feature: 'Reliability Logic', description: 'Outbox Pattern & Retries | Basic: Lost events on crash' },
-    { feature: 'Observability', description: 'Distributed Tracing (OTel) | Basic: Grep-ing through log files' },
-    { feature: 'Strategy Honesty', description: 'Advice on when NOT to use | Basic: Sell microservices to everyone' },
- ],
+differentiators: [
+  { feature: 'Decomposition Method', description: 'DDD Bounded Contexts drawn from real domain events, not arbitrary splits.' },
+  { feature: 'Migration Pattern', description: 'Strangler Fig incrementally replaces the monolith zero big-bang risk.' },
+  { feature: 'Reliability Logic', description: 'Outbox pattern with retries ensures no event is lost on pod crash.' },
+  { feature: 'Observability', description: 'OpenTelemetry traces spanning every service no more log-grepping.' },
+  { feature: 'Strategy Honesty', description: 'We advise against microservices when a modular monolith serves you better.' },
+  { feature: 'Service Contracts', description: 'AsyncAPI + OpenAPI specs defined before any service is implemented.' },
+  { feature: 'Data Isolation', description: 'Each service owns its schema no shared databases, no hidden coupling.' },
+  { feature: 'Failure Handling', description: 'Circuit breakers and bulkheads prevent one bad service cascading down.' },
+  { feature: 'Deployment Strategy', description: 'Independent CI/CD per service with canary rollouts and instant rollback.' },
+],
  processPhases: [
     { phase: 'Phase 1', title: 'Architecture Audit', timeline: 'Week 1-2', text: 'Assessing monolith coupling, team size, and DevOps maturity. Recommending microservices vs. modular monolith in a formal ADR.' },
     { phase: 'Phase 2', title: 'Domain Analysis', timeline: 'Week 2-4', text: 'Event storming workshops to define service boundaries, data ownership matrix, and synchronous vs. async communication patterns.' },
@@ -9798,7 +9886,7 @@ const databaseManagementOverride: ServicePageContent = {
 
  industryUseCases: [
 
-    { name: 'SaaS Database Management', description: 'RDS Multi-AZ for HA, PgBouncer for connection pooling (50 ECS tasks Ã— 10 connections â†’ 20 actual DB connections), weekly backup restore validation, prometheus/grafana monitoring.' },
+    { name: 'SaaS Database Management', description: 'RDS Multi-AZ for HA, PgBouncer for connection pooling (50 ECS tasks Ã 10 connections â†’ 20 actual DB connections), weekly backup restore validation, prometheus/grafana monitoring.' },
 
     { name: 'High-Write Analytics Database', description: 'Aggressive autovacuum settings for high-write tables (more frequent, higher threshold). pg_stat_statements to identify slow analytical queries. Read replica for reporting offload.' },
 
@@ -11432,7 +11520,7 @@ const complianceRiskManagementOverride: ServicePageContent = {
 
     { title: 'ISO 27001 Implementation', description: 'ISO 27001 ISMS development: scope definition (assets, processes, locations in scope for ISMS), Statement of Applicability (SoA map all 114 Annex A controls, document applicability, implementation status, exclusions), risk assessment (ISO 27001 Clause 6 identify threats/vulnerabilities, assess likelihood/impact, determine treatment: mitigate/accept/transfer/avoid), risk treatment plan (specific controls to mitigate accepted risks), ISMS documentation (policies, procedures, work instructions for each applicable Annex A control), management review (quarterly ISMS review risk register, audit findings, incidents, performance metrics).' },
 
-    { title: 'Risk Register & Risk Management', description: 'Enterprise risk management documentation: risk identification (threat landscape analysis for specific industry ransomware, data breach, insider threat, third-party vendor failure, regulatory action), risk assessment (likelihood Ã— impact matrix qualitative or quantitative scoring), risk treatment (for each significant risk: accept, mitigate, transfer (cyber insurance), or avoid), risk register (living document of all identified risks owner, treatment status, residual risk after controls, review date), risk reporting (quarterly board-level risk summary top 5 risks, treatment status, new risks identified).' },
+    { title: 'Risk Register & Risk Management', description: 'Enterprise risk management documentation: risk identification (threat landscape analysis for specific industry ransomware, data breach, insider threat, third-party vendor failure, regulatory action), risk assessment (likelihood Ã impact matrix qualitative or quantitative scoring), risk treatment (for each significant risk: accept, mitigate, transfer (cyber insurance), or avoid), risk register (living document of all identified risks owner, treatment status, residual risk after controls, review date), risk reporting (quarterly board-level risk summary top 5 risks, treatment status, new risks identified).' },
 
     { title: 'Compliance Automation (Vanta / Drata)', description: 'Reduce ongoing compliance overhead: Vanta (connects to AWS, GitHub, GSuite, Okta, Jira, Slack continuously monitors 100+ automated checks, sends alerts for failing controls, generates readiness dashboard, integrates with preferred auditors), Drata (similar integration coverage, continuous monitoring, evidence automation, SOC 2 Type II, ISO 27001, HIPAA, GDPR in one platform). ClickMasters configures platform, connects integrations, establishes failing control remediation workflow, trains internal team to maintain it.' },
 
@@ -14708,7 +14796,7 @@ const augmentedRealityDevelopmentOverride: ServicePageContent = {
 
  heading: 'Industrial AR The Business Case',
 
- body: 'For a manufacturing or field service organisation with 500 technicians, the cost of AR deployment: HoloLens 2 hardware ($3,500/device Ã— 500 = $1.75M), AR development ($25,000-50,000 per procedure), and annual support ($50,000). ROI drivers: reduced procedure time (20-25% faster with step-by-step AR overlays technicians do not consult paper manuals or separate tablets), reduced error rate (component selection errors, missing steps, safety violations each error event costs hours or equipment damage), reduced expert travel ($2,000-5,000 per remote site visit replaced by $50-100 remote assist session), and quicker new technician onboarding (new technicians reach proficiency in weeks vs months). For a high-value equipment manufacturer with high-accuracy maintenance requirements (aeronautics, energy, medical devices), the ROI case for industrial AR is often positive within the first year of deployment.',
+ body: 'For a manufacturing or field service organisation with 500 technicians, the cost of AR deployment: HoloLens 2 hardware ($3,500/device Ã 500 = $1.75M), AR development ($25,000-50,000 per procedure), and annual support ($50,000). ROI drivers: reduced procedure time (20-25% faster with step-by-step AR overlays technicians do not consult paper manuals or separate tablets), reduced error rate (component selection errors, missing steps, safety violations each error event costs hours or equipment damage), reduced expert travel ($2,000-5,000 per remote site visit replaced by $50-100 remote assist session), and quicker new technician onboarding (new technicians reach proficiency in weeks vs months). For a high-value equipment manufacturer with high-accuracy maintenance requirements (aeronautics, energy, medical devices), the ROI case for industrial AR is often positive within the first year of deployment.',
 
  items: [],
 
@@ -15768,7 +15856,7 @@ const industrialIoTOverride: ServicePageContent = {
 
     { title: 'OPC-UA Machine Connectivity', description: 'Connect PLCs and industrial controllers to the cloud: OPC-UA client (IEC 62541 vendor-neutral secure protocol connecting Siemens S7, Allen-Bradley, Beckhoff, Fanuc, Mitsubishi), Modbus TCP/RTU (legacy protocol in older equipment Ethernet or RS-485 serial), tag mapping (PLC register addresses mapped to human-readable names current_speed, target_temperature, parts_count), data buffering (store locally during WAN outage, forward on reconnect no data loss), Ignition SCADA with Kepware OPC-UA server (industrial gateway bridging proprietary protocols to OPC-UA and MQTT Sparkplug B).' },
 
-    { title: 'OEE Monitoring', description: 'Overall Equipment Effectiveness: Availability (actual run time / planned production time), Performance (actual output / rated speed output), Quality (good parts / total parts) OEE = Availability Ã— Performance Ã— Quality. World-class OEE is 85%+; global average is 65%. Downtime categorisation (touchscreen HMI operators tag reasons unplanned breakdown, planned maintenance, changeover, material shortage Pareto chart of loss causes), shift reports (automated PDF/email summary production count, OEE by machine, downtime events, target vs actual), ML production optimisation (correlate process parameters with quality outcomes, identify optimal settings).' },
+    { title: 'OEE Monitoring', description: 'Overall Equipment Effectiveness: Availability (actual run time / planned production time), Performance (actual output / rated speed output), Quality (good parts / total parts) OEE = Availability Ã Performance Ã Quality. World-class OEE is 85%+; global average is 65%. Downtime categorisation (touchscreen HMI operators tag reasons unplanned breakdown, planned maintenance, changeover, material shortage Pareto chart of loss causes), shift reports (automated PDF/email summary production count, OEE by machine, downtime events, target vs actual), ML production optimisation (correlate process parameters with quality outcomes, identify optimal settings).' },
 
     { title: 'SCADA Integration', description: 'Connect SCADA systems to cloud analytics: Ignition to AWS IoT (MQTT Sparkplug B real-time tag values from factory floor to cloud), historian integration (OSIsoft PI, Wonderware read historical process data for ML model training), alarm management (SCADA alarm data centralised frequency analysis, flooding detection, operator response time), IT/OT data bridge (join SCADA time series with ERP production orders and materials enable analytics spanning the IT/OT boundary).' },
 
@@ -15866,7 +15954,7 @@ const industrialIoTOverride: ServicePageContent = {
 
     {
 
- heading: 'OEE = Availability Ã— Performance Ã— Quality',
+ heading: 'OEE = Availability Ã Performance Ã Quality',
 
  body: 'OEE (Overall Equipment Effectiveness) = Availability x Performance x Quality. Availability: actual running time / planned production time. Performance: actual output rate / rated output rate. Quality: good parts / total parts produced. World-class OEE is typically 85%+. The global manufacturing average is approximately 65%. Low Availability indicates unplanned downtime or long changeovers. Low Performance indicates slow running or minor stoppages. Low Quality indicates process parameter issues causing defects. Real-time OEE monitoring with automatic downtime categorisation (operators select the loss reason on an HMI) makes losses visible and drives focused improvement. Moving from 65% to 75% OEE on a production line can increase output by 15% without adding equipment or headcount.',
 
@@ -15918,7 +16006,7 @@ const industrialIoTOverride: ServicePageContent = {
 
  'OPC-UA / Modbus PLC Connectivity',
 
- 'OEE Monitoring (Availability Ã— Performance Ã— Quality)',
+ 'OEE Monitoring (Availability Ã Performance Ã Quality)',
 
  'SCADA Integration (Ignition Sparkplug B)',
 
@@ -15932,7 +16020,7 @@ const industrialIoTOverride: ServicePageContent = {
 
     { name: 'OPC-UA', description: 'IEC 62541 vendor-neutral secure industrial protocol for PLC connectivity.' },
 
-    { name: 'OEE', description: 'Overall Equipment Effectiveness = Availability Ã— Performance Ã— Quality key manufacturing metric.' },
+    { name: 'OEE', description: 'Overall Equipment Effectiveness = Availability Ã Performance Ã Quality key manufacturing metric.' },
 
     { name: 'Sparkplug B', description: 'MQTT payload specification for industrial data Ignition SCADA to cloud.' },
 
