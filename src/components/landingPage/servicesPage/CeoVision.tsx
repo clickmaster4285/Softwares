@@ -11,6 +11,13 @@ interface CeoVisionProps {
 
 export function CeoVision({ slug }: CeoVisionProps) {
 
+
+const formattedSlug = slug
+  ?.split("-")
+  .map(word => word.charAt(0) + word.slice(1))
+    .join(" ");
+  
+  
   return (
     <section id="case-study" className="w-full overflow-hidden relative bg-[#f5fbfb]">
 
@@ -33,20 +40,20 @@ export function CeoVision({ slug }: CeoVisionProps) {
             </h2>
 
             {/* Subtitle */}
-            <p className="mx-auto max-w-2xl text-base md:text-lg text-gray-900 leading-relaxed px-2 sm:px-0">
-           To build scalable, intelligent{" "}
-{slug ? (
-  <Link
-    href={`/${slug}`}
-    className="text-primary font-medium hover:underline"
-  >
-    {slug} 
-  </Link>
-) : (
-  "software development"
-)}{" "}
-solutions that empower businesses to grow, automate, and transform in a digital-first world.
-            </p>
+     <p className="mx-auto max-w-2xl text-base md:text-lg text-gray-900 leading-relaxed px-2 sm:px-0">
+  To build scalable, intelligent{" "}
+  {slug ? (
+    <span
+     
+      className="font-medium "
+    >
+      {formattedSlug}
+    </span>
+  ) : (
+    "software development"
+  )}{" "}
+  solutions that empower businesses to grow, automate, and transform in a digital-first world.
+</p>
           </div>
         }
       >
