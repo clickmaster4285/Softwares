@@ -184,7 +184,7 @@ function ClientCard({
         </div>
 
         {/* Explore More: only on the active card */}
-        <div
+        {/* <div
           className={[
             "mt-5 flex items-center gap-2 text-sm font-medium transition-all duration-500 delay-100",
             isActive ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1",
@@ -192,7 +192,7 @@ function ClientCard({
         >
           <span>Explore More</span>
           <ArrowRight size={16} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -27,178 +27,107 @@ function PartnerCard({
   item: { name: string; logo: string };
 }) {
   return (
-    <div className="group flex h-32 w-56 flex-shrink-0 items-center justify-center rounded-3xl bg-white px-8 transition-all duration-300 hover:-translate-y-1 ">
+    <div className="group flex h-32 w-56 flex-shrink-0 items-center justify-center rounded-3xl bg-white px-8 transition-all duration-300 hover:-translate-y-1">
       <div className="relative h-16 w-full transition-transform duration-300 group-hover:scale-110">
         <Image
           src={item.logo}
           alt={item.name}
           fill
           className="object-contain"
+          sizes="224px"
         />
       </div>
     </div>
   );
 }
 
-// Function to create a seamless array without consecutive duplicates
-const createSeamlessArray = (arr: typeof partners, targetLength: number = 32) => {
-  const result = [];
-  let lastAddedIndex = -1;
-  
-  for (let i = 0; i < targetLength; i++) {
-    // Find available indices that aren't the same as the last added
-    const availableIndices = arr
-      .map((_, idx) => idx)
-      .filter(idx => idx !== lastAddedIndex);
-    
-    // Pick a random index from available ones
-    const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-    result.push(arr[randomIndex]);
-    lastAddedIndex = randomIndex;
-  }
-  
-  return result;
-};
-
-// Create shuffled arrays without consecutive duplicates
-const createShuffledRow = (originalArray: typeof partners) => {
-  // Create a shuffled copy
-  const shuffled = [...originalArray];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  
-  // Ensure no two identical are consecutive
-  for (let i = 0; i < shuffled.length - 1; i++) {
-    if (shuffled[i].name === shuffled[i + 1].name) {
-      // Swap with a different element
-      const swapIndex = (i + 2) % shuffled.length;
-      [shuffled[i + 1], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[i + 1]];
-    }
-  }
-  
-  return shuffled;
-};
-
 export default function TrustedBySection() {
-  // Create unique distribution for each row
-  const rowOneItems = createShuffledRow(partners);
-  const rowTwoItems = createShuffledRow(partners);
-  
-  // Extend arrays for seamless marquee (no duplicates at the join point)
-  const extendForMarquee = (arr: typeof partners) => {
-    const extended = [...arr];
-    const lastItem = arr[arr.length - 1];
-    const firstItem = arr[0];
-    
-    // Add items ensuring the join point doesn't have duplicates
-    for (let i = 1; i <= arr.length; i++) {
-      const nextItem = arr[i % arr.length];
-      if (extended[extended.length - 1].name !== nextItem.name) {
-        extended.push(nextItem);
-      } else {
-        // Find a different item to insert
-        const differentItem = arr.find(item => item.name !== extended[extended.length - 1].name);
-        if (differentItem) extended.push(differentItem);
-        else extended.push(nextItem);
-      }
-    }
-    
-    return extended;
-  };
-  
-  const rowOne = extendForMarquee(rowOneItems);
-  const rowTwo = extendForMarquee(rowTwoItems);
+  // Duplicate arrays for seamless infinite scroll
+  const rowOne = [...partners, ...partners];
+  const rowTwo = [...partners.slice().reverse(), ...partners.slice().reverse()];
 
   return (
     <>
       <style jsx>{`
         @keyframes marquee-left {
-          0% {
-            transform: translateX(0%);
+          from {
+            transform: translateX(0);
           }
-          100% {
+          to {
             transform: translateX(-50%);
           }
         }
 
         @keyframes marquee-right {
-          0% {
+          from {
             transform: translateX(-50%);
           }
-          100% {
-            transform: translateX(0%);
+          to {
+            transform: translateX(0);
           }
         }
 
         .marquee-left {
-          animation: marquee-left 60s linear infinite;
+          animation: marquee-left 45s linear infinite;
         }
 
         .marquee-right {
-          animation: marquee-right 60s linear infinite;
+          animation: marquee-right 45s linear infinite;
         }
 
         .marquee-left:hover,
         .marquee-right:hover {
           animation-play-state: paused;
         }
-        
+
         @media (max-width: 768px) {
-          .marquee-left {
-            animation-duration: 80s;
-          }
+          .marquee-left,
           .marquee-right {
-            animation-duration: 80s;
+            animation-duration: 70s;
           }
         }
       `}</style>
 
-    <section className="relative w-full overflow-x-hidden lg:px-10">
-  {/* Smooth transparent → white fade from top */}
-  <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-56 bg-gradient-to-b from-transparent via-white/30 via-white/70 to-white" />
+      <section className="relative w-full overflow-hidden lg:px-10">
+        {/* Top fade */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-56 bg-gradient-to-b from-transparent via-white/30 via-white/70 to-white" />
 
-  <div className="relative z-10 w-full">
-    
-    {/* Slider Wrapper — full bleed without w-screen (avoids mobile horizontal overflow) */}
-    <div className="space-y-4 bg-white w-full">
-      
-      {/* Row 1 */}
-      <div className="relative overflow-hidden">
-        {/* Side fade overlays */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-white" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-white to-transparent" />
+        <div className="relative z-10 w-full">
+          <div className="space-y-4 bg-white">
 
-        <div className="marquee-left flex w-max gap-4 md:gap-6">
-          {rowOne.map((item, index) => (
-            <PartnerCard
-              key={`${item.name}-${index}-${Math.random()}`}
-              item={item}
-            />
-          ))}
+            {/* Row 1 */}
+            <div className="relative overflow-hidden">
+              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-white to-transparent" />
+              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-white to-transparent" />
+
+              <div className="marquee-left flex w-max gap-4 md:gap-6">
+                {rowOne.map((item, index) => (
+                  <PartnerCard
+                    key={`row1-${item.name}-${index}`}
+                    item={item}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Row 2 */}
+            <div className="relative overflow-hidden">
+              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-white to-transparent" />
+              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-white to-transparent" />
+
+              <div className="marquee-right flex w-max gap-4 md:gap-6">
+                {rowTwo.map((item, index) => (
+                  <PartnerCard
+                    key={`row2-${item.name}-${index}`}
+                    item={item}
+                  />
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
-      </div>
-
-      {/* Row 2 */}
-      <div className="relative overflow-hidden">
-        {/* Side fade overlays */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-white to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-white to-transparent" />
-
-        <div className="marquee-right flex w-max gap-4 md:gap-6">
-          {rowTwo.map((item, index) => (
-            <PartnerCard
-              key={`${item.name}-second-${index}-${Math.random()}`}
-              item={item}
-            />
-          ))}
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
+      </section>
     </>
   );
 }
