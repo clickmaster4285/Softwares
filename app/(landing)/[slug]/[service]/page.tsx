@@ -34,6 +34,7 @@ import { TestimonialsSection } from '@/src/components/landingPage/home/Testimoni
 import { SectionContent } from '@/src/components/landingPage/servicesPage/SectionContent';
 import SolutionsPage from '@/src/components/landingPage/home/Solutions';
 import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
+import { WhoWeAre } from '@/src/components/landingPage/servicesPage/WhoWeAre';
 
 type Props = { params: Promise<{ slug: string; service: string }> };
 
@@ -73,7 +74,8 @@ function getCanonicalPath(page: ServicePageContent): string {
 export default async function ServiceByCategoryPage({ params }: Props) {
   const { slug, service } = await params;
   const page = getServicePage(service);
-
+  // console.log('Category slug:', slug);  
+  // console.log('Service slug:', service);
 
 
   if (!page) notFound();
@@ -204,7 +206,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
 
     <ServiceHero page={page} />
 
-
+    
 
         {/* Main Content with Table of Contents */}
        <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10">
@@ -219,7 +221,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
             <div className="min-w-0 w-full py-8 sm:py-10 lg:py-12">
               
 
-
+    <WhoWeAre slug={slug} />
               {/* Section Content */}
               
            <SectionContent sections={sections} serviceName={page.serviceName} />
@@ -284,7 +286,7 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               )}
               
 
-              <CeoVision slug={slug} />
+              <CeoVision slug={service} />
               
               {/* Generic Tables Section */}
               {page.tables && page.tables.map((table) => (
