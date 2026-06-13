@@ -74,6 +74,8 @@ export default async function ServiceByCategoryPage({ params }: Props) {
   const { slug, service } = await params;
   const page = getServicePage(service);
 
+
+
   if (!page) notFound();
 
   // If the category slug doesn't match, redirect to the correct one (canonical URL)
@@ -282,7 +284,8 @@ export default async function ServiceByCategoryPage({ params }: Props) {
               )}
               
 
-              <CeoVision />
+              <CeoVision slug={slug} />
+              
               {/* Generic Tables Section */}
               {page.tables && page.tables.map((table) => (
                 <section key={table.title} id={slugify(table.title)} className="scroll-mt-24 pt-16">
