@@ -19,11 +19,13 @@ import {
   resolvePersonaRoute,
 } from '@/src/lib/persona-utils';
 import { ServiceSubpageBreadcrumb } from '@/src/components/landingPage/servicesPage/ServiceSubpageBreadcrumb';
-import FaqSection from '@/src/components/landingPage/home/FaqSection';
+
+
 import ChecklistCTAHero from '@/src/components/landingPage/checklist/ChecklistCTAHero';
 import CTASectionImage from '@/src/components/landingPage/home/CTASectionImage';
 import { PricingSection } from '@/src/components/landingPage/servicesPage/PricingSection';
 import GoalIntroSections from '@/src/components/landingPage/goal-based/GoalIntroSections';
+import { FAQSection } from '@/src/components/landingPage/servicesPage/FAQSection';
 
 const orange = '#E8692A';
 const orangeLight = '#F5845A';
@@ -403,12 +405,15 @@ function GoalPageView({ goal, parentServiceHref }: GoalPageViewProps) {
   </div>
 )}
 
+
+
+
     
       {/* FAQ */}
  
 {faqs.length > 0 && (
-  <FaqSection
-    faqItems={faqs.map((faq) => ({
+  <FAQSection
+    faqs={faqs.map((faq) => ({
       question: faq.question,
       answer: faq.answer,
     }))}

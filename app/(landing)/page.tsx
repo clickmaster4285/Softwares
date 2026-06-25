@@ -228,11 +228,8 @@ export default function LandingPage() {
 
 
 
-          <LandingHomeDeferredHeavy>
-            <Suspense fallback={<div className="h-80 animate-pulse rounded-lg bg-gray-100" />}>
               <FaqSection />
-            </Suspense>
-          </LandingHomeDeferredHeavy>
+        
 
           <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-100" />}>
             <HelpSection />
